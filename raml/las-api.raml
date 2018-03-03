@@ -1,0 +1,125 @@
+#%RAML 1.0
+title: LucidInvoice
+version: v0
+baseUri: http://api.lucidtech.ai/{version}
+mediaType: application/json
+securedBy: [apiKey]
+protocols: [HTTPS]
+
+documentation:
+  - title: High-Level API Overview
+    content: |
+      Scanning a document with Lucidtech AI Services consists of the follow steps:
+      1. **GET** on /invoice/upload. The response contains an uploadUrl and an invoiceId.
+      2. **PUT** your invoice to uploadUrl.
+      2. **GET** on /invoice/{documentId}.
+
+      Please see below for a detailed description.
+  - title: SDKs
+    content: |
+      List of SDKs.
+
+securitySchemes:
+  apiKey:
+    type: x-custom
+    description: Authentication by API key
+    describedBy:
+      headers:
+        x-api-key:
+          required: true
+          type: string
+      responses:
+        401:
+          description: Unauthorized
+
+types:
+  Field:
+    type: object
+    properties:
+      label: string
+      value: string
+      confidence:
+        type: number
+        format: float
+
+  ReceiptScan:
+    type: Field[]
+    minItems: 0
+    uniqueItems: true
+    example:
+      -
+        label: "total"
+        value: "50.23"
+        confidence: 0.9731
+      -
+        label: "date"
+        value: "2018-07-25"
+        confidence: 0.9921
+
+  InvoiceScan:
+    type: Field[]
+    minItems: 0
+    uniqueItems: true
+    example:
+      -
+        label: "total_amount"
+        value: "50.23"
+        confidence: 0.9731
+      -
+        label: "payment_date"
+        value: "2018-07-25"
+        confidence: 0.9921
+  UploadResponse:
+    properties:
+      uploadUrl:
+        type: string
+        description: |
+          A URL pre-signed for a PUT operation.
+
+          *No headers* must be present when PUTting to this URL.
+
+          The request body should contain binary data.
+      documentId:
+        type: string
+        description: |
+          A unique ephemeral document identifier. This document ID is used
+          when scanning a document.
+
+/invoices:
+  /{receiptId}:
+    get:
+      description: Scan a receipt.
+      responses:
+        200:
+          body:
+            application/json:
+              type: ReceiptScan
+
+  /upload:
+    get:
+      description: Returns a URL pre-signed for uploading a document.
+      responses:
+        200:
+          body:
+            application/json:
+              type: UploadResponse
+
+
+/receipts:
+  /{receiptId}:
+    get:
+      description: Scan a receipt.
+      responses:
+        200:
+          body:
+            application/json:
+              type: ReceiptScan
+
+  /upload:
+    get:
+      description: Returns a URL pre-signed for uploading a document.
+      responses:
+        200:
+          body:
+            application/json:
+              type: UploadResponse
