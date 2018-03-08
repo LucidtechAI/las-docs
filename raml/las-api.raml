@@ -9,15 +9,16 @@ protocols: [HTTPS]
 documentation:
   - title: High-Level API Overview
     content: |
-      Scanning a document with Lucidtech AI Services consists of the follow steps:
-      1. **GET** on /invoice/upload. The response contains an uploadUrl and an invoiceId.
+      Scanning a document with Lucidtech AI Services consists of the following steps:
+      1. **GET** on /invoice/upload. The request returns an uploadUrl and an invoiceId.
       2. **PUT** your invoice to uploadUrl.
-      2. **GET** on /invoice/{documentId}.
+      2. **GET** on /invoice/{documentId} to perform the scan.
 
       Please see below for a detailed description.
   - title: SDKs
     content: |
-      List of SDKs.
+      List of SDKs:
+      - https://github.com/LucidtechAI/las-sdk-python
 
 securitySchemes:
   apiKey:
@@ -69,6 +70,7 @@ types:
         label: "payment_date"
         value: "2018-07-25"
         confidence: 0.9921
+
   UploadResponse:
     properties:
       uploadUrl:
@@ -86,14 +88,14 @@ types:
           when scanning a document.
 
 /invoices:
-  /{receiptId}:
+  /{invoiceId}:
     get:
-      description: Scan a receipt.
+      description: Scan an invoice.
       responses:
         200:
           body:
             application/json:
-              type: ReceiptScan
+              type: InvoiceScan
 
   /upload:
     get:
