@@ -1,27 +1,27 @@
 #%RAML 1.0
-title: LucidInvoice
+title: LAS (Lucidtech AI Services)
 version: v0
 baseUri: http://api.lucidtech.ai/{version}
 mediaType: application/json
-securedBy: [apiKey]
+securedBy: [x-api-key]
 protocols: [HTTPS]
 
 documentation:
   - title: High-Level API Overview
     content: |
       Scanning a document with Lucidtech AI Services consists of the following steps:
-      1. **GET** on /invoice/upload. The request returns an uploadUrl and an invoiceId.
-      2. **PUT** your invoice to uploadUrl.
-      2. **GET** on /invoice/{documentId} to perform the scan.
+      1. **PUT** on */documents* to create a document handle. The request returns a **pre-signed url** and a **document id**.
+      2. **PUT** on **pre-signed url** to upload your document.
+      2. **POST** on */invoices* or */receipts* with **document id** to scan your document.
 
       Please see below for a detailed description.
   - title: SDKs
     content: |
       List of SDKs:
-      - https://github.com/LucidtechAI/las-sdk-python
+      - Python SDK [(Github)](https://github.com/LucidtechAI/las-sdk-python) [(Reference)](https://docs.lucidtech.ai/python/index.html)
 
 securitySchemes:
-  apiKey:
+  x-api-key:
     type: x-custom
     description: Authentication by API key
     describedBy:
@@ -43,17 +43,42 @@ types:
         type: number
         format: float
 
+  ScanBody:
+    type: object
+    properties:
+      document_id:
+        type: string
+        description: As returned by **PUT** on /documents
+      min_confidence?:
+        type: number
+        format: float
+    example:
+      document_id: "a50920e1-214b-4c46-9137-2c03f96aad56"
+      min_confidence: "0.5"
+
+  UploadBody:
+    type: object
+    properties:
+      document_type:
+        enum: [image/jpeg, image/gif, image/png, image/bmp, application/pdf]
+        description: Mime type of the document to be uploaded
+      region?:
+        enum: [EU]
+        default: EU
+        description: Specify a region for the document to be uploaded. Currently only EU is supported
+    example:
+      document_type: "application/pdf"
+      region: "EU"
+
   ReceiptScan:
     type: Field[]
     minItems: 0
     uniqueItems: true
     example:
-      -
-        label: "total"
+      - label: "total"
         value: "50.23"
         confidence: 0.9731
-      -
-        label: "date"
+      - label: "date"
         value: "2018-07-25"
         confidence: 0.9921
 
@@ -62,66 +87,102 @@ types:
     minItems: 0
     uniqueItems: true
     example:
-      -
-        label: "total_amount"
+      - label: "total_amount"
         value: "50.23"
         confidence: 0.9731
-      -
-        label: "payment_date"
+      - label: "payment_date"
         value: "2018-07-25"
         confidence: 0.9921
 
   UploadResponse:
     properties:
-      uploadUrl:
+      upload_url:
         type: string
         description: |
-          A URL pre-signed for a PUT operation.
+          A pre-signed url for a **PUT** operation.
 
-          *No headers* must be present when PUTting to this URL.
+          *Content-Type* **must** match document_type provided in this request
+          when **PUT**-ting to upload_url.
 
           The request body should contain binary data.
-      documentId:
+
+          We use Amazon s3 for fast, secure and reliable file transfer.
+      document_id:
         type: string
         description: |
-          A unique ephemeral document identifier. This document ID is used
+          A unique ephemeral document identifier. This document_id is used
           when scanning a document.
+    example:
+      document_id: "a50920e1-214b-4c46-9137-2c03f96aad56"
+      upload_url: "https://eu.api.lucidtech.ai.s3.amazonaws.com/..."
 
 /invoices:
-  /{invoiceId}:
-    get:
-      description: Scan an invoice.
-      responses:
-        200:
-          body:
-            application/json:
-              type: InvoiceScan
+  post:
+    description: |
+      #### Scan an invoice.
 
-  /upload:
-    get:
-      description: Returns a URL pre-signed for uploading a document.
-      responses:
-        200:
-          body:
-            application/json:
-              type: UploadResponse
-
+      Example usage:
+      ```bash
+      $ curl -X POST https://api.lucidtech.ai/v0/invoices \
+        -H 'x-api-key: <Your api key>' \
+        -H 'Content-Type: application/json' \
+        -d '{"document_id": "a50920e1-214b-4c46-9137-2c03f96aad56"}'
+      ```
+    body:
+      application/json:
+        type: ScanBody
+    responses:
+      200:
+        body:
+          application/json:
+            type: InvoiceScan
 
 /receipts:
-  /{receiptId}:
-    get:
-      description: Scan a receipt.
-      responses:
-        200:
-          body:
-            application/json:
-              type: ReceiptScan
+  post:
+    description: |
+      #### Scan a receipt.
 
-  /upload:
-    get:
-      description: Returns a URL pre-signed for uploading a document.
-      responses:
-        200:
-          body:
-            application/json:
-              type: UploadResponse
+      Example usage:
+      ```bash
+      $ curl -X POST https://api.lucidtech.ai/v0/receipts \
+        -H 'x-api-key: <Your api key>' \
+        -H 'Content-Type: application/json' \
+        -d '{"document_id": "a50920e1-214b-4c46-9137-2c03f96aad56"}'
+      ```
+    body:
+      application/json:
+        type: ScanBody
+    responses:
+      200:
+        body:
+          application/json:
+            type: ReceiptScan
+
+
+/documents:
+  put:
+    description: |
+      #### Create a document handle and get a pre-signed upload url.
+
+      Example usage:
+      ```bash
+      $ curl -X PUT https://api.lucidtech.ai/v0/documents \
+        -H 'x-api-key: <Your api key>' \
+        -H 'Content-Type: application/json' \
+        -d '{"document_type": "image/jpeg", "region": "EU"}'
+      ```
+
+      Upload document data to retrieved pre-signed url:
+      ```bash
+      $ curl -X PUT https://eu.api.lucidtech.ai.s3.amazonaws.com/... \
+        -H 'Content-Type: image/jpeg' \
+        -d @document.jpeg
+      ```
+    body:
+      application/json:
+        type: UploadBody
+    responses:
+      200:
+        body:
+          application/json:
+            type: UploadResponse
