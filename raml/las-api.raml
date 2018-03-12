@@ -46,20 +46,20 @@ types:
   ScanBody:
     type: object
     properties:
-      document_id:
+      documentId:
         type: string
         description: As returned by **PUT** on /documents
-      min_confidence?:
+      minConfidence?:
         type: number
         format: float
     example:
-      document_id: "a50920e1-214b-4c46-9137-2c03f96aad56"
-      min_confidence: "0.5"
+      documentId: "a50920e1-214b-4c46-9137-2c03f96aad56"
+      minConfidence: "0.5"
 
   UploadBody:
     type: object
     properties:
-      document_type:
+      documentType:
         enum: [image/jpeg, image/gif, image/png, image/bmp, application/pdf]
         description: Mime type of the document to be uploaded
       region?:
@@ -67,7 +67,7 @@ types:
         default: EU
         description: Specify a region for the document to be uploaded. Currently only EU is supported
     example:
-      document_type: "application/pdf"
+      documentType: "application/pdf"
       region: "EU"
 
   ReceiptScan:
@@ -96,25 +96,25 @@ types:
 
   UploadResponse:
     properties:
-      upload_url:
+      uploadUrl:
         type: string
         description: |
           A pre-signed url for a **PUT** operation.
 
-          *Content-Type* **must** match document_type provided in this request
-          when **PUT**-ting to upload_url.
+          *Content-Type* **must** match documentType provided in this request
+          when **PUT**-ting to uploadUrl.
 
           The request body should contain binary data.
 
           We use Amazon s3 for fast, secure and reliable file transfer.
-      document_id:
+      documentId:
         type: string
         description: |
-          A unique ephemeral document identifier. This document_id is used
+          A unique ephemeral document identifier. This documentId is used
           when scanning a document.
     example:
-      document_id: "a50920e1-214b-4c46-9137-2c03f96aad56"
-      upload_url: "https://eu.api.lucidtech.ai.s3.amazonaws.com/..."
+      documentId: "a50920e1-214b-4c46-9137-2c03f96aad56"
+      uploadUrl: "https://eu.api.lucidtech.ai.s3.amazonaws.com/..."
 
 /invoices:
   post:
@@ -126,7 +126,7 @@ types:
       $ curl -X POST https://api.lucidtech.ai/v0/invoices \
         -H 'x-api-key: <Your api key>' \
         -H 'Content-Type: application/json' \
-        -d '{"document_id": "a50920e1-214b-4c46-9137-2c03f96aad56"}'
+        -d '{"documentId": "a50920e1-214b-4c46-9137-2c03f96aad56"}'
       ```
     body:
       application/json:
@@ -147,7 +147,7 @@ types:
       $ curl -X POST https://api.lucidtech.ai/v0/receipts \
         -H 'x-api-key: <Your api key>' \
         -H 'Content-Type: application/json' \
-        -d '{"document_id": "a50920e1-214b-4c46-9137-2c03f96aad56"}'
+        -d '{"documentId": "a50920e1-214b-4c46-9137-2c03f96aad56"}'
       ```
     body:
       application/json:
@@ -169,7 +169,7 @@ types:
       $ curl -X PUT https://api.lucidtech.ai/v0/documents \
         -H 'x-api-key: <Your api key>' \
         -H 'Content-Type: application/json' \
-        -d '{"document_type": "image/jpeg", "region": "EU"}'
+        -d '{"documentType": "image/jpeg", "region": "EU"}'
       ```
 
       Upload document data to retrieved pre-signed url:
