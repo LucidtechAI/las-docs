@@ -1,7 +1,7 @@
 #%RAML 1.0
 title: LAS (Lucidtech AI Services)
 version: v0
-baseUri: http://api.lucidtech.ai/{version}
+baseUri: https://api.lucidtech.ai/{version}
 mediaType: application/json
 securedBy: [x-api-key]
 protocols: [HTTPS]
@@ -12,7 +12,11 @@ documentation:
       Scanning a document with Lucidtech AI Services consists of the following steps:
       1. **PUT** on */documents* to create a document handle. The request returns a **pre-signed url** and a **document id**.
       2. **PUT** on **pre-signed url** to upload your document.
-      2. **POST** on */invoices* or */receipts* with **document id** to scan your document.
+      3. **POST** on */invoices* or */receipts* with **document id** to scan your document.
+
+      *Optional*
+      4. **POST** on */documents/{documentId}* with **document id** to post a feedback to the API. Feedback data will
+      be used to improve the APIs.
 
       Please see below for a detailed description.
   - title: SDKs
@@ -43,6 +47,12 @@ types:
         type: number
         format: float
 
+  FeedbackItem:
+    type: object
+    properties:
+      label: string
+      value: string
+
   ScanBody:
     type: object
     properties:
@@ -69,6 +79,20 @@ types:
     example:
       documentType: "application/pdf"
       region: "EU"
+
+  FeedbackBody:
+    type: object
+    properties:
+      feedback:
+        type: FeedbackItem[]
+        minItems: 0
+        uniqueItems: true
+    example:
+      feedback:
+        - label: 'total_amount'
+          value: '140.50'
+        - label: 'due_date'
+          value: '2017-03-22'
 
   ReceiptScan:
     type: Field[]
@@ -116,6 +140,10 @@ types:
       documentId: "a50920e1-214b-4c46-9137-2c03f96aad56"
       uploadUrl: "https://eu.api.lucidtech.ai.s3.amazonaws.com/..."
 
+  FeedbackResponse:
+    type: object
+    properties: {}
+
 /invoices:
   post:
     description: |
@@ -124,7 +152,7 @@ types:
       Example usage:
       ```bash
       $ curl -X POST https://api.lucidtech.ai/v0/invoices \
-        -H 'x-api-key: <Your api key>' \
+        -H 'x-api-key: <your api key>' \
         -H 'Content-Type: application/json' \
         -d '{"documentId": "a50920e1-214b-4c46-9137-2c03f96aad56"}'
       ```
@@ -145,7 +173,7 @@ types:
       Example usage:
       ```bash
       $ curl -X POST https://api.lucidtech.ai/v0/receipts \
-        -H 'x-api-key: <Your api key>' \
+        -H 'x-api-key: <your api key>' \
         -H 'Content-Type: application/json' \
         -d '{"documentId": "a50920e1-214b-4c46-9137-2c03f96aad56"}'
       ```
@@ -158,7 +186,6 @@ types:
           application/json:
             type: ReceiptScan
 
-
 /documents:
   put:
     description: |
@@ -167,16 +194,16 @@ types:
       Example usage:
       ```bash
       $ curl -X PUT https://api.lucidtech.ai/v0/documents \
-        -H 'x-api-key: <Your api key>' \
+        -H 'x-api-key: <your api key>' \
         -H 'Content-Type: application/json' \
         -d '{"documentType": "image/jpeg", "region": "EU"}'
       ```
 
-      Upload document data to retrieved pre-signed url:
+      Upload binary document data to retrieved pre-signed url:
       ```bash
       $ curl -X PUT https://eu.api.lucidtech.ai.s3.amazonaws.com/... \
         -H 'Content-Type: image/jpeg' \
-        -d @document.jpeg
+        --data-binary @document.jpeg
       ```
     body:
       application/json:
@@ -186,3 +213,29 @@ types:
         body:
           application/json:
             type: UploadResponse
+
+  /{documentId}:
+    uriParameters:
+      documentId:
+        type: string
+    post:
+      description: |
+        #### Post feedback to the API for further improvement of the API.
+
+        Example usage:
+        ```bash
+        $ curl -X POST https://api.lucidtech.ai/v0/documents/<document id> \
+          -H 'x-api-key: <your api key>' \
+          -H 'Content-Type: application/json' \
+          -d '{"feedback": [{"label": "total_amount", "value": "140.50"}]}'
+        ```
+      body:
+        application/json:
+          type: FeedbackBody
+      responses:
+        200:
+          body:
+            application/json:
+              type: FeedbackResponse
+
+
