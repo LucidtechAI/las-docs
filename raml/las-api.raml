@@ -237,5 +237,18 @@ types:
           body:
             application/json:
               type: FeedbackResponse
+    delete:
+      description: |
+        #### Delete a document from our servers
 
-
+        Example usage:
+        ```bash
+        $ curl -X DELETE https://api.lucidtech.ai/v0/documents/<document id> \
+          -H 'x-api-key: <your api key>'
+        ```
+      body:
+        text/plain: !!null
+      responses:
+        200:
+          body:
+            text/plain: !!null

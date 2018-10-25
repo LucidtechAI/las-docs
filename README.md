@@ -10,5 +10,5 @@ $ npm i -g raml2html
 ## Compile Docs
 
 ```bash
-$ raml2html raml/las-api.raml raml/las-api.html
+$ raml2html raml/las-api.raml > raml/las-api.html
 ```
