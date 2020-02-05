@@ -10,6 +10,8 @@
     * [Preparing Data for Training](page2/page2-1.md)    
     * [Start Training](page2/page2-1.md)    
     * [Use Trained Model](page2/page2-1.md)    
+* [FAQ](apis/dev/README.md)    
+* [Help](apis/dev/README.md)    
 
 ## Reference
 
