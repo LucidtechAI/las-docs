@@ -3,7 +3,7 @@
 ## Getting Started
 
 * [Quickstart](apis/dev/README.md)    
-    * [Using the CLI](https://github.com/LucidtechAI/las-cli/README.md)    
+    * [Using the CLI](https://github.com/LucidtechAI/las-cli/blob/master/README.md)
     * [Python](page2/page2-1.md)    
     * [.NET](page2/page2-1.md)    
 * [Custom Data Training](apis/dev/README.md)    
