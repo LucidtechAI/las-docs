@@ -21,5 +21,5 @@
     * [3.6](page2/page2-1.md)    
     * [3.7](part2/page2-2.md)    
 * [.NET](datatraining/README.md)    
-    * [4.7](page2/page2-1.md)    
+    * [4.7](net/4.7/README.md)    
     
