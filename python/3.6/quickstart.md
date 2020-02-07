@@ -14,7 +14,7 @@ import json
 
 from las import ApiClient
 
-api_client = ApiClient('https://demo.api.lucidtech.ai/v1')
+api_client = ApiClient()
 prediction = api_client.predict('document.jpeg', 'invoice')
 print(json.dumps(prediction, indent=2))
 ```
@@ -29,7 +29,7 @@ import json
 
 from las import ApiClient, Field
 
-api_client = ApiClient('https://demo.api.lucidtech.ai/v1')
+api_client = ApiClient()
 prediction = api_client.predict('document.jpeg', 'invoice')
 
 # We notice after manual inspection that some values were incorrect
@@ -51,7 +51,7 @@ import json
 
 from las import ApiClient
 
-api_client = ApiClient('https://demo.api.lucidtech.ai/v1')
+api_client = ApiClient()
 prediction = api_client.predict('document.jpeg', 'invoice', consent_id='example_customer_123')
 
 # Deleting the documents associated with 'example_customer_123'
@@ -75,9 +75,11 @@ this file should be
 
 ```
 [default]
-access_key_id = <your access key id>
-secret_access_key = <your secret access key>
+cliend_id = <your client id>
+client_secret = <your secret access key>
 api_key = <your api key>
+api_endpoint = <api endpoint>
+auth_endpoint = <authorization endpoint>
 ```
 
 Optionally you may provide a Credentials object when constructing the Api client. See details
