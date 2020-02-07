@@ -2,7 +2,7 @@
   "openapi": "3.0.1",
   "info": {
     "title": "sprint-1",
-    "version": "2020-02-04T11:19:49Z"
+    "version": "2020-02-07T14:42:40Z"
   },
   "servers": [
     {
@@ -1786,13 +1786,45 @@
         "type": "object",
         "properties": {
           "documentId": {
-            "minLength": 1,
+            "maxLength": 36,
+            "minLength": 36,
+            "pattern": "^[a-f0-9-]+$",
             "type": "string"
           },
           "predictions": {
+            "minItems": 1,
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/PredictionPredictionsItem"
+              "required": [
+                "confidence",
+                "label",
+                "value"
+              ],
+              "type": "object",
+              "properties": {
+                "confidence": {
+                  "maximum": 1,
+                  "minimum": 0,
+                  "type": "number"
+                },
+                "label": {
+                  "maxLength": 36,
+                  "minLength": 1,
+                  "pattern": "^[A-Za-z_]+$",
+                  "type": "string"
+                },
+                "value": {
+                  "anyOf": [
+                    {
+                      "maxLength": 64,
+                      "minLength": 1,
+                      "type": "string"
+                    },
+                    null
+                  ]
+                }
+              },
+              "additionalProperties": false
             }
           }
         },
@@ -1825,101 +1857,124 @@
         },
         "additionalProperties": false
       },
-      "PostDocumentIdFeedbackItem": {
-        "required": [
-          "label",
-          "value"
-        ],
-        "type": "object",
-        "properties": {
-          "label": {
-            "maxLength": 32,
-            "minLength": 1,
-            "pattern": "^[A-Za-z_]+$",
-            "type": "string"
-          },
-          "value": {
-            "anyOf": [
-              {
+      "Document": {
+        "title": "document",
+        "oneOf": [
+          {
+            "required": [
+              "consentId",
+              "contentType",
+              "documentId"
+            ],
+            "type": "object",
+            "properties": {
+              "feedback": {
+                "minItems": 1,
+                "type": "array",
+                "items": {
+                  "required": [
+                    "label",
+                    "value"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "label": {
+                      "maxLength": 36,
+                      "minLength": 1,
+                      "pattern": "^[A-Za-z_]+$",
+                      "type": "string"
+                    },
+                    "value": {
+                      "anyOf": [
+                        {
+                          "maxLength": 64,
+                          "minLength": 1,
+                          "type": "string"
+                        },
+                        null
+                      ]
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              },
+              "consentId": {
                 "maxLength": 64,
+                "minLength": 1,
+                "pattern": "^[A-Za-z0-9_-]+$",
+                "type": "string"
+              },
+              "inferenceTime": {
+                "minimum": 0,
+                "type": "number"
+              },
+              "documentId": {
+                "maxLength": 36,
+                "minLength": 36,
+                "pattern": "^[a-f0-9-]+$",
+                "type": "string"
+              },
+              "batchId": {
+                "maxLength": 36,
+                "minLength": 36,
+                "pattern": "^[a-f0-9-]+$",
+                "type": "string"
+              },
+              "contentType": {
+                "type": "string",
+                "enum": [
+                  "application/pdf",
+                  "image/jpeg"
+                ]
+              },
+              "updated": {
+                "minimum": 1,
+                "type": "integer"
+              },
+              "content": {
                 "minLength": 1,
                 "type": "string"
               },
-              null,
-              {
-                "type": "boolean"
+              "predictions": {
+                "minItems": 1,
+                "type": "array",
+                "items": {
+                  "required": [
+                    "confidence",
+                    "label",
+                    "value"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "confidence": {
+                      "maximum": 1,
+                      "minimum": 0,
+                      "type": "number"
+                    },
+                    "label": {
+                      "maxLength": 36,
+                      "minLength": 1,
+                      "pattern": "^[A-Za-z_]+$",
+                      "type": "string"
+                    },
+                    "value": {
+                      "anyOf": [
+                        {
+                          "maxLength": 64,
+                          "minLength": 1,
+                          "type": "string"
+                        },
+                        null
+                      ]
+                    }
+                  },
+                  "additionalProperties": false
+                }
               }
-            ]
+            },
+            "additionalProperties": false
           }
-        },
-        "additionalProperties": false
-      },
-      "Document": {
-        "title": "document",
-        "required": [
-          "consentId",
-          "contentType",
-          "documentId",
-          "uploadUrl"
-        ],
-        "type": "object",
-        "properties": {
-          "feedback": {
-            "minItems": 1,
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/DocumentFeedbackItem"
-            }
-          },
-          "consentId": {
-            "minLength": 1,
-            "type": "string"
-          },
-          "uploadUrl": {
-            "pattern": "^https://.+",
-            "type": "string"
-          },
-          "documentId": {
-            "minLength": 1,
-            "type": "string"
-          },
-          "batchId": {
-            "minLength": 1,
-            "type": "string"
-          },
-          "contentType": {
-            "type": "string",
-            "enum": [
-              "application/pdf",
-              "image/jpeg"
-            ]
-          }
-        },
-        "additionalProperties": false
-      },
-      "PredictionPredictionsItem": {
-        "required": [
-          "confidence",
-          "label",
-          "value"
-        ],
-        "type": "object",
-        "properties": {
-          "confidence": {
-            "maximum": 1,
-            "minimum": 0,
-            "type": "number"
-          },
-          "label": {
-            "pattern": "^[A-Za-z_]+$",
-            "type": "string"
-          },
-          "value": {
-            "minLength": 1,
-            "type": "string"
-          }
-        },
-        "additionalProperties": false
+        ]
       },
       "PostPredictions": {
         "title": "POST /predictions",
@@ -1936,14 +1991,13 @@
             ]
           },
           "maxPages": {
-            "maximum": 99,
             "minimum": 1,
             "type": "integer"
           },
           "documentId": {
             "maxLength": 36,
             "minLength": 36,
-            "pattern": "^[a-z0-9-]+$",
+            "pattern": "^[a-f0-9-]+$",
             "type": "string"
           },
           "autoRotate": {
@@ -1983,9 +2037,33 @@
         "type": "object",
         "properties": {
           "feedback": {
+            "minItems": 1,
             "type": "array",
             "items": {
-              "type": "object"
+              "required": [
+                "label",
+                "value"
+              ],
+              "type": "object",
+              "properties": {
+                "label": {
+                  "maxLength": 36,
+                  "minLength": 1,
+                  "pattern": "^[A-Za-z_]+$",
+                  "type": "string"
+                },
+                "value": {
+                  "anyOf": [
+                    {
+                      "maxLength": 64,
+                      "minLength": 1,
+                      "type": "string"
+                    },
+                    null
+                  ]
+                }
+              },
+              "additionalProperties": false
             }
           },
           "consentId": {
@@ -1995,9 +2073,9 @@
             "type": "string"
           },
           "batchId": {
-            "maxLength": 64,
-            "minLength": 1,
-            "pattern": "^[A-Za-z0-9_-]+$",
+            "maxLength": 36,
+            "minLength": 36,
+            "pattern": "^[a-f0-9-]+$",
             "type": "string"
           },
           "contentType": {
@@ -2008,14 +2086,11 @@
             ]
           },
           "content": {
+            "minLength": 1,
             "type": "string"
           }
         },
         "additionalProperties": false
-      },
-      "ConsentDocumentIdsItem": {
-        "minLength": 1,
-        "type": "string"
       },
       "PatchUserId": {
         "title": "POST /users/{userId}",
@@ -2034,8 +2109,7 @@
         "title": "batch",
         "required": [
           "batchId",
-          "description",
-          "userId"
+          "description"
         ],
         "type": "object",
         "properties": {
@@ -2044,11 +2118,9 @@
             "type": "string"
           },
           "batchId": {
-            "minLength": 1,
-            "type": "string"
-          },
-          "userId": {
-            "minLength": 1,
+            "maxLength": 36,
+            "minLength": 36,
+            "pattern": "^[a-f0-9-]+$",
             "type": "string"
           }
         },
@@ -2063,14 +2135,19 @@
         "type": "object",
         "properties": {
           "consentId": {
+            "maxLength": 64,
             "minLength": 1,
+            "pattern": "^[A-Za-z0-9_-]+$",
             "type": "string"
           },
           "documentIds": {
             "minItems": 1,
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/ConsentDocumentIdsItem"
+              "maxLength": 36,
+              "minLength": 36,
+              "pattern": "^[a-f0-9-]+$",
+              "type": "string"
             }
           }
         },
@@ -2083,35 +2160,135 @@
         ],
         "type": "object",
         "properties": {
-          "documents": {
-            "minItems": 1,
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Document"
-            }
-          }
-        },
-        "additionalProperties": false
-      },
-      "DocumentFeedbackItem": {
-        "required": [
-          "label",
-          "value"
-        ],
-        "type": "object",
-        "properties": {
-          "label": {
-            "pattern": "^[A-Za-z_]+$",
+          "batch_id": {
+            "maxLength": 36,
+            "minLength": 36,
+            "pattern": "^[a-f0-9-]+$",
             "type": "string"
           },
-          "value": {
-            "anyOf": [
-              {
-                "minLength": 1,
-                "type": "string"
+          "consent_id": {
+            "maxLength": 64,
+            "minLength": 1,
+            "pattern": "^[A-Za-z0-9_-]+$",
+            "type": "string"
+          },
+          "documents": {
+            "minItems": 0,
+            "type": "array",
+            "items": {
+              "required": [
+                "consentId",
+                "contentType",
+                "documentId"
+              ],
+              "type": "object",
+              "properties": {
+                "documentId": {
+                  "maxLength": 36,
+                  "minLength": 36,
+                  "pattern": "^[a-f0-9-]+$",
+                  "type": "string"
+                },
+                "contentType": {
+                  "type": "string",
+                  "enum": [
+                    "application/pdf",
+                    "image/jpeg"
+                  ]
+                },
+                "content": {
+                  "minLength": 1,
+                  "type": "string"
+                },
+                "consentId": {
+                  "maxLength": 64,
+                  "minLength": 1,
+                  "pattern": "^[A-Za-z0-9_-]+$",
+                  "type": "string"
+                },
+                "feedback": {
+                  "minItems": 1,
+                  "type": "array",
+                  "items": {
+                    "required": [
+                      "label",
+                      "value"
+                    ],
+                    "type": "object",
+                    "properties": {
+                      "label": {
+                        "maxLength": 36,
+                        "minLength": 1,
+                        "pattern": "^[A-Za-z_]+$",
+                        "type": "string"
+                      },
+                      "value": {
+                        "anyOf": [
+                          {
+                            "maxLength": 64,
+                            "minLength": 1,
+                            "type": "string"
+                          },
+                          null
+                        ]
+                      }
+                    },
+                    "additionalProperties": false
+                  }
+                },
+                "batchId": {
+                  "maxLength": 36,
+                  "minLength": 36,
+                  "pattern": "^[a-f0-9-]+$",
+                  "type": "string"
+                },
+                "updated": {
+                  "minimum": 1,
+                  "type": "integer"
+                },
+                "inferenceTime": {
+                  "minimum": 0,
+                  "type": "number"
+                },
+                "predictions": {
+                  "minItems": 1,
+                  "type": "array",
+                  "items": {
+                    "required": [
+                      "confidence",
+                      "label",
+                      "value"
+                    ],
+                    "type": "object",
+                    "properties": {
+                      "label": {
+                        "maxLength": 36,
+                        "minLength": 1,
+                        "pattern": "^[A-Za-z_]+$",
+                        "type": "string"
+                      },
+                      "value": {
+                        "anyOf": [
+                          {
+                            "maxLength": 64,
+                            "minLength": 1,
+                            "type": "string"
+                          },
+                          null
+                        ]
+                      },
+                      "confidence": {
+                        "maximum": 1,
+                        "minimum": 0,
+                        "type": "number"
+                      }
+                    },
+                    "additionalProperties": false
+                  }
+                }
               },
-              null
-            ]
+              "additionalProperties": false
+            }
           }
         },
         "additionalProperties": false
@@ -2124,11 +2301,33 @@
         "type": "object",
         "properties": {
           "feedback": {
-            "maxItems": 20,
             "minItems": 1,
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/PostDocumentIdFeedbackItem"
+              "required": [
+                "label",
+                "value"
+              ],
+              "type": "object",
+              "properties": {
+                "label": {
+                  "maxLength": 36,
+                  "minLength": 1,
+                  "pattern": "^[A-Za-z_]+$",
+                  "type": "string"
+                },
+                "value": {
+                  "anyOf": [
+                    {
+                      "maxLength": 64,
+                      "minLength": 1,
+                      "type": "string"
+                    },
+                    null
+                  ]
+                }
+              },
+              "additionalProperties": false
             }
           }
         },
