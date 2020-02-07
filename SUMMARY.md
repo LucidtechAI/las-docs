@@ -18,8 +18,7 @@
 * [Rest API](apis/dev/README.md)    
     * [v1](page2/page2-1.md)    
 * [Python SDK](datatraining/README.md)    
-    * [3.6](page2/page2-1.md)    
-    * [3.7](part2/page2-2.md)    
+    * [3.6](python/3.6/README.md)    
 * [.NET](datatraining/README.md)    
     * [4.7](net/4.7/README.md)    
     
