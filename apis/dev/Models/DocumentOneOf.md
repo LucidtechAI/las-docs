@@ -1,4 +1,4 @@
-# ./Models.Document
+# ./Models.DocumentOneOf
 ## Properties
 
 Name | Type | Description | Notes

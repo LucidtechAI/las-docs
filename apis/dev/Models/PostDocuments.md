@@ -3,7 +3,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**feedback** | [**List**](object.md) |  | [optional] [default to null]
+**feedback** | [**List**](Document_oneOf_feedback.md) |  | [optional] [default to null]
 **consentId** | [**String**](string.md) |  | [default to null]
 **batchId** | [**String**](string.md) |  | [optional] [default to null]
 **contentType** | [**String**](string.md) |  | [default to null]
