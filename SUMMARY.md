@@ -8,12 +8,8 @@
   * [Using the CLI](https://github.com/LucidtechAI/las-cli/blob/master/README.md)
   * [Python](getting-started/dev/python.md)
   * [.NET](getting-started/dev/.net.md)
-* [Custom Data Training](getting-started/dev-1/README.md)
-  * [Preparing Data for Training](getting-started/dev-1/preparing-data-for-training.md)
-  * [Start Training](getting-started/dev-1/start-training.md)
-  * [Use Trained Model](getting-started/dev-1/use-trained-model.md)
 * [FAQ](getting-started/faq.md)
-* [Help](getting-started/dev-3.md)
+* [Help](getting-started/help.md)
 
 ## Reference
 
