@@ -1,6 +1,6 @@
 # Using the CLI
 
-#### Installation
+## Installation
 
 Install the CLI via the Python package manager [pip](https://pip.pypa.io/en/stable/)
 
@@ -8,7 +8,7 @@ Install the CLI via the Python package manager [pip](https://pip.pypa.io/en/stab
 >> $ pip install lucidtech-las-cli
 ```
 
-#### Make a prediction on a document
+## Make a prediction on a document
 
 Suppose we wish to run inference on a document using Lucidtech’s invoice model.
 
@@ -28,10 +28,9 @@ Suppose we wish to run inference on a document using Lucidtech’s invoice model
 }
 ```
 
-#### Set ground truth of document
+## Set ground truth of document
 
-Suppose we make a prediction that returns incorrect values and we wish to improve the model for future use. We can 
-do so by sending feedback to the model, telling it what the expected values should have been.
+Suppose we make a prediction that returns incorrect values and we wish to improve the model for future use. We can do so by sending feedback to the model, telling it what the expected values should have been.
 
 ```bash
 >> $ las documents create invoice.pdf
@@ -49,7 +48,7 @@ do so by sending feedback to the model, telling it what the expected values shou
 }
 ```
 
-#### Create a document with consent id
+## Create a document with consent id
 
 {% hint style="info" %}
 Consent ID is an identifier you can assign to documents to keep track of document ownership for your customers.
@@ -64,11 +63,9 @@ Consent ID is an identifier you can assign to documents to keep track of documen
 }
 ```
 
-#### Revoking consent and deleting documents
+## Revoking consent and deleting documents
 
-Suppose we wish to delete all documents associated with a customer in our ERP database or other systems. We need 
-to provide a consent_id to the prediction method that uniquely identifies the customer and use that consent_id to 
-delete documents.
+Suppose we wish to delete all documents associated with a customer in our ERP database or other systems. We need to provide a consent\_id to the prediction method that uniquely identifies the customer and use that consent\_id to delete documents.
 
 ```bash
 >> $ las consents delete foobar
@@ -80,10 +77,9 @@ delete documents.
 }
 ```
 
-#### Create a batch and associate a few documents with it
+## Create a batch and associate a few documents with it
 
-Creating a batch is a way to group documents. This is useful for specifying batches of documents to use in improving 
-the model later.
+Creating a batch is a way to group documents. This is useful for specifying batches of documents to use in improving the model later.
 
 ```bash
 >> $ las batches create
