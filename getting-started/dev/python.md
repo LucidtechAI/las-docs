@@ -41,3 +41,17 @@ client = Client()
 document = client.create_document('invoice.pdf', consent_id='abc')
 ```
 
+#### Create a batch and associate a few documents with it
+
+Creating a batch is a way to group documents. This is useful for specifying batches of documents to use in improving 
+the model later.
+
+```python
+from las import Client
+
+client = Client()
+batch = client.create_batch()
+client.create_document('invoice.pdf', batch_id=batch.id)
+client.create_document('invoice2.jpeg', batch_id=batch.id)
+```
+
