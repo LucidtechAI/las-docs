@@ -28,7 +28,7 @@ feedback = [
     {'label': 'total_amount', 'value': '240.00'},
     {'label': 'due_date', 'value': '2020-01-31'}
 ]
-document = client.send_feedback(document_id=document.id, feedback=feedback)
+document = client.update_document(document_id=document.id, feedback=feedback)
 
 print(document)
 ```
