@@ -30,7 +30,9 @@ print(document)
 
 #### Create a document with consent id
 
-What is consent id?
+{% hint style="info" %}
+Consent ID is an identifier you can assign to documents to keep track of document ownership for your customers.
+{% endhint %}
 
 ```python
 from las import Client
