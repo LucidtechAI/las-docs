@@ -1,0 +1,693 @@
+# Summary
+
+ Members                        | Descriptions                                
+--------------------------------|---------------------------------------------
+`namespace `[`Lucidtech::Las`](#namespaceLucidtech_1_1Las) | 
+`namespace `[`Lucidtech::Las::Core`](#namespaceLucidtech_1_1Las_1_1Core) | 
+`namespace `[`Lucidtech::Las::Utils`](#namespaceLucidtech_1_1Las_1_1Utils) | 
+
+# namespace `Lucidtech::Las` 
+
+## Summary
+
+ Members                        | Descriptions                                
+--------------------------------|---------------------------------------------
+`class `[`Lucidtech::Las::ApiClient`](#classLucidtech_1_1Las_1_1ApiClient) | A high level client to invoke API methods from [Lucidtech](#namespaceLucidtech) AI Services.
+`class `[`Lucidtech::Las::Client`](#classLucidtech_1_1Las_1_1Client) | A low level client to invoke api methods from [Lucidtech](#namespaceLucidtech) AI Services.
+
+# class `Lucidtech::Las::ApiClient` 
+
+```
+class Lucidtech::Las::ApiClient
+  : public Lucidtech.Las.Client
+```  
+
+A high level client to invoke API methods from [Lucidtech](#namespaceLucidtech) AI Services.
+
+## Summary
+
+ Members                        | Descriptions                                
+--------------------------------|---------------------------------------------
+`public inline  `[`ApiClient`](#classLucidtech_1_1Las_1_1ApiClient_1ae3fb861fcb63fc53ef189021f31e94e6)`()` | [ApiClient](#classLucidtech_1_1Las_1_1ApiClient) constructor with credentials read from local file.
+`public inline  `[`ApiClient`](#classLucidtech_1_1Las_1_1ApiClient_1a5000f9975fdf94c890f721e3b1921bec)`(`[`AmazonCredentials`](#classLucidtech_1_1Las_1_1Core_1_1AmazonCredentials)` credentials)` | [ApiClient](#classLucidtech_1_1Las_1_1ApiClient) constructor.
+`public inline `[`Prediction`](#classLucidtech_1_1Las_1_1Core_1_1Prediction)` `[`Predict`](#classLucidtech_1_1Las_1_1ApiClient_1a8fddf2de600c64f51788a5318102d7fb)`(string documentPath,string modelName,string consentId)` | Run inference and create prediction on document, this method takes care of creating and uploaded document as well as running inference to create prediction on document.
+`public inline `[`FeedbackResponse`](#classLucidtech_1_1Las_1_1Core_1_1FeedbackResponse)` `[`SendFeedback`](#classLucidtech_1_1Las_1_1ApiClient_1af318f59c6854feaded4e4c21f3fe441b)`(string documentId,List< Dictionary< string, string >> feedback)` | Send feedback to the model. This method takes care of sending feedback related to a document specified by documentId. Feedback consists of ground truth values for the document specified as a List of Dictionaries.
+`public inline `[`RevokeResponse`](#classLucidtech_1_1Las_1_1Core_1_1RevokeResponse)` `[`RevokeConsent`](#classLucidtech_1_1Las_1_1ApiClient_1a8fbb4629795670a9b1e65b14cf471e6a)`(string consentId)` | Revoke consent and delete all documents associated with consentId. Consent id is a parameter that is provided by the user upon making a prediction on a document.
+
+## Members
+
+#### `public inline  `[`ApiClient`](#classLucidtech_1_1Las_1_1ApiClient_1ae3fb861fcb63fc53ef189021f31e94e6)`()` 
+
+[ApiClient](#classLucidtech_1_1Las_1_1ApiClient) constructor with credentials read from local file.
+
+#### `public inline  `[`ApiClient`](#classLucidtech_1_1Las_1_1ApiClient_1a5000f9975fdf94c890f721e3b1921bec)`(`[`AmazonCredentials`](#classLucidtech_1_1Las_1_1Core_1_1AmazonCredentials)` credentials)` 
+
+[ApiClient](#classLucidtech_1_1Las_1_1ApiClient) constructor.
+
+#### Parameters
+* `credentials` Keys and credentials needed for authorization
+
+#### `public inline `[`Prediction`](#classLucidtech_1_1Las_1_1Core_1_1Prediction)` `[`Predict`](#classLucidtech_1_1Las_1_1ApiClient_1a8fddf2de600c64f51788a5318102d7fb)`(string documentPath,string modelName,string consentId)` 
+
+Run inference and create prediction on document, this method takes care of creating and uploaded document as well as running inference to create prediction on document.
+
+```cpp
+using namespace Lucidtech.Las; 
+ApiClient apiClient = new ApiClient(); 
+Prediction response =
+apiClient.Predict(documentPath: "document.jpeg", modelName: "invoice", consentId: "bar"); 
+Console.WriteLine(response.ToJsonString(Formatting.Indented)); 
+```
+
+#### Parameters
+* `documentPath` Path to document to run inference on 
+
+* `modelName` The name of the model to use for inference 
+
+* `consentId` An identifier to mark the owner of the document handle 
+
+#### Returns
+Prediction on document
+
+#### `public inline `[`FeedbackResponse`](#classLucidtech_1_1Las_1_1Core_1_1FeedbackResponse)` `[`SendFeedback`](#classLucidtech_1_1Las_1_1ApiClient_1af318f59c6854feaded4e4c21f3fe441b)`(string documentId,List< Dictionary< string, string >> feedback)` 
+
+Send feedback to the model. This method takes care of sending feedback related to a document specified by documentId. Feedback consists of ground truth values for the document specified as a List of Dictionaries.
+
+```cpp
+using namespace Lucidtech.Las; 
+ApiClient apiClient = new ApiClient(); 
+var feedback = new List<Dictionary<string, string>>() 
+{ 
+    new Dictionary<string, string>(){{"label", "total_amount"},{"value", "54.50"}}, 
+    new Dictionary<string, string>(){{"label", "purchase_date"},{"value", "2007-07-30"}} 
+}; 
+FeedbackResponse response = apiClient.SendFeedback(documentId: '<documentId>', feedback: feedback); 
+Console.WriteLine(response.ToJsonString(Formatting.Indented)); 
+```
+
+#### Parameters
+* `documentId` Document id 
+
+* `feedback` Ground truth values 
+
+#### Returns
+Data that can be used to confirm that the feedback uploaded was successful
+
+#### `public inline `[`RevokeResponse`](#classLucidtech_1_1Las_1_1Core_1_1RevokeResponse)` `[`RevokeConsent`](#classLucidtech_1_1Las_1_1ApiClient_1a8fbb4629795670a9b1e65b14cf471e6a)`(string consentId)` 
+
+Revoke consent and delete all documents associated with consentId. Consent id is a parameter that is provided by the user upon making a prediction on a document.
+
+```cpp
+using namespace Lucidtech.Las; 
+ApiClient apiClient = new ApiClient(); 
+RevokeResponse response = apiClient.RevokeConsent(consentId: '<consentId>'); 
+Console.WriteLine(response.ToJsonString(Formatting.Indented)); 
+```
+
+#### Parameters
+* `consentId` Delete documents associated with this consent id 
+
+#### Returns
+The document ids of the deleted documents, and their consent id
+
+# class `Lucidtech::Las::Client` 
+
+A low level client to invoke api methods from [Lucidtech](#namespaceLucidtech) AI Services.
+
+## Summary
+
+ Members                        | Descriptions                                
+--------------------------------|---------------------------------------------
+`{property} RestClient `[`RestSharpClient`](#classLucidtech_1_1Las_1_1Client_1a5e59cc310cc0dd101e74a16824f2fa3a) | 
+`{property} `[`AmazonCredentials`](#classLucidtech_1_1Las_1_1Core_1_1AmazonCredentials)` `[`Credentials`](#classLucidtech_1_1Las_1_1Client_1a9cbce969c8ef19a70894424cf9a39e41) | 
+`public inline  `[`Client`](#classLucidtech_1_1Las_1_1Client_1acb8a1ebdb22971f7eba21c10df9ac552)`(`[`AmazonCredentials`](#classLucidtech_1_1Las_1_1Core_1_1AmazonCredentials)` credentials)` | [Client](#classLucidtech_1_1Las_1_1Client) constructor.
+`public inline  `[`Client`](#classLucidtech_1_1Las_1_1Client_1a0ba3cc00461a4ee4d4a346d9600efa4a)`()` | [Client](#classLucidtech_1_1Las_1_1Client) constructor with credentials read from local file.
+`public inline object `[`PostDocuments`](#classLucidtech_1_1Las_1_1Client_1ac0119d85645ec03e94705bf210b9b003)`(byte [] content,string contentType,string consentId,string batchId,List< Dictionary< string, string >> feedback)` | Creates a document handle, calls the POST /documents endpoint
+`public inline object `[`GetDocuments`](#classLucidtech_1_1Las_1_1Client_1afd613311836635a0bebabd5db980bd07)`(string batchId,string consentId)` | Get documents from the REST API, calls the GET /documents endpoint.
+`public inline object `[`PostPredictions`](#classLucidtech_1_1Las_1_1Client_1aae17784226085ddef349c3f40c288d2f)`(string documentId,string modelName,int? maxPages,bool? autoRotate,Dictionary< string, object >? extras)` | Run inference and create a prediction, calls the POST /predictions endpoint.
+`public inline object `[`GetDocumentId`](#classLucidtech_1_1Las_1_1Client_1a0e819da81848faf7d6325361b6c60034)`(string documentId)` | Get document from the REST API, calls the GET /documents/{documentId} endpoint.
+`public inline object `[`PostDocumentId`](#classLucidtech_1_1Las_1_1Client_1a7cd2a7d453b2cc23d1414dac50224053)`(string documentId,List< Dictionary< string, string >> feedback)` | Post feedback to the REST API, calls the POST /documents/{documentId} endpoint. Posting feedback means posting the ground truth data for the particular document. This enables the API to learn from past mistakes.
+`public inline object `[`DeleteConsentId`](#classLucidtech_1_1Las_1_1Client_1a05e3114f321ca9def9902cf2aae2e884)`(string consentId)` | Delete documents with this consentId, calls DELETE /consent/{consentId} endpoint.
+`public inline object `[`PostBatches`](#classLucidtech_1_1Las_1_1Client_1afefe6b8a1552ac686a5da1c85f9a931b)`(string description)` | Create a batch handle, calls the POST /batches endpoint.
+
+## Members
+
+#### `{property} RestClient `[`RestSharpClient`](#classLucidtech_1_1Las_1_1Client_1a5e59cc310cc0dd101e74a16824f2fa3a) 
+
+#### `{property} `[`AmazonCredentials`](#classLucidtech_1_1Las_1_1Core_1_1AmazonCredentials)` `[`Credentials`](#classLucidtech_1_1Las_1_1Client_1a9cbce969c8ef19a70894424cf9a39e41) 
+
+#### `public inline  `[`Client`](#classLucidtech_1_1Las_1_1Client_1acb8a1ebdb22971f7eba21c10df9ac552)`(`[`AmazonCredentials`](#classLucidtech_1_1Las_1_1Core_1_1AmazonCredentials)` credentials)` 
+
+[Client](#classLucidtech_1_1Las_1_1Client) constructor.
+
+#### Parameters
+* `credentials` Keys, endpoints and credentials needed for authorization
+
+#### `public inline  `[`Client`](#classLucidtech_1_1Las_1_1Client_1a0ba3cc00461a4ee4d4a346d9600efa4a)`()` 
+
+[Client](#classLucidtech_1_1Las_1_1Client) constructor with credentials read from local file.
+
+#### `public inline object `[`PostDocuments`](#classLucidtech_1_1Las_1_1Client_1ac0119d85645ec03e94705bf210b9b003)`(byte [] content,string contentType,string consentId,string batchId,List< Dictionary< string, string >> feedback)` 
+
+Creates a document handle, calls the POST /documents endpoint
+
+Create a document handle for a jpeg image 
+```cpp
+Client client = new Client();
+byte[] content = File.ReadAllBytes("MyReceipt.jpeg");
+var response = client.PostDocuments(content, "image/jpeg", "bar");
+```
+
+#### Parameters
+* `content` Content to POST 
+
+* `contentType` A mime type for the document handle 
+
+* `consentId` An identifier to mark the owner of the document handle 
+
+* `batchId` Specifies the batch to which the document will be associated with 
+
+* `feedback` A list of feedback items {label: value}, representing the ground truth values for the document 
+
+#### Returns
+A deserialized object that can be interpreted as a Dictionary with the fields with batchId, documentId, contentType and consentId
+
+#### `public inline object `[`GetDocuments`](#classLucidtech_1_1Las_1_1Client_1afd613311836635a0bebabd5db980bd07)`(string batchId,string consentId)` 
+
+Get documents from the REST API, calls the GET /documents endpoint.
+
+Create a document handle for a jpeg image 
+```cpp
+Client client = new Client();
+var response = client.GetDocuments('<batchId>');
+```
+
+#### Parameters
+* `batchId` The batch id that contains the documents of interest 
+
+* `consentId` An identifier to mark the owner of the document handle 
+
+#### Returns
+Documents from REST API contained in batch
+
+#### `public inline object `[`PostPredictions`](#classLucidtech_1_1Las_1_1Client_1aae17784226085ddef349c3f40c288d2f)`(string documentId,string modelName,int? maxPages,bool? autoRotate,Dictionary< string, object >? extras)` 
+
+Run inference and create a prediction, calls the POST /predictions endpoint.
+
+Run inference and create a prediction using the invoice model on the document specified by '<documentId>' 
+```cpp
+Client client = new Client(); 
+var response = client.PostPredictions('<documentId>',"invoice"); 
+```
+
+#### Parameters
+* `documentId` Path to document to upload Same as provided to [PostDocuments](#classLucidtech_1_1Las_1_1Client_1ac0119d85645ec03e94705bf210b9b003)
+
+* `modelName` The name of the model to use for inference 
+
+* `maxPages` Maximum number of pages to run predictions on 
+
+* `autoRotate` Whether or not to let the API try different rotations on the document when running 
+
+* `extras` Extra information to add to json body 
+
+#### Returns
+A deserialized object that can be interpreted as a Dictionary with the fields documentId and predictions, the value of predictions is the output from the model.
+
+#### `public inline object `[`GetDocumentId`](#classLucidtech_1_1Las_1_1Client_1a0e819da81848faf7d6325361b6c60034)`(string documentId)` 
+
+Get document from the REST API, calls the GET /documents/{documentId} endpoint.
+
+Get information of document specified by <documentId> 
+```cpp
+Client client = new Client();
+var response = client.GetDocumentId('<documentId>');
+```
+
+#### Parameters
+* `documentId` The document id to run inference and create a prediction on 
+
+#### Returns
+Document information from REST API
+
+#### `public inline object `[`PostDocumentId`](#classLucidtech_1_1Las_1_1Client_1a7cd2a7d453b2cc23d1414dac50224053)`(string documentId,List< Dictionary< string, string >> feedback)` 
+
+Post feedback to the REST API, calls the POST /documents/{documentId} endpoint. Posting feedback means posting the ground truth data for the particular document. This enables the API to learn from past mistakes.
+
+```cpp
+Client client = new Client(); 
+var feedback = new List<Dictionary<string, string>>() 
+{ 
+    new Dictionary<string, string>(){{"label", "total_amount"},{"value", "54.50"}}, 
+    new Dictionary<string, string>(){{"label", "purchase_date"},{"value", "2007-07-30"}} 
+}; 
+var response = client.PostDocumentId('<documentId>', feedback); 
+```
+
+#### Parameters
+* `documentId` Path to document to upload, Same as provided to [PostDocuments](#classLucidtech_1_1Las_1_1Client_1ac0119d85645ec03e94705bf210b9b003)
+
+* `feedback` A list of feedback items 
+
+#### Returns
+A deserialized object that can be interpreted as a Dictionary with the fields documentId, consentId, uploadUrl, contentType and feedback.
+
+#### `public inline object `[`DeleteConsentId`](#classLucidtech_1_1Las_1_1Client_1a05e3114f321ca9def9902cf2aae2e884)`(string consentId)` 
+
+Delete documents with this consentId, calls DELETE /consent/{consentId} endpoint.
+
+```cpp
+Client client = new Client(); 
+var response = client.DeleteConsentId('<consentId>'); 
+```
+
+#### Parameters
+* `consentId` Delete documents with provided consentId 
+
+#### Returns
+A deserialized object that can be interpreted as a Dictionary with the fields consentId and documentIds
+
+#### `public inline object `[`PostBatches`](#classLucidtech_1_1Las_1_1Client_1afefe6b8a1552ac686a5da1c85f9a931b)`(string description)` 
+
+Create a batch handle, calls the POST /batches endpoint.
+
+Create a new batch with the provided description. on the document specified by '<batchId>' 
+```cpp
+Client client = new Client(); 
+var response = client.PostBatches("Data gathered from the Mars Rover Invoice Scan Mission"); 
+```
+
+#### Parameters
+* `description` A brief description of the purpose of the batch 
+
+#### Returns
+A deserialized object that can be interpreted as a Dictionary with the fields batchId and description. batchId can be used as an input when posting documents to make them a part of this batch.
+
+# namespace `Lucidtech::Las::Core` 
+
+## Summary
+
+ Members                        | Descriptions                                
+--------------------------------|---------------------------------------------
+`class `[`Lucidtech::Las::Core::AmazonCredentials`](#classLucidtech_1_1Las_1_1Core_1_1AmazonCredentials) | Used to fetch and store credentials. One of 3 conditions must be met to successfully create credentials.
+`class `[`Lucidtech::Las::Core::ClientException`](#classLucidtech_1_1Las_1_1Core_1_1ClientException) | A [ClientException](#classLucidtech_1_1Las_1_1Core_1_1ClientException) is raised if the client refuses to send request due to incorrect usage or bad request data.
+`class `[`Lucidtech::Las::Core::FeedbackResponse`](#classLucidtech_1_1Las_1_1Core_1_1FeedbackResponse) | The structured format of the response from a send feedback request.
+`class `[`Lucidtech::Las::Core::InvalidCredentialsException`](#classLucidtech_1_1Las_1_1Core_1_1InvalidCredentialsException) | An [InvalidCredentialsException](#classLucidtech_1_1Las_1_1Core_1_1InvalidCredentialsException) is raised if api key, access key id or secret access key is invalid.
+`class `[`Lucidtech::Las::Core::LimitExceededException`](#classLucidtech_1_1Las_1_1Core_1_1LimitExceededException) | A [LimitExceededException](#classLucidtech_1_1Las_1_1Core_1_1LimitExceededException) is raised if you have reached the limit of total requests per month associated with your credentials.
+`class `[`Lucidtech::Las::Core::Prediction`](#classLucidtech_1_1Las_1_1Core_1_1Prediction) | A class that contains all the necessary information regarding a prediction performed by [ApiClient](#classLucidtech_1_1Las_1_1ApiClient).
+`class `[`Lucidtech::Las::Core::RequestException`](#classLucidtech_1_1Las_1_1Core_1_1RequestException) | A [RequestException](#classLucidtech_1_1Las_1_1Core_1_1RequestException) is raised if something went wrong with the request.
+`class `[`Lucidtech::Las::Core::RevokeResponse`](#classLucidtech_1_1Las_1_1Core_1_1RevokeResponse) | The structured format of the response from a revoke consent request.
+`class `[`Lucidtech::Las::Core::TooManyRequestsException`](#classLucidtech_1_1Las_1_1Core_1_1TooManyRequestsException) | A [TooManyRequestsException](#classLucidtech_1_1Las_1_1Core_1_1TooManyRequestsException) is raised if you have reached the number of requests per second limit associated with your credentials.
+
+# class `Lucidtech::Las::Core::AmazonCredentials` 
+
+Used to fetch and store credentials. One of 3 conditions must be met to successfully create credentials.
+
+* ClientId, ClientSecret, ApiKey, AuthEndpoint and ApiEndpoint are provided
+
+* The path to the file where the credentials are stored is provided
+
+* Credentials are located in default path ~/.lucidtech/credentials.cfg
+
+Get credentials by contacting [hello@lucidtech.ai](mailto:hello@lucidtech.ai)
+
+## Summary
+
+ Members                        | Descriptions                                
+--------------------------------|---------------------------------------------
+`{property} string `[`ClientId`](#classLucidtech_1_1Las_1_1Core_1_1AmazonCredentials_1a17bd08b31f6abde5e3ef98a8799ede16) | [Client](#classLucidtech_1_1Las_1_1Client) ID. Provided by [Lucidtech](#namespaceLucidtech).
+`{property} string `[`ClientSecret`](#classLucidtech_1_1Las_1_1Core_1_1AmazonCredentials_1a502f1ca2ea089165a262c6effab80a5c) | [Client](#classLucidtech_1_1Las_1_1Client) Secret. Provided by [Lucidtech](#namespaceLucidtech).
+`{property} string `[`ApiKey`](#classLucidtech_1_1Las_1_1Core_1_1AmazonCredentials_1a2634677fa10dc8816ea10e0d5699a57f) | AWS API Gateway API key. Provided by [Lucidtech](#namespaceLucidtech).
+`{property} string `[`AuthEndpoint`](#classLucidtech_1_1Las_1_1Core_1_1AmazonCredentials_1a75641588e4e15c71edb5ffdbd25f1afd) | AWS Authorization endpoint. Provided by [Lucidtech](#namespaceLucidtech).
+`{property} string `[`ApiEndpoint`](#classLucidtech_1_1Las_1_1Core_1_1AmazonCredentials_1a121cd627ca5d1c640bb3e3a4f019b335) | AWS API Gateway API endpoint. Provided by [Lucidtech](#namespaceLucidtech).
+`{property} RestClient `[`RestSharpClient`](#classLucidtech_1_1Las_1_1Core_1_1AmazonCredentials_1a8fd958b47704d68bd9d6dab82e54617a) | RestClient for making request to the authorization endpoint.
+`public inline string `[`GetAccessToken`](#classLucidtech_1_1Las_1_1Core_1_1AmazonCredentials_1a5a8bb218c0b21469826d2a997e76c5c6)`()` | Get Access token to API endpoint.
+`public inline  `[`AmazonCredentials`](#classLucidtech_1_1Las_1_1Core_1_1AmazonCredentials_1a50d4c49762d745dfcfedcbabf83565eb)`(string clientId,string clientSecret,string apiKey,string authEndpoint,string apiEndpoint)` | Credentials constructor where ClientId, ClientSecret, ApiKey, AuthEndpoint and ApiEndpoint are provided by [Lucidtech](#namespaceLucidtech).
+`public inline  `[`AmazonCredentials`](#classLucidtech_1_1Las_1_1Core_1_1AmazonCredentials_1a929e91e63462faa2576538e3619e0b3e)`(string credentialsPath)` | Credentials constructor where the path to the credentials config is provided.
+`public inline  `[`AmazonCredentials`](#classLucidtech_1_1Las_1_1Core_1_1AmazonCredentials_1a2f4c5415a4dba41c96c8c368f0db5b77)`()` | Credentials constructor where the credentials are located at the default path. ~/.lucidtech/credentials.cfg for linux and USERPROFILE%.lucidtech\credentials.cfg for Windows.
+
+## Members
+
+#### `{property} string `[`ClientId`](#classLucidtech_1_1Las_1_1Core_1_1AmazonCredentials_1a17bd08b31f6abde5e3ef98a8799ede16) 
+
+[Client](#classLucidtech_1_1Las_1_1Client) ID. Provided by [Lucidtech](#namespaceLucidtech).
+
+#### `{property} string `[`ClientSecret`](#classLucidtech_1_1Las_1_1Core_1_1AmazonCredentials_1a502f1ca2ea089165a262c6effab80a5c) 
+
+[Client](#classLucidtech_1_1Las_1_1Client) Secret. Provided by [Lucidtech](#namespaceLucidtech).
+
+#### `{property} string `[`ApiKey`](#classLucidtech_1_1Las_1_1Core_1_1AmazonCredentials_1a2634677fa10dc8816ea10e0d5699a57f) 
+
+AWS API Gateway API key. Provided by [Lucidtech](#namespaceLucidtech).
+
+#### `{property} string `[`AuthEndpoint`](#classLucidtech_1_1Las_1_1Core_1_1AmazonCredentials_1a75641588e4e15c71edb5ffdbd25f1afd) 
+
+AWS Authorization endpoint. Provided by [Lucidtech](#namespaceLucidtech).
+
+#### `{property} string `[`ApiEndpoint`](#classLucidtech_1_1Las_1_1Core_1_1AmazonCredentials_1a121cd627ca5d1c640bb3e3a4f019b335) 
+
+AWS API Gateway API endpoint. Provided by [Lucidtech](#namespaceLucidtech).
+
+#### `{property} RestClient `[`RestSharpClient`](#classLucidtech_1_1Las_1_1Core_1_1AmazonCredentials_1a8fd958b47704d68bd9d6dab82e54617a) 
+
+RestClient for making request to the authorization endpoint.
+
+#### `public inline string `[`GetAccessToken`](#classLucidtech_1_1Las_1_1Core_1_1AmazonCredentials_1a5a8bb218c0b21469826d2a997e76c5c6)`()` 
+
+Get Access token to API endpoint.
+
+#### `public inline  `[`AmazonCredentials`](#classLucidtech_1_1Las_1_1Core_1_1AmazonCredentials_1a50d4c49762d745dfcfedcbabf83565eb)`(string clientId,string clientSecret,string apiKey,string authEndpoint,string apiEndpoint)` 
+
+Credentials constructor where ClientId, ClientSecret, ApiKey, AuthEndpoint and ApiEndpoint are provided by [Lucidtech](#namespaceLucidtech).
+
+#### Parameters
+* `clientId` client id 
+
+* `clientSecret` client secret 
+
+* `apiKey` API key 
+
+* `authEndpoint` Authorization endpoint 
+
+* `apiEndpoint` API endpoint 
+
+#### Exceptions
+* `ArgumentException`
+
+#### `public inline  `[`AmazonCredentials`](#classLucidtech_1_1Las_1_1Core_1_1AmazonCredentials_1a929e91e63462faa2576538e3619e0b3e)`(string credentialsPath)` 
+
+Credentials constructor where the path to the credentials config is provided.
+
+#### Parameters
+* `credentialsPath` Path to the file where the credentials are stored
+
+#### `public inline  `[`AmazonCredentials`](#classLucidtech_1_1Las_1_1Core_1_1AmazonCredentials_1a2f4c5415a4dba41c96c8c368f0db5b77)`()` 
+
+Credentials constructor where the credentials are located at the default path. ~/.lucidtech/credentials.cfg for linux and USERPROFILE%.lucidtech\credentials.cfg for Windows.
+
+# class `Lucidtech::Las::Core::ClientException` 
+
+```
+class Lucidtech::Las::Core::ClientException
+  : public Exception
+```  
+
+A [ClientException](#classLucidtech_1_1Las_1_1Core_1_1ClientException) is raised if the client refuses to send request due to incorrect usage or bad request data.
+
+## Summary
+
+ Members                        | Descriptions                                
+--------------------------------|---------------------------------------------
+`public inline  `[`ClientException`](#classLucidtech_1_1Las_1_1Core_1_1ClientException_1adcb7f76b61fa3b414e4e71ceaca9fdad)`(string s)` | 
+
+## Members
+
+#### `public inline  `[`ClientException`](#classLucidtech_1_1Las_1_1Core_1_1ClientException_1adcb7f76b61fa3b414e4e71ceaca9fdad)`(string s)` 
+
+# class `Lucidtech::Las::Core::FeedbackResponse` 
+
+The structured format of the response from a send feedback request.
+
+## Summary
+
+ Members                        | Descriptions                                
+--------------------------------|---------------------------------------------
+`{property} string `[`DocumentId`](#classLucidtech_1_1Las_1_1Core_1_1FeedbackResponse_1a583fa4e93b2e4d42bc87a8de8e1155ae) | Document id
+`{property} string `[`ConsentId`](#classLucidtech_1_1Las_1_1Core_1_1FeedbackResponse_1a3cea748b281d1b4d14690c639f4e2ec6) | Consent id
+`{property} string `[`ContentType`](#classLucidtech_1_1Las_1_1Core_1_1FeedbackResponse_1a3410256cf5cb1e92bddb635c79590244) | Content type
+`{property} List< Dictionary< string, string > > `[`Feedback`](#classLucidtech_1_1Las_1_1Core_1_1FeedbackResponse_1a58bcc016725bbf3cd77d9d9707c8f633) | The same information as was uploaded as feedback.
+`public inline  `[`FeedbackResponse`](#classLucidtech_1_1Las_1_1Core_1_1FeedbackResponse_1a4d8a83b695036d1949218035465561a4)`(object response)` | 
+`public inline string `[`ToJsonString`](#classLucidtech_1_1Las_1_1Core_1_1FeedbackResponse_1ab7ca7a2e4f4362d7ba26a4f111bc7426)`(Formatting format)` | Convert an object of this class to a string ready to be interpreted as a json object.
+
+## Members
+
+#### `{property} string `[`DocumentId`](#classLucidtech_1_1Las_1_1Core_1_1FeedbackResponse_1a583fa4e93b2e4d42bc87a8de8e1155ae) 
+
+Document id
+
+#### `{property} string `[`ConsentId`](#classLucidtech_1_1Las_1_1Core_1_1FeedbackResponse_1a3cea748b281d1b4d14690c639f4e2ec6) 
+
+Consent id
+
+#### `{property} string `[`ContentType`](#classLucidtech_1_1Las_1_1Core_1_1FeedbackResponse_1a3410256cf5cb1e92bddb635c79590244) 
+
+Content type
+
+#### `{property} List< Dictionary< string, string > > `[`Feedback`](#classLucidtech_1_1Las_1_1Core_1_1FeedbackResponse_1a58bcc016725bbf3cd77d9d9707c8f633) 
+
+The same information as was uploaded as feedback.
+
+#### `public inline  `[`FeedbackResponse`](#classLucidtech_1_1Las_1_1Core_1_1FeedbackResponse_1a4d8a83b695036d1949218035465561a4)`(object response)` 
+
+#### `public inline string `[`ToJsonString`](#classLucidtech_1_1Las_1_1Core_1_1FeedbackResponse_1ab7ca7a2e4f4362d7ba26a4f111bc7426)`(Formatting format)` 
+
+Convert an object of this class to a string ready to be interpreted as a json object.
+
+#### Parameters
+* `format` The format of the string, either `Formatting.None` or `Formatting.Indented`
+
+#### Returns
+A string that is formatted as a json object
+
+# class `Lucidtech::Las::Core::InvalidCredentialsException` 
+
+```
+class Lucidtech::Las::Core::InvalidCredentialsException
+  : public Lucidtech.Las.Core.ClientException
+```  
+
+An [InvalidCredentialsException](#classLucidtech_1_1Las_1_1Core_1_1InvalidCredentialsException) is raised if api key, access key id or secret access key is invalid.
+
+## Summary
+
+ Members                        | Descriptions                                
+--------------------------------|---------------------------------------------
+`public inline  `[`InvalidCredentialsException`](#classLucidtech_1_1Las_1_1Core_1_1InvalidCredentialsException_1a666a601ee2b46cd24f54dc062a228d85)`(string s)` | 
+
+## Members
+
+#### `public inline  `[`InvalidCredentialsException`](#classLucidtech_1_1Las_1_1Core_1_1InvalidCredentialsException_1a666a601ee2b46cd24f54dc062a228d85)`(string s)` 
+
+# class `Lucidtech::Las::Core::LimitExceededException` 
+
+```
+class Lucidtech::Las::Core::LimitExceededException
+  : public Lucidtech.Las.Core.ClientException
+```  
+
+A [LimitExceededException](#classLucidtech_1_1Las_1_1Core_1_1LimitExceededException) is raised if you have reached the limit of total requests per month associated with your credentials.
+
+## Summary
+
+ Members                        | Descriptions                                
+--------------------------------|---------------------------------------------
+`public inline  `[`LimitExceededException`](#classLucidtech_1_1Las_1_1Core_1_1LimitExceededException_1a531eacc7391269340a13d3accebf5d6b)`(string s)` | 
+
+## Members
+
+#### `public inline  `[`LimitExceededException`](#classLucidtech_1_1Las_1_1Core_1_1LimitExceededException_1a531eacc7391269340a13d3accebf5d6b)`(string s)` 
+
+# class `Lucidtech::Las::Core::Prediction` 
+
+A class that contains all the necessary information regarding a prediction performed by [ApiClient](#classLucidtech_1_1Las_1_1ApiClient).
+
+## Summary
+
+ Members                        | Descriptions                                
+--------------------------------|---------------------------------------------
+`{property} string `[`ConsentId`](#classLucidtech_1_1Las_1_1Core_1_1Prediction_1aff35bf96ba266b12fcd51c39f9980398) | Consent id
+`{property} string `[`ModelName`](#classLucidtech_1_1Las_1_1Core_1_1Prediction_1a3e77070cbaf240ad9e83cbc0d8ca0cae) | Upload url
+`{property} string `[`DocumentId`](#classLucidtech_1_1Las_1_1Core_1_1Prediction_1ad4c7eebd91ad8bf95fb920af3720ab45) | Document id
+`{property} List< Dictionary< string, object > > `[`Fields`](#classLucidtech_1_1Las_1_1Core_1_1Prediction_1ad88d7e901b90fcb00f6788bce2cde1ec) | A list of the responses from a prediction
+`public inline  `[`Prediction`](#classLucidtech_1_1Las_1_1Core_1_1Prediction_1ad2683829a91fd8809e00aeb35c412901)`(string documentId,string consentId,string modelName,List< Dictionary< string, object >> predictionResponse)` | Constructor of s [Prediction](#classLucidtech_1_1Las_1_1Core_1_1Prediction) object
+`public inline string `[`ToJsonString`](#classLucidtech_1_1Las_1_1Core_1_1Prediction_1a8e22ad69756c2a1d0582d8d6c2dbc9bc)`(Formatting format)` | Convert an object of this class to a string ready to be interpreted as a json object.
+
+## Members
+
+#### `{property} string `[`ConsentId`](#classLucidtech_1_1Las_1_1Core_1_1Prediction_1aff35bf96ba266b12fcd51c39f9980398) 
+
+Consent id
+
+#### `{property} string `[`ModelName`](#classLucidtech_1_1Las_1_1Core_1_1Prediction_1a3e77070cbaf240ad9e83cbc0d8ca0cae) 
+
+Upload url
+
+#### `{property} string `[`DocumentId`](#classLucidtech_1_1Las_1_1Core_1_1Prediction_1ad4c7eebd91ad8bf95fb920af3720ab45) 
+
+Document id
+
+#### `{property} List< Dictionary< string, object > > `[`Fields`](#classLucidtech_1_1Las_1_1Core_1_1Prediction_1ad88d7e901b90fcb00f6788bce2cde1ec) 
+
+A list of the responses from a prediction
+
+#### `public inline  `[`Prediction`](#classLucidtech_1_1Las_1_1Core_1_1Prediction_1ad2683829a91fd8809e00aeb35c412901)`(string documentId,string consentId,string modelName,List< Dictionary< string, object >> predictionResponse)` 
+
+Constructor of s [Prediction](#classLucidtech_1_1Las_1_1Core_1_1Prediction) object
+
+#### Parameters
+* `documentId` The id of the document used in the prediction 
+
+* `consentId` The consent id 
+
+* `modelName` The name of the model used 
+
+* `predictionResponse` The response from prediction
+
+#### `public inline string `[`ToJsonString`](#classLucidtech_1_1Las_1_1Core_1_1Prediction_1a8e22ad69756c2a1d0582d8d6c2dbc9bc)`(Formatting format)` 
+
+Convert an object of this class to a string ready to be interpreted as a json object.
+
+#### Parameters
+* `format` The format of the string, either `Formatting.None` or `Formatting.Indented`
+
+#### Returns
+A string that is formatted as a json object
+
+# class `Lucidtech::Las::Core::RequestException` 
+
+```
+class Lucidtech::Las::Core::RequestException
+  : public Lucidtech.Las.Core.ClientException
+```  
+
+A [RequestException](#classLucidtech_1_1Las_1_1Core_1_1RequestException) is raised if something went wrong with the request.
+
+## Summary
+
+ Members                        | Descriptions                                
+--------------------------------|---------------------------------------------
+`{property} IRestResponse `[`Response`](#classLucidtech_1_1Las_1_1Core_1_1RequestException_1a20b3caf6340de32e418ba8c62ab05b82) | 
+`public inline  `[`RequestException`](#classLucidtech_1_1Las_1_1Core_1_1RequestException_1a587aab0b41a24b283809e77493870f2a)`(string s)` | 
+`public inline  `[`RequestException`](#classLucidtech_1_1Las_1_1Core_1_1RequestException_1ac3e3f5ebf0ec4517e27efabdc36c11d6)`(IRestResponse response)` | 
+
+## Members
+
+#### `{property} IRestResponse `[`Response`](#classLucidtech_1_1Las_1_1Core_1_1RequestException_1a20b3caf6340de32e418ba8c62ab05b82) 
+
+#### `public inline  `[`RequestException`](#classLucidtech_1_1Las_1_1Core_1_1RequestException_1a587aab0b41a24b283809e77493870f2a)`(string s)` 
+
+#### `public inline  `[`RequestException`](#classLucidtech_1_1Las_1_1Core_1_1RequestException_1ac3e3f5ebf0ec4517e27efabdc36c11d6)`(IRestResponse response)` 
+
+# class `Lucidtech::Las::Core::RevokeResponse` 
+
+The structured format of the response from a revoke consent request.
+
+## Summary
+
+ Members                        | Descriptions                                
+--------------------------------|---------------------------------------------
+`{property} string `[`ConsentId`](#classLucidtech_1_1Las_1_1Core_1_1RevokeResponse_1a5c9404abd75b168b34bc451e3ee056c2) | The consent Id where documents where deleted.
+`{property} List< string > `[`DocumentIds`](#classLucidtech_1_1Las_1_1Core_1_1RevokeResponse_1aab7c6599db6b09938ad642281f67cebb) | The document Ids of the deleted documents.
+`public inline  `[`RevokeResponse`](#classLucidtech_1_1Las_1_1Core_1_1RevokeResponse_1a87c59407fc6eb36f9b868c412977970a)`(object deleteConsentResponse)` | 
+`public inline string `[`ToJsonString`](#classLucidtech_1_1Las_1_1Core_1_1RevokeResponse_1a8b10fa6a2df43e00ea552a0c9814bb70)`(Formatting format)` | Convert an object of this class to a string ready to be interpreted as a json object.
+
+## Members
+
+#### `{property} string `[`ConsentId`](#classLucidtech_1_1Las_1_1Core_1_1RevokeResponse_1a5c9404abd75b168b34bc451e3ee056c2) 
+
+The consent Id where documents where deleted.
+
+#### `{property} List< string > `[`DocumentIds`](#classLucidtech_1_1Las_1_1Core_1_1RevokeResponse_1aab7c6599db6b09938ad642281f67cebb) 
+
+The document Ids of the deleted documents.
+
+#### `public inline  `[`RevokeResponse`](#classLucidtech_1_1Las_1_1Core_1_1RevokeResponse_1a87c59407fc6eb36f9b868c412977970a)`(object deleteConsentResponse)` 
+
+#### `public inline string `[`ToJsonString`](#classLucidtech_1_1Las_1_1Core_1_1RevokeResponse_1a8b10fa6a2df43e00ea552a0c9814bb70)`(Formatting format)` 
+
+Convert an object of this class to a string ready to be interpreted as a json object.
+
+#### Parameters
+* `format` The format of the string, either `Formatting.None` or `Formatting.Indented`
+
+#### Returns
+A string that is formatted as a json object
+
+# class `Lucidtech::Las::Core::TooManyRequestsException` 
+
+```
+class Lucidtech::Las::Core::TooManyRequestsException
+  : public Lucidtech.Las.Core.ClientException
+```  
+
+A [TooManyRequestsException](#classLucidtech_1_1Las_1_1Core_1_1TooManyRequestsException) is raised if you have reached the number of requests per second limit associated with your credentials.
+
+## Summary
+
+ Members                        | Descriptions                                
+--------------------------------|---------------------------------------------
+`public inline  `[`TooManyRequestsException`](#classLucidtech_1_1Las_1_1Core_1_1TooManyRequestsException_1a405f42f24fd1e1ffffb3609b6ea89bd2)`(string s)` | 
+
+## Members
+
+#### `public inline  `[`TooManyRequestsException`](#classLucidtech_1_1Las_1_1Core_1_1TooManyRequestsException_1a405f42f24fd1e1ffffb3609b6ea89bd2)`(string s)` 
+
+# namespace `Lucidtech::Las::Utils` 
+
+## Summary
+
+ Members                        | Descriptions                                
+--------------------------------|---------------------------------------------
+`class `[`Lucidtech::Las::Utils::FileType`](#classLucidtech_1_1Las_1_1Utils_1_1FileType) | Help determine the type of a file, inspired by pythons `imghdr.what()`.
+`class `[`Lucidtech::Las::Utils::JsonSerialPublisher`](#classLucidtech_1_1Las_1_1Utils_1_1JsonSerialPublisher) | A Json publishes that allows the user to serialize and deserialize back and forth between serialized json objects and deserialized general objects and specific Dictionaries.
+
+# class `Lucidtech::Las::Utils::FileType` 
+
+Help determine the type of a file, inspired by pythons `imghdr.what()`.
+
+## Summary
+
+ Members                        | Descriptions                                
+--------------------------------|---------------------------------------------
+
+## Members
+
+# class `Lucidtech::Las::Utils::JsonSerialPublisher` 
+
+```
+class Lucidtech::Las::Utils::JsonSerialPublisher
+  : public ISerializer
+  : public IDeserializer
+```  
+
+A Json publishes that allows the user to serialize and deserialize back and forth between serialized json objects and deserialized general objects and specific Dictionaries.
+
+## Summary
+
+ Members                        | Descriptions                                
+--------------------------------|---------------------------------------------
+`{property} string `[`ContentType`](#classLucidtech_1_1Las_1_1Utils_1_1JsonSerialPublisher_1a4bccd73b0ef7355d9e4013c4dc69ed0e) | 
+`public inline  `[`JsonSerialPublisher`](#classLucidtech_1_1Las_1_1Utils_1_1JsonSerialPublisher_1a4c11e94dba401f14ed1d3315ca17be59)`(Newtonsoft.Json.JsonSerializer serializer)` | 
+`public inline string `[`Serialize`](#classLucidtech_1_1Las_1_1Utils_1_1JsonSerialPublisher_1aabb184cf8d6e6511e7b2a5e34fe259af)`(object obj)` | Serialize a general object.
+`public inline T `[`Deserialize< T >`](#classLucidtech_1_1Las_1_1Utils_1_1JsonSerialPublisher_1a4d40df27e6e8fe372ef4b3a0f14fe85a)`(IRestResponse response)` | Deserialize the content of an IRestResponse.
+
+## Members
+
+#### `{property} string `[`ContentType`](#classLucidtech_1_1Las_1_1Utils_1_1JsonSerialPublisher_1a4bccd73b0ef7355d9e4013c4dc69ed0e) 
+
+#### `public inline  `[`JsonSerialPublisher`](#classLucidtech_1_1Las_1_1Utils_1_1JsonSerialPublisher_1a4c11e94dba401f14ed1d3315ca17be59)`(Newtonsoft.Json.JsonSerializer serializer)` 
+
+#### `public inline string `[`Serialize`](#classLucidtech_1_1Las_1_1Utils_1_1JsonSerialPublisher_1aabb184cf8d6e6511e7b2a5e34fe259af)`(object obj)` 
+
+Serialize a general object.
+
+#### Parameters
+* `obj` A general object to be serialized 
+
+#### Returns
+A string ready to be interpreted as a json file
+
+#### `public inline T `[`Deserialize< T >`](#classLucidtech_1_1Las_1_1Utils_1_1JsonSerialPublisher_1a4d40df27e6e8fe372ef4b3a0f14fe85a)`(IRestResponse response)` 
+
+Deserialize the content of an IRestResponse.
+
+#### Parameters
+* `response` The response from a request performed by ` RestSharp.RestClient `
+
+#### Parameters
+* `T` The type of the output, e.g. Dictionary or a List of some sort 
+
+#### Returns
+A deserialized object of type *T*
+
+Generated by [Moxygen](https://sourcey.com/moxygen)
