@@ -5,9 +5,10 @@
 ## Getting Started
 
 * [Quickstart](getting-started/dev/README.md)
-  * [Using the CLI](https://github.com/LucidtechAI/las-cli/blob/master/README.md)
+  * [Using the CLI](getting-started/dev/cli.md)
   * [Python](getting-started/dev/python.md)
-  * [.NET](getting-started/dev/.net.md)
+  * [JavaScript](getting-started/dev/js.md)
+  * [.NET](getting-started/dev/net.md)
 * [FAQ](getting-started/faq.md)
 * [Help](getting-started/help.md)
 
