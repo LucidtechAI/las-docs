@@ -28,3 +28,14 @@ document = client.send_feedback(document_id=document.id, feedback=feedback)
 print(document)
 ```
 
+#### Create a document with consent id
+
+What is consent id?
+
+```python
+from las import Client
+
+client = Client()
+document = client.create_document('invoice.pdf', consent_id='abc')
+```
+
