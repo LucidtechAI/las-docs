@@ -1,5 +1,13 @@
 # Python
 
+#### Installation
+
+Install the package via the Python package manager [pip](https://pip.pypa.io/en/stable/)
+
+```bash
+>> $ pip install lucidtech-las
+```
+
 #### Make a prediction on a document
 
 Suppose we wish to run inference on a document using Lucidtech’s invoice model.

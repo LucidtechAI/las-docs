@@ -1,4 +1,12 @@
-# JavaScript
+# Using the CLI
+
+#### Installation
+
+Install the CLI via the Python package manager [pip](https://pip.pypa.io/en/stable/)
+
+```bash
+>> $ pip install lucidtech-las-cli
+```
 
 #### Make a prediction on a document
 
