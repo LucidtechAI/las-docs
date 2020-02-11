@@ -1,6 +1,8 @@
 # Python
 
-#### Make predictions on an invoice
+#### Make a prediction on a document
+
+Suppose we wish to run inference on a document using Lucidtech’s invoice model.
 
 ```python
 from las import Client
@@ -13,6 +15,9 @@ print(prediction)
 ```
 
 #### Set ground truth of document
+
+Suppose we make a prediction that returns incorrect values and we wish to improve the model for future use. We can 
+do so by sending feedback to the model, telling it what the expected values should have been.
 
 ```python
 from las import Client
@@ -39,6 +44,21 @@ from las import Client
 
 client = Client()
 document = client.create_document('invoice.pdf', consent_id='abc')
+```
+
+#### Revoking consent and deleting documents
+
+Suppose we wish to delete all documents associated with a customer in our ERP database or other systems. We need 
+to provide a consent_id to the prediction method that uniquely identifies the customer and use that consent_id to 
+delete documents.
+
+```python
+from las import Client
+
+client = Client()
+consent_id = 'abc'
+client.create_document('invoice.pdf', consent_id=consent_id)
+client.delete_consent(consent_id=consent_id)
 ```
 
 #### Create a batch and associate a few documents with it
