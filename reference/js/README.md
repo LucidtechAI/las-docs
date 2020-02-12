@@ -1,6 +1,6 @@
 [@lucidtech/las-sdk-core](README.md) › [Globals](globals.md)
 
-# @lucidtech/las-sdk-core
+# @lucidtech/las-sdk-core 2.0
 
 # JavaScript SDK for Lucidtech AI Services API
 

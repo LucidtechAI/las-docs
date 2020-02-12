@@ -21,4 +21,4 @@
 * [.NET](reference/.net/README.md)
   * [4.7](reference/.net/4.7.md)
 * [JavaScript SDK](reference/js/README.md)
-  * [v1.3](reference/js/1.3.md)
+  * [v2.0](reference/js/2.0.md)
