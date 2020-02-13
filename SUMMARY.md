@@ -14,8 +14,8 @@
 
 ## Reference
 
-* [Rest API](reference/dev/README.md)
-  * [v1](reference/dev/v1.md)
+* [Rest API](reference/restapi/README.md)
+  * [dev](reference/restapi/dev/README.md)
 * [Python SDK](reference/python-sdk/README.md)
   * [v2.0](reference/python-sdk/v2.0.md)
 * [.NET](reference/.net/README.md)
