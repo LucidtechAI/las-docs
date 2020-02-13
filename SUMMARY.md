@@ -17,7 +17,7 @@
 * [Rest API](reference/dev/README.md)
   * [v1](reference/dev/v1.md)
 * [Python SDK](reference/python-sdk/README.md)
-  * [3.6](reference/python-sdk/3.6.md)
+  * [2](reference/python-sdk/2.md)
 * [.NET](reference/.net/README.md)
   * [4.7](reference/.net/4.7.md)
 * [JavaScript SDK](reference/js/README.md)
