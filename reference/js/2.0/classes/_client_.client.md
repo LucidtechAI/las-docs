@@ -16,66 +16,123 @@ A high-level http client for communicating the Lucidtech REST API
 
 ### Properties
 
-* [apiEndpoint](_client_.client.md#apiendpoint)
 * [credentials](_client_.client.md#credentials)
 
 ### Methods
 
+* [createBatch](_client_.client.md#createbatch)
+* [createDocument](_client_.client.md#createdocument)
+* [createPrediction](_client_.client.md#createprediction)
 * [getAuthorizationHeaders](_client_.client.md#private-getauthorizationheaders)
 * [getDocument](_client_.client.md#getdocument)
-* [getDocuments](_client_.client.md#getdocuments)
 * [getUser](_client_.client.md#getuser)
+* [listDocuments](_client_.client.md#listdocuments)
 * [makeAuthorizedRequest](_client_.client.md#private-makeauthorizedrequest)
 * [makeDeleteRequest](_client_.client.md#makedeleterequest)
 * [makeGetRequest](_client_.client.md#makegetrequest)
 * [makePatchRequest](_client_.client.md#makepatchrequest)
 * [makePostRequest](_client_.client.md#makepostrequest)
-* [patchUser](_client_.client.md#patchuser)
-* [postBatches](_client_.client.md#postbatches)
-* [postDocumentId](_client_.client.md#postdocumentid)
-* [postDocuments](_client_.client.md#postdocuments)
-* [postPredictions](_client_.client.md#postpredictions)
+* [updateDocument](_client_.client.md#updatedocument)
+* [updateUser](_client_.client.md#updateuser)
 
 ## Constructors
 
 ###  constructor
 
-\+ **new Client**(`apiEndpoint`: string, `credentials`: [Credentials](_credentials_.credentials.md)): *[Client](_client_.client.md)*
+\+ **new Client**(`credentials`: [Credentials](_credentials_.credentials.md)): *[Client](_client_.client.md)*
 
-*Defined in [client.ts:12](https://github.com/LucidtechAI/las-sdk-js/blob/3e32c37/packages/las-sdk-core/src/client.ts#L12)*
+*Defined in [client.ts:10](https://github.com/LucidtechAI/las-sdk-js/blob/6ca7af3/packages/las-sdk-core/src/client.ts#L10)*
 
 **Parameters:**
 
 Name | Type |
 ------ | ------ |
-`apiEndpoint` | string |
 `credentials` | [Credentials](_credentials_.credentials.md) |
 
 **Returns:** *[Client](_client_.client.md)*
 
 ## Properties
 
-###  apiEndpoint
-
-• **apiEndpoint**: *string*
-
-*Defined in [client.ts:10](https://github.com/LucidtechAI/las-sdk-js/blob/3e32c37/packages/las-sdk-core/src/client.ts#L10)*
-
-___
-
 ###  credentials
 
 • **credentials**: *[Credentials](_credentials_.credentials.md)*
 
-*Defined in [client.ts:12](https://github.com/LucidtechAI/las-sdk-js/blob/3e32c37/packages/las-sdk-core/src/client.ts#L12)*
+*Defined in [client.ts:10](https://github.com/LucidtechAI/las-sdk-js/blob/6ca7af3/packages/las-sdk-core/src/client.ts#L10)*
 
 ## Methods
+
+###  createBatch
+
+▸ **createBatch**(`description`: string): *Promise‹any›*
+
+*Defined in [client.ts:117](https://github.com/LucidtechAI/las-sdk-js/blob/6ca7af3/packages/las-sdk-core/src/client.ts#L117)*
+
+Creates a batch handle, calls the POST /batches endpoint
+
+**Parameters:**
+
+Name | Type | Description |
+------ | ------ | ------ |
+`description` | string | a short description of the batch you intend to create |
+
+**Returns:** *Promise‹any›*
+
+- batch handle id and pre-signed upload url
+
+___
+
+###  createDocument
+
+▸ **createDocument**(`content`: string, `contentType`: string, `consentId`: string, `batchId?`: undefined | string, `feedback?`: Array‹object›): *Promise‹any›*
+
+*Defined in [client.ts:37](https://github.com/LucidtechAI/las-sdk-js/blob/6ca7af3/packages/las-sdk-core/src/client.ts#L37)*
+
+Creates a document handle, calls the POST /documents endpoint.
+
+**Parameters:**
+
+Name | Type | Description |
+------ | ------ | ------ |
+`content` | string | The contents to POST |
+`contentType` | string | A MIME type for the document handle |
+`consentId` | string | An identifier to mark the owner of the document handle |
+`batchId?` | undefined &#124; string | - |
+`feedback?` | Array‹object› | - |
+
+**Returns:** *Promise‹any›*
+
+- document handle id
+
+___
+
+###  createPrediction
+
+▸ **createPrediction**(`documentId`: string, `modelName`: string, `maxPages?`: undefined | number, `autoRotate?`: undefined | false | true): *Promise‹any›*
+
+*Defined in [client.ts:94](https://github.com/LucidtechAI/las-sdk-js/blob/6ca7af3/packages/las-sdk-core/src/client.ts#L94)*
+
+Run inference and create a prediction, calls the POST /predictions endpoint.
+
+**Parameters:**
+
+Name | Type | Description |
+------ | ------ | ------ |
+`documentId` | string | the document id to run inference and create a prediction on |
+`modelName` | string | the name of the model to use for inference |
+`maxPages?` | undefined &#124; number | - |
+`autoRotate?` | undefined &#124; false &#124; true | - |
+
+**Returns:** *Promise‹any›*
+
+- prediction on document
+
+___
 
 ### `Private` getAuthorizationHeaders
 
 ▸ **getAuthorizationHeaders**(): *Promise‹any›*
 
-*Defined in [client.ts:185](https://github.com/LucidtechAI/las-sdk-js/blob/3e32c37/packages/las-sdk-core/src/client.ts#L185)*
+*Defined in [client.ts:184](https://github.com/LucidtechAI/las-sdk-js/blob/6ca7af3/packages/las-sdk-core/src/client.ts#L184)*
 
 **Returns:** *Promise‹any›*
 
@@ -85,7 +142,7 @@ ___
 
 ▸ **getDocument**(`documentId`: string): *Promise‹any›*
 
-*Defined in [client.ts:25](https://github.com/LucidtechAI/las-sdk-js/blob/3e32c37/packages/las-sdk-core/src/client.ts#L25)*
+*Defined in [client.ts:22](https://github.com/LucidtechAI/las-sdk-js/blob/6ca7af3/packages/las-sdk-core/src/client.ts#L22)*
 
 Get document from the REST API, calls the GET /documets/{documentId} endpoint
 
@@ -101,30 +158,11 @@ Name | Type | Description |
 
 ___
 
-###  getDocuments
-
-▸ **getDocuments**(`batchId`: string, `consentId?`: undefined | string): *Promise‹any›*
-
-*Defined in [client.ts:63](https://github.com/LucidtechAI/las-sdk-js/blob/3e32c37/packages/las-sdk-core/src/client.ts#L63)*
-
-**Parameters:**
-
-Name | Type | Description |
------- | ------ | ------ |
-`batchId` | string | the batch id that contains the documents of interest |
-`consentId?` | undefined &#124; string | - |
-
-**Returns:** *Promise‹any›*
-
-- documents from REST API contained in batch <batchId>
-
-___
-
 ###  getUser
 
 ▸ **getUser**(`userId`: string): *Promise‹any›*
 
-*Defined in [client.ts:145](https://github.com/LucidtechAI/las-sdk-js/blob/3e32c37/packages/las-sdk-core/src/client.ts#L145)*
+*Defined in [client.ts:144](https://github.com/LucidtechAI/las-sdk-js/blob/6ca7af3/packages/las-sdk-core/src/client.ts#L144)*
 
 Gets consent hash and user id for a given user id, calls the GET /users/{user_id} endpoint.
 
@@ -140,11 +178,30 @@ Name | Type | Description |
 
 ___
 
+###  listDocuments
+
+▸ **listDocuments**(`batchId?`: undefined | string, `consentId?`: undefined | string): *Promise‹any›*
+
+*Defined in [client.ts:60](https://github.com/LucidtechAI/las-sdk-js/blob/6ca7af3/packages/las-sdk-core/src/client.ts#L60)*
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`batchId?` | undefined &#124; string |
+`consentId?` | undefined &#124; string |
+
+**Returns:** *Promise‹any›*
+
+- documents from REST API contained in batch <batchId>
+
+___
+
 ### `Private` makeAuthorizedRequest
 
 ▸ **makeAuthorizedRequest**(`axiosFn`: function, `path`: string, `body?`: any): *Promise‹any›*
 
-*Defined in [client.ts:165](https://github.com/LucidtechAI/las-sdk-js/blob/3e32c37/packages/las-sdk-core/src/client.ts#L165)*
+*Defined in [client.ts:164](https://github.com/LucidtechAI/las-sdk-js/blob/6ca7af3/packages/las-sdk-core/src/client.ts#L164)*
 
 **Parameters:**
 
@@ -172,7 +229,7 @@ ___
 
 ▸ **makeDeleteRequest**(`path`: string): *Promise‹any›*
 
-*Defined in [client.ts:153](https://github.com/LucidtechAI/las-sdk-js/blob/3e32c37/packages/las-sdk-core/src/client.ts#L153)*
+*Defined in [client.ts:152](https://github.com/LucidtechAI/las-sdk-js/blob/6ca7af3/packages/las-sdk-core/src/client.ts#L152)*
 
 **Parameters:**
 
@@ -188,7 +245,7 @@ ___
 
 ▸ **makeGetRequest**(`path`: string, `query?`: any): *Promise‹any›*
 
-*Defined in [client.ts:149](https://github.com/LucidtechAI/las-sdk-js/blob/3e32c37/packages/las-sdk-core/src/client.ts#L149)*
+*Defined in [client.ts:148](https://github.com/LucidtechAI/las-sdk-js/blob/6ca7af3/packages/las-sdk-core/src/client.ts#L148)*
 
 **Parameters:**
 
@@ -205,7 +262,7 @@ ___
 
 ▸ **makePatchRequest**(`path`: string, `body`: any): *Promise‹any›*
 
-*Defined in [client.ts:161](https://github.com/LucidtechAI/las-sdk-js/blob/3e32c37/packages/las-sdk-core/src/client.ts#L161)*
+*Defined in [client.ts:160](https://github.com/LucidtechAI/las-sdk-js/blob/6ca7af3/packages/las-sdk-core/src/client.ts#L160)*
 
 **Parameters:**
 
@@ -222,7 +279,7 @@ ___
 
 ▸ **makePostRequest**(`path`: string, `body`: any): *Promise‹any›*
 
-*Defined in [client.ts:157](https://github.com/LucidtechAI/las-sdk-js/blob/3e32c37/packages/las-sdk-core/src/client.ts#L157)*
+*Defined in [client.ts:156](https://github.com/LucidtechAI/las-sdk-js/blob/6ca7af3/packages/las-sdk-core/src/client.ts#L156)*
 
 **Parameters:**
 
@@ -235,52 +292,11 @@ Name | Type |
 
 ___
 
-###  patchUser
+###  updateDocument
 
-▸ **patchUser**(`userId`: string, `consentHash`: string): *Promise‹any›*
+▸ **updateDocument**(`documentId`: string, `feedback`: Array‹object›): *Promise‹any›*
 
-*Defined in [client.ts:134](https://github.com/LucidtechAI/las-sdk-js/blob/3e32c37/packages/las-sdk-core/src/client.ts#L134)*
-
-Modifies consent hash for a user, calls the PATCH /users/{user_id} endpoint.
-
-**Parameters:**
-
-Name | Type | Description |
------- | ------ | ------ |
-`userId` | string | the user id to modify consent hash for |
-`consentHash` | string | the consent hash to set |
-
-**Returns:** *Promise‹any›*
-
-- batch handle id and pre-signed upload url
-
-___
-
-###  postBatches
-
-▸ **postBatches**(`description`: string): *Promise‹any›*
-
-*Defined in [client.ts:119](https://github.com/LucidtechAI/las-sdk-js/blob/3e32c37/packages/las-sdk-core/src/client.ts#L119)*
-
-Creates a batch handle, calls the POST /batches endpoint
-
-**Parameters:**
-
-Name | Type | Description |
------- | ------ | ------ |
-`description` | string | a short description of the batch you intend to create |
-
-**Returns:** *Promise‹any›*
-
-- batch handle id and pre-signed upload url
-
-___
-
-###  postDocumentId
-
-▸ **postDocumentId**(`documentId`: string, `feedback`: Array‹object›): *Promise‹any›*
-
-*Defined in [client.ts:78](https://github.com/LucidtechAI/las-sdk-js/blob/3e32c37/packages/las-sdk-core/src/client.ts#L78)*
+*Defined in [client.ts:75](https://github.com/LucidtechAI/las-sdk-js/blob/6ca7af3/packages/las-sdk-core/src/client.ts#L75)*
 
 Post feedback to the REST API, calls the POST /documents/{documentId} endpoint.
 Posting feedback means posting the ground truth data for the particular document.
@@ -299,47 +315,21 @@ Name | Type | Description |
 
 ___
 
-###  postDocuments
+###  updateUser
 
-▸ **postDocuments**(`content`: string, `contentType`: string, `consentId`: string, `batchId?`: undefined | string, `feedback?`: Array‹object›): *Promise‹any›*
+▸ **updateUser**(`userId`: string, `consentHash`: string): *Promise‹any›*
 
-*Defined in [client.ts:40](https://github.com/LucidtechAI/las-sdk-js/blob/3e32c37/packages/las-sdk-core/src/client.ts#L40)*
+*Defined in [client.ts:132](https://github.com/LucidtechAI/las-sdk-js/blob/6ca7af3/packages/las-sdk-core/src/client.ts#L132)*
 
-Creates a document handle, calls the POST /documents endpoint.
-
-**Parameters:**
-
-Name | Type | Description |
------- | ------ | ------ |
-`content` | string | The contents to POST |
-`contentType` | string | A MIME type for the document handle |
-`consentId` | string | An identifier to mark the owner of the document handle |
-`batchId?` | undefined &#124; string | - |
-`feedback?` | Array‹object› | - |
-
-**Returns:** *Promise‹any›*
-
-- document handle id
-
-___
-
-###  postPredictions
-
-▸ **postPredictions**(`documentId`: string, `modelName`: string, `maxPages?`: undefined | number, `autoRotate?`: undefined | false | true): *Promise‹any›*
-
-*Defined in [client.ts:96](https://github.com/LucidtechAI/las-sdk-js/blob/3e32c37/packages/las-sdk-core/src/client.ts#L96)*
-
-Run inference and create a prediction, calls the POST /predictions endpoint.
+Modifies consent hash for a user, calls the PATCH /users/{user_id} endpoint.
 
 **Parameters:**
 
 Name | Type | Description |
 ------ | ------ | ------ |
-`documentId` | string | the document id to run inference and create a prediction on |
-`modelName` | string | the name of the model to use for inference |
-`maxPages?` | undefined &#124; number | - |
-`autoRotate?` | undefined &#124; false &#124; true | - |
+`userId` | string | the user id to modify consent hash for |
+`consentHash` | string | the consent hash to set |
 
 **Returns:** *Promise‹any›*
 
-- prediction on document
+- batch handle id and pre-signed upload url

@@ -23,7 +23,7 @@
 
 • **getPersistentToken**: *function*
 
-*Defined in [storage.ts:5](https://github.com/LucidtechAI/las-sdk-js/blob/3e32c37/packages/las-sdk-core/src/storage.ts#L5)*
+*Defined in [storage.ts:5](https://github.com/LucidtechAI/las-sdk-js/blob/6ca7af3/packages/las-sdk-core/src/storage.ts#L5)*
 
 #### Type declaration:
 
@@ -35,7 +35,7 @@ ___
 
 • **setPersistentToken**: *function*
 
-*Defined in [storage.ts:6](https://github.com/LucidtechAI/las-sdk-js/blob/3e32c37/packages/las-sdk-core/src/storage.ts#L6)*
+*Defined in [storage.ts:6](https://github.com/LucidtechAI/las-sdk-js/blob/6ca7af3/packages/las-sdk-core/src/storage.ts#L6)*
 
 #### Type declaration:
 

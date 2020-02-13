@@ -30,7 +30,7 @@ Wrapper class for an AWS Cognito token
 
 \+ **new Token**(`accessToken`: string, `expiration`: number, `refreshToken?`: undefined | string): *[Token](_credentials_.token.md)*
 
-*Defined in [credentials.ts:19](https://github.com/LucidtechAI/las-sdk-js/blob/3e32c37/packages/las-sdk-core/src/credentials.ts#L19)*
+*Defined in [credentials.ts:19](https://github.com/LucidtechAI/las-sdk-js/blob/6ca7af3/packages/las-sdk-core/src/credentials.ts#L19)*
 
 **Parameters:**
 
@@ -48,7 +48,7 @@ Name | Type |
 
 • **accessToken**: *string*
 
-*Defined in [credentials.ts:8](https://github.com/LucidtechAI/las-sdk-js/blob/3e32c37/packages/las-sdk-core/src/credentials.ts#L8)*
+*Defined in [credentials.ts:8](https://github.com/LucidtechAI/las-sdk-js/blob/6ca7af3/packages/las-sdk-core/src/credentials.ts#L8)*
 
 ___
 
@@ -56,7 +56,7 @@ ___
 
 • **expiration**: *number*
 
-*Defined in [credentials.ts:10](https://github.com/LucidtechAI/las-sdk-js/blob/3e32c37/packages/las-sdk-core/src/credentials.ts#L10)*
+*Defined in [credentials.ts:10](https://github.com/LucidtechAI/las-sdk-js/blob/6ca7af3/packages/las-sdk-core/src/credentials.ts#L10)*
 
 ___
 
@@ -64,7 +64,7 @@ ___
 
 • **refreshToken**? : *undefined | string*
 
-*Defined in [credentials.ts:12](https://github.com/LucidtechAI/las-sdk-js/blob/3e32c37/packages/las-sdk-core/src/credentials.ts#L12)*
+*Defined in [credentials.ts:12](https://github.com/LucidtechAI/las-sdk-js/blob/6ca7af3/packages/las-sdk-core/src/credentials.ts#L12)*
 
 ## Methods
 
@@ -72,7 +72,7 @@ ___
 
 ▸ **isValid**(): *boolean*
 
-*Defined in [credentials.ts:17](https://github.com/LucidtechAI/las-sdk-js/blob/3e32c37/packages/las-sdk-core/src/credentials.ts#L17)*
+*Defined in [credentials.ts:17](https://github.com/LucidtechAI/las-sdk-js/blob/6ca7af3/packages/las-sdk-core/src/credentials.ts#L17)*
 
 Checks if current timestamp is larger than token expiration time
 
