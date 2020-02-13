@@ -9,7 +9,7 @@ npm install --save las-sdk-browser
 import { AuthorizationCodeCredentials } from '@lucidtech/las-sdk-browser';
 import { Client } from '@lucidtech/las-sdk-core';
 
-const credentials = new AuthorizationCodeCredentials('<apiEndpoint>', '<apiKey>', '<clientId>',  '<clientSecret>', '<authEndpoint>');
+const credentials = new AuthorizationCodeCredentials('<apiEndpoint>', '<apiKey>', '<clientId>',  '<redirectUri>', '<launchUriFn>', '<authEndpoint>');
 const client = new Client(credentials);
 ```
 
