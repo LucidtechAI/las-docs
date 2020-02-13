@@ -31,8 +31,11 @@ const client = new Client(credentials);
 Suppose we wish to run inference on a document using Lucidtech’s invoice model.
 
 ```javascript
-client.createPrediction(documentId, modelName)
-  .then(prediction => console.log(prediction.data);
+client.createDocument('<document content>', '<document mime type>', '<consent id>')
+  .then(documentData => {
+    client.createPrediction(documentData['documentId'], '<model name>')
+      .then(prediction => console.log(prediction.data);
+  });
 ```
 
 ## Set ground truth of document
@@ -44,13 +47,13 @@ Consent ID is an identifier you can assign to documents to keep track of documen
 {% endhint %}
 
 ```javascript
-client.createDocument(documentContent, documentMimeType, consentId)
+client.createDocument('<document content>', '<document mime type>', '<consent id>')
   .then(documentData => {
     const feedback = [
       { 'label': 'total_amount', 'value': '240.01' },
       { 'label': 'due_date', 'value': '2020-01-31' },
     ];
-    client.updateDocument(documentData['id']);
+    client.updateDocument(documentData['documentId']);
   });
 ```
 
@@ -60,7 +63,7 @@ Creating a batch is a way to group documents. This is useful for specifying batc
 
 ```javascript
 client.createBatch(batchDescription)
-  .then(batch => client.createDocument(content, contentType, consentId, batch['id']))
-  .then(batch => client.createDocument(anotherContent, anotherContentType, anotherConsentId, batch['id']))
+  .then(batch => client.createDocument(content, contentType, consentId, batch['batchId']))
+  .then(batch => client.createDocument(anotherContent, anotherContentType, anotherConsentId, batch['batchId']))
 ```
 
