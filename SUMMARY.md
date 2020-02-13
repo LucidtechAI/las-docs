@@ -19,6 +19,6 @@
 * [Python SDK](reference/python-sdk/README.md)
   * [v2.0](reference/python-sdk/v2.0.md)
 * [.NET](reference/.net/README.md)
-  * [4.7](reference/.net/4.7.md)
+  * [v2.0](reference/.net/v2.0.md)
 * [JavaScript SDK](reference/js/README.md)
   * [v2.0](reference/js/index.md)
