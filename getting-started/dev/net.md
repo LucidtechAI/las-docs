@@ -54,11 +54,3 @@ RevokeResponse response = apiClient.RevokeConsent(consentId: "<consentId>");
 Console.WriteLine(response.ToJsonString(Formatting.Indented));
 ```
 
-## Create a batch and associate a few documents with it
-
-Creating a batch is a way to group documents. This is useful for specifying batches of documents to use in improving the model later.
-
-```text
-
-```
-
