@@ -21,4 +21,4 @@
 * [.NET](reference/.net/README.md)
   * [v2.0](reference/.net/v2.0.md)
 * [JavaScript SDK](reference/js/README.md)
-  * [v2.0](reference/js/globals.md)
+  * [v2.0](reference/js/2.0/README.md)
