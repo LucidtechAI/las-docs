@@ -1,12 +1,20 @@
 # FAQ
 
-## Can I become who I want to be?
+## Do you have plans to support SDKs for language X?
 
-That's a tough question but thankfully, our team is on it. Please bear with us while we're investigating.
+If the programming language is widely used we might be able to provide support for it. Please send 
+us a request to hello@lucidtech.ai.
 
-## Have you had a chance to answer the previous question?
+## What documents do Lucidtech's APIs understand?
 
-Yes, after a few months we finally found the answer. Sadly, Mike is on vacations right now so I'm afraid we are not able to provide the answer at this point.
+We currently have an invoice API for norwegian invoices available for testing, but we typically offer
+customized APIs matching the customer's need. See [link](https://lucidtech.ai/docs-index.html) for 
+more information.
 
+## What file formats do Lucidtech's APIs understand?
 
+- image/jpeg
+- application/pdf
+
+If you need other file formats, contact us about getting a customized API.
 
