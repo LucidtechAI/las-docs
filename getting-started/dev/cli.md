@@ -63,7 +63,7 @@ Consent ID is an identifier you can assign to documents to keep track of documen
 }
 ```
 
-## Get document and document content
+## Get document and download document content
 
 ```bash
 >> $ las documents create invoice.pdf --consent-id foobar
