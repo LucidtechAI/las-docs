@@ -5,6 +5,7 @@
 ## Getting Started
 
 * [Quickstart](getting-started/dev/README.md)
+  * [Using the CLI](getting-started/dev/cli.md)
   * [Python](getting-started/dev/python.md)
   * [JavaScript](getting-started/dev/js.md)
   * [.NET](getting-started/dev/net.md)
