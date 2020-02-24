@@ -63,7 +63,23 @@ Consent ID is an identifier you can assign to documents to keep track of documen
 }
 ```
 
-## Foobar
+## Get document and download document content
+
+```bash
+>> $ las documents create invoice.pdf --consent-id foobar
+{
+  "documentId": "012345xxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+  "contentType": "application/pdf",
+  "consentId": "foobar"
+}
+>> $ las documents get 012345xxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx --download-content invoice2.pdf
+{
+  "documentId": "012345xxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+  "contentType": "application/pdf",
+  "consentId": "foobar",
+  "content": "XXXXXXXXX... [TRUNCATED]"
+}
+```
 
 ## Revoking consent and deleting documents
 
