@@ -4,7 +4,7 @@
 
 Suppose we wish to run inference on a document using Lucidtech’s invoice model.
 
-```C#
+```cpp
 using Lucidtech.Las;
 
 ApiClient apiClient = new ApiClient("<endpoint>");
@@ -16,7 +16,7 @@ Console.WriteLine(response.ToJsonString(Formatting.Indented));
 
 Suppose we make a prediction that returns incorrect values and we wish to improve the model for future use. We can do so by sending feedback to the model, telling it what the expected values should have been.
 
-```C#
+```cpp
 using Lucidtech.Las;
 
 var feedback = new List<Dictionary<string, string>>()
@@ -34,7 +34,7 @@ Console.WriteLine(response.ToJsonString(Formatting.Indented));
 Consent ID is an identifier you can assign to documents to keep track of document ownership for your customers.
 {% endhint %}
 
-```C#
+```cpp
 using Lucidtech.Las;
 
 ApiClient apiClient = new ApiClient("<endpoint>");
@@ -46,7 +46,7 @@ var response = apiClient.PostDocuments(body, "application/pdf", "<consent id>");
 
 Suppose we wish to delete all documents associated with a customer in our ERP database or other systems. We need to provide a consent\_id to the prediction method that uniquely identifies the customer and use that consent\_id to delete documents.
 
-```C#
+```cpp
 using Lucidtech.Las;
 
 ApiClient apiClient = new ApiClient("<endpoint>");
