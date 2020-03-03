@@ -1,2 +1,2 @@
-# .NET SDK
+# .NET
 

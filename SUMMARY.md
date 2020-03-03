@@ -14,15 +14,16 @@
 
 ## Data Training
 
-* [Custom Data Training](data-training/README.md)
+* [Custom Data Training](data-training/data-training.md)
 
 ## Reference
 
 * [Rest API](reference/restapi/README.md)
-  * [dev](reference/restapi/dev/README.md)
+  * [dev](reference/restapi/dev.md)
 * [Python SDK](reference/python-sdk/README.md)
   * [v2.0](reference/python-sdk/v2.0.md)
 * [.NET](reference/.net/README.md)
   * [v2.0](reference/.net/v2.0.md)
 * [JavaScript SDK](reference/js/README.md)
-  * [v2.0](reference/js/2.0/README.md)
+  * [v2.0](reference/js/2.0.md)
+

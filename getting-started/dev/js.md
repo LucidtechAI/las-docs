@@ -2,9 +2,10 @@
 
 ## Use browser version
 
-```shell
+```text
 npm install --save las-sdk-browser
 ```
+
 ```javascript
 import { AuthorizationCodeCredentials } from '@lucidtech/las-sdk-browser';
 import { Client } from '@lucidtech/las-sdk-core';
@@ -15,9 +16,10 @@ const client = new Client(credentials);
 
 ## Use node version
 
-```shell
+```text
 npm install --save las-sdk-node
 ```
+
 ```javascript
 import { AuthorizationCodeCredentials } from '@lucidtech/las-sdk-browser';
 import { Client } from '@lucidtech/las-sdk-core';
