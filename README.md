@@ -1,1 +1,2 @@
-# Welcome to Lucidtech Documentation
+# Introduction
+

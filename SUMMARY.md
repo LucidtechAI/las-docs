@@ -1,24 +1,26 @@
-‌# Summary​
+# Table of contents
+
+* [Introduction](README.md)
 
 ## Getting Started
 
-* [Quickstart](apis/dev/README.md)    
-    * [Using the CLI](https://github.com/LucidtechAI/las-cli/blob/master/README.md)
-    * [Python](page2/page2-1.md)    
-    * [.NET](page2/page2-1.md)    
-* [Custom Data Training](apis/dev/README.md)    
-    * [Preparing Data for Training](page2/page2-1.md)    
-    * [Start Training](page2/page2-1.md)    
-    * [Use Trained Model](page2/page2-1.md)    
-* [FAQ](apis/dev/README.md)    
-* [Help](apis/dev/README.md)    
+* [Quickstart](getting-started/dev/README.md)
+  * [Using the CLI](https://github.com/LucidtechAI/las-cli/blob/master/README.md)
+  * [Python](getting-started/dev/python.md)
+  * [.NET](getting-started/dev/.net.md)
+* [Custom Data Training](getting-started/dev-1/README.md)
+  * [Preparing Data for Training](getting-started/dev-1/preparing-data-for-training.md)
+  * [Start Training](getting-started/dev-1/start-training.md)
+  * [Use Trained Model](getting-started/dev-1/use-trained-model.md)
+* [FAQ](getting-started/dev-2.md)
+* [Help](getting-started/dev-3.md)
 
 ## Reference
 
-* [Rest API](apis/dev/README.md)    
-    * [v1](page2/page2-1.md)    
-* [Python SDK](datatraining/README.md)    
-    * [3.6](python/3.6/README.md)    
-* [.NET](datatraining/README.md)    
-    * [4.7](net/4.7/README.md)    
-    
+* [Rest API](reference/dev/README.md)
+  * [v1](reference/dev/v1.md)
+* [Python SDK](reference/python-sdk/README.md)
+  * [3.6](reference/python-sdk/3.6.md)
+* [.NET](reference/.net/README.md)
+  * [4.7](reference/.net/4.7.md)
+
