@@ -10,11 +10,15 @@ To make sure that our API provides optimal accuracy we train our models on your 
 
 ### Volume
 
-The amount of data needed to create a high quality API depends on the complexity of the API and your requirements. As a general rule of thumb we recommend you to provide at least 5000 documents as a start. When the API is running in production, the model will benefit from continuous learning from all new data.
+The amount of data needed to create a high quality model depends on the expected variation of the data as well as the quality of the training data. As a general rule of thumb we recommend at least 5000 documents when training a new model. When the API is deployed in production, the _feedback endpoints_ should be used to enable continuous training on new data.
 
 ### Representative data
 
-The training data should be representative for the expected data. This means that the training data should be similar to the expected data for in terms of similarity and variation. For example, if the expected data consists of invoices from thousands of different vendors, then the training data should not only consist of invoices from five different vendors.
+The training data should be representative for the expected data. For example, if the expected data consists of invoices from thousands of different vendors, then the training data should not only consist of invoices from five different vendors.
+
+{% hint style="success" %}
+A good way to select representative training data can be to choose data randomly from your database or document archive.
+{% endhint %}
 
 ### Correctness of data
 
@@ -22,7 +26,14 @@ Incorrect or missing ground truth information can be detrimental to the training
 
 ### Consistency
 
-Ground truth data should adhere to a common format. For example, when extracting dates, all ground truth dates should be listed on the same format to prevent some dates from being written 17.05.18, while others are written 17th of May, 2018.
+Ground truth data should adhere to a common format. For example, when extracting dates, all ground truth dates should be listed on the same date format regardless of how the date appears in the document. Examples of inconsistencies:
+
+* The same date is written as 17.05.18 in one ground truth file and as 17th of May, 2018 in another.
+* Different conventions are used to denote amounts, e.g. 1200.00, 1,200.00 and 1200.
+
+{% hint style="info" %}
+Consistency is only required in the ground truth data. The corresponding information as written on the actual documents in the data set may be on arbitrary formats.
+{% endhint %}
 
 ## 2. Data preparation
 
@@ -57,11 +68,11 @@ Ground truth data should be provided in JSON format according to the following s
 Examples of documents with corresponding ground truth data:
 
 {% tabs %}
-{% tab title="Example document" %}
+{% tab title="lucidcab001.jpeg" %}
 ![Receipt](../.gitbook/assets/image.png)
 {% endtab %}
 
-{% tab title="Ground truth data" %}
+{% tab title="lucidcab001.json" %}
 ```javascript
  {
   "document": {
