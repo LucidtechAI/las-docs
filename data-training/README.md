@@ -5,9 +5,7 @@ Lucidtech offers APIs for document data extracting. The core technology is a gen
 
 To make sure that our API provides optimal accuracy we train our models on your data. We use supervised learning for training our machine learning models. This means that the algorithms learn by observing thousands of examples of documents together with their ground truth. The goal of the training process is that Lucidtech's models learn to produce the correct output for new and previously unseen documents.
 
-When extracting training data, the following considerations should be made.
-
-Data requirements
+1. Data requirements
 ---
 
 ### Volume
@@ -22,7 +20,7 @@ Incorrect or missing ground truth information can be detrimental to the training
 ### Consistency
 Ground truth data should adhere to a common format. For example, when extracting dates, all ground truth dates should be listed on the same format to prevent some dates from being written 17.05.18, while others are written 17th of May, 2018.
 
-Data preparation
+2. Data preparation
 ---
 
 ### Deciding what to extract
