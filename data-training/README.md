@@ -5,8 +5,7 @@ Lucidtech offers APIs for document data extracting. The core technology is a gen
 
 To make sure that our API provides optimal accuracy we train our models on your data. We use supervised learning for training our machine learning models. This means that the algorithms learn by observing thousands of examples of documents together with their ground truth. The goal of the training process is that Lucidtech's models learn to produce the correct output for new and previously unseen documents.
 
-1. Data requirements
----
+## 1. Data requirements
 
 ### Volume
 The amount of data needed to create a high quality API depends on the complexity of the API and your requirements. As a general rule of thumb we recommend you to provide at least 5000 documents as a start. When the API is running in production, the model will benefit from continuous learning from all new data.
@@ -20,8 +19,7 @@ Incorrect or missing ground truth information can be detrimental to the training
 ### Consistency
 Ground truth data should adhere to a common format. For example, when extracting dates, all ground truth dates should be listed on the same format to prevent some dates from being written 17.05.18, while others are written 17th of May, 2018.
 
-2. Data preparation
----
+## 2. Data preparation
 
 ### Deciding what to extract
 The first step is to decide which data fields you want to extract from your documents. For an invoice this can be total amount, due date and bank account, or it can also be only total amount. For an ID document it can be first name, last name, id-number and nationality. For a travel ticket it can be price, departure date, arrival date, seat number and mean of transportation. Which data fields you want to extract is up to you as a customer to decide, our general recommendation is to keep it as simple as possible. Do not add fields that you will not use, and make sure that the majority of the data you provide contain the fields you specify.
