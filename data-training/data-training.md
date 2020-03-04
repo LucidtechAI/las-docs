@@ -43,7 +43,7 @@ Consistency is only required in the ground truth data. The corresponding informa
 
 ### Deciding what to extract
 
-The first step is to decide which data fields you want to extract from your documents. For an invoice this can be total amount, due date and bank account, or it can also be only total amount. For an ID document it can be first name, last name, id-number and nationality. For a travel ticket it can be price, departure date, arrival date, seat number and mean of transportation. Which data fields you want to extract is up to you as a customer to decide, our general recommendation is to keep it as simple as possible. Do not add fields that you will not use, and make sure that the majority of the data you provide contain the fields you specify.
+The first step is to decide which data fields you want to extract from your documents. For an invoice this can be total amount, due date and bank account, or it can also be only total amount. For an ID document it can be first name, last name, id-number and nationality. For a travel ticket it can be price, departure date, arrival date, seat number and mean of transportation. Which data fields you want to extract is up to you to decide. We generally recommend to keep it as simple as possible. In particular, avoid adding fields that you will not use, and make sure that the majority of the data you provide contain the fields you specify.
 
 ### Every document needs a ground truth
 
