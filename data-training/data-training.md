@@ -1,3 +1,7 @@
+---
+description: Getting started with custom data training.
+---
+
 # Custom Data Training
 
 ![Data Training](https://lucidtech.ai/assets/img/illustrations/data-training.png)
@@ -53,9 +57,9 @@ Ground truth data should be provided in JSON format according to the following s
 
 ```javascript
 {
-  "document":{
+  "document": {
     "path": "<path/to/document.jpg>",
-    "type": "receipt"
+    "type": "<document type>"
   },
   "labels":{
     "<your_first_field_name>":  "<ground_truth_value_for_this_documents_first_field>",
@@ -68,22 +72,45 @@ Ground truth data should be provided in JSON format according to the following s
 Examples of documents with corresponding ground truth data:
 
 {% tabs %}
-{% tab title="lucidcab001.jpeg" %}
+{% tab title="lucidcab.jpg" %}
 ![Receipt](../.gitbook/assets/image.png)
 {% endtab %}
 
-{% tab title="lucidcab001.json" %}
+{% tab title="lucidcab.json" %}
 ```javascript
  {
   "document": {
-    "path": "lucidcab001.jpeg",
+    "path": "lucidcab.jpg",
     "type": "receipt"
   },
-  "labels":{
+  "labels": {
     "category": "taxi",
     "currency": "EUR",
     "date": "2019-12-31",
     "total_amount": "43.90"
+  }
+}
+```
+{% endtab %}
+
+{% tab title="bill\_of\_lading.pdf " %}
+![](../.gitbook/assets/image%20%281%29.png)
+{% endtab %}
+
+{% tab title="bill\_of\_lading.json" %}
+```javascript
+{
+  "document": {
+    "path": "bill_of_lading.pdf",
+    "type": "bill-of-lading"
+  },
+  "labels": {
+    "lading_number": "s00158002",
+    "point_of_loading": "Chicago, United States",
+    "place_of_delivery": "Sydney, Australia",
+    "date": "2015-06-23",
+    "carrier": "Lucid Logistics",
+    "weight": "20000"
   }
 }
 ```
