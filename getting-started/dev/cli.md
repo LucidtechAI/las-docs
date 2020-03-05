@@ -63,6 +63,24 @@ Consent ID is an identifier you can assign to documents to keep track of documen
 }
 ```
 
+## Get document and download document content
+
+```bash
+>> $ las documents create invoice.pdf --consent-id foobar
+{
+  "documentId": "012345xxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+  "contentType": "application/pdf",
+  "consentId": "foobar"
+}
+>> $ las documents get 012345xxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx --download-content invoice2.pdf
+{
+  "documentId": "012345xxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+  "contentType": "application/pdf",
+  "consentId": "foobar",
+  "content": "XXXXXXXXX... [TRUNCATED]"
+}
+```
+
 ## Revoking consent and deleting documents
 
 Suppose we wish to delete all documents associated with a customer in our ERP database or other systems. We need to provide a consent\_id to the prediction method that uniquely identifies the customer and use that consent\_id to delete documents.

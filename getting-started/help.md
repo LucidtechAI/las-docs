@@ -4,7 +4,3 @@
 
 Send us an email at hello@lucidtech.ai
 
-## 
-
-
-
