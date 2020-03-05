@@ -1,5 +1,4 @@
 # JavaScript SDK
-
 [@lucidtech/las-sdk-core](./) › [Globals](https://github.com/LucidtechAI/las-docs/tree/dbde26b766381742d445a8ead828b941490b0bc4/reference/js/globals.md)
 
 ## @lucidtech/las-sdk-core 2.0
