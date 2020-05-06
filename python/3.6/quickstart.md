@@ -1,13 +1,12 @@
-# Quick start guide
+# Quick Start Guide
 
-This section should talk you through everything you need to get started with Lucidtech AI Services Python SDK.
+This section covers basic usage of Lucidtech AI Services with our Python SDK.
 
 ## Examples
 
 ### Making a prediction on a document
-
-Suppose we have credentials with access to the demo api and we wish to run inference on a document using Lucidtech’s
-invoice model.
+Suppose we have credentials with access to the demo API and we wish to run inference on a document using one of Lucidtech's
+invoice models.
 
 ```
 import json
@@ -20,7 +19,6 @@ print(json.dumps(prediction, indent=2))
 ```
 
 ### Sending feedback to the model
-
 Suppose we make a prediction that returns incorrect values and we wish to improve the model for future use. We can do so
 by sending feedback to the model, telling it what the expected values should have been.
 
@@ -41,7 +39,6 @@ api_client.send_feedback(prediction.document_id, feedback)
 ```
 
 ### Revoking consent and deleting documents
-
 Suppose we wish to delete all documents associated with a customer in our ERP database or other systems. We need to
 provide a consent_id to the prediction method that uniquely identifies the customer and use that consent_id to delete
 documents.
@@ -59,8 +56,7 @@ api_client.revoke_consent(prediction.consent_id)
 ```
 
 ## Prerequisites
-
-Python 3.6 or newer
+Python 3.6 or newer.
 
 ## Installation
 
@@ -69,9 +65,8 @@ $ pip install lucidtech-las
 ```
 
 ## Credentials
-
 By default, lucidtech-las looks for credentials in a file located at ~/.lucidtech/credentials.cfg. The contents of
-this file should be
+this file is assumed to be on the following format:
 
 ```
 [default]
@@ -82,7 +77,7 @@ api_endpoint = <api endpoint>
 auth_endpoint = <authorization endpoint>
 ```
 
-Optionally you may provide a Credentials object when constructing the Api client. See details
-[here](reference.html#module-las.credentials)
+Optionally, you may provide a Credentials object when to ApiClient's constructor. See details
+[here](reference.html#module-las.credentials).
 
 Contact Lucidtech at [hello@lucidtech.ai](mailto:hello@lucidtech.ai) to get access_key_id, secret_access_key and api_key
