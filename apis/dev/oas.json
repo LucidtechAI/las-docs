@@ -2,14 +2,14 @@
   "openapi": "3.0.1",
   "info": {
     "title": "sprint-1",
-    "version": "2020-02-14T10:02:08Z"
+    "version": "2020-05-04T13:18:30Z"
   },
   "servers": [
     {
       "url": "https://fma2pcjhd6.execute-api.eu-west-1.amazonaws.com/{basePath}",
       "variables": {
         "basePath": {
-          "default": "/dev"
+          "default": "/v1"
         }
       }
     }
@@ -1019,9 +1019,7 @@
         "type": "object",
         "properties": {
           "documentId": {
-            "maxLength": 36,
-            "minLength": 36,
-            "pattern": "^[a-f0-9-]+$",
+            "pattern": "^[a-f0-9]{8}-?[a-f0-9]{4}-?4[a-f0-9]{3}-?[89ab][a-f0-9]{3}-?[a-f0-9]{12}$",
             "type": "string"
           },
           "predictions": {
@@ -1043,7 +1041,7 @@
                 "label": {
                   "maxLength": 36,
                   "minLength": 1,
-                  "pattern": "^[A-Za-z_]+$",
+                  "pattern": "^[0-9A-Za-z_]+$",
                   "type": "string"
                 },
                 "value": {
@@ -1096,7 +1094,7 @@
                     "label": {
                       "maxLength": 36,
                       "minLength": 1,
-                      "pattern": "^[A-Za-z_]+$",
+                      "pattern": "^[0-9A-Za-z_]+$",
                       "type": "string"
                     },
                     "value": {
@@ -1124,15 +1122,11 @@
                 "type": "number"
               },
               "documentId": {
-                "maxLength": 36,
-                "minLength": 36,
-                "pattern": "^[a-f0-9-]+$",
+                "pattern": "^[a-f0-9]{8}-?[a-f0-9]{4}-?4[a-f0-9]{3}-?[89ab][a-f0-9]{3}-?[a-f0-9]{12}$",
                 "type": "string"
               },
               "batchId": {
-                "maxLength": 36,
-                "minLength": 36,
-                "pattern": "^[a-f0-9-]+$",
+                "pattern": "^[a-f0-9]{8}-?[a-f0-9]{4}-?4[a-f0-9]{3}-?[89ab][a-f0-9]{3}-?[a-f0-9]{12}$",
                 "type": "string"
               },
               "contentType": {
@@ -1169,7 +1163,7 @@
                     "label": {
                       "maxLength": 36,
                       "minLength": 1,
-                      "pattern": "^[A-Za-z_]+$",
+                      "pattern": "^[0-9A-Za-z_]+$",
                       "type": "string"
                     },
                     "value": {
@@ -1202,7 +1196,14 @@
           "modelName": {
             "type": "string",
             "enum": [
-              "invoice"
+              "invoice",
+              "receipt",
+              "invoice:2",
+              "invoice:1",
+              "invoice:3",
+              "receipt:2",
+              "receipt:1",
+              "receipt:3"
             ]
           },
           "maxPages": {
@@ -1210,9 +1211,7 @@
             "type": "integer"
           },
           "documentId": {
-            "maxLength": 36,
-            "minLength": 36,
-            "pattern": "^[a-f0-9-]+$",
+            "pattern": "^[a-f0-9]{8}-?[a-f0-9]{4}-?4[a-f0-9]{3}-?[89ab][a-f0-9]{3}-?[a-f0-9]{12}$",
             "type": "string"
           },
           "autoRotate": {
@@ -1247,7 +1246,7 @@
                 "label": {
                   "maxLength": 36,
                   "minLength": 1,
-                  "pattern": "^[A-Za-z_]+$",
+                  "pattern": "^[0-9A-Za-z_]+$",
                   "type": "string"
                 },
                 "value": {
@@ -1271,9 +1270,7 @@
             "type": "string"
           },
           "batchId": {
-            "maxLength": 36,
-            "minLength": 36,
-            "pattern": "^[a-f0-9-]+$",
+            "pattern": "^[a-f0-9]{8}-?[a-f0-9]{4}-?4[a-f0-9]{3}-?[89ab][a-f0-9]{3}-?[a-f0-9]{12}$",
             "type": "string"
           },
           "contentType": {
@@ -1316,9 +1313,7 @@
             "type": "string"
           },
           "batchId": {
-            "maxLength": 36,
-            "minLength": 36,
-            "pattern": "^[a-f0-9-]+$",
+            "pattern": "^[a-f0-9]{8}-?[a-f0-9]{4}-?4[a-f0-9]{3}-?[89ab][a-f0-9]{3}-?[a-f0-9]{12}$",
             "type": "string"
           }
         },
@@ -1342,9 +1337,7 @@
             "minItems": 1,
             "type": "array",
             "items": {
-              "maxLength": 36,
-              "minLength": 36,
-              "pattern": "^[a-f0-9-]+$",
+              "pattern": "^[a-f0-9]{8}-?[a-f0-9]{4}-?4[a-f0-9]{3}-?[89ab][a-f0-9]{3}-?[a-f0-9]{12}$",
               "type": "string"
             }
           }
@@ -1359,9 +1352,7 @@
         "type": "object",
         "properties": {
           "batch_id": {
-            "maxLength": 36,
-            "minLength": 36,
-            "pattern": "^[a-f0-9-]+$",
+            "pattern": "^[a-f0-9]{8}-?[a-f0-9]{4}-?4[a-f0-9]{3}-?[89ab][a-f0-9]{3}-?[a-f0-9]{12}$",
             "type": "string"
           },
           "consent_id": {
@@ -1382,9 +1373,7 @@
               "type": "object",
               "properties": {
                 "documentId": {
-                  "maxLength": 36,
-                  "minLength": 36,
-                  "pattern": "^[a-f0-9-]+$",
+                  "pattern": "^[a-f0-9]{8}-?[a-f0-9]{4}-?4[a-f0-9]{3}-?[89ab][a-f0-9]{3}-?[a-f0-9]{12}$",
                   "type": "string"
                 },
                 "contentType": {
@@ -1417,7 +1406,7 @@
                       "label": {
                         "maxLength": 36,
                         "minLength": 1,
-                        "pattern": "^[A-Za-z_]+$",
+                        "pattern": "^[0-9A-Za-z_]+$",
                         "type": "string"
                       },
                       "value": {
@@ -1435,9 +1424,7 @@
                   }
                 },
                 "batchId": {
-                  "maxLength": 36,
-                  "minLength": 36,
-                  "pattern": "^[a-f0-9-]+$",
+                  "pattern": "^[a-f0-9]{8}-?[a-f0-9]{4}-?4[a-f0-9]{3}-?[89ab][a-f0-9]{3}-?[a-f0-9]{12}$",
                   "type": "string"
                 },
                 "updated": {
@@ -1462,7 +1449,7 @@
                       "label": {
                         "maxLength": 36,
                         "minLength": 1,
-                        "pattern": "^[A-Za-z_]+$",
+                        "pattern": "^[0-9A-Za-z_]+$",
                         "type": "string"
                       },
                       "value": {
@@ -1511,7 +1498,7 @@
                 "label": {
                   "maxLength": 36,
                   "minLength": 1,
-                  "pattern": "^[A-Za-z_]+$",
+                  "pattern": "^[0-9A-Za-z_]+$",
                   "type": "string"
                 },
                 "value": {
