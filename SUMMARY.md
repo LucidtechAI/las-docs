@@ -12,10 +12,6 @@
 * [FAQ](getting-started/faq.md)
 * [Help](getting-started/help.md)
 
-## Data Training
-
-* [Custom Data Training](data-training/data-training.md)
-
 ## Reference
 
 * [Rest API](reference/restapi/README.md)
