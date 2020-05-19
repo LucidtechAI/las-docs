@@ -27,4 +27,5 @@
   * [v2.1](reference/dotnet/v2.1.md)
 * [JavaScript SDK](reference/js/README.md)
   * [v2.0](reference/js/2.0.md)
-
+* [Java SDK](reference/java/README.md)
+  * [v2.0](reference/js/2.0.md)
