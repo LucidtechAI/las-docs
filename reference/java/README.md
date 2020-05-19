@@ -1,4 +1,5 @@
 # LAS Java SDK
+[Github](https://github.com/LucidtechAI/las-sdk-java)
 * [Classes](index_classes.md)
   * [ai::lucidtech::las::sdk::Client](Classes/classai_1_1lucidtech_1_1las_1_1sdk_1_1_client.md)
 * [Namespaces](index_namespaces.md)
@@ -20,4 +21,3 @@
 * [Pages](index_pages.md)
 * [Examples](index_examples.md)
 
-[Github](https://github.com/LucidtechAI/las-sdk-java)
