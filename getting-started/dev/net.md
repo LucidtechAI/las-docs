@@ -39,7 +39,7 @@ using Lucidtech.Las;
 
 ApiClient apiClient = new ApiClient("<endpoint>");
 byte[] body = File.ReadAllBytes("invoice.pdf");
-var response = apiClient.PostDocuments(body, "application/pdf", "<consent id>");
+var response = apiClient.CreateDocument(body, "application/pdf", "<consent id>");
 ```
 
 ## Revoking consent and deleting documents
