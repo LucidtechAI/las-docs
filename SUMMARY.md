@@ -28,4 +28,4 @@
 * [JavaScript SDK](reference/js/README.md)
   * [v2.0](reference/js/2.0.md)
 * [Java SDK](reference/java/README.md)
-  * [v2.0](reference/js/2.0.md)
+  * [latest](reference/java/latest.md)
