@@ -9,6 +9,7 @@
   * [Python](getting-started/dev/python.md)
   * [JavaScript](getting-started/dev/js.md)
   * [.NET](getting-started/dev/net.md)
+  * [Java](./getting-started/dev/java.md)
 * [FAQ](getting-started/faq.md)
 * [Help](getting-started/help.md)
 
