@@ -40,27 +40,3 @@ public class Main {
     }
 }
 ```
-
-## Contributing
-
-### Prerequisites
-
-* Gradle
-* Lucidtech AI Services credentials
-
-#### Arch
-
-```bash
-$ pacman -S gradle
-```
-
-### Run tests
-To run tests, the following environment variables should be present and contain valid AWS credentials:
-- TEST_LAS_CLIENT_ID
-- TEST_LAS_CLIENT_SECRET
-- TEST_LAS_API_KEY
-- TEST_LAS_AUTH_ENDPOINT
-- TEST_LAS_API_ENDPOINT
-```bash
-$ gradle test
-```

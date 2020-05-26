@@ -21,7 +21,7 @@ $ yarn add @lucidtech/las-sdk-node
 $ npm install @lucidtech/las-sdk-node
 ```
 
-### Usage
+### Example usage
 
 ```javascript
 import {ClientCredentials} from '@lucidtech/las-sdk-core';
@@ -37,24 +37,3 @@ client.postDocuments(content, 'image/jpeg', '<consentId>').then(documentResponse
     console.log(error);
 })
 ```
-
-### Contributing
-
-Install dependencies
-
-```text
-$ npm install && npm run upgrade-lucidtech
-```
-
-Build
-
-```text
-$ npm run build
-```
-
-Run tests
-
-```text
-$ npm run test test
-```
-
