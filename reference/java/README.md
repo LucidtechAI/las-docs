@@ -17,26 +17,24 @@ import ai.lucidtech.las.sdk.Field;
 
 import java.util.List;
 
-public class Main {
-    public static void main(String[] args) throws IOException, URISyntaxException {
-        Credentials credentials = new Credentials(
-            clientId,
-            clientSecret,
-            apiKey,
-            authEndpoint,
-            apiEndpoint
-        );
-        Client client = new Client("<api endpoint>");
-        JSONObject document = this.createDocument(documentContent, contentType, consentId);
-        String documentId = document.getString("documentId");
-        JSONObject prediction = this.createPrediction(documentId, modelName);
+public static void main(String[] args) throws IOException, URISyntaxException {
+    Credentials credentials = new Credentials(
+        clientId,
+        clientSecret,
+        apiKey,
+        authEndpoint,
+        apiEndpoint
+    );
+    Client client = new Client("<api endpoint>");
+    JSONObject document = this.createDocument(documentContent, contentType, consentId);
+    String documentId = document.getString("documentId");
+    JSONObject prediction = this.createPrediction(documentId, modelName);
 
-        fields.forEach(item -> {
-            JSONObject field = (JSONObject) item;
-            System.out.println("field: " + field.getString("label"));
-            System.out.println("field: " + field.getString("value"));
-            System.out.println("field: " + field.getFloat("confidence"));
-        });
-    }
+    fields.forEach(item -> {
+        JSONObject field = (JSONObject) item;
+        System.out.println("field: " + field.getString("label"));
+        System.out.println("field: " + field.getString("value"));
+        System.out.println("field: " + field.getFloat("confidence"));
+    });
 }
 ```
