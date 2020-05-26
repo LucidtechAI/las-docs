@@ -2,6 +2,19 @@
 
 [API reference](../../reference/java/latest.md)
 
+## Create a client to talk to the API
+```java
+    Credentials credentials = new Credentials(
+        System.getenv("LAS_CLIENT_ID"),
+        System.getenv("LAS_CLIENT_SECRET"),
+        System.getenv("LAS_API_KEY"),
+        System.getenv("LAS_AUTH_ENDPOINT"),
+        System.getenv("LAS_API_ENDPOINT")
+    );
+
+    client = new Client(credentials);
+```
+
 ## Make a prediction on a document
 
 Suppose we wish to run inference on a document using Lucidtech’s invoice model.
@@ -12,16 +25,15 @@ Consent ID is an identifier you can assign to documents to keep track of documen
 
 ```java
     public void createDocument() throws IOException, APIException, MissingAccessTokenException {
-        String[] documentMimeTypes = this.toArray(this.config.getProperty("document.mime.types"));
+        ContentType contentType = ContentType.fromString("image/jpeg");
+        Path path = Paths.get("path/to/document");
+        byte[] content = Files.readAllBytes(path);
+        String consentId = "consent id";
 
-        for (String documentMimeType : documentMimeTypes) {
-            ContentType contentType = ContentType.fromString(documentMimeType);
-
-            JSONObject document = this.client.createDocument(this.content, contentType, this.consentId);
-            Assert.assertTrue(document.has("consentId"));
-            Assert.assertTrue(document.has("contentType"));
-            Assert.assertTrue(document.has("documentId"));
-        }
+        JSONObject document = client.createDocument(content, contentType, consentId);
+        Assert.assertTrue(document.has("consentId"));
+        Assert.assertTrue(document.has("contentType"));
+        Assert.assertTrue(document.has("documentId"));
     }
 ```
 
@@ -32,17 +44,24 @@ We can do so by sending feedback to the model, telling it what the expected valu
 
 ```java
     public void setDocumentFeedback() throws IOException, APIException, MissingAccessTokenException {
-        JSONObject documentResponse = this.client.createDocument(this.content, contentType, this.consentId);
         JSONObject feedback = new JSONObject();
 
-        List<JSONObject> fieldList = Arrays.asList(
-            this.createField("total_amount", "123.00"),
-            this.createField("purchase_date", "2019-05-23")
-        );
+        JSONObject totalAmount = new JSONObject();
+        totalAmount.put("label", "total_amount");
+        totalAmount.put("value", "123.00");
+
+        JSONObject purchaseDate = new JSONObject();
+        purchaseDate.put("label", "purchase_date");
+        purchaseDate.put("value", "2019-05-23");
+
+        List<JSONObject> fieldList = Arrays.asList(totalAmount, purchaseDate);
         JSONArray fields = new JSONArray(fieldList);
         feedback.put("feedback", fields);
 
-        JSONObject feedbackResponse = this.client.updateDocument(documentResponse.getString("documentId"), feedback);
+        JSONObject feedbackResponse = client.updateDocument(documentId, feedback);
+        Assert.assertNotNull(feedbackResponse.get("documentId"));
+        Assert.assertNotNull(feedbackResponse.get("consentId"));
+        Assert.assertNotNull(feedbackResponse.get("feedback"));
     }
 ```
 
@@ -53,7 +72,7 @@ Creating a batch is a way to group documents. This is useful for specifying batc
 ```javascript
     public void createBatch() throws IOException, APIException, MissingAccessTokenException {
         String description = "I'm gonna create a new batch, give me a batch id!";
-        JSONObject response = this.client.createBatch(description);
+        JSONObject response = client.createBatch(description);
         Assert.assertNotNull(response.get("batchId"));
     }
 ```
