@@ -1,5 +1,5 @@
 # JavaScript SDK
-[@lucidtech/las-sdk-core](./) › [Globals](https://github.com/LucidtechAI/las-docs/tree/dbde26b766381742d445a8ead828b941490b0bc4/reference/js/globals.md)
+[@lucidtech/las-sdk-core](./) › [Globals](./2.0/globals.md)
 
 ## @lucidtech/las-sdk-core 2.0
 
@@ -21,7 +21,7 @@ $ yarn add @lucidtech/las-sdk-node
 $ npm install @lucidtech/las-sdk-node
 ```
 
-### Usage
+### Example usage
 
 ```javascript
 import {ClientCredentials} from '@lucidtech/las-sdk-core';
@@ -37,24 +37,3 @@ client.postDocuments(content, 'image/jpeg', '<consentId>').then(documentResponse
     console.log(error);
 })
 ```
-
-### Contributing
-
-Install dependencies
-
-```text
-$ npm install && npm run upgrade-lucidtech
-```
-
-Build
-
-```text
-$ npm run build
-```
-
-Run tests
-
-```text
-$ npm run test test
-```
-

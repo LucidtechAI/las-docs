@@ -8,7 +8,7 @@ We provide SDKs on request for commonly used programming languages. Please send 
 
 We currently have an invoice API for norwegian invoices available for testing, but customized APIs matching the customer's need.
 
-See [link](https://github.com/LucidtechAI/las-docs/tree/d80c6eb0b57b989919d570bc1e0a6f80afec78eb/data-training/data-training/README.md) for more information.
+See [link](../data-training/data-training.md) for more information.
 
 ## What file formats do Lucidtech's APIs understand?
 
