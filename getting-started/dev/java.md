@@ -42,7 +42,7 @@ Suppose we wish to run inference on a document using Lucidtech’s invoice model
 ```java
 public void createPrediction() throws IOException, APIException, MissingAccessTokenException {
     String modelName = "invoice";
-    JSONObject prediction = this.client.createPrediction(documentId, modelName);
+    JSONObject prediction = client.createPrediction(documentId, modelName);
     JSONArray fields = prediction.getJSONArray("predictions");
     Assert.assertNotNull(fields);
 }
