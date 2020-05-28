@@ -23,6 +23,8 @@
 `public inline JSONObject `[`getDocument`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_client_1a23a56cacfb99ffa27d2243ff44466e02)`(String documentId)` | #### Parameters
 `public inline JSONObject `[`listDocuments`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_client_1a15d880fed0ee9683e7f92c3a9966ba31)`()` | #### Returns
 `public inline JSONObject `[`listDocuments`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_client_1a52a82364e47da2a51bb7accc239ca2d3)`(List< NameValuePair > options)` | #### Parameters
+`public inline JSONObject `[`createDocument`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_client_1af86c1b0d8ee1fdc0595239c6276a4b1b)`(InputStream content,ContentType contentType,String consentId,Map< String, Object > options)` | Creates a document handle, calls POST /documents endpoint
+`public inline JSONObject `[`createDocument`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_client_1a7db5e8c3b50061635b0cd124532e8146)`(InputStream content,ContentType contentType,String consentId)` | Creates a document handle, calls POST /documents endpoint
 `public inline JSONObject `[`createDocument`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_client_1a4803a524d666ba14de129f7c2d92fefd)`(byte[] content,ContentType contentType,String consentId,Map< String, Object > options)` | Creates a document handle, calls POST /documents endpoint
 `public inline JSONObject `[`createDocument`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_client_1aa5cf3a7689eeec8ce532c06bdf1c5cae)`(byte[] content,ContentType contentType,String consentId)` | Creates a document handle, calls POST /documents endpoint
 `public inline JSONObject `[`createPrediction`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_client_1a6dccb713bddcf7d2a9f3ccdbee9cf489)`(String documentId,String modelName)` | Run inference and create a prediction, calls the POST /predictions endpoint
@@ -57,7 +59,7 @@ response from the API
 
 * `APIException` Raised when API returns an erroneous status code 
 
-* `MissingAccessTokenException` Raised when access token is missing
+* `MissingAccessTokenException` Raised if access token cannot be obtained
 
 #### `public inline JSONObject `[`listDocuments`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_client_1a15d880fed0ee9683e7f92c3a9966ba31)`()` 
 
@@ -69,7 +71,7 @@ All documents from REST API
 
 * `APIException` Raised when API returns an erroneous status code 
 
-* `MissingAccessTokenException` Raised when access token is missing
+* `MissingAccessTokenException` Raised if access token cannot be obtained
 
 #### `public inline JSONObject `[`listDocuments`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_client_1a52a82364e47da2a51bb7accc239ca2d3)`(List< NameValuePair > options)` 
 
@@ -84,7 +86,55 @@ documents from REST API filtered using the passed options
 
 * `APIException` Raised when API returns an erroneous status code 
 
-* `MissingAccessTokenException` Raised when access token is missing
+* `MissingAccessTokenException` Raised if access token cannot be obtained
+
+#### `public inline JSONObject `[`createDocument`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_client_1af86c1b0d8ee1fdc0595239c6276a4b1b)`(InputStream content,ContentType contentType,String consentId,Map< String, Object > options)` 
+
+Creates a document handle, calls POST /documents endpoint
+
+**See also**: ContentType 
+
+#### Parameters
+* `content` Input stream 
+
+* `contentType` A mime type for the document handle 
+
+* `consentId` An identifier to mark the owner of the document handle 
+
+* `options` Additional options to include in request body 
+
+#### Returns
+Response from API 
+
+#### Exceptions
+* `IOException` General IOException 
+
+* `APIException` Raised when API returns an erroneous status code 
+
+* `MissingAccessTokenException` Raised if access token cannot be obtained
+
+#### `public inline JSONObject `[`createDocument`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_client_1a7db5e8c3b50061635b0cd124532e8146)`(InputStream content,ContentType contentType,String consentId)` 
+
+Creates a document handle, calls POST /documents endpoint
+
+**See also**: ContentType 
+
+#### Parameters
+* `content` Input stream 
+
+* `contentType` A mime type for the document handle 
+
+* `consentId` An identifier to mark the owner of the document handle 
+
+#### Returns
+Response from API 
+
+#### Exceptions
+* `IOException` General IOException 
+
+* `APIException` Raised when API returns an erroneous status code 
+
+* `MissingAccessTokenException` Raised if access token cannot be obtained
 
 #### `public inline JSONObject `[`createDocument`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_client_1a4803a524d666ba14de129f7c2d92fefd)`(byte[] content,ContentType contentType,String consentId,Map< String, Object > options)` 
 
@@ -109,7 +159,7 @@ Response from API
 
 * `APIException` Raised when API returns an erroneous status code 
 
-* `MissingAccessTokenException` Raised when access token is missing
+* `MissingAccessTokenException` Raised if access token cannot be obtained
 
 #### `public inline JSONObject `[`createDocument`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_client_1aa5cf3a7689eeec8ce532c06bdf1c5cae)`(byte[] content,ContentType contentType,String consentId)` 
 
@@ -132,13 +182,13 @@ Response from API
 
 * `APIException` Raised when API returns an erroneous status code 
 
-* `MissingAccessTokenException` Raised when access token is missing
+* `MissingAccessTokenException` Raised if access token cannot be obtained
 
 #### `public inline JSONObject `[`createPrediction`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_client_1a6dccb713bddcf7d2a9f3ccdbee9cf489)`(String documentId,String modelName)` 
 
 Run inference and create a prediction, calls the POST /predictions endpoint
 
-**See also**: [Client::createDocument](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_client_1a4803a524d666ba14de129f7c2d92fefd)
+**See also**: [Client::createDocument](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_client_1af86c1b0d8ee1fdc0595239c6276a4b1b)
 
 #### Parameters
 * `documentId` The document id to run inference and create a prediction. See createDocument for how to get documentId 
@@ -153,13 +203,13 @@ Prediction on document
 
 * `APIException` Raised when API returns an erroneous status code 
 
-* `MissingAccessTokenException` Raised when access token is missing
+* `MissingAccessTokenException` Raised if access token cannot be obtained
 
 #### `public inline JSONObject `[`createPrediction`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_client_1a1d5c2bfa09dfcb7f60cae34b52ff1426)`(String documentId,String modelName,Map< String, Object > options)` 
 
 Run inference and create a prediction, calls the POST /predictions endpoint
 
-**See also**: [Client::createDocument](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_client_1a4803a524d666ba14de129f7c2d92fefd)
+**See also**: [Client::createDocument](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_client_1af86c1b0d8ee1fdc0595239c6276a4b1b)
 
 #### Parameters
 * `documentId` The document id to run inference and create a prediction. See createDocument for how to get documentId 
@@ -176,7 +226,7 @@ Prediction on document
 
 * `APIException` Raised when API returns an erroneous status code 
 
-* `MissingAccessTokenException` Raised when access token is missing
+* `MissingAccessTokenException` Raised if access token cannot be obtained
 
 #### `public inline Prediction `[`predict`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_client_1ad652c2f80a8b4890552ffdb36e4239ae)`(String documentPath,String modelName,String consentId)` 
 
@@ -197,13 +247,13 @@ Prediction on document
 
 * `APIException` Raised when API returns an erroneous status code 
 
-* `MissingAccessTokenException` Raised when access token is missing
+* `MissingAccessTokenException` Raised if access token cannot be obtained
 
 #### `public inline JSONObject `[`updateDocument`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_client_1a280e08fa464580f19873900e96eeb93b)`(String documentId,JSONObject feedback)` 
 
 Post feedback to the REST API, calls the POST /documents/{documentId} endpoint. Posting feedback means posting the ground truth data for the particular document. This enables the API to learn from past mistakes
 
-**See also**: [Client::createDocument](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_client_1a4803a524d666ba14de129f7c2d92fefd)
+**See also**: [Client::createDocument](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_client_1af86c1b0d8ee1fdc0595239c6276a4b1b)
 
 #### Parameters
 * `documentId` The document id to post feedback to. 
@@ -218,7 +268,7 @@ Feedback response
 
 * `APIException` Raised when API returns an erroneous status code 
 
-* `MissingAccessTokenException` Raised when access token is missing
+* `MissingAccessTokenException` Raised if access token cannot be obtained
 
 #### `public inline JSONObject `[`createBatch`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_client_1a53b440aa0099aab8577c5a91a2a05801)`(String description)` 
 
@@ -232,13 +282,15 @@ Batch handle id and pre-signed upload url
 #### Exceptions
 * `IOException` General IOException 
 
-* `APIException` Raised when API returns an erroneous status code
+* `APIException` Raised when API returns an erroneous status code 
+
+* `MissingAccessTokenException` Raised if access token cannot be obtained
 
 #### `public inline JSONObject `[`deleteConsent`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_client_1aa62d1f8ced37a1253ade235ff5dfad24)`(String consentId)` 
 
 Delete documents with this consent_id, calls the DELETE /consent/{consentId} endpoint.
 
-**See also**: [Client::createDocument](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_client_1a4803a524d666ba14de129f7c2d92fefd)
+**See also**: [Client::createDocument](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_client_1af86c1b0d8ee1fdc0595239c6276a4b1b)
 
 #### Parameters
 * `consentId` Delete documents with this consentId 
@@ -251,7 +303,7 @@ Feedback response
 
 * `APIException` Raised when API returns an erroneous status code 
 
-* `MissingAccessTokenException` Raised when access token is missing
+* `MissingAccessTokenException` Raised if access token cannot be obtained
 
 #### `public inline JSONObject `[`getUser`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_client_1a20f91d81c208182343abb01a17ce166f)`(String userId)` 
 
@@ -259,12 +311,15 @@ Get information about user, calls the GET /users/{user_id} endpoint.
 #### Parameters
 * `userId` The user_id to get consent hash for 
 
+#### Returns
+User response 
+
 #### Exceptions
 * `IOException` General IOException 
 
 * `APIException` Raised when API returns an erroneous status code 
 
-* `MissingAccessTokenException` Raised when access token is missing
+* `MissingAccessTokenException` Raised if access token cannot be obtained
 
 # class `ai::lucidtech::las::sdk::Credentials` 
 
@@ -303,7 +358,10 @@ Used to fetch and store credentials.
 * `httpClient` Instance of HttpClient used to access the authentication endpoint 
 
 #### Returns
-Access token, downloading it if necessary
+Access token, downloading it if necessary 
+
+#### Exceptions
+* `MissingAccessTokenException` Raised if access token cannot be obtained
 
 #### `public inline String `[`getApiKey`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_credentials_1a8946c7a17157dc72de7f5ac78e853b87)`()` 
 
