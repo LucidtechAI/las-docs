@@ -1,5 +1,6 @@
 # JavaScript SDK
-[@lucidtech/las-sdk-core](./) › [Globals](./2.0/globals.md)
+
+[@lucidtech/las-sdk-core](./) › [Globals](https://github.com/LucidtechAI/las-docs/tree/2479fbadf71d289f61249e4ef2c09f3227515355/reference/js/2.0/globals.md)
 
 ## @lucidtech/las-sdk-core 2.0
 
@@ -37,3 +38,4 @@ client.postDocuments(content, 'image/jpeg', '<consentId>').then(documentResponse
     console.log(error);
 })
 ```
+

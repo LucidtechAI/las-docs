@@ -9,11 +9,12 @@
   * [Python](getting-started/dev/python.md)
   * [JavaScript](getting-started/dev/js.md)
   * [.NET](getting-started/dev/net.md)
-  * [Java](./getting-started/dev/java.md)
+  * [Java](getting-started/dev/java.md)
 * [FAQ](getting-started/faq.md)
 * [Help](getting-started/help.md)
 
 ## Data Training
+
 * [Custom Data Training](data-training/data-training.md)
 
 ## Reference
@@ -29,3 +30,4 @@
   * [v2.0](reference/js/2.0.md)
 * [Java SDK](reference/java/README.md)
   * [latest](reference/java/latest.md)
+

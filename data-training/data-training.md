@@ -14,7 +14,7 @@ To make sure that our API provides optimal accuracy we train our models on your 
 
 ### Volume
 
-The amount of data needed to create a high quality model depends on the expected variation of the data as well as the quality of the training data. As a general rule of thumb we require at least 10000 documents when training a new model, but 30000+ documents is recommended for a good result. When the API is deployed in production, the _feedback endpoints_ should be used to enable continuous training on new data.
+The amount of data needed to create a high quality model depends on the expected variation of the data as well as the quality of the training data. As a general rule of thumb we require at least 10 000 documents when training a new model, but 30 000+ documents is recommended for an optimal result. When the API is deployed in production, the _feedback endpoints_ should be used to enable continuous training on new data.
 
 ### Representative data
 
