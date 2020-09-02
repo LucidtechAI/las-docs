@@ -1,12 +1,12 @@
-# Java SDK for Lucidtech AI Services API
+# Java SDK
 
 ## Usage
 
 ### Preconditions
 
-- Documents must be in upright position
-- Only one receipt or invoice per document is supported
-- Supported file formats are: jpeg, pdf
+* Documents must be in upright position
+* Only one receipt or invoice per document is supported
+* Supported file formats are: jpeg, pdf
 
 ### Quick start
 
@@ -38,3 +38,4 @@ public static void main(String[] args) throws IOException, URISyntaxException {
     });
 }
 ```
+

@@ -3,6 +3,7 @@
 [API reference](../../reference/java/latest.md)
 
 ## Create a client to talk to the API
+
 ```java
 Credentials credentials = new Credentials(
     System.getenv("LAS_CLIENT_ID"),
@@ -50,8 +51,7 @@ public void createPrediction() throws IOException, APIException, MissingAccessTo
 
 ## Set ground truth of document
 
-Suppose we make a prediction that returns incorrect values and we wish to improve the model for future use.
-We can do so by sending feedback to the model, telling it what the expected values should have been.
+Suppose we make a prediction that returns incorrect values and we wish to improve the model for future use. We can do so by sending feedback to the model, telling it what the expected values should have been.
 
 ```java
 public void setDocumentFeedback() throws IOException, APIException, MissingAccessTokenException {
@@ -87,3 +87,4 @@ public void createBatch() throws IOException, APIException, MissingAccessTokenEx
     Assert.assertNotNull(response.get("batchId"));
 }
 ```
+
