@@ -2709,6 +2709,66 @@
         },
         "additionalProperties" : false
       },
+      "Workflow": {
+        "title": "workflow",
+        "oneOf": [
+          {
+          "type": "object",
+          "properties": {
+              "name": {
+                  "type": "string",
+                  "minLength": 1
+              },
+              "workflowId": {
+                  "type": "string",
+                  "minLength": 1
+              },
+              "description": {
+                  "type": ["string", "null"]
+              }
+          },
+          "required": [
+              "name",
+              "workflowId"
+          ],
+          "additionalProperties": false
+      }
+        ]
+      },
+      "Workflows": {
+        "title": "workflows",
+        "type": "object",
+        "properties": {
+          "workflows": {
+        "type": "array",
+        "items": {
+              "type": "object",
+              "properties": {
+                  "name": {
+                      "type": "string",
+                      "minLength": 1
+                  },
+                  "workflowId": {
+                      "type": "string",
+                      "minLength": 1
+                  },
+                  "description": {
+                      "type": ["string", "null"]
+                  }
+              },
+              "required": [
+                  "name",
+                  "workflowId"
+              ],
+              "additionalProperties": false
+          }
+      }
+        },
+        "required": [
+          "workflows"
+        ],
+        "additionalProperties": false
+      },
       "Document" : {
         "title" : "document",
         "oneOf" : [ {
