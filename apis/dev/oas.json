@@ -5,7 +5,7 @@
     "version" : "2020-11-03T09:11:53Z"
   },
   "servers" : [ {
-    "url" : "https://api.com",
+    "url" : "https://yj6rbtavs6.execute-api.eu-west-1.amazonaws.com/{basePath}",
     "variables" : {
       "basePath" : {
         "default" : "/dev"
@@ -121,7 +121,7 @@
           }
         },
         "security" : [ {
-          "scope-Authorizer" : [ "magnus-dev.lucidtech.io/transitions.post" ]
+          "magnus-dev-ApiStack-1N8UE8C3EWEHB-Authorizer" : [ "magnus-dev.lucidtech.io/transitions.post" ]
         }, {
           "api_key" : [ ]
         } ]
@@ -265,7 +265,7 @@
           }
         },
         "security" : [ {
-          "scope-Authorizer" : [ "magnus-dev.lucidtech.io/workflows.workflowid.executions.get" ]
+          "magnus-dev-ApiStack-1N8UE8C3EWEHB-Authorizer" : [ "magnus-dev.lucidtech.io/workflows.workflowid.executions.get" ]
         }, {
           "api_key" : [ ]
         } ]
@@ -369,7 +369,7 @@
           }
         },
         "security" : [ {
-          "scope-Authorizer" : [ "magnus-dev.lucidtech.io/workflows.workflowid.executions.post" ]
+          "magnus-dev-ApiStack-1N8UE8C3EWEHB-Authorizer" : [ "magnus-dev.lucidtech.io/workflows.workflowid.executions.post" ]
         }, {
           "api_key" : [ ]
         } ]
@@ -506,7 +506,7 @@
           }
         },
         "security" : [ {
-          "scope-Authorizer" : [ "magnus-dev.lucidtech.io/users.get" ]
+          "magnus-dev-ApiStack-1N8UE8C3EWEHB-Authorizer" : [ "magnus-dev.lucidtech.io/users.get" ]
         }, {
           "api_key" : [ ]
         } ]
@@ -618,7 +618,7 @@
           }
         },
         "security" : [ {
-          "scope-Authorizer" : [ "magnus-dev.lucidtech.io/users.post" ]
+          "magnus-dev-ApiStack-1N8UE8C3EWEHB-Authorizer" : [ "magnus-dev.lucidtech.io/users.post" ]
         }, {
           "api_key" : [ ]
         } ]
@@ -763,7 +763,7 @@
           }
         },
         "security" : [ {
-          "scope-Authorizer" : [ "magnus-dev.lucidtech.io/documents.documentid.get" ]
+          "magnus-dev-ApiStack-1N8UE8C3EWEHB-Authorizer" : [ "magnus-dev.lucidtech.io/documents.documentid.get" ]
         }, {
           "api_key" : [ ]
         } ]
@@ -923,7 +923,7 @@
           }
         },
         "security" : [ {
-          "scope-Authorizer" : [ "magnus-dev.lucidtech.io/documents.documentid.patch" ]
+          "magnus-dev-ApiStack-1N8UE8C3EWEHB-Authorizer" : [ "magnus-dev.lucidtech.io/documents.documentid.patch" ]
         }, {
           "api_key" : [ ]
         } ]
@@ -1085,7 +1085,7 @@
           }
         },
         "security" : [ {
-          "scope-Authorizer" : [ "magnus-dev.lucidtech.io/transitions.transitionid.executions.executionid.patch" ]
+          "magnus-dev-ApiStack-1N8UE8C3EWEHB-Authorizer" : [ "magnus-dev.lucidtech.io/transitions.transitionid.executions.executionid.patch" ]
         }, {
           "api_key" : [ ]
         } ]
@@ -1199,7 +1199,7 @@
           }
         },
         "security" : [ {
-          "scope-Authorizer" : [ "magnus-dev.lucidtech.io/batches.post" ]
+          "magnus-dev-ApiStack-1N8UE8C3EWEHB-Authorizer" : [ "magnus-dev.lucidtech.io/batches.post" ]
         }, {
           "api_key" : [ ]
         } ]
@@ -1349,7 +1349,7 @@
           }
         },
         "security" : [ {
-          "scope-Authorizer" : [ "magnus-dev.lucidtech.io/documents.get" ]
+          "magnus-dev-ApiStack-1N8UE8C3EWEHB-Authorizer" : [ "magnus-dev.lucidtech.io/documents.get" ]
         }, {
           "api_key" : [ ]
         } ]
@@ -1461,7 +1461,7 @@
           }
         },
         "security" : [ {
-          "scope-Authorizer" : [ "magnus-dev.lucidtech.io/documents.post" ]
+          "magnus-dev-ApiStack-1N8UE8C3EWEHB-Authorizer" : [ "magnus-dev.lucidtech.io/documents.post" ]
         }, {
           "api_key" : [ ]
         } ]
@@ -1563,7 +1563,7 @@
           }
         },
         "security" : [ {
-          "scope-Authorizer" : [ "magnus-dev.lucidtech.io/documents.delete" ]
+          "magnus-dev-ApiStack-1N8UE8C3EWEHB-Authorizer" : [ "magnus-dev.lucidtech.io/documents.delete" ]
         }, {
           "api_key" : [ ]
         } ]
@@ -1761,7 +1761,7 @@
           }
         },
         "security" : [ {
-          "scope-Authorizer" : [ "magnus-dev.lucidtech.io/predictions.post" ]
+          "magnus-dev-ApiStack-1N8UE8C3EWEHB-Authorizer" : [ "magnus-dev.lucidtech.io/predictions.post" ]
         }, {
           "api_key" : [ ]
         } ]
@@ -1906,7 +1906,7 @@
           }
         },
         "security" : [ {
-          "scope-Authorizer" : [ "magnus-dev.lucidtech.io/users.userid.get" ]
+          "magnus-dev-ApiStack-1N8UE8C3EWEHB-Authorizer" : [ "magnus-dev.lucidtech.io/users.userid.get" ]
         }, {
           "api_key" : [ ]
         } ]
@@ -2008,7 +2008,7 @@
           }
         },
         "security" : [ {
-          "scope-Authorizer" : [ "magnus-dev.lucidtech.io/users.userid.delete" ]
+          "magnus-dev-ApiStack-1N8UE8C3EWEHB-Authorizer" : [ "magnus-dev.lucidtech.io/users.userid.delete" ]
         }, {
           "api_key" : [ ]
         } ]
@@ -2163,7 +2163,7 @@
           }
         },
         "security" : [ {
-          "scope-Authorizer" : [ "magnus-dev.lucidtech.io/transitions.transitionid.executions.post" ]
+          "magnus-dev-ApiStack-1N8UE8C3EWEHB-Authorizer" : [ "magnus-dev.lucidtech.io/transitions.transitionid.executions.post" ]
         }, {
           "api_key" : [ ]
         } ]
@@ -2308,7 +2308,7 @@
           }
         },
         "security" : [ {
-          "scope-Authorizer" : [ "magnus-dev.lucidtech.io/workflows.workflowid.delete" ]
+          "magnus-dev-ApiStack-1N8UE8C3EWEHB-Authorizer" : [ "magnus-dev.lucidtech.io/workflows.workflowid.delete" ]
         }, {
           "api_key" : [ ]
         } ]
@@ -2445,7 +2445,7 @@
           }
         },
         "security" : [ {
-          "scope-Authorizer" : [ "magnus-dev.lucidtech.io/workflows.get" ]
+          "magnus-dev-ApiStack-1N8UE8C3EWEHB-Authorizer" : [ "magnus-dev.lucidtech.io/workflows.get" ]
         }, {
           "api_key" : [ ]
         } ]
@@ -2557,7 +2557,7 @@
           }
         },
         "security" : [ {
-          "scope-Authorizer" : [ "magnus-dev.lucidtech.io/workflows.post" ]
+          "magnus-dev-ApiStack-1N8UE8C3EWEHB-Authorizer" : [ "magnus-dev.lucidtech.io/workflows.post" ]
         }, {
           "api_key" : [ ]
         } ]
@@ -3283,7 +3283,7 @@
       }
     },
     "securitySchemes" : {
-      "scope-Authorizer" : {
+      "magnus-dev-ApiStack-1N8UE8C3EWEHB-Authorizer" : {
         "type" : "apiKey",
         "name" : "Authorization",
         "in" : "header",
