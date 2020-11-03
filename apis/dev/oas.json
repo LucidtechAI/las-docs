@@ -8,7 +8,7 @@
     "url" : "https://yj6rbtavs6.execute-api.eu-west-1.amazonaws.com/{basePath}",
     "variables" : {
       "basePath" : {
-        "default" : "/dev"
+        "default" : "/v1"
       }
     }
   } ],
