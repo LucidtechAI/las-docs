@@ -1,1535 +1,3298 @@
 {
-  "openapi": "3.0.1",
-  "info": {
-    "title": "sprint-1",
-    "version": "2020-05-04T13:18:30Z"
+  "openapi" : "3.0.1",
+  "info" : {
+    "title" : "magnus-dev",
+    "version" : "2020-11-03T09:11:53Z"
   },
-  "servers": [
-    {
-      "url": "https://fma2pcjhd6.execute-api.eu-west-1.amazonaws.com/{basePath}",
-      "variables": {
-        "basePath": {
-          "default": "/v1"
+  "servers" : [ {
+    "url" : "https://api.com",
+    "variables" : {
+      "basePath" : {
+        "default" : "/dev"
+      }
+    }
+  } ],
+  "paths" : {
+    "/transitions" : {
+      "post" : {
+        "parameters" : [ {
+          "name" : "Content-Type",
+          "in" : "header",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/PostTransitions"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "404" : {
+            "description" : "404 response",
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "415" : {
+            "description" : "415 response",
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "200" : {
+            "description" : "200 response",
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Transition"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "400 response",
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500" : {
+            "description" : "500 response",
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "security" : [ {
+          "scope-Authorizer" : [ "magnus-dev.lucidtech.io/transitions.post" ]
+        }, {
+          "api_key" : [ ]
+        } ]
+      },
+      "options" : {
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/Empty"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "description" : "200 response",
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              },
+              "Access-Control-Allow-Methods" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              },
+              "Access-Control-Allow-Headers" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Empty"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/workflows/{workflowId}/executions" : {
+      "get" : {
+        "parameters" : [ {
+          "name" : "status",
+          "in" : "query",
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "404" : {
+            "description" : "404 response",
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "415" : {
+            "description" : "415 response",
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "200" : {
+            "description" : "200 response",
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Execution"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "400 response",
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500" : {
+            "description" : "500 response",
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "security" : [ {
+          "scope-Authorizer" : [ "magnus-dev.lucidtech.io/workflows.workflowid.executions.get" ]
+        }, {
+          "api_key" : [ ]
+        } ]
+      },
+      "post" : {
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/PostWorkflowExecutions"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "404" : {
+            "description" : "404 response",
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "415" : {
+            "description" : "415 response",
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "200" : {
+            "description" : "200 response",
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Execution"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "400 response",
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500" : {
+            "description" : "500 response",
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "security" : [ {
+          "scope-Authorizer" : [ "magnus-dev.lucidtech.io/workflows.workflowid.executions.post" ]
+        }, {
+          "api_key" : [ ]
+        } ]
+      },
+      "options" : {
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/Empty"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "description" : "200 response",
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              },
+              "Access-Control-Allow-Methods" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              },
+              "Access-Control-Allow-Headers" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Empty"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users" : {
+      "get" : {
+        "responses" : {
+          "404" : {
+            "description" : "404 response",
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "415" : {
+            "description" : "415 response",
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "200" : {
+            "description" : "200 response",
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Users"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "400 response",
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500" : {
+            "description" : "500 response",
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "security" : [ {
+          "scope-Authorizer" : [ "magnus-dev.lucidtech.io/users.get" ]
+        }, {
+          "api_key" : [ ]
+        } ]
+      },
+      "post" : {
+        "parameters" : [ {
+          "name" : "Content-Type",
+          "in" : "header",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/PostUsers"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "404" : {
+            "description" : "404 response",
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "415" : {
+            "description" : "415 response",
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "200" : {
+            "description" : "200 response",
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/User"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "400 response",
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500" : {
+            "description" : "500 response",
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "security" : [ {
+          "scope-Authorizer" : [ "magnus-dev.lucidtech.io/users.post" ]
+        }, {
+          "api_key" : [ ]
+        } ]
+      },
+      "options" : {
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/Empty"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "description" : "200 response",
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              },
+              "Access-Control-Allow-Methods" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              },
+              "Access-Control-Allow-Headers" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Empty"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/documents/{documentId}" : {
+      "get" : {
+        "parameters" : [ {
+          "name" : "documentId",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "404" : {
+            "description" : "404 response",
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "415" : {
+            "description" : "415 response",
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "200" : {
+            "description" : "200 response",
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Document"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "400 response",
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500" : {
+            "description" : "500 response",
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "security" : [ {
+          "scope-Authorizer" : [ "magnus-dev.lucidtech.io/documents.documentid.get" ]
+        }, {
+          "api_key" : [ ]
+        } ]
+      },
+      "options" : {
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/Empty"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "description" : "200 response",
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              },
+              "Access-Control-Allow-Methods" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              },
+              "Access-Control-Allow-Headers" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Empty"
+                }
+              }
+            }
+          }
+        }
+      },
+      "patch" : {
+        "parameters" : [ {
+          "name" : "Content-Type",
+          "in" : "header",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "documentId",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/PatchDocumentId"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "404" : {
+            "description" : "404 response",
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "415" : {
+            "description" : "415 response",
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "200" : {
+            "description" : "200 response",
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Document"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "400 response",
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500" : {
+            "description" : "500 response",
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "security" : [ {
+          "scope-Authorizer" : [ "magnus-dev.lucidtech.io/documents.documentid.patch" ]
+        }, {
+          "api_key" : [ ]
+        } ]
+      }
+    },
+    "/transitions/{transitionId}/executions/{executionId}" : {
+      "options" : {
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/Empty"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "description" : "200 response",
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              },
+              "Access-Control-Allow-Methods" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              },
+              "Access-Control-Allow-Headers" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Empty"
+                }
+              }
+            }
+          }
+        }
+      },
+      "patch" : {
+        "parameters" : [ {
+          "name" : "transitionId",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "executionId",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/PatchTransistionExecutionId"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "404" : {
+            "description" : "404 response",
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "415" : {
+            "description" : "415 response",
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "200" : {
+            "description" : "200 response",
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/TransitionExecution"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "400 response",
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500" : {
+            "description" : "500 response",
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "security" : [ {
+          "scope-Authorizer" : [ "magnus-dev.lucidtech.io/transitions.transitionid.executions.executionid.patch" ]
+        }, {
+          "api_key" : [ ]
+        } ]
+      }
+    },
+    "/batches" : {
+      "post" : {
+        "parameters" : [ {
+          "name" : "Content-Type",
+          "in" : "header",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/PostBatches"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "404" : {
+            "description" : "404 response",
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "415" : {
+            "description" : "415 response",
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "200" : {
+            "description" : "200 response",
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Batch"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "400 response",
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500" : {
+            "description" : "500 response",
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "security" : [ {
+          "scope-Authorizer" : [ "magnus-dev.lucidtech.io/batches.post" ]
+        }, {
+          "api_key" : [ ]
+        } ]
+      },
+      "options" : {
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/Empty"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "description" : "200 response",
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              },
+              "Access-Control-Allow-Methods" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              },
+              "Access-Control-Allow-Headers" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Empty"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/documents" : {
+      "get" : {
+        "parameters" : [ {
+          "name" : "batchId",
+          "in" : "query",
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "consentId",
+          "in" : "query",
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "404" : {
+            "description" : "404 response",
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "415" : {
+            "description" : "415 response",
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "200" : {
+            "description" : "200 response",
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Documents"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "400 response",
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500" : {
+            "description" : "500 response",
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "security" : [ {
+          "scope-Authorizer" : [ "magnus-dev.lucidtech.io/documents.get" ]
+        }, {
+          "api_key" : [ ]
+        } ]
+      },
+      "post" : {
+        "parameters" : [ {
+          "name" : "Content-Type",
+          "in" : "header",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/PostDocuments"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "404" : {
+            "description" : "404 response",
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "415" : {
+            "description" : "415 response",
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "200" : {
+            "description" : "200 response",
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Document"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "400 response",
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500" : {
+            "description" : "500 response",
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "security" : [ {
+          "scope-Authorizer" : [ "magnus-dev.lucidtech.io/documents.post" ]
+        }, {
+          "api_key" : [ ]
+        } ]
+      },
+      "delete" : {
+        "parameters" : [ {
+          "name" : "consentId",
+          "in" : "query",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "404" : {
+            "description" : "404 response",
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "415" : {
+            "description" : "415 response",
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "400 response",
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500" : {
+            "description" : "500 response",
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "204" : {
+            "description" : "204 response",
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Empty"
+                }
+              }
+            }
+          }
+        },
+        "security" : [ {
+          "scope-Authorizer" : [ "magnus-dev.lucidtech.io/documents.delete" ]
+        }, {
+          "api_key" : [ ]
+        } ]
+      },
+      "options" : {
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/Empty"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "description" : "200 response",
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              },
+              "Access-Control-Allow-Methods" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              },
+              "Access-Control-Allow-Headers" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Empty"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/transitions/{transitionId}" : {
+      "options" : {
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/Empty"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "description" : "200 response",
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              },
+              "Access-Control-Allow-Methods" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              },
+              "Access-Control-Allow-Headers" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Empty"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/predictions" : {
+      "post" : {
+        "parameters" : [ {
+          "name" : "Content-Type",
+          "in" : "header",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/PostPredictions"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "404" : {
+            "description" : "404 response",
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "415" : {
+            "description" : "415 response",
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "200" : {
+            "description" : "200 response",
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Prediction"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "400 response",
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500" : {
+            "description" : "500 response",
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "security" : [ {
+          "scope-Authorizer" : [ "magnus-dev.lucidtech.io/predictions.post" ]
+        }, {
+          "api_key" : [ ]
+        } ]
+      },
+      "options" : {
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/Empty"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "description" : "200 response",
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              },
+              "Access-Control-Allow-Methods" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              },
+              "Access-Control-Allow-Headers" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Empty"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users/{userId}" : {
+      "get" : {
+        "parameters" : [ {
+          "name" : "userId",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "404" : {
+            "description" : "404 response",
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "415" : {
+            "description" : "415 response",
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "200" : {
+            "description" : "200 response",
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/User"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "400 response",
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500" : {
+            "description" : "500 response",
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "security" : [ {
+          "scope-Authorizer" : [ "magnus-dev.lucidtech.io/users.userid.get" ]
+        }, {
+          "api_key" : [ ]
+        } ]
+      },
+      "delete" : {
+        "parameters" : [ {
+          "name" : "userId",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "404" : {
+            "description" : "404 response",
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "415" : {
+            "description" : "415 response",
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "400 response",
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500" : {
+            "description" : "500 response",
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "204" : {
+            "description" : "204 response",
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Empty"
+                }
+              }
+            }
+          }
+        },
+        "security" : [ {
+          "scope-Authorizer" : [ "magnus-dev.lucidtech.io/users.userid.delete" ]
+        }, {
+          "api_key" : [ ]
+        } ]
+      },
+      "options" : {
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/Empty"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "description" : "200 response",
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              },
+              "Access-Control-Allow-Methods" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              },
+              "Access-Control-Allow-Headers" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Empty"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/transitions/{transitionId}/executions" : {
+      "post" : {
+        "parameters" : [ {
+          "name" : "Content-Type",
+          "in" : "header",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/PostTransitionExecution"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "404" : {
+            "description" : "404 response",
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "415" : {
+            "description" : "415 response",
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "200" : {
+            "description" : "200 response",
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/TransitionExecution"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "400 response",
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500" : {
+            "description" : "500 response",
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "security" : [ {
+          "scope-Authorizer" : [ "magnus-dev.lucidtech.io/transitions.transitionid.executions.post" ]
+        }, {
+          "api_key" : [ ]
+        } ]
+      },
+      "options" : {
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/Empty"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "description" : "200 response",
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              },
+              "Access-Control-Allow-Methods" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              },
+              "Access-Control-Allow-Headers" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Empty"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/workflows/{workflowId}" : {
+      "delete" : {
+        "parameters" : [ {
+          "name" : "workflowId",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "404" : {
+            "description" : "404 response",
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "415" : {
+            "description" : "415 response",
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "400 response",
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500" : {
+            "description" : "500 response",
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "204" : {
+            "description" : "204 response",
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Empty"
+                }
+              }
+            }
+          }
+        },
+        "security" : [ {
+          "scope-Authorizer" : [ "magnus-dev.lucidtech.io/workflows.workflowid.delete" ]
+        }, {
+          "api_key" : [ ]
+        } ]
+      },
+      "options" : {
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/Empty"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "description" : "200 response",
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              },
+              "Access-Control-Allow-Methods" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              },
+              "Access-Control-Allow-Headers" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Empty"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/workflows" : {
+      "get" : {
+        "responses" : {
+          "404" : {
+            "description" : "404 response",
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "415" : {
+            "description" : "415 response",
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "200" : {
+            "description" : "200 response",
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Workflows"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "400 response",
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500" : {
+            "description" : "500 response",
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "security" : [ {
+          "scope-Authorizer" : [ "magnus-dev.lucidtech.io/workflows.get" ]
+        }, {
+          "api_key" : [ ]
+        } ]
+      },
+      "post" : {
+        "parameters" : [ {
+          "name" : "Content-Type",
+          "in" : "header",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/PostWorkflows"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "404" : {
+            "description" : "404 response",
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "415" : {
+            "description" : "415 response",
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "200" : {
+            "description" : "200 response",
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Workflow"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "400 response",
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500" : {
+            "description" : "500 response",
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "security" : [ {
+          "scope-Authorizer" : [ "magnus-dev.lucidtech.io/workflows.post" ]
+        }, {
+          "api_key" : [ ]
+        } ]
+      },
+      "options" : {
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/Empty"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "description" : "200 response",
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              },
+              "Access-Control-Allow-Methods" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              },
+              "Access-Control-Allow-Headers" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Empty"
+                }
+              }
+            }
+          }
         }
       }
     }
-  ],
-  "paths": {
-    "/documents": {
-      "get": {
-        "parameters": [
-          {
-            "name": "batchId",
-            "in": "query",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "consentId",
-            "in": "query",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "200 response",
-            "headers": {
-              "Access-Control-Allow-Origin": {
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Documents"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "400 response",
-            "headers": {
-              "Access-Control-Allow-Origin": {
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "sprint-1-ApiStack-134F8SFRSYA4Z-Authorizer": [
-              "sprint-1.lucidtech.io/documents.get"
-            ]
-          },
-          {
-            "api_key": []
-          }
-        ]
-      },
-      "post": {
-        "parameters": [
-          {
-            "name": "Content-Type",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/PostDocuments"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "200": {
-            "description": "200 response",
-            "headers": {
-              "Access-Control-Allow-Origin": {
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Document"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "400 response",
-            "headers": {
-              "Access-Control-Allow-Origin": {
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "sprint-1-ApiStack-134F8SFRSYA4Z-Authorizer": [
-              "sprint-1.lucidtech.io/documents.post"
-            ]
-          },
-          {
-            "api_key": []
-          }
-        ]
-      },
-      "options": {
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/Empty"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "200": {
-            "description": "200 response",
-            "headers": {
-              "Access-Control-Allow-Origin": {
-                "schema": {
-                  "type": "string"
-                }
-              },
-              "Access-Control-Allow-Methods": {
-                "schema": {
-                  "type": "string"
-                }
-              },
-              "Access-Control-Allow-Headers": {
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Empty"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/predictions": {
-      "post": {
-        "parameters": [
-          {
-            "name": "Content-Type",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/PostPredictions"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "200": {
-            "description": "200 response",
-            "headers": {
-              "Access-Control-Allow-Origin": {
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Prediction"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "400 response",
-            "headers": {
-              "Access-Control-Allow-Origin": {
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "404 response",
-            "headers": {
-              "Access-Control-Allow-Origin": {
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "415": {
-            "description": "415 response",
-            "headers": {
-              "Access-Control-Allow-Origin": {
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "sprint-1-ApiStack-134F8SFRSYA4Z-Authorizer": [
-              "sprint-1.lucidtech.io/predictions.post"
-            ]
-          },
-          {
-            "api_key": []
-          }
-        ]
-      },
-      "options": {
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/Empty"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "200": {
-            "description": "200 response",
-            "headers": {
-              "Access-Control-Allow-Origin": {
-                "schema": {
-                  "type": "string"
-                }
-              },
-              "Access-Control-Allow-Methods": {
-                "schema": {
-                  "type": "string"
-                }
-              },
-              "Access-Control-Allow-Headers": {
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Empty"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/users": {
-      "options": {
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/Empty"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "200": {
-            "description": "200 response",
-            "headers": {
-              "Access-Control-Allow-Origin": {
-                "schema": {
-                  "type": "string"
-                }
-              },
-              "Access-Control-Allow-Methods": {
-                "schema": {
-                  "type": "string"
-                }
-              },
-              "Access-Control-Allow-Headers": {
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Empty"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/documents/{documentId}": {
-      "get": {
-        "parameters": [
-          {
-            "name": "documentId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "200 response",
-            "headers": {
-              "Access-Control-Allow-Origin": {
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Document"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "400 response",
-            "headers": {
-              "Access-Control-Allow-Origin": {
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "404 response",
-            "headers": {
-              "Access-Control-Allow-Origin": {
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "sprint-1-ApiStack-134F8SFRSYA4Z-Authorizer": [
-              "sprint-1.lucidtech.io/documents.documentid.get"
-            ]
-          },
-          {
-            "api_key": []
-          }
-        ]
-      },
-      "post": {
-        "parameters": [
-          {
-            "name": "Content-Type",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "documentId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/PostDocumentId"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "200": {
-            "description": "200 response",
-            "headers": {
-              "Access-Control-Allow-Origin": {
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Document"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "400 response",
-            "headers": {
-              "Access-Control-Allow-Origin": {
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "sprint-1-ApiStack-134F8SFRSYA4Z-Authorizer": [
-              "sprint-1.lucidtech.io/documents.documentid.post"
-            ]
-          },
-          {
-            "api_key": []
-          }
-        ]
-      },
-      "options": {
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/Empty"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "200": {
-            "description": "200 response",
-            "headers": {
-              "Access-Control-Allow-Origin": {
-                "schema": {
-                  "type": "string"
-                }
-              },
-              "Access-Control-Allow-Methods": {
-                "schema": {
-                  "type": "string"
-                }
-              },
-              "Access-Control-Allow-Headers": {
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Empty"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/batches": {
-      "post": {
-        "parameters": [
-          {
-            "name": "Content-Type",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/PostBatches"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "200": {
-            "description": "200 response",
-            "headers": {
-              "Access-Control-Allow-Origin": {
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Batch"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "400 response",
-            "headers": {
-              "Access-Control-Allow-Origin": {
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "sprint-1-ApiStack-134F8SFRSYA4Z-Authorizer": [
-              "sprint-1.lucidtech.io/batches.post"
-            ]
-          },
-          {
-            "api_key": []
-          }
-        ]
-      },
-      "options": {
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/Empty"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "200": {
-            "description": "200 response",
-            "headers": {
-              "Access-Control-Allow-Origin": {
-                "schema": {
-                  "type": "string"
-                }
-              },
-              "Access-Control-Allow-Methods": {
-                "schema": {
-                  "type": "string"
-                }
-              },
-              "Access-Control-Allow-Headers": {
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Empty"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/users/{userId}": {
-      "get": {
-        "parameters": [
-          {
-            "name": "userId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "200 response",
-            "headers": {
-              "Access-Control-Allow-Origin": {
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/User"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "400 response",
-            "headers": {
-              "Access-Control-Allow-Origin": {
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "404 response",
-            "headers": {
-              "Access-Control-Allow-Origin": {
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "sprint-1-ApiStack-134F8SFRSYA4Z-Authorizer": [
-              "sprint-1.lucidtech.io/users.userid.get"
-            ]
-          },
-          {
-            "api_key": []
-          }
-        ]
-      },
-      "options": {
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/Empty"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "200": {
-            "description": "200 response",
-            "headers": {
-              "Access-Control-Allow-Origin": {
-                "schema": {
-                  "type": "string"
-                }
-              },
-              "Access-Control-Allow-Methods": {
-                "schema": {
-                  "type": "string"
-                }
-              },
-              "Access-Control-Allow-Headers": {
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Empty"
-                }
-              }
-            }
-          }
-        }
-      },
-      "patch": {
-        "parameters": [
-          {
-            "name": "Content-Type",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "userId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/PatchUserId"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "200": {
-            "description": "200 response",
-            "headers": {
-              "Access-Control-Allow-Origin": {
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/User"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "400 response",
-            "headers": {
-              "Access-Control-Allow-Origin": {
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "404 response",
-            "headers": {
-              "Access-Control-Allow-Origin": {
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "sprint-1-ApiStack-134F8SFRSYA4Z-Authorizer": [
-              "sprint-1.lucidtech.io/users.userid.patch"
-            ]
-          },
-          {
-            "api_key": []
-          }
-        ]
-      }
-    },
-    "/consents/{consentId}": {
-      "delete": {
-        "parameters": [
-          {
-            "name": "Content-Type",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "consentId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/Empty"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "200": {
-            "description": "200 response",
-            "headers": {
-              "Access-Control-Allow-Origin": {
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Consent"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "400 response",
-            "headers": {
-              "Access-Control-Allow-Origin": {
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "404 response",
-            "headers": {
-              "Access-Control-Allow-Origin": {
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "sprint-1-ApiStack-134F8SFRSYA4Z-Authorizer": [
-              "sprint-1.lucidtech.io/consents.consentid.delete"
-            ]
-          },
-          {
-            "api_key": []
-          }
-        ]
-      }
-    }
   },
-  "components": {
-    "schemas": {
-      "PostBatches": {
-        "title": "POST /batches",
-        "required": [
-          "description"
-        ],
-        "type": "object",
-        "properties": {
-          "description": {
-            "minLength": 1,
-            "type": "string"
+  "components" : {
+    "schemas" : {
+      "PostBatches" : {
+        "title" : "POST /batches",
+        "required" : [ "description" ],
+        "type" : "object",
+        "properties" : {
+          "description" : {
+            "minLength" : 1,
+            "type" : "string"
           }
         },
-        "additionalProperties": false
+        "additionalProperties" : false
       },
-      "User": {
-        "title": "user",
-        "type": "object"
+      "User" : {
+        "title" : "user",
+        "type" : "object"
       },
-      "Prediction": {
-        "title": "prediction",
-        "required": [
-          "documentId",
-          "predictions"
-        ],
-        "type": "object",
-        "properties": {
-          "documentId": {
-            "pattern": "^[a-f0-9]{8}-?[a-f0-9]{4}-?4[a-f0-9]{3}-?[89ab][a-f0-9]{3}-?[a-f0-9]{12}$",
-            "type": "string"
+      "PostWorkflowExecutions" : {
+        "title" : "POST /workflows/{workflowId}/executions",
+        "required" : [ "input" ],
+        "type" : "object",
+        "properties" : {
+          "input" : {
+            "type" : "object"
+          }
+        },
+        "additionalProperties" : false
+      },
+      "Prediction" : {
+        "title" : "prediction",
+        "required" : [ "documentId", "predictions" ],
+        "type" : "object",
+        "properties" : {
+          "documentId" : {
+            "pattern" : "^las:document:[a-f0-9]{32}$",
+            "type" : "string"
           },
-          "predictions": {
-            "minItems": 1,
-            "type": "array",
-            "items": {
-              "required": [
-                "confidence",
-                "label",
-                "value"
-              ],
-              "type": "object",
-              "properties": {
-                "confidence": {
-                  "maximum": 1,
-                  "minimum": 0,
-                  "type": "number"
+          "predictions" : {
+            "type" : "array",
+            "items" : {
+              "required" : [ "confidence", "label", "value" ],
+              "type" : "object",
+              "properties" : {
+                "confidence" : {
+                  "maximum" : 1,
+                  "minimum" : 0,
+                  "type" : "number"
                 },
-                "label": {
-                  "maxLength": 36,
-                  "minLength": 1,
-                  "pattern": "^[0-9A-Za-z_]+$",
-                  "type": "string"
+                "label" : {
+                  "maxLength" : 36,
+                  "minLength" : 1,
+                  "pattern" : "^[0-9A-Za-z_]+$",
+                  "type" : "string"
                 },
-                "value": {
-                  "anyOf": [
-                    {
-                      "maxLength": 64,
-                      "minLength": 1,
-                      "type": "string"
-                    },
-                    null
-                  ]
+                "value" : {
+                  "anyOf" : [ {
+                    "maxLength" : 64,
+                    "minLength" : 1,
+                    "type" : "string"
+                  }, null ]
                 }
               },
-              "additionalProperties": false
+              "additionalProperties" : false
             }
           }
         },
-        "additionalProperties": false
+        "additionalProperties" : false
       },
-      "Error": {
-        "title": "Error Schema",
-        "type": "object",
-        "properties": {
-          "message": {
-            "type": "string"
+      "Error" : {
+        "title" : "Error Schema",
+        "type" : "object",
+        "properties" : {
+          "message" : {
+            "type" : "string"
           }
         }
       },
-      "Document": {
-        "title": "document",
-        "oneOf": [
-          {
-            "required": [
-              "consentId",
-              "contentType",
-              "documentId"
-            ],
-            "type": "object",
-            "properties": {
-              "feedback": {
-                "minItems": 1,
-                "type": "array",
-                "items": {
-                  "required": [
-                    "label",
-                    "value"
-                  ],
-                  "type": "object",
-                  "properties": {
-                    "label": {
-                      "maxLength": 36,
-                      "minLength": 1,
-                      "pattern": "^[0-9A-Za-z_]+$",
-                      "type": "string"
-                    },
-                    "value": {
-                      "anyOf": [
-                        {
-                          "maxLength": 64,
-                          "minLength": 1,
-                          "type": "string"
-                        },
-                        null
-                      ]
-                    }
-                  },
-                  "additionalProperties": false
+      "Users" : {
+        "title" : "users",
+        "required" : [ "users" ],
+        "type" : "object",
+        "properties" : {
+          "users" : {
+            "type" : "array",
+            "items" : {
+              "required" : [ "email", "userId" ],
+              "type" : "object",
+              "properties" : {
+                "userId" : {
+                  "pattern" : "^las:user:[a-f0-9]{32}$",
+                  "type" : "string"
+                },
+                "email" : {
+                  "pattern" : "^[A-Za-z0-9][-+._A-Za-z0-9]*@([A-Za-z0-9]+\\.)+[A-Za-z]{2,}$",
+                  "type" : "string"
                 }
               },
-              "consentId": {
-                "maxLength": 64,
-                "minLength": 1,
-                "pattern": "^[A-Za-z0-9_-]+$",
-                "type": "string"
-              },
-              "inferenceTime": {
-                "minimum": 0,
-                "type": "number"
-              },
-              "documentId": {
-                "pattern": "^[a-f0-9]{8}-?[a-f0-9]{4}-?4[a-f0-9]{3}-?[89ab][a-f0-9]{3}-?[a-f0-9]{12}$",
-                "type": "string"
-              },
-              "batchId": {
-                "pattern": "^[a-f0-9]{8}-?[a-f0-9]{4}-?4[a-f0-9]{3}-?[89ab][a-f0-9]{3}-?[a-f0-9]{12}$",
-                "type": "string"
-              },
-              "contentType": {
-                "type": "string",
-                "enum": [
-                  "application/pdf",
-                  "image/jpeg"
-                ]
-              },
-              "updated": {
-                "minimum": 1,
-                "type": "integer"
-              },
-              "content": {
-                "minLength": 1,
-                "type": "string"
-              },
-              "predictions": {
-                "minItems": 1,
-                "type": "array",
-                "items": {
-                  "required": [
-                    "confidence",
-                    "label",
-                    "value"
-                  ],
-                  "type": "object",
-                  "properties": {
-                    "confidence": {
-                      "maximum": 1,
-                      "minimum": 0,
-                      "type": "number"
-                    },
-                    "label": {
-                      "maxLength": 36,
-                      "minLength": 1,
-                      "pattern": "^[0-9A-Za-z_]+$",
-                      "type": "string"
-                    },
-                    "value": {
-                      "anyOf": [
-                        {
-                          "maxLength": 64,
-                          "minLength": 1,
-                          "type": "string"
-                        },
-                        null
-                      ]
-                    }
+              "additionalProperties" : false
+            }
+          }
+        },
+        "additionalProperties" : false
+      },
+      "Document" : {
+        "title" : "document",
+        "oneOf" : [ {
+          "required" : [ "contentType", "documentId" ],
+          "type" : "object",
+          "properties" : {
+            "feedback" : {
+              "type" : "array",
+              "items" : {
+                "required" : [ "label", "value" ],
+                "type" : "object",
+                "properties" : {
+                  "label" : {
+                    "maxLength" : 36,
+                    "minLength" : 1,
+                    "pattern" : "^[0-9A-Za-z_]+$",
+                    "type" : "string"
                   },
-                  "additionalProperties": false
-                }
+                  "value" : {
+                    "anyOf" : [ {
+                      "maxLength" : 64,
+                      "minLength" : 1,
+                      "type" : "string"
+                    }, null ]
+                  }
+                },
+                "additionalProperties" : false
               }
             },
-            "additionalProperties": false
-          }
-        ]
-      },
-      "PostPredictions": {
-        "title": "POST /predictions",
-        "required": [
-          "documentId",
-          "modelName"
-        ],
-        "type": "object",
-        "properties": {
-          "modelName": {
-            "type": "string",
-            "enum": [
-              "invoice",
-              "receipt",
-              "invoice:2",
-              "invoice:1",
-              "invoice:3",
-              "receipt:2",
-              "receipt:1",
-              "receipt:3"
-            ]
-          },
-          "maxPages": {
-            "minimum": 1,
-            "type": "integer"
-          },
-          "documentId": {
-            "pattern": "^[a-f0-9]{8}-?[a-f0-9]{4}-?4[a-f0-9]{3}-?[89ab][a-f0-9]{3}-?[a-f0-9]{12}$",
-            "type": "string"
-          },
-          "autoRotate": {
-            "type": "boolean"
-          }
-        },
-        "additionalProperties": false
-      },
-      "Empty": {
-        "title": "Empty Schema",
-        "type": "object"
-      },
-      "PostDocuments": {
-        "title": "POST /documents",
-        "required": [
-          "consentId",
-          "content",
-          "contentType"
-        ],
-        "type": "object",
-        "properties": {
-          "feedback": {
-            "minItems": 1,
-            "type": "array",
-            "items": {
-              "required": [
-                "label",
-                "value"
-              ],
-              "type": "object",
-              "properties": {
-                "label": {
-                  "maxLength": 36,
-                  "minLength": 1,
-                  "pattern": "^[0-9A-Za-z_]+$",
-                  "type": "string"
-                },
-                "value": {
-                  "anyOf": [
-                    {
-                      "maxLength": 64,
-                      "minLength": 1,
-                      "type": "string"
-                    },
-                    null
-                  ]
-                }
-              },
-              "additionalProperties": false
-            }
-          },
-          "consentId": {
-            "maxLength": 64,
-            "minLength": 1,
-            "pattern": "^[A-Za-z0-9_-]+$",
-            "type": "string"
-          },
-          "batchId": {
-            "pattern": "^[a-f0-9]{8}-?[a-f0-9]{4}-?4[a-f0-9]{3}-?[89ab][a-f0-9]{3}-?[a-f0-9]{12}$",
-            "type": "string"
-          },
-          "contentType": {
-            "type": "string",
-            "enum": [
-              "application/pdf",
-              "image/jpeg"
-            ]
-          },
-          "content": {
-            "minLength": 1,
-            "type": "string"
-          }
-        },
-        "additionalProperties": false
-      },
-      "PatchUserId": {
-        "title": "POST /users/{userId}",
-        "required": [
-          "consentHash"
-        ],
-        "type": "object",
-        "properties": {
-          "consentHash": {
-            "type": "string"
-          }
-        },
-        "additionalProperties": false
-      },
-      "Batch": {
-        "title": "batch",
-        "required": [
-          "batchId",
-          "description"
-        ],
-        "type": "object",
-        "properties": {
-          "description": {
-            "minLength": 1,
-            "type": "string"
-          },
-          "batchId": {
-            "pattern": "^[a-f0-9]{8}-?[a-f0-9]{4}-?4[a-f0-9]{3}-?[89ab][a-f0-9]{3}-?[a-f0-9]{12}$",
-            "type": "string"
-          }
-        },
-        "additionalProperties": false
-      },
-      "Consent": {
-        "title": "consent",
-        "required": [
-          "consentId",
-          "documentIds"
-        ],
-        "type": "object",
-        "properties": {
-          "consentId": {
-            "maxLength": 64,
-            "minLength": 1,
-            "pattern": "^[A-Za-z0-9_-]+$",
-            "type": "string"
-          },
-          "documentIds": {
-            "minItems": 1,
-            "type": "array",
-            "items": {
-              "pattern": "^[a-f0-9]{8}-?[a-f0-9]{4}-?4[a-f0-9]{3}-?[89ab][a-f0-9]{3}-?[a-f0-9]{12}$",
-              "type": "string"
-            }
-          }
-        },
-        "additionalProperties": false
-      },
-      "Documents": {
-        "title": "documents",
-        "required": [
-          "documents"
-        ],
-        "type": "object",
-        "properties": {
-          "batch_id": {
-            "pattern": "^[a-f0-9]{8}-?[a-f0-9]{4}-?4[a-f0-9]{3}-?[89ab][a-f0-9]{3}-?[a-f0-9]{12}$",
-            "type": "string"
-          },
-          "consent_id": {
-            "maxLength": 64,
-            "minLength": 1,
-            "pattern": "^[A-Za-z0-9_-]+$",
-            "type": "string"
-          },
-          "documents": {
-            "minItems": 0,
-            "type": "array",
-            "items": {
-              "required": [
-                "consentId",
-                "contentType",
-                "documentId"
-              ],
-              "type": "object",
-              "properties": {
-                "documentId": {
-                  "pattern": "^[a-f0-9]{8}-?[a-f0-9]{4}-?4[a-f0-9]{3}-?[89ab][a-f0-9]{3}-?[a-f0-9]{12}$",
-                  "type": "string"
-                },
-                "contentType": {
-                  "type": "string",
-                  "enum": [
-                    "application/pdf",
-                    "image/jpeg"
-                  ]
-                },
-                "content": {
-                  "minLength": 1,
-                  "type": "string"
-                },
-                "consentId": {
-                  "maxLength": 64,
-                  "minLength": 1,
-                  "pattern": "^[A-Za-z0-9_-]+$",
-                  "type": "string"
-                },
-                "feedback": {
-                  "minItems": 1,
-                  "type": "array",
-                  "items": {
-                    "required": [
-                      "label",
-                      "value"
-                    ],
-                    "type": "object",
-                    "properties": {
-                      "label": {
-                        "maxLength": 36,
-                        "minLength": 1,
-                        "pattern": "^[0-9A-Za-z_]+$",
-                        "type": "string"
-                      },
-                      "value": {
-                        "anyOf": [
-                          {
-                            "maxLength": 64,
-                            "minLength": 1,
-                            "type": "string"
-                          },
-                          null
-                        ]
-                      }
-                    },
-                    "additionalProperties": false
+            "consentId" : {
+              "pattern" : "^las:consent:[a-f0-9]{32}$",
+              "type" : "string"
+            },
+            "inferenceTime" : {
+              "minimum" : 0,
+              "type" : "number"
+            },
+            "documentId" : {
+              "pattern" : "^las:document:[a-f0-9]{32}$",
+              "type" : "string"
+            },
+            "batchId" : {
+              "pattern" : "^las:batch:[a-f0-9]{32}$",
+              "type" : "string"
+            },
+            "contentType" : {
+              "type" : "string",
+              "enum" : [ "application/pdf", "image/jpeg" ]
+            },
+            "updated" : {
+              "minimum" : 1,
+              "type" : "integer"
+            },
+            "content" : {
+              "minLength" : 1,
+              "type" : "string"
+            },
+            "predictions" : {
+              "type" : "array",
+              "items" : {
+                "required" : [ "confidence", "label", "value" ],
+                "type" : "object",
+                "properties" : {
+                  "confidence" : {
+                    "maximum" : 1,
+                    "minimum" : 0,
+                    "type" : "number"
+                  },
+                  "label" : {
+                    "maxLength" : 36,
+                    "minLength" : 1,
+                    "pattern" : "^[0-9A-Za-z_]+$",
+                    "type" : "string"
+                  },
+                  "value" : {
+                    "anyOf" : [ {
+                      "maxLength" : 64,
+                      "minLength" : 1,
+                      "type" : "string"
+                    }, null ]
                   }
                 },
-                "batchId": {
-                  "pattern": "^[a-f0-9]{8}-?[a-f0-9]{4}-?4[a-f0-9]{3}-?[89ab][a-f0-9]{3}-?[a-f0-9]{12}$",
-                  "type": "string"
-                },
-                "updated": {
-                  "minimum": 1,
-                  "type": "integer"
-                },
-                "inferenceTime": {
-                  "minimum": 0,
-                  "type": "number"
-                },
-                "predictions": {
-                  "minItems": 1,
-                  "type": "array",
-                  "items": {
-                    "required": [
-                      "confidence",
-                      "label",
-                      "value"
-                    ],
-                    "type": "object",
-                    "properties": {
-                      "label": {
-                        "maxLength": 36,
-                        "minLength": 1,
-                        "pattern": "^[0-9A-Za-z_]+$",
-                        "type": "string"
-                      },
-                      "value": {
-                        "anyOf": [
-                          {
-                            "maxLength": 64,
-                            "minLength": 1,
-                            "type": "string"
-                          },
-                          null
-                        ]
-                      },
-                      "confidence": {
-                        "maximum": 1,
-                        "minimum": 0,
-                        "type": "number"
-                      }
-                    },
-                    "additionalProperties": false
+                "additionalProperties" : false
+              }
+            }
+          },
+          "additionalProperties" : false
+        } ]
+      },
+      "PostTransitions" : {
+        "title" : "POST /transitions",
+        "required" : [ "inputJsonSchema", "outputJsonSchema", "transitionType" ],
+        "type" : "object",
+        "properties" : {
+          "outputJsonSchema" : {
+            "type" : "object"
+          },
+          "params" : {
+            "required" : [ "imageUrl" ],
+            "type" : "object",
+            "properties" : {
+              "environment" : {
+                "type" : "object",
+                "additionalProperties" : true
+              },
+              "memory" : {
+                "maximum" : 4096,
+                "minimum" : 512,
+                "type" : "integer"
+              },
+              "credentials" : {
+                "required" : [ "password", "username" ],
+                "type" : "object",
+                "properties" : {
+                  "password" : {
+                    "type" : "string"
+                  },
+                  "username" : {
+                    "type" : "string"
                   }
                 }
               },
-              "additionalProperties": false
-            }
+              "imageUrl" : {
+                "type" : "string"
+              },
+              "cpu" : {
+                "maximum" : 2048,
+                "minimum" : 256,
+                "type" : "integer"
+              }
+            },
+            "additionalProperties" : false
+          },
+          "transitionType" : {
+            "type" : "string",
+            "enum" : [ "docker", "manual" ]
+          },
+          "inputJsonSchema" : {
+            "type" : "object"
           }
         },
-        "additionalProperties": false
+        "additionalProperties" : false
       },
-      "PostDocumentId": {
-        "title": "POST /documents/{documentId}",
-        "required": [
-          "feedback"
-        ],
-        "type": "object",
-        "properties": {
-          "feedback": {
-            "minItems": 1,
-            "type": "array",
-            "items": {
-              "required": [
-                "label",
-                "value"
-              ],
-              "type": "object",
-              "properties": {
-                "label": {
-                  "maxLength": 36,
-                  "minLength": 1,
-                  "pattern": "^[0-9A-Za-z_]+$",
-                  "type": "string"
+      "PatchDocumentId" : {
+        "title" : "PATCH /documents/{documentId}",
+        "required" : [ "feedback" ],
+        "type" : "object",
+        "properties" : {
+          "feedback" : {
+            "type" : "array",
+            "items" : {
+              "required" : [ "label", "value" ],
+              "type" : "object",
+              "properties" : {
+                "label" : {
+                  "maxLength" : 36,
+                  "minLength" : 1,
+                  "pattern" : "^[0-9A-Za-z_]+$",
+                  "type" : "string"
                 },
-                "value": {
-                  "anyOf": [
-                    {
-                      "maxLength": 64,
-                      "minLength": 1,
-                      "type": "string"
-                    },
-                    null
-                  ]
+                "value" : {
+                  "anyOf" : [ {
+                    "maxLength" : 64,
+                    "minLength" : 1,
+                    "type" : "string"
+                  }, null ]
                 }
               },
-              "additionalProperties": false
+              "additionalProperties" : false
             }
           }
         },
-        "additionalProperties": false
+        "additionalProperties" : false
+      },
+      "PostPredictions" : {
+        "title" : "POST /predictions",
+        "required" : [ "documentId", "modelId" ],
+        "type" : "object",
+        "properties" : {
+          "modelId" : {
+            "pattern" : "^las:model:[0-9A-Za-z_]+$",
+            "type" : "string"
+          },
+          "maxPages" : {
+            "minimum" : 1,
+            "type" : "integer"
+          },
+          "documentId" : {
+            "pattern" : "^las:document:[a-f0-9]{32}$",
+            "type" : "string"
+          },
+          "autoRotate" : {
+            "type" : "boolean"
+          }
+        },
+        "additionalProperties" : false
+      },
+      "PostUsers" : {
+        "title" : "POST /users",
+        "required" : [ "email" ],
+        "type" : "object",
+        "properties" : {
+          "email" : {
+            "pattern" : "^[A-Za-z0-9][-+._A-Za-z0-9]*@([A-Za-z0-9]+\\.)+[A-Za-z]{2,}$",
+            "type" : "string"
+          }
+        },
+        "additionalProperties" : false
+      },
+      "Empty" : {
+        "title" : "Empty Schema",
+        "type" : "object"
+      },
+      "Execution" : {
+        "title" : "execution",
+        "type" : "object"
+      },
+      "PostDocuments" : {
+        "title" : "POST /documents",
+        "required" : [ "consentId", "content", "contentType" ],
+        "type" : "object",
+        "properties" : {
+          "feedback" : {
+            "type" : "array",
+            "items" : {
+              "required" : [ "label", "value" ],
+              "type" : "object",
+              "properties" : {
+                "label" : {
+                  "maxLength" : 36,
+                  "minLength" : 1,
+                  "pattern" : "^[0-9A-Za-z_]+$",
+                  "type" : "string"
+                },
+                "value" : {
+                  "anyOf" : [ {
+                    "maxLength" : 64,
+                    "minLength" : 1,
+                    "type" : "string"
+                  }, null ]
+                }
+              },
+              "additionalProperties" : false
+            }
+          },
+          "consentId" : {
+            "pattern" : "^las:consent:[a-f0-9]{32}$",
+            "type" : "string"
+          },
+          "batchId" : {
+            "pattern" : "^las:batch:[a-f0-9]{32}$",
+            "type" : "string"
+          },
+          "contentType" : {
+            "type" : "string",
+            "enum" : [ "application/pdf", "image/jpeg" ]
+          },
+          "content" : {
+            "minLength" : 1,
+            "type" : "string"
+          }
+        },
+        "additionalProperties" : false
+      },
+      "TransitionExecution" : {
+        "title" : "document",
+        "oneOf" : [ {
+          "required" : [ "contentType", "documentId" ],
+          "type" : "object",
+          "properties" : {
+            "feedback" : {
+              "type" : "array",
+              "items" : {
+                "required" : [ "label", "value" ],
+                "type" : "object",
+                "properties" : {
+                  "label" : {
+                    "maxLength" : 36,
+                    "minLength" : 1,
+                    "pattern" : "^[0-9A-Za-z_]+$",
+                    "type" : "string"
+                  },
+                  "value" : {
+                    "anyOf" : [ {
+                      "maxLength" : 64,
+                      "minLength" : 1,
+                      "type" : "string"
+                    }, null ]
+                  }
+                },
+                "additionalProperties" : false
+              }
+            },
+            "consentId" : {
+              "pattern" : "^las:consent:[a-f0-9]{32}$",
+              "type" : "string"
+            },
+            "inferenceTime" : {
+              "minimum" : 0,
+              "type" : "number"
+            },
+            "documentId" : {
+              "pattern" : "^las:document:[a-f0-9]{32}$",
+              "type" : "string"
+            },
+            "batchId" : {
+              "pattern" : "^las:batch:[a-f0-9]{32}$",
+              "type" : "string"
+            },
+            "contentType" : {
+              "type" : "string",
+              "enum" : [ "application/pdf", "image/jpeg" ]
+            },
+            "updated" : {
+              "minimum" : 1,
+              "type" : "integer"
+            },
+            "content" : {
+              "minLength" : 1,
+              "type" : "string"
+            },
+            "predictions" : {
+              "type" : "array",
+              "items" : {
+                "required" : [ "confidence", "label", "value" ],
+                "type" : "object",
+                "properties" : {
+                  "confidence" : {
+                    "maximum" : 1,
+                    "minimum" : 0,
+                    "type" : "number"
+                  },
+                  "label" : {
+                    "maxLength" : 36,
+                    "minLength" : 1,
+                    "pattern" : "^[0-9A-Za-z_]+$",
+                    "type" : "string"
+                  },
+                  "value" : {
+                    "anyOf" : [ {
+                      "maxLength" : 64,
+                      "minLength" : 1,
+                      "type" : "string"
+                    }, null ]
+                  }
+                },
+                "additionalProperties" : false
+              }
+            }
+          },
+          "additionalProperties" : false
+        } ]
+      },
+      "PostTransitionExecution" : {
+        "title" : "POST /transitions/{transitionId}/executions",
+        "type" : "object"
+      },
+      "Batch" : {
+        "title" : "batch",
+        "required" : [ "batchId", "description" ],
+        "type" : "object",
+        "properties" : {
+          "description" : {
+            "minLength" : 1,
+            "type" : "string"
+          },
+          "batchId" : {
+            "pattern" : "^las:batch:[a-f0-9]{32}$",
+            "type" : "string"
+          }
+        },
+        "additionalProperties" : false
+      },
+      "Documents" : {
+        "title" : "documents",
+        "required" : [ "documents" ],
+        "type" : "object",
+        "properties" : {
+          "consentId" : {
+            "pattern" : "^las:consent:[a-f0-9]{32}$",
+            "type" : "string"
+          },
+          "documents" : {
+            "type" : "array",
+            "items" : {
+              "required" : [ "contentType", "documentId" ],
+              "type" : "object",
+              "properties" : {
+                "feedback" : {
+                  "type" : "array",
+                  "items" : {
+                    "required" : [ "label", "value" ],
+                    "type" : "object",
+                    "properties" : {
+                      "label" : {
+                        "maxLength" : 36,
+                        "minLength" : 1,
+                        "pattern" : "^[0-9A-Za-z_]+$",
+                        "type" : "string"
+                      },
+                      "value" : {
+                        "anyOf" : [ {
+                          "maxLength" : 64,
+                          "minLength" : 1,
+                          "type" : "string"
+                        }, null ]
+                      }
+                    },
+                    "additionalProperties" : false
+                  }
+                },
+                "consentId" : {
+                  "pattern" : "^las:consent:[a-f0-9]{32}$",
+                  "type" : "string"
+                },
+                "inferenceTime" : {
+                  "minimum" : 0,
+                  "type" : "number"
+                },
+                "documentId" : {
+                  "pattern" : "^las:document:[a-f0-9]{32}$",
+                  "type" : "string"
+                },
+                "batchId" : {
+                  "pattern" : "^las:batch:[a-f0-9]{32}$",
+                  "type" : "string"
+                },
+                "contentType" : {
+                  "type" : "string",
+                  "enum" : [ "application/pdf", "image/jpeg" ]
+                },
+                "updated" : {
+                  "minimum" : 1,
+                  "type" : "integer"
+                },
+                "content" : {
+                  "minLength" : 1,
+                  "type" : "string"
+                },
+                "predictions" : {
+                  "type" : "array",
+                  "items" : {
+                    "required" : [ "confidence", "label", "value" ],
+                    "type" : "object",
+                    "properties" : {
+                      "confidence" : {
+                        "maximum" : 1,
+                        "minimum" : 0,
+                        "type" : "number"
+                      },
+                      "label" : {
+                        "maxLength" : 36,
+                        "minLength" : 1,
+                        "pattern" : "^[0-9A-Za-z_]+$",
+                        "type" : "string"
+                      },
+                      "value" : {
+                        "anyOf" : [ {
+                          "maxLength" : 64,
+                          "minLength" : 1,
+                          "type" : "string"
+                        }, null ]
+                      }
+                    },
+                    "additionalProperties" : false
+                  }
+                }
+              },
+              "additionalProperties" : false
+            }
+          },
+          "batchId" : {
+            "pattern" : "^las:batch:[a-f0-9]{32}$",
+            "type" : "string"
+          }
+        },
+        "additionalProperties" : false
+      },
+      "Transition" : {
+        "title" : "transition",
+        "required" : [ "transitionId" ],
+        "type" : "object",
+        "properties" : {
+          "transitionId" : {
+            "pattern" : "^[a-f0-9]{8}-?[a-f0-9]{4}-?4[a-f0-9]{3}-?[89ab][a-f0-9]{3}-?[a-f0-9]{12}$",
+            "type" : "string"
+          }
+        },
+        "additionalProperties" : false
+      },
+      "PostWorkflows" : {
+        "title" : "POST /workflows",
+        "required" : [ "name", "specification" ],
+        "type" : "object",
+        "properties" : {
+          "name" : {
+            "minLength" : 1,
+            "type" : "string"
+          },
+          "description" : {
+            "type" : "string"
+          },
+          "specification" : {
+            "required" : [ "definition" ],
+            "type" : "object",
+            "properties" : {
+              "language" : {
+                "type" : "string",
+                "enum" : [ "ASL" ]
+              },
+              "definition" : {
+                "type" : "object"
+              },
+              "version" : {
+                "type" : "string",
+                "enum" : [ "1.0.0" ]
+              }
+            },
+            "additionalProperties" : false
+          },
+          "errorConfig" : {
+            "required" : [ "email" ],
+            "type" : "object",
+            "properties" : {
+              "email" : {
+                "type" : "string"
+              }
+            },
+            "additionalProperties" : false
+          }
+        },
+        "additionalProperties" : false
+      },
+      "PatchTransistionExecutionId" : {
+        "title" : "PATCH transitions/{transitionId}/executions/{executionId}",
+        "type" : "object",
+        "properties" : {
+          "output" : {
+            "type" : "object"
+          },
+          "error" : {
+            "required" : [ "message" ],
+            "type" : "object",
+            "properties" : {
+              "message" : {
+                "type" : "string"
+              }
+            }
+          },
+          "status" : {
+            "type" : "string"
+          }
+        },
+        "additionalProperties" : false,
+        "oneOf" : [ {
+          "type" : "object",
+          "properties" : {
+            "status" : {
+              "type" : "object",
+              "enum" : [ "succeeded" ]
+            }
+          }
+        }, {
+          "type" : "object",
+          "properties" : {
+            "status" : {
+              "type" : "object",
+              "enum" : [ "failed" ]
+            }
+          }
+        } ]
       }
     },
-    "securitySchemes": {
-      "api_key": {
-        "type": "apiKey",
-        "name": "x-api-key",
-        "in": "header"
+    "securitySchemes" : {
+      "scope-Authorizer" : {
+        "type" : "apiKey",
+        "name" : "Authorization",
+        "in" : "header",
+        "x-amazon-apigateway-authtype" : "cognito_user_pools"
       },
-      "sprint-1-ApiStack-134F8SFRSYA4Z-Authorizer": {
-        "type": "apiKey",
-        "name": "Authorization",
-        "in": "header",
-        "x-amazon-apigateway-authtype": "cognito_user_pools"
+      "api_key" : {
+        "type" : "apiKey",
+        "name" : "x-api-key",
+        "in" : "header"
       }
     }
   }
