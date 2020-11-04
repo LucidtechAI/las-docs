@@ -2,7 +2,7 @@
   "openapi" : "3.0.1",
   "info" : {
     "title" : "magnus-dev",
-    "version" : "2020-11-03T09:11:53Z"
+    "version" : "2020-11-04T09:43:24Z"
   },
   "servers" : [ {
     "url" : "https://yj6rbtavs6.execute-api.eu-west-1.amazonaws.com/{basePath}",
@@ -176,6 +176,13 @@
           "schema" : {
             "type" : "string"
           }
+        }, {
+          "name" : "workflowId",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
         } ],
         "responses" : {
           "404" : {
@@ -271,6 +278,21 @@
         } ]
       },
       "post" : {
+        "parameters" : [ {
+          "name" : "Content-Type",
+          "in" : "header",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "workflowId",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
         "requestBody" : {
           "content" : {
             "application/json" : {
@@ -973,6 +995,13 @@
       },
       "patch" : {
         "parameters" : [ {
+          "name" : "Content-Type",
+          "in" : "header",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
           "name" : "transitionId",
           "in" : "path",
           "required" : true,
@@ -1470,7 +1499,6 @@
         "parameters" : [ {
           "name" : "consentId",
           "in" : "query",
-          "required" : true,
           "schema" : {
             "type" : "string"
           }
@@ -2060,6 +2088,13 @@
         "parameters" : [ {
           "name" : "Content-Type",
           "in" : "header",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "transitionId",
+          "in" : "path",
           "required" : true,
           "schema" : {
             "type" : "string"
@@ -2988,7 +3023,7 @@
       },
       "PostDocuments" : {
         "title" : "POST /documents",
-        "required" : [ "consentId", "content", "contentType" ],
+        "required" : [ "content", "contentType" ],
         "type" : "object",
         "properties" : {
           "feedback" : {
