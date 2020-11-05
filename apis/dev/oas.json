@@ -2,13 +2,11 @@
   "openapi": "3.0.1",
   "info": {
     "title": "demo",
-    "version": "2020-11-04T18:17:42Z"
+    "version": "2020-11-05T14:00:23Z"
   },
   "servers": [
     {
-      "url": [
-        "https://las.demo.api.com/{basePath}"
-      ],
+      "url": "https://las.demo.api.com/{basePath}",
       "variables": {
         "basePath": {
           "default": "/dev"
@@ -235,7 +233,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Execution"
+                  "$ref": "#/components/schemas/Executions"
                 }
               }
             }
@@ -2606,28 +2604,67 @@
         },
         "additionalProperties": false
       },
+      "Executions": {
+        "title": "workflow-executions",
+        "required": [
+          "executions",
+          "workflowId"
+        ],
+        "type": "object",
+        "properties": {
+          "executions": {
+            "type": "array",
+            "items": {
+              "required": [
+                "executionId",
+                "status",
+                "workflowId"
+              ],
+              "type": "object",
+              "properties": {
+                "executionId": {
+                  "pattern": "^las:workflow-execution:[a-f0-9]{32}$",
+                  "type": "string"
+                },
+                "workflowId": {
+                  "pattern": "^las:workflow:[a-f0-9]{32}$",
+                  "type": "string"
+                },
+                "status": {
+                  "type": "string"
+                }
+              },
+              "additionalProperties": false
+            }
+          },
+          "workflowId": {
+            "pattern": "^las:workflow:[a-f0-9]{32}$",
+            "type": "string"
+          },
+          "status": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
       "User": {
         "title": "user",
-        "oneOf": [
-          {
-            "required": [
-              "email",
-              "userId"
-            ],
-            "type": "object",
-            "properties": {
-              "userId": {
-                "pattern": "^las:user:[a-f0-9]{32}$",
-                "type": "string"
-              },
-              "email": {
-                "pattern": "^[A-Za-z0-9][-+._A-Za-z0-9]*@([A-Za-z0-9]+\\.)+[A-Za-z]{2,}$",
-                "type": "string"
-              }
-            },
-            "additionalProperties": false
+        "required": [
+          "email",
+          "userId"
+        ],
+        "type": "object",
+        "properties": {
+          "userId": {
+            "pattern": "^las:user:[a-f0-9]{32}$",
+            "type": "string"
+          },
+          "email": {
+            "pattern": "^[A-Za-z0-9][-+._A-Za-z0-9]*@([A-Za-z0-9]+\\.)+[A-Za-z]{2,}$",
+            "type": "string"
           }
-        ]
+        },
+        "additionalProperties": false
       },
       "PostWorkflowExecutions": {
         "title": "POST /workflows/{workflowId}/executions",
@@ -2734,113 +2771,109 @@
       },
       "Document": {
         "title": "document",
-        "oneOf": [
-          {
-            "required": [
-              "contentType",
-              "documentId"
-            ],
-            "type": "object",
-            "properties": {
-              "feedback": {
-                "type": "array",
-                "items": {
-                  "required": [
-                    "label",
-                    "value"
-                  ],
-                  "type": "object",
-                  "properties": {
-                    "label": {
-                      "maxLength": 36,
+        "required": [
+          "contentType",
+          "documentId"
+        ],
+        "type": "object",
+        "properties": {
+          "feedback": {
+            "type": "array",
+            "items": {
+              "required": [
+                "label",
+                "value"
+              ],
+              "type": "object",
+              "properties": {
+                "label": {
+                  "maxLength": 36,
+                  "minLength": 1,
+                  "pattern": "^[0-9A-Za-z_]+$",
+                  "type": "string"
+                },
+                "value": {
+                  "anyOf": [
+                    {
+                      "maxLength": 64,
                       "minLength": 1,
-                      "pattern": "^[0-9A-Za-z_]+$",
                       "type": "string"
                     },
-                    "value": {
-                      "anyOf": [
-                        {
-                          "maxLength": 64,
-                          "minLength": 1,
-                          "type": "string"
-                        },
-                        null
-                      ]
-                    }
-                  },
-                  "additionalProperties": false
+                    null
+                  ]
                 }
               },
-              "consentId": {
-                "pattern": "^las:consent:[a-f0-9]{32}$",
-                "type": "string"
-              },
-              "inferenceTime": {
-                "minimum": 0,
-                "type": "number"
-              },
-              "documentId": {
-                "pattern": "^las:document:[a-f0-9]{32}$",
-                "type": "string"
-              },
-              "batchId": {
-                "pattern": "^las:batch:[a-f0-9]{32}$",
-                "type": "string"
-              },
-              "contentType": {
-                "type": "string",
-                "enum": [
-                  "application/pdf",
-                  "image/jpeg"
-                ]
-              },
-              "updated": {
-                "minimum": 1,
-                "type": "integer"
-              },
-              "content": {
-                "minLength": 1,
-                "type": "string"
-              },
-              "predictions": {
-                "type": "array",
-                "items": {
-                  "required": [
-                    "confidence",
-                    "label",
-                    "value"
-                  ],
-                  "type": "object",
-                  "properties": {
-                    "confidence": {
-                      "maximum": 1,
-                      "minimum": 0,
-                      "type": "number"
-                    },
-                    "label": {
-                      "maxLength": 36,
+              "additionalProperties": false
+            }
+          },
+          "consentId": {
+            "pattern": "^las:consent:[a-f0-9]{32}$",
+            "type": "string"
+          },
+          "inferenceTime": {
+            "minimum": 0,
+            "type": "number"
+          },
+          "documentId": {
+            "pattern": "^las:document:[a-f0-9]{32}$",
+            "type": "string"
+          },
+          "batchId": {
+            "pattern": "^las:batch:[a-f0-9]{32}$",
+            "type": "string"
+          },
+          "contentType": {
+            "type": "string",
+            "enum": [
+              "application/pdf",
+              "image/jpeg"
+            ]
+          },
+          "updated": {
+            "minimum": 1,
+            "type": "integer"
+          },
+          "content": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "predictions": {
+            "type": "array",
+            "items": {
+              "required": [
+                "confidence",
+                "label",
+                "value"
+              ],
+              "type": "object",
+              "properties": {
+                "confidence": {
+                  "maximum": 1,
+                  "minimum": 0,
+                  "type": "number"
+                },
+                "label": {
+                  "maxLength": 36,
+                  "minLength": 1,
+                  "pattern": "^[0-9A-Za-z_]+$",
+                  "type": "string"
+                },
+                "value": {
+                  "anyOf": [
+                    {
+                      "maxLength": 64,
                       "minLength": 1,
-                      "pattern": "^[0-9A-Za-z_]+$",
                       "type": "string"
                     },
-                    "value": {
-                      "anyOf": [
-                        {
-                          "maxLength": 64,
-                          "minLength": 1,
-                          "type": "string"
-                        },
-                        null
-                      ]
-                    }
-                  },
-                  "additionalProperties": false
+                    null
+                  ]
                 }
-              }
-            },
-            "additionalProperties": false
+              },
+              "additionalProperties": false
+            }
           }
-        ]
+        },
+        "additionalProperties": false
       },
       "PostTransitions": {
         "title": "POST /transitions",
@@ -2993,30 +3026,26 @@
       },
       "Execution": {
         "title": "workflow-execution",
-        "oneOf": [
-          {
-            "required": [
-              "executionId",
-              "status",
-              "workflowId"
-            ],
-            "type": "object",
-            "properties": {
-              "executionId": {
-                "pattern": "^las:workflow-execution:[a-f0-9]{32}$",
-                "type": "string"
-              },
-              "workflowId": {
-                "pattern": "^las:workflow:[a-f0-9]{32}$",
-                "type": "string"
-              },
-              "status": {
-                "type": "string"
-              }
-            },
-            "additionalProperties": false
+        "required": [
+          "executionId",
+          "status",
+          "workflowId"
+        ],
+        "type": "object",
+        "properties": {
+          "executionId": {
+            "pattern": "^las:workflow-execution:[a-f0-9]{32}$",
+            "type": "string"
+          },
+          "workflowId": {
+            "pattern": "^las:workflow:[a-f0-9]{32}$",
+            "type": "string"
+          },
+          "status": {
+            "type": "string"
           }
-        ]
+        },
+        "additionalProperties": false
       },
       "PostDocuments": {
         "title": "POST /documents",
@@ -3078,39 +3107,39 @@
         "additionalProperties": false
       },
       "TransitionExecution": {
-        "title": "transformation-execution",
-        "oneOf": [
-          {
-            "required": [
-              "executionId",
-              "status",
-              "transitionId"
-            ],
-            "type": "object",
-            "properties": {
-              "executionId": {
-                "pattern": "^las:transition-execution:[a-f0-9]{32}$",
+        "title": "transition-execution",
+        "required": [
+          "executionId",
+          "input",
+          "status",
+          "transitionId"
+        ],
+        "type": "object",
+        "properties": {
+          "executionId": {
+            "pattern": "^las:transition-execution:[a-f0-9]{32}$",
+            "type": "string"
+          },
+          "input": {
+            "type": "object"
+          },
+          "transitionId": {
+            "oneOf": [
+              {
+                "pattern": "^las:transition:[a-f0-9]{32}$",
                 "type": "string"
               },
-              "transitionId": {
-                "oneOf": [
-                  {
-                    "pattern": "^las:transition:[a-f0-9]{32}$",
-                    "type": "string"
-                  },
-                  {
-                    "pattern": "^las:transition:commons-[0-9A-Za-z-]+$",
-                    "type": "string"
-                  }
-                ]
-              },
-              "status": {
+              {
+                "pattern": "^las:transition:commons-[0-9A-Za-z-]+$",
                 "type": "string"
               }
-            },
-            "additionalProperties": false
+            ]
+          },
+          "status": {
+            "type": "string"
           }
-        ]
+        },
+        "additionalProperties": false
       },
       "PostTransitionExecution": {
         "title": "POST /transitions/{transitionId}/executions",
@@ -3134,66 +3163,6 @@
           }
         },
         "additionalProperties": false
-      },
-      "Workflow": {
-        "title": "workflow",
-        "oneOf": [
-          {
-          "type": "object",
-          "properties": {
-              "name": {
-        "type": "string",
-        "minLength": 1
-      },
-              "workflowId": {
-          "type": "string",
-          "pattern": "^las:workflow:[a-f0-9]{32}$"
-      },
-              "description": {
-                  "type": ["string", "null"]
-              }
-          },
-          "required": [
-              "name",
-              "workflowId"
-          ],
-          "additionalProperties": false
-      }
-        ]
-      },
-      "Workflows": {
-        "title": "workflows",
-        "type": "object",
-        "additionalProperties": false,
-          "properties": {
-            "workflows": {
-              "type": "array",
-              "items": {
-                    "type": "object",
-                    "properties": {
-                        "name": {
-                  "type": "string",
-                  "minLength": 1
-                },
-                        "workflowId": {
-                    "type": "string",
-                    "pattern": "^las:workflow:[a-f0-9]{32}$"
-                },
-                        "description": {
-                            "type": ["string", "null"]
-                        }
-                    },
-                    "required": [
-                        "name",
-                        "workflowId"
-                    ],
-                    "additionalProperties": false
-                }
-            }
-        },
-        "required": [
-          "workflows"
-        ]
       },
       "Documents": {
         "title": "documents",
@@ -3318,16 +3287,75 @@
             "pattern": "^las:batch:[a-f0-9]{32}$",
             "type": "string"
           }
+        }
+      },
+      "Workflow": {
+        "title": "workflow",
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "name": {
+              "type": "string",
+              "minLength": 1
+            },
+          "workflowId": {
+              "type": "string",
+              "pattern": "^las:workflow:[a-f0-9]{32}$"
+            },
+          "description": {
+              "type": ["string", "null"]
+          }
         },
-        "additionalProperties": false
+        "required": [
+          "name",
+          "workflowId"
+        ]
+      },
+      "Workflows": {
+        "title": "workflows",
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "workflows": {
+            "type": "array",
+            "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "name": {
+                  "type": "string",
+                  "minLength": 1
+                },
+              "workflowId": {
+                  "type": "string",
+                  "pattern": "^las:workflow:[a-f0-9]{32}$"
+                },
+              "description": {
+                  "type": ["string", "null"]
+              }
+            },
+            "required": [
+              "name",
+              "workflowId"
+            ]
+            }
+          }
+        },
+        "required": [
+          "workflows"
+        ]
       },
       "Transition": {
         "title": "transition",
         "required": [
-          "transitionId"
+          "transitionId",
+          "transitionType"
         ],
         "type": "object",
         "properties": {
+          "outputJsonSchema": {
+            "type": "object"
+          },
           "transitionId": {
             "oneOf": [
               {
@@ -3339,8 +3367,15 @@
                 "type": "string"
               }
             ]
+          },
+          "transitionType": {
+            "type": "string"
+          },
+          "inputJsonSchema": {
+            "type": "object"
           }
-        }
+        },
+        "additionalProperties": false
       },
       "PostWorkflows": {
         "title": "POST /workflows",
