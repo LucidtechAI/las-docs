@@ -16,6 +16,104 @@
   ],
   "paths": {
     "/transitions": {
+      "get": {
+        "parameters": [
+          {
+            "name": "type",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "404": {
+            "description": "404 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "415": {
+            "description": "415 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "200 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Transitions"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "400 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "500 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      },
       "post": {
         "parameters": [
           {
@@ -233,7 +331,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Executions"
+                  "$ref": "#/components/schemas/WorkflowExecutions"
                 }
               }
             }
@@ -350,7 +448,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Execution"
+                  "$ref": "#/components/schemas/WorkflowExecution"
                 }
               }
             }
@@ -2604,7 +2702,7 @@
         },
         "additionalProperties": false
       },
-      "Executions": {
+      "WorkflowExecutions": {
         "title": "workflow-executions",
         "required": [
           "executions",
@@ -2675,6 +2773,57 @@
         "properties": {
           "input": {
             "type": "object"
+          }
+        },
+        "additionalProperties": false
+      },
+      "Transitions": {
+        "title": "transitions",
+        "required": [
+          "transitions"
+        ],
+        "type": "object",
+        "properties": {
+          "transitions": {
+            "type": "array",
+            "items": {
+              "required": [
+                "transitionId",
+                "transitionType"
+              ],
+              "type": "object",
+              "properties": {
+                "outputJsonSchema": {
+                  "type": "object"
+                },
+                "transitionId": {
+                  "oneOf": [
+                    {
+                      "pattern": "^las:transition:[a-f0-9]{32}$",
+                      "type": "string"
+                    },
+                    {
+                      "pattern": "^las:transition:commons-[0-9A-Za-z-]+$",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "transitionType": {
+                  "type": "string"
+                },
+                "inputJsonSchema": {
+                  "type": "object"
+                }
+              },
+              "additionalProperties": false
+            }
+          },
+          "transitionType": {
+            "type": "string",
+            "enum": [
+              "docker",
+              "manual"
+            ]
           }
         },
         "additionalProperties": false
@@ -3024,7 +3173,7 @@
         "title": "Empty Schema",
         "type": "object"
       },
-      "Execution": {
+      "WorkflowExecution": {
         "title": "workflow-execution",
         "required": [
           "executionId",
