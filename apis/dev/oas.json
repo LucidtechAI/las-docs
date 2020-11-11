@@ -2,7 +2,7 @@
   "openapi": "3.0.1",
   "info": {
     "title": "demo",
-    "version": "2020-11-11T14:27:53Z"
+    "version": "2020-11-11T15:26:04Z"
   },
   "servers": [
     {
@@ -3280,7 +3280,10 @@
                       "minLength": 1,
                       "type": "string"
                     },
-                    null
+                    null,
+                    {
+                      "type": "boolean"
+                    }
                   ]
                 }
               },
@@ -3398,7 +3401,10 @@
                             "minLength": 1,
                             "type": "string"
                           },
-                          null
+                          null,
+                          {
+                            "type": "boolean"
+                          }
                         ]
                       }
                     },
@@ -3511,7 +3517,10 @@
                       "minLength": 1,
                       "type": "string"
                     },
-                    null
+                    null,
+                    {
+                      "type": "boolean"
+                    }
                   ]
                 }
               },
@@ -3645,7 +3654,10 @@
                       "minLength": 1,
                       "type": "string"
                     },
-                    null
+                    null,
+                    {
+                      "type": "boolean"
+                    }
                   ]
                 }
               },
