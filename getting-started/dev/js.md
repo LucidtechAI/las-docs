@@ -21,7 +21,7 @@ npm install --save las-sdk-node
 ```
 
 ```javascript
-import { AuthorizationCodeCredentials } from '@lucidtech/las-sdk-browser';
+import { AuthorizationCodeCredentials } from '@lucidtech/las-sdk-node';
 import { Client } from '@lucidtech/las-sdk-core';
 
 const credentials = new ClientCredentials('<apiEndpoint>', '<apiKey>', '<clientId>',  '<clientSecret>', '<authEndpoint>');
@@ -33,10 +33,9 @@ const client = new Client(credentials);
 Suppose we wish to run inference on a document using Lucidtech’s invoice model.
 
 ```javascript
-client.createDocument('<document content>', '<document mime type>', '<consent id>')
-  .then(({ documentId }) => client.
-    createPrediction(documentId, '<model name>')
-      .then(({ documentId, predictions }) => console.log(prediction.data)));
+const { documentId } = await client.createDocument('<document content>', '<document mime type>', '<consent id>');
+const { predictions } = await client.createPrediction(documentId, '<model name>');
+console.log(predictions);
 ```
 
 ## Set ground truth of document
@@ -48,14 +47,12 @@ Consent ID is an identifier you can assign to documents to keep track of documen
 {% endhint %}
 
 ```javascript
-client.createDocument('<document content>', '<document mime type>', '<consent id>')
-  .then(({ documentId }) => {
-    const feedback = [
-      { 'label': 'total_amount', 'value': '240.01' },
-      { 'label': 'due_date', 'value': '2020-01-31' },
-    ];
-    client.updateDocument(documentId);
-  });
+const { documentId } = await client.createDocument('<document content>', '<document mime type>', '<consent id>');
+const feedback = [
+  { 'label': 'total_amount', 'value': '240.01' },
+  { 'label': 'due_date', 'value': '2020-01-31' },
+];
+client.updateDocument(documentId, feedback);
 ```
 
 ## Create a batch and associate a few documents with it
@@ -63,10 +60,8 @@ client.createDocument('<document content>', '<document mime type>', '<consent id
 Creating a batch is a way to group documents. This is useful for specifying batches of documents to use in improving the model later.
 
 ```javascript
-client.createBatch(batchDescription)
-  .then(({ batchId }) => {
-    client.createDocument('<content>', '<content type>', '<consent id>', batchId)
-    client.createDocument('<another content>', '<another content type>', '<consent id>', batchId);
-  })
+const { batchId } = await client.createBatch(batchDescription);
+client.createDocument('<content>', '<content type>', '<consent id>', batchId);
+client.createDocument('<another content>', '<another content type>', '<consent id>', batchId);
 ```
 
