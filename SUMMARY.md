@@ -19,6 +19,8 @@
 
 ## Reference
 
+* [API reference](apis/dev/api.md)
+
 * [Rest API](reference/restapi/README.md)
   * [dev](reference/restapi/dev.md)
 * [Python SDK](reference/python-sdk/README.md)
@@ -30,4 +32,3 @@
   * [v2.0](reference/js/2.0.md)
 * [Java SDK](reference/java/README.md)
   * [latest](reference/java/latest.md)
-
