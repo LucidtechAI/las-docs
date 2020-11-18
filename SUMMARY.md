@@ -19,8 +19,8 @@
 
 ## Reference
 
-* [API reference](apis/dev/api.md)
-
+* [API reference](apis/dev/README.md)
+  * [dev](apis/dev/api.md)
 * [Rest API](reference/restapi/README.md)
   * [dev](reference/restapi/dev.md)
 * [Python SDK](reference/python-sdk/README.md)
