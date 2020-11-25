@@ -2,7 +2,7 @@
   "openapi": "3.0.1",
   "info": {
     "title": "demo",
-    "version": "2020-11-16T15:12:03Z"
+    "version": "2020-11-25T07:58:13Z"
   },
   "servers": [
     {
@@ -15,6 +15,33 @@
     }
   ],
   "paths": {
+    "/": {
+      "get": {
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Empty"
+                }
+              }
+            },
+            "description": "200 response"
+          }
+        },
+        "x-amazon-apigateway-integration": {
+          "httpMethod": "GET",
+          "passthroughBehavior": "when_no_match",
+          "responses": {
+            "default": {
+              "statusCode": "200"
+            }
+          },
+          "type": "http",
+          "uri": ""
+        }
+      }
+    },
     "/assets": {
       "get": {
         "parameters": [
@@ -119,7 +146,64 @@
               }
             }
           }
-        }
+        },
+        "x-amazon-apigateway-integration": {
+          "httpMethod": "POST",
+          "passthroughBehavior": "never",
+          "requestTemplates": {
+            "application/json": "#set($body = $input.path('$'))\n{\n#if( \"$!input.params().querystring.get('maxResults')\" != \"\")\n    \"maxResults\": $input.params().querystring.get('maxResults'),\n#end\n#if( \"$!input.params().querystring.get('nextToken')\" != \"\")\n    \"nextToken\": \"$input.params().querystring.get('nextToken')\",\n#end\n    \"oauthClientId\": \"$context.authorizer.claims.client_id\",\n    \"oauthSubId\": \"$context.authorizer.claims.sub\"\n}\n"
+          },
+          "responses": {
+            "^\\[BadRequest\\].*": {
+              "responseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'"
+              },
+              "responseTemplates": {
+                "application/json": "#set($error = $input.path('$'))\n{\n    \"message\": \"$error.errorMessage\"\n}\n"
+              },
+              "statusCode": "400"
+            },
+            "^\\[InternalServerError\\].*": {
+              "responseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'"
+              },
+              "responseTemplates": {
+                "application/json": "#set($error = $input.path('$'))\n{\n    \"message\": \"$error.errorMessage\"\n}\n"
+              },
+              "statusCode": "500"
+            },
+            "^\\[NotFound\\].*": {
+              "responseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'"
+              },
+              "responseTemplates": {
+                "application/json": "#set($error = $input.path('$'))\n{\n    \"message\": \"$error.errorMessage\"\n}\n"
+              },
+              "statusCode": "404"
+            },
+            "^\\[UnsupportedMediaType\\].*": {
+              "responseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'"
+              },
+              "responseTemplates": {
+                "application/json": "#set($error = $input.path('$'))\n{\n    \"message\": \"$error.errorMessage\"\n}\n"
+              },
+              "statusCode": "415"
+            },
+            "default": {
+              "responseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'"
+              },
+              "responseTemplates": {
+                "application/json": "#set($body = $input.path('$'))\n{\n    \"assets\": $input.json('$.assets'),\n    \"nextToken\": \"$body.nextToken\"\n}\n"
+              },
+              "statusCode": "200"
+            }
+          },
+          "type": "aws",
+          "uri": ""
+        },
+        "x-amazon-apigateway-request-validator": ""
       },
       "options": {
         "requestBody": {
@@ -160,6 +244,23 @@
               }
             }
           }
+        },
+        "x-amazon-apigateway-integration": {
+          "passthroughBehavior": "when_no_match",
+          "requestTemplates": {
+            "application/json": "{\n  \"statusCode\": 200\n}\n"
+          },
+          "responses": {
+            "default": {
+              "responseParameters": {
+                "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'",
+                "method.response.header.Access-Control-Allow-Methods": "'GET,POST,OPTIONS'",
+                "method.response.header.Access-Control-Allow-Origin": "'*'"
+              },
+              "statusCode": "200"
+            }
+          },
+          "type": "mock"
         }
       },
       "post": {
@@ -269,7 +370,64 @@
               }
             }
           }
-        }
+        },
+        "x-amazon-apigateway-integration": {
+          "httpMethod": "POST",
+          "passthroughBehavior": "never",
+          "requestTemplates": {
+            "application/json": "#set($body = $input.path('$'))\n    {\n        \"oauthClientId\": \"$context.authorizer.claims.client_id\",\n        \"oauthSubId\": \"$context.authorizer.claims.sub\",\n        \"content\": \"$body.content\"\n    }\n"
+          },
+          "responses": {
+            "^\\[BadRequest\\].*": {
+              "responseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'"
+              },
+              "responseTemplates": {
+                "application/json": "#set($error = $input.path('$'))\n{\n    \"message\": \"$error.errorMessage\"\n}\n"
+              },
+              "statusCode": "400"
+            },
+            "^\\[InternalServerError\\].*": {
+              "responseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'"
+              },
+              "responseTemplates": {
+                "application/json": "#set($error = $input.path('$'))\n{\n    \"message\": \"$error.errorMessage\"\n}\n"
+              },
+              "statusCode": "500"
+            },
+            "^\\[NotFound\\].*": {
+              "responseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'"
+              },
+              "responseTemplates": {
+                "application/json": "#set($error = $input.path('$'))\n{\n    \"message\": \"$error.errorMessage\"\n}\n"
+              },
+              "statusCode": "404"
+            },
+            "^\\[UnsupportedMediaType\\].*": {
+              "responseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'"
+              },
+              "responseTemplates": {
+                "application/json": "#set($error = $input.path('$'))\n{\n    \"message\": \"$error.errorMessage\"\n}\n"
+              },
+              "statusCode": "415"
+            },
+            "default": {
+              "responseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'"
+              },
+              "responseTemplates": {
+                "application/json": "#set($body = $input.path('$'))\n{\n    \"assetId\": \"$body.assetId\"\n}\n"
+              },
+              "statusCode": "200"
+            }
+          },
+          "type": "aws",
+          "uri": ""
+        },
+        "x-amazon-apigateway-request-validator": ""
       }
     },
     "/assets/{assetId}": {
@@ -370,7 +528,64 @@
               }
             }
           }
-        }
+        },
+        "x-amazon-apigateway-integration": {
+          "httpMethod": "POST",
+          "passthroughBehavior": "never",
+          "requestTemplates": {
+            "application/json": "#set($body = $input.path('$'))\n{\n    \"oauthClientId\": \"$context.authorizer.claims.client_id\",\n    \"oauthSubId\": \"$context.authorizer.claims.sub\",\n    \"assetId\": \"$input.params().path.assetId\"\n}\n"
+          },
+          "responses": {
+            "^\\[BadRequest\\].*": {
+              "responseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'"
+              },
+              "responseTemplates": {
+                "application/json": "#set($error = $input.path('$'))\n{\n    \"message\": \"$error.errorMessage\"\n}\n"
+              },
+              "statusCode": "400"
+            },
+            "^\\[InternalServerError\\].*": {
+              "responseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'"
+              },
+              "responseTemplates": {
+                "application/json": "#set($error = $input.path('$'))\n{\n    \"message\": \"$error.errorMessage\"\n}\n"
+              },
+              "statusCode": "500"
+            },
+            "^\\[NotFound\\].*": {
+              "responseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'"
+              },
+              "responseTemplates": {
+                "application/json": "#set($error = $input.path('$'))\n{\n    \"message\": \"$error.errorMessage\"\n}\n"
+              },
+              "statusCode": "404"
+            },
+            "^\\[UnsupportedMediaType\\].*": {
+              "responseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'"
+              },
+              "responseTemplates": {
+                "application/json": "#set($error = $input.path('$'))\n{\n    \"message\": \"$error.errorMessage\"\n}\n"
+              },
+              "statusCode": "415"
+            },
+            "default": {
+              "responseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'"
+              },
+              "responseTemplates": {
+                "application/json": "#set($body = $input.path('$'))\n{\n    \"assetId\": \"$body.assetId\",\n    \"content\": \"$body.content\"\n}\n"
+              },
+              "statusCode": "200"
+            }
+          },
+          "type": "aws",
+          "uri": ""
+        },
+        "x-amazon-apigateway-request-validator": ""
       },
       "options": {
         "requestBody": {
@@ -411,6 +626,23 @@
               }
             }
           }
+        },
+        "x-amazon-apigateway-integration": {
+          "passthroughBehavior": "when_no_match",
+          "requestTemplates": {
+            "application/json": "{\n  \"statusCode\": 200\n}\n"
+          },
+          "responses": {
+            "default": {
+              "responseParameters": {
+                "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'",
+                "method.response.header.Access-Control-Allow-Methods": "'GET,PATCH,OPTIONS'",
+                "method.response.header.Access-Control-Allow-Origin": "'*'"
+              },
+              "statusCode": "200"
+            }
+          },
+          "type": "mock"
         }
       },
       "patch": {
@@ -528,7 +760,64 @@
               }
             }
           }
-        }
+        },
+        "x-amazon-apigateway-integration": {
+          "httpMethod": "POST",
+          "passthroughBehavior": "never",
+          "requestTemplates": {
+            "application/json": "#set($body = $input.path('$'))\n    {\n        \"oauthClientId\": \"$context.authorizer.claims.client_id\",\n        \"oauthSubId\": \"$context.authorizer.claims.sub\",\n        \"content\": \"$body.content\",\n        \"assetId\": \"$input.params().path.assetId\"\n    }\n"
+          },
+          "responses": {
+            "^\\[BadRequest\\].*": {
+              "responseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'"
+              },
+              "responseTemplates": {
+                "application/json": "#set($error = $input.path('$'))\n{\n    \"message\": \"$error.errorMessage\"\n}\n"
+              },
+              "statusCode": "400"
+            },
+            "^\\[InternalServerError\\].*": {
+              "responseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'"
+              },
+              "responseTemplates": {
+                "application/json": "#set($error = $input.path('$'))\n{\n    \"message\": \"$error.errorMessage\"\n}\n"
+              },
+              "statusCode": "500"
+            },
+            "^\\[NotFound\\].*": {
+              "responseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'"
+              },
+              "responseTemplates": {
+                "application/json": "#set($error = $input.path('$'))\n{\n    \"message\": \"$error.errorMessage\"\n}\n"
+              },
+              "statusCode": "404"
+            },
+            "^\\[UnsupportedMediaType\\].*": {
+              "responseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'"
+              },
+              "responseTemplates": {
+                "application/json": "#set($error = $input.path('$'))\n{\n    \"message\": \"$error.errorMessage\"\n}\n"
+              },
+              "statusCode": "415"
+            },
+            "default": {
+              "responseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'"
+              },
+              "responseTemplates": {
+                "application/json": "#set($body = $input.path('$'))\n{\n    \"assetId\": \"$body.assetId\"\n}\n"
+              },
+              "statusCode": "200"
+            }
+          },
+          "type": "aws",
+          "uri": ""
+        },
+        "x-amazon-apigateway-request-validator": ""
       }
     },
     "/batches": {
@@ -571,6 +860,23 @@
               }
             }
           }
+        },
+        "x-amazon-apigateway-integration": {
+          "passthroughBehavior": "when_no_match",
+          "requestTemplates": {
+            "application/json": "{\n  \"statusCode\": 200\n}\n"
+          },
+          "responses": {
+            "default": {
+              "responseParameters": {
+                "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'",
+                "method.response.header.Access-Control-Allow-Methods": "'POST,OPTIONS'",
+                "method.response.header.Access-Control-Allow-Origin": "'*'"
+              },
+              "statusCode": "200"
+            }
+          },
+          "type": "mock"
         }
       },
       "post": {
@@ -680,7 +986,64 @@
               }
             }
           }
-        }
+        },
+        "x-amazon-apigateway-integration": {
+          "httpMethod": "POST",
+          "passthroughBehavior": "never",
+          "requestTemplates": {
+            "application/json": "#set($body = $input.path('$'))\n{\n    \"oauthClientId\": \"$context.authorizer.claims.client_id\",\n    \"oauthSubId\": \"$context.authorizer.claims.sub\",\n    \"description\": \"$body.description\"\n}\n"
+          },
+          "responses": {
+            "^\\[BadRequest\\].*": {
+              "responseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'"
+              },
+              "responseTemplates": {
+                "application/json": "#set($error = $input.path('$'))\n{\n    \"message\": \"$error.errorMessage\"\n}\n"
+              },
+              "statusCode": "400"
+            },
+            "^\\[InternalServerError\\].*": {
+              "responseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'"
+              },
+              "responseTemplates": {
+                "application/json": "#set($error = $input.path('$'))\n{\n    \"message\": \"$error.errorMessage\"\n}\n"
+              },
+              "statusCode": "500"
+            },
+            "^\\[NotFound\\].*": {
+              "responseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'"
+              },
+              "responseTemplates": {
+                "application/json": "#set($error = $input.path('$'))\n{\n    \"message\": \"$error.errorMessage\"\n}\n"
+              },
+              "statusCode": "404"
+            },
+            "^\\[UnsupportedMediaType\\].*": {
+              "responseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'"
+              },
+              "responseTemplates": {
+                "application/json": "#set($error = $input.path('$'))\n{\n    \"message\": \"$error.errorMessage\"\n}\n"
+              },
+              "statusCode": "415"
+            },
+            "default": {
+              "responseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'"
+              },
+              "responseTemplates": {
+                "application/json": "#set($body = $input.path('$'))\n{\n    \"batchId\": \"$body.batchId\",\n    \"description\": \"$body.description\"\n}\n"
+              },
+              "statusCode": "200"
+            }
+          },
+          "type": "aws",
+          "uri": ""
+        },
+        "x-amazon-apigateway-request-validator": ""
       }
     },
     "/documents": {
@@ -780,7 +1143,64 @@
               }
             }
           }
-        }
+        },
+        "x-amazon-apigateway-integration": {
+          "httpMethod": "POST",
+          "passthroughBehavior": "never",
+          "requestTemplates": {
+            "application/json": "{\n#if( \"$!input.params().querystring.get('consentId')\" != \"\")\n    \"consentId\": [\n    #foreach( $consentId in $method.request.multivaluequerystring.consentId )\n        \"$consentId\"#if( $foreach.hasNext ),#end\n    #end\n    ],\n#end\n    \"oauthClientId\": \"$context.authorizer.claims.client_id\",\n    \"oauthSubId\": \"$context.authorizer.claims.sub\"\n}\n"
+          },
+          "responses": {
+            "^\\[BadRequest\\].*": {
+              "responseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'"
+              },
+              "responseTemplates": {
+                "application/json": "#set($error = $input.path('$'))\n{\n    \"message\": \"$error.errorMessage\"\n}\n"
+              },
+              "statusCode": "400"
+            },
+            "^\\[InternalServerError\\].*": {
+              "responseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'"
+              },
+              "responseTemplates": {
+                "application/json": "#set($error = $input.path('$'))\n{\n    \"message\": \"$error.errorMessage\"\n}\n"
+              },
+              "statusCode": "500"
+            },
+            "^\\[NotFound\\].*": {
+              "responseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'"
+              },
+              "responseTemplates": {
+                "application/json": "#set($error = $input.path('$'))\n{\n    \"message\": \"$error.errorMessage\"\n}\n"
+              },
+              "statusCode": "404"
+            },
+            "^\\[UnsupportedMediaType\\].*": {
+              "responseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'"
+              },
+              "responseTemplates": {
+                "application/json": "#set($error = $input.path('$'))\n{\n    \"message\": \"$error.errorMessage\"\n}\n"
+              },
+              "statusCode": "415"
+            },
+            "default": {
+              "responseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'"
+              },
+              "responseTemplates": {
+                "application/json": "#set($body = $input.path('$'))\n{\n#if( \"$!body.consentId\" != \"\")\n    \"consentId\": $body.consentId,\n#end\n    \"documents\": $input.json('$.documents')\n}\n"
+              },
+              "statusCode": "200"
+            }
+          },
+          "type": "aws",
+          "uri": ""
+        },
+        "x-amazon-apigateway-request-validator": ""
       },
       "get": {
         "parameters": [
@@ -899,7 +1319,64 @@
               }
             }
           }
-        }
+        },
+        "x-amazon-apigateway-integration": {
+          "httpMethod": "POST",
+          "passthroughBehavior": "never",
+          "requestTemplates": {
+            "application/json": "#set($body = $input.path('$'))\n{\n#if( \"$!input.params().querystring.get('batchId')\" != \"\")\n    \"batchId\": [\n    #foreach( $status in $method.request.multivaluequerystring.batchId )\n        \"$status\"#if( $foreach.hasNext ),#end\n    #end\n    ],\n#end\n#if( \"$!input.params().querystring.get('consentId')\" != \"\")\n    \"consentId\": [\n    #foreach( $consentId in $method.request.multivaluequerystring.consentId )\n        \"$consentId\"#if( $foreach.hasNext ),#end\n    #end\n    ],\n#end\n#if( \"$!input.params().querystring.get('maxResults')\" != \"\")\n    \"maxResults\": $input.params().querystring.get('maxResults'),\n#end\n#if( \"$!input.params().querystring.get('nextToken')\" != \"\")\n    \"nextToken\": \"$input.params().querystring.get('nextToken')\",\n#end\n    \"oauthClientId\": \"$context.authorizer.claims.client_id\",\n    \"oauthSubId\": \"$context.authorizer.claims.sub\"\n}\n"
+          },
+          "responses": {
+            "^\\[BadRequest\\].*": {
+              "responseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'"
+              },
+              "responseTemplates": {
+                "application/json": "#set($error = $input.path('$'))\n{\n    \"message\": \"$error.errorMessage\"\n}\n"
+              },
+              "statusCode": "400"
+            },
+            "^\\[InternalServerError\\].*": {
+              "responseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'"
+              },
+              "responseTemplates": {
+                "application/json": "#set($error = $input.path('$'))\n{\n    \"message\": \"$error.errorMessage\"\n}\n"
+              },
+              "statusCode": "500"
+            },
+            "^\\[NotFound\\].*": {
+              "responseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'"
+              },
+              "responseTemplates": {
+                "application/json": "#set($error = $input.path('$'))\n{\n    \"message\": \"$error.errorMessage\"\n}\n"
+              },
+              "statusCode": "404"
+            },
+            "^\\[UnsupportedMediaType\\].*": {
+              "responseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'"
+              },
+              "responseTemplates": {
+                "application/json": "#set($error = $input.path('$'))\n{\n    \"message\": \"$error.errorMessage\"\n}\n"
+              },
+              "statusCode": "415"
+            },
+            "default": {
+              "responseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'"
+              },
+              "responseTemplates": {
+                "application/json": "#set($body = $input.path('$'))\n{\n#if( \"$!body.batchId\" != \"\")\n    \"batchId\": $body.batchId,\n#end\n#if( \"$!body.consentId\" != \"\")\n    \"consentId\": $body.consentId,\n#end\n    \"documents\": $input.json('$.documents'),\n    \"nextToken\": \"$body.nextToken\"\n}\n"
+              },
+              "statusCode": "200"
+            }
+          },
+          "type": "aws",
+          "uri": ""
+        },
+        "x-amazon-apigateway-request-validator": ""
       },
       "options": {
         "requestBody": {
@@ -940,6 +1417,23 @@
               }
             }
           }
+        },
+        "x-amazon-apigateway-integration": {
+          "passthroughBehavior": "when_no_match",
+          "requestTemplates": {
+            "application/json": "{\n  \"statusCode\": 200\n}\n"
+          },
+          "responses": {
+            "default": {
+              "responseParameters": {
+                "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'",
+                "method.response.header.Access-Control-Allow-Methods": "'GET,POST,DELETE,OPTIONS'",
+                "method.response.header.Access-Control-Allow-Origin": "'*'"
+              },
+              "statusCode": "200"
+            }
+          },
+          "type": "mock"
         }
       },
       "post": {
@@ -1049,7 +1543,64 @@
               }
             }
           }
-        }
+        },
+        "x-amazon-apigateway-integration": {
+          "httpMethod": "POST",
+          "passthroughBehavior": "never",
+          "requestTemplates": {
+            "application/json": "#set($body = $input.path('$'))\n    {\n        \"oauthClientId\": \"$context.authorizer.claims.client_id\",\n        \"oauthSubId\": \"$context.authorizer.claims.sub\",\n    #if( \"$!body.batchId\" != \"\")\n        \"batchId\": \"$body.batchId\",\n    #end\n    #if( \"$!body.groundTruth\" != \"\")\n        \"groundTruth\": $body.groundTruth,\n    #end\n    #if( \"$!body.consentId\" != \"\")\n        \"consentId\": \"$body.consentId\",\n    #end\n        \"contentType\": \"$body.contentType\",\n        \"content\": \"$body.content\"\n    }\n"
+          },
+          "responses": {
+            "^\\[BadRequest\\].*": {
+              "responseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'"
+              },
+              "responseTemplates": {
+                "application/json": "#set($error = $input.path('$'))\n{\n    \"message\": \"$error.errorMessage\"\n}\n"
+              },
+              "statusCode": "400"
+            },
+            "^\\[InternalServerError\\].*": {
+              "responseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'"
+              },
+              "responseTemplates": {
+                "application/json": "#set($error = $input.path('$'))\n{\n    \"message\": \"$error.errorMessage\"\n}\n"
+              },
+              "statusCode": "500"
+            },
+            "^\\[NotFound\\].*": {
+              "responseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'"
+              },
+              "responseTemplates": {
+                "application/json": "#set($error = $input.path('$'))\n{\n    \"message\": \"$error.errorMessage\"\n}\n"
+              },
+              "statusCode": "404"
+            },
+            "^\\[UnsupportedMediaType\\].*": {
+              "responseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'"
+              },
+              "responseTemplates": {
+                "application/json": "#set($error = $input.path('$'))\n{\n    \"message\": \"$error.errorMessage\"\n}\n"
+              },
+              "statusCode": "415"
+            },
+            "default": {
+              "responseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'"
+              },
+              "responseTemplates": {
+                "application/json": "#set($body = $input.path('$'))\n{\n#if( \"$!body.batchId\" != \"\")\n    \"batchId\": \"$body.batchId\",\n#end\n#if( \"$!body.groundTruth\" != \"\")\n    \"groundTruth\": $input.json('$.groundTruth'),\n#end\n    \"documentId\": \"$body.documentId\",\n    \"contentType\": \"$body.contentType\",\n    \"consentId\": \"$body.consentId\"\n}\n"
+              },
+              "statusCode": "200"
+            }
+          },
+          "type": "aws",
+          "uri": ""
+        },
+        "x-amazon-apigateway-request-validator": ""
       }
     },
     "/documents/{documentId}": {
@@ -1150,7 +1701,64 @@
               }
             }
           }
-        }
+        },
+        "x-amazon-apigateway-integration": {
+          "httpMethod": "POST",
+          "passthroughBehavior": "never",
+          "requestTemplates": {
+            "application/json": "#set($body = $input.path('$'))\n{\n    \"oauthClientId\": \"$context.authorizer.claims.client_id\",\n    \"oauthSubId\": \"$context.authorizer.claims.sub\",\n    \"documentId\": \"$input.params().path.documentId\"\n}\n"
+          },
+          "responses": {
+            "^\\[BadRequest\\].*": {
+              "responseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'"
+              },
+              "responseTemplates": {
+                "application/json": "#set($error = $input.path('$'))\n{\n    \"message\": \"$error.errorMessage\"\n}\n"
+              },
+              "statusCode": "400"
+            },
+            "^\\[InternalServerError\\].*": {
+              "responseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'"
+              },
+              "responseTemplates": {
+                "application/json": "#set($error = $input.path('$'))\n{\n    \"message\": \"$error.errorMessage\"\n}\n"
+              },
+              "statusCode": "500"
+            },
+            "^\\[NotFound\\].*": {
+              "responseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'"
+              },
+              "responseTemplates": {
+                "application/json": "#set($error = $input.path('$'))\n{\n    \"message\": \"$error.errorMessage\"\n}\n"
+              },
+              "statusCode": "404"
+            },
+            "^\\[UnsupportedMediaType\\].*": {
+              "responseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'"
+              },
+              "responseTemplates": {
+                "application/json": "#set($error = $input.path('$'))\n{\n    \"message\": \"$error.errorMessage\"\n}\n"
+              },
+              "statusCode": "415"
+            },
+            "default": {
+              "responseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'"
+              },
+              "responseTemplates": {
+                "application/json": "#set($body = $input.path('$'))\n{\n    \"documentId\": \"$body.documentId\",\n#if( \"$!body.batchId\" != \"\")\n    \"batchId\": \"$body.batchId\",\n#end\n#if( \"$!body.consentId\" != \"\")\n    \"consentId\": \"$body.consentId\",\n#end\n#if( \"$!body.groundTruth\" != \"\")\n    \"groundTruth\": $input.json('$.groundTruth'),\n#end\n    \"content\": \"$body.content\",\n    \"contentType\": \"$body.contentType\"\n}\n"
+              },
+              "statusCode": "200"
+            }
+          },
+          "type": "aws",
+          "uri": ""
+        },
+        "x-amazon-apigateway-request-validator": ""
       },
       "options": {
         "requestBody": {
@@ -1191,6 +1799,23 @@
               }
             }
           }
+        },
+        "x-amazon-apigateway-integration": {
+          "passthroughBehavior": "when_no_match",
+          "requestTemplates": {
+            "application/json": "{\n  \"statusCode\": 200\n}\n"
+          },
+          "responses": {
+            "default": {
+              "responseParameters": {
+                "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'",
+                "method.response.header.Access-Control-Allow-Methods": "'GET,PATCH,OPTIONS'",
+                "method.response.header.Access-Control-Allow-Origin": "'*'"
+              },
+              "statusCode": "200"
+            }
+          },
+          "type": "mock"
         }
       },
       "patch": {
@@ -1308,7 +1933,64 @@
               }
             }
           }
-        }
+        },
+        "x-amazon-apigateway-integration": {
+          "httpMethod": "POST",
+          "passthroughBehavior": "never",
+          "requestTemplates": {
+            "application/json": "#set($body = $input.path('$'))\n{\n    \"oauthClientId\": \"$context.authorizer.claims.client_id\",\n    \"oauthSubId\": \"$context.authorizer.claims.sub\",\n    \"documentId\": \"$input.params().path.documentId\",\n    \"groundTruth\": $input.json('$.groundTruth')\n}\n"
+          },
+          "responses": {
+            "^\\[BadRequest\\].*": {
+              "responseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'"
+              },
+              "responseTemplates": {
+                "application/json": "#set($error = $input.path('$'))\n{\n    \"message\": \"$error.errorMessage\"\n}\n"
+              },
+              "statusCode": "400"
+            },
+            "^\\[InternalServerError\\].*": {
+              "responseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'"
+              },
+              "responseTemplates": {
+                "application/json": "#set($error = $input.path('$'))\n{\n    \"message\": \"$error.errorMessage\"\n}\n"
+              },
+              "statusCode": "500"
+            },
+            "^\\[NotFound\\].*": {
+              "responseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'"
+              },
+              "responseTemplates": {
+                "application/json": "#set($error = $input.path('$'))\n{\n    \"message\": \"$error.errorMessage\"\n}\n"
+              },
+              "statusCode": "404"
+            },
+            "^\\[UnsupportedMediaType\\].*": {
+              "responseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'"
+              },
+              "responseTemplates": {
+                "application/json": "#set($error = $input.path('$'))\n{\n    \"message\": \"$error.errorMessage\"\n}\n"
+              },
+              "statusCode": "415"
+            },
+            "default": {
+              "responseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'"
+              },
+              "responseTemplates": {
+                "application/json": "#set($body = $input.path('$'))\n{\n    \"documentId\": \"$body.documentId\",\n#if( \"$!body.batchId\" != \"\")\n    \"batchId\": \"$body.batchId\",\n#end\n#if( \"$!body.consentId\" != \"\")\n    \"consentId\": \"$body.consentId\",\n#end\n    \"contentType\": \"$body.contentType\",\n    \"groundTruth\": $input.json('$.groundTruth')\n}\n"
+              },
+              "statusCode": "200"
+            }
+          },
+          "type": "aws",
+          "uri": ""
+        },
+        "x-amazon-apigateway-request-validator": ""
       }
     },
     "/predictions": {
@@ -1351,6 +2033,23 @@
               }
             }
           }
+        },
+        "x-amazon-apigateway-integration": {
+          "passthroughBehavior": "when_no_match",
+          "requestTemplates": {
+            "application/json": "{\n  \"statusCode\": 200\n}\n"
+          },
+          "responses": {
+            "default": {
+              "responseParameters": {
+                "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'",
+                "method.response.header.Access-Control-Allow-Methods": "'POST,OPTIONS'",
+                "method.response.header.Access-Control-Allow-Origin": "'*'"
+              },
+              "statusCode": "200"
+            }
+          },
+          "type": "mock"
         }
       },
       "post": {
@@ -1460,7 +2159,686 @@
               }
             }
           }
+        },
+        "x-amazon-apigateway-integration": {
+          "httpMethod": "POST",
+          "passthroughBehavior": "never",
+          "requestTemplates": {
+            "application/json": "#set($body = $input.path('$'))\n{\n    \"oauthClientId\": \"$context.authorizer.claims.client_id\",\n    \"oauthSubId\": \"$context.authorizer.claims.sub\",\n#if( \"$!body.autoRotate\" != \"\")\n    \"autoRotate\": $body.autoRotate,\n#end\n#if( \"$!body.maxPages\" != \"\")\n    \"maxPages\": $body.maxPages,\n#end\n    \"modelId\": \"$body.modelId\",\n    \"documentId\": \"$body.documentId\"\n}\n"
+          },
+          "responses": {
+            "^\\[BadRequest\\].*": {
+              "responseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'"
+              },
+              "responseTemplates": {
+                "application/json": "#set($error = $input.path('$'))\n{\n    \"message\": \"$error.errorMessage\"\n}\n"
+              },
+              "statusCode": "400"
+            },
+            "^\\[InternalServerError\\].*": {
+              "responseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'"
+              },
+              "responseTemplates": {
+                "application/json": "#set($error = $input.path('$'))\n{\n    \"message\": \"$error.errorMessage\"\n}\n"
+              },
+              "statusCode": "500"
+            },
+            "^\\[NotFound\\].*": {
+              "responseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'"
+              },
+              "responseTemplates": {
+                "application/json": "#set($error = $input.path('$'))\n{\n    \"message\": \"$error.errorMessage\"\n}\n"
+              },
+              "statusCode": "404"
+            },
+            "^\\[UnsupportedMediaType\\].*": {
+              "responseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'"
+              },
+              "responseTemplates": {
+                "application/json": "#set($error = $input.path('$'))\n{\n    \"message\": \"$error.errorMessage\"\n}\n"
+              },
+              "statusCode": "415"
+            },
+            "default": {
+              "responseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'"
+              },
+              "responseTemplates": {
+                "application/json": "#set($body = $input.path('$'))\n{\n    \"predictionId\": \"$body.predictionId\",\n    \"modelId\": \"$body.modelId\",\n    \"documentId\": \"$body.documentId\",\n    \"predictions\": $input.json('$.predictions'),\n    \"timestamp\": $body.timestamp,\n    \"inferenceTime\": $body.inferenceTime\n}\n"
+              },
+              "statusCode": "200"
+            }
+          },
+          "type": "aws",
+          "uri": ""
+        },
+        "x-amazon-apigateway-request-validator": ""
+      }
+    },
+    "/secrets": {
+      "get": {
+        "parameters": [
+          {
+            "in": "query",
+            "name": "nextToken",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "maxResults",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Secrets"
+                }
+              }
+            },
+            "description": "200 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "400 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "404 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "415": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "415 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "500 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "x-amazon-apigateway-integration": {
+          "httpMethod": "POST",
+          "passthroughBehavior": "never",
+          "requestTemplates": {
+            "application/json": "#set($body = $input.path('$'))\n{\n#if( \"$!input.params().querystring.get('maxResults')\" != \"\")\n    \"maxResults\": $input.params().querystring.get('maxResults'),\n#end\n#if( \"$!input.params().querystring.get('nextToken')\" != \"\")\n    \"nextToken\": \"$input.params().querystring.get('nextToken')\",\n#end\n    \"oauthClientId\": \"$context.authorizer.claims.client_id\",\n    \"oauthSubId\": \"$context.authorizer.claims.sub\"\n}\n"
+          },
+          "responses": {
+            "^\\[BadRequest\\].*": {
+              "responseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'"
+              },
+              "responseTemplates": {
+                "application/json": "#set($error = $input.path('$'))\n{\n    \"message\": \"$error.errorMessage\"\n}\n"
+              },
+              "statusCode": "400"
+            },
+            "^\\[InternalServerError\\].*": {
+              "responseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'"
+              },
+              "responseTemplates": {
+                "application/json": "#set($error = $input.path('$'))\n{\n    \"message\": \"$error.errorMessage\"\n}\n"
+              },
+              "statusCode": "500"
+            },
+            "^\\[NotFound\\].*": {
+              "responseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'"
+              },
+              "responseTemplates": {
+                "application/json": "#set($error = $input.path('$'))\n{\n    \"message\": \"$error.errorMessage\"\n}\n"
+              },
+              "statusCode": "404"
+            },
+            "^\\[UnsupportedMediaType\\].*": {
+              "responseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'"
+              },
+              "responseTemplates": {
+                "application/json": "#set($error = $input.path('$'))\n{\n    \"message\": \"$error.errorMessage\"\n}\n"
+              },
+              "statusCode": "415"
+            },
+            "default": {
+              "responseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'"
+              },
+              "responseTemplates": {
+                "application/json": "#set($body = $input.path('$'))\n{\n    \"secrets\": $input.json('$.secrets'),\n    \"nextToken\": \"$body.nextToken\"\n}\n"
+              },
+              "statusCode": "200"
+            }
+          },
+          "type": "aws",
+          "uri": ""
+        },
+        "x-amazon-apigateway-request-validator": ""
+      },
+      "options": {
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Empty"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Empty"
+                }
+              }
+            },
+            "description": "200 response",
+            "headers": {
+              "Access-Control-Allow-Headers": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "Access-Control-Allow-Methods": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "x-amazon-apigateway-integration": {
+          "passthroughBehavior": "when_no_match",
+          "requestTemplates": {
+            "application/json": "{\n  \"statusCode\": 200\n}\n"
+          },
+          "responses": {
+            "default": {
+              "responseParameters": {
+                "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'",
+                "method.response.header.Access-Control-Allow-Methods": "'POST,GET,OPTIONS'",
+                "method.response.header.Access-Control-Allow-Origin": "'*'"
+              },
+              "statusCode": "200"
+            }
+          },
+          "type": "mock"
         }
+      },
+      "post": {
+        "parameters": [
+          {
+            "in": "header",
+            "name": "Content-Type",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PostSecrets"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Secret"
+                }
+              }
+            },
+            "description": "200 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "400 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "404 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "415": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "415 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "500 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "x-amazon-apigateway-integration": {
+          "httpMethod": "POST",
+          "passthroughBehavior": "never",
+          "requestTemplates": {
+            "application/json": "#set($body = $input.path('$'))\n    {\n        \"oauthClientId\": \"$context.authorizer.claims.client_id\",\n        \"oauthSubId\": \"$context.authorizer.claims.sub\",\n    #if( \"$!body.description\" != \"\")\n        \"description\": \"$body.description\",\n    #end\n        \"data\": $input.json('$.data')\n    }\n"
+          },
+          "responses": {
+            "^\\[BadRequest\\].*": {
+              "responseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'"
+              },
+              "responseTemplates": {
+                "application/json": "#set($error = $input.path('$'))\n{\n    \"message\": \"$error.errorMessage\"\n}\n"
+              },
+              "statusCode": "400"
+            },
+            "^\\[InternalServerError\\].*": {
+              "responseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'"
+              },
+              "responseTemplates": {
+                "application/json": "#set($error = $input.path('$'))\n{\n    \"message\": \"$error.errorMessage\"\n}\n"
+              },
+              "statusCode": "500"
+            },
+            "^\\[NotFound\\].*": {
+              "responseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'"
+              },
+              "responseTemplates": {
+                "application/json": "#set($error = $input.path('$'))\n{\n    \"message\": \"$error.errorMessage\"\n}\n"
+              },
+              "statusCode": "404"
+            },
+            "^\\[UnsupportedMediaType\\].*": {
+              "responseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'"
+              },
+              "responseTemplates": {
+                "application/json": "#set($error = $input.path('$'))\n{\n    \"message\": \"$error.errorMessage\"\n}\n"
+              },
+              "statusCode": "415"
+            },
+            "default": {
+              "responseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'"
+              },
+              "responseTemplates": {
+                "application/json": "#set($body = $input.path('$'))\n{\n    \"description\": \"$body.description\",\n    \"secretId\": \"$body.secretId\"\n}\n"
+              },
+              "statusCode": "200"
+            }
+          },
+          "type": "aws",
+          "uri": ""
+        },
+        "x-amazon-apigateway-request-validator": ""
+      }
+    },
+    "/secrets/{secretId}": {
+      "options": {
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Empty"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Empty"
+                }
+              }
+            },
+            "description": "200 response",
+            "headers": {
+              "Access-Control-Allow-Headers": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "Access-Control-Allow-Methods": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "x-amazon-apigateway-integration": {
+          "passthroughBehavior": "when_no_match",
+          "requestTemplates": {
+            "application/json": "{\n  \"statusCode\": 200\n}\n"
+          },
+          "responses": {
+            "default": {
+              "responseParameters": {
+                "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'",
+                "method.response.header.Access-Control-Allow-Methods": "'PATCH,OPTIONS'",
+                "method.response.header.Access-Control-Allow-Origin": "'*'"
+              },
+              "statusCode": "200"
+            }
+          },
+          "type": "mock"
+        }
+      },
+      "patch": {
+        "parameters": [
+          {
+            "in": "header",
+            "name": "Content-Type",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "secretId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PatchSecretId"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Secret"
+                }
+              }
+            },
+            "description": "200 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "400 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "404 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "415": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "415 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "500 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "x-amazon-apigateway-integration": {
+          "httpMethod": "POST",
+          "passthroughBehavior": "never",
+          "requestTemplates": {
+            "application/json": "#set($body = $input.path('$'))\n    {\n        \"oauthClientId\": \"$context.authorizer.claims.client_id\",\n        \"oauthSubId\": \"$context.authorizer.claims.sub\",\n    #if( \"$!body.description\" != \"\")\n        \"description\": \"$body.description\",\n    #end\n        \"data\": $input.json('$.data'),\n        \"secretId\": \"$input.params().path.secretId\"\n    }\n"
+          },
+          "responses": {
+            "^\\[BadRequest\\].*": {
+              "responseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'"
+              },
+              "responseTemplates": {
+                "application/json": "#set($error = $input.path('$'))\n{\n    \"message\": \"$error.errorMessage\"\n}\n"
+              },
+              "statusCode": "400"
+            },
+            "^\\[InternalServerError\\].*": {
+              "responseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'"
+              },
+              "responseTemplates": {
+                "application/json": "#set($error = $input.path('$'))\n{\n    \"message\": \"$error.errorMessage\"\n}\n"
+              },
+              "statusCode": "500"
+            },
+            "^\\[NotFound\\].*": {
+              "responseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'"
+              },
+              "responseTemplates": {
+                "application/json": "#set($error = $input.path('$'))\n{\n    \"message\": \"$error.errorMessage\"\n}\n"
+              },
+              "statusCode": "404"
+            },
+            "^\\[UnsupportedMediaType\\].*": {
+              "responseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'"
+              },
+              "responseTemplates": {
+                "application/json": "#set($error = $input.path('$'))\n{\n    \"message\": \"$error.errorMessage\"\n}\n"
+              },
+              "statusCode": "415"
+            },
+            "default": {
+              "responseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'"
+              },
+              "responseTemplates": {
+                "application/json": "#set($body = $input.path('$'))\n{\n    \"secretId\": \"$body.secretId\"\n}\n"
+              },
+              "statusCode": "200"
+            }
+          },
+          "type": "aws",
+          "uri": ""
+        },
+        "x-amazon-apigateway-request-validator": ""
       }
     },
     "/transitions": {
@@ -1574,7 +2952,64 @@
               }
             }
           }
-        }
+        },
+        "x-amazon-apigateway-integration": {
+          "httpMethod": "POST",
+          "passthroughBehavior": "never",
+          "requestTemplates": {
+            "application/json": "{\n#if( \"$!input.params().querystring.get('transitionType')\" != \"\")\n    \"transitionType\": [\n    #foreach( $transitionType in $method.request.multivaluequerystring.transitionType )\n        \"$transitionType\"#if( $foreach.hasNext ),#end\n    #end\n    ],\n#end\n#if( \"$!input.params().querystring.get('maxResults')\" != \"\")\n    \"maxResults\": $input.params().querystring.get('maxResults'),\n#end\n#if( \"$!input.params().querystring.get('nextToken')\" != \"\")\n    \"nextToken\": \"$input.params().querystring.get('nextToken')\",\n#end\n    \"oauthClientId\": \"$context.authorizer.claims.client_id\",\n    \"oauthSubId\": \"$context.authorizer.claims.sub\"\n}\n"
+          },
+          "responses": {
+            "^\\[BadRequest\\].*": {
+              "responseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'"
+              },
+              "responseTemplates": {
+                "application/json": "#set($error = $input.path('$'))\n{\n    \"message\": \"$error.errorMessage\"\n}\n"
+              },
+              "statusCode": "400"
+            },
+            "^\\[InternalServerError\\].*": {
+              "responseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'"
+              },
+              "responseTemplates": {
+                "application/json": "#set($error = $input.path('$'))\n{\n    \"message\": \"$error.errorMessage\"\n}\n"
+              },
+              "statusCode": "500"
+            },
+            "^\\[NotFound\\].*": {
+              "responseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'"
+              },
+              "responseTemplates": {
+                "application/json": "#set($error = $input.path('$'))\n{\n    \"message\": \"$error.errorMessage\"\n}\n"
+              },
+              "statusCode": "404"
+            },
+            "^\\[UnsupportedMediaType\\].*": {
+              "responseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'"
+              },
+              "responseTemplates": {
+                "application/json": "#set($error = $input.path('$'))\n{\n    \"message\": \"$error.errorMessage\"\n}\n"
+              },
+              "statusCode": "415"
+            },
+            "default": {
+              "responseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'"
+              },
+              "responseTemplates": {
+                "application/json": "#set($body = $input.path('$'))\n{\n#if( \"$!body.transitionType\" != \"\")\n    \"transitionType\": $body.transitionType,\n#end\n    \"transitions\": $input.json('$.transitions'),\n    \"nextToken\": \"$body.nextToken\"\n}\n"
+              },
+              "statusCode": "200"
+            }
+          },
+          "type": "aws",
+          "uri": ""
+        },
+        "x-amazon-apigateway-request-validator": ""
       },
       "options": {
         "requestBody": {
@@ -1615,6 +3050,23 @@
               }
             }
           }
+        },
+        "x-amazon-apigateway-integration": {
+          "passthroughBehavior": "when_no_match",
+          "requestTemplates": {
+            "application/json": "{\n  \"statusCode\": 200\n}\n"
+          },
+          "responses": {
+            "default": {
+              "responseParameters": {
+                "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'",
+                "method.response.header.Access-Control-Allow-Methods": "'POST,GET,OPTIONS'",
+                "method.response.header.Access-Control-Allow-Origin": "'*'"
+              },
+              "statusCode": "200"
+            }
+          },
+          "type": "mock"
         }
       },
       "post": {
@@ -1724,7 +3176,64 @@
               }
             }
           }
-        }
+        },
+        "x-amazon-apigateway-integration": {
+          "httpMethod": "POST",
+          "passthroughBehavior": "never",
+          "requestTemplates": {
+            "application/json": "#set($body = $input.path('$'))\n{\n    \"oauthClientId\": \"$context.authorizer.claims.client_id\",\n    \"oauthSubId\": \"$context.authorizer.claims.sub\",\n#if( \"$!body.params\" != \"\")\n    \"params\": $input.json('$.params'),\n#end\n#if( \"$body.description\" != \"\")\n    \"description\": \"$body.description\",\n#end\n    \"name\": \"$body.name\",\n    \"transitionType\": \"$body.transitionType\",\n    \"inputJsonSchema\": $input.json('$.inputJsonSchema'),\n    \"outputJsonSchema\": $input.json('$.outputJsonSchema')\n}\n"
+          },
+          "responses": {
+            "^\\[BadRequest\\].*": {
+              "responseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'"
+              },
+              "responseTemplates": {
+                "application/json": "#set($error = $input.path('$'))\n{\n    \"message\": \"$error.errorMessage\"\n}\n"
+              },
+              "statusCode": "400"
+            },
+            "^\\[InternalServerError\\].*": {
+              "responseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'"
+              },
+              "responseTemplates": {
+                "application/json": "#set($error = $input.path('$'))\n{\n    \"message\": \"$error.errorMessage\"\n}\n"
+              },
+              "statusCode": "500"
+            },
+            "^\\[NotFound\\].*": {
+              "responseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'"
+              },
+              "responseTemplates": {
+                "application/json": "#set($error = $input.path('$'))\n{\n    \"message\": \"$error.errorMessage\"\n}\n"
+              },
+              "statusCode": "404"
+            },
+            "^\\[UnsupportedMediaType\\].*": {
+              "responseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'"
+              },
+              "responseTemplates": {
+                "application/json": "#set($error = $input.path('$'))\n{\n    \"message\": \"$error.errorMessage\"\n}\n"
+              },
+              "statusCode": "415"
+            },
+            "default": {
+              "responseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'"
+              },
+              "responseTemplates": {
+                "application/json": "#set($body = $input.path('$'))\n{\n    \"name\": \"$body.name\",\n    \"description\": \"$body.description\",\n    \"transitionId\": \"$body.transitionId\",\n    \"transitionType\": \"$body.transitionType\",\n#if( \"$!body.assets\" != \"\")\n    \"assets\": $input.json('$.assets'),\n#end\n    \"inputJsonSchema\": $input.json('$.inputJsonSchema'),\n    \"outputJsonSchema\": $input.json('$.outputJsonSchema')\n}\n"
+              },
+              "statusCode": "200"
+            }
+          },
+          "type": "aws",
+          "uri": ""
+        },
+        "x-amazon-apigateway-request-validator": ""
       }
     },
     "/transitions/{transitionId}": {
@@ -1767,6 +3276,23 @@
               }
             }
           }
+        },
+        "x-amazon-apigateway-integration": {
+          "passthroughBehavior": "when_no_match",
+          "requestTemplates": {
+            "application/json": "{\n  \"statusCode\": 200\n}\n"
+          },
+          "responses": {
+            "default": {
+              "responseParameters": {
+                "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'",
+                "method.response.header.Access-Control-Allow-Methods": "'OPTIONS'",
+                "method.response.header.Access-Control-Allow-Origin": "'*'"
+              },
+              "statusCode": "200"
+            }
+          },
+          "type": "mock"
         }
       }
     },
@@ -1810,6 +3336,23 @@
               }
             }
           }
+        },
+        "x-amazon-apigateway-integration": {
+          "passthroughBehavior": "when_no_match",
+          "requestTemplates": {
+            "application/json": "{\n  \"statusCode\": 200\n}\n"
+          },
+          "responses": {
+            "default": {
+              "responseParameters": {
+                "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'",
+                "method.response.header.Access-Control-Allow-Methods": "'POST,OPTIONS'",
+                "method.response.header.Access-Control-Allow-Origin": "'*'"
+              },
+              "statusCode": "200"
+            }
+          },
+          "type": "mock"
         }
       },
       "post": {
@@ -1927,7 +3470,64 @@
               }
             }
           }
-        }
+        },
+        "x-amazon-apigateway-integration": {
+          "httpMethod": "POST",
+          "passthroughBehavior": "never",
+          "requestTemplates": {
+            "application/json": "#set($body = $input.path('$'))\n    {\n        \"oauthClientId\": \"$context.authorizer.claims.client_id\",\n        \"oauthSubId\": \"$context.authorizer.claims.sub\",\n        \"transitionId\": \"$input.params().path.transitionId\"\n    }\n"
+          },
+          "responses": {
+            "^\\[BadRequest\\].*": {
+              "responseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'"
+              },
+              "responseTemplates": {
+                "application/json": "#set($error = $input.path('$'))\n{\n    \"message\": \"$error.errorMessage\"\n}\n"
+              },
+              "statusCode": "400"
+            },
+            "^\\[InternalServerError\\].*": {
+              "responseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'"
+              },
+              "responseTemplates": {
+                "application/json": "#set($error = $input.path('$'))\n{\n    \"message\": \"$error.errorMessage\"\n}\n"
+              },
+              "statusCode": "500"
+            },
+            "^\\[NotFound\\].*": {
+              "responseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'"
+              },
+              "responseTemplates": {
+                "application/json": "#set($error = $input.path('$'))\n{\n    \"message\": \"$error.errorMessage\"\n}\n"
+              },
+              "statusCode": "404"
+            },
+            "^\\[UnsupportedMediaType\\].*": {
+              "responseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'"
+              },
+              "responseTemplates": {
+                "application/json": "#set($error = $input.path('$'))\n{\n    \"message\": \"$error.errorMessage\"\n}\n"
+              },
+              "statusCode": "415"
+            },
+            "default": {
+              "responseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'"
+              },
+              "responseTemplates": {
+                "application/json": "#set($body = $input.path('$'))\n{\n#if( \"$!body.input\" != \"\")\n    \"input\": $input.json('$.input'),\n#end\n    \"executionId\": \"$body.executionId\",\n    \"transitionId\": \"$body.transitionId\",\n    \"status\":  \"$body.status\"\n}\n"
+              },
+              "statusCode": "200"
+            }
+          },
+          "type": "aws",
+          "uri": ""
+        },
+        "x-amazon-apigateway-request-validator": ""
       }
     },
     "/transitions/{transitionId}/executions/{executionId}": {
@@ -1970,6 +3570,23 @@
               }
             }
           }
+        },
+        "x-amazon-apigateway-integration": {
+          "passthroughBehavior": "when_no_match",
+          "requestTemplates": {
+            "application/json": "{\n  \"statusCode\": 200\n}\n"
+          },
+          "responses": {
+            "default": {
+              "responseParameters": {
+                "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'",
+                "method.response.header.Access-Control-Allow-Methods": "'PATCH,OPTIONS'",
+                "method.response.header.Access-Control-Allow-Origin": "'*'"
+              },
+              "statusCode": "200"
+            }
+          },
+          "type": "mock"
         }
       },
       "patch": {
@@ -2095,7 +3712,64 @@
               }
             }
           }
-        }
+        },
+        "x-amazon-apigateway-integration": {
+          "httpMethod": "POST",
+          "passthroughBehavior": "never",
+          "requestTemplates": {
+            "application/json": "#set($body = $input.path('$'))\n{\n    \"oauthClientId\": \"$context.authorizer.claims.client_id\",\n    \"oauthSubId\": \"$context.authorizer.claims.sub\",\n#if( \"$!body.output\" != \"\")\n    \"output\": $input.json('$.output'),\n#end\n#if( \"$!body.error\" != \"\")\n    \"error\": $input.json('$.error'),\n#end\n#if( \"$!body.status\" != \"\")\n    \"status\": \"$body.status\",\n#end\n    \"executionId\": \"$input.params().path.executionId\",\n    \"transitionId\": \"$input.params().path.transitionId\"\n}\n"
+          },
+          "responses": {
+            "^\\[BadRequest\\].*": {
+              "responseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'"
+              },
+              "responseTemplates": {
+                "application/json": "#set($error = $input.path('$'))\n{\n    \"message\": \"$error.errorMessage\"\n}\n"
+              },
+              "statusCode": "400"
+            },
+            "^\\[InternalServerError\\].*": {
+              "responseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'"
+              },
+              "responseTemplates": {
+                "application/json": "#set($error = $input.path('$'))\n{\n    \"message\": \"$error.errorMessage\"\n}\n"
+              },
+              "statusCode": "500"
+            },
+            "^\\[NotFound\\].*": {
+              "responseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'"
+              },
+              "responseTemplates": {
+                "application/json": "#set($error = $input.path('$'))\n{\n    \"message\": \"$error.errorMessage\"\n}\n"
+              },
+              "statusCode": "404"
+            },
+            "^\\[UnsupportedMediaType\\].*": {
+              "responseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'"
+              },
+              "responseTemplates": {
+                "application/json": "#set($error = $input.path('$'))\n{\n    \"message\": \"$error.errorMessage\"\n}\n"
+              },
+              "statusCode": "415"
+            },
+            "default": {
+              "responseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'"
+              },
+              "responseTemplates": {
+                "application/json": "#set($body = $input.path('$'))\n{\n#if( \"$!body.input\" != \"\")\n    \"input\": $input.json('$.input'),\n#end\n    \"executionId\": \"$body.executionId\",\n    \"transitionId\": \"$body.transitionId\",\n    \"status\":  \"$body.status\"\n}\n"
+              },
+              "statusCode": "200"
+            }
+          },
+          "type": "aws",
+          "uri": ""
+        },
+        "x-amazon-apigateway-request-validator": ""
       }
     },
     "/users": {
@@ -2202,7 +3876,64 @@
               }
             }
           }
-        }
+        },
+        "x-amazon-apigateway-integration": {
+          "httpMethod": "POST",
+          "passthroughBehavior": "never",
+          "requestTemplates": {
+            "application/json": "#set($body = $input.path('$'))\n{\n#if( \"$!input.params().querystring.get('maxResults')\" != \"\")\n    \"maxResults\": $input.params().querystring.get('maxResults'),\n#end\n#if( \"$!input.params().querystring.get('nextToken')\" != \"\")\n    \"nextToken\": \"$input.params().querystring.get('nextToken')\",\n#end\n    \"oauthClientId\": \"$context.authorizer.claims.client_id\",\n    \"oauthSubId\": \"$context.authorizer.claims.sub\"\n}\n"
+          },
+          "responses": {
+            "^\\[BadRequest\\].*": {
+              "responseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'"
+              },
+              "responseTemplates": {
+                "application/json": "#set($error = $input.path('$'))\n{\n    \"message\": \"$error.errorMessage\"\n}\n"
+              },
+              "statusCode": "400"
+            },
+            "^\\[InternalServerError\\].*": {
+              "responseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'"
+              },
+              "responseTemplates": {
+                "application/json": "#set($error = $input.path('$'))\n{\n    \"message\": \"$error.errorMessage\"\n}\n"
+              },
+              "statusCode": "500"
+            },
+            "^\\[NotFound\\].*": {
+              "responseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'"
+              },
+              "responseTemplates": {
+                "application/json": "#set($error = $input.path('$'))\n{\n    \"message\": \"$error.errorMessage\"\n}\n"
+              },
+              "statusCode": "404"
+            },
+            "^\\[UnsupportedMediaType\\].*": {
+              "responseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'"
+              },
+              "responseTemplates": {
+                "application/json": "#set($error = $input.path('$'))\n{\n    \"message\": \"$error.errorMessage\"\n}\n"
+              },
+              "statusCode": "415"
+            },
+            "default": {
+              "responseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'"
+              },
+              "responseTemplates": {
+                "application/json": "#set($body = $input.path('$'))\n{\n    \"users\": $input.json('$.users'),\n    \"nextToken\": \"$body.nextToken\"\n}\n"
+              },
+              "statusCode": "200"
+            }
+          },
+          "type": "aws",
+          "uri": ""
+        },
+        "x-amazon-apigateway-request-validator": ""
       },
       "options": {
         "requestBody": {
@@ -2243,6 +3974,23 @@
               }
             }
           }
+        },
+        "x-amazon-apigateway-integration": {
+          "passthroughBehavior": "when_no_match",
+          "requestTemplates": {
+            "application/json": "{\n  \"statusCode\": 200\n}\n"
+          },
+          "responses": {
+            "default": {
+              "responseParameters": {
+                "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'",
+                "method.response.header.Access-Control-Allow-Methods": "'GET,POST,OPTIONS'",
+                "method.response.header.Access-Control-Allow-Origin": "'*'"
+              },
+              "statusCode": "200"
+            }
+          },
+          "type": "mock"
         }
       },
       "post": {
@@ -2352,7 +4100,64 @@
               }
             }
           }
-        }
+        },
+        "x-amazon-apigateway-integration": {
+          "httpMethod": "POST",
+          "passthroughBehavior": "never",
+          "requestTemplates": {
+            "application/json": "#set($body = $input.path('$'))\n    {\n        \"oauthClientId\": \"$context.authorizer.claims.client_id\",\n        \"oauthSubId\": \"$context.authorizer.claims.sub\",\n        \"email\": \"$body.email\"\n    }\n"
+          },
+          "responses": {
+            "^\\[BadRequest\\].*": {
+              "responseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'"
+              },
+              "responseTemplates": {
+                "application/json": "#set($error = $input.path('$'))\n{\n    \"message\": \"$error.errorMessage\"\n}\n"
+              },
+              "statusCode": "400"
+            },
+            "^\\[InternalServerError\\].*": {
+              "responseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'"
+              },
+              "responseTemplates": {
+                "application/json": "#set($error = $input.path('$'))\n{\n    \"message\": \"$error.errorMessage\"\n}\n"
+              },
+              "statusCode": "500"
+            },
+            "^\\[NotFound\\].*": {
+              "responseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'"
+              },
+              "responseTemplates": {
+                "application/json": "#set($error = $input.path('$'))\n{\n    \"message\": \"$error.errorMessage\"\n}\n"
+              },
+              "statusCode": "404"
+            },
+            "^\\[UnsupportedMediaType\\].*": {
+              "responseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'"
+              },
+              "responseTemplates": {
+                "application/json": "#set($error = $input.path('$'))\n{\n    \"message\": \"$error.errorMessage\"\n}\n"
+              },
+              "statusCode": "415"
+            },
+            "default": {
+              "responseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'"
+              },
+              "responseTemplates": {
+                "application/json": "#set($body = $input.path('$'))\n{\n    \"userId\": \"$body.userId\",\n    \"email\": \"$body.email\"\n}\n"
+              },
+              "statusCode": "200"
+            }
+          },
+          "type": "aws",
+          "uri": ""
+        },
+        "x-amazon-apigateway-request-validator": ""
       }
     },
     "/users/{userId}": {
@@ -2453,7 +4258,64 @@
               }
             }
           }
-        }
+        },
+        "x-amazon-apigateway-integration": {
+          "httpMethod": "POST",
+          "passthroughBehavior": "never",
+          "requestTemplates": {
+            "application/json": "#set($body = $input.path('$'))\n{\n    \"oauthClientId\": \"$context.authorizer.claims.client_id\",\n    \"oauthSubId\": \"$context.authorizer.claims.sub\",\n    \"userId\": \"$input.params().path.userId\"\n}\n"
+          },
+          "responses": {
+            "^\\[BadRequest\\].*": {
+              "responseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'"
+              },
+              "responseTemplates": {
+                "application/json": "#set($error = $input.path('$'))\n{\n    \"message\": \"$error.errorMessage\"\n}\n"
+              },
+              "statusCode": "400"
+            },
+            "^\\[InternalServerError\\].*": {
+              "responseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'"
+              },
+              "responseTemplates": {
+                "application/json": "#set($error = $input.path('$'))\n{\n    \"message\": \"$error.errorMessage\"\n}\n"
+              },
+              "statusCode": "500"
+            },
+            "^\\[NotFound\\].*": {
+              "responseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'"
+              },
+              "responseTemplates": {
+                "application/json": "#set($error = $input.path('$'))\n{\n    \"message\": \"$error.errorMessage\"\n}\n"
+              },
+              "statusCode": "404"
+            },
+            "^\\[UnsupportedMediaType\\].*": {
+              "responseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'"
+              },
+              "responseTemplates": {
+                "application/json": "#set($error = $input.path('$'))\n{\n    \"message\": \"$error.errorMessage\"\n}\n"
+              },
+              "statusCode": "415"
+            },
+            "default": {
+              "responseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'"
+              },
+              "responseTemplates": {
+                "application/json": "#set($body = $input.path('$'))\n{\n    \"userId\": \"$body.userId\",\n    \"email\": \"$body.email\"\n}\n"
+              },
+              "statusCode": "200"
+            }
+          },
+          "type": "aws",
+          "uri": ""
+        },
+        "x-amazon-apigateway-request-validator": ""
       },
       "get": {
         "parameters": [
@@ -2552,7 +4414,64 @@
               }
             }
           }
-        }
+        },
+        "x-amazon-apigateway-integration": {
+          "httpMethod": "POST",
+          "passthroughBehavior": "never",
+          "requestTemplates": {
+            "application/json": "#set($body = $input.path('$'))\n{\n    \"oauthClientId\": \"$context.authorizer.claims.client_id\",\n    \"oauthSubId\": \"$context.authorizer.claims.sub\",\n    \"userId\": \"$input.params().path.userId\"\n}\n"
+          },
+          "responses": {
+            "^\\[BadRequest\\].*": {
+              "responseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'"
+              },
+              "responseTemplates": {
+                "application/json": "#set($error = $input.path('$'))\n{\n    \"message\": \"$error.errorMessage\"\n}\n"
+              },
+              "statusCode": "400"
+            },
+            "^\\[InternalServerError\\].*": {
+              "responseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'"
+              },
+              "responseTemplates": {
+                "application/json": "#set($error = $input.path('$'))\n{\n    \"message\": \"$error.errorMessage\"\n}\n"
+              },
+              "statusCode": "500"
+            },
+            "^\\[NotFound\\].*": {
+              "responseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'"
+              },
+              "responseTemplates": {
+                "application/json": "#set($error = $input.path('$'))\n{\n    \"message\": \"$error.errorMessage\"\n}\n"
+              },
+              "statusCode": "404"
+            },
+            "^\\[UnsupportedMediaType\\].*": {
+              "responseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'"
+              },
+              "responseTemplates": {
+                "application/json": "#set($error = $input.path('$'))\n{\n    \"message\": \"$error.errorMessage\"\n}\n"
+              },
+              "statusCode": "415"
+            },
+            "default": {
+              "responseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'"
+              },
+              "responseTemplates": {
+                "application/json": "#set($body = $input.path('$'))\n{\n    \"userId\": \"$body.userId\",\n    \"email\": \"$body.email\"\n}\n"
+              },
+              "statusCode": "200"
+            }
+          },
+          "type": "aws",
+          "uri": ""
+        },
+        "x-amazon-apigateway-request-validator": ""
       },
       "options": {
         "requestBody": {
@@ -2593,6 +4512,23 @@
               }
             }
           }
+        },
+        "x-amazon-apigateway-integration": {
+          "passthroughBehavior": "when_no_match",
+          "requestTemplates": {
+            "application/json": "{\n  \"statusCode\": 200\n}\n"
+          },
+          "responses": {
+            "default": {
+              "responseParameters": {
+                "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'",
+                "method.response.header.Access-Control-Allow-Methods": "'GET,DELETE,OPTIONS'",
+                "method.response.header.Access-Control-Allow-Origin": "'*'"
+              },
+              "statusCode": "200"
+            }
+          },
+          "type": "mock"
         }
       }
     },
@@ -2700,7 +4636,64 @@
               }
             }
           }
-        }
+        },
+        "x-amazon-apigateway-integration": {
+          "httpMethod": "POST",
+          "passthroughBehavior": "never",
+          "requestTemplates": {
+            "application/json": "#set($body = $input.path('$'))\n{\n#if( \"$!input.params().querystring.get('maxResults')\" != \"\")\n    \"maxResults\": $input.params().querystring.get('maxResults'),\n#end\n#if( \"$!input.params().querystring.get('nextToken')\" != \"\")\n    \"nextToken\": \"$input.params().querystring.get('nextToken')\",\n#end\n    \"oauthClientId\": \"$context.authorizer.claims.client_id\",\n    \"oauthSubId\": \"$context.authorizer.claims.sub\"\n}\n"
+          },
+          "responses": {
+            "^\\[BadRequest\\].*": {
+              "responseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'"
+              },
+              "responseTemplates": {
+                "application/json": "#set($error = $input.path('$'))\n{\n    \"message\": \"$error.errorMessage\"\n}\n"
+              },
+              "statusCode": "400"
+            },
+            "^\\[InternalServerError\\].*": {
+              "responseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'"
+              },
+              "responseTemplates": {
+                "application/json": "#set($error = $input.path('$'))\n{\n    \"message\": \"$error.errorMessage\"\n}\n"
+              },
+              "statusCode": "500"
+            },
+            "^\\[NotFound\\].*": {
+              "responseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'"
+              },
+              "responseTemplates": {
+                "application/json": "#set($error = $input.path('$'))\n{\n    \"message\": \"$error.errorMessage\"\n}\n"
+              },
+              "statusCode": "404"
+            },
+            "^\\[UnsupportedMediaType\\].*": {
+              "responseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'"
+              },
+              "responseTemplates": {
+                "application/json": "#set($error = $input.path('$'))\n{\n    \"message\": \"$error.errorMessage\"\n}\n"
+              },
+              "statusCode": "415"
+            },
+            "default": {
+              "responseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'"
+              },
+              "responseTemplates": {
+                "application/json": "#set($body = $input.path('$'))\n{\n    \"workflows\": $input.json('$.workflows'),\n    \"nextToken\": \"$body.nextToken\"\n}\n"
+              },
+              "statusCode": "200"
+            }
+          },
+          "type": "aws",
+          "uri": ""
+        },
+        "x-amazon-apigateway-request-validator": ""
       },
       "options": {
         "requestBody": {
@@ -2741,6 +4734,23 @@
               }
             }
           }
+        },
+        "x-amazon-apigateway-integration": {
+          "passthroughBehavior": "when_no_match",
+          "requestTemplates": {
+            "application/json": "{\n  \"statusCode\": 200\n}\n"
+          },
+          "responses": {
+            "default": {
+              "responseParameters": {
+                "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'",
+                "method.response.header.Access-Control-Allow-Methods": "'POST,GET,OPTIONS'",
+                "method.response.header.Access-Control-Allow-Origin": "'*'"
+              },
+              "statusCode": "200"
+            }
+          },
+          "type": "mock"
         }
       },
       "post": {
@@ -2850,7 +4860,64 @@
               }
             }
           }
-        }
+        },
+        "x-amazon-apigateway-integration": {
+          "httpMethod": "POST",
+          "passthroughBehavior": "never",
+          "requestTemplates": {
+            "application/json": "#set($body = $input.path('$'))\n{\n    \"oauthClientId\": \"$context.authorizer.claims.client_id\",\n    \"oauthSubId\": \"$context.authorizer.claims.sub\",\n    \"name\": \"$body.name\",\n#if( \"$body.description\" != \"\")\n    \"description\": \"$body.description\",\n#end\n#if( \"$!body.errorConfig\" != \"\")\n    \"errorConfig\": $input.json('$.errorConfig'),\n#end\n    \"specification\": $input.json('$.specification')\n}\n"
+          },
+          "responses": {
+            "^\\[BadRequest\\].*": {
+              "responseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'"
+              },
+              "responseTemplates": {
+                "application/json": "#set($error = $input.path('$'))\n{\n    \"message\": \"$error.errorMessage\"\n}\n"
+              },
+              "statusCode": "400"
+            },
+            "^\\[InternalServerError\\].*": {
+              "responseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'"
+              },
+              "responseTemplates": {
+                "application/json": "#set($error = $input.path('$'))\n{\n    \"message\": \"$error.errorMessage\"\n}\n"
+              },
+              "statusCode": "500"
+            },
+            "^\\[NotFound\\].*": {
+              "responseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'"
+              },
+              "responseTemplates": {
+                "application/json": "#set($error = $input.path('$'))\n{\n    \"message\": \"$error.errorMessage\"\n}\n"
+              },
+              "statusCode": "404"
+            },
+            "^\\[UnsupportedMediaType\\].*": {
+              "responseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'"
+              },
+              "responseTemplates": {
+                "application/json": "#set($error = $input.path('$'))\n{\n    \"message\": \"$error.errorMessage\"\n}\n"
+              },
+              "statusCode": "415"
+            },
+            "default": {
+              "responseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'"
+              },
+              "responseTemplates": {
+                "application/json": "#set($body = $input.path('$'))\n{\n    \"name\": \"$body.name\",\n    \"description\": \"$body.description\",\n    \"workflowId\": \"$body.workflowId\"\n}\n"
+              },
+              "statusCode": "200"
+            }
+          },
+          "type": "aws",
+          "uri": ""
+        },
+        "x-amazon-apigateway-request-validator": ""
       }
     },
     "/workflows/{workflowId}": {
@@ -2951,7 +5018,64 @@
               }
             }
           }
-        }
+        },
+        "x-amazon-apigateway-integration": {
+          "httpMethod": "POST",
+          "passthroughBehavior": "never",
+          "requestTemplates": {
+            "application/json": "{\n    \"oauthClientId\": \"$context.authorizer.claims.client_id\",\n    \"oauthSubId\": \"$context.authorizer.claims.sub\",\n    \"workflowId\": \"$input.params().path.workflowId\"\n}\n"
+          },
+          "responses": {
+            "^\\[BadRequest\\].*": {
+              "responseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'"
+              },
+              "responseTemplates": {
+                "application/json": "#set($error = $input.path('$'))\n{\n    \"message\": \"$error.errorMessage\"\n}\n"
+              },
+              "statusCode": "400"
+            },
+            "^\\[InternalServerError\\].*": {
+              "responseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'"
+              },
+              "responseTemplates": {
+                "application/json": "#set($error = $input.path('$'))\n{\n    \"message\": \"$error.errorMessage\"\n}\n"
+              },
+              "statusCode": "500"
+            },
+            "^\\[NotFound\\].*": {
+              "responseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'"
+              },
+              "responseTemplates": {
+                "application/json": "#set($error = $input.path('$'))\n{\n    \"message\": \"$error.errorMessage\"\n}\n"
+              },
+              "statusCode": "404"
+            },
+            "^\\[UnsupportedMediaType\\].*": {
+              "responseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'"
+              },
+              "responseTemplates": {
+                "application/json": "#set($error = $input.path('$'))\n{\n    \"message\": \"$error.errorMessage\"\n}\n"
+              },
+              "statusCode": "415"
+            },
+            "default": {
+              "responseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'"
+              },
+              "responseTemplates": {
+                "application/json": "#set($body = $input.path('$'))\n{\n#if( \"$!body.name\" != \"\")\n    \"name\": \"$body.name\",\n#end\n#if( \"$!body.description\" != \"\")\n    \"description\": \"$body.description\",\n#end\n    \"workflowId\": \"$body.workflowId\"\n}\n"
+              },
+              "statusCode": "200"
+            }
+          },
+          "type": "aws",
+          "uri": ""
+        },
+        "x-amazon-apigateway-request-validator": ""
       },
       "options": {
         "requestBody": {
@@ -2992,6 +5116,23 @@
               }
             }
           }
+        },
+        "x-amazon-apigateway-integration": {
+          "passthroughBehavior": "when_no_match",
+          "requestTemplates": {
+            "application/json": "{\n  \"statusCode\": 200\n}\n"
+          },
+          "responses": {
+            "default": {
+              "responseParameters": {
+                "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'",
+                "method.response.header.Access-Control-Allow-Methods": "'DELETE,OPTIONS'",
+                "method.response.header.Access-Control-Allow-Origin": "'*'"
+              },
+              "statusCode": "200"
+            }
+          },
+          "type": "mock"
         }
       }
     },
@@ -3114,7 +5255,64 @@
               }
             }
           }
-        }
+        },
+        "x-amazon-apigateway-integration": {
+          "httpMethod": "POST",
+          "passthroughBehavior": "never",
+          "requestTemplates": {
+            "application/json": "#set($body = $input.path('$'))\n{\n    \"workflowId\": \"$input.params().path.workflowId\",\n#if( \"$!input.params().querystring.get('status')\" != \"\")\n    \"status\": [\n    #foreach( $status in $method.request.multivaluequerystring.status )\n        \"$status\"#if( $foreach.hasNext ),#end\n    #end\n    ],\n#end\n#if( \"$!input.params().querystring.get('maxResults')\" != \"\")\n    \"maxResults\": $input.params().querystring.get('maxResults'),\n#end\n#if( \"$!input.params().querystring.get('nextToken')\" != \"\")\n    \"nextToken\": \"$input.params().querystring.get('nextToken')\",\n#end\n    \"oauthClientId\": \"$context.authorizer.claims.client_id\",\n    \"oauthSubId\": \"$context.authorizer.claims.sub\"\n}\n"
+          },
+          "responses": {
+            "^\\[BadRequest\\].*": {
+              "responseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'"
+              },
+              "responseTemplates": {
+                "application/json": "#set($error = $input.path('$'))\n{\n    \"message\": \"$error.errorMessage\"\n}\n"
+              },
+              "statusCode": "400"
+            },
+            "^\\[InternalServerError\\].*": {
+              "responseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'"
+              },
+              "responseTemplates": {
+                "application/json": "#set($error = $input.path('$'))\n{\n    \"message\": \"$error.errorMessage\"\n}\n"
+              },
+              "statusCode": "500"
+            },
+            "^\\[NotFound\\].*": {
+              "responseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'"
+              },
+              "responseTemplates": {
+                "application/json": "#set($error = $input.path('$'))\n{\n    \"message\": \"$error.errorMessage\"\n}\n"
+              },
+              "statusCode": "404"
+            },
+            "^\\[UnsupportedMediaType\\].*": {
+              "responseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'"
+              },
+              "responseTemplates": {
+                "application/json": "#set($error = $input.path('$'))\n{\n    \"message\": \"$error.errorMessage\"\n}\n"
+              },
+              "statusCode": "415"
+            },
+            "default": {
+              "responseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'"
+              },
+              "responseTemplates": {
+                "application/json": "#set($body = $input.path('$'))\n{\n    \"workflowId\": \"$body.workflowId\",\n#if( \"$!body.status\" != \"\")\n    \"status\": $body.status,\n#end\n    \"executions\": $input.json('$.executions'),\n    \"nextToken\": \"$body.nextToken\"\n}\n"
+              },
+              "statusCode": "200"
+            }
+          },
+          "type": "aws",
+          "uri": ""
+        },
+        "x-amazon-apigateway-request-validator": ""
       },
       "options": {
         "requestBody": {
@@ -3155,6 +5353,23 @@
               }
             }
           }
+        },
+        "x-amazon-apigateway-integration": {
+          "passthroughBehavior": "when_no_match",
+          "requestTemplates": {
+            "application/json": "{\n  \"statusCode\": 200\n}\n"
+          },
+          "responses": {
+            "default": {
+              "responseParameters": {
+                "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'",
+                "method.response.header.Access-Control-Allow-Methods": "'GET,POST,OPTIONS'",
+                "method.response.header.Access-Control-Allow-Origin": "'*'"
+              },
+              "statusCode": "200"
+            }
+          },
+          "type": "mock"
         }
       },
       "post": {
@@ -3272,7 +5487,64 @@
               }
             }
           }
-        }
+        },
+        "x-amazon-apigateway-integration": {
+          "httpMethod": "POST",
+          "passthroughBehavior": "never",
+          "requestTemplates": {
+            "application/json": "{\n        \"oauthClientId\": \"$context.authorizer.claims.client_id\",\n        \"oauthSubId\": \"$context.authorizer.claims.sub\",\n        \"workflowId\": \"$input.params().path.workflowId\",\n        \"input\": $input.json('$.input')\n    }\n"
+          },
+          "responses": {
+            "^\\[BadRequest\\].*": {
+              "responseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'"
+              },
+              "responseTemplates": {
+                "application/json": "#set($error = $input.path('$'))\n{\n    \"message\": \"$error.errorMessage\"\n}\n"
+              },
+              "statusCode": "400"
+            },
+            "^\\[InternalServerError\\].*": {
+              "responseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'"
+              },
+              "responseTemplates": {
+                "application/json": "#set($error = $input.path('$'))\n{\n    \"message\": \"$error.errorMessage\"\n}\n"
+              },
+              "statusCode": "500"
+            },
+            "^\\[NotFound\\].*": {
+              "responseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'"
+              },
+              "responseTemplates": {
+                "application/json": "#set($error = $input.path('$'))\n{\n    \"message\": \"$error.errorMessage\"\n}\n"
+              },
+              "statusCode": "404"
+            },
+            "^\\[UnsupportedMediaType\\].*": {
+              "responseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'"
+              },
+              "responseTemplates": {
+                "application/json": "#set($error = $input.path('$'))\n{\n    \"message\": \"$error.errorMessage\"\n}\n"
+              },
+              "statusCode": "415"
+            },
+            "default": {
+              "responseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'"
+              },
+              "responseTemplates": {
+                "application/json": "#set($body = $input.path('$'))\n{\n    \"workflowId\": \"$body.workflowId\",\n    \"executionId\": \"$body.executionId\",\n    \"status\": \"$body.status\"\n}\n"
+              },
+              "statusCode": "200"
+            }
+          },
+          "type": "aws",
+          "uri": ""
+        },
+        "x-amazon-apigateway-request-validator": ""
       }
     }
   },
@@ -3380,7 +5652,7 @@
             "pattern": "^las:document:[a-f0-9]{32}$",
             "type": "string"
           },
-          "feedback": {
+          "groundTruth": {
             "items": {
               "additionalProperties": false,
               "properties": {
@@ -3467,12 +5739,18 @@
         "additionalProperties": false,
         "properties": {
           "batchId": {
-            "pattern": "^las:batch:[a-f0-9]{32}$",
-            "type": "string"
+            "items": {
+              "pattern": "^las:batch:[a-f0-9]{32}$",
+              "type": "string"
+            },
+            "type": "array"
           },
           "consentId": {
-            "pattern": "^las:consent:[a-f0-9]{32}$",
-            "type": "string"
+            "items": {
+              "pattern": "^las:consent:[a-f0-9]{32}$",
+              "type": "string"
+            },
+            "type": "array"
           },
           "documents": {
             "items": {
@@ -3501,7 +5779,7 @@
                   "pattern": "^las:document:[a-f0-9]{32}$",
                   "type": "string"
                 },
-                "feedback": {
+                "groundTruth": {
                   "items": {
                     "additionalProperties": false,
                     "properties": {
@@ -3631,7 +5909,7 @@
       "PatchDocumentId": {
         "additionalProperties": false,
         "properties": {
-          "feedback": {
+          "groundTruth": {
             "items": {
               "additionalProperties": false,
               "properties": {
@@ -3665,14 +5943,31 @@
           }
         },
         "required": [
-          "feedback"
+          "groundTruth"
         ],
         "title": "PATCH /documents/{documentId}",
         "type": "object"
       },
+      "PatchSecretId": {
+        "additionalProperties": false,
+        "properties": {
+          "data": {
+            "type": "object"
+          },
+          "description": {
+            "minLength": 1,
+            "type": "string"
+          }
+        },
+        "required": [
+          "data"
+        ],
+        "title": "PATCH /secrets/{secretId}",
+        "type": "object"
+      },
       "PatchTransistionExecutionId": {
         "additionalProperties": false,
-        "oneOf": [
+        "anyOf": [
           {
             "properties": {
               "status": {
@@ -3769,7 +6064,7 @@
             ],
             "type": "string"
           },
-          "feedback": {
+          "groundTruth": {
             "items": {
               "additionalProperties": false,
               "properties": {
@@ -3835,6 +6130,22 @@
         "title": "POST /predictions",
         "type": "object"
       },
+      "PostSecrets": {
+        "additionalProperties": false,
+        "properties": {
+          "data": {
+            "type": "object"
+          },
+          "description": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "data"
+        ],
+        "title": "POST /secrets",
+        "type": "object"
+      },
       "PostTransitionExecution": {
         "title": "POST /transitions/{transitionId}/executions",
         "type": "object"
@@ -3842,14 +6153,27 @@
       "PostTransitions": {
         "additionalProperties": false,
         "properties": {
+          "description": {
+            "anyOf": [
+              {
+                "minLength": 1,
+                "type": "string"
+              },
+              null
+            ]
+          },
           "inputJsonSchema": {
             "type": "object"
+          },
+          "name": {
+            "minLength": 1,
+            "type": "string"
           },
           "outputJsonSchema": {
             "type": "object"
           },
           "params": {
-            "oneOf": [
+            "anyOf": [
               {
                 "additionalProperties": false,
                 "properties": {
@@ -3858,21 +6182,6 @@
                       256
                     ],
                     "type": "integer"
-                  },
-                  "credentials": {
-                    "properties": {
-                      "password": {
-                        "type": "string"
-                      },
-                      "username": {
-                        "type": "string"
-                      }
-                    },
-                    "required": [
-                      "password",
-                      "username"
-                    ],
-                    "type": "object"
                   },
                   "environment": {
                     "additionalProperties": true,
@@ -3888,6 +6197,10 @@
                       2048
                     ],
                     "type": "integer"
+                  },
+                  "secretId": {
+                    "pattern": "^las:secret:[a-f0-9]{32}$",
+                    "type": "string"
                   }
                 },
                 "required": [
@@ -3923,6 +6236,7 @@
         },
         "required": [
           "inputJsonSchema",
+          "name",
           "outputJsonSchema",
           "transitionType"
         ],
@@ -3960,7 +6274,13 @@
         "additionalProperties": false,
         "properties": {
           "description": {
-            "type": "string"
+            "anyOf": [
+              {
+                "minLength": 1,
+                "type": "string"
+              },
+              null
+            ]
           },
           "errorConfig": {
             "additionalProperties": false,
@@ -4061,6 +6381,73 @@
         "title": "prediction",
         "type": "object"
       },
+      "Secret": {
+        "additionalProperties": false,
+        "properties": {
+          "description": {
+            "anyOf": [
+              {
+                "minLength": 1,
+                "type": "string"
+              },
+              null
+            ]
+          },
+          "secretId": {
+            "pattern": "^las:secret:[a-f0-9]{32}$",
+            "type": "string"
+          }
+        },
+        "required": [
+          "secretId"
+        ],
+        "title": "secret",
+        "type": "object"
+      },
+      "Secrets": {
+        "additionalProperties": false,
+        "properties": {
+          "nextToken": {
+            "anyOf": [
+              {
+                "minLength": 1,
+                "type": "string"
+              },
+              null
+            ]
+          },
+          "secrets": {
+            "items": {
+              "additionalProperties": false,
+              "properties": {
+                "description": {
+                  "anyOf": [
+                    {
+                      "minLength": 1,
+                      "type": "string"
+                    },
+                    null
+                  ]
+                },
+                "secretId": {
+                  "pattern": "^las:secret:[a-f0-9]{32}$",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "secretId"
+              ],
+              "type": "object"
+            },
+            "type": "array"
+          }
+        },
+        "required": [
+          "secrets"
+        ],
+        "title": "secrets",
+        "type": "object"
+      },
       "Transition": {
         "additionalProperties": false,
         "properties": {
@@ -4074,14 +6461,27 @@
             },
             "type": "object"
           },
+          "description": {
+            "anyOf": [
+              {
+                "minLength": 1,
+                "type": "string"
+              },
+              null
+            ]
+          },
           "inputJsonSchema": {
             "type": "object"
+          },
+          "name": {
+            "minLength": 1,
+            "type": "string"
           },
           "outputJsonSchema": {
             "type": "object"
           },
           "transitionId": {
-            "oneOf": [
+            "anyOf": [
               {
                 "pattern": "^las:transition:[a-f0-9]{32}$",
                 "type": "string"
@@ -4097,6 +6497,7 @@
           }
         },
         "required": [
+          "name",
           "transitionId",
           "transitionType"
         ],
@@ -4117,7 +6518,7 @@
             "type": "string"
           },
           "transitionId": {
-            "oneOf": [
+            "anyOf": [
               {
                 "pattern": "^las:transition:[a-f0-9]{32}$",
                 "type": "string"
@@ -4151,11 +6552,14 @@
             ]
           },
           "transitionType": {
-            "enum": [
-              "docker",
-              "manual"
-            ],
-            "type": "string"
+            "items": {
+              "enum": [
+                "docker",
+                "manual"
+              ],
+              "type": "string"
+            },
+            "type": "array"
           },
           "transitions": {
             "items": {
@@ -4171,14 +6575,27 @@
                   },
                   "type": "object"
                 },
+                "description": {
+                  "anyOf": [
+                    {
+                      "minLength": 1,
+                      "type": "string"
+                    },
+                    null
+                  ]
+                },
                 "inputJsonSchema": {
                   "type": "object"
+                },
+                "name": {
+                  "minLength": 1,
+                  "type": "string"
                 },
                 "outputJsonSchema": {
                   "type": "object"
                 },
                 "transitionId": {
-                  "oneOf": [
+                  "anyOf": [
                     {
                       "pattern": "^las:transition:[a-f0-9]{32}$",
                       "type": "string"
@@ -4194,6 +6611,7 @@
                 }
               },
               "required": [
+                "name",
                 "transitionId",
                 "transitionType"
               ],
@@ -4268,26 +6686,32 @@
         "type": "object"
       },
       "Workflow": {
-        "title": "workflow",
-        "type": "object",
         "additionalProperties": false,
         "properties": {
-          "name": {
-              "type": "string",
-              "minLength": 1
-            },
-          "workflowId": {
-              "type": "string",
-              "pattern": "^las:workflow:[a-f0-9]{32}$"
-            },
           "description": {
-              "type": ["string", "null"]
+            "anyOf": [
+              {
+                "minLength": 1,
+                "type": "string"
+              },
+              null
+            ]
+          },
+          "name": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "workflowId": {
+            "pattern": "^las:workflow:[a-f0-9]{32}$",
+            "type": "string"
           }
         },
         "required": [
           "name",
           "workflowId"
-        ]
+        ],
+        "title": "workflow",
+        "type": "object"
       },
       "WorkflowExecution": {
         "additionalProperties": false,
@@ -4362,7 +6786,10 @@
             ]
           },
           "status": {
-            "type": "string"
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
           },
           "workflowId": {
             "pattern": "^las:workflow:[a-f0-9]{32}$",
@@ -4377,50 +6804,56 @@
         "type": "object"
       },
       "Workflows": {
-        "title": "workflows",
-        "type": "object",
         "additionalProperties": false,
         "properties": {
+          "nextToken": {
+            "anyOf": [
+              {
+                "minLength": 1,
+                "type": "string"
+              },
+              null
+            ]
+          },
           "workflows": {
-            "type": "array",
             "items": {
-            "type": "object",
               "additionalProperties": false,
               "properties": {
-                "name": {
-                    "type": "string",
-                    "minLength": 1
-                  },
-                "workflowId": {
-                    "type": "string",
-                    "pattern": "^las:workflow:[a-f0-9]{32}$"
-                  },
                 "description": {
-                    "type": ["string", "null"]
+                  "anyOf": [
+                    {
+                      "minLength": 1,
+                      "type": "string"
+                    },
+                    null
+                  ]
+                },
+                "name": {
+                  "minLength": 1,
+                  "type": "string"
+                },
+                "workflowId": {
+                  "pattern": "^las:workflow:[a-f0-9]{32}$",
+                  "type": "string"
                 }
               },
               "required": [
                 "name",
                 "workflowId"
-              ]
-            }
-          },
-          "nextToken": {
-            "anyOf": [
-              {
-                "type": "string",
-                "minLength": 1
-              },
-              {
-                "type": "null"
-              }
-            ]
+              ],
+              "type": "object"
+            },
+            "type": "array"
           }
         },
         "required": [
           "workflows"
-        ]
+        ],
+        "title": "workflows",
+        "type": "object"
       }
-    }
-  }
+    },
+    "securitySchemes": {}
+  },
+  "x-amazon-apigateway-request-validators": {}
 }
