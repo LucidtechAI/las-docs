@@ -2,7 +2,7 @@
   "openapi": "3.0.1",
   "info": {
     "title": "demo",
-    "version": "2020-11-25T07:58:13Z"
+    "version": "2020-12-01T13:43:01Z"
   },
   "servers": [
     {
@@ -17,6 +17,22 @@
   "paths": {
     "/": {
       "get": {
+        "parameters": [
+          {
+            "in": "query",
+            "name": "method.request.multivaluequerystring.status",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "method.request.querystring.status",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "content": {
@@ -30,14 +46,15 @@
           }
         },
         "x-amazon-apigateway-integration": {
-          "httpMethod": "GET",
+          "contentHandling": "CONVERT_TO_TEXT",
+          "httpMethod": "POST",
           "passthroughBehavior": "when_no_match",
           "responses": {
             "default": {
               "statusCode": "200"
             }
           },
-          "type": "http",
+          "type": "aws",
           "uri": ""
         }
       }
@@ -195,7 +212,7 @@
                 "method.response.header.Access-Control-Allow-Origin": "'*'"
               },
               "responseTemplates": {
-                "application/json": "#set($body = $input.path('$'))\n{\n    \"assets\": $input.json('$.assets'),\n    \"nextToken\": \"$body.nextToken\"\n}\n"
+                "application/json": "#set($body = $input.path('$'))\n{\n    \"assets\": $input.json('$.assets'),\n#if( \"$!body.nextToken\" != \"\")\n    \"nextToken\": \"$body.nextToken\"\n#else\n    \"nextToken\": null\n#end\n}\n"
               },
               "statusCode": "200"
             }
@@ -1368,7 +1385,7 @@
                 "method.response.header.Access-Control-Allow-Origin": "'*'"
               },
               "responseTemplates": {
-                "application/json": "#set($body = $input.path('$'))\n{\n#if( \"$!body.batchId\" != \"\")\n    \"batchId\": $body.batchId,\n#end\n#if( \"$!body.consentId\" != \"\")\n    \"consentId\": $body.consentId,\n#end\n    \"documents\": $input.json('$.documents'),\n    \"nextToken\": \"$body.nextToken\"\n}\n"
+                "application/json": "#set($body = $input.path('$'))\n{\n#if( \"$!body.batchId\" != \"\")\n    \"batchId\": $body.batchId,\n#end\n#if( \"$!body.consentId\" != \"\")\n    \"consentId\": $body.consentId,\n#end\n    \"documents\": $input.json('$.documents'),\n#if( \"$!body.nextToken\" != \"\")\n    \"nextToken\": \"$body.nextToken\"\n#else\n    \"nextToken\": null\n#end\n}\n"
               },
               "statusCode": "200"
             }
@@ -2372,7 +2389,7 @@
                 "method.response.header.Access-Control-Allow-Origin": "'*'"
               },
               "responseTemplates": {
-                "application/json": "#set($body = $input.path('$'))\n{\n    \"secrets\": $input.json('$.secrets'),\n    \"nextToken\": \"$body.nextToken\"\n}\n"
+                "application/json": "#set($body = $input.path('$'))\n{\n    \"secrets\": $input.json('$.secrets'),\n#if( \"$!body.nextToken\" != \"\")\n    \"nextToken\": \"$body.nextToken\"\n#else\n    \"nextToken\": null\n#end\n}\n"
               },
               "statusCode": "200"
             }
@@ -3001,7 +3018,7 @@
                 "method.response.header.Access-Control-Allow-Origin": "'*'"
               },
               "responseTemplates": {
-                "application/json": "#set($body = $input.path('$'))\n{\n#if( \"$!body.transitionType\" != \"\")\n    \"transitionType\": $body.transitionType,\n#end\n    \"transitions\": $input.json('$.transitions'),\n    \"nextToken\": \"$body.nextToken\"\n}\n"
+                "application/json": "#set($body = $input.path('$'))\n{\n#if( \"$!body.transitionType\" != \"\")\n    \"transitionType\": $body.transitionType,\n#end\n    \"transitions\": $input.json('$.transitions'),\n#if( \"$!body.nextToken\" != \"\")\n    \"nextToken\": \"$body.nextToken\"\n#else\n    \"nextToken\": null\n#end\n}\n"
               },
               "statusCode": "200"
             }
@@ -3225,7 +3242,7 @@
                 "method.response.header.Access-Control-Allow-Origin": "'*'"
               },
               "responseTemplates": {
-                "application/json": "#set($body = $input.path('$'))\n{\n    \"name\": \"$body.name\",\n    \"description\": \"$body.description\",\n    \"transitionId\": \"$body.transitionId\",\n    \"transitionType\": \"$body.transitionType\",\n#if( \"$!body.assets\" != \"\")\n    \"assets\": $input.json('$.assets'),\n#end\n    \"inputJsonSchema\": $input.json('$.inputJsonSchema'),\n    \"outputJsonSchema\": $input.json('$.outputJsonSchema')\n}\n"
+                "application/json": "#set($body = $input.path('$'))\n{\n    \"name\": \"$body.name\",\n#if( \"$!body.description\" != \"\")\n    \"description\": \"$body.description\",\n#else\n    \"description\": null,\n#end\n    \"transitionId\": \"$body.transitionId\",\n    \"transitionType\": \"$body.transitionType\",\n#if( \"$!body.assets\" != \"\")\n    \"assets\": $input.json('$.assets'),\n#end\n    \"inputJsonSchema\": $input.json('$.inputJsonSchema'),\n    \"outputJsonSchema\": $input.json('$.outputJsonSchema')\n}\n"
               },
               "statusCode": "200"
             }
@@ -3286,7 +3303,7 @@
             "default": {
               "responseParameters": {
                 "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'",
-                "method.response.header.Access-Control-Allow-Methods": "'OPTIONS'",
+                "method.response.header.Access-Control-Allow-Methods": "'PATCH,OPTIONS'",
                 "method.response.header.Access-Control-Allow-Origin": "'*'"
               },
               "statusCode": "200"
@@ -3294,9 +3311,367 @@
           },
           "type": "mock"
         }
+      },
+      "patch": {
+        "parameters": [
+          {
+            "in": "header",
+            "name": "Content-Type",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "transitionId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PatchTransitionId"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Transition"
+                }
+              }
+            },
+            "description": "200 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "400 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "404 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "415": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "415 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "500 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "x-amazon-apigateway-integration": {
+          "httpMethod": "POST",
+          "passthroughBehavior": "never",
+          "requestTemplates": {
+            "application/json": "#set($body = $input.path('$'))\n{\n    \"oauthClientId\": \"$context.authorizer.claims.client_id\",\n    \"oauthSubId\": \"$context.authorizer.claims.sub\",\n#if( \"$body.description\" != \"\")\n    \"description\": \"$body.description\",\n#end\n#if( \"$body.name\" != \"\")\n    \"name\": \"$body.name\",\n#end\n#if( \"$body.inputJsonSchema\" != \"\")\n    \"inputJsonSchema\": $input.json('$.inputJsonSchema'),\n#end\n#if( \"$body.outputJsonSchema\" != \"\")\n    \"outputJsonSchema\": $input.json('$.outputJsonSchema'),\n#end\n    \"transitionId\": \"$input.params().path.transitionId\"\n}\n"
+          },
+          "responses": {
+            "^\\[BadRequest\\].*": {
+              "responseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'"
+              },
+              "responseTemplates": {
+                "application/json": "#set($error = $input.path('$'))\n{\n    \"message\": \"$error.errorMessage\"\n}\n"
+              },
+              "statusCode": "400"
+            },
+            "^\\[InternalServerError\\].*": {
+              "responseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'"
+              },
+              "responseTemplates": {
+                "application/json": "#set($error = $input.path('$'))\n{\n    \"message\": \"$error.errorMessage\"\n}\n"
+              },
+              "statusCode": "500"
+            },
+            "^\\[NotFound\\].*": {
+              "responseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'"
+              },
+              "responseTemplates": {
+                "application/json": "#set($error = $input.path('$'))\n{\n    \"message\": \"$error.errorMessage\"\n}\n"
+              },
+              "statusCode": "404"
+            },
+            "^\\[UnsupportedMediaType\\].*": {
+              "responseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'"
+              },
+              "responseTemplates": {
+                "application/json": "#set($error = $input.path('$'))\n{\n    \"message\": \"$error.errorMessage\"\n}\n"
+              },
+              "statusCode": "415"
+            },
+            "default": {
+              "responseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'"
+              },
+              "responseTemplates": {
+                "application/json": "#set($body = $input.path('$'))\n{\n    \"name\": \"$body.name\",\n#if( \"$!body.description\" != \"\")\n    \"description\": \"$body.description\",\n#else\n    \"description\": null,\n#end\n    \"transitionId\": \"$body.transitionId\",\n    \"transitionType\": \"$body.transitionType\",\n#if( \"$!body.assets\" != \"\")\n    \"assets\": $input.json('$.assets'),\n#end\n    \"inputJsonSchema\": $input.json('$.inputJsonSchema'),\n    \"outputJsonSchema\": $input.json('$.outputJsonSchema')\n}\n"
+              },
+              "statusCode": "200"
+            }
+          },
+          "type": "aws",
+          "uri": ""
+        },
+        "x-amazon-apigateway-request-validator": ""
       }
     },
     "/transitions/{transitionId}/executions": {
+      "get": {
+        "parameters": [
+          {
+            "in": "path",
+            "name": "transitionId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "status",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "nextToken",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "maxResults",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "executionId",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TransitionExecutions"
+                }
+              }
+            },
+            "description": "200 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "400 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "404 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "415": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "415 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "500 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "x-amazon-apigateway-integration": {
+          "httpMethod": "POST",
+          "passthroughBehavior": "never",
+          "requestTemplates": {
+            "application/json": "#set($body = $input.path('$'))\n{\n    \"transitionId\": \"$input.params().path.transitionId\",\n#if( \"$!input.params().querystring.get('status')\" != \"\")\n    \"status\": [\n    #foreach( $status in $method.request.multivaluequerystring.status )\n        \"$status\"#if( $foreach.hasNext ),#end\n    #end\n    ],\n#end\n#if( \"$!input.params().querystring.get('executionId')\" != \"\")\n    \"executionId\": [\n    #foreach( $executionId in $method.request.multivaluequerystring.executionId )\n        \"$executionId\"#if( $foreach.hasNext ),#end\n    #end\n    ],\n#end\n#if( \"$!input.params().querystring.get('maxResults')\" != \"\")\n    \"maxResults\": $input.params().querystring.get('maxResults'),\n#end\n#if( \"$!input.params().querystring.get('nextToken')\" != \"\")\n    \"nextToken\": \"$input.params().querystring.get('nextToken')\",\n#end\n    \"oauthClientId\": \"$context.authorizer.claims.client_id\",\n    \"oauthSubId\": \"$context.authorizer.claims.sub\"\n}\n"
+          },
+          "responses": {
+            "^\\[BadRequest\\].*": {
+              "responseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'"
+              },
+              "responseTemplates": {
+                "application/json": "#set($error = $input.path('$'))\n{\n    \"message\": \"$error.errorMessage\"\n}\n"
+              },
+              "statusCode": "400"
+            },
+            "^\\[InternalServerError\\].*": {
+              "responseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'"
+              },
+              "responseTemplates": {
+                "application/json": "#set($error = $input.path('$'))\n{\n    \"message\": \"$error.errorMessage\"\n}\n"
+              },
+              "statusCode": "500"
+            },
+            "^\\[NotFound\\].*": {
+              "responseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'"
+              },
+              "responseTemplates": {
+                "application/json": "#set($error = $input.path('$'))\n{\n    \"message\": \"$error.errorMessage\"\n}\n"
+              },
+              "statusCode": "404"
+            },
+            "^\\[UnsupportedMediaType\\].*": {
+              "responseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'"
+              },
+              "responseTemplates": {
+                "application/json": "#set($error = $input.path('$'))\n{\n    \"message\": \"$error.errorMessage\"\n}\n"
+              },
+              "statusCode": "415"
+            },
+            "default": {
+              "responseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'"
+              },
+              "responseTemplates": {
+                "application/json": "#set($body = $input.path('$'))\n{\n    \"transitionId\": \"$body.transitionId\",\n#if( \"$!body.status\" != \"\")\n    \"status\": $body.status,\n#end\n    \"executions\": $input.json('$.executions'),\n#if( \"$!body.nextToken\" != \"\")\n    \"nextToken\": \"$body.nextToken\"\n#else\n    \"nextToken\": null\n#end\n}\n"
+              },
+              "statusCode": "200"
+            }
+          },
+          "type": "aws",
+          "uri": ""
+        },
+        "x-amazon-apigateway-request-validator": ""
+      },
       "options": {
         "requestBody": {
           "content": {
@@ -3346,7 +3721,7 @@
             "default": {
               "responseParameters": {
                 "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'",
-                "method.response.header.Access-Control-Allow-Methods": "'POST,OPTIONS'",
+                "method.response.header.Access-Control-Allow-Methods": "'POST,GET,OPTIONS'",
                 "method.response.header.Access-Control-Allow-Origin": "'*'"
               },
               "statusCode": "200"
@@ -3519,7 +3894,7 @@
                 "method.response.header.Access-Control-Allow-Origin": "'*'"
               },
               "responseTemplates": {
-                "application/json": "#set($body = $input.path('$'))\n{\n#if( \"$!body.input\" != \"\")\n    \"input\": $input.json('$.input'),\n#end\n    \"executionId\": \"$body.executionId\",\n    \"transitionId\": \"$body.transitionId\",\n    \"status\":  \"$body.status\"\n}\n"
+                "application/json": "#set($body = $input.path('$'))\n{\n#if( \"$!body.input\" != \"\")\n    \"input\": $input.json('$.input'),\n#end\n    \"executionId\": \"$body.executionId\",\n    \"transitionId\": \"$body.transitionId\",\n    \"status\":  \"$body.status\",\n#if( \"$!body.completedBy\" != \"\")\n    \"completedBy\": \"$body.completedBy\"\n#else\n    \"completedBy\": null\n#end\n}\n"
               },
               "statusCode": "200"
             }
@@ -3761,7 +4136,7 @@
                 "method.response.header.Access-Control-Allow-Origin": "'*'"
               },
               "responseTemplates": {
-                "application/json": "#set($body = $input.path('$'))\n{\n#if( \"$!body.input\" != \"\")\n    \"input\": $input.json('$.input'),\n#end\n    \"executionId\": \"$body.executionId\",\n    \"transitionId\": \"$body.transitionId\",\n    \"status\":  \"$body.status\"\n}\n"
+                "application/json": "#set($body = $input.path('$'))\n{\n#if( \"$!body.input\" != \"\")\n    \"input\": $input.json('$.input'),\n#end\n    \"executionId\": \"$body.executionId\",\n    \"transitionId\": \"$body.transitionId\",\n    \"status\":  \"$body.status\",\n#if( \"$!body.completedBy\" != \"\")\n    \"completedBy\": \"$body.completedBy\"\n#else\n    \"completedBy\": null\n#end\n}\n"
               },
               "statusCode": "200"
             }
@@ -3925,7 +4300,7 @@
                 "method.response.header.Access-Control-Allow-Origin": "'*'"
               },
               "responseTemplates": {
-                "application/json": "#set($body = $input.path('$'))\n{\n    \"users\": $input.json('$.users'),\n    \"nextToken\": \"$body.nextToken\"\n}\n"
+                "application/json": "#set($body = $input.path('$'))\n{\n    \"users\": $input.json('$.users'),\n#if( \"$!body.nextToken\" != \"\")\n    \"nextToken\": \"$body.nextToken\"\n#else\n    \"nextToken\": null\n#end\n}\n"
               },
               "statusCode": "200"
             }
@@ -4685,7 +5060,7 @@
                 "method.response.header.Access-Control-Allow-Origin": "'*'"
               },
               "responseTemplates": {
-                "application/json": "#set($body = $input.path('$'))\n{\n    \"workflows\": $input.json('$.workflows'),\n    \"nextToken\": \"$body.nextToken\"\n}\n"
+                "application/json": "#set($body = $input.path('$'))\n{\n    \"workflows\": $input.json('$.workflows'),\n#if( \"$!body.nextToken\" != \"\")\n    \"nextToken\": \"$body.nextToken\"\n#else\n    \"nextToken\": null\n#end\n}\n"
               },
               "statusCode": "200"
             }
@@ -4909,7 +5284,7 @@
                 "method.response.header.Access-Control-Allow-Origin": "'*'"
               },
               "responseTemplates": {
-                "application/json": "#set($body = $input.path('$'))\n{\n    \"name\": \"$body.name\",\n    \"description\": \"$body.description\",\n    \"workflowId\": \"$body.workflowId\"\n}\n"
+                "application/json": "#set($body = $input.path('$'))\n{\n    \"name\": \"$body.name\",\n#if( \"$!body.description\" != \"\")\n    \"description\": \"$body.description\",\n#else\n    \"description\": null,\n#end\n    \"workflowId\": \"$body.workflowId\"\n}\n"
               },
               "statusCode": "200"
             }
@@ -5126,7 +5501,7 @@
             "default": {
               "responseParameters": {
                 "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'",
-                "method.response.header.Access-Control-Allow-Methods": "'DELETE,OPTIONS'",
+                "method.response.header.Access-Control-Allow-Methods": "'DELETE,PATCH,OPTIONS'",
                 "method.response.header.Access-Control-Allow-Origin": "'*'"
               },
               "statusCode": "200"
@@ -5134,6 +5509,180 @@
           },
           "type": "mock"
         }
+      },
+      "patch": {
+        "parameters": [
+          {
+            "in": "header",
+            "name": "Content-Type",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "workflowId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PatchWorkflowId"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Workflow"
+                }
+              }
+            },
+            "description": "200 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "400 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "404 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "415": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "415 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "500 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "x-amazon-apigateway-integration": {
+          "httpMethod": "POST",
+          "passthroughBehavior": "never",
+          "requestTemplates": {
+            "application/json": "#set($body = $input.path('$'))\n{\n    \"oauthClientId\": \"$context.authorizer.claims.client_id\",\n    \"oauthSubId\": \"$context.authorizer.claims.sub\",\n#if( \"$body.description\" != \"\")\n    \"description\": \"$body.description\",\n#end\n#if( \"$body.name\" != \"\")\n    \"name\": \"$body.name\",\n#end\n    \"workflowId\": \"$input.params().path.workflowId\"\n}\n"
+          },
+          "responses": {
+            "^\\[BadRequest\\].*": {
+              "responseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'"
+              },
+              "responseTemplates": {
+                "application/json": "#set($error = $input.path('$'))\n{\n    \"message\": \"$error.errorMessage\"\n}\n"
+              },
+              "statusCode": "400"
+            },
+            "^\\[InternalServerError\\].*": {
+              "responseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'"
+              },
+              "responseTemplates": {
+                "application/json": "#set($error = $input.path('$'))\n{\n    \"message\": \"$error.errorMessage\"\n}\n"
+              },
+              "statusCode": "500"
+            },
+            "^\\[NotFound\\].*": {
+              "responseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'"
+              },
+              "responseTemplates": {
+                "application/json": "#set($error = $input.path('$'))\n{\n    \"message\": \"$error.errorMessage\"\n}\n"
+              },
+              "statusCode": "404"
+            },
+            "^\\[UnsupportedMediaType\\].*": {
+              "responseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'"
+              },
+              "responseTemplates": {
+                "application/json": "#set($error = $input.path('$'))\n{\n    \"message\": \"$error.errorMessage\"\n}\n"
+              },
+              "statusCode": "415"
+            },
+            "default": {
+              "responseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'"
+              },
+              "responseTemplates": {
+                "application/json": "#set($body = $input.path('$'))\n{\n    \"name\": \"$body.name\",\n#if( \"$!body.description\" != \"\")\n    \"description\": \"$body.description\",\n#else\n    \"description\": null,\n#end\n    \"workflowId\": \"$body.workflowId\"\n}\n"
+              },
+              "statusCode": "200"
+            }
+          },
+          "type": "aws",
+          "uri": ""
+        },
+        "x-amazon-apigateway-request-validator": ""
       }
     },
     "/workflows/{workflowId}/executions": {
@@ -5164,6 +5713,20 @@
           {
             "in": "query",
             "name": "maxResults",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "sortBy",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "order",
             "schema": {
               "type": "string"
             }
@@ -5260,7 +5823,7 @@
           "httpMethod": "POST",
           "passthroughBehavior": "never",
           "requestTemplates": {
-            "application/json": "#set($body = $input.path('$'))\n{\n    \"workflowId\": \"$input.params().path.workflowId\",\n#if( \"$!input.params().querystring.get('status')\" != \"\")\n    \"status\": [\n    #foreach( $status in $method.request.multivaluequerystring.status )\n        \"$status\"#if( $foreach.hasNext ),#end\n    #end\n    ],\n#end\n#if( \"$!input.params().querystring.get('maxResults')\" != \"\")\n    \"maxResults\": $input.params().querystring.get('maxResults'),\n#end\n#if( \"$!input.params().querystring.get('nextToken')\" != \"\")\n    \"nextToken\": \"$input.params().querystring.get('nextToken')\",\n#end\n    \"oauthClientId\": \"$context.authorizer.claims.client_id\",\n    \"oauthSubId\": \"$context.authorizer.claims.sub\"\n}\n"
+            "application/json": "#set($body = $input.path('$'))\n{\n    \"workflowId\": \"$input.params().path.workflowId\",\n#if( \"$!input.params().querystring.get('status')\" != \"\")\n    \"status\": [\n    #foreach( $status in $method.request.multivaluequerystring.status )\n        \"$status\"#if( $foreach.hasNext ),#end\n    #end\n    ],\n#end\n#if( \"$!input.params().querystring.get('sortBy')\" != \"\")\n    \"sortBy\": $input.params().querystring.get('sortBy'),\n#end\n#if( \"$!input.params().querystring.get('order')\" != \"\")\n    \"order\": $input.params().querystring.get('order'),\n#end\n#if( \"$!input.params().querystring.get('maxResults')\" != \"\")\n    \"maxResults\": $input.params().querystring.get('maxResults'),\n#end\n#if( \"$!input.params().querystring.get('nextToken')\" != \"\")\n    \"nextToken\": \"$input.params().querystring.get('nextToken')\",\n#end\n    \"oauthClientId\": \"$context.authorizer.claims.client_id\",\n    \"oauthSubId\": \"$context.authorizer.claims.sub\"\n}\n"
           },
           "responses": {
             "^\\[BadRequest\\].*": {
@@ -5304,7 +5867,7 @@
                 "method.response.header.Access-Control-Allow-Origin": "'*'"
               },
               "responseTemplates": {
-                "application/json": "#set($body = $input.path('$'))\n{\n    \"workflowId\": \"$body.workflowId\",\n#if( \"$!body.status\" != \"\")\n    \"status\": $body.status,\n#end\n    \"executions\": $input.json('$.executions'),\n    \"nextToken\": \"$body.nextToken\"\n}\n"
+                "application/json": "#set($body = $input.path('$'))\n{\n    \"workflowId\": \"$body.workflowId\",\n#if( \"$!body.status\" != \"\")\n    \"status\": $body.status,\n#end\n#if( \"$!body.sortBy\" != \"\")\n    \"sortBy\": \"$body.sortBy\",\n#end\n#if( \"$!body.order\" != \"\")\n    \"order\": \"$body.order\",\n#end\n    \"executions\": $input.json('$.executions'),\n#if( \"$!body.nextToken\" != \"\")\n    \"nextToken\": \"$body.nextToken\"\n#else\n    \"nextToken\": null\n#end\n}\n"
               },
               "statusCode": "200"
             }
@@ -5536,7 +6099,7 @@
                 "method.response.header.Access-Control-Allow-Origin": "'*'"
               },
               "responseTemplates": {
-                "application/json": "#set($body = $input.path('$'))\n{\n    \"workflowId\": \"$body.workflowId\",\n    \"executionId\": \"$body.executionId\",\n    \"status\": \"$body.status\"\n}\n"
+                "application/json": "#set($body = $input.path('$'))\n{\n#if( \"$!body.endTime\" != \"\")\n    \"endTime\": \"$body.endTime\",\n#else\n    \"endTime\": null,\n#end\n#if( \"$!body.startTime\" != \"\")\n    \"startTime\": \"$body.startTime\",\n#else\n    \"startTime\": null,\n#end\n#if( \"$!body.transitionExecutions\" != \"\")\n    \"transitionExecutions\": $input.json('$.transitionExecutions'),\n#else\n    \"transitionExecutions\": null,\n#end\n    \"workflowId\": \"$body.workflowId\",\n    \"executionId\": \"$body.executionId\",\n    \"status\": \"$body.status\"\n}\n"
               },
               "statusCode": "200"
             }
@@ -5984,7 +6547,8 @@
               "status": {
                 "enum": [
                   "failed",
-                  "rejected"
+                  "rejected",
+                  "retry"
                 ],
                 "type": "string"
               }
@@ -5994,6 +6558,7 @@
         ],
         "properties": {
           "error": {
+            "additionalProperties": false,
             "properties": {
               "message": {
                 "type": "string"
@@ -6012,6 +6577,72 @@
           }
         },
         "title": "PATCH transitions/{transitionId}/executions/{executionId}",
+        "type": "object"
+      },
+      "PatchTransitionId": {
+        "additionalProperties": false,
+        "properties": {
+          "description": {
+            "anyOf": [
+              {
+                "minLength": 1,
+                "type": "string"
+              },
+              null
+            ]
+          },
+          "inputJsonSchema": {
+            "anyOf": [
+              {
+                "type": "object"
+              },
+              null
+            ]
+          },
+          "name": {
+            "anyOf": [
+              {
+                "minLength": 1,
+                "type": "string"
+              },
+              null
+            ]
+          },
+          "outputJsonSchema": {
+            "anyOf": [
+              {
+                "type": "object"
+              },
+              null
+            ]
+          }
+        },
+        "title": "PATCH /transitions/{transitionId}",
+        "type": "object"
+      },
+      "PatchWorkflowId": {
+        "additionalProperties": false,
+        "properties": {
+          "description": {
+            "anyOf": [
+              {
+                "minLength": 1,
+                "type": "string"
+              },
+              null
+            ]
+          },
+          "name": {
+            "anyOf": [
+              {
+                "minLength": 1,
+                "type": "string"
+              },
+              null
+            ]
+          }
+        },
+        "title": "PATCH /workflows/{workflowId}",
         "type": "object"
       },
       "PostAssets": {
@@ -6507,6 +7138,15 @@
       "TransitionExecution": {
         "additionalProperties": false,
         "properties": {
+          "completedBy": {
+            "anyOf": [
+              {
+                "minLength": 1,
+                "type": "string"
+              },
+              null
+            ]
+          },
           "executionId": {
             "pattern": "^las:transition-execution:[a-f0-9]{32}$",
             "type": "string"
@@ -6515,6 +7155,13 @@
             "type": "object"
           },
           "status": {
+            "enum": [
+              "running",
+              "succeeded",
+              "failed",
+              "rejected",
+              "retry"
+            ],
             "type": "string"
           },
           "transitionId": {
@@ -6531,6 +7178,59 @@
           }
         },
         "required": [
+          "completedBy",
+          "executionId",
+          "input",
+          "status",
+          "transitionId"
+        ],
+        "title": "transition-execution",
+        "type": "object"
+      },
+      "TransitionExecutions": {
+        "additionalProperties": false,
+        "properties": {
+          "completedBy": {
+            "anyOf": [
+              {
+                "minLength": 1,
+                "type": "string"
+              },
+              null
+            ]
+          },
+          "executionId": {
+            "pattern": "^las:transition-execution:[a-f0-9]{32}$",
+            "type": "string"
+          },
+          "input": {
+            "type": "object"
+          },
+          "status": {
+            "enum": [
+              "running",
+              "succeeded",
+              "failed",
+              "rejected",
+              "retry"
+            ],
+            "type": "string"
+          },
+          "transitionId": {
+            "anyOf": [
+              {
+                "pattern": "^las:transition:[a-f0-9]{32}$",
+                "type": "string"
+              },
+              {
+                "pattern": "^las:transition:commons-[0-9A-Za-z-]+$",
+                "type": "string"
+              }
+            ]
+          }
+        },
+        "required": [
+          "completedBy",
           "executionId",
           "input",
           "status",
@@ -6716,6 +7416,15 @@
       "WorkflowExecution": {
         "additionalProperties": false,
         "properties": {
+          "endTime": {
+            "anyOf": [
+              {
+                "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2} ?[0-9]{2}:?[0-9]{2}:?[0-9]{2}.?[0-9]{6}",
+                "type": "string"
+              },
+              null
+            ]
+          },
           "executionId": {
             "pattern": "^las:workflow-execution:[a-f0-9]{32}$",
             "type": "string"
@@ -6726,8 +7435,32 @@
           "output": {
             "type": "object"
           },
+          "startTime": {
+            "anyOf": [
+              {
+                "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2} ?[0-9]{2}:?[0-9]{2}:?[0-9]{2}.?[0-9]{6}",
+                "type": "string"
+              },
+              null
+            ]
+          },
           "status": {
+            "enum": [
+              "running",
+              "succeeded",
+              "failed",
+              "rejected",
+              "retry"
+            ],
             "type": "string"
+          },
+          "transitionExecutions": {
+            "anyOf": [
+              {
+                "type": "object"
+              },
+              null
+            ]
           },
           "workflowId": {
             "pattern": "^las:workflow:[a-f0-9]{32}$",
@@ -6735,7 +7468,9 @@
           }
         },
         "required": [
+          "endTime",
           "executionId",
+          "startTime",
           "status",
           "workflowId"
         ],
@@ -6749,6 +7484,15 @@
             "items": {
               "additionalProperties": false,
               "properties": {
+                "endTime": {
+                  "anyOf": [
+                    {
+                      "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2} ?[0-9]{2}:?[0-9]{2}:?[0-9]{2}.?[0-9]{6}",
+                      "type": "string"
+                    },
+                    null
+                  ]
+                },
                 "executionId": {
                   "pattern": "^las:workflow-execution:[a-f0-9]{32}$",
                   "type": "string"
@@ -6759,8 +7503,32 @@
                 "output": {
                   "type": "object"
                 },
+                "startTime": {
+                  "anyOf": [
+                    {
+                      "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2} ?[0-9]{2}:?[0-9]{2}:?[0-9]{2}.?[0-9]{6}",
+                      "type": "string"
+                    },
+                    null
+                  ]
+                },
                 "status": {
+                  "enum": [
+                    "running",
+                    "succeeded",
+                    "failed",
+                    "rejected",
+                    "retry"
+                  ],
                   "type": "string"
+                },
+                "transitionExecutions": {
+                  "anyOf": [
+                    {
+                      "type": "object"
+                    },
+                    null
+                  ]
                 },
                 "workflowId": {
                   "pattern": "^las:workflow:[a-f0-9]{32}$",
@@ -6768,7 +7536,9 @@
                 }
               },
               "required": [
+                "endTime",
                 "executionId",
+                "startTime",
                 "status",
                 "workflowId"
               ],
@@ -6785,8 +7555,29 @@
               null
             ]
           },
+          "order": {
+            "enum": [
+              "ascending",
+              "descending"
+            ],
+            "type": "string"
+          },
+          "sortBy": {
+            "enum": [
+              "startTime",
+              "endTime"
+            ],
+            "type": "string"
+          },
           "status": {
             "items": {
+              "enum": [
+                "running",
+                "succeeded",
+                "failed",
+                "rejected",
+                "retry"
+              ],
               "type": "string"
             },
             "type": "array"
