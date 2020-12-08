@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.1",
   "info": {
-    "title": "Lucidtech API",
+    "title": "Lucidtech-API",
     "version": "2020-12-04T12:13:16Z"
   },
   "servers": [
@@ -6899,6 +6899,69 @@
           }
         },
         "title": "Error Schema",
+        "type": "object"
+      },
+      "Models": {
+        "additionalProperties": false,
+        "properties": {
+          "models": {
+            "items": {
+              "additionalProperties": false,
+              "properties": {
+                "description": {
+                  "anyOf": [
+                    {
+                      "minLength": 1,
+                      "type": "string"
+                    },
+                    null
+                  ]
+                },
+                "height": {
+                  "type": "integer"
+                },
+                "modelId": {
+                  "pattern": "^las:model:[0-9A-Za-z_]+$",
+                  "type": "string"
+                },
+                "name": {
+                  "anyOf": [
+                    {
+                      "minLength": 1,
+                      "type": "string"
+                    },
+                    null
+                  ]
+                },
+                "width": {
+                  "type": "integer"
+                }
+              },
+              "required": [
+                "description",
+                "height",
+                "modelId",
+                "name",
+                "width"
+              ],
+              "type": "object"
+            },
+            "type": "array"
+          },
+          "nextToken": {
+            "anyOf": [
+              {
+                "minLength": 1,
+                "type": "string"
+              },
+              null
+            ]
+          }
+        },
+        "required": [
+          "models"
+        ],
+        "title": "models",
         "type": "object"
       },
       "PatchAssetId": {
