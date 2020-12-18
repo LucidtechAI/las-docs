@@ -1,0 +1,12 @@
+{
+  "$schema": "https://json-schema.org/draft-04/schema#",
+  "title": "in",
+  "type": "object",
+  "properties": {
+    "document_id": {"type": "string"},
+    "modelId": {"type": "string"}
+  },
+  "required": [
+    "document_id"
+  ]
+}

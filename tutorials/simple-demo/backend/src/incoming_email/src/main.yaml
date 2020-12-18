@@ -1,0 +1,227 @@
+AWSTemplateFormatVersion: 2010-09-09
+Description: Master Stack for Obos Email integration
+
+
+Parameters:
+  KeyPrefix:
+    Type: String
+    Default: emails
+
+  UnprocessedPrefix:
+    Type: String
+    Default: unprocessed
+
+  ProcessedPrefix:
+    Type: String
+    Default: processed
+
+  DebtCollectionPrefix:
+    Type: String
+    Default: debt_collection
+
+  OverduePrefix:
+    Type: String
+    Default: overdue
+
+  OtherPrefix:
+    Type: String
+    Default: other
+
+  Cpu:
+    Type: Number
+    Default: 4096
+
+  Memory:
+    Type: Number
+    Default: 16384
+
+  ServiceName:
+    Type: String
+    Default: EmailInput
+
+
+Resources:
+  EmailBucket:
+    Type: AWS::S3::Bucket
+
+  EmailBucketPolicy:
+    Type: AWS::S3::BucketPolicy
+    Properties:
+      Bucket: !Ref EmailBucket
+      PolicyDocument:
+        Statement:
+          Effect: Allow
+          Principal:
+            Service: ses.amazonaws.com
+          Action: s3:PutObject
+          Resource: !Sub arn:aws:s3:::${EmailBucket}/*
+          Condition:
+            StringEquals:
+              aws:Referer: !Ref AWS::AccountId
+
+  IncomingEmailRule:
+    Type: AWS::SES::ReceiptRule
+    DependsOn: EmailBucketPolicy
+    Properties:
+      RuleSetName: default-rule-set
+      Rule:
+        Actions:
+          - S3Action:
+              BucketName: !Ref EmailBucket
+              ObjectKeyPrefix: !Ref KeyPrefix
+        Enabled: true
+        Recipients:
+          - {{ Recipient }}
+        ScanEnabled: true
+        TlsPolicy: Require
+
+  ExecutionRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: 2012-10-17
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: ecs-tasks.amazonaws.com
+            Action: sts:AssumeRole
+      ManagedPolicyArns:
+        - arn:aws:iam::aws:policy/service-role/AmazonECSTaskExecutionRolePolicy
+
+  ContainerRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: 2012-10-17
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: ecs-tasks.amazonaws.com
+            Action: sts:AssumeRole
+      Policies:
+        - PolicyName: GetModel
+          PolicyDocument:
+            Version: 2012-10-17
+            Statement:
+              - Effect: Allow
+                Action:
+                  - s3:GetObject
+                Resource: !Sub ${EmailBucket.Arn}/frozen_east_text_detection.pb
+        - PolicyName: ListAndGetEmails
+          PolicyDocument:
+            Version: 2012-10-17
+            Statement:
+              - Effect: Allow
+                Action:
+                  - s3:PutObject
+                  - s3:GetObject
+                  - s3:DeleteObject
+                Resource:
+                  - !Sub ${EmailBucket.Arn}/${UnprocessedPrefix}/*
+                  - !Sub ${EmailBucket.Arn}/${ProcessedPrefix}/*
+                  - !Sub ${EmailBucket.Arn}/${DebtCollectionPrefix}/*
+                  - !Sub ${EmailBucket.Arn}/${OverduePrefix}/*
+                  - !Sub ${EmailBucket.Arn}/${OtherPrefix}/*
+              - Effect: Allow
+                Action:
+                  - s3:GetObject
+                  - s3:DeleteObject
+                Resource: !Sub ${EmailBucket.Arn}/${KeyPrefix}/*
+              - Effect: Allow
+                Action:
+                  - s3:ListBucket
+                Resource: !GetAtt EmailBucket.Arn
+        - PolicyName: SendEmail
+          PolicyDocument:
+            Version: 2012-10-17
+            Statement:
+              - Effect: Allow
+                Action:
+                  - ses:SendEmail
+                  - ses:SendRawEmail
+                Resource: !Sub arn:aws:ses:${AWS::Region}:${AWS::AccountId}:identity/{{ Recipient }}
+
+  Cluster:
+    Type: AWS::ECS::Cluster
+
+  LogGroup:
+    Type: AWS::Logs::LogGroup
+    DeletionPolicy: Delete
+
+  TaskDefinition:
+    Type: AWS::ECS::TaskDefinition
+    Properties:
+      ContainerDefinitions:
+        - Image: {{ DockerImageUrl }}
+          LogConfiguration:
+            LogDriver: awslogs
+            Options:
+              awslogs-group: !Ref LogGroup
+              awslogs-region: !Ref AWS::Region
+              awslogs-stream-prefix: !Ref ServiceName
+          Name: !Ref ServiceName
+          Cpu: !Ref Cpu
+          Memory: !Ref Memory
+          Environment:
+            - Name: BUCKET_NAME
+              Value: !Ref EmailBucket
+      Family: !Ref ServiceName
+      Cpu: !Ref Cpu
+      Memory: !Ref Memory
+      ExecutionRoleArn: !GetAtt ExecutionRole.Arn
+      NetworkMode: awsvpc
+      RequiresCompatibilities:
+        - FARGATE
+      TaskRoleArn: !GetAtt ContainerRole.Arn
+
+  EventRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: 2012-10-17
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: events.amazonaws.com
+            Action: sts:AssumeRole
+      Policies:
+        - PolicyName: RunTask
+          PolicyDocument:
+            Version: 2012-10-17
+            Statement:
+              - Effect: Allow
+                Action:
+                  - ecs:RunTask
+                Resource:
+                  - !Ref TaskDefinition
+        - PolicyName: PassExecutionRole
+          PolicyDocument:
+            Statement:
+              - Effect: Allow
+                Action:
+                  - iam:PassRole
+                Resource:
+                  - !GetAtt ExecutionRole.Arn
+                  - !GetAtt ContainerRole.Arn
+                Condition:
+                  StringEqualsIfExists:
+                      iam:PassedToService:
+                          ecs-tasks.amazonaws.com
+
+  IncomingEmailEvent:
+    Type: AWS::Events::Rule
+    Properties:
+      ScheduleExpression: rate(5 minutes)
+      State: ENABLED
+      Targets:
+        - Id: !Ref ServiceName
+          Arn: !GetAtt Cluster.Arn
+          RoleArn: !GetAtt EventRole.Arn
+          EcsParameters:
+            LaunchType: FARGATE
+            TaskDefinitionArn: !Ref TaskDefinition
+            NetworkConfiguration:
+              AwsVpcConfiguration:
+                AssignPublicIp: DISABLED
+                Subnets:
+                  - subnet-516a8e0b

@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft-04/schema#",
+  "title": "out",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "documentId": {"type": "string"},
+    "predictionId": {"type": "string"},
+    "modelId": {"type": "string"}
+  },
+  "required": [
+    "documentId",
+    "predictionId",
+    "modelId"
+  ]
+}
