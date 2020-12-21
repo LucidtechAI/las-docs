@@ -1,14 +1,16 @@
 import { Client as SDKClient } from '@lucidtech/las-sdk-core';
-import { Asset, ContentType, TransitionExecution } from '@lucidtech/las-sdk-core/lib/types';
-import { QueueStatus, RemoteComponentExternalProps } from '../types';
+import { Asset, PredictionResponse, TransitionExecution } from '@lucidtech/las-sdk-core/lib/types';
 
-const assets = {};
+import { QueueStatus, RemoteComponentExternalProps } from '../types';
+import assets from './assets';
+import documents from './documents';
 
 class Client {
-  async getDocument(): Promise<any> {
+  async getDocument(documentId: string): Promise<any> {
     return new Promise((resolve, _reject) => {
       setTimeout(() => {
-        return resolve('');
+        const document = documents[documentId]
+        return resolve(document);
       }, 2000);
     })
   }
@@ -32,26 +34,31 @@ const onRequestNew = (): void => {
   console.log('request new task');
 };
 const getAsset = async (assetId: string): Promise<Asset> => {
-  const asset = assets[assetId];
-  return asset;
+  return new Promise((resolve, _reject) => {
+    setTimeout(() => {
+      const asset = assets[assetId];
+      return resolve(asset);
+    }, 1000);
+  })
 };
+
+const input: PredictionResponse = {
+  documentId: 'las:document:abc',
+  predictions: [
+    {
+      label: 'bank_account',
+      value: '1010101',
+      confidence: 0.9833426,
+    },
+  ],
+}
 
 const transitionExecution: TransitionExecution = {
   executionId: '',
   transitionId: '',
   status: 'running',
   completedBy: null,
-  input: {
-    documentId: 'abcdefg',
-    documentContentType: 'application/pdf' as ContentType,
-    predictions: [
-      {
-        label: 'bank_account',
-        value: '1010101',
-        confidence: 0.9833426,
-      },
-    ],
-  },
+  input
 };
 
 const props: RemoteComponentExternalProps = {
@@ -72,6 +79,7 @@ const props: RemoteComponentExternalProps = {
     transitionType: 'manual',
     assets: {
       jsRemoteComponent: 'las:asset:abcdefg',
+      fields: 'las:asset:fields'
     },
   },
   transitionExecution,

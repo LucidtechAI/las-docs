@@ -1,7 +1,7 @@
 import React, { ReactNode, useEffect, useMemo, useState } from 'react';
 import { PDFObject } from 'react-pdfobject';
 
-import { Button, Input } from '@lucidtech/flyt-form';
+import { Button, DateInput, Input } from '@lucidtech/flyt-form';
 import { RemoteComponentExternalProps } from './types';
 import { Prediction } from '@lucidtech/las-sdk-core/lib/types';
 
@@ -38,13 +38,6 @@ const labelStyle: React.CSSProperties = {
 
 const getPercentage = (confidenceValue: number): number => Math.floor(confidenceValue * 100);
 
-const getConfidenceLevel = (confidenceLevel: number): ConfidenceLevel => {
-  if (confidenceLevel >= 0.97) return 'highest';
-  if (confidenceLevel >= 0.9) return 'high';
-  if (confidenceLevel >= 0.6) return 'low';
-  return 'lowest';
-};
-
 const formatDate = (date: Date): string => {
   const year = new Intl.DateTimeFormat('en', { year: 'numeric' }).format(date);
   const month = new Intl.DateTimeFormat('en', { month: 'numeric' }).format(date);
@@ -52,26 +45,86 @@ const formatDate = (date: Date): string => {
   return `${year}-${month}-${day}`;
 };
 
+const getBestPrediction = (fieldName: string, predictions: Prediction[]): Prediction | undefined => {
+  const fieldPredictions = predictions.filter(prediction => prediction.label === fieldName)
+  fieldPredictions.sort((a, b) => b.confidence - a.confidence)
+
+  return fieldPredictions.pop()
+}
+
+type Field = { type: string; display: string; confidenceLevels: { automated: number, highest: number, high: number, low: number } };
+
 const RemoteComponent = ({
   transitionExecution,
+  transition,
   onApprove,
   onReject,
   onRequestNew,
+  getAsset,
   onSkip,
   client,
 }: RemoteComponentExternalProps): JSX.Element => {
   // You'd probably prefer to use a form library like React Hook Forms, Formik, or similar.
   // For this example we'll simplify it and just make use of useState.
-  const [values, setValues] = useState<Record<string, any>>({});
+  const [fields, setFields] = useState<Record<string, Field>>({});
+  const [values, setValues] = useState<Record<string, string | undefined | null>>({});
+  // predictions will serve as our initial values for the form
+  const [predictions, setPredictions] = useState<Prediction[]>([]);
+
   const [doc, setDoc] = useState('');
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoadingDocument, setIsLoadingDocument] = useState(true);
 
-  // get the document content for our pdf viewer
+  const [isLoadingAssets, setIsLoadingAssets] = useState(true);
+
+  // load fields from asset
   useEffect(() => {
-    setIsLoading(true);
-    if (!transitionExecution) return;
-    if (!transitionExecution.input.documentId) return;
+    const fieldsAssetId = transition?.assets?.fields;
+    if (!fieldsAssetId) return;
+    getAsset(fieldsAssetId)
+      .then((res) => {
+        const decoded = window.atob(res.content!);
+        const fields = JSON.parse(decoded);
 
+        setFields(fields);
+      })
+      .catch((e) => {
+        console.error(e);
+      })
+      .finally(() => {
+        setIsLoadingAssets(false);
+      });
+  }, [transition]);
+
+  // whenever we get new fields or predictions, set new initial values
+  const initialValues = useMemo(() => {
+    const vals: Record<string, Prediction | undefined> = {};
+    Object.keys(fields).forEach(fieldName => {
+      const prediction = getBestPrediction(fieldName, predictions)
+      vals[fieldName] = prediction;
+    })
+
+    return vals;
+  }, [predictions, fields])
+
+  // and also reset values
+  useEffect(() => {
+    const vals: Record<string, string | undefined | null> = {};
+    Object.keys(fields).forEach(fieldName => {
+      const prediction = getBestPrediction(fieldName, predictions)
+      vals[fieldName] = prediction?.value as string | undefined | null;
+    })
+
+    setValues(vals)
+  }, [predictions, fields])
+
+  // new transition execution, get document, and set predictions
+  useEffect(() => {
+    if (!transitionExecution) return;
+
+    setIsLoadingDocument(true);
+    setPredictions(transitionExecution.input.predictions)
+
+    if (!transitionExecution.input.documentId) return;
     client
       .getDocument(transitionExecution.input.documentId)
       .then((res) => {
@@ -82,27 +135,8 @@ const RemoteComponent = ({
         console.error(e);
       })
       .finally(() => {
-        setIsLoading(false);
+        setIsLoadingDocument(false);
       });
-  }, [transitionExecution]);
-
-  // When we get a new transitionExecution, (re)set the form values.
-  // We'll also keep track of the initial predictions separately.
-  const initialValues = useMemo(() => {
-    const values: Record<string, any> = {};
-    // map through the predictions for each field
-    const initialValues: Record<string, Prediction> = Object.entries(transitionExecution.input.predictions).reduce<
-      Record<string, Prediction>
-    >((vals, [key, val]) => {
-      console.log(key, val);
-      // vals[key] = '' || val.candidates[0] || '';
-      // values[key] = '' || val.candidates[0]?.value;
-
-      return vals;
-    }, {});
-
-    setValues(values);
-    return initialValues;
   }, [transitionExecution]);
 
   const onChange = (field: string, value: string) => {
@@ -112,36 +146,90 @@ const RemoteComponent = ({
     }));
   };
 
-  // Two helper functions that we'll use to show the confidence label and automation label,
+  const getConfidenceLevel = (fieldName: string, confidenceLevel: number): ConfidenceLevel => {
+    const levels = {
+      "highest": fields[fieldName]?.confidenceLevels?.highest || 0.97,
+      "high": fields[fieldName]?.confidenceLevels?.high || 0.9,
+      "low": fields[fieldName]?.confidenceLevels?.low || 0.5,
+    }
+
+    if (confidenceLevel >= levels.highest) return 'highest';
+    if (confidenceLevel >= levels.high) return 'high';
+    if (confidenceLevel >= levels.low) return 'low';
+    return 'lowest';
+  };
+
+  // Helper functions that we'll use to show the confidence label and automation label,
   // but only when a value has not been manually edited.
   const isChanged = (field: string) => values[field] !== initialValues[field]?.value;
 
+  
   const getConfidenceProps = (field: string) => {
+    const confidence = initialValues[field]?.confidence || 0;
+    const isAutomated = !isChanged(field) && confidence >= (fields[field]?.confidenceLevels?.automated || 0.98);
     return {
-      confidenceAutomated: !isChanged(field) && initialValues[field]?.confidence >= 0.99,
-      confidenceLevel: isChanged(field) ? undefined : getConfidenceLevel(initialValues[field]?.confidence),
-      confidenceValue: getPercentage(initialValues[field]?.confidence) || undefined,
+      confidenceAutomated: isAutomated,
+      confidenceLevel: isChanged(field) ? undefined : getConfidenceLevel(field, confidence),
+      confidenceValue: getPercentage(confidence) || undefined,
     };
   };
 
   const approve = () => {
     onApprove(values);
     onRequestNew();
-  }
+  };
 
   const reject = () => {
     onReject('Manually rejecting');
     onRequestNew();
-  }
+  };
 
   const skip = () => {
     onSkip();
     onRequestNew();
-  }
+  };
+
+  const getFieldComponent = (fieldKey: string, value: string | null | undefined): JSX.Element => {
+    const type = fields[fieldKey].type;
+    switch (type) {
+      case 'date':
+        return (
+          <>
+            <label htmlFor={fieldKey} style={labelStyle}>
+              {fields[fieldKey].display || fieldKey}
+            </label>
+            <div>
+              <DateInput
+                selected={value && typeof value === 'string' && new Date(value)}
+                onSelect={(date) => onChange(fieldKey, formatDate(date))}
+                onChange={(date) => onChange(fieldKey, formatDate(date as Date))}
+                {...getConfidenceProps(fieldKey)}
+              />
+            </div>
+          </>
+        );
+      default:
+        return (
+          <>
+            <label htmlFor={fieldKey} style={labelStyle}>
+              {fields[fieldKey].display || fieldKey}
+            </label>
+            <Input
+              name={fieldKey}
+              value={value || ''}
+              onChange={(e) => onChange(fieldKey, e.target.value)}
+              {...getConfidenceProps(fieldKey)}
+            />
+          </>
+        );
+    }
+  };
 
   return (
     <div style={{ display: 'flex', flexDirection: 'row', width: '100%' }}>
-      <PDFObject url={doc} containerProps={{ style: { width: '100%', height: '95vh' } }} />
+      <div style={{ flexGrow: 1 }} className="mr-5">
+        <PDFObject url={doc} containerProps={{ style: { width: '100%', height: '95vh' } }} />
+      </div>
       <div style={{ minWidth: '40%' }}>
         <form onSubmit={(e) => e.preventDefault()}>
           <div className="card">
@@ -164,64 +252,9 @@ const RemoteComponent = ({
 
             <div className="card-body">
               <Grid>
-                <label htmlFor="invoice_number" style={labelStyle}>
-                  Invoice number
-                </label>
-                <Input
-                  name="invoice_number"
-                  value={values.invoice_number}
-                  onChange={(e) => onChange('invoice_number', e.target.value)}
-                  {...getConfidenceProps('invoice_number')}
-                />
-                <label htmlFor="supplier_name" style={labelStyle}>
-                  Supplier name
-                </label>
-                <Input
-                  name="supplier_name"
-                  value={values.supplier_name}
-                  onChange={(e) => onChange('supplier_name', e.target.value)}
-                  {...getConfidenceProps('supplier_name')}
-                />
-                <label htmlFor="account_number" style={labelStyle}>
-                  Supplier number
-                </label>
-                <Input
-                  name="account_number"
-                  value={values.account_number}
-                  onChange={(e) => onChange('account_number', e.target.value)}
-                  {...getConfidenceProps('account_number')}
-                />
-                {/* <label htmlFor="invoice_date" style={labelStyle}>
-                Invoice date
-              </label>
-              <div>
-                <DateInput
-                  selected={new Date(values.invoice_date)}
-                  onSelect={(date) => onChange('invoice_date', formatDate(date))}
-                  onChange={(date) => onChange('invoice_date', formatDate(date as Date))}
-                  {...getConfidenceProps('invoice_date')}
-                />
-              </div> */}
-                {/* <label htmlFor="due_date" style={labelStyle}>
-                Due date
-              </label>
-              <div>
-                <DateInput
-                  selected={new Date(values.due_date)}
-                  onSelect={(date) => onChange('due_date', formatDate(date))}
-                  onChange={(date) => onChange('due_date', formatDate(date as Date))}
-                  {...getConfidenceProps('due_date')}
-                />
-              </div> */}
-                <label htmlFor="total_amount" style={labelStyle}>
-                  Total amount
-                </label>
-                <Input
-                  name="total_amount"
-                  value={values.total_amount}
-                  onChange={(e) => onChange('total_amount', e.target.value)}
-                  {...getConfidenceProps('total_amount')}
-                />
+                {Object.entries(values).map(([fieldKey, value]) => {
+                  return <React.Fragment key={fieldKey}>{getFieldComponent(fieldKey, value)}</React.Fragment>;
+                })}
               </Grid>
             </div>
 
