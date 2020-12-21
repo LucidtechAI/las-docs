@@ -33,18 +33,14 @@ def handler(event, environ):
     document_id = event['document_id']
     config = get_config()
     model_id = event.get('model_id', config['model_id'])
-    prediction = client.create_prediction(
+    response = client.create_prediction(
         document_id=document_id,
         model_id=model_id,
         max_pages=config['max_pages'],
         auto_rotate=config['auto_rotate'],
     )
 
-    return {
-        'documentId': document_id,
-        'predictionId': prediction['predictionId'],
-        'modelId': model_id,
-    }
+    return response
 
 
 if __name__ == '__main__':
