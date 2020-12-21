@@ -1,5 +1,6 @@
 {
   "assets": {
-    "jsRemoteComponent": "las:asset:<hex>"
+    "jsRemoteComponent": "las:asset:<hex>",
+    "formConfig": "las:asset:<hex>"
   }
 }
