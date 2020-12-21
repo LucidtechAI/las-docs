@@ -1,0 +1,35 @@
+{
+  "name": "frontend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "webpack.config.js",
+  "scripts": {
+    "build": "npm run build:types && webpack --config=webpack.config.js --mode=production",
+    "build:remote": "npm run build:types && webpack --config=webpack.config.js --mode=production",
+    "build:types": "tsc --emitDeclarationOnly",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "storybook": "start-storybook -p 6006 -s ./public",
+    "build-storybook": "build-storybook -s ./public"
+  },
+  "keywords": [],
+  "author": "Roger Andersen <roger@lucidtech.ai>",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/core": "^7.12.10",
+    "@lucidtech/flyt-form": "^1.2.3",
+    "@lucidtech/las-sdk-core": "^3.2.4",
+    "@storybook/addon-actions": "^6.1.11",
+    "@storybook/addon-essentials": "^6.1.11",
+    "@storybook/addon-links": "^6.1.11",
+    "@storybook/react": "^6.1.11",
+    "babel-loader": "^8.2.2",
+    "react": "^16.14.0",
+    "react-dom": "^16.14.0",
+    "typescript": "^4.1.3",
+    "webpack": "^4.44.2",
+    "webpack-cli": "^4.2.0"
+  },
+  "dependencies": {
+    "react-pdfobject": "^1.1.1"
+  }
+}
