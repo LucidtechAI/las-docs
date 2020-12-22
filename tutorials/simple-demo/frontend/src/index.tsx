@@ -235,7 +235,7 @@ const RemoteComponent = ({
   return (
     <div style={{ display: 'flex', flexDirection: 'row', width: '100%' }}>
       <div style={{ flexGrow: 1 }} className="mr-5">
-        {isLoadingDocument ? (
+        {isLoadingDocument || queueStatus === QueueStatus.LOADING ? (
           <Spinner animation="border" variant="primary" />
         ) : (
           <PDFObject url={doc} containerProps={{ style: { width: '100%', height: '95vh' } }} />
@@ -262,7 +262,7 @@ const RemoteComponent = ({
             </div>
 
             <div className="card-body">
-              {isLoadingAssets || queueStatus === QueueStatus.LOADING ? (
+              {isLoadingAssets || queueStatus === QueueStatus.LOADING || isLoadingDocument ? (
                 <Spinner animation="border" variant="primary" />
               ) : (
                 <Grid>

@@ -27,30 +27,38 @@ type PropProviderProps = {
 const PropProvider = ({ Component }: PropProviderProps) => {
   const [transition, setTransition] = useState(createTransition());
   const [transitionExecution, setTransitionExecution] = useState(createTransitionExecution(transition.transitionId));
+  const [queueStatus, setQueueStatus] = useState(QueueStatus.READY)
 
   const onReject = (taskError: string): void => {
     console.log(taskError);
   };
+
   const onApprove = (taskResult: Record<string, unknown>): void => {
     console.log(taskResult);
   };
+
   const onSkip = (): void => {
     console.log('skip task');
   };
+
   const onEndSession = (): void => {
     console.log('end session');
   };
+
   const onRequestNew = (): void => {
     console.log('request new task');
+    setQueueStatus(QueueStatus.LOADING)
     new Promise<TransitionExecution>((resolve, _reject) => {
       setTimeout(() => {
         const execution = createTransitionExecution(transition.transitionId);
         return resolve(execution);
       }, 1000);
     }).then(res => {
+      setQueueStatus(QueueStatus.READY)
       setTransitionExecution(createTransitionExecution(res.transitionId))
     });
   };
+
   const getAsset = async (assetId: string): Promise<Asset> => {
     return new Promise((resolve, _reject) => {
       setTimeout(() => {
@@ -72,7 +80,7 @@ const PropProvider = ({ Component }: PropProviderProps) => {
       getAsset={getAsset}
       numProcessed={0}
       onSkip={onSkip}
-      queueStatus={QueueStatus.READY}
+      queueStatus={queueStatus}
     />
   );
 };
