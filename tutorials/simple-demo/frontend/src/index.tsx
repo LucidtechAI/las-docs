@@ -175,7 +175,9 @@ const RemoteComponent = ({
   };
 
   const approve = () => {
-    onApprove(values);
+    const valuesCopy = { ...values };
+    Object.keys(valuesCopy).forEach(key => valuesCopy[key] === undefined && delete valuesCopy[key])
+    onApprove(valuesCopy);
     onRequestNew();
   };
 
