@@ -39,14 +39,12 @@
     "noFallthroughCasesInSwitch": true,
     "moduleResolution": "node",
     "baseUrl": "./",
+    "skipLibCheck": true,
     "paths": {
       
     },
     "rootDirs": [
       
-    ],
-    "typeRoots": [
-      "./node_modules/@types"
     ],
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,

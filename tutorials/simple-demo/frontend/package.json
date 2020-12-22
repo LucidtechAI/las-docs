@@ -30,6 +30,7 @@
     "webpack-cli": "^4.2.0"
   },
   "dependencies": {
+    "react-bootstrap": "^1.4.0",
     "react-pdfobject": "^1.1.1"
   }
 }

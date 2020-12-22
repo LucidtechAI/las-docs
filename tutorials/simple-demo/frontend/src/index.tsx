@@ -4,6 +4,7 @@ import { PDFObject } from 'react-pdfobject';
 import { Button, DateInput, Input } from '@lucidtech/flyt-form';
 import { RemoteComponentExternalProps } from './types';
 import { Prediction } from '@lucidtech/las-sdk-core/lib/types';
+import Spinner from 'react-bootstrap/Spinner';
 
 type ConfidenceLevel = 'lowest' | 'low' | 'high' | 'highest';
 type ButtonVariant = 'success' | 'soft' | 'danger' | 'primary';
@@ -46,13 +47,17 @@ const formatDate = (date: Date): string => {
 };
 
 const getBestPrediction = (fieldName: string, predictions: Prediction[]): Prediction | undefined => {
-  const fieldPredictions = predictions.filter(prediction => prediction.label === fieldName)
-  fieldPredictions.sort((a, b) => b.confidence - a.confidence)
+  const fieldPredictions = predictions.filter((prediction) => prediction.label === fieldName);
+  fieldPredictions.sort((a, b) => b.confidence - a.confidence);
 
-  return fieldPredictions.pop()
-}
+  return fieldPredictions.pop();
+};
 
-type Field = { type: string; display: string; confidenceLevels: { automated: number, highest: number, high: number, low: number } };
+type Field = {
+  type: string;
+  display: string;
+  confidenceLevels: { automated: number; highest: number; high: number; low: number };
+};
 
 const RemoteComponent = ({
   transitionExecution,
@@ -98,31 +103,31 @@ const RemoteComponent = ({
   // whenever we get new fields or predictions, set new initial values
   const initialValues = useMemo(() => {
     const vals: Record<string, Prediction | undefined> = {};
-    Object.keys(fields).forEach(fieldName => {
-      const prediction = getBestPrediction(fieldName, predictions)
+    Object.keys(fields).forEach((fieldName) => {
+      const prediction = getBestPrediction(fieldName, predictions);
       vals[fieldName] = prediction;
-    })
+    });
 
     return vals;
-  }, [predictions, fields])
+  }, [predictions, fields]);
 
   // and also reset values
   useEffect(() => {
     const vals: Record<string, string | undefined | null> = {};
-    Object.keys(fields).forEach(fieldName => {
-      const prediction = getBestPrediction(fieldName, predictions)
+    Object.keys(fields).forEach((fieldName) => {
+      const prediction = getBestPrediction(fieldName, predictions);
       vals[fieldName] = prediction?.value as string | undefined | null;
-    })
+    });
 
-    setValues(vals)
-  }, [predictions, fields])
+    setValues(vals);
+  }, [predictions, fields]);
 
   // new transition execution, get document, and set predictions
   useEffect(() => {
     if (!transitionExecution) return;
 
     setIsLoadingDocument(true);
-    setPredictions(transitionExecution.input.predictions)
+    setPredictions(transitionExecution.input.predictions);
 
     if (!transitionExecution.input.documentId) return;
     client
@@ -148,10 +153,10 @@ const RemoteComponent = ({
 
   const getConfidenceLevel = (fieldName: string, confidenceLevel: number): ConfidenceLevel => {
     const levels = {
-      "highest": fields[fieldName]?.confidenceLevels?.highest || 0.97,
-      "high": fields[fieldName]?.confidenceLevels?.high || 0.9,
-      "low": fields[fieldName]?.confidenceLevels?.low || 0.5,
-    }
+      highest: fields[fieldName]?.confidenceLevels?.highest || 0.97,
+      high: fields[fieldName]?.confidenceLevels?.high || 0.9,
+      low: fields[fieldName]?.confidenceLevels?.low || 0.5,
+    };
 
     if (confidenceLevel >= levels.highest) return 'highest';
     if (confidenceLevel >= levels.high) return 'high';
@@ -163,7 +168,6 @@ const RemoteComponent = ({
   // but only when a value has not been manually edited.
   const isChanged = (field: string) => values[field] !== initialValues[field]?.value;
 
-  
   const getConfidenceProps = (field: string) => {
     const confidence = initialValues[field]?.confidence || 0;
     const isAutomated = !isChanged(field) && confidence >= (fields[field]?.confidenceLevels?.automated || 0.98);
@@ -176,7 +180,7 @@ const RemoteComponent = ({
 
   const approve = () => {
     const valuesCopy = { ...values };
-    Object.keys(valuesCopy).forEach(key => valuesCopy[key] === undefined && delete valuesCopy[key])
+    Object.keys(valuesCopy).forEach((key) => valuesCopy[key] === undefined && delete valuesCopy[key]);
     onApprove(valuesCopy);
     onRequestNew();
   };
@@ -230,7 +234,11 @@ const RemoteComponent = ({
   return (
     <div style={{ display: 'flex', flexDirection: 'row', width: '100%' }}>
       <div style={{ flexGrow: 1 }} className="mr-5">
-        <PDFObject url={doc} containerProps={{ style: { width: '100%', height: '95vh' } }} />
+        {isLoadingDocument ? (
+          <Spinner animation="border" variant="primary" />
+        ) : (
+          <PDFObject url={doc} containerProps={{ style: { width: '100%', height: '95vh' } }} />
+        )}
       </div>
       <div style={{ minWidth: '40%' }}>
         <form onSubmit={(e) => e.preventDefault()}>
@@ -253,11 +261,15 @@ const RemoteComponent = ({
             </div>
 
             <div className="card-body">
-              <Grid>
-                {Object.entries(values).map(([fieldKey, value]) => {
-                  return <React.Fragment key={fieldKey}>{getFieldComponent(fieldKey, value)}</React.Fragment>;
-                })}
-              </Grid>
+              {isLoadingAssets ? (
+                <Spinner animation="border" variant="primary" />
+              ) : (
+                <Grid>
+                  {Object.entries(values).map(([fieldKey, value]) => {
+                    return <React.Fragment key={fieldKey}>{getFieldComponent(fieldKey, value)}</React.Fragment>;
+                  })}
+                </Grid>
+              )}
             </div>
 
             <div className="card-footer">
@@ -269,15 +281,31 @@ const RemoteComponent = ({
                 }}
               >
                 <div style={{ order: 2 }}>
-                  <Button variant="success" style={{ width: '150px', order: 1 }} onClick={approve}>
+                  <Button
+                    variant="success"
+                    style={{ width: '150px', order: 1 }}
+                    onClick={approve}
+                    disabled={isLoadingDocument || isLoadingAssets}
+                  >
                     {getButtonIcon('success')}
                   </Button>
                 </div>
                 <div style={{ order: 1, display: 'flex', flexDirection: 'row' }}>
-                  <Button variant="soft" style={{ order: 2 }} onClick={skip}>
+                  <Button
+                    variant="soft"
+                    style={{ order: 2 }}
+                    onClick={skip}
+                    disabled={isLoadingDocument || isLoadingAssets}
+                  >
                     {getButtonIcon('soft')}
                   </Button>
-                  <Button variant="danger" className="mr-2" style={{ order: 1 }} onClick={reject}>
+                  <Button
+                    variant="danger"
+                    className="mr-2"
+                    style={{ order: 1 }}
+                    onClick={reject}
+                    disabled={isLoadingDocument || isLoadingAssets}
+                  >
                     {getButtonIcon('danger')}
                   </Button>
                 </div>
