@@ -2,7 +2,7 @@ import React, { ReactNode, useEffect, useMemo, useState } from 'react';
 import { PDFObject } from 'react-pdfobject';
 
 import { Button, DateInput, Input } from '@lucidtech/flyt-form';
-import { RemoteComponentExternalProps } from './types';
+import { QueueStatus, RemoteComponentExternalProps } from './types';
 import { Prediction } from '@lucidtech/las-sdk-core/lib/types';
 import Spinner from 'react-bootstrap/Spinner';
 
@@ -68,6 +68,7 @@ const RemoteComponent = ({
   getAsset,
   onSkip,
   client,
+  queueStatus
 }: RemoteComponentExternalProps): JSX.Element => {
   // You'd probably prefer to use a form library like React Hook Forms, Formik, or similar.
   // For this example we'll simplify it and just make use of useState.
@@ -261,7 +262,7 @@ const RemoteComponent = ({
             </div>
 
             <div className="card-body">
-              {isLoadingAssets ? (
+              {isLoadingAssets || queueStatus === QueueStatus.LOADING ? (
                 <Spinner animation="border" variant="primary" />
               ) : (
                 <Grid>
