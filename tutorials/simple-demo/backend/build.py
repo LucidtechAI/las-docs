@@ -74,6 +74,9 @@ WORKFLOWS = [
         name='Invoice',
         description='The demo invoice workflow',
     ),
+]
+
+WORKFLOWS_FUTURE = [
     Workflow(
         path=WORKFLOW_PATH / 'receipt-workflow.json',
         error_email=EMAIL,
