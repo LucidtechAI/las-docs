@@ -39,8 +39,7 @@ module.exports = {
     filename: 'remote.js',
   },
   externals: {
-    react: 'react',
-    'react-dom': 'react-dom',
+    react: 'react'
   },
   plugins: [new webpack.DefinePlugin({ ___TUTORIAL_VERSION___: JSON.stringify(version) })],
 };
