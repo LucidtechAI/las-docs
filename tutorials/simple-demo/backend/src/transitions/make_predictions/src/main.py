@@ -30,9 +30,9 @@ def create_api_client():
 
 def handler(event, environ):
     client = create_api_client()
-    document_id = event['document_id']
+    document_id = event['documentId']
     config = get_config()
-    model_id = event.get('model_id', config['model_id'])
+    model_id = event.get('modelId', config['model_id'])
     response = client.create_prediction(
         document_id=document_id,
         model_id=model_id,

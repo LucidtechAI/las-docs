@@ -3,10 +3,10 @@
   "title": "in",
   "type": "object",
   "properties": {
-    "document_id": {"type": "string"},
+    "documentId": {"type": "string"},
     "modelId": {"type": "string"}
   },
   "required": [
-    "document_id"
+    "documentId"
   ]
 }
