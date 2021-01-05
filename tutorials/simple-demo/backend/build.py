@@ -44,13 +44,6 @@ TRANSITIONS = [
         docker_image_tag='make-predictions',
     ),
     Transition(
-        path=TRANSITION_PATH / 'export_document',
-        transition_type='docker',
-        name='ExportDocument',
-        description='Export approved document',
-        docker_image_tag='export-document',
-    ),
-    Transition(
         path=TRANSITION_PATH / 'manual_invoice',
         transition_type='manual',
         name='Invoice',
@@ -64,6 +57,15 @@ TRANSITIONS = [
     )
 ]
 
+EXPORT_TRANSITIONS = [
+    Transition(
+        path=TRANSITION_PATH / 'export_document',
+        transition_type='docker',
+        name='ExportDocument',
+        description='Export approved document',
+        docker_image_tag='export-document',
+    ),
+]
 
 WORKFLOWS = [
     Workflow(
@@ -118,7 +120,9 @@ def create_assets(client):
     assets = {}
     remote_component = REMOTE_COMPONENT_PATH.read_bytes()
     assets['invoice'] = client.create_asset(remote_component)['assetId']
+    assets['invoice_form_config'] = client.create_asset(b'foo')['assetId']
     assets['receipt'] = client.create_asset(remote_component)['assetId']
+    assets['receipt_form_config'] = client.create_asset(b'foo')['assetId']
     return assets
 
 
@@ -128,6 +132,7 @@ def update_transitions(assets):
         {
             "assets": {
                 "jsRemoteComponent": assets['invoice'],
+                "formConfig": assets['invoice_form_config'],
             }
         },
         indent=2,
@@ -138,6 +143,7 @@ def update_transitions(assets):
         {
             "assets": {
                 "jsRemoteComponent": assets['receipt'],
+                "formConfig": assets['receipt_form_config'],
             }
         },
         indent=2,

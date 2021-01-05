@@ -6,9 +6,9 @@
       "MakePredictions": {
         "Type": "Task",
         "Resource": "las:transition:<hex>",
-        "Next": "Ordinær"
+        "Next": "Receipt"
       },
-      "Manual": {
+      "Receipt": {
         "Type": "Task",
         "Resource": "las:transition:<hex>",
         "TimeoutSeconds": 900,
