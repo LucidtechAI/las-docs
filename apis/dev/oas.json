@@ -2,7 +2,7 @@
   "openapi": "3.0.1",
   "info": {
     "title": "Lucidtech API",
-    "version": "2020-12-15T20:20:45Z"
+    "version": "2021-01-08T12:26:54Z"
   },
   "servers": [
     {
@@ -3582,7 +3582,7 @@
           "httpMethod": "POST",
           "passthroughBehavior": "never",
           "requestTemplates": {
-            "application/json": "#set($body = $input.path('$'))\n{\n    \"oauthClientId\": \"$context.authorizer.claims.client_id\",\n    \"oauthSubId\": \"$context.authorizer.claims.sub\",\n    #set ($jsonbody = $util.parseJson($input.json('$')))\n    #if( $jsonbody.containsKey('name') && $body.name == $null)\n        \"name\": null,\n    #elseif( $jsonbody.containsKey('name'))\n        \"name\": \"$body.name\",\n    #end\n    #if( $jsonbody.containsKey('description') && $body.description == $null)\n        \"description\": null,\n    #elseif( $jsonbody.containsKey('description'))\n        \"description\": \"$body.description\",\n    #end\n#if( \"$!body.params\" != \"\")\n    \"params\": $input.json('$.params'),\n#end\n#if( \"$body.inputJsonSchema\" != \"\")\n    \"inputJsonSchema\": $input.json('$.inputJsonSchema'),\n#end\n#if( \"$body.outputJsonSchema\" != \"\")\n    \"outputJsonSchema\": $input.json('$.outputJsonSchema'),\n#end\n    \"transitionType\": \"$body.transitionType\"\n}\n"
+            "application/json": "#set($body = $input.path('$'))\n{\n    \"oauthClientId\": \"$context.authorizer.claims.client_id\",\n    \"oauthSubId\": \"$context.authorizer.claims.sub\",\n    #set ($jsonbody = $util.parseJson($input.json('$')))\n    #if( $jsonbody.containsKey('name') && $body.name == $null)\n        \"name\": null,\n    #elseif( $jsonbody.containsKey('name'))\n        \"name\": \"$body.name\",\n    #end\n    #if( $jsonbody.containsKey('description') && $body.description == $null)\n        \"description\": null,\n    #elseif( $jsonbody.containsKey('description'))\n        \"description\": \"$body.description\",\n    #end\n#if( \"$!body.parameters\" != \"\")\n    \"parameters\": $input.json('$.parameters'),\n#end\n#if( \"$body.inputJsonSchema\" != \"\")\n    \"inputJsonSchema\": $input.json('$.inputJsonSchema'),\n#end\n#if( \"$body.outputJsonSchema\" != \"\")\n    \"outputJsonSchema\": $input.json('$.outputJsonSchema'),\n#end\n    \"transitionType\": \"$body.transitionType\"\n}\n"
           },
           "responses": {
             "^\\[BadRequest\\].*": {
@@ -7585,7 +7585,7 @@
           "outputJsonSchema": {
             "type": "object"
           },
-          "params": {
+          "parameters": {
             "anyOf": [
               {
                 "additionalProperties": false,
@@ -7599,6 +7599,13 @@
                   "environment": {
                     "additionalProperties": true,
                     "type": "object"
+                  },
+                  "environmentSecrets": {
+                    "items": {
+                      "pattern": "^las:secret:[a-f0-9]{32}$",
+                      "type": "string"
+                    },
+                    "type": "array"
                   },
                   "imageUrl": {
                     "type": "string"
@@ -7932,6 +7939,14 @@
           "outputJsonSchema": {
             "type": "object"
           },
+          "parameters": {
+            "anyOf": [
+              {
+                "type": "object"
+              },
+              null
+            ]
+          },
           "transitionId": {
             "anyOf": [
               {
@@ -8034,53 +8049,102 @@
       "TransitionExecutions": {
         "additionalProperties": false,
         "properties": {
-          "completedBy": {
-            "anyOf": [
-              {
-                "type": "string"
+          "executions": {
+            "items": {
+              "additionalProperties": false,
+              "properties": {
+                "completedBy": {
+                  "anyOf": [
+                    {
+                      "type": "string"
+                    },
+                    null
+                  ]
+                },
+                "endTime": {
+                  "anyOf": [
+                    {
+                      "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2} ?[0-9]{2}:?[0-9]{2}:?[0-9]{2}.?[0-9]{6}",
+                      "type": "string"
+                    },
+                    null
+                  ]
+                },
+                "executionId": {
+                  "pattern": "^las:transition-execution:[a-f0-9]{32}$",
+                  "type": "string"
+                },
+                "input": {
+                  "anyOf": [
+                    {
+                      "type": "object"
+                    },
+                    null
+                  ]
+                },
+                "startTime": {
+                  "anyOf": [
+                    {
+                      "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2} ?[0-9]{2}:?[0-9]{2}:?[0-9]{2}.?[0-9]{6}",
+                      "type": "string"
+                    },
+                    null
+                  ]
+                },
+                "status": {
+                  "enum": [
+                    "running",
+                    "succeeded",
+                    "failed",
+                    "rejected",
+                    "retry"
+                  ],
+                  "type": "string"
+                },
+                "transitionId": {
+                  "anyOf": [
+                    {
+                      "pattern": "^las:transition:[a-f0-9]{32}$",
+                      "type": "string"
+                    },
+                    {
+                      "pattern": "^las:transition:commons-[0-9A-Za-z-]+$",
+                      "type": "string"
+                    }
+                  ]
+                }
               },
-              null
-            ]
+              "required": [
+                "completedBy",
+                "executionId",
+                "input",
+                "status",
+                "transitionId"
+              ],
+              "type": "object"
+            },
+            "type": "array"
           },
-          "endTime": {
+          "nextToken": {
             "anyOf": [
               {
-                "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2} ?[0-9]{2}:?[0-9]{2}:?[0-9]{2}.?[0-9]{6}",
-                "type": "string"
-              },
-              null
-            ]
-          },
-          "executionId": {
-            "pattern": "^las:transition-execution:[a-f0-9]{32}$",
-            "type": "string"
-          },
-          "input": {
-            "anyOf": [
-              {
-                "type": "object"
-              },
-              null
-            ]
-          },
-          "startTime": {
-            "anyOf": [
-              {
-                "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2} ?[0-9]{2}:?[0-9]{2}:?[0-9]{2}.?[0-9]{6}",
                 "type": "string"
               },
               null
             ]
           },
           "status": {
-            "enum": [
-              "running",
-              "succeeded",
-              "failed",
-              "rejected",
-              "retry"
-            ],
-            "type": "string"
+            "items": {
+              "enum": [
+                "running",
+                "succeeded",
+                "failed",
+                "rejected",
+                "retry"
+              ],
+              "type": "string"
+            },
+            "type": "array"
           },
           "transitionId": {
             "anyOf": [
@@ -8096,13 +8160,10 @@
           }
         },
         "required": [
-          "completedBy",
-          "executionId",
-          "input",
-          "status",
+          "executions",
           "transitionId"
         ],
-        "title": "transition-execution",
+        "title": "transition-executions",
         "type": "object"
       },
       "Transitions": {
@@ -8161,6 +8222,14 @@
                 },
                 "outputJsonSchema": {
                   "type": "object"
+                },
+                "parameters": {
+                  "anyOf": [
+                    {
+                      "type": "object"
+                    },
+                    null
+                  ]
                 },
                 "transitionId": {
                   "anyOf": [
