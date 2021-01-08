@@ -6,22 +6,6 @@
       "MakePredictions": {
         "Type": "Task",
         "Resource": "las:transition:<hex>",
-        "Next": "Invoice"
-      },
-      "Invoice": {
-        "Type": "Task",
-        "Resource": "las:transition:<hex>",
-        "TimeoutSeconds": 900,
-        "Retry": [
-          {
-            "ErrorEquals": [
-              "States.Timeout"
-            ],
-            "IntervalSeconds": 3,
-            "MaxAttempts": 50,
-            "BackoffRate": 1
-          }
-        ],
         "End": true
       }
     }

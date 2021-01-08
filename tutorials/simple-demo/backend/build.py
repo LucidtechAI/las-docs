@@ -43,18 +43,6 @@ TRANSITIONS = [
         description='make predition on a document',
         docker_image_tag='make-predictions',
     ),
-    Transition(
-        path=TRANSITION_PATH / 'manual_invoice',
-        transition_type='manual',
-        name='Invoice',
-        description='queue for approving invoices',
-    ),
-    Transition(
-        path=TRANSITION_PATH / 'manual_receipt',
-        transition_type='manual',
-        name='Receipt',
-        description='queue for approving receipts',
-    )
 ]
 
 EXPORT_TRANSITIONS = [
@@ -86,16 +74,27 @@ WORKFLOWS_FUTURE = [
 ]
 
 
-def create_secret(client):
+def create_secrets(client):
     data = {
         'username': os.environ['DOCKER_USERNAME'],
         'password': os.environ['DOCKER_PASSWORD'],
     }
-    response = client.create_secret(data, description='docker credentials')
-    return response['secretId']
+    credentials = {k: os.environ.get(k) for k in (
+            'LAS_CLIENT_ID',
+            'LAS_CLIENT_SECRET',
+            'LAS_API_KEY',
+            'LAS_AUTH_ENDPOINT',
+            'LAS_API_ENDPOINT'
+        )
+    }
+    response = {
+        'docker_credentials': client.create_secret(data, description='docker credentials')['secretId'],
+        'las_credentials': client.create_secret(credentials, description='las credentials')['secretId'],
+    }
+    return response
 
 
-def create_transitions(client, secret_id):
+def create_transitions(client, secrets):
     transitions = {}
     for transition in TRANSITIONS:
         logging.info(f'create {transition.name}...')
@@ -104,15 +103,17 @@ def create_transitions(client, secret_id):
         params = json.loads((transition.path / transition.params_name).read_text())
         if transition.transition_type == 'docker':
             image_base_name = ':'.join([DOCKER_IMAGE, transition.docker_image_tag])
-            params['imageUrl'] = '-'.join([image_base_name, STAGE])
+            params['imageUrl'] = '-'.join([image_base_name])
         if 'secretId' in params:
-            params['secretId'] = secret_id
+            params['secretId'] = secrets['docker_credentials']
+        if 'environmentSecrets' in params:
+            params['environmentSecrets'] = [secrets['las_credentials']]
         response = client.create_transition(
             name=transition.name,
             in_schema=in_schema,
             out_schema=out_schema,
             transition_type=transition.transition_type,
-            params=params,
+            parameters=params,
             description=transition.description,
         )
         transitions[transition.name] = response['transitionId']
@@ -175,13 +176,12 @@ def create_workflows(client, transitions):
 
 if __name__ == '__main__':
     client = las.Client()
-    secret_id = create_secret(client)
-    assets = create_assets(client)
-    update_transitions(assets)
-    transitions = create_transitions(client, secret_id)
+    secrets = create_secrets(client)
+    #assets = create_assets(client)
+    #update_transitions(assets)
+    transitions = create_transitions(client, secrets)
     workflows = create_workflows(client, transitions)
 
-    logging.info(f'Secret: \n {secret_id}')
-    logging.info('\n'.join(['Assets:', yaml.dump(assets, indent=2)]))
+    logging.info(f'Secrets: \n {secrets}')
     logging.info('\n'.join(['Transitions:', yaml.dump(transitions, indent=2)]))
     logging.info('\n'.join(['Workflows:', yaml.dump(workflows, indent=2)]))
