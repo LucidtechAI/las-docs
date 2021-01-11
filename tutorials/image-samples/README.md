@@ -10,3 +10,7 @@ or it can be used as a starting point for a customized step in a workflow.
 To make a workflow that consist of the samples in this folder 
 there is no need to dwell here. Just check out the tutorials in the parent folder.
 
+## Sample images
+* make-predictions: get predictions from Lucidtechs world class OCR-models
+* feedback-to-model: Make sure the OCR-models stays state-of-the-art by feeding corrected results back to the model 
+* export-to-semine: One of many accounting systems Lucidtech provides a standard integration module 
