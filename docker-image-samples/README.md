@@ -1,14 +1,17 @@
 # Docker Image Samples
-Docker images are the essence of an automatic transition, 
-and the building blocks of a workflow
+Docker images are the essence of an automatic transition;
+they are the building blocks of a workflow.
+
 
 ## Introduction
 This folder contains sample images that can be used directly in an automatic transition, 
-or it can be used as a starting point for a customized step in a workflow.
+or as a starting point for a customized step in a workflow.
+
 
 ## Getting started
 To make a workflow that consist of the samples in this folder 
-there is no need to dwell here. Just check out the tutorials in the parent folder.
+there is no need to dwell here. Just check out the 
+[tutorials](https://github.com/LucidtechAI/las-docs/tree/master/tutorials/README.md)
 
 ## Sample images
 * make-predictions: get predictions from Lucidtechs world class OCR-models
