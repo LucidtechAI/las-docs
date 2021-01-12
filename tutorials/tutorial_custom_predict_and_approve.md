@@ -11,7 +11,7 @@ The workflow in this tutorial will consist of two steps:
 
 ## Prerequisites
 * Download the [lucidtech CLI](https://github.com/LucidtechAI/las-cli)
-* create a remote component [tutorial](https://github.com/LucidtechAI/flyt-form/tree/master/examples)
+* Create a remote component [tutorial](https://github.com/LucidtechAI/flyt-form/tree/master/examples)
 
 
 ## Manual approval (manual transition)

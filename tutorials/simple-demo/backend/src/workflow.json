@@ -5,12 +5,12 @@
     "States": {
       "MakePredictions": {
         "Type": "Task",
-        "Resource": "las:transition:<hex>",
+        "Resource": "las:transition:0449232eadcb4bcfb3956ec2eb42ae96",
         "Next": "ManualApprove"
       },
       "ManualApprove": {
         "Type": "Task",
-        "Resource": "las:transition:<hex>",
+        "Resource": "las:transition:6eb47493fd7b449dae0cf5f62038aa70",
         "TimeoutSeconds": 900,
         "Retry": [
           {

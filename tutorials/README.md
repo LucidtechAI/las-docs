@@ -1,18 +1,10 @@
-## Prerequisites
+## Tutorials
 
-* LAS credentials
-* A Model for making predictions (This can be fixed after setting up the workflow)
+Welcome to Lucidtechs tutorials. 
 
+If you are looking for a simple plug and play tutorial the best place to start is the
+[simple-demo](https://github.com/LucidtechAI/las-docs/tree/master/tutorials/simple-demo/README.md).
 
-## Steps
-* Build the remote component and copy it to the assets folder for the manual step
-```                 
-cd simple-demo
-npm run --prefix frontend build:remote 
-cp frontend/dist/remote.js backend/src/ManualApprove/assets/jsRemoteComponent.js
-```
-* Make sure all environment variables are assigned correcty
-* create the demo workflow
-```
-python backend/build.py
-```
+If you need to make something a bit more customizable check out this
+[tutorial](https://github.com/LucidtechAI/las-docs/tree/master/tutorials/tutorial_custom_predict_and_approve.md).
+

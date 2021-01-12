@@ -13,6 +13,7 @@
 * [FAQ](getting-started/faq.md)
 * [Help](getting-started/help.md)
 * [Tutorials](tutorials/README.md)
+  * [Simple demo](tutorials/simple-demo/README.md)
   * [Custom workflow](tutorials/tutorial_custom_predict_and_approve.md)
   * [Docker samples](docker-image-samples/README.md)
 
