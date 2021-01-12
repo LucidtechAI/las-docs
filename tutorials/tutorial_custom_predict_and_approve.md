@@ -40,7 +40,7 @@ las transitions create manual params.json
 
 ## Automatic prediction (docker transition)
 An automatic step is made by creating a docker image that will perform a task 
-without any user involved. Check out our [sample images](docker-sample-images) for inspiration and best practices. 
+without any user involved. Check out our [sample images](../docker-sample-images) for inspiration and best practices. 
 
 The first step is to build a docker image and push it to some repository
 ```commandline
