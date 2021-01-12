@@ -2,8 +2,8 @@
   "imageUrl": "<image-url>",
   "secretId": "las:secret:<hex>",
   "environmentSecrets": [
-    "las-credentials": "las:secret:<hex>",
-    "semine-credentials": "las:secret:<hex>"
+    "las:secret:<hex-las-credentials>",
+    "las:secret:<hex-semine-credentials>"
   ]
 }
 

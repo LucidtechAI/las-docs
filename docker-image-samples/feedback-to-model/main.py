@@ -26,10 +26,7 @@ if __name__ == '__main__':
     logging.info(f'Execute {execution_id} of transition {transition_id}')
 
     try:
-        response = las_client.list_transition_executions(transition_id, execution_id=execution_id)
-        executions = response['executions']
-        logging.info(f'executions: {executions}')
-        execution = executions.pop()
+        execution = las_client.get_transition_execution(transition_id, execution_id=execution_id)
         event = execution['input']
         logging.info(f'event: {event}')
         output = handler(las_client, event, environ=os.environ)

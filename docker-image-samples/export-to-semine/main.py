@@ -142,10 +142,7 @@ if __name__ == '__main__':
     execution_id = os.environ['EXECUTION_ID']
 
     try:
-        response = las_client.list_transition_executions(transition_id, execution_id=execution_id)
-        executions = response['executions']
-        logging.info(f'executions: {executions}')
-        execution = executions.pop()
+        execution = las_client.get_transition_execution(transition_id, execution_id=execution_id)
         event = execution['input']
         output = handler(las_client, event, environ=os.environ)
         las_client.update_transition_execution(
