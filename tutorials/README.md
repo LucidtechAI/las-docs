@@ -1,4 +1,4 @@
-## Prerequisite
+## Prerequisites
 
 * LAS credentials
 * A Model for making predictions (This can be fixed after setting up the workflow)
