@@ -1,8 +1,0 @@
-{
-  "imageUrl": "<image-url>",
-  "secretId": "las:secret:<hex>",
-  "environmentSecrets": [
-    "las:secret:<hex>"
-  ]
-}
-

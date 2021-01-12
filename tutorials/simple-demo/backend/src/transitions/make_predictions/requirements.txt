@@ -1,5 +1,0 @@
-lucidtech-las == 3.1.0
-backoff
-filetype
-requests
-urllib3

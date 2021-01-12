@@ -1,14 +1,14 @@
 {
   "definition": {
-    "Comment": "receipt workflow",
+    "Comment": "simple demo workflow",
     "StartAt": "MakePredictions",
     "States": {
       "MakePredictions": {
         "Type": "Task",
         "Resource": "las:transition:<hex>",
-        "Next": "Receipt"
+        "Next": "ManualApprove"
       },
-      "Receipt": {
+      "ManualApprove": {
         "Type": "Task",
         "Resource": "las:transition:<hex>",
         "TimeoutSeconds": 900,

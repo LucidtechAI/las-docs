@@ -1,7 +1,0 @@
-{
-  "imageUrl": "<image-url>",
-  "secretId": "las:secret:<hex>",
-  "memory": 1024,
-  "cpu": 256 
-}
-

@@ -2,83 +2,15 @@ import las
 import json
 import logging
 import os
-import yaml
-from dataclasses import dataclass
-from io import BytesIO
+from argparse import ArgumentParser, RawDescriptionHelpFormatter
 from pathlib import Path
-from typing import Optional
 
-TRANSITION_PATH = Path('src/transitions/')
-WORKFLOW_PATH = Path('src/workflows/')
-EMAIL = os.environ['EMAIL']
-STAGE = os.environ['STAGE']
-REMOTE_COMPONENT_PATH = Path(__file__).parent / '../frontend/dist/remote.js'
-DOCKER_IMAGE = os.environ['DOCKER_IMAGE']
+EMAIL = os.environ.get('EMAIL', 'no-reply@lucidtech.ai')
 
 logging.getLogger().setLevel(logging.INFO)
 
-@dataclass
-class Transition:
-    path: Path
-    transition_type: str
-    name: str
-    description: str
-    docker_image_tag: Optional[str] = None
-    params_name: Optional[str] = 'params.json'
 
-
-@dataclass
-class Workflow:
-    path: Path
-    error_email: str
-    name: str
-    description: str
-
-
-TRANSITIONS = [
-    Transition(
-        path=TRANSITION_PATH / 'make_predictions',
-        transition_type='docker',
-        name='MakePredictions',
-        description='make predition on a document',
-        docker_image_tag='make-predictions',
-    ),
-]
-
-EXPORT_TRANSITIONS = [
-    Transition(
-        path=TRANSITION_PATH / 'export_document',
-        transition_type='docker',
-        name='ExportDocument',
-        description='Export approved document',
-        docker_image_tag='export-document',
-    ),
-]
-
-WORKFLOWS = [
-    Workflow(
-        path=WORKFLOW_PATH / 'invoice-workflow.json',
-        error_email=EMAIL,
-        name='Invoice',
-        description='The demo invoice workflow',
-    ),
-]
-
-WORKFLOWS_FUTURE = [
-    Workflow(
-        path=WORKFLOW_PATH / 'receipt-workflow.json',
-        error_email=EMAIL,
-        name='Receipt',
-        description='The demo receipt workflow',
-    )
-]
-
-
-def create_secrets(client):
-    data = {
-        'username': os.environ['DOCKER_USERNAME'],
-        'password': os.environ['DOCKER_PASSWORD'],
-    }
+def create_secret(client):
     credentials = {k: os.environ.get(k) for k in (
             'LAS_CLIENT_ID',
             'LAS_CLIENT_SECRET',
@@ -87,101 +19,88 @@ def create_secrets(client):
             'LAS_API_ENDPOINT'
         )
     }
-    response = {
-        'docker_credentials': client.create_secret(data, description='docker credentials')['secretId'],
-        'las_credentials': client.create_secret(credentials, description='las credentials')['secretId'],
-    }
+    response = client.create_secret(credentials, description='las credentials')
+    return response['secretId']
+
+
+def create_transition(client, transition_path: Path, secret_id=None):
+    resources = {}
+    logging.info(f'create {transition_path}...')
+    in_schema = json.loads((transition_path / 'in_schema.json').read_text())
+    out_schema = json.loads((transition_path / 'out_schema.json').read_text())
+    params = json.loads((transition_path / 'params.json').read_text())
+    transition_type = 'docker' if 'imageUrl' in params else 'manual'
+
+    if transition_type == 'manual':
+        for asset_path in (transition_path / 'assets').iterdir():
+            data = asset_path.read_bytes()
+            asset_id = client.create_asset(data)['assetId']
+            resources[asset_path.stem] = asset_id
+            params['assets'][asset_path.stem] = asset_id
+
+    if 'environmentSecrets' in params:
+        secret_id = secret_id or create_secret(client)
+        params['environmentSecrets'] = [secret_id]
+        resources['credentials'] = secret_id
+
+    response = client.create_transition(
+        name=transition_path.name,
+        in_schema=in_schema,
+        out_schema=out_schema,
+        transition_type=transition_type,
+        parameters=params,
+    )
+    resources['transitionId'] = response['transitionId']
+    return resources
+
+
+def create_workflow(client, specification_path, name, description, secret_id=None):
+    logging.info('create Workflow...')
+
+    specification = json.loads(specification_path.read_text())
+    for state in specification['definition']['States']:
+        transition_path = Path('src') / state
+
+        if not transition_path.is_dir():
+            raise FileNotFoundError(
+                f'State names must coincide with transition definition folders, {transition_path} is not a directory'
+            )
+
+        resources = create_transition(client, transition_path, secret_id=secret_id)
+        logging.info(f'successfully created {transition_path}: {json.dumps(resources, indent=2)}')
+
+        specification['definition']['States'][state]['Resource'] = resources['transitionId']
+    specification_path.write_text(json.dumps(specification, indent=2))
+    response = client.create_workflow(
+        specification=specification,
+        name=name,
+        description=description,
+        error_config={"email": EMAIL},
+    )
+    logging.info(f'successfully created workflow {name}: {json.dumps(response, indent=2)}')
     return response
 
 
-def create_transitions(client, secrets):
-    transitions = {}
-    for transition in TRANSITIONS:
-        logging.info(f'create {transition.name}...')
-        in_schema = json.loads((transition.path / 'in_schema.json').read_text())
-        out_schema = json.loads((transition.path / 'out_schema.json').read_text())
-        params = json.loads((transition.path / transition.params_name).read_text())
-        if transition.transition_type == 'docker':
-            image_base_name = ':'.join([DOCKER_IMAGE, transition.docker_image_tag])
-            params['imageUrl'] = '-'.join([image_base_name])
-        if 'secretId' in params:
-            params['secretId'] = secrets['docker_credentials']
-        if 'environmentSecrets' in params:
-            params['environmentSecrets'] = [secrets['las_credentials']]
-        response = client.create_transition(
-            name=transition.name,
-            in_schema=in_schema,
-            out_schema=out_schema,
-            transition_type=transition.transition_type,
-            parameters=params,
-            description=transition.description,
-        )
-        transitions[transition.name] = response['transitionId']
-    return transitions
-
-
-def create_assets(client):
-    assets = {}
-    remote_component = REMOTE_COMPONENT_PATH.read_bytes()
-    assets['invoice'] = client.create_asset(remote_component)['assetId']
-    assets['invoice_form_config'] = client.create_asset(b'foo')['assetId']
-    assets['receipt'] = client.create_asset(remote_component)['assetId']
-    assets['receipt_form_config'] = client.create_asset(b'foo')['assetId']
-    return assets
-
-
-def update_transitions(assets):
-    path = TRANSITION_PATH / 'manual_invoice' / 'params.json'
-    path.write_text(json.dumps(
-        {
-            "assets": {
-                "jsRemoteComponent": assets['invoice'],
-                "formConfig": assets['invoice_form_config'],
-            }
-        },
-        indent=2,
-    ))
-
-    path = TRANSITION_PATH / 'manual_receipt' / 'params.json'
-    path.write_text(json.dumps(
-        {
-            "assets": {
-                "jsRemoteComponent": assets['receipt'],
-                "formConfig": assets['receipt_form_config'],
-            }
-        },
-        indent=2,
-    ))
-
-
-def create_workflows(client, transitions):
-    workflows = {}
-    logging.info('create Workflows...')
-
-    for workflow in WORKFLOWS:
-        specification = json.loads(workflow.path.read_text())
-        for state in specification['definition']['States']:
-            if state in transitions:
-                specification['definition']['States'][state]['Resource'] = transitions[state]
-        workflow.path.write_text(json.dumps(specification, indent=2))
-        response = client.create_workflow(
-            specification=specification,
-            name=workflow.name,
-            description=workflow.description,
-            error_config={"email": workflow.error_email},
-        )
-        workflows[workflow.name] = response['workflowId']
-    return workflows
-
-
 if __name__ == '__main__':
+    parser = ArgumentParser(
+        formatter_class=RawDescriptionHelpFormatter,
+        description='\n'.join([
+            'This script builds all necessary components for the simple demo',
+            'Prerequisites: Lucidtech credentials',
+            'Please supply the secretId for your credentials if they have already been stored',
+        ])
+    )
+    parser.add_argument('--workflow-spec', default=Path('src/workflow.json'), type=Path)
+    parser.add_argument('--name', default='simple-demo')
+    parser.add_argument('--description', default='A simple workflow for demonstration purposes')
+    parser.add_argument('--secret-id', help='secretId to las credentials')
+    args = parser.parse_args()
     client = las.Client()
-    secrets = create_secrets(client)
-    #assets = create_assets(client)
-    #update_transitions(assets)
-    transitions = create_transitions(client, secrets)
-    workflows = create_workflows(client, transitions)
+    create_workflow(
+        client=client,
+        specification_path=args.workflow_spec,
+        name=args.name,
+        description=args.description,
+        secret_id=args.secret_id,
+    )
 
-    logging.info(f'Secrets: \n {secrets}')
-    logging.info('\n'.join(['Transitions:', yaml.dump(transitions, indent=2)]))
-    logging.info('\n'.join(['Workflows:', yaml.dump(workflows, indent=2)]))
