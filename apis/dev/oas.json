@@ -2,7 +2,7 @@
   "openapi": "3.0.1",
   "info": {
     "title": "Lucidtech API",
-    "version": "2021-01-08T14:23:33Z"
+    "version": "2021-01-12T14:52:08Z"
   },
   "servers": [
     {
@@ -2008,6 +2008,282 @@
           "uri": ""
         },
         "x-amazon-apigateway-request-validator": ""
+      }
+    },
+    "/logs": {
+      "options": {
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Empty"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Empty"
+                }
+              }
+            },
+            "description": "200 response",
+            "headers": {
+              "Access-Control-Allow-Headers": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "Access-Control-Allow-Methods": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "x-amazon-apigateway-integration": {
+          "passthroughBehavior": "when_no_match",
+          "requestTemplates": {
+            "application/json": "{\n  \"statusCode\": 200\n}\n"
+          },
+          "responses": {
+            "default": {
+              "responseParameters": {
+                "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'",
+                "method.response.header.Access-Control-Allow-Methods": "'OPTIONS'",
+                "method.response.header.Access-Control-Allow-Origin": "'*'"
+              },
+              "statusCode": "200"
+            }
+          },
+          "type": "mock"
+        }
+      }
+    },
+    "/logs/{logId}": {
+      "get": {
+        "parameters": [
+          {
+            "in": "path",
+            "name": "logId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Log"
+                }
+              }
+            },
+            "description": "200 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "400 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "404 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "415": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "415 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "500 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "x-amazon-apigateway-integration": {
+          "httpMethod": "POST",
+          "passthroughBehavior": "never",
+          "requestTemplates": {
+            "application/json": "#set($body = $input.path('$'))\n{\n    \"oauthClientId\": \"$context.authorizer.claims.client_id\",\n    \"oauthSubId\": \"$context.authorizer.claims.sub\",\n    \"logId\": \"$input.params().path.logId\"\n}\n"
+          },
+          "responses": {
+            "^\\[BadRequest\\].*": {
+              "responseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'"
+              },
+              "responseTemplates": {
+                "application/json": "#set($error = $input.path('$'))\n{\n    \"message\": \"$error.errorMessage\"\n}\n"
+              },
+              "statusCode": "400"
+            },
+            "^\\[InternalServerError\\].*": {
+              "responseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'"
+              },
+              "responseTemplates": {
+                "application/json": "#set($error = $input.path('$'))\n{\n    \"message\": \"$error.errorMessage\"\n}\n"
+              },
+              "statusCode": "500"
+            },
+            "^\\[NotFound\\].*": {
+              "responseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'"
+              },
+              "responseTemplates": {
+                "application/json": "#set($error = $input.path('$'))\n{\n    \"message\": \"$error.errorMessage\"\n}\n"
+              },
+              "statusCode": "404"
+            },
+            "^\\[UnsupportedMediaType\\].*": {
+              "responseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'"
+              },
+              "responseTemplates": {
+                "application/json": "#set($error = $input.path('$'))\n{\n    \"message\": \"$error.errorMessage\"\n}\n"
+              },
+              "statusCode": "415"
+            },
+            "default": {
+              "responseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'"
+              },
+              "responseTemplates": {
+                "application/json": "$input.json('$')\n"
+              },
+              "statusCode": "200"
+            }
+          },
+          "type": "aws",
+          "uri": ""
+        },
+        "x-amazon-apigateway-request-validator": ""
+      },
+      "options": {
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Empty"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Empty"
+                }
+              }
+            },
+            "description": "200 response",
+            "headers": {
+              "Access-Control-Allow-Headers": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "Access-Control-Allow-Methods": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "x-amazon-apigateway-integration": {
+          "passthroughBehavior": "when_no_match",
+          "requestTemplates": {
+            "application/json": "{\n  \"statusCode\": 200\n}\n"
+          },
+          "responses": {
+            "default": {
+              "responseParameters": {
+                "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'",
+                "method.response.header.Access-Control-Allow-Methods": "'GET,OPTIONS'",
+                "method.response.header.Access-Control-Allow-Origin": "'*'"
+              },
+              "statusCode": "200"
+            }
+          },
+          "type": "mock"
+        }
       }
     },
     "/models": {
@@ -7288,6 +7564,44 @@
         "title": "Error Schema",
         "type": "object"
       },
+      "Log": {
+        "additionalProperties": false,
+        "properties": {
+          "events": {
+            "items": {
+              "type": "object"
+            },
+            "type": "array"
+          },
+          "logId": {
+            "pattern": "^las:log:[a-f0-9]{32}$",
+            "type": "string"
+          },
+          "transitionId": {
+            "anyOf": [
+              {
+                "anyOf": [
+                  {
+                    "pattern": "^las:transition:[a-f0-9]{32}$",
+                    "type": "string"
+                  },
+                  {
+                    "pattern": "^las:transition:commons-[0-9A-Za-z-]+$",
+                    "type": "string"
+                  }
+                ]
+              },
+              null
+            ]
+          }
+        },
+        "required": [
+          "events",
+          "logId"
+        ],
+        "title": "log",
+        "type": "object"
+      },
       "Models": {
         "additionalProperties": false,
         "properties": {
@@ -7676,6 +7990,7 @@
             "type": "string"
           },
           "maxPages": {
+            "maximum": 3,
             "minimum": 1,
             "type": "integer"
           },
@@ -8168,6 +8483,15 @@
               null
             ]
           },
+          "logId": {
+            "anyOf": [
+              {
+                "pattern": "^las:log:[a-f0-9]{32}$",
+                "type": "string"
+              },
+              null
+            ]
+          },
           "startTime": {
             "anyOf": [
               {
@@ -8242,6 +8566,15 @@
                   "anyOf": [
                     {
                       "type": "object"
+                    },
+                    null
+                  ]
+                },
+                "logId": {
+                  "anyOf": [
+                    {
+                      "pattern": "^las:log:[a-f0-9]{32}$",
+                      "type": "string"
                     },
                     null
                   ]
@@ -8521,6 +8854,21 @@
       "WorkflowExecution": {
         "additionalProperties": false,
         "properties": {
+          "completedBy": {
+            "items": {
+              "anyOf": [
+                {
+                  "pattern": "^las:user:[a-f0-9]{32}$",
+                  "type": "string"
+                },
+                {
+                  "pattern": "^las:app-client:[a-f0-9]{32}$",
+                  "type": "string"
+                }
+              ]
+            },
+            "type": "array"
+          },
           "endTime": {
             "anyOf": [
               {
@@ -8602,6 +8950,21 @@
             "items": {
               "additionalProperties": false,
               "properties": {
+                "completedBy": {
+                  "items": {
+                    "anyOf": [
+                      {
+                        "pattern": "^las:user:[a-f0-9]{32}$",
+                        "type": "string"
+                      },
+                      {
+                        "pattern": "^las:app-client:[a-f0-9]{32}$",
+                        "type": "string"
+                      }
+                    ]
+                  },
+                  "type": "array"
+                },
                 "endTime": {
                   "anyOf": [
                     {
