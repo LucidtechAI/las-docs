@@ -59,7 +59,7 @@ def create_workflow(client, specification_path, name, description, secret_id=Non
 
     specification = json.loads(specification_path.read_text())
     for state in specification['definition']['States']:
-        transition_path = Path('src') / state
+        transition_path = Path(__file__).parent / 'src' / state
 
         if not transition_path.is_dir():
             raise FileNotFoundError(
@@ -90,7 +90,7 @@ if __name__ == '__main__':
             'Please supply the secretId for your credentials if they have already been stored',
         ])
     )
-    parser.add_argument('--workflow-spec', default=Path('src/workflow.json'), type=Path)
+    parser.add_argument('--workflow-spec', default=Path(__file__).parent / 'src' / 'workflow.json', type=Path)
     parser.add_argument('--name', default='simple-demo')
     parser.add_argument('--description', default='A simple workflow for demonstration purposes')
     parser.add_argument('--secret-id', help='secretId to las credentials')

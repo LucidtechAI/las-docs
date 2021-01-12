@@ -1,4 +1,4 @@
 set -xe
 
-name=lucidtechai/test:make-predictions
+name=lucidtechai/transition-samples:make-predictions
 docker build . -t $name && docker push $name
