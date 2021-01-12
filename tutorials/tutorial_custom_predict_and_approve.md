@@ -1,15 +1,17 @@
 
-# Tutoral: Predict and validate
+# Tutoral: Predict and approve - setup using LAS CLI 
 
 In this tutorial you will learn how to setup a simple workflow that 
 allows you to handle any type of documents in a safe and semi-automatic way.
 
 
-The workflow will consist of two steps
+The workflow in this tutorial will consist of two steps:
+* automatic prediction
+* manual verification 
 
-# Prerequisites
-* Download the lucidtech CLI
-* create a remote component  https://github.com/LucidtechAI/flyt-form/tree/master/examples
+## Prerequisites
+* Download the [lucidtech CLI](https://github.com/LucidtechAI/las-cli)
+* create a remote component [tutorial](https://github.com/LucidtechAI/flyt-form/tree/master/examples)
 
 
 ## Manual approval (manual transition)
@@ -38,22 +40,21 @@ las transitions create manual params.json
 
 ## Automatic prediction (docker transition)
 An automatic step is made by creating a docker image that will perform a task 
-without any user involved. 
-This folder contains a `Dockerfile` along with `main.py` which is all you need 
-to automatically make predictions on your documents.
+without any user involved. Check out our [sample images](docker-sample-images) for inspiration and best practices. 
 
 The first step is to build a docker image and push it to some repository
 ```commandline
 $ docker build . -t <image-url> && docker push <image-url>
 ```
 
-If the docker image is placed in a private repository (which is recommended) you need 
-to store your credentials as a secret
+#####Note:
+*It is recommended to place the docker image in a private repository, 
+if that is the case you need to store your credentials as a secret.*
 ```commandline
 $ las secrets create  username=<username> password=<password> --description 'docker credentials'
 ```
-
-Create a json-file that contains the parameters you need to run the docker image
+The next step is to create a json-file that contains the parameters you need to run the docker image.
+*Note that secretId is only needed if you are using a private image.*
 ```json
 {
   "imageUrl": "<image-url>",
@@ -93,5 +94,5 @@ together in a single workflow. The workflow definition must be provided using
 
 store the file and use it as input for creating the workflow
 ```commandline
-$ las workflows create workflow.json 'Predict and Approve' 
+$ las workflows create workflow.json --name 'Predict and Approve' 
 ```
