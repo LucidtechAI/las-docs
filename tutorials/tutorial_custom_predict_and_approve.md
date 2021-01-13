@@ -73,6 +73,14 @@ las transitions create docker params.json
 Now that we have created the two transitions we are ready to put them 
 together in a single workflow. The workflow definition must be provided using 
 [Amazon States Language](https://docs.aws.amazon.com/step-functions/latest/dg/concepts-amazon-states-language.html).
+{% hint style="info" %}
+The Resource name of each state must be a transition ID.
+{% endhint %}
+{% hint style="info" %}
+The only allowed *types* of States are **Task** and **Choice**.
+{% endhint %}
+
+
 ```json
 {
   "definition": {

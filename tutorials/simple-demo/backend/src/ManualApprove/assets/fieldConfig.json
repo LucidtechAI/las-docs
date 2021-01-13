@@ -2,51 +2,51 @@
   "invoice_date": {
     "type": "date",
     "display": "Fakturadato",
-    "confidenceLevels": { "automated": 0.98, "highest": 0.97, "high": 0.9, "low": 0.5 }
+    "confidenceLevels": { "automated": 0.98, "high": 0.97, "medium": 0.9, "low": 0.5 }
   },
   "due_date": {
     "type": "date",
     "display": "Forfallsdato",
-    "confidenceLevels": { "automated": 0.98, "highest": 0.97, "high": 0.9, "low": 0.5 }
+    "confidenceLevels": { "automated": 0.98, "high": 0.97, "medium": 0.9, "low": 0.5 }
   },
   "account_id": {
     "type": "string",
     "display": "Kontonummer",
-    "confidenceLevels": { "automated": 0.98, "highest": 0.97, "high": 0.9, "low": 0.5 }
+    "confidenceLevels": { "automated": 0.98, "high": 0.97, "medium": 0.9, "low": 0.5 }
   },
   "invoice_id": {
     "type": "string",
     "display": "Fakturanummer",
-    "confidenceLevels": { "automated": 0.98, "highest": 0.97, "high": 0.9, "low": 0.5 }
+    "confidenceLevels": { "automated": 0.98, "high": 0.97, "medium": 0.9, "low": 0.5 }
   },
   "total_amount": {
     "type": "amount",
     "display": "Total",
-    "confidenceLevels": { "automated": 0.98, "highest": 0.97, "high": 0.9, "low": 0.5 }
+    "confidenceLevels": { "automated": 0.98, "high": 0.97, "medium": 0.9, "low": 0.5 }
   },
   "net_amount": {
     "type": "amount",
     "display": "Netto",
-    "confidenceLevels": { "automated": 0.98, "highest": 0.97, "high": 0.9, "low": 0.5 }
+    "confidenceLevels": { "automated": 0.98, "high": 0.97, "medium": 0.9, "low": 0.5 }
   },
   "vat_amount": {
     "type": "amount",
     "display": "VAT",
-    "confidenceLevels": { "automated": 0.98, "highest": 0.97, "high": 0.9, "low": 0.5 }
+    "confidenceLevels": { "automated": 0.98, "high": 0.97, "medium": 0.9, "low": 0.5 }
   },
   "currency": {
     "type": "string",
     "display": "Valuta",
-    "confidenceLevels": { "automated": 0.98, "highest": 0.97, "high": 0.9, "low": 0.5 }
+    "confidenceLevels": { "automated": 0.98, "high": 0.97, "medium": 0.9, "low": 0.5 }
   },
   "supplier_org_id": {
     "type": "string",
     "display": "Org.nr.",
-    "confidenceLevels": { "automated": 0.98, "highest": 0.97, "high": 0.9, "low": 0.5 }
+    "confidenceLevels": { "automated": 0.98, "high": 0.97, "medium": 0.9, "low": 0.5 }
   },
   "payment_id": {
     "type": "string",
     "display": "KID",
-    "confidenceLevels": { "automated": 0.98, "highest": 0.97, "high": 0.9, "low": 0.5 }
+    "confidenceLevels": { "automated": 0.98, "high": 0.97, "medium": 0.9, "low": 0.5 }
   }
 }
