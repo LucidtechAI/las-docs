@@ -11,31 +11,31 @@ invoice models.
 ```
 import json
 
-from las import ApiClient
+from las import Client
 
-api_client = ApiClient()
-prediction = api_client.predict('document.jpeg', 'invoice')
+client = Client()
+prediction = client.predict('document.jpeg', 'invoice')
 print(json.dumps(prediction, indent=2))
 ```
 
-### Sending feedback to the model
+### Sending the ground truth to the model
 Suppose we make a prediction that returns incorrect values and we wish to improve the model for future use. We can do so
-by sending feedback to the model, telling it what the expected values should have been.
+by sending the ground truth to the model, telling it what the expected values should have been.
 
 ```
 import json
 
-from las import ApiClient, Field
+from las import Client
 
-api_client = ApiClient()
-prediction = api_client.predict('document.jpeg', 'invoice')
+client = Client()
+prediction = client.create_prediction(document_id='las:document:<hex>', model_id='las:model:<hex>')
 
 # We notice after manual inspection that some values were incorrect
 print(json.dumps(prediction, indent=2))
 
-# Constructing field instances with correct values and sending these to the model
-feedback = [Field(label='total_amount', value='100.00'), Field(label='purchase_date', value='2019-03-18')]
-api_client.send_feedback(prediction.document_id, feedback)
+# Construct ground truth with correct values and sending these to the model
+ground_truth = [dict(label='total_amount', value='100.00'), dict(label='purchase_date', value='2019-03-18')]
+client.update_document(document_id, ground_truth)
 ```
 
 ### Revoking consent and deleting documents
@@ -46,13 +46,14 @@ documents.
 ```
 import json
 
-from las import ApiClient
+from las import Client
 
-api_client = ApiClient()
-prediction = api_client.predict('document.jpeg', 'invoice', consent_id='example_customer_123')
+client = Client()
+consent_id = 'las:consent:<hex>'
+prediction = client.create_prediction('las:document:<hex>', 'las:model:<hex>', consent_id=consent_id)
 
-# Deleting the documents associated with 'example_customer_123'
-api_client.revoke_consent(prediction.consent_id)
+# Deleting the documents associated with consent_id
+client.delete_documents(consent_id=consent_id)
 ```
 
 ## Prerequisites
@@ -77,7 +78,7 @@ api_endpoint = <api endpoint>
 auth_endpoint = <authorization endpoint>
 ```
 
-Optionally, you may provide a Credentials object when to ApiClient's constructor. See details
+Optionally, you may provide a Credentials object when to Client's constructor. See details
 [here](reference.html#module-las.credentials).
 
 Contact Lucidtech at [hello@lucidtech.ai](mailto:hello@lucidtech.ai) to get access_key_id, secret_access_key and api_key

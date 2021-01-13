@@ -16,29 +16,35 @@ Suppose we wish to run inference on a document using Lucidtech’s invoice model
 from las import Client
 
 client = Client()
-document = client.create_document('invoice.pdf')
-prediction = client.create_prediction(document_id=document.id, model_name='invoice')
+document = client.create_document('invoice.pdf', 'application/pdf')
+prediction = client.create_prediction(document_id=document['documentId'], model_id='las:model:<hex>')
 
 print(prediction)
 ```
 
 ## Set ground truth of document
 
-Suppose we make a prediction that returns incorrect values and we wish to improve the model for future use. We can do so by sending feedback to the model, telling it what the expected values should have been.
+Suppose we make a prediction that returns incorrect values and we wish to improve the model for future use. 
+We can do so by sending feedback to the model, telling it what the expected values should have been.
 
 ```python
 from las import Client
 
 client = Client()
-document = client.create_document('invoice.pdf')
-feedback = [
+document = client.create_document('invoice.pdf', 'application/pdf')
+ground_truth = [
     {'label': 'total_amount', 'value': '240.00'},
     {'label': 'due_date', 'value': '2020-01-31'}
 ]
-document = client.update_document(document_id=document.id, feedback=feedback)
+document = client.update_document(document_id=document['documentId'], ground_truth=ground_truth)
 
 print(document)
 ```
+
+{% hint style="info" %}
+Providing ground truth is a necessary to re-train a model whether the model got it right or wrong. So always provide 
+the ground truth if it is available.
+{% endhint %}
 
 ## Create a document with consent id
 
@@ -50,7 +56,7 @@ Consent ID is an identifier you can assign to documents to keep track of documen
 from las import Client
 
 client = Client()
-document = client.create_document('invoice.pdf', consent_id='abc')
+document = client.create_document('invoice.pdf', 'application/pdf', consent_id='las:consent:<hex>')
 ```
 
 ## Revoking consent and deleting documents
@@ -61,21 +67,22 @@ Suppose we wish to delete all documents associated with a customer in our ERP da
 from las import Client
 
 client = Client()
-consent_id = 'abc'
-client.create_document('invoice.pdf', consent_id=consent_id)
-client.delete_consent(consent_id=consent_id)
+consent_id = 'las:consent:<hex>'
+document = client.create_document('invoice.pdf', 'application/pdf', consent_id=consent_id)
+client.delete_documents(consent_id=consent_id)
 ```
 
 ## Create a batch and associate a few documents with it
 
-Creating a batch is a way to group documents. This is useful for specifying batches of documents to use in improving the model later.
+Creating a batch is a way to group documents. This is useful for specifying batches of documents to use in improving the
+model later.
 
 ```python
 from las import Client
 
 client = Client()
-batch = client.create_batch()
-client.create_document('invoice.pdf', batch_id=batch.id)
-client.create_document('invoice2.jpeg', batch_id=batch.id)
+batch = client.create_batch(name='Invoices2020F', description='invoices from fall 2020')
+client.create_document('invoice.pdf', 'application/pdf', batch_id=batch['batchId'])
+client.create_document('invoice2.jpeg', 'application/pdf', batch_id=batch['batchId'])
 ```
 
