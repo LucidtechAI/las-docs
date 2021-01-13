@@ -9,7 +9,7 @@ Bases: `object`
 A low level client to invoke api methods from Lucidtech AI Services.
 
 
-#### create_asset(content: bytes)
+#### create_asset(content: Union[bytes, bytearray, str, pathlib.Path, io.IOBase], \*\*optional_args)
 Creates an asset handle, calls the POST /assets endpoint.
 
 ```python
@@ -21,7 +21,14 @@ Creates an asset handle, calls the POST /assets endpoint.
 
 * **Parameters**
 
-    **content** (*bytes*) – Content to POST
+    
+    * **content** (*Content*) – Content to POST
+
+
+    * **name** (*Optional**[**str**]*) – Name of the asset
+
+
+    * **description** (*Optional**[**str**]*) – Description of the asset
 
 
 
@@ -43,7 +50,7 @@ Creates an asset handle, calls the POST /assets endpoint.
 
 
 
-#### create_batch(description: str)
+#### create_batch(\*\*optional_args)
 Creates a batch, calls the POST /batches endpoint.
 
 ```python
@@ -55,7 +62,11 @@ Creates a batch, calls the POST /batches endpoint.
 
 * **Parameters**
 
-    **description** (*str*) – Description of the batch
+    
+    * **name** (*Optional**[**str**]*) – Name of the batch
+
+
+    * **description** (*Optional**[**str**]*) – Description of the batch
 
 
 
@@ -77,32 +88,32 @@ Creates a batch, calls the POST /batches endpoint.
 
 
 
-#### create_document(content: bytes, content_type: str, \*, consent_id: Optional[str] = None, batch_id: str = None, ground_truth: Sequence[Dict[str, str]] = None)
+#### create_document(content: Union[bytes, bytearray, str, pathlib.Path, io.IOBase], content_type: str, \*, consent_id: Optional[str] = None, batch_id: str = None, ground_truth: Sequence[Dict[str, str]] = None)
 Creates a document handle, calls the POST /documents endpoint.
 
 ```python
 >>> from las.client import Client
 >>> client = Client()
->>> client.create_document(b'<bytes data>', 'image/jpeg', '<consent id>')
+>>> client.create_document(b'<bytes data>', 'image/jpeg', consent_id='<consent id>')
 ```
 
 
 * **Parameters**
 
     
-    * **content** (*bytes*) – Content to POST
+    * **content** (*Content*) – Content to POST
 
 
     * **content_type** (*str*) – MIME type for the document handle
 
 
-    * **consent_id** (*str*) – Id of the consent that marks the owner of the document handle
+    * **consent_id** (*Optional**[**str**]*) – Id of the consent that marks the owner of the document handle
 
 
-    * **batch_id** (*str*) – Id of the associated batch
+    * **batch_id** (*Optional**[**str**]*) – Id of the associated batch
 
 
-    * **ground_truth** (*Sequence**[**Dict**[**str**, **str**]**]*) – List of items {label: value} representing the ground truth values for the document
+    * **ground_truth** (*Optional**[**Sequence**[**Dict**[**str**, **str**]**]**]*) – List of items {label: value} representing the ground truth values for the document
 
 
 
@@ -143,10 +154,10 @@ Create a prediction on a document using specified model, calls the POST /predict
     * **model_id** (*str*) – Id of the model to use for inference
 
 
-    * **max_pages** (*int*) – Maximum number of pages to run predictions on
+    * **max_pages** (*Optional**[**int**]*) – Maximum number of pages to run predictions on
 
 
-    * **auto_rotate** (*bool*) – Whether or not to let the API try different rotations on the document when running predictions
+    * **auto_rotate** (*Optional**[**bool**]*) – Whether or not to let the API try different rotations on the document when running predictions
 
 
 
@@ -168,14 +179,14 @@ Create a prediction on a document using specified model, calls the POST /predict
 
 
 
-#### create_secret(data: dict, \*, description: Optional[str] = None)
+#### create_secret(data: dict, \*\*optional_args)
 Creates an secret handle, calls the POST /secrets endpoint.
 
 ```python
 >>> from las.client import Client
 >>> client = Client()
 >>> data = {'username': '<username>', 'password': '<password>'}
->>> client.create_secret(data, '<description>')
+>>> client.create_secret(data, description='<description>')
 ```
 
 
@@ -185,7 +196,10 @@ Creates an secret handle, calls the POST /secrets endpoint.
     * **data** (*str*) – Dict containing the data you want to keep secret
 
 
-    * **description** (*str*) – Description of the secret
+    * **name** (*Optional**[**str**]*) – Name of the secret
+
+
+    * **description** (*Optional**[**str**]*) – Description of the secret
 
 
 
@@ -207,7 +221,7 @@ Creates an secret handle, calls the POST /secrets endpoint.
 
 
 
-#### create_transition(name, transition_type: str, in_schema: dict, out_schema: dict, \*, params: Optional[dict] = None, description: Optional[str] = None)
+#### create_transition(transition_type: str, \*, in_schema: Optional[dict] = None, out_schema: Optional[dict] = None, parameters: Optional[dict] = None, \*\*optional_args)
 Creates a transition handle, calls the POST /transitions endpoint.
 
 ```python
@@ -217,32 +231,32 @@ Creates a transition handle, calls the POST /transitions endpoint.
 >>> client = Client()
 >>> in_schema = {'$schema': 'https://json-schema.org/draft-04/schema#', 'title': 'in', 'properties': {...} }
 >>> out_schema = {'$schema': 'https://json-schema.org/draft-04/schema#', 'title': 'out', 'properties': {...} }
->>> # A typical docker transitions
+>>> # A typical docker transition
 >>> docker_params = {
 >>>     'imageUrl': '<image_url>',
 >>>     'credentials': {'username': '<username>', 'password': '<password>'}
 >>> }
->>> client.create_transition('<name>', 'docker', in_schema, out_schema, docker_params)
->>> # A typical manual transitions
+>>> client.create_transition('docker', in_schema=in_schema, out_schema=out_schema, params=docker_params)
+>>> # A manual transition with UI
 >>> assets = {'jsRemoteComponent': 'las:asset:<hex-uuid>', '<other asset name>': 'las:asset:<hex-uuid>'}
 >>> manual_params = {'assets': assets}
->>> client.create_transition('<name>', 'manual', in_schema, out_schema, manual_params)
+>>> client.create_transition('manual', in_schema=in_schema, out_schema=out_schema, params=manual_params)
 ```
 
 
 * **Parameters**
 
     
-    * **in_schema** (*dict*) – Json-schema that defines the input to the transition
-
-
-    * **out_schema** (*dict*) – Json-schema that defines the output of the transition
-
-
-    * **name** (*str*) – Name of the transition
-
-
     * **transition_type** (*str*) – Type of transition “docker”|”manual”
+
+
+    * **in_schema** (*Optional**[**dict**]*) – Json-schema that defines the input to the transition
+
+
+    * **out_schema** (*Optional**[**dict**]*) – Json-schema that defines the output of the transition
+
+
+    * **name** (*Optional**[**str**]*) – Name of the transition
 
 
     * **params** (*Optional**[**dict**]*) – Parameters to the corresponding transition type
@@ -304,8 +318,9 @@ Creates a new user, calls the POST /users endpoint.
 
 
 
-#### create_workflow(specification: dict, name: str, \*, description: Optional[str] = None, error_config: Optional[dict] = None)
+#### create_workflow(specification: dict, \*, error_config: Optional[dict] = None, \*\*optional_args)
 Creates a new workflow, calls the POST /workflows endpoint.
+Check out Lucidtech’s tutorials for more info on how to create a workflow.
 
 ```python
 >>> from las.client import Client
@@ -313,7 +328,7 @@ Creates a new workflow, calls the POST /workflows endpoint.
 >>> client = Client()
 >>> specification = {'language': 'ASL', 'version': '1.0.0', 'definition': {...}}
 >>> error_config = {'email': '<error-recipient>'}
->>> client.create_workflow(specification, '<name>', '<description>', error_config)
+>>> client.create_workflow(specification, error_config=error_config)
 ```
 
 
@@ -324,13 +339,13 @@ Creates a new workflow, calls the POST /workflows endpoint.
     currently supporting ASL: [https://states-language.net/spec.html](https://states-language.net/spec.html)
 
 
-    * **name** (*str*) – Name of the workflow
+    * **name** (*Optional**[**str**]*) – Name of the workflow
 
 
-    * **description** (*str*) – Description of the workflow
+    * **description** (*Optional**[**str**]*) – Description of the workflow
 
 
-    * **error_config** (*dict*) – Configuration of error handler
+    * **error_config** (*Optional**[**dict**]*) – Configuration of error handler
 
 
 
@@ -358,13 +373,13 @@ Delete documents with the provided consent_id, calls the DELETE /documents endpo
 ```python
 >>> from las.client import Client
 >>> client = Client()
->>> client.delete_documents('<consent id>')
+>>> client.delete_documents(consent_id='<consent id>')
 ```
 
 
 * **Parameters**
 
-    **consent_id** (*Queryparam*) – Ids of the consents that marks the owner of the document handle
+    **consent_id** (*Optional**[**Queryparam**]*) – Ids of the consents that marks the owner of the document handle
 
 
 
@@ -439,6 +454,45 @@ Delete the workflow with the provided workflow_id, calls the DELETE /workflows/{
 * **Returns**
 
     Workflow response from REST API
+
+
+
+* **Return type**
+
+    dict
+
+
+
+* **Raises**
+
+    `InvalidCredentialsException`, `TooManyRequestsException`, `LimitExceededException`, `requests.exception.RequestException`
+
+
+
+#### delete_workflow_execution(workflow_id: str, execution_id: str)
+Deletes the execution with the provided execution_id from workflow_id,
+calls the DELETE /workflows/{workflowId}/executions/{executionId} endpoint.
+
+```python
+>>> from las.client import Client
+>>> client = Client()
+>>> client.delete_workflow_execution('<workflow_id>', '<execution_id>')
+```
+
+
+* **Parameters**
+
+    
+    * **workflow_id** (*str*) – Id of the workflow
+
+
+    * **execution_id** (*str*) – Id of the execution
+
+
+
+* **Returns**
+
+    WorkflowExecution response from REST API
 
 
 
@@ -568,7 +622,7 @@ Get document from the REST API, calls the GET /documents/{documentId} endpoint.
 ```python
 >>> from las.client import Client
 >>> client = Client()
->>> client.get_document(document_id='<document id>')
+>>> client.get_document('<document id>')
 ```
 
 
@@ -581,6 +635,78 @@ Get document from the REST API, calls the GET /documents/{documentId} endpoint.
 * **Returns**
 
     Document response from REST API
+
+
+
+* **Return type**
+
+    dict
+
+
+
+* **Raises**
+
+    `InvalidCredentialsException`, `TooManyRequestsException`, `LimitExceededException`, `requests.exception.RequestException`
+
+
+
+#### get_log(log_id)
+get log, calls the GET /logs/{logId} endpoint.
+
+```python
+>>> from las.client import Client
+>>> client = Client()
+>>> client.get_log('<log_id>')
+```
+
+
+* **Parameters**
+
+    **log_id** (*str*) – Id of the log
+
+
+
+* **Returns**
+
+    Log response from REST API
+
+
+
+* **Return type**
+
+    dict
+
+
+
+* **Raises**
+
+    `InvalidCredentialsException`, `TooManyRequestsException`, `LimitExceededException`, `requests.exception.RequestException`
+
+
+
+#### get_transition_execution(transition_id: str, execution_id: str)
+Get an execution of a transition, calls the GET /transitions/{transitionId}/executions/{executionId} endpoint
+
+```python
+>>> from las.client import Client
+>>> client = Client()
+>>> client.get_transition_execution('<transition_id>', '<execution_id>')
+```
+
+
+* **Parameters**
+
+    
+    * **transition_id** (*str*) – Id of the transition
+
+
+    * **execution_id** (*str*) – Id of the executions
+
+
+
+* **Returns**
+
+    Transition execution responses from REST API
 
 
 
@@ -643,10 +769,10 @@ List assets available, calls the GET /assets endpoint.
 * **Parameters**
 
     
-    * **max_results** (*int*) – Maximum number of results to be returned
+    * **max_results** (*Optional**[**int**]*) – Maximum number of results to be returned
 
 
-    * **next_token** (*str*) – A unique token for each page, use the returned token to retrieve the next page.
+    * **next_token** (*Optional**[**str**]*) – A unique token for each page, use the returned token to retrieve the next page.
 
 
 
@@ -681,16 +807,16 @@ List documents available for inference, calls the GET /documents endpoint.
 * **Parameters**
 
     
-    * **batch_id** (*Queryparam*) – Ids of batches that contains the documents of interest
+    * **batch_id** (*Optional**[**Queryparam**]*) – Ids of batches that contains the documents of interest
 
 
-    * **consent_id** (*Queryparam*) – Ids of the consents that marks the owner of the document handle
+    * **consent_id** (*Optional**[**Queryparam**]*) – Ids of the consents that marks the owner of the document handle
 
 
-    * **max_results** (*int*) – Maximum number of results to be returned
+    * **max_results** (*Optional**[**int**]*) – Maximum number of results to be returned
 
 
-    * **next_token** (*str*) – A unique token for each page, use the returned token to retrieve the next page.
+    * **next_token** (*Optional**[**str**]*) – A unique token for each page, use the returned token to retrieve the next page.
 
 
 
@@ -725,16 +851,54 @@ List models available, calls the GET /models endpoint.
 * **Parameters**
 
     
-    * **max_results** (*int*) – Maximum number of results to be returned
+    * **max_results** (*Optional**[**int**]*) – Maximum number of results to be returned
 
 
-    * **next_token** (*str*) – A unique token for each page, use the returned token to retrieve the next page.
+    * **next_token** (*Optional**[**str**]*) – A unique token for each page, use the returned token to retrieve the next page.
 
 
 
 * **Returns**
 
     Models response from REST API without the content of each model
+
+
+
+* **Return type**
+
+    dict
+
+
+
+* **Raises**
+
+    `InvalidCredentialsException`, `TooManyRequestsException`, `LimitExceededException`, `requests.exception.RequestException`
+
+
+
+#### list_predictions(\*, max_results: Optional[int] = None, next_token: Optional[str] = None)
+List predictions available, calls the GET /predictions endpoint.
+
+```python
+>>> from las.client import Client
+>>> client = Client()
+>>> client.list_predictions()
+```
+
+
+* **Parameters**
+
+    
+    * **max_results** (*Optional**[**int**]*) – Maximum number of results to be returned
+
+
+    * **next_token** (*Optional**[**str**]*) – A unique token for each page, use the returned token to retrieve the next page.
+
+
+
+* **Returns**
+
+    Predictions response from REST API without the content of each prediction
 
 
 
@@ -763,10 +927,10 @@ List secrets available, calls the GET /secrets endpoint.
 * **Parameters**
 
     
-    * **max_results** (*int*) – Maximum number of results to be returned
+    * **max_results** (*Optional**[**int**]*) – Maximum number of results to be returned
 
 
-    * **next_token** (*str*) – A unique token for each page, use the returned token to retrieve the next page.
+    * **next_token** (*Optional**[**str**]*) – A unique token for each page, use the returned token to retrieve the next page.
 
 
 
@@ -788,7 +952,7 @@ List secrets available, calls the GET /secrets endpoint.
 
 
 
-#### list_transition_executions(transition_id: str, \*, status: Optional[Union[str, List[str]]] = None, execution_id: Optional[Union[str, List[str]]] = None, max_results: Optional[int] = None, next_token: Optional[str] = None)
+#### list_transition_executions(transition_id: str, \*, status: Optional[Union[str, List[str]]] = None, execution_id: Optional[Union[str, List[str]]] = None, max_results: Optional[int] = None, next_token: Optional[str] = None, sort_by: Optional[str] = None, order: Optional[str] = None)
 List executions in a transition, calls the GET /transitions/{transitionId}/executions endpoint.
 
 ```python
@@ -804,16 +968,22 @@ List executions in a transition, calls the GET /transitions/{transitionId}/execu
     * **transition_id** (*str*) – Id of the transition
 
 
-    * **status** (*Queryparam*) – Statuses of the executions
+    * **status** (*Optional**[**Queryparam**]*) – Statuses of the executions
 
 
-    * **execution_id** (*Queryparam*) – Ids of the executions
+    * **order** (*Optional**[**str**]*) – Order of the executions, either ‘ascending’ or ‘descending’
 
 
-    * **max_results** (*int*) – Maximum number of results to be returned
+    * **sort_by** (*Optional**[**str**]*) – the sorting variable of the executions, either ‘endTime’, or ‘startTime’
 
 
-    * **next_token** (*str*) – A unique token for each page, use the returned token to retrieve the next page.
+    * **execution_id** (*Optional**[**Queryparam**]*) – Ids of the executions
+
+
+    * **max_results** (*Optional**[**int**]*) – Maximum number of results to be returned
+
+
+    * **next_token** (*Optional**[**str**]*) – A unique token for each page, use the returned token to retrieve the next page.
 
 
 
@@ -848,13 +1018,13 @@ List transitions, calls the GET /transitions endpoint.
 * **Parameters**
 
     
-    * **transition_type** (*Queryparam*) – Types of transitions
+    * **transition_type** (*Optional**[**Queryparam**]*) – Types of transitions
 
 
-    * **max_results** (*int*) – Maximum number of results to be returned
+    * **max_results** (*Optional**[**int**]*) – Maximum number of results to be returned
 
 
-    * **next_token** (*str*) – A unique token for each page, use the returned token to retrieve the next page.
+    * **next_token** (*Optional**[**str**]*) – A unique token for each page, use the returned token to retrieve the next page.
 
 
 
@@ -889,10 +1059,10 @@ List users, calls the GET /users endpoint.
 * **Parameters**
 
     
-    * **max_results** (*int*) – Maximum number of results to be returned
+    * **max_results** (*Optional**[**int**]*) – Maximum number of results to be returned
 
 
-    * **next_token** (*str*) – A unique token for each page, use the returned token to retrieve the next page.
+    * **next_token** (*Optional**[**str**]*) – A unique token for each page, use the returned token to retrieve the next page.
 
 
 
@@ -930,19 +1100,19 @@ List executions in a workflow, calls the GET /workflows/{workflowId}/executions 
     * **workflow_id** (*str*) – Id of the workflow
 
 
-    * **order** (*Optional str*) – Order of the executions, either ‘ascending’ or ‘descending’
+    * **order** (*Optional**[**str**]*) – Order of the executions, either ‘ascending’ or ‘descending’
 
 
-    * **sort_by** (*Optional str*) – the sorting variable of the executions, either ‘endTime’, or ‘startTime’
+    * **sort_by** (*Optional**[**str**]*) – the sorting variable of the executions, either ‘endTime’, or ‘startTime’
 
 
-    * **status** (*Queryparam*) – Statuses of the executions
+    * **status** (*Optional**[**Queryparam**]*) – Statuses of the executions
 
 
-    * **max_results** (*int*) – Maximum number of results to be returned
+    * **max_results** (*Optional**[**int**]*) – Maximum number of results to be returned
 
 
-    * **next_token** (*str*) – A unique token for each page, use the returned token to retrieve the next page.
+    * **next_token** (*Optional**[**str**]*) – A unique token for each page, use the returned token to retrieve the next page.
 
 
 
@@ -977,10 +1147,10 @@ List workflows, calls the GET /workflows endpoint.
 * **Parameters**
 
     
-    * **max_results** (*int*) – Maximum number of results to be returned
+    * **max_results** (*Optional**[**int**]*) – Maximum number of results to be returned
 
 
-    * **next_token** (*str*) – A unique token for each page, use the returned token to retrieve the next page.
+    * **next_token** (*Optional**[**str**]*) – A unique token for each page, use the returned token to retrieve the next page.
 
 
 
@@ -1002,52 +1172,13 @@ List workflows, calls the GET /workflows endpoint.
 
 
 
-#### stop_workflow_execution(workflow_id: str, execution_id: str)
-Stops the execution with the provided execution_id from workflow_id,
-calls the DELETE /workflows/{workflowId}/executions/{executionId} endpoint.
+#### update_asset(asset_id: str, \*\*optional_args)
+Updates an asset, calls the PATCH /assets/{assetId} endpoint.
 
 ```python
 >>> from las.client import Client
 >>> client = Client()
->>> client.stop_workflow_execution('<workflow_id>', '<execution_id>')
-```
-
-
-* **Parameters**
-
-    
-    * **workflow_id** (*str*) – Id of the workflow
-
-
-    * **execution_id** (*str*) – Id of the execution
-
-
-
-* **Returns**
-
-    WorkflowExecution response from REST API
-
-
-
-* **Return type**
-
-    dict
-
-
-
-* **Raises**
-
-    `InvalidCredentialsException`, `TooManyRequestsException`, `LimitExceededException`, `requests.exception.RequestException`
-
-
-
-#### update_asset(asset_id: str, content: bytes)
-Updates an asset, calls the PATCH /assets/assetId endpoint.
-
-```python
->>> from las.client import Client
->>> client = Client()
->>> client.update_asset('<asset id>', b'<bytes data>')
+>>> client.update_asset('<asset id>', content=b'<bytes data>')
 ```
 
 
@@ -1057,7 +1188,13 @@ Updates an asset, calls the PATCH /assets/assetId endpoint.
     * **asset_id** (*str*) – Id of the asset
 
 
-    * **content** (*bytes*) – Content to PATCH
+    * **content** (*Optional**[**Content**]*) – Content to PATCH
+
+
+    * **name** (*Optional**[**str**]*) – Name of the asset
+
+
+    * **description** (*Optional**[**str**]*) – Description of the asset
 
 
 
@@ -1120,14 +1257,14 @@ This enables the API to learn from past mistakes.
 
 
 
-#### update_secret(secret_id: str, data: dict, \*, description: Optional[str] = None)
+#### update_secret(secret_id: str, \*, data: Optional[dict] = None, \*\*optional_args)
 Updates an secret, calls the PATCH /secrets/secretId endpoint.
 
 ```python
 >>> from las.client import Client
 >>> client = Client()
 >>> data = {'username': '<username>', 'password': '<password>'}
->>> client.update_secret('<secret id>', data, '<description>')
+>>> client.update_secret('<secret id>', data, description='<description>')
 ```
 
 
@@ -1137,7 +1274,10 @@ Updates an secret, calls the PATCH /secrets/secretId endpoint.
     * **secret_id** (*str*) – Id of the secret
 
 
-    * **data** (*str*) – Dict containing the data you want to keep secret
+    * **data** (*Optional**[**dict**]*) – Dict containing the data you want to keep secret
+
+
+    * **name** (*Optional**[**str**]*) – Name of the secret
 
 
     * **description** (*Optional**[**str**]*) – Description of the secret
@@ -1162,7 +1302,7 @@ Updates an secret, calls the PATCH /secrets/secretId endpoint.
 
 
 
-#### update_transition(transition_id: str, \*, name: Optional[str], in_schema: Optional[dict], out_schema: Optional[dict], description: Optional[str] = None)
+#### update_transition(transition_id: str, \*, in_schema: Optional[dict] = None, out_schema: Optional[dict] = None, \*\*optional_args)
 Creates a transition handle, calls the PATCH /transitions/{transitionId} endpoint.
 
 ```python
@@ -1237,10 +1377,10 @@ calls the PATCH /transitions/{transition_id}/executions/{execution_id} endpoint.
     * **status** (*str*) – Status of the execution ‘succeeded|failed’
 
 
-    * **output** (*str*) – Output from the execution, required when status is ‘succeded’
+    * **output** (*Optional**[**str**]*) – Output from the execution, required when status is ‘succeded’
 
 
-    * **error** (*str*) – Error from the execution, required when status is ‘failed’, needs to contain ‘message’
+    * **error** (*Optional**[**str**]*) – Error from the execution, required when status is ‘failed’, needs to contain ‘message’
 
 
 
@@ -1262,7 +1402,7 @@ calls the PATCH /transitions/{transition_id}/executions/{execution_id} endpoint.
 
 
 
-#### update_workflow(workflow_id: str, \*, name: Optional[str], description: Optional[str] = None)
+#### update_workflow(workflow_id: str, \*\*optional_args)
 Creates a workflow handle, calls the PATCH /workflows/{workflowId} endpoint.
 
 ```python
