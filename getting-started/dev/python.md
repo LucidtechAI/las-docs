@@ -17,7 +17,7 @@ from las import Client
 
 client = Client()
 document = client.create_document('invoice.pdf', 'application/pdf')
-prediction = client.create_prediction(document_id=document['documentId'], model_id='las:model:<hex>')
+prediction = client.create_prediction(document['documentId'], model_id='las:model:<hex>')
 
 print(prediction)
 ```
@@ -36,7 +36,7 @@ ground_truth = [
     {'label': 'total_amount', 'value': '240.00'},
     {'label': 'due_date', 'value': '2020-01-31'}
 ]
-document = client.update_document(document_id=document['documentId'], ground_truth=ground_truth)
+document = client.update_document(document['documentId'], ground_truth=ground_truth)
 
 print(document)
 ```
