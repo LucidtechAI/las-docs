@@ -28,7 +28,7 @@ import json
 from las import Client
 
 client = Client()
-prediction = client.create_prediction(document_id='las:document:<hex>', model_id='las:model:<hex>')
+prediction = client.create_prediction('las:document:<hex>', model_id='las:model:<hex>')
 
 # We notice after manual inspection that some values were incorrect
 print(json.dumps(prediction, indent=2))

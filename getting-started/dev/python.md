@@ -17,7 +17,7 @@ from las import Client
 
 client = Client()
 document = client.create_document('invoice.pdf', 'application/pdf')
-prediction = client.create_prediction(document['documentId'], model_id='las:model:<hex>')
+prediction = client.create_prediction(document['documentId'], 'las:model:<hex>')
 
 print(prediction)
 ```
