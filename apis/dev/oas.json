@@ -1,8 +1,8 @@
 {
   "openapi": "3.0.1",
   "info": {
-    "title": "Lucidtech-API",
-    "version": "2020-12-04T12:13:16Z"
+    "title": "Lucidtech API",
+    "version": "2021-01-12T14:52:08Z"
   },
   "servers": [
     {
@@ -212,7 +212,7 @@
                 "method.response.header.Access-Control-Allow-Origin": "'*'"
               },
               "responseTemplates": {
-                "application/json": "#set($body = $input.path('$'))\n{\n    \"assets\": $input.json('$.assets'),\n#if( \"$!body.nextToken\" != \"\")\n    \"nextToken\": \"$body.nextToken\"\n#else\n    \"nextToken\": null\n#end\n}\n"
+                "application/json": "$input.json('$')\n"
               },
               "statusCode": "200"
             }
@@ -392,7 +392,7 @@
           "httpMethod": "POST",
           "passthroughBehavior": "never",
           "requestTemplates": {
-            "application/json": "#set($body = $input.path('$'))\n    {\n        \"oauthClientId\": \"$context.authorizer.claims.client_id\",\n        \"oauthSubId\": \"$context.authorizer.claims.sub\",\n        \"content\": \"$body.content\"\n    }\n"
+            "application/json": "#set($body = $input.path('$'))\n    {\n        \"oauthClientId\": \"$context.authorizer.claims.client_id\",\n        \"oauthSubId\": \"$context.authorizer.claims.sub\",\n        #set ($jsonbody = $util.parseJson($input.json('$')))\n        #if( $jsonbody.containsKey('name') && $body.name == $null)\n            \"name\": null,\n        #elseif( $jsonbody.containsKey('name'))\n            \"name\": \"$body.name\",\n        #end\n        #if( $jsonbody.containsKey('description') && $body.description == $null)\n            \"description\": null,\n        #elseif( $jsonbody.containsKey('description'))\n            \"description\": \"$body.description\",\n        #end\n        \"content\": \"$body.content\"\n    }\n"
           },
           "responses": {
             "^\\[BadRequest\\].*": {
@@ -436,7 +436,7 @@
                 "method.response.header.Access-Control-Allow-Origin": "'*'"
               },
               "responseTemplates": {
-                "application/json": "#set($body = $input.path('$'))\n{\n    \"assetId\": \"$body.assetId\"\n}\n"
+                "application/json": "$input.json('$')\n"
               },
               "statusCode": "200"
             }
@@ -594,7 +594,7 @@
                 "method.response.header.Access-Control-Allow-Origin": "'*'"
               },
               "responseTemplates": {
-                "application/json": "#set($body = $input.path('$'))\n{\n    \"assetId\": \"$body.assetId\",\n    \"content\": \"$body.content\"\n}\n"
+                "application/json": "$input.json('$')\n"
               },
               "statusCode": "200"
             }
@@ -782,7 +782,7 @@
           "httpMethod": "POST",
           "passthroughBehavior": "never",
           "requestTemplates": {
-            "application/json": "#set($body = $input.path('$'))\n    {\n        \"oauthClientId\": \"$context.authorizer.claims.client_id\",\n        \"oauthSubId\": \"$context.authorizer.claims.sub\",\n        \"content\": \"$body.content\",\n        \"assetId\": \"$input.params().path.assetId\"\n    }\n"
+            "application/json": "#set($body = $input.path('$'))\n    {\n        \"oauthClientId\": \"$context.authorizer.claims.client_id\",\n        \"oauthSubId\": \"$context.authorizer.claims.sub\",\n        #set ($jsonbody = $util.parseJson($input.json('$')))\n    #if( $jsonbody.containsKey('name') && $body.name == $null)\n        \"name\": null,\n    #elseif( $jsonbody.containsKey('name'))\n        \"name\": \"$body.name\",\n    #end\n    #if( $jsonbody.containsKey('description') && $body.description == $null)\n        \"description\": null,\n    #elseif( $jsonbody.containsKey('description'))\n        \"description\": \"$body.description\",\n    #end\n    #if( \"$!body.content\" != \"\")\n        \"content\": \"$body.content\",\n    #end\n        \"assetId\": \"$input.params().path.assetId\"\n    }\n"
           },
           "responses": {
             "^\\[BadRequest\\].*": {
@@ -826,7 +826,7 @@
                 "method.response.header.Access-Control-Allow-Origin": "'*'"
               },
               "responseTemplates": {
-                "application/json": "#set($body = $input.path('$'))\n{\n    \"assetId\": \"$body.assetId\"\n}\n"
+                "application/json": "$input.json('$')\n"
               },
               "statusCode": "200"
             }
@@ -1008,7 +1008,7 @@
           "httpMethod": "POST",
           "passthroughBehavior": "never",
           "requestTemplates": {
-            "application/json": "#set($body = $input.path('$'))\n{\n    \"oauthClientId\": \"$context.authorizer.claims.client_id\",\n    \"oauthSubId\": \"$context.authorizer.claims.sub\",\n    \"description\": \"$body.description\"\n}\n"
+            "application/json": "#set($body = $input.path('$'))\n{\n    #set ($jsonbody = $util.parseJson($input.json('$')))\n    #if( $jsonbody.containsKey('name') && $body.name == $null)\n        \"name\": null,\n    #elseif( $jsonbody.containsKey('name'))\n        \"name\": \"$body.name\",\n    #end\n    #if( $jsonbody.containsKey('description') && $body.description == $null)\n        \"description\": null,\n    #elseif( $jsonbody.containsKey('description'))\n        \"description\": \"$body.description\",\n    #end\n    \"oauthClientId\": \"$context.authorizer.claims.client_id\",\n    \"oauthSubId\": \"$context.authorizer.claims.sub\"\n}\n"
           },
           "responses": {
             "^\\[BadRequest\\].*": {
@@ -1052,7 +1052,7 @@
                 "method.response.header.Access-Control-Allow-Origin": "'*'"
               },
               "responseTemplates": {
-                "application/json": "#set($body = $input.path('$'))\n{\n    \"batchId\": \"$body.batchId\",\n    \"description\": \"$body.description\"\n}\n"
+                "application/json": "$input.json('$')\n"
               },
               "statusCode": "200"
             }
@@ -1209,7 +1209,7 @@
                 "method.response.header.Access-Control-Allow-Origin": "'*'"
               },
               "responseTemplates": {
-                "application/json": "#set($body = $input.path('$'))\n{\n#if( \"$!body.consentId\" != \"\")\n    \"consentId\": $body.consentId,\n#end\n    \"documents\": $input.json('$.documents')\n}\n"
+                "application/json": "$input.json('$')\n"
               },
               "statusCode": "200"
             }
@@ -1385,7 +1385,7 @@
                 "method.response.header.Access-Control-Allow-Origin": "'*'"
               },
               "responseTemplates": {
-                "application/json": "#set($body = $input.path('$'))\n{\n    \"batchId\": $body.batchId,\n    \"consentId\": $body.consentId,\n    \"documents\": $input.json('$.documents'),\n#if( \"$!body.nextToken\" != \"\")\n    \"nextToken\": \"$body.nextToken\"\n#else\n    \"nextToken\": null\n#end\n}\n"
+                "application/json": "$input.json('$')\n"
               },
               "statusCode": "200"
             }
@@ -1609,7 +1609,7 @@
                 "method.response.header.Access-Control-Allow-Origin": "'*'"
               },
               "responseTemplates": {
-                "application/json": "#set($body = $input.path('$'))\n{\n#if( \"$!body.batchId\" != \"\")\n    \"batchId\": \"$body.batchId\",\n#end\n#if( \"$!body.groundTruth\" != \"\")\n    \"groundTruth\": $input.json('$.groundTruth'),\n#end\n    \"documentId\": \"$body.documentId\",\n    \"contentType\": \"$body.contentType\",\n    \"consentId\": \"$body.consentId\"\n}\n"
+                "application/json": "$input.json('$')\n"
               },
               "statusCode": "200"
             }
@@ -1767,7 +1767,7 @@
                 "method.response.header.Access-Control-Allow-Origin": "'*'"
               },
               "responseTemplates": {
-                "application/json": "#set($body = $input.path('$'))\n{\n    \"documentId\": \"$body.documentId\",\n#if( \"$!body.batchId\" != \"\")\n    \"batchId\": \"$body.batchId\",\n#end\n#if( \"$!body.consentId\" != \"\")\n    \"consentId\": \"$body.consentId\",\n#end\n#if( \"$!body.groundTruth\" != \"\")\n    \"groundTruth\": $input.json('$.groundTruth'),\n#end\n    \"content\": \"$body.content\",\n    \"contentType\": \"$body.contentType\"\n}\n"
+                "application/json": "$input.json('$')\n"
               },
               "statusCode": "200"
             }
@@ -1999,7 +1999,7 @@
                 "method.response.header.Access-Control-Allow-Origin": "'*'"
               },
               "responseTemplates": {
-                "application/json": "#set($body = $input.path('$'))\n{\n    \"documentId\": \"$body.documentId\",\n#if( \"$!body.batchId\" != \"\")\n    \"batchId\": \"$body.batchId\",\n#end\n#if( \"$!body.consentId\" != \"\")\n    \"consentId\": \"$body.consentId\",\n#end\n    \"contentType\": \"$body.contentType\",\n    \"groundTruth\": $input.json('$.groundTruth')\n}\n"
+                "application/json": "$input.json('$')\n"
               },
               "statusCode": "200"
             }
@@ -2008,6 +2008,282 @@
           "uri": ""
         },
         "x-amazon-apigateway-request-validator": ""
+      }
+    },
+    "/logs": {
+      "options": {
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Empty"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Empty"
+                }
+              }
+            },
+            "description": "200 response",
+            "headers": {
+              "Access-Control-Allow-Headers": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "Access-Control-Allow-Methods": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "x-amazon-apigateway-integration": {
+          "passthroughBehavior": "when_no_match",
+          "requestTemplates": {
+            "application/json": "{\n  \"statusCode\": 200\n}\n"
+          },
+          "responses": {
+            "default": {
+              "responseParameters": {
+                "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'",
+                "method.response.header.Access-Control-Allow-Methods": "'OPTIONS'",
+                "method.response.header.Access-Control-Allow-Origin": "'*'"
+              },
+              "statusCode": "200"
+            }
+          },
+          "type": "mock"
+        }
+      }
+    },
+    "/logs/{logId}": {
+      "get": {
+        "parameters": [
+          {
+            "in": "path",
+            "name": "logId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Log"
+                }
+              }
+            },
+            "description": "200 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "400 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "404 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "415": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "415 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "500 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "x-amazon-apigateway-integration": {
+          "httpMethod": "POST",
+          "passthroughBehavior": "never",
+          "requestTemplates": {
+            "application/json": "#set($body = $input.path('$'))\n{\n    \"oauthClientId\": \"$context.authorizer.claims.client_id\",\n    \"oauthSubId\": \"$context.authorizer.claims.sub\",\n    \"logId\": \"$input.params().path.logId\"\n}\n"
+          },
+          "responses": {
+            "^\\[BadRequest\\].*": {
+              "responseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'"
+              },
+              "responseTemplates": {
+                "application/json": "#set($error = $input.path('$'))\n{\n    \"message\": \"$error.errorMessage\"\n}\n"
+              },
+              "statusCode": "400"
+            },
+            "^\\[InternalServerError\\].*": {
+              "responseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'"
+              },
+              "responseTemplates": {
+                "application/json": "#set($error = $input.path('$'))\n{\n    \"message\": \"$error.errorMessage\"\n}\n"
+              },
+              "statusCode": "500"
+            },
+            "^\\[NotFound\\].*": {
+              "responseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'"
+              },
+              "responseTemplates": {
+                "application/json": "#set($error = $input.path('$'))\n{\n    \"message\": \"$error.errorMessage\"\n}\n"
+              },
+              "statusCode": "404"
+            },
+            "^\\[UnsupportedMediaType\\].*": {
+              "responseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'"
+              },
+              "responseTemplates": {
+                "application/json": "#set($error = $input.path('$'))\n{\n    \"message\": \"$error.errorMessage\"\n}\n"
+              },
+              "statusCode": "415"
+            },
+            "default": {
+              "responseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'"
+              },
+              "responseTemplates": {
+                "application/json": "$input.json('$')\n"
+              },
+              "statusCode": "200"
+            }
+          },
+          "type": "aws",
+          "uri": ""
+        },
+        "x-amazon-apigateway-request-validator": ""
+      },
+      "options": {
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Empty"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Empty"
+                }
+              }
+            },
+            "description": "200 response",
+            "headers": {
+              "Access-Control-Allow-Headers": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "Access-Control-Allow-Methods": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "x-amazon-apigateway-integration": {
+          "passthroughBehavior": "when_no_match",
+          "requestTemplates": {
+            "application/json": "{\n  \"statusCode\": 200\n}\n"
+          },
+          "responses": {
+            "default": {
+              "responseParameters": {
+                "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'",
+                "method.response.header.Access-Control-Allow-Methods": "'GET,OPTIONS'",
+                "method.response.header.Access-Control-Allow-Origin": "'*'"
+              },
+              "statusCode": "200"
+            }
+          },
+          "type": "mock"
+        }
       }
     },
     "/models": {
@@ -2163,7 +2439,7 @@
                 "method.response.header.Access-Control-Allow-Origin": "'*'"
               },
               "responseTemplates": {
-                "application/json": "#set($body = $input.path('$'))\n{\n    \"models\": $input.json('$.models'),\n#if( \"$!body.nextToken\" != \"\")\n    \"nextToken\": \"$body.nextToken\"\n#else\n    \"nextToken\": null\n#end\n}\n"
+                "application/json": "$input.json('$')\n"
               },
               "statusCode": "200"
             }
@@ -2233,6 +2509,168 @@
       }
     },
     "/predictions": {
+      "get": {
+        "parameters": [
+          {
+            "in": "query",
+            "name": "nextToken",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "maxResults",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Prediction"
+                }
+              }
+            },
+            "description": "200 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "400 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "404 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "415": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "415 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "500 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "x-amazon-apigateway-integration": {
+          "httpMethod": "POST",
+          "passthroughBehavior": "never",
+          "requestTemplates": {
+            "application/json": "#set($body = $input.path('$'))\n{\n#if( \"$!input.params().querystring.get('maxResults')\" != \"\")\n    \"maxResults\": $input.params().querystring.get('maxResults'),\n#end\n#if( \"$!input.params().querystring.get('nextToken')\" != \"\")\n    \"nextToken\": \"$input.params().querystring.get('nextToken')\",\n#end\n    \"oauthClientId\": \"$context.authorizer.claims.client_id\",\n    \"oauthSubId\": \"$context.authorizer.claims.sub\"\n}\n"
+          },
+          "responses": {
+            "^\\[BadRequest\\].*": {
+              "responseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'"
+              },
+              "responseTemplates": {
+                "application/json": "#set($error = $input.path('$'))\n{\n    \"message\": \"$error.errorMessage\"\n}\n"
+              },
+              "statusCode": "400"
+            },
+            "^\\[InternalServerError\\].*": {
+              "responseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'"
+              },
+              "responseTemplates": {
+                "application/json": "#set($error = $input.path('$'))\n{\n    \"message\": \"$error.errorMessage\"\n}\n"
+              },
+              "statusCode": "500"
+            },
+            "^\\[NotFound\\].*": {
+              "responseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'"
+              },
+              "responseTemplates": {
+                "application/json": "#set($error = $input.path('$'))\n{\n    \"message\": \"$error.errorMessage\"\n}\n"
+              },
+              "statusCode": "404"
+            },
+            "^\\[UnsupportedMediaType\\].*": {
+              "responseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'"
+              },
+              "responseTemplates": {
+                "application/json": "#set($error = $input.path('$'))\n{\n    \"message\": \"$error.errorMessage\"\n}\n"
+              },
+              "statusCode": "415"
+            },
+            "default": {
+              "responseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'"
+              },
+              "responseTemplates": {
+                "application/json": "$input.json('$')\n"
+              },
+              "statusCode": "200"
+            }
+          },
+          "type": "aws",
+          "uri": ""
+        },
+        "x-amazon-apigateway-request-validator": ""
+      },
       "options": {
         "requestBody": {
           "content": {
@@ -2282,7 +2720,7 @@
             "default": {
               "responseParameters": {
                 "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'",
-                "method.response.header.Access-Control-Allow-Methods": "'POST,OPTIONS'",
+                "method.response.header.Access-Control-Allow-Methods": "'GET,POST,OPTIONS'",
                 "method.response.header.Access-Control-Allow-Origin": "'*'"
               },
               "statusCode": "200"
@@ -2447,7 +2885,7 @@
                 "method.response.header.Access-Control-Allow-Origin": "'*'"
               },
               "responseTemplates": {
-                "application/json": "#set($body = $input.path('$'))\n{\n    \"predictionId\": \"$body.predictionId\",\n    \"modelId\": \"$body.modelId\",\n    \"documentId\": \"$body.documentId\",\n    \"predictions\": $input.json('$.predictions'),\n    \"timestamp\": $body.timestamp,\n    \"inferenceTime\": $body.inferenceTime\n}\n"
+                "application/json": "$input.json('$')\n"
               },
               "statusCode": "200"
             }
@@ -2611,7 +3049,7 @@
                 "method.response.header.Access-Control-Allow-Origin": "'*'"
               },
               "responseTemplates": {
-                "application/json": "#set($body = $input.path('$'))\n{\n    \"secrets\": $input.json('$.secrets'),\n#if( \"$!body.nextToken\" != \"\")\n    \"nextToken\": \"$body.nextToken\"\n#else\n    \"nextToken\": null\n#end\n}\n"
+                "application/json": "$input.json('$')\n"
               },
               "statusCode": "200"
             }
@@ -2791,7 +3229,7 @@
           "httpMethod": "POST",
           "passthroughBehavior": "never",
           "requestTemplates": {
-            "application/json": "#set($body = $input.path('$'))\n    {\n        \"oauthClientId\": \"$context.authorizer.claims.client_id\",\n        \"oauthSubId\": \"$context.authorizer.claims.sub\",\n    #if( \"$!body.description\" != \"\")\n        \"description\": \"$body.description\",\n    #end\n        \"data\": $input.json('$.data')\n    }\n"
+            "application/json": "#set($body = $input.path('$'))\n    {\n        #set ($jsonbody = $util.parseJson($input.json('$')))\n        #if( $jsonbody.containsKey('name') && $body.name == $null)\n            \"name\": null,\n        #elseif( $jsonbody.containsKey('name'))\n            \"name\": \"$body.name\",\n        #end\n        #if( $jsonbody.containsKey('description') && $body.description == $null)\n            \"description\": null,\n        #elseif( $jsonbody.containsKey('description'))\n            \"description\": \"$body.description\",\n        #end\n        \"oauthClientId\": \"$context.authorizer.claims.client_id\",\n        \"oauthSubId\": \"$context.authorizer.claims.sub\",\n        \"data\": $input.json('$.data')\n    }\n"
           },
           "responses": {
             "^\\[BadRequest\\].*": {
@@ -2835,7 +3273,7 @@
                 "method.response.header.Access-Control-Allow-Origin": "'*'"
               },
               "responseTemplates": {
-                "application/json": "#set($body = $input.path('$'))\n{\n#if( \"$body.description\" != \"\" )\n    \"description\": \"$body.description\",\n#else\n    \"description\": null,\n#end\n    \"secretId\": \"$body.secretId\"\n}\n"
+                "application/json": "$input.json('$')\n"
               },
               "statusCode": "200"
             }
@@ -3025,7 +3463,7 @@
           "httpMethod": "POST",
           "passthroughBehavior": "never",
           "requestTemplates": {
-            "application/json": "#set($body = $input.path('$'))\n    {\n        \"oauthClientId\": \"$context.authorizer.claims.client_id\",\n        \"oauthSubId\": \"$context.authorizer.claims.sub\",\n    #if( \"$!body.description\" != \"\")\n        \"description\": \"$body.description\",\n    #end\n        \"data\": $input.json('$.data'),\n        \"secretId\": \"$input.params().path.secretId\"\n    }\n"
+            "application/json": "#set($body = $input.path('$'))\n    {\n        \"oauthClientId\": \"$context.authorizer.claims.client_id\",\n        \"oauthSubId\": \"$context.authorizer.claims.sub\",\n        #set ($jsonbody = $util.parseJson($input.json('$')))\n        #if( $jsonbody.containsKey('name') && $body.name == $null)\n            \"name\": null,\n        #elseif( $jsonbody.containsKey('name'))\n            \"name\": \"$body.name\",\n        #end\n        #if( $jsonbody.containsKey('description') && $body.description == $null)\n            \"description\": null,\n        #elseif( $jsonbody.containsKey('description'))\n            \"description\": \"$body.description\",\n        #end\n    #if( \"$!body.data\" != \"\")\n        \"data\": $input.json('$.data'),\n    #end\n        \"secretId\": \"$input.params().path.secretId\"\n    }\n"
           },
           "responses": {
             "^\\[BadRequest\\].*": {
@@ -3069,7 +3507,7 @@
                 "method.response.header.Access-Control-Allow-Origin": "'*'"
               },
               "responseTemplates": {
-                "application/json": "#set($body = $input.path('$'))\n{\n    \"secretId\": \"$body.secretId\"\n}\n"
+                "application/json": "$input.json('$')\n"
               },
               "statusCode": "200"
             }
@@ -3240,7 +3678,7 @@
                 "method.response.header.Access-Control-Allow-Origin": "'*'"
               },
               "responseTemplates": {
-                "application/json": "#set($body = $input.path('$'))\n{\n#if( \"$!body.transitionType\" != \"\")\n    \"transitionType\": $body.transitionType,\n#end\n    \"transitions\": $input.json('$.transitions'),\n#if( \"$!body.nextToken\" != \"\")\n    \"nextToken\": \"$body.nextToken\"\n#else\n    \"nextToken\": null\n#end\n}\n"
+                "application/json": "$input.json('$')\n"
               },
               "statusCode": "200"
             }
@@ -3420,7 +3858,7 @@
           "httpMethod": "POST",
           "passthroughBehavior": "never",
           "requestTemplates": {
-            "application/json": "#set($body = $input.path('$'))\n{\n    \"oauthClientId\": \"$context.authorizer.claims.client_id\",\n    \"oauthSubId\": \"$context.authorizer.claims.sub\",\n#if( \"$!body.params\" != \"\")\n    \"params\": $input.json('$.params'),\n#end\n#if( \"$body.description\" != \"\")\n    \"description\": \"$body.description\",\n#end\n    \"name\": \"$body.name\",\n    \"transitionType\": \"$body.transitionType\",\n    \"inputJsonSchema\": $input.json('$.inputJsonSchema'),\n    \"outputJsonSchema\": $input.json('$.outputJsonSchema')\n}\n"
+            "application/json": "#set($body = $input.path('$'))\n{\n    \"oauthClientId\": \"$context.authorizer.claims.client_id\",\n    \"oauthSubId\": \"$context.authorizer.claims.sub\",\n    #set ($jsonbody = $util.parseJson($input.json('$')))\n    #if( $jsonbody.containsKey('name') && $body.name == $null)\n        \"name\": null,\n    #elseif( $jsonbody.containsKey('name'))\n        \"name\": \"$body.name\",\n    #end\n    #if( $jsonbody.containsKey('description') && $body.description == $null)\n        \"description\": null,\n    #elseif( $jsonbody.containsKey('description'))\n        \"description\": \"$body.description\",\n    #end\n#if( \"$!body.parameters\" != \"\")\n    \"parameters\": $input.json('$.parameters'),\n#end\n#if( \"$body.inputJsonSchema\" != \"\")\n    \"inputJsonSchema\": $input.json('$.inputJsonSchema'),\n#end\n#if( \"$body.outputJsonSchema\" != \"\")\n    \"outputJsonSchema\": $input.json('$.outputJsonSchema'),\n#end\n    \"transitionType\": \"$body.transitionType\"\n}\n"
           },
           "responses": {
             "^\\[BadRequest\\].*": {
@@ -3464,7 +3902,7 @@
                 "method.response.header.Access-Control-Allow-Origin": "'*'"
               },
               "responseTemplates": {
-                "application/json": "#set($body = $input.path('$'))\n{\n    \"name\": \"$body.name\",\n#if( \"$!body.description\" != \"\")\n    \"description\": \"$body.description\",\n#else\n    \"description\": null,\n#end\n    \"transitionId\": \"$body.transitionId\",\n    \"transitionType\": \"$body.transitionType\",\n#if( \"$!body.assets\" != \"\")\n    \"assets\": $input.json('$.assets'),\n#end\n    \"inputJsonSchema\": $input.json('$.inputJsonSchema'),\n    \"outputJsonSchema\": $input.json('$.outputJsonSchema')\n}\n"
+                "application/json": "$input.json('$')\n"
               },
               "statusCode": "200"
             }
@@ -3654,7 +4092,7 @@
           "httpMethod": "POST",
           "passthroughBehavior": "never",
           "requestTemplates": {
-            "application/json": "#set($body = $input.path('$'))\n{\n    \"oauthClientId\": \"$context.authorizer.claims.client_id\",\n    \"oauthSubId\": \"$context.authorizer.claims.sub\",\n#if( \"$body.description\" != \"\")\n    \"description\": \"$body.description\",\n#end\n#if( \"$body.name\" != \"\")\n    \"name\": \"$body.name\",\n#end\n#if( \"$body.inputJsonSchema\" != \"\")\n    \"inputJsonSchema\": $input.json('$.inputJsonSchema'),\n#end\n#if( \"$body.outputJsonSchema\" != \"\")\n    \"outputJsonSchema\": $input.json('$.outputJsonSchema'),\n#end\n    \"transitionId\": \"$input.params().path.transitionId\"\n}\n"
+            "application/json": "#set($body = $input.path('$'))\n{\n    \"oauthClientId\": \"$context.authorizer.claims.client_id\",\n    \"oauthSubId\": \"$context.authorizer.claims.sub\",\n    #set ($jsonbody = $util.parseJson($input.json('$')))\n    #if( $jsonbody.containsKey('name') && $body.name == $null)\n        \"name\": null,\n    #elseif( $jsonbody.containsKey('name'))\n        \"name\": \"$body.name\",\n    #end\n    #if( $jsonbody.containsKey('description') && $body.description == $null)\n        \"description\": null,\n    #elseif( $jsonbody.containsKey('description'))\n        \"description\": \"$body.description\",\n    #end\n#if( \"$body.inputJsonSchema\" != \"\")\n    \"inputJsonSchema\": $input.json('$.inputJsonSchema'),\n#end\n#if( \"$body.outputJsonSchema\" != \"\")\n    \"outputJsonSchema\": $input.json('$.outputJsonSchema'),\n#end\n    \"transitionId\": \"$input.params().path.transitionId\"\n}\n"
           },
           "responses": {
             "^\\[BadRequest\\].*": {
@@ -3698,7 +4136,7 @@
                 "method.response.header.Access-Control-Allow-Origin": "'*'"
               },
               "responseTemplates": {
-                "application/json": "#set($body = $input.path('$'))\n{\n    \"name\": \"$body.name\",\n#if( \"$!body.description\" != \"\")\n    \"description\": \"$body.description\",\n#else\n    \"description\": null,\n#end\n    \"transitionId\": \"$body.transitionId\",\n    \"transitionType\": \"$body.transitionType\",\n#if( \"$!body.assets\" != \"\")\n    \"assets\": $input.json('$.assets'),\n#end\n    \"inputJsonSchema\": $input.json('$.inputJsonSchema'),\n    \"outputJsonSchema\": $input.json('$.outputJsonSchema')\n}\n"
+                "application/json": "$input.json('$')\n"
               },
               "statusCode": "200"
             }
@@ -3712,6 +4150,27 @@
     "/transitions/{transitionId}/executions": {
       "get": {
         "parameters": [
+          {
+            "in": "query",
+            "name": "nextToken",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "order",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "executionId",
+            "schema": {
+              "type": "string"
+            }
+          },
           {
             "in": "path",
             "name": "transitionId",
@@ -3729,13 +4188,6 @@
           },
           {
             "in": "query",
-            "name": "nextToken",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "in": "query",
             "name": "maxResults",
             "schema": {
               "type": "string"
@@ -3743,7 +4195,7 @@
           },
           {
             "in": "query",
-            "name": "executionId",
+            "name": "sortBy",
             "schema": {
               "type": "string"
             }
@@ -3840,7 +4292,7 @@
           "httpMethod": "POST",
           "passthroughBehavior": "never",
           "requestTemplates": {
-            "application/json": "#set($body = $input.path('$'))\n{\n    \"transitionId\": \"$input.params().path.transitionId\",\n#if( \"$!input.params().querystring.get('status')\" != \"\")\n    \"status\": [\n    #foreach( $status in $method.request.multivaluequerystring.status )\n        \"$status\"#if( $foreach.hasNext ),#end\n    #end\n    ],\n#end\n#if( \"$!input.params().querystring.get('executionId')\" != \"\")\n    \"executionId\": [\n    #foreach( $executionId in $method.request.multivaluequerystring.executionId )\n        \"$executionId\"#if( $foreach.hasNext ),#end\n    #end\n    ],\n#end\n#if( \"$!input.params().querystring.get('maxResults')\" != \"\")\n    \"maxResults\": $input.params().querystring.get('maxResults'),\n#end\n#if( \"$!input.params().querystring.get('nextToken')\" != \"\")\n    \"nextToken\": \"$input.params().querystring.get('nextToken')\",\n#end\n    \"oauthClientId\": \"$context.authorizer.claims.client_id\",\n    \"oauthSubId\": \"$context.authorizer.claims.sub\"\n}\n"
+            "application/json": "#set($body = $input.path('$'))\n{\n    \"transitionId\": \"$input.params().path.transitionId\",\n#if( \"$!input.params().querystring.get('status')\" != \"\")\n    \"status\": [\n    #foreach( $status in $method.request.multivaluequerystring.status )\n        \"$status\"#if( $foreach.hasNext ),#end\n    #end\n    ],\n#end\n#if( \"$!input.params().querystring.get('executionId')\" != \"\")\n    \"executionId\": [\n    #foreach( $executionId in $method.request.multivaluequerystring.executionId )\n        \"$executionId\"#if( $foreach.hasNext ),#end\n    #end\n    ],\n#end\n#if( \"$!input.params().querystring.get('sortBy')\" != \"\")\n    \"sortBy\": \"$input.params().querystring.get('sortBy')\",\n#end\n#if( \"$!input.params().querystring.get('order')\" != \"\")\n    \"order\": \"$input.params().querystring.get('order')\",\n#end\n#if( \"$!input.params().querystring.get('maxResults')\" != \"\")\n    \"maxResults\": $input.params().querystring.get('maxResults'),\n#end\n#if( \"$!input.params().querystring.get('nextToken')\" != \"\")\n    \"nextToken\": \"$input.params().querystring.get('nextToken')\",\n#end\n    \"oauthClientId\": \"$context.authorizer.claims.client_id\",\n    \"oauthSubId\": \"$context.authorizer.claims.sub\"\n}\n"
           },
           "responses": {
             "^\\[BadRequest\\].*": {
@@ -3884,7 +4336,7 @@
                 "method.response.header.Access-Control-Allow-Origin": "'*'"
               },
               "responseTemplates": {
-                "application/json": "#set($body = $input.path('$'))\n{\n    \"transitionId\": \"$body.transitionId\",\n#if( \"$!body.status\" != \"\")\n    \"status\": $body.status,\n#end\n    \"executions\": $input.json('$.executions'),\n#if( \"$!body.nextToken\" != \"\")\n    \"nextToken\": \"$body.nextToken\"\n#else\n    \"nextToken\": null\n#end\n}\n"
+                "application/json": "$input.json('$')\n"
               },
               "statusCode": "200"
             }
@@ -4116,7 +4568,7 @@
                 "method.response.header.Access-Control-Allow-Origin": "'*'"
               },
               "responseTemplates": {
-                "application/json": "#set($body = $input.path('$'))\n{\n#if( \"$!body.input\" != \"\")\n    \"input\": $input.json('$.input'),\n#end\n    \"executionId\": \"$body.executionId\",\n    \"transitionId\": \"$body.transitionId\",\n    \"status\":  \"$body.status\",\n#if( \"$!body.completedBy\" != \"\")\n    \"completedBy\": \"$body.completedBy\"\n#else\n    \"completedBy\": null\n#end\n}\n"
+                "application/json": "$input.json('$')\n"
               },
               "statusCode": "200"
             }
@@ -4128,6 +4580,170 @@
       }
     },
     "/transitions/{transitionId}/executions/{executionId}": {
+      "get": {
+        "parameters": [
+          {
+            "in": "path",
+            "name": "transitionId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "executionId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TransitionExecution"
+                }
+              }
+            },
+            "description": "200 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "400 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "404 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "415": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "415 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "500 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "x-amazon-apigateway-integration": {
+          "httpMethod": "POST",
+          "passthroughBehavior": "never",
+          "requestTemplates": {
+            "application/json": "#set($body = $input.path('$'))\n{\n    \"oauthClientId\": \"$context.authorizer.claims.client_id\",\n    \"oauthSubId\": \"$context.authorizer.claims.sub\",\n    \"transitionId\": \"$input.params().path.transitionId\",\n    \"executionId\": \"$input.params().path.executionId\"\n}\n"
+          },
+          "responses": {
+            "^\\[BadRequest\\].*": {
+              "responseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'"
+              },
+              "responseTemplates": {
+                "application/json": "#set($error = $input.path('$'))\n{\n    \"message\": \"$error.errorMessage\"\n}\n"
+              },
+              "statusCode": "400"
+            },
+            "^\\[InternalServerError\\].*": {
+              "responseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'"
+              },
+              "responseTemplates": {
+                "application/json": "#set($error = $input.path('$'))\n{\n    \"message\": \"$error.errorMessage\"\n}\n"
+              },
+              "statusCode": "500"
+            },
+            "^\\[NotFound\\].*": {
+              "responseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'"
+              },
+              "responseTemplates": {
+                "application/json": "#set($error = $input.path('$'))\n{\n    \"message\": \"$error.errorMessage\"\n}\n"
+              },
+              "statusCode": "404"
+            },
+            "^\\[UnsupportedMediaType\\].*": {
+              "responseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'"
+              },
+              "responseTemplates": {
+                "application/json": "#set($error = $input.path('$'))\n{\n    \"message\": \"$error.errorMessage\"\n}\n"
+              },
+              "statusCode": "415"
+            },
+            "default": {
+              "responseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'"
+              },
+              "responseTemplates": {
+                "application/json": "$input.json('$')\n"
+              },
+              "statusCode": "200"
+            }
+          },
+          "type": "aws",
+          "uri": ""
+        },
+        "x-amazon-apigateway-request-validator": ""
+      },
       "options": {
         "requestBody": {
           "content": {
@@ -4177,7 +4793,7 @@
             "default": {
               "responseParameters": {
                 "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'",
-                "method.response.header.Access-Control-Allow-Methods": "'PATCH,OPTIONS'",
+                "method.response.header.Access-Control-Allow-Methods": "'PATCH,GET,OPTIONS'",
                 "method.response.header.Access-Control-Allow-Origin": "'*'"
               },
               "statusCode": "200"
@@ -4358,7 +4974,7 @@
                 "method.response.header.Access-Control-Allow-Origin": "'*'"
               },
               "responseTemplates": {
-                "application/json": "#set($body = $input.path('$'))\n{\n#if( \"$!body.input\" != \"\")\n    \"input\": $input.json('$.input'),\n#end\n    \"executionId\": \"$body.executionId\",\n    \"transitionId\": \"$body.transitionId\",\n    \"status\":  \"$body.status\",\n#if( \"$!body.completedBy\" != \"\")\n    \"completedBy\": \"$body.completedBy\"\n#else\n    \"completedBy\": null\n#end\n}\n"
+                "application/json": "$input.json('$')\n"
               },
               "statusCode": "200"
             }
@@ -4522,7 +5138,7 @@
                 "method.response.header.Access-Control-Allow-Origin": "'*'"
               },
               "responseTemplates": {
-                "application/json": "#set($body = $input.path('$'))\n{\n    \"users\": $input.json('$.users'),\n#if( \"$!body.nextToken\" != \"\")\n    \"nextToken\": \"$body.nextToken\"\n#else\n    \"nextToken\": null\n#end\n}\n"
+                "application/json": "$input.json('$')\n"
               },
               "statusCode": "200"
             }
@@ -4746,7 +5362,7 @@
                 "method.response.header.Access-Control-Allow-Origin": "'*'"
               },
               "responseTemplates": {
-                "application/json": "#set($body = $input.path('$'))\n{\n    \"userId\": \"$body.userId\",\n    \"email\": \"$body.email\"\n}\n"
+                "application/json": "$input.json('$')\n"
               },
               "statusCode": "200"
             }
@@ -4904,7 +5520,7 @@
                 "method.response.header.Access-Control-Allow-Origin": "'*'"
               },
               "responseTemplates": {
-                "application/json": "#set($body = $input.path('$'))\n{\n    \"userId\": \"$body.userId\",\n    \"email\": \"$body.email\"\n}\n"
+                "application/json": "$input.json('$')\n"
               },
               "statusCode": "200"
             }
@@ -5060,7 +5676,7 @@
                 "method.response.header.Access-Control-Allow-Origin": "'*'"
               },
               "responseTemplates": {
-                "application/json": "#set($body = $input.path('$'))\n{\n    \"userId\": \"$body.userId\",\n    \"email\": \"$body.email\"\n}\n"
+                "application/json": "$input.json('$')\n"
               },
               "statusCode": "200"
             }
@@ -5282,7 +5898,7 @@
                 "method.response.header.Access-Control-Allow-Origin": "'*'"
               },
               "responseTemplates": {
-                "application/json": "#set($body = $input.path('$'))\n{\n    \"workflows\": $input.json('$.workflows'),\n#if( \"$!body.nextToken\" != \"\")\n    \"nextToken\": \"$body.nextToken\"\n#else\n    \"nextToken\": null\n#end\n}\n"
+                "application/json": "$input.json('$')\n"
               },
               "statusCode": "200"
             }
@@ -5462,7 +6078,7 @@
           "httpMethod": "POST",
           "passthroughBehavior": "never",
           "requestTemplates": {
-            "application/json": "#set($body = $input.path('$'))\n{\n    \"oauthClientId\": \"$context.authorizer.claims.client_id\",\n    \"oauthSubId\": \"$context.authorizer.claims.sub\",\n    \"name\": \"$body.name\",\n#if( \"$body.description\" != \"\")\n    \"description\": \"$body.description\",\n#end\n#if( \"$!body.errorConfig\" != \"\")\n    \"errorConfig\": $input.json('$.errorConfig'),\n#end\n    \"specification\": $input.json('$.specification')\n}\n"
+            "application/json": "#set($body = $input.path('$'))\n{\n    \"oauthClientId\": \"$context.authorizer.claims.client_id\",\n    \"oauthSubId\": \"$context.authorizer.claims.sub\",\n    #set ($jsonbody = $util.parseJson($input.json('$')))\n    #if( $jsonbody.containsKey('name') && $body.name == $null)\n        \"name\": null,\n    #elseif( $jsonbody.containsKey('name'))\n        \"name\": \"$body.name\",\n    #end\n    #if( $jsonbody.containsKey('description') && $body.description == $null)\n        \"description\": null,\n    #elseif( $jsonbody.containsKey('description'))\n        \"description\": \"$body.description\",\n    #end\n#if( \"$!body.errorConfig\" != \"\")\n    \"errorConfig\": $input.json('$.errorConfig'),\n#end\n    \"specification\": $input.json('$.specification')\n}\n"
           },
           "responses": {
             "^\\[BadRequest\\].*": {
@@ -5506,7 +6122,7 @@
                 "method.response.header.Access-Control-Allow-Origin": "'*'"
               },
               "responseTemplates": {
-                "application/json": "#set($body = $input.path('$'))\n{\n    \"name\": \"$body.name\",\n#if( \"$!body.description\" != \"\")\n    \"description\": \"$body.description\",\n#else\n    \"description\": null,\n#end\n    \"workflowId\": \"$body.workflowId\"\n}\n"
+                "application/json": "$input.json('$')\n"
               },
               "statusCode": "200"
             }
@@ -5664,7 +6280,7 @@
                 "method.response.header.Access-Control-Allow-Origin": "'*'"
               },
               "responseTemplates": {
-                "application/json": "#set($body = $input.path('$'))\n{\n#if( \"$!body.name\" != \"\")\n    \"name\": \"$body.name\",\n#end\n#if( \"$!body.description\" != \"\")\n    \"description\": \"$body.description\",\n#end\n    \"workflowId\": \"$body.workflowId\"\n}\n"
+                "application/json": "$input.json('$')\n"
               },
               "statusCode": "200"
             }
@@ -5852,7 +6468,7 @@
           "httpMethod": "POST",
           "passthroughBehavior": "never",
           "requestTemplates": {
-            "application/json": "#set($body = $input.path('$'))\n{\n    \"oauthClientId\": \"$context.authorizer.claims.client_id\",\n    \"oauthSubId\": \"$context.authorizer.claims.sub\",\n#if( \"$body.description\" != \"\")\n    \"description\": \"$body.description\",\n#end\n#if( \"$body.name\" != \"\")\n    \"name\": \"$body.name\",\n#end\n    \"workflowId\": \"$input.params().path.workflowId\"\n}\n"
+            "application/json": "#set($body = $input.path('$'))\n{\n    \"oauthClientId\": \"$context.authorizer.claims.client_id\",\n    \"oauthSubId\": \"$context.authorizer.claims.sub\",\n    #set ($jsonbody = $util.parseJson($input.json('$')))\n    #if( $jsonbody.containsKey('name') && $body.name == $null)\n        \"name\": null,\n    #elseif( $jsonbody.containsKey('name'))\n        \"name\": \"$body.name\",\n    #end\n    #if( $jsonbody.containsKey('description') && $body.description == $null)\n        \"description\": null,\n    #elseif( $jsonbody.containsKey('description'))\n        \"description\": \"$body.description\",\n    #end\n    \"workflowId\": \"$input.params().path.workflowId\"\n}\n"
           },
           "responses": {
             "^\\[BadRequest\\].*": {
@@ -5896,7 +6512,7 @@
                 "method.response.header.Access-Control-Allow-Origin": "'*'"
               },
               "responseTemplates": {
-                "application/json": "#set($body = $input.path('$'))\n{\n    \"name\": \"$body.name\",\n#if( \"$!body.description\" != \"\")\n    \"description\": \"$body.description\",\n#else\n    \"description\": null,\n#end\n    \"workflowId\": \"$body.workflowId\"\n}\n"
+                "application/json": "$input.json('$')\n"
               },
               "statusCode": "200"
             }
@@ -6089,7 +6705,7 @@
                 "method.response.header.Access-Control-Allow-Origin": "'*'"
               },
               "responseTemplates": {
-                "application/json": "#set($body = $input.path('$'))\n{\n    \"workflowId\": \"$body.workflowId\",\n#if( \"$!body.status\" != \"\")\n    \"status\": $body.status,\n#end\n#if( \"$!body.sortBy\" != \"\")\n    \"sortBy\": \"$body.sortBy\",\n#end\n#if( \"$!body.order\" != \"\")\n    \"order\": \"$body.order\",\n#end\n    \"executions\": $input.json('$.executions'),\n#if( \"$!body.nextToken\" != \"\")\n    \"nextToken\": \"$body.nextToken\"\n#else\n    \"nextToken\": null\n#end\n}\n"
+                "application/json": "$input.json('$')\n"
               },
               "statusCode": "200"
             }
@@ -6321,7 +6937,7 @@
                 "method.response.header.Access-Control-Allow-Origin": "'*'"
               },
               "responseTemplates": {
-                "application/json": "#set($body = $input.path('$'))\n{\n#if( \"$!body.endTime\" != \"\")\n    \"endTime\": \"$body.endTime\",\n#else\n    \"endTime\": null,\n#end\n#if( \"$!body.startTime\" != \"\")\n    \"startTime\": \"$body.startTime\",\n#else\n    \"startTime\": null,\n#end\n#if( \"$!body.transitionExecutions\" != \"\")\n    \"transitionExecutions\": $input.json('$.transitionExecutions'),\n#else\n    \"transitionExecutions\": null,\n#end\n    \"workflowId\": \"$body.workflowId\",\n    \"executionId\": \"$body.executionId\",\n    \"status\": \"$body.status\"\n}\n"
+                "application/json": "$input.json('$')\n"
               },
               "statusCode": "200"
             }
@@ -6569,10 +7185,28 @@
           "content": {
             "minLength": 1,
             "type": "string"
+          },
+          "description": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              null
+            ]
+          },
+          "name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              null
+            ]
           }
         },
         "required": [
-          "assetId"
+          "assetId",
+          "description",
+          "name"
         ],
         "title": "asset",
         "type": "object"
@@ -6591,10 +7225,28 @@
                 "content": {
                   "minLength": 1,
                   "type": "string"
+                },
+                "description": {
+                  "anyOf": [
+                    {
+                      "type": "string"
+                    },
+                    null
+                  ]
+                },
+                "name": {
+                  "anyOf": [
+                    {
+                      "type": "string"
+                    },
+                    null
+                  ]
                 }
               },
               "required": [
-                "assetId"
+                "assetId",
+                "description",
+                "name"
               ],
               "type": "object"
             },
@@ -6603,7 +7255,6 @@
           "nextToken": {
             "anyOf": [
               {
-                "minLength": 1,
                 "type": "string"
               },
               null
@@ -6624,13 +7275,26 @@
             "type": "string"
           },
           "description": {
-            "minLength": 1,
-            "type": "string"
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              null
+            ]
+          },
+          "name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              null
+            ]
           }
         },
         "required": [
           "batchId",
-          "description"
+          "description",
+          "name"
         ],
         "title": "batch",
         "type": "object"
@@ -6875,7 +7539,6 @@
           "nextToken": {
             "anyOf": [
               {
-                "minLength": 1,
                 "type": "string"
               },
               null
@@ -6901,6 +7564,44 @@
         "title": "Error Schema",
         "type": "object"
       },
+      "Log": {
+        "additionalProperties": false,
+        "properties": {
+          "events": {
+            "items": {
+              "type": "object"
+            },
+            "type": "array"
+          },
+          "logId": {
+            "pattern": "^las:log:[a-f0-9]{32}$",
+            "type": "string"
+          },
+          "transitionId": {
+            "anyOf": [
+              {
+                "anyOf": [
+                  {
+                    "pattern": "^las:transition:[a-f0-9]{32}$",
+                    "type": "string"
+                  },
+                  {
+                    "pattern": "^las:transition:commons-[0-9A-Za-z-]+$",
+                    "type": "string"
+                  }
+                ]
+              },
+              null
+            ]
+          }
+        },
+        "required": [
+          "events",
+          "logId"
+        ],
+        "title": "log",
+        "type": "object"
+      },
       "Models": {
         "additionalProperties": false,
         "properties": {
@@ -6911,7 +7612,6 @@
                 "description": {
                   "anyOf": [
                     {
-                      "minLength": 1,
                       "type": "string"
                     },
                     null
@@ -6927,7 +7627,6 @@
                 "name": {
                   "anyOf": [
                     {
-                      "minLength": 1,
                       "type": "string"
                     },
                     null
@@ -6951,7 +7650,6 @@
           "nextToken": {
             "anyOf": [
               {
-                "minLength": 1,
                 "type": "string"
               },
               null
@@ -6966,15 +7664,29 @@
       },
       "PatchAssetId": {
         "additionalProperties": false,
+        "minProperties": 1,
         "properties": {
           "content": {
             "minLength": 1,
             "type": "string"
+          },
+          "description": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              null
+            ]
+          },
+          "name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              null
+            ]
           }
         },
-        "required": [
-          "content"
-        ],
         "title": "PATCH /assets/assetId",
         "type": "object"
       },
@@ -7022,18 +7734,28 @@
       },
       "PatchSecretId": {
         "additionalProperties": false,
+        "minProperties": 1,
         "properties": {
           "data": {
             "type": "object"
           },
           "description": {
-            "minLength": 1,
-            "type": "string"
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              null
+            ]
+          },
+          "name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              null
+            ]
           }
         },
-        "required": [
-          "data"
-        ],
         "title": "PATCH /secrets/{secretId}",
         "type": "object"
       },
@@ -7090,40 +7812,29 @@
       },
       "PatchTransitionId": {
         "additionalProperties": false,
+        "minProperties": 1,
         "properties": {
           "description": {
             "anyOf": [
               {
-                "minLength": 1,
                 "type": "string"
               },
               null
             ]
           },
           "inputJsonSchema": {
-            "anyOf": [
-              {
-                "type": "object"
-              },
-              null
-            ]
+            "type": "object"
           },
           "name": {
             "anyOf": [
               {
-                "minLength": 1,
                 "type": "string"
               },
               null
             ]
           },
           "outputJsonSchema": {
-            "anyOf": [
-              {
-                "type": "object"
-              },
-              null
-            ]
+            "type": "object"
           }
         },
         "title": "PATCH /transitions/{transitionId}",
@@ -7131,11 +7842,11 @@
       },
       "PatchWorkflowId": {
         "additionalProperties": false,
+        "minProperties": 1,
         "properties": {
           "description": {
             "anyOf": [
               {
-                "minLength": 1,
                 "type": "string"
               },
               null
@@ -7144,7 +7855,6 @@
           "name": {
             "anyOf": [
               {
-                "minLength": 1,
                 "type": "string"
               },
               null
@@ -7160,6 +7870,22 @@
           "content": {
             "minLength": 1,
             "type": "string"
+          },
+          "description": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              null
+            ]
+          },
+          "name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              null
+            ]
           }
         },
         "required": [
@@ -7172,13 +7898,22 @@
         "additionalProperties": false,
         "properties": {
           "description": {
-            "minLength": 1,
-            "type": "string"
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              null
+            ]
+          },
+          "name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              null
+            ]
           }
         },
-        "required": [
-          "description"
-        ],
         "title": "POST /batches",
         "type": "object"
       },
@@ -7255,6 +7990,7 @@
             "type": "string"
           },
           "maxPages": {
+            "maximum": 3,
             "minimum": 1,
             "type": "integer"
           },
@@ -7277,7 +8013,20 @@
             "type": "object"
           },
           "description": {
-            "type": "string"
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              null
+            ]
+          },
+          "name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              null
+            ]
           }
         },
         "required": [
@@ -7296,7 +8045,6 @@
           "description": {
             "anyOf": [
               {
-                "minLength": 1,
                 "type": "string"
               },
               null
@@ -7306,13 +8054,17 @@
             "type": "object"
           },
           "name": {
-            "minLength": 1,
-            "type": "string"
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              null
+            ]
           },
           "outputJsonSchema": {
             "type": "object"
           },
-          "params": {
+          "parameters": {
             "anyOf": [
               {
                 "additionalProperties": false,
@@ -7326,6 +8078,13 @@
                   "environment": {
                     "additionalProperties": true,
                     "type": "object"
+                  },
+                  "environmentSecrets": {
+                    "items": {
+                      "pattern": "^las:secret:[a-f0-9]{32}$",
+                      "type": "string"
+                    },
+                    "type": "array"
                   },
                   "imageUrl": {
                     "type": "string"
@@ -7375,9 +8134,6 @@
           }
         },
         "required": [
-          "inputJsonSchema",
-          "name",
-          "outputJsonSchema",
           "transitionType"
         ],
         "title": "POST /transitions",
@@ -7416,7 +8172,6 @@
           "description": {
             "anyOf": [
               {
-                "minLength": 1,
                 "type": "string"
               },
               null
@@ -7436,8 +8191,12 @@
             "type": "object"
           },
           "name": {
-            "minLength": 1,
-            "type": "string"
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              null
+            ]
           },
           "specification": {
             "additionalProperties": false,
@@ -7465,7 +8224,6 @@
           }
         },
         "required": [
-          "name",
           "specification"
         ],
         "title": "POST /workflows",
@@ -7476,6 +8234,18 @@
         "properties": {
           "documentId": {
             "pattern": "^las:document:[a-f0-9]{32}$",
+            "type": "string"
+          },
+          "inferenceTime": {
+            "minimum": 0,
+            "type": "number"
+          },
+          "modelId": {
+            "pattern": "^las:model:[0-9A-Za-z_]+$",
+            "type": "string"
+          },
+          "predictionId": {
+            "pattern": "^las:prediction:[a-f0-9]{32}$",
             "type": "string"
           },
           "predictions": {
@@ -7512,11 +8282,19 @@
               "type": "object"
             },
             "type": "array"
+          },
+          "timestamp": {
+            "minimum": 1,
+            "type": "integer"
           }
         },
         "required": [
           "documentId",
-          "predictions"
+          "inferenceTime",
+          "modelId",
+          "predictionId",
+          "predictions",
+          "timestamp"
         ],
         "title": "prediction",
         "type": "object"
@@ -7527,7 +8305,14 @@
           "description": {
             "anyOf": [
               {
-                "minLength": 1,
+                "type": "string"
+              },
+              null
+            ]
+          },
+          "name": {
+            "anyOf": [
+              {
                 "type": "string"
               },
               null
@@ -7539,6 +8324,8 @@
           }
         },
         "required": [
+          "description",
+          "name",
           "secretId"
         ],
         "title": "secret",
@@ -7550,7 +8337,6 @@
           "nextToken": {
             "anyOf": [
               {
-                "minLength": 1,
                 "type": "string"
               },
               null
@@ -7563,7 +8349,14 @@
                 "description": {
                   "anyOf": [
                     {
-                      "minLength": 1,
+                      "type": "string"
+                    },
+                    null
+                  ]
+                },
+                "name": {
+                  "anyOf": [
+                    {
                       "type": "string"
                     },
                     null
@@ -7575,6 +8368,8 @@
                 }
               },
               "required": [
+                "description",
+                "name",
                 "secretId"
               ],
               "type": "object"
@@ -7604,7 +8399,6 @@
           "description": {
             "anyOf": [
               {
-                "minLength": 1,
                 "type": "string"
               },
               null
@@ -7614,11 +8408,23 @@
             "type": "object"
           },
           "name": {
-            "minLength": 1,
-            "type": "string"
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              null
+            ]
           },
           "outputJsonSchema": {
             "type": "object"
+          },
+          "parameters": {
+            "anyOf": [
+              {
+                "type": "object"
+              },
+              null
+            ]
           },
           "transitionId": {
             "anyOf": [
@@ -7637,6 +8443,7 @@
           }
         },
         "required": [
+          "description",
           "name",
           "transitionId",
           "transitionType"
@@ -7650,7 +8457,15 @@
           "completedBy": {
             "anyOf": [
               {
-                "minLength": 1,
+                "type": "string"
+              },
+              null
+            ]
+          },
+          "endTime": {
+            "anyOf": [
+              {
+                "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2} ?[0-9]{2}:?[0-9]{2}:?[0-9]{2}.?[0-9]{6}",
                 "type": "string"
               },
               null
@@ -7661,7 +8476,30 @@
             "type": "string"
           },
           "input": {
-            "type": "object"
+            "anyOf": [
+              {
+                "type": "object"
+              },
+              null
+            ]
+          },
+          "logId": {
+            "anyOf": [
+              {
+                "pattern": "^las:log:[a-f0-9]{32}$",
+                "type": "string"
+              },
+              null
+            ]
+          },
+          "startTime": {
+            "anyOf": [
+              {
+                "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2} ?[0-9]{2}:?[0-9]{2}:?[0-9]{2}.?[0-9]{6}",
+                "type": "string"
+              },
+              null
+            ]
           },
           "status": {
             "enum": [
@@ -7699,31 +8537,111 @@
       "TransitionExecutions": {
         "additionalProperties": false,
         "properties": {
-          "completedBy": {
+          "executions": {
+            "items": {
+              "additionalProperties": false,
+              "properties": {
+                "completedBy": {
+                  "anyOf": [
+                    {
+                      "type": "string"
+                    },
+                    null
+                  ]
+                },
+                "endTime": {
+                  "anyOf": [
+                    {
+                      "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2} ?[0-9]{2}:?[0-9]{2}:?[0-9]{2}.?[0-9]{6}",
+                      "type": "string"
+                    },
+                    null
+                  ]
+                },
+                "executionId": {
+                  "pattern": "^las:transition-execution:[a-f0-9]{32}$",
+                  "type": "string"
+                },
+                "input": {
+                  "anyOf": [
+                    {
+                      "type": "object"
+                    },
+                    null
+                  ]
+                },
+                "logId": {
+                  "anyOf": [
+                    {
+                      "pattern": "^las:log:[a-f0-9]{32}$",
+                      "type": "string"
+                    },
+                    null
+                  ]
+                },
+                "startTime": {
+                  "anyOf": [
+                    {
+                      "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2} ?[0-9]{2}:?[0-9]{2}:?[0-9]{2}.?[0-9]{6}",
+                      "type": "string"
+                    },
+                    null
+                  ]
+                },
+                "status": {
+                  "enum": [
+                    "running",
+                    "succeeded",
+                    "failed",
+                    "rejected",
+                    "retry"
+                  ],
+                  "type": "string"
+                },
+                "transitionId": {
+                  "anyOf": [
+                    {
+                      "pattern": "^las:transition:[a-f0-9]{32}$",
+                      "type": "string"
+                    },
+                    {
+                      "pattern": "^las:transition:commons-[0-9A-Za-z-]+$",
+                      "type": "string"
+                    }
+                  ]
+                }
+              },
+              "required": [
+                "completedBy",
+                "executionId",
+                "input",
+                "status",
+                "transitionId"
+              ],
+              "type": "object"
+            },
+            "type": "array"
+          },
+          "nextToken": {
             "anyOf": [
               {
-                "minLength": 1,
                 "type": "string"
               },
               null
             ]
           },
-          "executionId": {
-            "pattern": "^las:transition-execution:[a-f0-9]{32}$",
-            "type": "string"
-          },
-          "input": {
-            "type": "object"
-          },
           "status": {
-            "enum": [
-              "running",
-              "succeeded",
-              "failed",
-              "rejected",
-              "retry"
-            ],
-            "type": "string"
+            "items": {
+              "enum": [
+                "running",
+                "succeeded",
+                "failed",
+                "rejected",
+                "retry"
+              ],
+              "type": "string"
+            },
+            "type": "array"
           },
           "transitionId": {
             "anyOf": [
@@ -7739,13 +8657,10 @@
           }
         },
         "required": [
-          "completedBy",
-          "executionId",
-          "input",
-          "status",
+          "executions",
           "transitionId"
         ],
-        "title": "transition-execution",
+        "title": "transition-executions",
         "type": "object"
       },
       "Transitions": {
@@ -7754,7 +8669,6 @@
           "nextToken": {
             "anyOf": [
               {
-                "minLength": 1,
                 "type": "string"
               },
               null
@@ -7787,7 +8701,6 @@
                 "description": {
                   "anyOf": [
                     {
-                      "minLength": 1,
                       "type": "string"
                     },
                     null
@@ -7797,11 +8710,23 @@
                   "type": "object"
                 },
                 "name": {
-                  "minLength": 1,
-                  "type": "string"
+                  "anyOf": [
+                    {
+                      "type": "string"
+                    },
+                    null
+                  ]
                 },
                 "outputJsonSchema": {
                   "type": "object"
+                },
+                "parameters": {
+                  "anyOf": [
+                    {
+                      "type": "object"
+                    },
+                    null
+                  ]
                 },
                 "transitionId": {
                   "anyOf": [
@@ -7820,6 +8745,7 @@
                 }
               },
               "required": [
+                "description",
                 "name",
                 "transitionId",
                 "transitionType"
@@ -7860,7 +8786,6 @@
           "nextToken": {
             "anyOf": [
               {
-                "minLength": 1,
                 "type": "string"
               },
               null
@@ -7900,15 +8825,18 @@
           "description": {
             "anyOf": [
               {
-                "minLength": 1,
                 "type": "string"
               },
               null
             ]
           },
           "name": {
-            "minLength": 1,
-            "type": "string"
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              null
+            ]
           },
           "workflowId": {
             "pattern": "^las:workflow:[a-f0-9]{32}$",
@@ -7916,6 +8844,7 @@
           }
         },
         "required": [
+          "description",
           "name",
           "workflowId"
         ],
@@ -7925,6 +8854,21 @@
       "WorkflowExecution": {
         "additionalProperties": false,
         "properties": {
+          "completedBy": {
+            "items": {
+              "anyOf": [
+                {
+                  "pattern": "^las:user:[a-f0-9]{32}$",
+                  "type": "string"
+                },
+                {
+                  "pattern": "^las:app-client:[a-f0-9]{32}$",
+                  "type": "string"
+                }
+              ]
+            },
+            "type": "array"
+          },
           "endTime": {
             "anyOf": [
               {
@@ -7939,10 +8883,20 @@
             "type": "string"
           },
           "input": {
-            "type": "object"
+            "anyOf": [
+              {
+                "type": "object"
+              },
+              null
+            ]
           },
           "output": {
-            "type": "object"
+            "anyOf": [
+              {
+                "type": "object"
+              },
+              null
+            ]
           },
           "startTime": {
             "anyOf": [
@@ -7979,8 +8933,11 @@
         "required": [
           "endTime",
           "executionId",
+          "input",
+          "output",
           "startTime",
           "status",
+          "transitionExecutions",
           "workflowId"
         ],
         "title": "workflow-execution",
@@ -7993,6 +8950,21 @@
             "items": {
               "additionalProperties": false,
               "properties": {
+                "completedBy": {
+                  "items": {
+                    "anyOf": [
+                      {
+                        "pattern": "^las:user:[a-f0-9]{32}$",
+                        "type": "string"
+                      },
+                      {
+                        "pattern": "^las:app-client:[a-f0-9]{32}$",
+                        "type": "string"
+                      }
+                    ]
+                  },
+                  "type": "array"
+                },
                 "endTime": {
                   "anyOf": [
                     {
@@ -8007,10 +8979,20 @@
                   "type": "string"
                 },
                 "input": {
-                  "type": "object"
+                  "anyOf": [
+                    {
+                      "type": "object"
+                    },
+                    null
+                  ]
                 },
                 "output": {
-                  "type": "object"
+                  "anyOf": [
+                    {
+                      "type": "object"
+                    },
+                    null
+                  ]
                 },
                 "startTime": {
                   "anyOf": [
@@ -8047,8 +9029,11 @@
               "required": [
                 "endTime",
                 "executionId",
+                "input",
+                "output",
                 "startTime",
                 "status",
+                "transitionExecutions",
                 "workflowId"
               ],
               "type": "object"
@@ -8058,7 +9043,6 @@
           "nextToken": {
             "anyOf": [
               {
-                "minLength": 1,
                 "type": "string"
               },
               null
@@ -8109,7 +9093,6 @@
           "nextToken": {
             "anyOf": [
               {
-                "minLength": 1,
                 "type": "string"
               },
               null
@@ -8122,15 +9105,18 @@
                 "description": {
                   "anyOf": [
                     {
-                      "minLength": 1,
                       "type": "string"
                     },
                     null
                   ]
                 },
                 "name": {
-                  "minLength": 1,
-                  "type": "string"
+                  "anyOf": [
+                    {
+                      "type": "string"
+                    },
+                    null
+                  ]
                 },
                 "workflowId": {
                   "pattern": "^las:workflow:[a-f0-9]{32}$",
@@ -8138,6 +9124,7 @@
                 }
               },
               "required": [
+                "description",
                 "name",
                 "workflowId"
               ],
