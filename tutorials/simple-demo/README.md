@@ -1,4 +1,4 @@
-## Simple demonstation workflow
+## Simple demonstration workflow
 In this tutorial you will learn how to setup a simple workflow that 
 allows you to handle any type of documents in a safe and semi-automatic way.
 We will do this by using the 
