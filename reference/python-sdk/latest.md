@@ -25,10 +25,10 @@ Creates an asset handle, calls the POST /assets endpoint.
     * **content** (*Content*) – Content to POST
 
 
-    * **name** (*str*) – Name of the asset
+    * **name** (*Optional**[**str**]*) – Name of the asset
 
 
-    * **description** (*str*) – Description of the asset
+    * **description** (*Optional**[**str**]*) – Description of the asset
 
 
 
@@ -63,10 +63,10 @@ Creates a batch, calls the POST /batches endpoint.
 * **Parameters**
 
     
-    * **name** (*str*) – Name of the batch
+    * **name** (*Optional**[**str**]*) – Name of the batch
 
 
-    * **description** (*str*) – Description of the batch
+    * **description** (*Optional**[**str**]*) – Description of the batch
 
 
 
@@ -94,7 +94,7 @@ Creates a document handle, calls the POST /documents endpoint.
 ```python
 >>> from las.client import Client
 >>> client = Client()
->>> client.create_document(b'<bytes data>', 'image/jpeg', '<consent id>')
+>>> client.create_document(b'<bytes data>', 'image/jpeg', consent_id='<consent id>')
 ```
 
 
@@ -107,13 +107,13 @@ Creates a document handle, calls the POST /documents endpoint.
     * **content_type** (*str*) – MIME type for the document handle
 
 
-    * **consent_id** (*str*) – Id of the consent that marks the owner of the document handle
+    * **consent_id** (*Optional**[**str**]*) – Id of the consent that marks the owner of the document handle
 
 
-    * **batch_id** (*str*) – Id of the associated batch
+    * **batch_id** (*Optional**[**str**]*) – Id of the associated batch
 
 
-    * **ground_truth** (*Sequence**[**Dict**[**str**, **str**]**]*) – List of items {label: value} representing the ground truth values for the document
+    * **ground_truth** (*Optional**[**Sequence**[**Dict**[**str**, **str**]**]**]*) – List of items {label: value} representing the ground truth values for the document
 
 
 
@@ -154,10 +154,10 @@ Create a prediction on a document using specified model, calls the POST /predict
     * **model_id** (*str*) – Id of the model to use for inference
 
 
-    * **max_pages** (*int*) – Maximum number of pages to run predictions on
+    * **max_pages** (*Optional**[**int**]*) – Maximum number of pages to run predictions on
 
 
-    * **auto_rotate** (*bool*) – Whether or not to let the API try different rotations on the document when running predictions
+    * **auto_rotate** (*Optional**[**bool**]*) – Whether or not to let the API try different rotations on the document when running predictions
 
 
 
@@ -196,10 +196,10 @@ Creates an secret handle, calls the POST /secrets endpoint.
     * **data** (*str*) – Dict containing the data you want to keep secret
 
 
-    * **name** (*str*) – Name of the secret
+    * **name** (*Optional**[**str**]*) – Name of the secret
 
 
-    * **description** (*str*) – Description of the secret
+    * **description** (*Optional**[**str**]*) – Description of the secret
 
 
 
@@ -247,16 +247,16 @@ Creates a transition handle, calls the POST /transitions endpoint.
 * **Parameters**
 
     
-    * **in_schema** (*dict*) – Json-schema that defines the input to the transition
-
-
-    * **out_schema** (*dict*) – Json-schema that defines the output of the transition
-
-
-    * **name** (*str*) – Name of the transition
-
-
     * **transition_type** (*str*) – Type of transition “docker”|”manual”
+
+
+    * **in_schema** (*Optional**[**dict**]*) – Json-schema that defines the input to the transition
+
+
+    * **out_schema** (*Optional**[**dict**]*) – Json-schema that defines the output of the transition
+
+
+    * **name** (*Optional**[**str**]*) – Name of the transition
 
 
     * **params** (*Optional**[**dict**]*) – Parameters to the corresponding transition type
@@ -320,7 +320,7 @@ Creates a new user, calls the POST /users endpoint.
 
 #### create_workflow(specification: dict, \*, error_config: Optional[dict] = None, \*\*optional_args)
 Creates a new workflow, calls the POST /workflows endpoint.
-Check out Lucidtechs tutorials for more info on how to create a workflow.
+Check out Lucidtech’s tutorials for more info on how to create a workflow.
 
 ```python
 >>> from las.client import Client
@@ -339,13 +339,13 @@ Check out Lucidtechs tutorials for more info on how to create a workflow.
     currently supporting ASL: [https://states-language.net/spec.html](https://states-language.net/spec.html)
 
 
-    * **name** (*str*) – Name of the workflow
+    * **name** (*Optional**[**str**]*) – Name of the workflow
 
 
-    * **description** (*str*) – Description of the workflow
+    * **description** (*Optional**[**str**]*) – Description of the workflow
 
 
-    * **error_config** (*dict*) – Configuration of error handler
+    * **error_config** (*Optional**[**dict**]*) – Configuration of error handler
 
 
 
@@ -373,13 +373,13 @@ Delete documents with the provided consent_id, calls the DELETE /documents endpo
 ```python
 >>> from las.client import Client
 >>> client = Client()
->>> client.delete_documents('<consent id>')
+>>> client.delete_documents(consent_id='<consent id>')
 ```
 
 
 * **Parameters**
 
-    **consent_id** (*Queryparam*) – Ids of the consents that marks the owner of the document handle
+    **consent_id** (*Optional**[**Queryparam**]*) – Ids of the consents that marks the owner of the document handle
 
 
 
@@ -622,7 +622,7 @@ Get document from the REST API, calls the GET /documents/{documentId} endpoint.
 ```python
 >>> from las.client import Client
 >>> client = Client()
->>> client.get_document(document_id='<document id>')
+>>> client.get_document('<document id>')
 ```
 
 
@@ -769,10 +769,10 @@ List assets available, calls the GET /assets endpoint.
 * **Parameters**
 
     
-    * **max_results** (*int*) – Maximum number of results to be returned
+    * **max_results** (*Optional**[**int**]*) – Maximum number of results to be returned
 
 
-    * **next_token** (*str*) – A unique token for each page, use the returned token to retrieve the next page.
+    * **next_token** (*Optional**[**str**]*) – A unique token for each page, use the returned token to retrieve the next page.
 
 
 
@@ -807,16 +807,16 @@ List documents available for inference, calls the GET /documents endpoint.
 * **Parameters**
 
     
-    * **batch_id** (*Queryparam*) – Ids of batches that contains the documents of interest
+    * **batch_id** (*Optional**[**Queryparam**]*) – Ids of batches that contains the documents of interest
 
 
-    * **consent_id** (*Queryparam*) – Ids of the consents that marks the owner of the document handle
+    * **consent_id** (*Optional**[**Queryparam**]*) – Ids of the consents that marks the owner of the document handle
 
 
-    * **max_results** (*int*) – Maximum number of results to be returned
+    * **max_results** (*Optional**[**int**]*) – Maximum number of results to be returned
 
 
-    * **next_token** (*str*) – A unique token for each page, use the returned token to retrieve the next page.
+    * **next_token** (*Optional**[**str**]*) – A unique token for each page, use the returned token to retrieve the next page.
 
 
 
@@ -851,10 +851,10 @@ List models available, calls the GET /models endpoint.
 * **Parameters**
 
     
-    * **max_results** (*int*) – Maximum number of results to be returned
+    * **max_results** (*Optional**[**int**]*) – Maximum number of results to be returned
 
 
-    * **next_token** (*str*) – A unique token for each page, use the returned token to retrieve the next page.
+    * **next_token** (*Optional**[**str**]*) – A unique token for each page, use the returned token to retrieve the next page.
 
 
 
@@ -889,10 +889,10 @@ List predictions available, calls the GET /predictions endpoint.
 * **Parameters**
 
     
-    * **max_results** (*int*) – Maximum number of results to be returned
+    * **max_results** (*Optional**[**int**]*) – Maximum number of results to be returned
 
 
-    * **next_token** (*str*) – A unique token for each page, use the returned token to retrieve the next page.
+    * **next_token** (*Optional**[**str**]*) – A unique token for each page, use the returned token to retrieve the next page.
 
 
 
@@ -927,10 +927,10 @@ List secrets available, calls the GET /secrets endpoint.
 * **Parameters**
 
     
-    * **max_results** (*int*) – Maximum number of results to be returned
+    * **max_results** (*Optional**[**int**]*) – Maximum number of results to be returned
 
 
-    * **next_token** (*str*) – A unique token for each page, use the returned token to retrieve the next page.
+    * **next_token** (*Optional**[**str**]*) – A unique token for each page, use the returned token to retrieve the next page.
 
 
 
@@ -968,22 +968,22 @@ List executions in a transition, calls the GET /transitions/{transitionId}/execu
     * **transition_id** (*str*) – Id of the transition
 
 
-    * **status** (*Queryparam*) – Statuses of the executions
+    * **status** (*Optional**[**Queryparam**]*) – Statuses of the executions
 
 
-    * **order** (*Optional str*) – Order of the executions, either ‘ascending’ or ‘descending’
+    * **order** (*Optional**[**str**]*) – Order of the executions, either ‘ascending’ or ‘descending’
 
 
-    * **sort_by** (*Optional str*) – the sorting variable of the executions, either ‘endTime’, or ‘startTime’
+    * **sort_by** (*Optional**[**str**]*) – the sorting variable of the executions, either ‘endTime’, or ‘startTime’
 
 
-    * **execution_id** (*Queryparam*) – Ids of the executions
+    * **execution_id** (*Optional**[**Queryparam**]*) – Ids of the executions
 
 
-    * **max_results** (*int*) – Maximum number of results to be returned
+    * **max_results** (*Optional**[**int**]*) – Maximum number of results to be returned
 
 
-    * **next_token** (*str*) – A unique token for each page, use the returned token to retrieve the next page.
+    * **next_token** (*Optional**[**str**]*) – A unique token for each page, use the returned token to retrieve the next page.
 
 
 
@@ -1018,13 +1018,13 @@ List transitions, calls the GET /transitions endpoint.
 * **Parameters**
 
     
-    * **transition_type** (*Queryparam*) – Types of transitions
+    * **transition_type** (*Optional**[**Queryparam**]*) – Types of transitions
 
 
-    * **max_results** (*int*) – Maximum number of results to be returned
+    * **max_results** (*Optional**[**int**]*) – Maximum number of results to be returned
 
 
-    * **next_token** (*str*) – A unique token for each page, use the returned token to retrieve the next page.
+    * **next_token** (*Optional**[**str**]*) – A unique token for each page, use the returned token to retrieve the next page.
 
 
 
@@ -1059,10 +1059,10 @@ List users, calls the GET /users endpoint.
 * **Parameters**
 
     
-    * **max_results** (*int*) – Maximum number of results to be returned
+    * **max_results** (*Optional**[**int**]*) – Maximum number of results to be returned
 
 
-    * **next_token** (*str*) – A unique token for each page, use the returned token to retrieve the next page.
+    * **next_token** (*Optional**[**str**]*) – A unique token for each page, use the returned token to retrieve the next page.
 
 
 
@@ -1100,19 +1100,19 @@ List executions in a workflow, calls the GET /workflows/{workflowId}/executions 
     * **workflow_id** (*str*) – Id of the workflow
 
 
-    * **order** (*Optional str*) – Order of the executions, either ‘ascending’ or ‘descending’
+    * **order** (*Optional**[**str**]*) – Order of the executions, either ‘ascending’ or ‘descending’
 
 
-    * **sort_by** (*Optional str*) – the sorting variable of the executions, either ‘endTime’, or ‘startTime’
+    * **sort_by** (*Optional**[**str**]*) – the sorting variable of the executions, either ‘endTime’, or ‘startTime’
 
 
-    * **status** (*Queryparam*) – Statuses of the executions
+    * **status** (*Optional**[**Queryparam**]*) – Statuses of the executions
 
 
-    * **max_results** (*int*) – Maximum number of results to be returned
+    * **max_results** (*Optional**[**int**]*) – Maximum number of results to be returned
 
 
-    * **next_token** (*str*) – A unique token for each page, use the returned token to retrieve the next page.
+    * **next_token** (*Optional**[**str**]*) – A unique token for each page, use the returned token to retrieve the next page.
 
 
 
@@ -1147,10 +1147,10 @@ List workflows, calls the GET /workflows endpoint.
 * **Parameters**
 
     
-    * **max_results** (*int*) – Maximum number of results to be returned
+    * **max_results** (*Optional**[**int**]*) – Maximum number of results to be returned
 
 
-    * **next_token** (*str*) – A unique token for each page, use the returned token to retrieve the next page.
+    * **next_token** (*Optional**[**str**]*) – A unique token for each page, use the returned token to retrieve the next page.
 
 
 
@@ -1188,13 +1188,13 @@ Updates an asset, calls the PATCH /assets/{assetId} endpoint.
     * **asset_id** (*str*) – Id of the asset
 
 
-    * **content** (*Content*) – Content to PATCH
+    * **content** (*Optional**[**Content**]*) – Content to PATCH
 
 
-    * **name** (*str*) – Name of the asset
+    * **name** (*Optional**[**str**]*) – Name of the asset
 
 
-    * **description** (*str*) – Description of the asset
+    * **description** (*Optional**[**str**]*) – Description of the asset
 
 
 
@@ -1274,7 +1274,7 @@ Updates an secret, calls the PATCH /secrets/secretId endpoint.
     * **secret_id** (*str*) – Id of the secret
 
 
-    * **data** (*str*) – Dict containing the data you want to keep secret
+    * **data** (*Optional**[**dict**]*) – Dict containing the data you want to keep secret
 
 
     * **name** (*Optional**[**str**]*) – Name of the secret
@@ -1377,10 +1377,10 @@ calls the PATCH /transitions/{transition_id}/executions/{execution_id} endpoint.
     * **status** (*str*) – Status of the execution ‘succeeded|failed’
 
 
-    * **output** (*str*) – Output from the execution, required when status is ‘succeded’
+    * **output** (*Optional**[**str**]*) – Output from the execution, required when status is ‘succeded’
 
 
-    * **error** (*str*) – Error from the execution, required when status is ‘failed’, needs to contain ‘message’
+    * **error** (*Optional**[**str**]*) – Error from the execution, required when status is ‘failed’, needs to contain ‘message’
 
 
 
