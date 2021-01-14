@@ -12,6 +12,10 @@
   * [Java](getting-started/dev/java.md)
 * [FAQ](getting-started/faq.md)
 * [Help](getting-started/help.md)
+* [Tutorials](tutorials/README.md)
+  * [Simple demo](tutorials/simple-demo/README.md)
+  * [Custom workflow](tutorials/tutorial_custom_predict_and_approve.md)
+  * [Docker samples](docker-image-samples/README.md)
 
 ## Data Training
 
@@ -23,11 +27,10 @@
 * [Rest API](reference/restapi/README.md)
   * [dev](reference/restapi/dev.md)
 * [Python SDK](reference/python-sdk/README.md)
-  * [v2.0](reference/python-sdk/v2.0.md)
-  * [v3.0.0](reference/python-sdk/v3.0.0.md)
+  * [latest](reference/python-sdk/latest.md)
 * [.NET](reference/dotnet/README.md)
-  * [v2.0](reference/dotnet/v2.0.md)
   * [v2.1](reference/dotnet/v2.1.md)
+  * [v2.0](reference/dotnet/v2.0.md)
 * [JavaScript SDK](reference/js/README.md)
   * [v2.0](reference/js/2.0.md)
 * [Java SDK](reference/java/README.md)
