@@ -1,5 +1,5 @@
 ---
-description: What you need to know about Confidence
+description: What you need to know about confidence
 ---
 
 # How to deal with uncertain predictions
