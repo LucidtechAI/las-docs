@@ -2,9 +2,9 @@
 description: What you need to know about Confidence
 ---
 
-# How do we deal with uncertain predictions?
+# How to deal with uncertain predictions
 
-## What is end-to-end confidence?
+## End-to-end confidence
 
 Every field the model extracts has a corresponding confidence value. The confidence is different from a traditional OCR confidence in that it does not only estimates the probability that the characters are interpreted correctly, but also that it has extracted the correct information (e.g. the total amount and not the VAT amount).
 
