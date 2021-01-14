@@ -20,6 +20,7 @@
 ## Data Training
 
 * [Custom Data Training](data-training/data-training.md)
+* [What is Confidence?](data-training/confidence.md)
 
 ## Reference
 
