@@ -10,13 +10,14 @@
   * [JavaScript](getting-started/dev/js.md)
   * [.NET](getting-started/dev/net.md)
   * [Java](getting-started/dev/java.md)
-* [FAQ](getting-started/faq.md)
-* [Help](getting-started/help.md)
 * [Tutorials](tutorials/README.md)
   * [Simple demo](tutorials/simple-demo/README.md)
   * [Custom workflow](tutorials/tutorial_custom_predict_and_approve.md)
   * [Docker samples](docker-image-samples/README.md)
+* [Authentication](authentication/README.md)
 * [Quotas](quotas/README.md)
+* [FAQ](getting-started/faq.md)
+* [Help](getting-started/help.md)
 
 ## Data Training
 
