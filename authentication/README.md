@@ -16,7 +16,7 @@ https://auth.lucidtech.ai and the endpoint for the API is https://api.lucidtech.
 #### Getting an access token
 
 To acquire an access token we need to ask the auth endpoint with our client id and client secret for access. This is 
-done by performing a POST request to the token endpoint /oauth2/token with two headers defined. One header 
+done by performing a HTTP POST request to the token endpoint /oauth2/token with two headers defined. One header 
 should be Authorization with base64 encoded client_id and client secret and one header should be Content-Type which 
 will always contain the same value 'application/x-www-form-urlencoded'.
 
