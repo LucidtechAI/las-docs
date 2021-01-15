@@ -48,8 +48,10 @@ If everything is working as expected, the response should look similar to the fo
 }
 ```
 
-Notice that the token will expire after some time, currently after 3600 seconds (1 hour). When the token expires 
+{% hint style="info" %}
+The access_token will expire after some time, currently after 3600 seconds (1 hour). When the token expires 
 you will need to get a new access_token using the same procedure.
+{% endhint %}
 
 #### Using the API
 
