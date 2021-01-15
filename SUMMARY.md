@@ -16,6 +16,7 @@
   * [Simple demo](tutorials/simple-demo/README.md)
   * [Custom workflow](tutorials/tutorial_custom_predict_and_approve.md)
   * [Docker samples](docker-image-samples/README.md)
+* [Quotas](quotas/README.md)
 
 ## Data Training
 
