@@ -1,6 +1,6 @@
 ## Authenticating to Lucidtech
 
-Lucidtech APIs require you to authenticate using the [OAuth2 protocol](https://tools.ietf.org/html/rfc6749). Our SDKs 
+Lucidtech APIs require you to authenticate using the OAuth2 [protocol](https://tools.ietf.org/html/rfc6749). Our SDKs 
 will typically handle authentication for you but should you wish to use the REST API, you would need to do this 
 yourself. Here is a brief introduction to get you started
 
