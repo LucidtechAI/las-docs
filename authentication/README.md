@@ -61,8 +61,8 @@ newly acquired access token.
 
 | Header name   | Header value                    |
 | -----------   | ------------------------------- |
-| Authorization | Bearer <your access token here> |
-| x-api-key     | <your api key here>             |
+| Authorization | Bearer \<your access token here> |
+| x-api-key     | \<your api key here>             |
 
 ```bash
 $ api_key="<your api key here>"
