@@ -59,10 +59,10 @@ Upon successfully acquiring access token from previous step, we are ready to cal
 provide two headers to the API. One header 'x-api-key' with our api key and one header 'Authorization' with the 
 newly acquired access token.
 
-| Header name   | Header value                    |
-| -----------   | ------------------------------- |
-| Authorization | Bearer \<your access token here> |
-| x-api-key     | \<your api key here>             |
+| Header name   | Header value                          |
+| -----------   | ------------------------------------- |
+| Authorization | Bearer &lt;your access token here&gt; |
+| x-api-key     | &lt;your api key here&gt;             |
 
 ```bash
 $ api_key="<your api key here>"
