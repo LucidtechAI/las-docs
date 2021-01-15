@@ -7,7 +7,7 @@ yourself. Here is a brief introduction to get you started
 
 #### Credentials
 You should already have acquired a client id, client secret and api key before continuing. The client id and client 
-secret will be used to acquire an access token from the auth endpoint and the api key will be used together with the 
+secret will be used to get an access token from the auth endpoint and the api key will be used together with the 
 access token to authorize to the API.
 
 Unless specified otherwise in the credentials file you have received, the endpoint for authentication is 
@@ -53,7 +53,7 @@ The access token will expire after some time, currently after 3600 seconds (1 ho
 you will need to get a new access token using the same procedure.
 {% endhint %}
 
-#### Using the API
+#### Calling the API
 
 Upon successfully acquiring access token from previous step, we are ready to call the API! To do that we need to 
 provide two headers to the API. One header 'x-api-key' with our api key and one header 'Authorization' with the 
