@@ -140,6 +140,6 @@ type TransitionExecution = {
 ### React code
 
 Here's what we're making:
-![Screenshot](remote.png?raw=true)
+![Screenshot](../.gitbook/assets/image.png)
 
 See [the source](https://github.com/LucidtechAI/las-docs/tree/master/tutorials/simple-demo/frontend/src/) for the code itself.
