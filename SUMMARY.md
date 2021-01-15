@@ -15,6 +15,7 @@
 * [Tutorials](tutorials/README.md)
   * [Simple demo](tutorials/simple-demo/README.md)
   * [Custom workflow](tutorials/tutorial_custom_predict_and_approve.md)
+  * [Custom approve view](tutorials/custom_approve_view.md)
   * [Docker samples](docker-image-samples/README.md)
 * [Quotas](quotas/README.md)
 
