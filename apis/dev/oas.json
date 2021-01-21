@@ -2,7 +2,7 @@
   "openapi": "3.0.1",
   "info": {
     "title": "Lucidtech API",
-    "version": "2021-01-12T14:52:08Z"
+    "version": "2021-01-21T14:21:02Z"
   },
   "servers": [
     {
@@ -15,50 +15,6 @@
     }
   ],
   "paths": {
-    "/": {
-      "get": {
-        "parameters": [
-          {
-            "in": "query",
-            "name": "method.request.multivaluequerystring.status",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "in": "query",
-            "name": "method.request.querystring.status",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Empty"
-                }
-              }
-            },
-            "description": "200 response"
-          }
-        },
-        "x-amazon-apigateway-integration": {
-          "contentHandling": "CONVERT_TO_TEXT",
-          "httpMethod": "POST",
-          "passthroughBehavior": "when_no_match",
-          "responses": {
-            "default": {
-              "statusCode": "200"
-            }
-          },
-          "type": "aws",
-          "uri": ""
-        }
-      }
-    },
     "/assets": {
       "get": {
         "parameters": [
@@ -5735,7 +5691,7 @@
             "default": {
               "responseParameters": {
                 "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'",
-                "method.response.header.Access-Control-Allow-Methods": "'GET,DELETE,OPTIONS'",
+                "method.response.header.Access-Control-Allow-Methods": "'GET,DELETE,PATCH,OPTIONS'",
                 "method.response.header.Access-Control-Allow-Origin": "'*'"
               },
               "statusCode": "200"
@@ -5743,6 +5699,180 @@
           },
           "type": "mock"
         }
+      },
+      "patch": {
+        "parameters": [
+          {
+            "in": "header",
+            "name": "Content-Type",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "userId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PatchUserId"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            },
+            "description": "200 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "400 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "404 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "415": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "415 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "500 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "x-amazon-apigateway-integration": {
+          "httpMethod": "POST",
+          "passthroughBehavior": "never",
+          "requestTemplates": {
+            "application/json": "#set($body = $input.path('$'))\n#set($jsonbody = $util.parseJson($input.json('$')))\n{\n    \"oauthClientId\": \"$context.authorizer.claims.client_id\",\n    \"oauthSubId\": \"$context.authorizer.claims.sub\",\n#if( $jsonbody.containsKey('name') && $body.name == $null)\n    \"name\": null,\n#elseif( $jsonbody.containsKey('name'))\n    \"name\": \"$body.name\",\n#end\n#if( $jsonbody.containsKey('avatar') && $body.avatar == $null)\n    \"avatar\": null,\n#elseif( $jsonbody.containsKey('avatar'))\n    \"avatar\": \"$body.avatar\",\n#end\n    \"userId\": \"$input.params().path.userId\"\n}\n"
+          },
+          "responses": {
+            "^\\[BadRequest\\].*": {
+              "responseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'"
+              },
+              "responseTemplates": {
+                "application/json": "#set($error = $input.path('$'))\n{\n    \"message\": \"$error.errorMessage\"\n}\n"
+              },
+              "statusCode": "400"
+            },
+            "^\\[InternalServerError\\].*": {
+              "responseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'"
+              },
+              "responseTemplates": {
+                "application/json": "#set($error = $input.path('$'))\n{\n    \"message\": \"$error.errorMessage\"\n}\n"
+              },
+              "statusCode": "500"
+            },
+            "^\\[NotFound\\].*": {
+              "responseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'"
+              },
+              "responseTemplates": {
+                "application/json": "#set($error = $input.path('$'))\n{\n    \"message\": \"$error.errorMessage\"\n}\n"
+              },
+              "statusCode": "404"
+            },
+            "^\\[UnsupportedMediaType\\].*": {
+              "responseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'"
+              },
+              "responseTemplates": {
+                "application/json": "#set($error = $input.path('$'))\n{\n    \"message\": \"$error.errorMessage\"\n}\n"
+              },
+              "statusCode": "415"
+            },
+            "default": {
+              "responseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'"
+              },
+              "responseTemplates": {
+                "application/json": "$input.json('$')\n"
+              },
+              "statusCode": "200"
+            }
+          },
+          "type": "aws",
+          "uri": ""
+        },
+        "x-amazon-apigateway-request-validator": ""
       }
     },
     "/workflows": {
@@ -7189,6 +7319,7 @@
           "description": {
             "anyOf": [
               {
+                "maxLength": 4096,
                 "type": "string"
               },
               null
@@ -7197,6 +7328,7 @@
           "name": {
             "anyOf": [
               {
+                "maxLength": 4096,
                 "type": "string"
               },
               null
@@ -7229,6 +7361,7 @@
                 "description": {
                   "anyOf": [
                     {
+                      "maxLength": 4096,
                       "type": "string"
                     },
                     null
@@ -7237,6 +7370,7 @@
                 "name": {
                   "anyOf": [
                     {
+                      "maxLength": 4096,
                       "type": "string"
                     },
                     null
@@ -7255,6 +7389,7 @@
           "nextToken": {
             "anyOf": [
               {
+                "maxLength": 4096,
                 "type": "string"
               },
               null
@@ -7277,6 +7412,7 @@
           "description": {
             "anyOf": [
               {
+                "maxLength": 4096,
                 "type": "string"
               },
               null
@@ -7285,6 +7421,7 @@
           "name": {
             "anyOf": [
               {
+                "maxLength": 4096,
                 "type": "string"
               },
               null
@@ -7539,6 +7676,7 @@
           "nextToken": {
             "anyOf": [
               {
+                "maxLength": 4096,
                 "type": "string"
               },
               null
@@ -7612,6 +7750,7 @@
                 "description": {
                   "anyOf": [
                     {
+                      "maxLength": 4096,
                       "type": "string"
                     },
                     null
@@ -7627,6 +7766,7 @@
                 "name": {
                   "anyOf": [
                     {
+                      "maxLength": 4096,
                       "type": "string"
                     },
                     null
@@ -7650,6 +7790,7 @@
           "nextToken": {
             "anyOf": [
               {
+                "maxLength": 4096,
                 "type": "string"
               },
               null
@@ -7673,6 +7814,7 @@
           "description": {
             "anyOf": [
               {
+                "maxLength": 4096,
                 "type": "string"
               },
               null
@@ -7681,6 +7823,7 @@
           "name": {
             "anyOf": [
               {
+                "maxLength": 4096,
                 "type": "string"
               },
               null
@@ -7742,6 +7885,7 @@
           "description": {
             "anyOf": [
               {
+                "maxLength": 4096,
                 "type": "string"
               },
               null
@@ -7750,6 +7894,7 @@
           "name": {
             "anyOf": [
               {
+                "maxLength": 4096,
                 "type": "string"
               },
               null
@@ -7817,6 +7962,7 @@
           "description": {
             "anyOf": [
               {
+                "maxLength": 4096,
                 "type": "string"
               },
               null
@@ -7828,6 +7974,7 @@
           "name": {
             "anyOf": [
               {
+                "maxLength": 4096,
                 "type": "string"
               },
               null
@@ -7840,13 +7987,14 @@
         "title": "PATCH /transitions/{transitionId}",
         "type": "object"
       },
-      "PatchWorkflowId": {
+      "PatchUserId": {
         "additionalProperties": false,
         "minProperties": 1,
         "properties": {
-          "description": {
+          "avatar": {
             "anyOf": [
               {
+                "maxLength": 131072,
                 "type": "string"
               },
               null
@@ -7855,6 +8003,33 @@
           "name": {
             "anyOf": [
               {
+                "maxLength": 4096,
+                "type": "string"
+              },
+              null
+            ]
+          }
+        },
+        "title": "PATCH /users/{userId}",
+        "type": "object"
+      },
+      "PatchWorkflowId": {
+        "additionalProperties": false,
+        "minProperties": 1,
+        "properties": {
+          "description": {
+            "anyOf": [
+              {
+                "maxLength": 4096,
+                "type": "string"
+              },
+              null
+            ]
+          },
+          "name": {
+            "anyOf": [
+              {
+                "maxLength": 4096,
                 "type": "string"
               },
               null
@@ -7874,6 +8049,7 @@
           "description": {
             "anyOf": [
               {
+                "maxLength": 4096,
                 "type": "string"
               },
               null
@@ -7882,6 +8058,7 @@
           "name": {
             "anyOf": [
               {
+                "maxLength": 4096,
                 "type": "string"
               },
               null
@@ -7900,6 +8077,7 @@
           "description": {
             "anyOf": [
               {
+                "maxLength": 4096,
                 "type": "string"
               },
               null
@@ -7908,6 +8086,7 @@
           "name": {
             "anyOf": [
               {
+                "maxLength": 4096,
                 "type": "string"
               },
               null
@@ -8015,6 +8194,7 @@
           "description": {
             "anyOf": [
               {
+                "maxLength": 4096,
                 "type": "string"
               },
               null
@@ -8023,6 +8203,7 @@
           "name": {
             "anyOf": [
               {
+                "maxLength": 4096,
                 "type": "string"
               },
               null
@@ -8045,6 +8226,7 @@
           "description": {
             "anyOf": [
               {
+                "maxLength": 4096,
                 "type": "string"
               },
               null
@@ -8056,6 +8238,7 @@
           "name": {
             "anyOf": [
               {
+                "maxLength": 4096,
                 "type": "string"
               },
               null
@@ -8172,6 +8355,7 @@
           "description": {
             "anyOf": [
               {
+                "maxLength": 4096,
                 "type": "string"
               },
               null
@@ -8193,6 +8377,7 @@
           "name": {
             "anyOf": [
               {
+                "maxLength": 4096,
                 "type": "string"
               },
               null
@@ -8305,6 +8490,7 @@
           "description": {
             "anyOf": [
               {
+                "maxLength": 4096,
                 "type": "string"
               },
               null
@@ -8313,6 +8499,7 @@
           "name": {
             "anyOf": [
               {
+                "maxLength": 4096,
                 "type": "string"
               },
               null
@@ -8337,6 +8524,7 @@
           "nextToken": {
             "anyOf": [
               {
+                "maxLength": 4096,
                 "type": "string"
               },
               null
@@ -8349,6 +8537,7 @@
                 "description": {
                   "anyOf": [
                     {
+                      "maxLength": 4096,
                       "type": "string"
                     },
                     null
@@ -8357,6 +8546,7 @@
                 "name": {
                   "anyOf": [
                     {
+                      "maxLength": 4096,
                       "type": "string"
                     },
                     null
@@ -8399,6 +8589,7 @@
           "description": {
             "anyOf": [
               {
+                "maxLength": 4096,
                 "type": "string"
               },
               null
@@ -8410,6 +8601,7 @@
           "name": {
             "anyOf": [
               {
+                "maxLength": 4096,
                 "type": "string"
               },
               null
@@ -8457,6 +8649,7 @@
           "completedBy": {
             "anyOf": [
               {
+                "maxLength": 4096,
                 "type": "string"
               },
               null
@@ -8544,6 +8737,7 @@
                 "completedBy": {
                   "anyOf": [
                     {
+                      "maxLength": 4096,
                       "type": "string"
                     },
                     null
@@ -8625,6 +8819,7 @@
           "nextToken": {
             "anyOf": [
               {
+                "maxLength": 4096,
                 "type": "string"
               },
               null
@@ -8669,6 +8864,7 @@
           "nextToken": {
             "anyOf": [
               {
+                "maxLength": 4096,
                 "type": "string"
               },
               null
@@ -8701,6 +8897,7 @@
                 "description": {
                   "anyOf": [
                     {
+                      "maxLength": 4096,
                       "type": "string"
                     },
                     null
@@ -8712,6 +8909,7 @@
                 "name": {
                   "anyOf": [
                     {
+                      "maxLength": 4096,
                       "type": "string"
                     },
                     null
@@ -8764,9 +8962,27 @@
       "User": {
         "additionalProperties": false,
         "properties": {
+          "avatar": {
+            "anyOf": [
+              {
+                "maxLength": 131072,
+                "type": "string"
+              },
+              null
+            ]
+          },
           "email": {
             "pattern": "^[A-Za-z0-9][-+._A-Za-z0-9]*@([A-Za-z0-9]+\\.)+[A-Za-z]{2,}$",
             "type": "string"
+          },
+          "name": {
+            "anyOf": [
+              {
+                "maxLength": 4096,
+                "type": "string"
+              },
+              null
+            ]
           },
           "userId": {
             "pattern": "^las:user:[a-f0-9]{32}$",
@@ -8786,6 +9002,7 @@
           "nextToken": {
             "anyOf": [
               {
+                "maxLength": 4096,
                 "type": "string"
               },
               null
@@ -8795,9 +9012,27 @@
             "items": {
               "additionalProperties": false,
               "properties": {
+                "avatar": {
+                  "anyOf": [
+                    {
+                      "maxLength": 131072,
+                      "type": "string"
+                    },
+                    null
+                  ]
+                },
                 "email": {
                   "pattern": "^[A-Za-z0-9][-+._A-Za-z0-9]*@([A-Za-z0-9]+\\.)+[A-Za-z]{2,}$",
                   "type": "string"
+                },
+                "name": {
+                  "anyOf": [
+                    {
+                      "maxLength": 4096,
+                      "type": "string"
+                    },
+                    null
+                  ]
                 },
                 "userId": {
                   "pattern": "^las:user:[a-f0-9]{32}$",
@@ -8825,6 +9060,7 @@
           "description": {
             "anyOf": [
               {
+                "maxLength": 4096,
                 "type": "string"
               },
               null
@@ -8833,6 +9069,7 @@
           "name": {
             "anyOf": [
               {
+                "maxLength": 4096,
                 "type": "string"
               },
               null
@@ -9043,6 +9280,7 @@
           "nextToken": {
             "anyOf": [
               {
+                "maxLength": 4096,
                 "type": "string"
               },
               null
@@ -9093,6 +9331,7 @@
           "nextToken": {
             "anyOf": [
               {
+                "maxLength": 4096,
                 "type": "string"
               },
               null
@@ -9105,6 +9344,7 @@
                 "description": {
                   "anyOf": [
                     {
+                      "maxLength": 4096,
                       "type": "string"
                     },
                     null
@@ -9113,6 +9353,7 @@
                 "name": {
                   "anyOf": [
                     {
+                      "maxLength": 4096,
                       "type": "string"
                     },
                     null
@@ -9141,6 +9382,14 @@
       }
     },
     "securitySchemes": {}
+  },
+  "x-amazon-apigateway-gateway-responses": {
+    "BAD_REQUEST_BODY": {
+      "responseTemplates": {
+        "application/json": "{\n    \"message\": \"[BadRequest] $context.error.validationErrorString\"\n}\n"
+      },
+      "statusCode": 400
+    }
   },
   "x-amazon-apigateway-request-validators": {}
 }
