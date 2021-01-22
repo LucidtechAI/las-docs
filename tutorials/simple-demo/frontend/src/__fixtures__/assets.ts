@@ -10,8 +10,8 @@ const fields = {
 const fieldsB64 = btoa(JSON.stringify(fields))
 
 const assets: Record<string, Asset> = {
-  'las:asset:fields': {
-    assetId: 'las:asset:fields',
+  'las:asset:fieldConfig': {
+    assetId: 'las:asset:fieldConfig',
     content: fieldsB64,
   },
 };

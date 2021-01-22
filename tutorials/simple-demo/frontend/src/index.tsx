@@ -84,7 +84,7 @@ const RemoteComponent = ({
 
   // load fields from asset
   useEffect(() => {
-    const fieldsAssetId = transition?.assets?.fields;
+    const fieldsAssetId = transition?.assets?.fieldConfig;
     if (!fieldsAssetId) return;
     getAsset(fieldsAssetId)
       .then((res) => {
