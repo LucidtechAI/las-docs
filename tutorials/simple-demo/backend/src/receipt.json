@@ -22,6 +22,11 @@
             "BackoffRate": 1
           }
         ],
+        "Next": "Feedback"
+      },
+      "Feedback": {
+        "Type": "Task",
+        "Resource": "las:transition:<hex>",
         "End": true
       }
     }
