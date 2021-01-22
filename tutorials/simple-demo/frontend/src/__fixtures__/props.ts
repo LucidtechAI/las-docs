@@ -11,7 +11,7 @@ export function createTransition(): Transition {
     transitionType: 'manual',
     assets: {
       jsRemoteComponent: 'las:asset:abcdefg',
-      fields: 'las:asset:fields'
+      fieldConfig: 'las:asset:fieldConfig'
     },
   }
 
