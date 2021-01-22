@@ -5,12 +5,12 @@
     "States": {
       "MakePredictions": {
         "Type": "Task",
-        "Resource": "las:transition:0449232eadcb4bcfb3956ec2eb42ae96",
-        "Next": "ManualApprove"
+        "Resource": "las:transition:<hex>",
+        "Next": "Receipt"
       },
-      "ManualApprove": {
+      "Receipt": {
         "Type": "Task",
-        "Resource": "las:transition:6eb47493fd7b449dae0cf5f62038aa70",
+        "Resource": "las:transition:<hex>",
         "TimeoutSeconds": 900,
         "Retry": [
           {
@@ -22,6 +22,11 @@
             "BackoffRate": 1
           }
         ],
+        "Next": "Feedback"
+      },
+      "Feedback": {
+        "Type": "Task",
+        "Resource": "las:transition:<hex>",
         "End": true
       }
     }
