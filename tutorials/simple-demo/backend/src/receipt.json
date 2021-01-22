@@ -1,0 +1,29 @@
+{
+  "definition": {
+    "Comment": "simple demo workflow",
+    "StartAt": "MakePredictions",
+    "States": {
+      "MakePredictions": {
+        "Type": "Task",
+        "Resource": "las:transition:<hex>",
+        "Next": "Receipt"
+      },
+      "Receipt": {
+        "Type": "Task",
+        "Resource": "las:transition:<hex>",
+        "TimeoutSeconds": 900,
+        "Retry": [
+          {
+            "ErrorEquals": [
+              "States.Timeout"
+            ],
+            "IntervalSeconds": 3,
+            "MaxAttempts": 50,
+            "BackoffRate": 1
+          }
+        ],
+        "End": true
+      }
+    }
+  }
+}
