@@ -1,12 +1,12 @@
 {
   "date": {
     "type": "date",
-    "display": "Fakturadato",
+    "display": "Purchase Date",
     "confidenceLevels": { "automated": 0.98, "high": 0.97, "medium": 0.9, "low": 0.5 }
   },
   "total_amount": {
     "type": "amount",
-    "display": "Total",
+    "display": "Total Amount",
     "confidenceLevels": { "automated": 0.98, "high": 0.97, "medium": 0.9, "low": 0.5 }
   }
 }
