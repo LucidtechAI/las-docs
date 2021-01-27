@@ -7,8 +7,8 @@
     "verified": {
       "type": "object",
       "properties": {
-        "date": {"type", "string"}, 
-        "total_amount": {"type", "string"}
+        "date": {"type": "string"}, 
+        "total_amount": {"type": "string"}
       }
     }
   },
