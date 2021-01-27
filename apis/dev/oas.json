@@ -2,7 +2,7 @@
   "openapi": "3.0.1",
   "info": {
     "title": "Lucidtech API",
-    "version": "2021-01-12T14:52:08Z"
+    "version": "2021-01-26T14:40:46Z"
   },
   "servers": [
     {
@@ -15,50 +15,6 @@
     }
   ],
   "paths": {
-    "/": {
-      "get": {
-        "parameters": [
-          {
-            "in": "query",
-            "name": "method.request.multivaluequerystring.status",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "in": "query",
-            "name": "method.request.querystring.status",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Empty"
-                }
-              }
-            },
-            "description": "200 response"
-          }
-        },
-        "x-amazon-apigateway-integration": {
-          "contentHandling": "CONVERT_TO_TEXT",
-          "httpMethod": "POST",
-          "passthroughBehavior": "when_no_match",
-          "responses": {
-            "default": {
-              "statusCode": "200"
-            }
-          },
-          "type": "aws",
-          "uri": ""
-        }
-      }
-    },
     "/assets": {
       "get": {
         "parameters": [
@@ -5318,7 +5274,7 @@
           "httpMethod": "POST",
           "passthroughBehavior": "never",
           "requestTemplates": {
-            "application/json": "#set($body = $input.path('$'))\n    {\n        \"oauthClientId\": \"$context.authorizer.claims.client_id\",\n        \"oauthSubId\": \"$context.authorizer.claims.sub\",\n        \"email\": \"$body.email\"\n    }\n"
+            "application/json": "#set($body = $input.path('$'))\n    {\n        \"oauthClientId\": \"$context.authorizer.claims.client_id\",\n        \"oauthSubId\": \"$context.authorizer.claims.sub\",\n    #if( \"$!body.name\" != \"\")\n        \"name\": \"$body.name\",\n    #end\n    #if( \"$!body.avatar\" != \"\")\n        \"avatar\": \"$body.avatar\",\n    #end\n        \"email\": \"$body.email\"\n    }\n"
           },
           "responses": {
             "^\\[BadRequest\\].*": {
@@ -5735,7 +5691,7 @@
             "default": {
               "responseParameters": {
                 "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'",
-                "method.response.header.Access-Control-Allow-Methods": "'GET,DELETE,OPTIONS'",
+                "method.response.header.Access-Control-Allow-Methods": "'GET,DELETE,PATCH,OPTIONS'",
                 "method.response.header.Access-Control-Allow-Origin": "'*'"
               },
               "statusCode": "200"
@@ -5743,6 +5699,180 @@
           },
           "type": "mock"
         }
+      },
+      "patch": {
+        "parameters": [
+          {
+            "in": "header",
+            "name": "Content-Type",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "userId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PatchUserId"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            },
+            "description": "200 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "400 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "404 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "415": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "415 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "500 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "x-amazon-apigateway-integration": {
+          "httpMethod": "POST",
+          "passthroughBehavior": "never",
+          "requestTemplates": {
+            "application/json": "#set($body = $input.path('$'))\n#set($jsonbody = $util.parseJson($input.json('$')))\n{\n    \"oauthClientId\": \"$context.authorizer.claims.client_id\",\n    \"oauthSubId\": \"$context.authorizer.claims.sub\",\n#if( $jsonbody.containsKey('name') && $body.name == $null)\n    \"name\": null,\n#elseif( $jsonbody.containsKey('name'))\n    \"name\": \"$body.name\",\n#end\n#if( $jsonbody.containsKey('avatar') && $body.avatar == $null)\n    \"avatar\": null,\n#elseif( $jsonbody.containsKey('avatar'))\n    \"avatar\": \"$body.avatar\",\n#end\n    \"userId\": \"$input.params().path.userId\"\n}\n"
+          },
+          "responses": {
+            "^\\[BadRequest\\].*": {
+              "responseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'"
+              },
+              "responseTemplates": {
+                "application/json": "#set($error = $input.path('$'))\n{\n    \"message\": \"$error.errorMessage\"\n}\n"
+              },
+              "statusCode": "400"
+            },
+            "^\\[InternalServerError\\].*": {
+              "responseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'"
+              },
+              "responseTemplates": {
+                "application/json": "#set($error = $input.path('$'))\n{\n    \"message\": \"$error.errorMessage\"\n}\n"
+              },
+              "statusCode": "500"
+            },
+            "^\\[NotFound\\].*": {
+              "responseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'"
+              },
+              "responseTemplates": {
+                "application/json": "#set($error = $input.path('$'))\n{\n    \"message\": \"$error.errorMessage\"\n}\n"
+              },
+              "statusCode": "404"
+            },
+            "^\\[UnsupportedMediaType\\].*": {
+              "responseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'"
+              },
+              "responseTemplates": {
+                "application/json": "#set($error = $input.path('$'))\n{\n    \"message\": \"$error.errorMessage\"\n}\n"
+              },
+              "statusCode": "415"
+            },
+            "default": {
+              "responseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'"
+              },
+              "responseTemplates": {
+                "application/json": "$input.json('$')\n"
+              },
+              "statusCode": "200"
+            }
+          },
+          "type": "aws",
+          "uri": ""
+        },
+        "x-amazon-apigateway-request-validator": ""
       }
     },
     "/workflows": {
@@ -7189,17 +7319,19 @@
           "description": {
             "anyOf": [
               {
+                "maxLength": 4096,
+                "nullable": true,
                 "type": "string"
-              },
-              null
+              }
             ]
           },
           "name": {
             "anyOf": [
               {
+                "maxLength": 4096,
+                "nullable": true,
                 "type": "string"
-              },
-              null
+              }
             ]
           }
         },
@@ -7229,17 +7361,19 @@
                 "description": {
                   "anyOf": [
                     {
+                      "maxLength": 4096,
+                      "nullable": true,
                       "type": "string"
-                    },
-                    null
+                    }
                   ]
                 },
                 "name": {
                   "anyOf": [
                     {
+                      "maxLength": 4096,
+                      "nullable": true,
                       "type": "string"
-                    },
-                    null
+                    }
                   ]
                 }
               },
@@ -7255,9 +7389,10 @@
           "nextToken": {
             "anyOf": [
               {
+                "maxLength": 4096,
+                "nullable": true,
                 "type": "string"
-              },
-              null
+              }
             ]
           }
         },
@@ -7277,17 +7412,19 @@
           "description": {
             "anyOf": [
               {
+                "maxLength": 4096,
+                "nullable": true,
                 "type": "string"
-              },
-              null
+              }
             ]
           },
           "name": {
             "anyOf": [
               {
+                "maxLength": 4096,
+                "nullable": true,
                 "type": "string"
-              },
-              null
+              }
             ]
           }
         },
@@ -7340,9 +7477,9 @@
                     {
                       "maxLength": 64,
                       "minLength": 1,
+                      "nullable": true,
                       "type": "string"
                     },
-                    null,
                     {
                       "type": "boolean"
                     }
@@ -7381,9 +7518,9 @@
                     {
                       "maxLength": 64,
                       "minLength": 1,
+                      "nullable": true,
                       "type": "string"
-                    },
-                    null
+                    }
                   ]
                 }
               },
@@ -7467,9 +7604,9 @@
                           {
                             "maxLength": 64,
                             "minLength": 1,
+                            "nullable": true,
                             "type": "string"
                           },
-                          null,
                           {
                             "type": "boolean"
                           }
@@ -7508,9 +7645,9 @@
                           {
                             "maxLength": 64,
                             "minLength": 1,
+                            "nullable": true,
                             "type": "string"
-                          },
-                          null
+                          }
                         ]
                       }
                     },
@@ -7539,9 +7676,10 @@
           "nextToken": {
             "anyOf": [
               {
+                "maxLength": 4096,
+                "nullable": true,
                 "type": "string"
-              },
-              null
+              }
             ]
           }
         },
@@ -7590,8 +7728,7 @@
                     "type": "string"
                   }
                 ]
-              },
-              null
+              }
             ]
           }
         },
@@ -7612,9 +7749,10 @@
                 "description": {
                   "anyOf": [
                     {
+                      "maxLength": 4096,
+                      "nullable": true,
                       "type": "string"
-                    },
-                    null
+                    }
                   ]
                 },
                 "height": {
@@ -7627,9 +7765,10 @@
                 "name": {
                   "anyOf": [
                     {
+                      "maxLength": 4096,
+                      "nullable": true,
                       "type": "string"
-                    },
-                    null
+                    }
                   ]
                 },
                 "width": {
@@ -7650,9 +7789,10 @@
           "nextToken": {
             "anyOf": [
               {
+                "maxLength": 4096,
+                "nullable": true,
                 "type": "string"
-              },
-              null
+              }
             ]
           }
         },
@@ -7673,17 +7813,19 @@
           "description": {
             "anyOf": [
               {
+                "maxLength": 4096,
+                "nullable": true,
                 "type": "string"
-              },
-              null
+              }
             ]
           },
           "name": {
             "anyOf": [
               {
+                "maxLength": 4096,
+                "nullable": true,
                 "type": "string"
-              },
-              null
+              }
             ]
           }
         },
@@ -7708,9 +7850,9 @@
                     {
                       "maxLength": 64,
                       "minLength": 1,
+                      "nullable": true,
                       "type": "string"
                     },
-                    null,
                     {
                       "type": "boolean"
                     }
@@ -7742,17 +7884,19 @@
           "description": {
             "anyOf": [
               {
+                "maxLength": 4096,
+                "nullable": true,
                 "type": "string"
-              },
-              null
+              }
             ]
           },
           "name": {
             "anyOf": [
               {
+                "maxLength": 4096,
+                "nullable": true,
                 "type": "string"
-              },
-              null
+              }
             ]
           }
         },
@@ -7817,9 +7961,10 @@
           "description": {
             "anyOf": [
               {
+                "maxLength": 4096,
+                "nullable": true,
                 "type": "string"
-              },
-              null
+              }
             ]
           },
           "inputJsonSchema": {
@@ -7828,9 +7973,10 @@
           "name": {
             "anyOf": [
               {
+                "maxLength": 4096,
+                "nullable": true,
                 "type": "string"
-              },
-              null
+              }
             ]
           },
           "outputJsonSchema": {
@@ -7840,6 +7986,32 @@
         "title": "PATCH /transitions/{transitionId}",
         "type": "object"
       },
+      "PatchUserId": {
+        "additionalProperties": false,
+        "minProperties": 1,
+        "properties": {
+          "avatar": {
+            "anyOf": [
+              {
+                "maxLength": 131072,
+                "nullable": true,
+                "type": "string"
+              }
+            ]
+          },
+          "name": {
+            "anyOf": [
+              {
+                "maxLength": 4096,
+                "nullable": true,
+                "type": "string"
+              }
+            ]
+          }
+        },
+        "title": "PATCH /users/{userId}",
+        "type": "object"
+      },
       "PatchWorkflowId": {
         "additionalProperties": false,
         "minProperties": 1,
@@ -7847,17 +8019,19 @@
           "description": {
             "anyOf": [
               {
+                "maxLength": 4096,
+                "nullable": true,
                 "type": "string"
-              },
-              null
+              }
             ]
           },
           "name": {
             "anyOf": [
               {
+                "maxLength": 4096,
+                "nullable": true,
                 "type": "string"
-              },
-              null
+              }
             ]
           }
         },
@@ -7874,17 +8048,19 @@
           "description": {
             "anyOf": [
               {
+                "maxLength": 4096,
+                "nullable": true,
                 "type": "string"
-              },
-              null
+              }
             ]
           },
           "name": {
             "anyOf": [
               {
+                "maxLength": 4096,
+                "nullable": true,
                 "type": "string"
-              },
-              null
+              }
             ]
           }
         },
@@ -7900,17 +8076,19 @@
           "description": {
             "anyOf": [
               {
+                "maxLength": 4096,
+                "nullable": true,
                 "type": "string"
-              },
-              null
+              }
             ]
           },
           "name": {
             "anyOf": [
               {
+                "maxLength": 4096,
+                "nullable": true,
                 "type": "string"
-              },
-              null
+              }
             ]
           }
         },
@@ -7954,9 +8132,9 @@
                     {
                       "maxLength": 64,
                       "minLength": 1,
+                      "nullable": true,
                       "type": "string"
                     },
-                    null,
                     {
                       "type": "boolean"
                     }
@@ -8015,17 +8193,19 @@
           "description": {
             "anyOf": [
               {
+                "maxLength": 4096,
+                "nullable": true,
                 "type": "string"
-              },
-              null
+              }
             ]
           },
           "name": {
             "anyOf": [
               {
+                "maxLength": 4096,
+                "nullable": true,
                 "type": "string"
-              },
-              null
+              }
             ]
           }
         },
@@ -8045,9 +8225,10 @@
           "description": {
             "anyOf": [
               {
+                "maxLength": 4096,
+                "nullable": true,
                 "type": "string"
-              },
-              null
+              }
             ]
           },
           "inputJsonSchema": {
@@ -8056,9 +8237,10 @@
           "name": {
             "anyOf": [
               {
+                "maxLength": 4096,
+                "nullable": true,
                 "type": "string"
-              },
-              null
+              }
             ]
           },
           "outputJsonSchema": {
@@ -8142,9 +8324,27 @@
       "PostUsers": {
         "additionalProperties": false,
         "properties": {
+          "avatar": {
+            "anyOf": [
+              {
+                "maxLength": 131072,
+                "nullable": true,
+                "type": "string"
+              }
+            ]
+          },
           "email": {
             "pattern": "^[A-Za-z0-9][-+._A-Za-z0-9]*@([A-Za-z0-9]+\\.)+[A-Za-z]{2,}$",
             "type": "string"
+          },
+          "name": {
+            "anyOf": [
+              {
+                "maxLength": 4096,
+                "nullable": true,
+                "type": "string"
+              }
+            ]
           }
         },
         "required": [
@@ -8172,9 +8372,10 @@
           "description": {
             "anyOf": [
               {
+                "maxLength": 4096,
+                "nullable": true,
                 "type": "string"
-              },
-              null
+              }
             ]
           },
           "errorConfig": {
@@ -8193,9 +8394,10 @@
           "name": {
             "anyOf": [
               {
+                "maxLength": 4096,
+                "nullable": true,
                 "type": "string"
-              },
-              null
+              }
             ]
           },
           "specification": {
@@ -8268,9 +8470,9 @@
                     {
                       "maxLength": 64,
                       "minLength": 1,
+                      "nullable": true,
                       "type": "string"
-                    },
-                    null
+                    }
                   ]
                 }
               },
@@ -8305,17 +8507,19 @@
           "description": {
             "anyOf": [
               {
+                "maxLength": 4096,
+                "nullable": true,
                 "type": "string"
-              },
-              null
+              }
             ]
           },
           "name": {
             "anyOf": [
               {
+                "maxLength": 4096,
+                "nullable": true,
                 "type": "string"
-              },
-              null
+              }
             ]
           },
           "secretId": {
@@ -8337,9 +8541,10 @@
           "nextToken": {
             "anyOf": [
               {
+                "maxLength": 4096,
+                "nullable": true,
                 "type": "string"
-              },
-              null
+              }
             ]
           },
           "secrets": {
@@ -8349,17 +8554,19 @@
                 "description": {
                   "anyOf": [
                     {
+                      "maxLength": 4096,
+                      "nullable": true,
                       "type": "string"
-                    },
-                    null
+                    }
                   ]
                 },
                 "name": {
                   "anyOf": [
                     {
+                      "maxLength": 4096,
+                      "nullable": true,
                       "type": "string"
-                    },
-                    null
+                    }
                   ]
                 },
                 "secretId": {
@@ -8399,9 +8606,10 @@
           "description": {
             "anyOf": [
               {
+                "maxLength": 4096,
+                "nullable": true,
                 "type": "string"
-              },
-              null
+              }
             ]
           },
           "inputJsonSchema": {
@@ -8410,9 +8618,10 @@
           "name": {
             "anyOf": [
               {
+                "maxLength": 4096,
+                "nullable": true,
                 "type": "string"
-              },
-              null
+              }
             ]
           },
           "outputJsonSchema": {
@@ -8422,8 +8631,7 @@
             "anyOf": [
               {
                 "type": "object"
-              },
-              null
+              }
             ]
           },
           "transitionId": {
@@ -8457,18 +8665,19 @@
           "completedBy": {
             "anyOf": [
               {
+                "maxLength": 4096,
+                "nullable": true,
                 "type": "string"
-              },
-              null
+              }
             ]
           },
           "endTime": {
             "anyOf": [
               {
+                "nullable": true,
                 "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2} ?[0-9]{2}:?[0-9]{2}:?[0-9]{2}.?[0-9]{6}",
                 "type": "string"
-              },
-              null
+              }
             ]
           },
           "executionId": {
@@ -8479,26 +8688,25 @@
             "anyOf": [
               {
                 "type": "object"
-              },
-              null
+              }
             ]
           },
           "logId": {
             "anyOf": [
               {
+                "nullable": true,
                 "pattern": "^las:log:[a-f0-9]{32}$",
                 "type": "string"
-              },
-              null
+              }
             ]
           },
           "startTime": {
             "anyOf": [
               {
+                "nullable": true,
                 "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2} ?[0-9]{2}:?[0-9]{2}:?[0-9]{2}.?[0-9]{6}",
                 "type": "string"
-              },
-              null
+              }
             ]
           },
           "status": {
@@ -8544,18 +8752,19 @@
                 "completedBy": {
                   "anyOf": [
                     {
+                      "maxLength": 4096,
+                      "nullable": true,
                       "type": "string"
-                    },
-                    null
+                    }
                   ]
                 },
                 "endTime": {
                   "anyOf": [
                     {
+                      "nullable": true,
                       "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2} ?[0-9]{2}:?[0-9]{2}:?[0-9]{2}.?[0-9]{6}",
                       "type": "string"
-                    },
-                    null
+                    }
                   ]
                 },
                 "executionId": {
@@ -8566,26 +8775,25 @@
                   "anyOf": [
                     {
                       "type": "object"
-                    },
-                    null
+                    }
                   ]
                 },
                 "logId": {
                   "anyOf": [
                     {
+                      "nullable": true,
                       "pattern": "^las:log:[a-f0-9]{32}$",
                       "type": "string"
-                    },
-                    null
+                    }
                   ]
                 },
                 "startTime": {
                   "anyOf": [
                     {
+                      "nullable": true,
                       "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2} ?[0-9]{2}:?[0-9]{2}:?[0-9]{2}.?[0-9]{6}",
                       "type": "string"
-                    },
-                    null
+                    }
                   ]
                 },
                 "status": {
@@ -8625,9 +8833,10 @@
           "nextToken": {
             "anyOf": [
               {
+                "maxLength": 4096,
+                "nullable": true,
                 "type": "string"
-              },
-              null
+              }
             ]
           },
           "status": {
@@ -8669,9 +8878,10 @@
           "nextToken": {
             "anyOf": [
               {
+                "maxLength": 4096,
+                "nullable": true,
                 "type": "string"
-              },
-              null
+              }
             ]
           },
           "transitionType": {
@@ -8701,9 +8911,10 @@
                 "description": {
                   "anyOf": [
                     {
+                      "maxLength": 4096,
+                      "nullable": true,
                       "type": "string"
-                    },
-                    null
+                    }
                   ]
                 },
                 "inputJsonSchema": {
@@ -8712,9 +8923,10 @@
                 "name": {
                   "anyOf": [
                     {
+                      "maxLength": 4096,
+                      "nullable": true,
                       "type": "string"
-                    },
-                    null
+                    }
                   ]
                 },
                 "outputJsonSchema": {
@@ -8724,8 +8936,7 @@
                   "anyOf": [
                     {
                       "type": "object"
-                    },
-                    null
+                    }
                   ]
                 },
                 "transitionId": {
@@ -8764,9 +8975,27 @@
       "User": {
         "additionalProperties": false,
         "properties": {
+          "avatar": {
+            "anyOf": [
+              {
+                "maxLength": 131072,
+                "nullable": true,
+                "type": "string"
+              }
+            ]
+          },
           "email": {
             "pattern": "^[A-Za-z0-9][-+._A-Za-z0-9]*@([A-Za-z0-9]+\\.)+[A-Za-z]{2,}$",
             "type": "string"
+          },
+          "name": {
+            "anyOf": [
+              {
+                "maxLength": 4096,
+                "nullable": true,
+                "type": "string"
+              }
+            ]
           },
           "userId": {
             "pattern": "^las:user:[a-f0-9]{32}$",
@@ -8786,18 +9015,37 @@
           "nextToken": {
             "anyOf": [
               {
+                "maxLength": 4096,
+                "nullable": true,
                 "type": "string"
-              },
-              null
+              }
             ]
           },
           "users": {
             "items": {
               "additionalProperties": false,
               "properties": {
+                "avatar": {
+                  "anyOf": [
+                    {
+                      "maxLength": 131072,
+                      "nullable": true,
+                      "type": "string"
+                    }
+                  ]
+                },
                 "email": {
                   "pattern": "^[A-Za-z0-9][-+._A-Za-z0-9]*@([A-Za-z0-9]+\\.)+[A-Za-z]{2,}$",
                   "type": "string"
+                },
+                "name": {
+                  "anyOf": [
+                    {
+                      "maxLength": 4096,
+                      "nullable": true,
+                      "type": "string"
+                    }
+                  ]
                 },
                 "userId": {
                   "pattern": "^las:user:[a-f0-9]{32}$",
@@ -8825,17 +9073,19 @@
           "description": {
             "anyOf": [
               {
+                "maxLength": 4096,
+                "nullable": true,
                 "type": "string"
-              },
-              null
+              }
             ]
           },
           "name": {
             "anyOf": [
               {
+                "maxLength": 4096,
+                "nullable": true,
                 "type": "string"
-              },
-              null
+              }
             ]
           },
           "workflowId": {
@@ -8872,10 +9122,10 @@
           "endTime": {
             "anyOf": [
               {
+                "nullable": true,
                 "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2} ?[0-9]{2}:?[0-9]{2}:?[0-9]{2}.?[0-9]{6}",
                 "type": "string"
-              },
-              null
+              }
             ]
           },
           "executionId": {
@@ -8886,25 +9136,23 @@
             "anyOf": [
               {
                 "type": "object"
-              },
-              null
+              }
             ]
           },
           "output": {
             "anyOf": [
               {
                 "type": "object"
-              },
-              null
+              }
             ]
           },
           "startTime": {
             "anyOf": [
               {
+                "nullable": true,
                 "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2} ?[0-9]{2}:?[0-9]{2}:?[0-9]{2}.?[0-9]{6}",
                 "type": "string"
-              },
-              null
+              }
             ]
           },
           "status": {
@@ -8921,8 +9169,7 @@
             "anyOf": [
               {
                 "type": "object"
-              },
-              null
+              }
             ]
           },
           "workflowId": {
@@ -8968,10 +9215,10 @@
                 "endTime": {
                   "anyOf": [
                     {
+                      "nullable": true,
                       "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2} ?[0-9]{2}:?[0-9]{2}:?[0-9]{2}.?[0-9]{6}",
                       "type": "string"
-                    },
-                    null
+                    }
                   ]
                 },
                 "executionId": {
@@ -8982,25 +9229,23 @@
                   "anyOf": [
                     {
                       "type": "object"
-                    },
-                    null
+                    }
                   ]
                 },
                 "output": {
                   "anyOf": [
                     {
                       "type": "object"
-                    },
-                    null
+                    }
                   ]
                 },
                 "startTime": {
                   "anyOf": [
                     {
+                      "nullable": true,
                       "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2} ?[0-9]{2}:?[0-9]{2}:?[0-9]{2}.?[0-9]{6}",
                       "type": "string"
-                    },
-                    null
+                    }
                   ]
                 },
                 "status": {
@@ -9017,8 +9262,7 @@
                   "anyOf": [
                     {
                       "type": "object"
-                    },
-                    null
+                    }
                   ]
                 },
                 "workflowId": {
@@ -9043,9 +9287,10 @@
           "nextToken": {
             "anyOf": [
               {
+                "maxLength": 4096,
+                "nullable": true,
                 "type": "string"
-              },
-              null
+              }
             ]
           },
           "order": {
@@ -9093,9 +9338,10 @@
           "nextToken": {
             "anyOf": [
               {
+                "maxLength": 4096,
+                "nullable": true,
                 "type": "string"
-              },
-              null
+              }
             ]
           },
           "workflows": {
@@ -9105,17 +9351,19 @@
                 "description": {
                   "anyOf": [
                     {
+                      "maxLength": 4096,
+                      "nullable": true,
                       "type": "string"
-                    },
-                    null
+                    }
                   ]
                 },
                 "name": {
                   "anyOf": [
                     {
+                      "maxLength": 4096,
+                      "nullable": true,
                       "type": "string"
-                    },
-                    null
+                    }
                   ]
                 },
                 "workflowId": {
@@ -9141,6 +9389,14 @@
       }
     },
     "securitySchemes": {}
+  },
+  "x-amazon-apigateway-gateway-responses": {
+    "BAD_REQUEST_BODY": {
+      "responseTemplates": {
+        "application/json": "{\n    \"message\": \"[BadRequest] $context.error.validationErrorString\"\n}\n"
+      },
+      "statusCode": 400
+    }
   },
   "x-amazon-apigateway-request-validators": {}
 }
