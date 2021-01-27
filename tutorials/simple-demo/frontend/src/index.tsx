@@ -256,7 +256,7 @@ const RemoteComponent = ({
                       padding: '0.3em',
                     }}
                   />
-                  Invoice
+                  {transition?.name || 'Document'}
                 </h2>
               </header>
             </div>
