@@ -284,19 +284,26 @@ Creates a transition handle, calls the POST /transitions endpoint.
 
 
 
-#### create_user(email: str)
+#### create_user(email: str, \*\*optional_args)
 Creates a new user, calls the POST /users endpoint.
 
 ```python
 >>> from las.client import Client
 >>> client = Client()
->>> client.create_user('<email>')
+>>> client.create_user('<email>', name='John Doe')
 ```
 
 
 * **Parameters**
 
-    **email** (*str*) – Email to the new user
+    
+    * **email** (*str*) – Email to the new user
+
+
+    * **name** (*Optional**[**str**]*) – Name of the user
+
+
+    * **avatar** (*Optional**[**str**]*) – base64 encoded JPEG avatar of the user
 
 
 
@@ -1387,6 +1394,47 @@ calls the PATCH /transitions/{transition_id}/executions/{execution_id} endpoint.
 * **Returns**
 
     Transition execution response from REST API
+
+
+
+* **Return type**
+
+    dict
+
+
+
+* **Raises**
+
+    `InvalidCredentialsException`, `TooManyRequestsException`, `LimitExceededException`, `requests.exception.RequestException`
+
+
+
+#### update_user(user_id: str, \*\*optional_args)
+Updates a user, calls the PATCH /users/{userId} endpoint.
+
+```python
+>>> from las.client import Client
+>>> client = Client()
+>>> client.update_user('<user id>', name='John Doe')
+```
+
+
+* **Parameters**
+
+    
+    * **user_id** (*str*) – Id of the user
+
+
+    * **name** (*Optional**[**str**]*) – Name of the user
+
+
+    * **avatar** (*Optional**[**str**]*) – base64 encoded JPEG avatar of the user
+
+
+
+* **Returns**
+
+    User response from REST API
 
 
 
