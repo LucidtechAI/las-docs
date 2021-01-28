@@ -28,7 +28,7 @@
 ## Reference
 
 * [Rest API](reference/restapi/README.md)
-  * [latest](reference/restapi/latest/index.adoc)
+  * [latest](reference/restapi/latest/README.md)
 * [Python SDK](reference/python-sdk/README.md)
   * [latest](reference/python-sdk/latest.md)
 * [.NET](reference/dotnet/README.md)
