@@ -27,6 +27,7 @@ const Grid = (props: { children: ReactNode }) => (
       rowGap: '5px',
       columnGap: '20px',
       alignItems: 'center',
+      width: '100%'
     }}
     {...props}
   />
@@ -237,9 +238,11 @@ const RemoteComponent = ({
     }
   };
 
+  const somethingIsLoading = isLoadingAssets || queueStatus === QueueStatus.LOADING || isLoadingDocument
+
   return (
     <div style={{ display: 'flex', flexDirection: 'row', width: '100%' }}>
-      <div style={{ flexGrow: 1 }} className="mr-5">
+      <div style={{ flexGrow: 1, display: 'flex', justifyContent: 'center', alignItems: 'center' }} className="mr-5">
         {isLoadingDocument || queueStatus === QueueStatus.LOADING ? (
           <Spinner animation="border" variant="primary" />
         ) : (
@@ -266,8 +269,8 @@ const RemoteComponent = ({
               </header>
             </div>
 
-            <div className="card-body">
-              {isLoadingAssets || queueStatus === QueueStatus.LOADING || isLoadingDocument ? (
+            <div className="card-body" style={ {display: 'flex', justifyContent: 'center', alignItems: 'center'} }>
+              {somethingIsLoading ? (
                 <Spinner animation="border" variant="primary" />
               ) : (
                 <Grid>
