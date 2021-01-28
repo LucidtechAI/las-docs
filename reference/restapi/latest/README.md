@@ -205,7 +205,7 @@
 
 | Query name | Query value |
 | --- | --- |
-| consentId | String |
+| consentId | Id of consent on the form las:consent:&lt;hex&gt; |
 
 
 
@@ -225,8 +225,8 @@
 
 | Query name | Query value |
 | --- | --- |
-| batchId | String |
-| consentId | String |
+| batchId | Id of batch on the form las:batch:&lt;hex&gt; |
+| consentId | Id of consent on the form las:consent:&lt;hex&gt; |
 | nextToken | String value as returned by a previous list operation |
 | maxResults | Integer representing maximum number of resources to list |
 
