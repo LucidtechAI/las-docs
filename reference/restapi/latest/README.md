@@ -7,7 +7,7 @@ All URIs are relative to *https://api.lucidtech.ai/v1*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-*DefaultApi* | [**assetsAssetIdGet**](reference/restapi/latest/Apis/DefaultApi.md#assetsassetidget) | **GET** /assets/{assetId} | 
+*DefaultApi* | [**assetsAssetIdGet**](Apis/DefaultApi.md) | **GET** /assets/{assetId} | 
 *DefaultApi* | [**assetsAssetIdOptions**](Apis/DefaultApi.md#assetsassetidoptions) | **OPTIONS** /assets/{assetId} | 
 *DefaultApi* | [**assetsAssetIdPatch**](Apis/DefaultApi.md#assetsassetidpatch) | **PATCH** /assets/{assetId} | 
 *DefaultApi* | [**assetsGet**](Apis/DefaultApi.md#assetsget) | **GET** /assets | 
