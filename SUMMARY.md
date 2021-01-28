@@ -28,7 +28,7 @@
 ## Reference
 
 * [Rest API](reference/restapi/README.md)
-  * [dev](reference/restapi/dev.md)
+  * [latest](reference/restapi/latest/README.md)
 * [Python SDK](reference/python-sdk/README.md)
   * [latest](reference/python-sdk/latest.md)
 * [.NET](reference/dotnet/README.md)
