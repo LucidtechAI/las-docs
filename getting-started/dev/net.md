@@ -7,10 +7,10 @@ Suppose we wish to run inference on a document using Lucidtech’s invoice model
 ```cs
 using Lucidtech.Las;
 
-Client apiClient = new Client(<credentials>);
+Client client = new Client(<credentials>);
 string documentId = "las:document:39e2d47b04214610a66050d1c6ed8b6d";
 string modelId = "las:document:39e2d47b04214610a66050d1c6ed8b6d";
-var response = apiClient.CreatePrediction(documentId, modelId);
+var response = client.CreatePrediction(documentId, modelId);
 ```
 
 ## Set ground truth of document
@@ -25,7 +25,7 @@ var groundTruth = new List<Dictionary<string, string>>()
     new Dictionary<string, string>(){{"label", "total_amount"},{"value", "54.50"}},
     new Dictionary<string, string>(){{"label", "purchase_date"},{"value", "2007-07-30"}}
 };
-var response = apiClient.SendFeedback(documentId: "<documentId>", groundTruth: groundTruth);
+var response = client.UpdateDocument(documentId: "<documentId>", groundTruth: groundTruth);
 ```
 
 ## Create a document with consent id
@@ -37,9 +37,9 @@ Consent ID is an identifier you can assign to documents to keep track of documen
 ```cs
 using Lucidtech.Las;
 
-Client apiClient = new Client(<credentials>);
+Client client = new Client(<credentials>);
 byte[] body = File.ReadAllBytes("invoice.pdf");
-var response = apiClient.CreateDocument(body, "application/pdf", "<consent id>");
+var response = client.CreateDocument(body, "application/pdf", "<consent id>");
 ```
 
 ## Revoking consent and deleting documents
@@ -49,7 +49,6 @@ Suppose we wish to delete all documents associated with a customer in our ERP da
 ```cs
 using Lucidtech.Las;
 
-Client apiClient = new Client(<credentials>);
-var response = apiClient.DeleteDocuments(consentId: "<consentId>");
+Client client = new Client(<credentials>);
+var response = client.DeleteDocuments(consentId: "<consentId>");
 ```
-
