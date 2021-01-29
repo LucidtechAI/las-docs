@@ -22,63 +22,63 @@
 ##### Response body JSON Schema
 ```json
 {
-  "additionalProperties": false,
+  "title": "assets",
+  "required": [
+    "assets"
+  ],
+  "type": "object",
   "properties": {
     "assets": {
+      "type": "array",
       "items": {
-        "additionalProperties": false,
-        "properties": {
-          "assetId": {
-            "pattern": "^las:asset:[a-f0-9]{32}$",
-            "type": "string"
-          },
-          "content": {
-            "minLength": 1,
-            "type": "string"
-          },
-          "description": {
-            "anyOf": [
-              {
-                "maxLength": 4096,
-                "nullable": true,
-                "type": "string"
-              }
-            ]
-          },
-          "name": {
-            "anyOf": [
-              {
-                "maxLength": 4096,
-                "nullable": true,
-                "type": "string"
-              }
-            ]
-          }
-        },
         "required": [
           "assetId",
           "description",
           "name"
         ],
-        "type": "object"
-      },
-      "type": "array"
+        "type": "object",
+        "properties": {
+          "assetId": {
+            "pattern": "^las:asset:[a-f0-9]{32}$",
+            "type": "string"
+          },
+          "name": {
+            "anyOf": [
+              {
+                "maxLength": 4096,
+                "type": "string",
+                "nullable": true
+              }
+            ]
+          },
+          "description": {
+            "anyOf": [
+              {
+                "maxLength": 4096,
+                "type": "string",
+                "nullable": true
+              }
+            ]
+          },
+          "content": {
+            "minLength": 1,
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      }
     },
     "nextToken": {
       "anyOf": [
         {
           "maxLength": 4096,
-          "nullable": true,
-          "type": "string"
+          "type": "string",
+          "nullable": true
         }
       ]
     }
   },
-  "required": [
-    "assets"
-  ],
-  "title": "assets",
-  "type": "object"
+  "additionalProperties": false
 }
 ```
 
@@ -102,36 +102,36 @@
 ##### Request body JSON Schema
 ```json
 {
-  "additionalProperties": false,
+  "title": "POST /assets",
+  "required": [
+    "content"
+  ],
+  "type": "object",
   "properties": {
-    "content": {
-      "minLength": 1,
-      "type": "string"
+    "name": {
+      "anyOf": [
+        {
+          "maxLength": 4096,
+          "type": "string",
+          "nullable": true
+        }
+      ]
     },
     "description": {
       "anyOf": [
         {
           "maxLength": 4096,
-          "nullable": true,
-          "type": "string"
+          "type": "string",
+          "nullable": true
         }
       ]
     },
-    "name": {
-      "anyOf": [
-        {
-          "maxLength": 4096,
-          "nullable": true,
-          "type": "string"
-        }
-      ]
+    "content": {
+      "minLength": 1,
+      "type": "string"
     }
   },
-  "required": [
-    "content"
-  ],
-  "title": "POST /assets",
-  "type": "object"
+  "additionalProperties": false
 }
 ```
 
@@ -139,42 +139,42 @@
 ##### Response body JSON Schema
 ```json
 {
-  "additionalProperties": false,
-  "properties": {
-    "assetId": {
-      "pattern": "^las:asset:[a-f0-9]{32}$",
-      "type": "string"
-    },
-    "content": {
-      "minLength": 1,
-      "type": "string"
-    },
-    "description": {
-      "anyOf": [
-        {
-          "maxLength": 4096,
-          "nullable": true,
-          "type": "string"
-        }
-      ]
-    },
-    "name": {
-      "anyOf": [
-        {
-          "maxLength": 4096,
-          "nullable": true,
-          "type": "string"
-        }
-      ]
-    }
-  },
+  "title": "asset",
   "required": [
     "assetId",
     "description",
     "name"
   ],
-  "title": "asset",
-  "type": "object"
+  "type": "object",
+  "properties": {
+    "assetId": {
+      "pattern": "^las:asset:[a-f0-9]{32}$",
+      "type": "string"
+    },
+    "name": {
+      "anyOf": [
+        {
+          "maxLength": 4096,
+          "type": "string",
+          "nullable": true
+        }
+      ]
+    },
+    "description": {
+      "anyOf": [
+        {
+          "maxLength": 4096,
+          "type": "string",
+          "nullable": true
+        }
+      ]
+    },
+    "content": {
+      "minLength": 1,
+      "type": "string"
+    }
+  },
+  "additionalProperties": false
 }
 ```
 
@@ -202,42 +202,42 @@
 ##### Response body JSON Schema
 ```json
 {
-  "additionalProperties": false,
-  "properties": {
-    "assetId": {
-      "pattern": "^las:asset:[a-f0-9]{32}$",
-      "type": "string"
-    },
-    "content": {
-      "minLength": 1,
-      "type": "string"
-    },
-    "description": {
-      "anyOf": [
-        {
-          "maxLength": 4096,
-          "nullable": true,
-          "type": "string"
-        }
-      ]
-    },
-    "name": {
-      "anyOf": [
-        {
-          "maxLength": 4096,
-          "nullable": true,
-          "type": "string"
-        }
-      ]
-    }
-  },
+  "title": "asset",
   "required": [
     "assetId",
     "description",
     "name"
   ],
-  "title": "asset",
-  "type": "object"
+  "type": "object",
+  "properties": {
+    "assetId": {
+      "pattern": "^las:asset:[a-f0-9]{32}$",
+      "type": "string"
+    },
+    "name": {
+      "anyOf": [
+        {
+          "maxLength": 4096,
+          "type": "string",
+          "nullable": true
+        }
+      ]
+    },
+    "description": {
+      "anyOf": [
+        {
+          "maxLength": 4096,
+          "type": "string",
+          "nullable": true
+        }
+      ]
+    },
+    "content": {
+      "minLength": 1,
+      "type": "string"
+    }
+  },
+  "additionalProperties": false
 }
 ```
 
@@ -263,34 +263,34 @@
 ##### Request body JSON Schema
 ```json
 {
-  "additionalProperties": false,
+  "title": "PATCH /assets/assetId",
   "minProperties": 1,
+  "type": "object",
   "properties": {
-    "content": {
-      "minLength": 1,
-      "type": "string"
+    "name": {
+      "anyOf": [
+        {
+          "maxLength": 4096,
+          "type": "string",
+          "nullable": true
+        }
+      ]
     },
     "description": {
       "anyOf": [
         {
           "maxLength": 4096,
-          "nullable": true,
-          "type": "string"
+          "type": "string",
+          "nullable": true
         }
       ]
     },
-    "name": {
-      "anyOf": [
-        {
-          "maxLength": 4096,
-          "nullable": true,
-          "type": "string"
-        }
-      ]
+    "content": {
+      "minLength": 1,
+      "type": "string"
     }
   },
-  "title": "PATCH /assets/assetId",
-  "type": "object"
+  "additionalProperties": false
 }
 ```
 
@@ -298,42 +298,42 @@
 ##### Response body JSON Schema
 ```json
 {
-  "additionalProperties": false,
-  "properties": {
-    "assetId": {
-      "pattern": "^las:asset:[a-f0-9]{32}$",
-      "type": "string"
-    },
-    "content": {
-      "minLength": 1,
-      "type": "string"
-    },
-    "description": {
-      "anyOf": [
-        {
-          "maxLength": 4096,
-          "nullable": true,
-          "type": "string"
-        }
-      ]
-    },
-    "name": {
-      "anyOf": [
-        {
-          "maxLength": 4096,
-          "nullable": true,
-          "type": "string"
-        }
-      ]
-    }
-  },
+  "title": "asset",
   "required": [
     "assetId",
     "description",
     "name"
   ],
-  "title": "asset",
-  "type": "object"
+  "type": "object",
+  "properties": {
+    "assetId": {
+      "pattern": "^las:asset:[a-f0-9]{32}$",
+      "type": "string"
+    },
+    "name": {
+      "anyOf": [
+        {
+          "maxLength": 4096,
+          "type": "string",
+          "nullable": true
+        }
+      ]
+    },
+    "description": {
+      "anyOf": [
+        {
+          "maxLength": 4096,
+          "type": "string",
+          "nullable": true
+        }
+      ]
+    },
+    "content": {
+      "minLength": 1,
+      "type": "string"
+    }
+  },
+  "additionalProperties": false
 }
 ```
 
@@ -357,29 +357,29 @@
 ##### Request body JSON Schema
 ```json
 {
-  "additionalProperties": false,
+  "title": "POST /batches",
+  "type": "object",
   "properties": {
-    "description": {
-      "anyOf": [
-        {
-          "maxLength": 4096,
-          "nullable": true,
-          "type": "string"
-        }
-      ]
-    },
     "name": {
       "anyOf": [
         {
           "maxLength": 4096,
-          "nullable": true,
-          "type": "string"
+          "type": "string",
+          "nullable": true
+        }
+      ]
+    },
+    "description": {
+      "anyOf": [
+        {
+          "maxLength": 4096,
+          "type": "string",
+          "nullable": true
         }
       ]
     }
   },
-  "title": "POST /batches",
-  "type": "object"
+  "additionalProperties": false
 }
 ```
 
@@ -387,38 +387,38 @@
 ##### Response body JSON Schema
 ```json
 {
-  "additionalProperties": false,
-  "properties": {
-    "batchId": {
-      "pattern": "^las:batch:[a-f0-9]{32}$",
-      "type": "string"
-    },
-    "description": {
-      "anyOf": [
-        {
-          "maxLength": 4096,
-          "nullable": true,
-          "type": "string"
-        }
-      ]
-    },
-    "name": {
-      "anyOf": [
-        {
-          "maxLength": 4096,
-          "nullable": true,
-          "type": "string"
-        }
-      ]
-    }
-  },
+  "title": "batch",
   "required": [
     "batchId",
     "description",
     "name"
   ],
-  "title": "batch",
-  "type": "object"
+  "type": "object",
+  "properties": {
+    "name": {
+      "anyOf": [
+        {
+          "maxLength": 4096,
+          "type": "string",
+          "nullable": true
+        }
+      ]
+    },
+    "description": {
+      "anyOf": [
+        {
+          "maxLength": 4096,
+          "type": "string",
+          "nullable": true
+        }
+      ]
+    },
+    "batchId": {
+      "pattern": "^las:batch:[a-f0-9]{32}$",
+      "type": "string"
+    }
+  },
+  "additionalProperties": false
 }
 ```
 
@@ -446,52 +446,36 @@
 ##### Response body JSON Schema
 ```json
 {
-  "additionalProperties": false,
+  "title": "documents",
+  "required": [
+    "documents"
+  ],
+  "type": "object",
   "properties": {
-    "batchId": {
-      "items": {
-        "pattern": "^las:batch:[a-f0-9]{32}$",
-        "type": "string"
-      },
-      "type": "array"
-    },
     "consentId": {
+      "type": "array",
       "items": {
         "pattern": "^las:consent:[a-f0-9]{32}$",
         "type": "string"
-      },
-      "type": "array"
+      }
     },
     "documents": {
+      "type": "array",
       "items": {
-        "additionalProperties": false,
+        "required": [
+          "contentType",
+          "documentId"
+        ],
+        "type": "object",
         "properties": {
-          "batchId": {
-            "pattern": "^las:batch:[a-f0-9]{32}$",
-            "type": "string"
-          },
-          "consentId": {
-            "pattern": "^las:consent:[a-f0-9]{32}$",
-            "type": "string"
-          },
-          "content": {
-            "minLength": 1,
-            "type": "string"
-          },
-          "contentType": {
-            "enum": [
-              "application/pdf",
-              "image/jpeg"
-            ],
-            "type": "string"
-          },
-          "documentId": {
-            "pattern": "^las:document:[a-f0-9]{32}$",
-            "type": "string"
-          },
           "groundTruth": {
+            "type": "array",
             "items": {
-              "additionalProperties": false,
+              "required": [
+                "label",
+                "value"
+              ],
+              "type": "object",
               "properties": {
                 "label": {
                   "maxLength": 36,
@@ -504,8 +488,8 @@
                     {
                       "maxLength": 64,
                       "minLength": 1,
-                      "nullable": true,
-                      "type": "string"
+                      "type": "string",
+                      "nullable": true
                     },
                     {
                       "type": "boolean"
@@ -513,21 +497,49 @@
                   ]
                 }
               },
-              "required": [
-                "label",
-                "value"
-              ],
-              "type": "object"
-            },
-            "type": "array"
+              "additionalProperties": false
+            }
+          },
+          "consentId": {
+            "pattern": "^las:consent:[a-f0-9]{32}$",
+            "type": "string"
           },
           "inferenceTime": {
             "minimum": 0,
             "type": "number"
           },
+          "documentId": {
+            "pattern": "^las:document:[a-f0-9]{32}$",
+            "type": "string"
+          },
+          "batchId": {
+            "pattern": "^las:batch:[a-f0-9]{32}$",
+            "type": "string"
+          },
+          "contentType": {
+            "type": "string",
+            "enum": [
+              "application/pdf",
+              "image/jpeg"
+            ]
+          },
+          "updated": {
+            "minimum": 1,
+            "type": "integer"
+          },
+          "content": {
+            "minLength": 1,
+            "type": "string"
+          },
           "predictions": {
+            "type": "array",
             "items": {
-              "additionalProperties": false,
+              "required": [
+                "confidence",
+                "label",
+                "value"
+              ],
+              "type": "object",
               "properties": {
                 "confidence": {
                   "maximum": 1,
@@ -545,49 +557,37 @@
                     {
                       "maxLength": 64,
                       "minLength": 1,
-                      "nullable": true,
-                      "type": "string"
+                      "type": "string",
+                      "nullable": true
                     }
                   ]
                 }
               },
-              "required": [
-                "confidence",
-                "label",
-                "value"
-              ],
-              "type": "object"
-            },
-            "type": "array"
-          },
-          "updated": {
-            "minimum": 1,
-            "type": "integer"
+              "additionalProperties": false
+            }
           }
         },
-        "required": [
-          "contentType",
-          "documentId"
-        ],
-        "type": "object"
-      },
-      "type": "array"
+        "additionalProperties": false
+      }
     },
     "nextToken": {
       "anyOf": [
         {
           "maxLength": 4096,
-          "nullable": true,
-          "type": "string"
+          "type": "string",
+          "nullable": true
         }
       ]
+    },
+    "batchId": {
+      "type": "array",
+      "items": {
+        "pattern": "^las:batch:[a-f0-9]{32}$",
+        "type": "string"
+      }
     }
   },
-  "required": [
-    "documents"
-  ],
-  "title": "documents",
-  "type": "object"
+  "additionalProperties": false
 }
 ```
 
@@ -618,52 +618,36 @@
 ##### Response body JSON Schema
 ```json
 {
-  "additionalProperties": false,
+  "title": "documents",
+  "required": [
+    "documents"
+  ],
+  "type": "object",
   "properties": {
-    "batchId": {
-      "items": {
-        "pattern": "^las:batch:[a-f0-9]{32}$",
-        "type": "string"
-      },
-      "type": "array"
-    },
     "consentId": {
+      "type": "array",
       "items": {
         "pattern": "^las:consent:[a-f0-9]{32}$",
         "type": "string"
-      },
-      "type": "array"
+      }
     },
     "documents": {
+      "type": "array",
       "items": {
-        "additionalProperties": false,
+        "required": [
+          "contentType",
+          "documentId"
+        ],
+        "type": "object",
         "properties": {
-          "batchId": {
-            "pattern": "^las:batch:[a-f0-9]{32}$",
-            "type": "string"
-          },
-          "consentId": {
-            "pattern": "^las:consent:[a-f0-9]{32}$",
-            "type": "string"
-          },
-          "content": {
-            "minLength": 1,
-            "type": "string"
-          },
-          "contentType": {
-            "enum": [
-              "application/pdf",
-              "image/jpeg"
-            ],
-            "type": "string"
-          },
-          "documentId": {
-            "pattern": "^las:document:[a-f0-9]{32}$",
-            "type": "string"
-          },
           "groundTruth": {
+            "type": "array",
             "items": {
-              "additionalProperties": false,
+              "required": [
+                "label",
+                "value"
+              ],
+              "type": "object",
               "properties": {
                 "label": {
                   "maxLength": 36,
@@ -676,8 +660,8 @@
                     {
                       "maxLength": 64,
                       "minLength": 1,
-                      "nullable": true,
-                      "type": "string"
+                      "type": "string",
+                      "nullable": true
                     },
                     {
                       "type": "boolean"
@@ -685,21 +669,49 @@
                   ]
                 }
               },
-              "required": [
-                "label",
-                "value"
-              ],
-              "type": "object"
-            },
-            "type": "array"
+              "additionalProperties": false
+            }
+          },
+          "consentId": {
+            "pattern": "^las:consent:[a-f0-9]{32}$",
+            "type": "string"
           },
           "inferenceTime": {
             "minimum": 0,
             "type": "number"
           },
+          "documentId": {
+            "pattern": "^las:document:[a-f0-9]{32}$",
+            "type": "string"
+          },
+          "batchId": {
+            "pattern": "^las:batch:[a-f0-9]{32}$",
+            "type": "string"
+          },
+          "contentType": {
+            "type": "string",
+            "enum": [
+              "application/pdf",
+              "image/jpeg"
+            ]
+          },
+          "updated": {
+            "minimum": 1,
+            "type": "integer"
+          },
+          "content": {
+            "minLength": 1,
+            "type": "string"
+          },
           "predictions": {
+            "type": "array",
             "items": {
-              "additionalProperties": false,
+              "required": [
+                "confidence",
+                "label",
+                "value"
+              ],
+              "type": "object",
               "properties": {
                 "confidence": {
                   "maximum": 1,
@@ -717,49 +729,37 @@
                     {
                       "maxLength": 64,
                       "minLength": 1,
-                      "nullable": true,
-                      "type": "string"
+                      "type": "string",
+                      "nullable": true
                     }
                   ]
                 }
               },
-              "required": [
-                "confidence",
-                "label",
-                "value"
-              ],
-              "type": "object"
-            },
-            "type": "array"
-          },
-          "updated": {
-            "minimum": 1,
-            "type": "integer"
+              "additionalProperties": false
+            }
           }
         },
-        "required": [
-          "contentType",
-          "documentId"
-        ],
-        "type": "object"
-      },
-      "type": "array"
+        "additionalProperties": false
+      }
     },
     "nextToken": {
       "anyOf": [
         {
           "maxLength": 4096,
-          "nullable": true,
-          "type": "string"
+          "type": "string",
+          "nullable": true
         }
       ]
+    },
+    "batchId": {
+      "type": "array",
+      "items": {
+        "pattern": "^las:batch:[a-f0-9]{32}$",
+        "type": "string"
+      }
     }
   },
-  "required": [
-    "documents"
-  ],
-  "title": "documents",
-  "type": "object"
+  "additionalProperties": false
 }
 ```
 
@@ -783,30 +783,21 @@
 ##### Request body JSON Schema
 ```json
 {
-  "additionalProperties": false,
+  "title": "POST /documents",
+  "required": [
+    "content",
+    "contentType"
+  ],
+  "type": "object",
   "properties": {
-    "batchId": {
-      "pattern": "^las:batch:[a-f0-9]{32}$",
-      "type": "string"
-    },
-    "consentId": {
-      "pattern": "^las:consent:[a-f0-9]{32}$",
-      "type": "string"
-    },
-    "content": {
-      "minLength": 1,
-      "type": "string"
-    },
-    "contentType": {
-      "enum": [
-        "application/pdf",
-        "image/jpeg"
-      ],
-      "type": "string"
-    },
     "groundTruth": {
+      "type": "array",
       "items": {
-        "additionalProperties": false,
+        "required": [
+          "label",
+          "value"
+        ],
+        "type": "object",
         "properties": {
           "label": {
             "maxLength": 36,
@@ -819,8 +810,8 @@
               {
                 "maxLength": 64,
                 "minLength": 1,
-                "nullable": true,
-                "type": "string"
+                "type": "string",
+                "nullable": true
               },
               {
                 "type": "boolean"
@@ -828,21 +819,30 @@
             ]
           }
         },
-        "required": [
-          "label",
-          "value"
-        ],
-        "type": "object"
-      },
-      "type": "array"
+        "additionalProperties": false
+      }
+    },
+    "consentId": {
+      "pattern": "^las:consent:[a-f0-9]{32}$",
+      "type": "string"
+    },
+    "batchId": {
+      "pattern": "^las:batch:[a-f0-9]{32}$",
+      "type": "string"
+    },
+    "contentType": {
+      "type": "string",
+      "enum": [
+        "application/pdf",
+        "image/jpeg"
+      ]
+    },
+    "content": {
+      "minLength": 1,
+      "type": "string"
     }
   },
-  "required": [
-    "content",
-    "contentType"
-  ],
-  "title": "POST /documents",
-  "type": "object"
+  "additionalProperties": false
 }
 ```
 
@@ -850,34 +850,21 @@
 ##### Response body JSON Schema
 ```json
 {
-  "additionalProperties": false,
+  "title": "document",
+  "required": [
+    "contentType",
+    "documentId"
+  ],
+  "type": "object",
   "properties": {
-    "batchId": {
-      "pattern": "^las:batch:[a-f0-9]{32}$",
-      "type": "string"
-    },
-    "consentId": {
-      "pattern": "^las:consent:[a-f0-9]{32}$",
-      "type": "string"
-    },
-    "content": {
-      "minLength": 1,
-      "type": "string"
-    },
-    "contentType": {
-      "enum": [
-        "application/pdf",
-        "image/jpeg"
-      ],
-      "type": "string"
-    },
-    "documentId": {
-      "pattern": "^las:document:[a-f0-9]{32}$",
-      "type": "string"
-    },
     "groundTruth": {
+      "type": "array",
       "items": {
-        "additionalProperties": false,
+        "required": [
+          "label",
+          "value"
+        ],
+        "type": "object",
         "properties": {
           "label": {
             "maxLength": 36,
@@ -890,8 +877,8 @@
               {
                 "maxLength": 64,
                 "minLength": 1,
-                "nullable": true,
-                "type": "string"
+                "type": "string",
+                "nullable": true
               },
               {
                 "type": "boolean"
@@ -899,21 +886,49 @@
             ]
           }
         },
-        "required": [
-          "label",
-          "value"
-        ],
-        "type": "object"
-      },
-      "type": "array"
+        "additionalProperties": false
+      }
+    },
+    "consentId": {
+      "pattern": "^las:consent:[a-f0-9]{32}$",
+      "type": "string"
     },
     "inferenceTime": {
       "minimum": 0,
       "type": "number"
     },
+    "documentId": {
+      "pattern": "^las:document:[a-f0-9]{32}$",
+      "type": "string"
+    },
+    "batchId": {
+      "pattern": "^las:batch:[a-f0-9]{32}$",
+      "type": "string"
+    },
+    "contentType": {
+      "type": "string",
+      "enum": [
+        "application/pdf",
+        "image/jpeg"
+      ]
+    },
+    "updated": {
+      "minimum": 1,
+      "type": "integer"
+    },
+    "content": {
+      "minLength": 1,
+      "type": "string"
+    },
     "predictions": {
+      "type": "array",
       "items": {
-        "additionalProperties": false,
+        "required": [
+          "confidence",
+          "label",
+          "value"
+        ],
+        "type": "object",
         "properties": {
           "confidence": {
             "maximum": 1,
@@ -931,32 +946,17 @@
               {
                 "maxLength": 64,
                 "minLength": 1,
-                "nullable": true,
-                "type": "string"
+                "type": "string",
+                "nullable": true
               }
             ]
           }
         },
-        "required": [
-          "confidence",
-          "label",
-          "value"
-        ],
-        "type": "object"
-      },
-      "type": "array"
-    },
-    "updated": {
-      "minimum": 1,
-      "type": "integer"
+        "additionalProperties": false
+      }
     }
   },
-  "required": [
-    "contentType",
-    "documentId"
-  ],
-  "title": "document",
-  "type": "object"
+  "additionalProperties": false
 }
 ```
 
@@ -984,34 +984,21 @@
 ##### Response body JSON Schema
 ```json
 {
-  "additionalProperties": false,
+  "title": "document",
+  "required": [
+    "contentType",
+    "documentId"
+  ],
+  "type": "object",
   "properties": {
-    "batchId": {
-      "pattern": "^las:batch:[a-f0-9]{32}$",
-      "type": "string"
-    },
-    "consentId": {
-      "pattern": "^las:consent:[a-f0-9]{32}$",
-      "type": "string"
-    },
-    "content": {
-      "minLength": 1,
-      "type": "string"
-    },
-    "contentType": {
-      "enum": [
-        "application/pdf",
-        "image/jpeg"
-      ],
-      "type": "string"
-    },
-    "documentId": {
-      "pattern": "^las:document:[a-f0-9]{32}$",
-      "type": "string"
-    },
     "groundTruth": {
+      "type": "array",
       "items": {
-        "additionalProperties": false,
+        "required": [
+          "label",
+          "value"
+        ],
+        "type": "object",
         "properties": {
           "label": {
             "maxLength": 36,
@@ -1024,8 +1011,8 @@
               {
                 "maxLength": 64,
                 "minLength": 1,
-                "nullable": true,
-                "type": "string"
+                "type": "string",
+                "nullable": true
               },
               {
                 "type": "boolean"
@@ -1033,21 +1020,49 @@
             ]
           }
         },
-        "required": [
-          "label",
-          "value"
-        ],
-        "type": "object"
-      },
-      "type": "array"
+        "additionalProperties": false
+      }
+    },
+    "consentId": {
+      "pattern": "^las:consent:[a-f0-9]{32}$",
+      "type": "string"
     },
     "inferenceTime": {
       "minimum": 0,
       "type": "number"
     },
+    "documentId": {
+      "pattern": "^las:document:[a-f0-9]{32}$",
+      "type": "string"
+    },
+    "batchId": {
+      "pattern": "^las:batch:[a-f0-9]{32}$",
+      "type": "string"
+    },
+    "contentType": {
+      "type": "string",
+      "enum": [
+        "application/pdf",
+        "image/jpeg"
+      ]
+    },
+    "updated": {
+      "minimum": 1,
+      "type": "integer"
+    },
+    "content": {
+      "minLength": 1,
+      "type": "string"
+    },
     "predictions": {
+      "type": "array",
       "items": {
-        "additionalProperties": false,
+        "required": [
+          "confidence",
+          "label",
+          "value"
+        ],
+        "type": "object",
         "properties": {
           "confidence": {
             "maximum": 1,
@@ -1065,32 +1080,17 @@
               {
                 "maxLength": 64,
                 "minLength": 1,
-                "nullable": true,
-                "type": "string"
+                "type": "string",
+                "nullable": true
               }
             ]
           }
         },
-        "required": [
-          "confidence",
-          "label",
-          "value"
-        ],
-        "type": "object"
-      },
-      "type": "array"
-    },
-    "updated": {
-      "minimum": 1,
-      "type": "integer"
+        "additionalProperties": false
+      }
     }
   },
-  "required": [
-    "contentType",
-    "documentId"
-  ],
-  "title": "document",
-  "type": "object"
+  "additionalProperties": false
 }
 ```
 
@@ -1116,11 +1116,20 @@
 ##### Request body JSON Schema
 ```json
 {
-  "additionalProperties": false,
+  "title": "PATCH /documents/{documentId}",
+  "required": [
+    "groundTruth"
+  ],
+  "type": "object",
   "properties": {
     "groundTruth": {
+      "type": "array",
       "items": {
-        "additionalProperties": false,
+        "required": [
+          "label",
+          "value"
+        ],
+        "type": "object",
         "properties": {
           "label": {
             "maxLength": 36,
@@ -1133,8 +1142,8 @@
               {
                 "maxLength": 64,
                 "minLength": 1,
-                "nullable": true,
-                "type": "string"
+                "type": "string",
+                "nullable": true
               },
               {
                 "type": "boolean"
@@ -1142,20 +1151,11 @@
             ]
           }
         },
-        "required": [
-          "label",
-          "value"
-        ],
-        "type": "object"
-      },
-      "type": "array"
+        "additionalProperties": false
+      }
     }
   },
-  "required": [
-    "groundTruth"
-  ],
-  "title": "PATCH /documents/{documentId}",
-  "type": "object"
+  "additionalProperties": false
 }
 ```
 
@@ -1163,34 +1163,21 @@
 ##### Response body JSON Schema
 ```json
 {
-  "additionalProperties": false,
+  "title": "document",
+  "required": [
+    "contentType",
+    "documentId"
+  ],
+  "type": "object",
   "properties": {
-    "batchId": {
-      "pattern": "^las:batch:[a-f0-9]{32}$",
-      "type": "string"
-    },
-    "consentId": {
-      "pattern": "^las:consent:[a-f0-9]{32}$",
-      "type": "string"
-    },
-    "content": {
-      "minLength": 1,
-      "type": "string"
-    },
-    "contentType": {
-      "enum": [
-        "application/pdf",
-        "image/jpeg"
-      ],
-      "type": "string"
-    },
-    "documentId": {
-      "pattern": "^las:document:[a-f0-9]{32}$",
-      "type": "string"
-    },
     "groundTruth": {
+      "type": "array",
       "items": {
-        "additionalProperties": false,
+        "required": [
+          "label",
+          "value"
+        ],
+        "type": "object",
         "properties": {
           "label": {
             "maxLength": 36,
@@ -1203,8 +1190,8 @@
               {
                 "maxLength": 64,
                 "minLength": 1,
-                "nullable": true,
-                "type": "string"
+                "type": "string",
+                "nullable": true
               },
               {
                 "type": "boolean"
@@ -1212,21 +1199,49 @@
             ]
           }
         },
-        "required": [
-          "label",
-          "value"
-        ],
-        "type": "object"
-      },
-      "type": "array"
+        "additionalProperties": false
+      }
+    },
+    "consentId": {
+      "pattern": "^las:consent:[a-f0-9]{32}$",
+      "type": "string"
     },
     "inferenceTime": {
       "minimum": 0,
       "type": "number"
     },
+    "documentId": {
+      "pattern": "^las:document:[a-f0-9]{32}$",
+      "type": "string"
+    },
+    "batchId": {
+      "pattern": "^las:batch:[a-f0-9]{32}$",
+      "type": "string"
+    },
+    "contentType": {
+      "type": "string",
+      "enum": [
+        "application/pdf",
+        "image/jpeg"
+      ]
+    },
+    "updated": {
+      "minimum": 1,
+      "type": "integer"
+    },
+    "content": {
+      "minLength": 1,
+      "type": "string"
+    },
     "predictions": {
+      "type": "array",
       "items": {
-        "additionalProperties": false,
+        "required": [
+          "confidence",
+          "label",
+          "value"
+        ],
+        "type": "object",
         "properties": {
           "confidence": {
             "maximum": 1,
@@ -1244,32 +1259,17 @@
               {
                 "maxLength": 64,
                 "minLength": 1,
-                "nullable": true,
-                "type": "string"
+                "type": "string",
+                "nullable": true
               }
             ]
           }
         },
-        "required": [
-          "confidence",
-          "label",
-          "value"
-        ],
-        "type": "object"
-      },
-      "type": "array"
-    },
-    "updated": {
-      "minimum": 1,
-      "type": "integer"
+        "additionalProperties": false
+      }
     }
   },
-  "required": [
-    "contentType",
-    "documentId"
-  ],
-  "title": "document",
-  "type": "object"
+  "additionalProperties": false
 }
 ```
 
@@ -1297,18 +1297,13 @@
 ##### Response body JSON Schema
 ```json
 {
-  "additionalProperties": false,
+  "title": "log",
+  "required": [
+    "events",
+    "logId"
+  ],
+  "type": "object",
   "properties": {
-    "events": {
-      "items": {
-        "type": "object"
-      },
-      "type": "array"
-    },
-    "logId": {
-      "pattern": "^las:log:[a-f0-9]{32}$",
-      "type": "string"
-    },
     "transitionId": {
       "anyOf": [
         {
@@ -1324,14 +1319,19 @@
           ]
         }
       ]
+    },
+    "logId": {
+      "pattern": "^las:log:[a-f0-9]{32}$",
+      "type": "string"
+    },
+    "events": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
     }
   },
-  "required": [
-    "events",
-    "logId"
-  ],
-  "title": "log",
-  "type": "object"
+  "additionalProperties": false
 }
 ```
 
@@ -1360,24 +1360,24 @@
 ##### Response body JSON Schema
 ```json
 {
-  "additionalProperties": false,
+  "title": "models",
+  "required": [
+    "models"
+  ],
+  "type": "object",
   "properties": {
     "models": {
+      "type": "array",
       "items": {
-        "additionalProperties": false,
+        "required": [
+          "description",
+          "height",
+          "modelId",
+          "name",
+          "width"
+        ],
+        "type": "object",
         "properties": {
-          "description": {
-            "anyOf": [
-              {
-                "maxLength": 4096,
-                "nullable": true,
-                "type": "string"
-              }
-            ]
-          },
-          "height": {
-            "type": "integer"
-          },
           "modelId": {
             "pattern": "^las:model:[0-9A-Za-z_]+$",
             "type": "string"
@@ -1386,41 +1386,41 @@
             "anyOf": [
               {
                 "maxLength": 4096,
-                "nullable": true,
-                "type": "string"
+                "type": "string",
+                "nullable": true
               }
             ]
           },
           "width": {
             "type": "integer"
+          },
+          "description": {
+            "anyOf": [
+              {
+                "maxLength": 4096,
+                "type": "string",
+                "nullable": true
+              }
+            ]
+          },
+          "height": {
+            "type": "integer"
           }
         },
-        "required": [
-          "description",
-          "height",
-          "modelId",
-          "name",
-          "width"
-        ],
-        "type": "object"
-      },
-      "type": "array"
+        "additionalProperties": false
+      }
     },
     "nextToken": {
       "anyOf": [
         {
           "maxLength": 4096,
-          "nullable": true,
-          "type": "string"
+          "type": "string",
+          "nullable": true
         }
       ]
     }
   },
-  "required": [
-    "models"
-  ],
-  "title": "models",
-  "type": "object"
+  "additionalProperties": false
 }
 ```
 
@@ -1449,18 +1449,27 @@
 ##### Response body JSON Schema
 ```json
 {
-  "additionalProperties": false,
+  "title": "prediction",
+  "required": [
+    "documentId",
+    "inferenceTime",
+    "modelId",
+    "predictionId",
+    "predictions",
+    "timestamp"
+  ],
+  "type": "object",
   "properties": {
-    "documentId": {
-      "pattern": "^las:document:[a-f0-9]{32}$",
+    "modelId": {
+      "pattern": "^las:model:[0-9A-Za-z_]+$",
       "type": "string"
     },
     "inferenceTime": {
       "minimum": 0,
       "type": "number"
     },
-    "modelId": {
-      "pattern": "^las:model:[0-9A-Za-z_]+$",
+    "documentId": {
+      "pattern": "^las:document:[a-f0-9]{32}$",
       "type": "string"
     },
     "predictionId": {
@@ -1468,8 +1477,14 @@
       "type": "string"
     },
     "predictions": {
+      "type": "array",
       "items": {
-        "additionalProperties": false,
+        "required": [
+          "confidence",
+          "label",
+          "value"
+        ],
+        "type": "object",
         "properties": {
           "confidence": {
             "maximum": 1,
@@ -1487,36 +1502,21 @@
               {
                 "maxLength": 64,
                 "minLength": 1,
-                "nullable": true,
-                "type": "string"
+                "type": "string",
+                "nullable": true
               }
             ]
           }
         },
-        "required": [
-          "confidence",
-          "label",
-          "value"
-        ],
-        "type": "object"
-      },
-      "type": "array"
+        "additionalProperties": false
+      }
     },
     "timestamp": {
       "minimum": 1,
       "type": "integer"
     }
   },
-  "required": [
-    "documentId",
-    "inferenceTime",
-    "modelId",
-    "predictionId",
-    "predictions",
-    "timestamp"
-  ],
-  "title": "prediction",
-  "type": "object"
+  "additionalProperties": false
 }
 ```
 
@@ -1540,13 +1540,15 @@
 ##### Request body JSON Schema
 ```json
 {
-  "additionalProperties": false,
+  "title": "POST /predictions",
+  "required": [
+    "documentId",
+    "modelId"
+  ],
+  "type": "object",
   "properties": {
-    "autoRotate": {
-      "type": "boolean"
-    },
-    "documentId": {
-      "pattern": "^las:document:[a-f0-9]{32}$",
+    "modelId": {
+      "pattern": "^las:model:[0-9A-Za-z_]+$",
       "type": "string"
     },
     "maxPages": {
@@ -1554,17 +1556,15 @@
       "minimum": 1,
       "type": "integer"
     },
-    "modelId": {
-      "pattern": "^las:model:[0-9A-Za-z_]+$",
+    "documentId": {
+      "pattern": "^las:document:[a-f0-9]{32}$",
       "type": "string"
+    },
+    "autoRotate": {
+      "type": "boolean"
     }
   },
-  "required": [
-    "documentId",
-    "modelId"
-  ],
-  "title": "POST /predictions",
-  "type": "object"
+  "additionalProperties": false
 }
 ```
 
@@ -1572,18 +1572,27 @@
 ##### Response body JSON Schema
 ```json
 {
-  "additionalProperties": false,
+  "title": "prediction",
+  "required": [
+    "documentId",
+    "inferenceTime",
+    "modelId",
+    "predictionId",
+    "predictions",
+    "timestamp"
+  ],
+  "type": "object",
   "properties": {
-    "documentId": {
-      "pattern": "^las:document:[a-f0-9]{32}$",
+    "modelId": {
+      "pattern": "^las:model:[0-9A-Za-z_]+$",
       "type": "string"
     },
     "inferenceTime": {
       "minimum": 0,
       "type": "number"
     },
-    "modelId": {
-      "pattern": "^las:model:[0-9A-Za-z_]+$",
+    "documentId": {
+      "pattern": "^las:document:[a-f0-9]{32}$",
       "type": "string"
     },
     "predictionId": {
@@ -1591,8 +1600,14 @@
       "type": "string"
     },
     "predictions": {
+      "type": "array",
       "items": {
-        "additionalProperties": false,
+        "required": [
+          "confidence",
+          "label",
+          "value"
+        ],
+        "type": "object",
         "properties": {
           "confidence": {
             "maximum": 1,
@@ -1610,36 +1625,21 @@
               {
                 "maxLength": 64,
                 "minLength": 1,
-                "nullable": true,
-                "type": "string"
+                "type": "string",
+                "nullable": true
               }
             ]
           }
         },
-        "required": [
-          "confidence",
-          "label",
-          "value"
-        ],
-        "type": "object"
-      },
-      "type": "array"
+        "additionalProperties": false
+      }
     },
     "timestamp": {
       "minimum": 1,
       "type": "integer"
     }
   },
-  "required": [
-    "documentId",
-    "inferenceTime",
-    "modelId",
-    "predictionId",
-    "predictions",
-    "timestamp"
-  ],
-  "title": "prediction",
-  "type": "object"
+  "additionalProperties": false
 }
 ```
 
@@ -1668,59 +1668,59 @@
 ##### Response body JSON Schema
 ```json
 {
-  "additionalProperties": false,
+  "title": "secrets",
+  "required": [
+    "secrets"
+  ],
+  "type": "object",
   "properties": {
     "nextToken": {
       "anyOf": [
         {
           "maxLength": 4096,
-          "nullable": true,
-          "type": "string"
+          "type": "string",
+          "nullable": true
         }
       ]
     },
     "secrets": {
+      "type": "array",
       "items": {
-        "additionalProperties": false,
+        "required": [
+          "description",
+          "name",
+          "secretId"
+        ],
+        "type": "object",
         "properties": {
-          "description": {
-            "anyOf": [
-              {
-                "maxLength": 4096,
-                "nullable": true,
-                "type": "string"
-              }
-            ]
-          },
           "name": {
             "anyOf": [
               {
                 "maxLength": 4096,
-                "nullable": true,
-                "type": "string"
+                "type": "string",
+                "nullable": true
               }
             ]
           },
           "secretId": {
             "pattern": "^las:secret:[a-f0-9]{32}$",
             "type": "string"
+          },
+          "description": {
+            "anyOf": [
+              {
+                "maxLength": 4096,
+                "type": "string",
+                "nullable": true
+              }
+            ]
           }
         },
-        "required": [
-          "description",
-          "name",
-          "secretId"
-        ],
-        "type": "object"
-      },
-      "type": "array"
+        "additionalProperties": false
+      }
     }
   },
-  "required": [
-    "secrets"
-  ],
-  "title": "secrets",
-  "type": "object"
+  "additionalProperties": false
 }
 ```
 
@@ -1744,35 +1744,35 @@
 ##### Request body JSON Schema
 ```json
 {
-  "additionalProperties": false,
+  "title": "POST /secrets",
+  "required": [
+    "data"
+  ],
+  "type": "object",
   "properties": {
     "data": {
       "type": "object"
-    },
-    "description": {
-      "anyOf": [
-        {
-          "maxLength": 4096,
-          "nullable": true,
-          "type": "string"
-        }
-      ]
     },
     "name": {
       "anyOf": [
         {
           "maxLength": 4096,
-          "nullable": true,
-          "type": "string"
+          "type": "string",
+          "nullable": true
+        }
+      ]
+    },
+    "description": {
+      "anyOf": [
+        {
+          "maxLength": 4096,
+          "type": "string",
+          "nullable": true
         }
       ]
     }
   },
-  "required": [
-    "data"
-  ],
-  "title": "POST /secrets",
-  "type": "object"
+  "additionalProperties": false
 }
 ```
 
@@ -1780,38 +1780,38 @@
 ##### Response body JSON Schema
 ```json
 {
-  "additionalProperties": false,
+  "title": "secret",
+  "required": [
+    "description",
+    "name",
+    "secretId"
+  ],
+  "type": "object",
   "properties": {
-    "description": {
-      "anyOf": [
-        {
-          "maxLength": 4096,
-          "nullable": true,
-          "type": "string"
-        }
-      ]
-    },
     "name": {
       "anyOf": [
         {
           "maxLength": 4096,
-          "nullable": true,
-          "type": "string"
+          "type": "string",
+          "nullable": true
         }
       ]
     },
     "secretId": {
       "pattern": "^las:secret:[a-f0-9]{32}$",
       "type": "string"
+    },
+    "description": {
+      "anyOf": [
+        {
+          "maxLength": 4096,
+          "type": "string",
+          "nullable": true
+        }
+      ]
     }
   },
-  "required": [
-    "description",
-    "name",
-    "secretId"
-  ],
-  "title": "secret",
-  "type": "object"
+  "additionalProperties": false
 }
 ```
 
@@ -1837,33 +1837,33 @@
 ##### Request body JSON Schema
 ```json
 {
-  "additionalProperties": false,
+  "title": "PATCH /secrets/{secretId}",
   "minProperties": 1,
+  "type": "object",
   "properties": {
     "data": {
       "type": "object"
-    },
-    "description": {
-      "anyOf": [
-        {
-          "maxLength": 4096,
-          "nullable": true,
-          "type": "string"
-        }
-      ]
     },
     "name": {
       "anyOf": [
         {
           "maxLength": 4096,
-          "nullable": true,
-          "type": "string"
+          "type": "string",
+          "nullable": true
+        }
+      ]
+    },
+    "description": {
+      "anyOf": [
+        {
+          "maxLength": 4096,
+          "type": "string",
+          "nullable": true
         }
       ]
     }
   },
-  "title": "PATCH /secrets/{secretId}",
-  "type": "object"
+  "additionalProperties": false
 }
 ```
 
@@ -1871,38 +1871,38 @@
 ##### Response body JSON Schema
 ```json
 {
-  "additionalProperties": false,
+  "title": "secret",
+  "required": [
+    "description",
+    "name",
+    "secretId"
+  ],
+  "type": "object",
   "properties": {
-    "description": {
-      "anyOf": [
-        {
-          "maxLength": 4096,
-          "nullable": true,
-          "type": "string"
-        }
-      ]
-    },
     "name": {
       "anyOf": [
         {
           "maxLength": 4096,
-          "nullable": true,
-          "type": "string"
+          "type": "string",
+          "nullable": true
         }
       ]
     },
     "secretId": {
       "pattern": "^las:secret:[a-f0-9]{32}$",
       "type": "string"
+    },
+    "description": {
+      "anyOf": [
+        {
+          "maxLength": 4096,
+          "type": "string",
+          "nullable": true
+        }
+      ]
     }
   },
-  "required": [
-    "description",
-    "name",
-    "secretId"
-  ],
-  "title": "secret",
-  "type": "object"
+  "additionalProperties": false
 }
 ```
 
@@ -1932,71 +1932,44 @@
 ##### Response body JSON Schema
 ```json
 {
-  "additionalProperties": false,
+  "title": "transitions",
+  "required": [
+    "transitions"
+  ],
+  "type": "object",
   "properties": {
     "nextToken": {
       "anyOf": [
         {
           "maxLength": 4096,
-          "nullable": true,
-          "type": "string"
+          "type": "string",
+          "nullable": true
         }
       ]
     },
-    "transitionType": {
-      "items": {
-        "enum": [
-          "docker",
-          "manual"
-        ],
-        "type": "string"
-      },
-      "type": "array"
-    },
     "transitions": {
+      "type": "array",
       "items": {
-        "additionalProperties": false,
+        "required": [
+          "description",
+          "name",
+          "transitionId",
+          "transitionType"
+        ],
+        "type": "object",
         "properties": {
+          "outputJsonSchema": {
+            "type": "object"
+          },
           "assets": {
-            "additionalProperties": true,
+            "type": "object",
             "properties": {
               "jsRemoteComponent": {
                 "pattern": "^las:asset:[a-f0-9]{32}$",
                 "type": "string"
               }
             },
-            "type": "object"
-          },
-          "description": {
-            "anyOf": [
-              {
-                "maxLength": 4096,
-                "nullable": true,
-                "type": "string"
-              }
-            ]
-          },
-          "inputJsonSchema": {
-            "type": "object"
-          },
-          "name": {
-            "anyOf": [
-              {
-                "maxLength": 4096,
-                "nullable": true,
-                "type": "string"
-              }
-            ]
-          },
-          "outputJsonSchema": {
-            "type": "object"
-          },
-          "parameters": {
-            "anyOf": [
-              {
-                "type": "object"
-              }
-            ]
+            "additionalProperties": true
           },
           "transitionId": {
             "anyOf": [
@@ -2010,26 +1983,53 @@
               }
             ]
           },
+          "name": {
+            "anyOf": [
+              {
+                "maxLength": 4096,
+                "type": "string",
+                "nullable": true
+              }
+            ]
+          },
+          "description": {
+            "anyOf": [
+              {
+                "maxLength": 4096,
+                "type": "string",
+                "nullable": true
+              }
+            ]
+          },
           "transitionType": {
             "type": "string"
+          },
+          "inputJsonSchema": {
+            "type": "object"
+          },
+          "parameters": {
+            "anyOf": [
+              {
+                "type": "object"
+              }
+            ]
           }
         },
-        "required": [
-          "description",
-          "name",
-          "transitionId",
-          "transitionType"
-        ],
-        "type": "object"
-      },
-      "type": "array"
+        "additionalProperties": false
+      }
+    },
+    "transitionType": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "docker",
+          "manual"
+        ]
+      }
     }
   },
-  "required": [
-    "transitions"
-  ],
-  "title": "transitions",
-  "type": "object"
+  "additionalProperties": false
 }
 ```
 
@@ -2053,106 +2053,106 @@
 ##### Request body JSON Schema
 ```json
 {
-  "additionalProperties": false,
+  "title": "POST /transitions",
+  "required": [
+    "transitionType"
+  ],
+  "type": "object",
   "properties": {
-    "description": {
-      "anyOf": [
-        {
-          "maxLength": 4096,
-          "nullable": true,
-          "type": "string"
-        }
-      ]
-    },
-    "inputJsonSchema": {
+    "outputJsonSchema": {
       "type": "object"
     },
     "name": {
       "anyOf": [
         {
           "maxLength": 4096,
-          "nullable": true,
-          "type": "string"
+          "type": "string",
+          "nullable": true
         }
       ]
     },
-    "outputJsonSchema": {
+    "description": {
+      "anyOf": [
+        {
+          "maxLength": 4096,
+          "type": "string",
+          "nullable": true
+        }
+      ]
+    },
+    "transitionType": {
+      "type": "string",
+      "enum": [
+        "docker",
+        "manual"
+      ]
+    },
+    "inputJsonSchema": {
       "type": "object"
     },
     "parameters": {
       "anyOf": [
         {
-          "additionalProperties": false,
+          "required": [
+            "imageUrl"
+          ],
+          "type": "object",
           "properties": {
-            "cpu": {
-              "enum": [
-                256
-              ],
-              "type": "integer"
-            },
-            "environment": {
-              "additionalProperties": true,
-              "type": "object"
-            },
             "environmentSecrets": {
+              "type": "array",
               "items": {
                 "pattern": "^las:secret:[a-f0-9]{32}$",
                 "type": "string"
-              },
-              "type": "array"
+              }
             },
-            "imageUrl": {
-              "type": "string"
+            "environment": {
+              "type": "object",
+              "additionalProperties": true
             },
             "memory": {
+              "type": "integer",
               "enum": [
                 512,
                 1024,
                 2048
-              ],
-              "type": "integer"
+              ]
+            },
+            "imageUrl": {
+              "type": "string"
             },
             "secretId": {
               "pattern": "^las:secret:[a-f0-9]{32}$",
               "type": "string"
+            },
+            "cpu": {
+              "type": "integer",
+              "enum": [
+                256
+              ]
             }
           },
-          "required": [
-            "imageUrl"
-          ],
-          "type": "object"
+          "additionalProperties": false
         },
         {
-          "additionalProperties": false,
+          "type": "object",
           "properties": {
             "assets": {
-              "additionalProperties": true,
+              "type": "object",
               "properties": {
                 "jsRemoteComponent": {
                   "pattern": "^las:asset:[a-f0-9]{32}$",
                   "type": "string"
                 }
               },
-              "type": "object"
+              "additionalProperties": true
             }
           },
-          "type": "object"
+          "additionalProperties": false
         }
       ]
-    },
-    "transitionType": {
-      "enum": [
-        "docker",
-        "manual"
-      ],
-      "type": "string"
     }
   },
-  "required": [
-    "transitionType"
-  ],
-  "title": "POST /transitions",
-  "type": "object"
+  "additionalProperties": false
 }
 ```
 
@@ -2160,48 +2160,27 @@
 ##### Response body JSON Schema
 ```json
 {
-  "additionalProperties": false,
+  "title": "transition",
+  "required": [
+    "description",
+    "name",
+    "transitionId",
+    "transitionType"
+  ],
+  "type": "object",
   "properties": {
+    "outputJsonSchema": {
+      "type": "object"
+    },
     "assets": {
-      "additionalProperties": true,
+      "type": "object",
       "properties": {
         "jsRemoteComponent": {
           "pattern": "^las:asset:[a-f0-9]{32}$",
           "type": "string"
         }
       },
-      "type": "object"
-    },
-    "description": {
-      "anyOf": [
-        {
-          "maxLength": 4096,
-          "nullable": true,
-          "type": "string"
-        }
-      ]
-    },
-    "inputJsonSchema": {
-      "type": "object"
-    },
-    "name": {
-      "anyOf": [
-        {
-          "maxLength": 4096,
-          "nullable": true,
-          "type": "string"
-        }
-      ]
-    },
-    "outputJsonSchema": {
-      "type": "object"
-    },
-    "parameters": {
-      "anyOf": [
-        {
-          "type": "object"
-        }
-      ]
+      "additionalProperties": true
     },
     "transitionId": {
       "anyOf": [
@@ -2215,18 +2194,39 @@
         }
       ]
     },
+    "name": {
+      "anyOf": [
+        {
+          "maxLength": 4096,
+          "type": "string",
+          "nullable": true
+        }
+      ]
+    },
+    "description": {
+      "anyOf": [
+        {
+          "maxLength": 4096,
+          "type": "string",
+          "nullable": true
+        }
+      ]
+    },
     "transitionType": {
       "type": "string"
+    },
+    "inputJsonSchema": {
+      "type": "object"
+    },
+    "parameters": {
+      "anyOf": [
+        {
+          "type": "object"
+        }
+      ]
     }
   },
-  "required": [
-    "description",
-    "name",
-    "transitionId",
-    "transitionType"
-  ],
-  "title": "transition",
-  "type": "object"
+  "additionalProperties": false
 }
 ```
 
@@ -2252,36 +2252,36 @@
 ##### Request body JSON Schema
 ```json
 {
-  "additionalProperties": false,
+  "title": "PATCH /transitions/{transitionId}",
   "minProperties": 1,
+  "type": "object",
   "properties": {
-    "description": {
-      "anyOf": [
-        {
-          "maxLength": 4096,
-          "nullable": true,
-          "type": "string"
-        }
-      ]
-    },
-    "inputJsonSchema": {
+    "outputJsonSchema": {
       "type": "object"
     },
     "name": {
       "anyOf": [
         {
           "maxLength": 4096,
-          "nullable": true,
-          "type": "string"
+          "type": "string",
+          "nullable": true
         }
       ]
     },
-    "outputJsonSchema": {
+    "description": {
+      "anyOf": [
+        {
+          "maxLength": 4096,
+          "type": "string",
+          "nullable": true
+        }
+      ]
+    },
+    "inputJsonSchema": {
       "type": "object"
     }
   },
-  "title": "PATCH /transitions/{transitionId}",
-  "type": "object"
+  "additionalProperties": false
 }
 ```
 
@@ -2289,48 +2289,27 @@
 ##### Response body JSON Schema
 ```json
 {
-  "additionalProperties": false,
+  "title": "transition",
+  "required": [
+    "description",
+    "name",
+    "transitionId",
+    "transitionType"
+  ],
+  "type": "object",
   "properties": {
+    "outputJsonSchema": {
+      "type": "object"
+    },
     "assets": {
-      "additionalProperties": true,
+      "type": "object",
       "properties": {
         "jsRemoteComponent": {
           "pattern": "^las:asset:[a-f0-9]{32}$",
           "type": "string"
         }
       },
-      "type": "object"
-    },
-    "description": {
-      "anyOf": [
-        {
-          "maxLength": 4096,
-          "nullable": true,
-          "type": "string"
-        }
-      ]
-    },
-    "inputJsonSchema": {
-      "type": "object"
-    },
-    "name": {
-      "anyOf": [
-        {
-          "maxLength": 4096,
-          "nullable": true,
-          "type": "string"
-        }
-      ]
-    },
-    "outputJsonSchema": {
-      "type": "object"
-    },
-    "parameters": {
-      "anyOf": [
-        {
-          "type": "object"
-        }
-      ]
+      "additionalProperties": true
     },
     "transitionId": {
       "anyOf": [
@@ -2344,18 +2323,39 @@
         }
       ]
     },
+    "name": {
+      "anyOf": [
+        {
+          "maxLength": 4096,
+          "type": "string",
+          "nullable": true
+        }
+      ]
+    },
+    "description": {
+      "anyOf": [
+        {
+          "maxLength": 4096,
+          "type": "string",
+          "nullable": true
+        }
+      ]
+    },
     "transitionType": {
       "type": "string"
+    },
+    "inputJsonSchema": {
+      "type": "object"
+    },
+    "parameters": {
+      "anyOf": [
+        {
+          "type": "object"
+        }
+      ]
     }
   },
-  "required": [
-    "description",
-    "name",
-    "transitionId",
-    "transitionType"
-  ],
-  "title": "transition",
-  "type": "object"
+  "additionalProperties": false
 }
 ```
 
@@ -2390,30 +2390,25 @@
 ##### Response body JSON Schema
 ```json
 {
-  "additionalProperties": false,
+  "title": "transition-executions",
+  "required": [
+    "executions",
+    "transitionId"
+  ],
+  "type": "object",
   "properties": {
     "executions": {
+      "type": "array",
       "items": {
-        "additionalProperties": false,
+        "required": [
+          "completedBy",
+          "executionId",
+          "input",
+          "status",
+          "transitionId"
+        ],
+        "type": "object",
         "properties": {
-          "completedBy": {
-            "anyOf": [
-              {
-                "maxLength": 4096,
-                "nullable": true,
-                "type": "string"
-              }
-            ]
-          },
-          "endTime": {
-            "anyOf": [
-              {
-                "nullable": true,
-                "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2} ?[0-9]{2}:?[0-9]{2}:?[0-9]{2}.?[0-9]{6}",
-                "type": "string"
-              }
-            ]
-          },
           "executionId": {
             "pattern": "^las:transition-execution:[a-f0-9]{32}$",
             "type": "string"
@@ -2424,34 +2419,6 @@
                 "type": "object"
               }
             ]
-          },
-          "logId": {
-            "anyOf": [
-              {
-                "nullable": true,
-                "pattern": "^las:log:[a-f0-9]{32}$",
-                "type": "string"
-              }
-            ]
-          },
-          "startTime": {
-            "anyOf": [
-              {
-                "nullable": true,
-                "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2} ?[0-9]{2}:?[0-9]{2}:?[0-9]{2}.?[0-9]{6}",
-                "type": "string"
-              }
-            ]
-          },
-          "status": {
-            "enum": [
-              "running",
-              "succeeded",
-              "failed",
-              "rejected",
-              "retry"
-            ],
-            "type": "string"
           },
           "transitionId": {
             "anyOf": [
@@ -2464,40 +2431,56 @@
                 "type": "string"
               }
             ]
+          },
+          "startTime": {
+            "anyOf": [
+              {
+                "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2} ?[0-9]{2}:?[0-9]{2}:?[0-9]{2}.?[0-9]{6}",
+                "type": "string",
+                "nullable": true
+              }
+            ]
+          },
+          "logId": {
+            "anyOf": [
+              {
+                "pattern": "^las:log:[a-f0-9]{32}$",
+                "type": "string",
+                "nullable": true
+              }
+            ]
+          },
+          "endTime": {
+            "anyOf": [
+              {
+                "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2} ?[0-9]{2}:?[0-9]{2}:?[0-9]{2}.?[0-9]{6}",
+                "type": "string",
+                "nullable": true
+              }
+            ]
+          },
+          "completedBy": {
+            "anyOf": [
+              {
+                "maxLength": 4096,
+                "type": "string",
+                "nullable": true
+              }
+            ]
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "running",
+              "succeeded",
+              "failed",
+              "rejected",
+              "retry"
+            ]
           }
         },
-        "required": [
-          "completedBy",
-          "executionId",
-          "input",
-          "status",
-          "transitionId"
-        ],
-        "type": "object"
-      },
-      "type": "array"
-    },
-    "nextToken": {
-      "anyOf": [
-        {
-          "maxLength": 4096,
-          "nullable": true,
-          "type": "string"
-        }
-      ]
-    },
-    "status": {
-      "items": {
-        "enum": [
-          "running",
-          "succeeded",
-          "failed",
-          "rejected",
-          "retry"
-        ],
-        "type": "string"
-      },
-      "type": "array"
+        "additionalProperties": false
+      }
     },
     "transitionId": {
       "anyOf": [
@@ -2510,14 +2493,31 @@
           "type": "string"
         }
       ]
+    },
+    "nextToken": {
+      "anyOf": [
+        {
+          "maxLength": 4096,
+          "type": "string",
+          "nullable": true
+        }
+      ]
+    },
+    "status": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "running",
+          "succeeded",
+          "failed",
+          "rejected",
+          "retry"
+        ]
+      }
     }
   },
-  "required": [
-    "executions",
-    "transitionId"
-  ],
-  "title": "transition-executions",
-  "type": "object"
+  "additionalProperties": false
 }
 ```
 
@@ -2552,26 +2552,16 @@
 ##### Response body JSON Schema
 ```json
 {
-  "additionalProperties": false,
+  "title": "transition-execution",
+  "required": [
+    "completedBy",
+    "executionId",
+    "input",
+    "status",
+    "transitionId"
+  ],
+  "type": "object",
   "properties": {
-    "completedBy": {
-      "anyOf": [
-        {
-          "maxLength": 4096,
-          "nullable": true,
-          "type": "string"
-        }
-      ]
-    },
-    "endTime": {
-      "anyOf": [
-        {
-          "nullable": true,
-          "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2} ?[0-9]{2}:?[0-9]{2}:?[0-9]{2}.?[0-9]{6}",
-          "type": "string"
-        }
-      ]
-    },
     "executionId": {
       "pattern": "^las:transition-execution:[a-f0-9]{32}$",
       "type": "string"
@@ -2582,34 +2572,6 @@
           "type": "object"
         }
       ]
-    },
-    "logId": {
-      "anyOf": [
-        {
-          "nullable": true,
-          "pattern": "^las:log:[a-f0-9]{32}$",
-          "type": "string"
-        }
-      ]
-    },
-    "startTime": {
-      "anyOf": [
-        {
-          "nullable": true,
-          "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2} ?[0-9]{2}:?[0-9]{2}:?[0-9]{2}.?[0-9]{6}",
-          "type": "string"
-        }
-      ]
-    },
-    "status": {
-      "enum": [
-        "running",
-        "succeeded",
-        "failed",
-        "rejected",
-        "retry"
-      ],
-      "type": "string"
     },
     "transitionId": {
       "anyOf": [
@@ -2622,17 +2584,55 @@
           "type": "string"
         }
       ]
+    },
+    "startTime": {
+      "anyOf": [
+        {
+          "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2} ?[0-9]{2}:?[0-9]{2}:?[0-9]{2}.?[0-9]{6}",
+          "type": "string",
+          "nullable": true
+        }
+      ]
+    },
+    "logId": {
+      "anyOf": [
+        {
+          "pattern": "^las:log:[a-f0-9]{32}$",
+          "type": "string",
+          "nullable": true
+        }
+      ]
+    },
+    "endTime": {
+      "anyOf": [
+        {
+          "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2} ?[0-9]{2}:?[0-9]{2}:?[0-9]{2}.?[0-9]{6}",
+          "type": "string",
+          "nullable": true
+        }
+      ]
+    },
+    "completedBy": {
+      "anyOf": [
+        {
+          "maxLength": 4096,
+          "type": "string",
+          "nullable": true
+        }
+      ]
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "running",
+        "succeeded",
+        "failed",
+        "rejected",
+        "retry"
+      ]
     }
   },
-  "required": [
-    "completedBy",
-    "executionId",
-    "input",
-    "status",
-    "transitionId"
-  ],
-  "title": "transition-execution",
-  "type": "object"
+  "additionalProperties": false
 }
 ```
 
@@ -2661,26 +2661,16 @@
 ##### Response body JSON Schema
 ```json
 {
-  "additionalProperties": false,
+  "title": "transition-execution",
+  "required": [
+    "completedBy",
+    "executionId",
+    "input",
+    "status",
+    "transitionId"
+  ],
+  "type": "object",
   "properties": {
-    "completedBy": {
-      "anyOf": [
-        {
-          "maxLength": 4096,
-          "nullable": true,
-          "type": "string"
-        }
-      ]
-    },
-    "endTime": {
-      "anyOf": [
-        {
-          "nullable": true,
-          "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2} ?[0-9]{2}:?[0-9]{2}:?[0-9]{2}.?[0-9]{6}",
-          "type": "string"
-        }
-      ]
-    },
     "executionId": {
       "pattern": "^las:transition-execution:[a-f0-9]{32}$",
       "type": "string"
@@ -2691,34 +2681,6 @@
           "type": "object"
         }
       ]
-    },
-    "logId": {
-      "anyOf": [
-        {
-          "nullable": true,
-          "pattern": "^las:log:[a-f0-9]{32}$",
-          "type": "string"
-        }
-      ]
-    },
-    "startTime": {
-      "anyOf": [
-        {
-          "nullable": true,
-          "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2} ?[0-9]{2}:?[0-9]{2}:?[0-9]{2}.?[0-9]{6}",
-          "type": "string"
-        }
-      ]
-    },
-    "status": {
-      "enum": [
-        "running",
-        "succeeded",
-        "failed",
-        "rejected",
-        "retry"
-      ],
-      "type": "string"
     },
     "transitionId": {
       "anyOf": [
@@ -2731,17 +2693,55 @@
           "type": "string"
         }
       ]
+    },
+    "startTime": {
+      "anyOf": [
+        {
+          "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2} ?[0-9]{2}:?[0-9]{2}:?[0-9]{2}.?[0-9]{6}",
+          "type": "string",
+          "nullable": true
+        }
+      ]
+    },
+    "logId": {
+      "anyOf": [
+        {
+          "pattern": "^las:log:[a-f0-9]{32}$",
+          "type": "string",
+          "nullable": true
+        }
+      ]
+    },
+    "endTime": {
+      "anyOf": [
+        {
+          "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2} ?[0-9]{2}:?[0-9]{2}:?[0-9]{2}.?[0-9]{6}",
+          "type": "string",
+          "nullable": true
+        }
+      ]
+    },
+    "completedBy": {
+      "anyOf": [
+        {
+          "maxLength": 4096,
+          "type": "string",
+          "nullable": true
+        }
+      ]
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "running",
+        "succeeded",
+        "failed",
+        "rejected",
+        "retry"
+      ]
     }
   },
-  "required": [
-    "completedBy",
-    "executionId",
-    "input",
-    "status",
-    "transitionId"
-  ],
-  "title": "transition-execution",
-  "type": "object"
+  "additionalProperties": false
 }
 ```
 
@@ -2768,55 +2768,55 @@
 ##### Request body JSON Schema
 ```json
 {
-  "additionalProperties": false,
-  "anyOf": [
-    {
-      "properties": {
-        "status": {
-          "enum": [
-            "succeeded"
-          ],
-          "type": "string"
-        }
-      },
+  "title": "PATCH transitions/{transitionId}/executions/{executionId}",
+  "type": "object",
+  "properties": {
+    "output": {
       "type": "object"
     },
-    {
-      "properties": {
-        "status": {
-          "enum": [
-            "failed",
-            "rejected",
-            "retry"
-          ],
-          "type": "string"
-        }
-      },
-      "type": "object"
-    }
-  ],
-  "properties": {
     "error": {
-      "additionalProperties": false,
+      "required": [
+        "message"
+      ],
+      "type": "object",
       "properties": {
         "message": {
           "type": "string"
         }
       },
-      "required": [
-        "message"
-      ],
-      "type": "object"
-    },
-    "output": {
-      "type": "object"
+      "additionalProperties": false
     },
     "status": {
       "type": "string"
     }
   },
-  "title": "PATCH transitions/{transitionId}/executions/{executionId}",
-  "type": "object"
+  "additionalProperties": false,
+  "anyOf": [
+    {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string",
+          "enum": [
+            "succeeded"
+          ]
+        }
+      }
+    },
+    {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string",
+          "enum": [
+            "failed",
+            "rejected",
+            "retry"
+          ]
+        }
+      }
+    }
+  ]
 }
 ```
 
@@ -2824,26 +2824,16 @@
 ##### Response body JSON Schema
 ```json
 {
-  "additionalProperties": false,
+  "title": "transition-execution",
+  "required": [
+    "completedBy",
+    "executionId",
+    "input",
+    "status",
+    "transitionId"
+  ],
+  "type": "object",
   "properties": {
-    "completedBy": {
-      "anyOf": [
-        {
-          "maxLength": 4096,
-          "nullable": true,
-          "type": "string"
-        }
-      ]
-    },
-    "endTime": {
-      "anyOf": [
-        {
-          "nullable": true,
-          "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2} ?[0-9]{2}:?[0-9]{2}:?[0-9]{2}.?[0-9]{6}",
-          "type": "string"
-        }
-      ]
-    },
     "executionId": {
       "pattern": "^las:transition-execution:[a-f0-9]{32}$",
       "type": "string"
@@ -2854,34 +2844,6 @@
           "type": "object"
         }
       ]
-    },
-    "logId": {
-      "anyOf": [
-        {
-          "nullable": true,
-          "pattern": "^las:log:[a-f0-9]{32}$",
-          "type": "string"
-        }
-      ]
-    },
-    "startTime": {
-      "anyOf": [
-        {
-          "nullable": true,
-          "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2} ?[0-9]{2}:?[0-9]{2}:?[0-9]{2}.?[0-9]{6}",
-          "type": "string"
-        }
-      ]
-    },
-    "status": {
-      "enum": [
-        "running",
-        "succeeded",
-        "failed",
-        "rejected",
-        "retry"
-      ],
-      "type": "string"
     },
     "transitionId": {
       "anyOf": [
@@ -2894,17 +2856,55 @@
           "type": "string"
         }
       ]
+    },
+    "startTime": {
+      "anyOf": [
+        {
+          "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2} ?[0-9]{2}:?[0-9]{2}:?[0-9]{2}.?[0-9]{6}",
+          "type": "string",
+          "nullable": true
+        }
+      ]
+    },
+    "logId": {
+      "anyOf": [
+        {
+          "pattern": "^las:log:[a-f0-9]{32}$",
+          "type": "string",
+          "nullable": true
+        }
+      ]
+    },
+    "endTime": {
+      "anyOf": [
+        {
+          "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2} ?[0-9]{2}:?[0-9]{2}:?[0-9]{2}.?[0-9]{6}",
+          "type": "string",
+          "nullable": true
+        }
+      ]
+    },
+    "completedBy": {
+      "anyOf": [
+        {
+          "maxLength": 4096,
+          "type": "string",
+          "nullable": true
+        }
+      ]
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "running",
+        "succeeded",
+        "failed",
+        "rejected",
+        "retry"
+      ]
     }
   },
-  "required": [
-    "completedBy",
-    "executionId",
-    "input",
-    "status",
-    "transitionId"
-  ],
-  "title": "transition-execution",
-  "type": "object"
+  "additionalProperties": false
 }
 ```
 
@@ -2933,62 +2933,62 @@
 ##### Response body JSON Schema
 ```json
 {
-  "additionalProperties": false,
+  "title": "users",
+  "required": [
+    "users"
+  ],
+  "type": "object",
   "properties": {
     "nextToken": {
       "anyOf": [
         {
           "maxLength": 4096,
-          "nullable": true,
-          "type": "string"
+          "type": "string",
+          "nullable": true
         }
       ]
     },
     "users": {
+      "type": "array",
       "items": {
-        "additionalProperties": false,
+        "required": [
+          "email",
+          "userId"
+        ],
+        "type": "object",
         "properties": {
-          "avatar": {
-            "anyOf": [
-              {
-                "maxLength": 131072,
-                "nullable": true,
-                "type": "string"
-              }
-            ]
-          },
-          "email": {
-            "pattern": "^[A-Za-z0-9][-+._A-Za-z0-9]*@([A-Za-z0-9]+\\.)+[A-Za-z]{2,}$",
-            "type": "string"
-          },
           "name": {
             "anyOf": [
               {
                 "maxLength": 4096,
-                "nullable": true,
-                "type": "string"
+                "type": "string",
+                "nullable": true
+              }
+            ]
+          },
+          "avatar": {
+            "anyOf": [
+              {
+                "maxLength": 131072,
+                "type": "string",
+                "nullable": true
               }
             ]
           },
           "userId": {
             "pattern": "^las:user:[a-f0-9]{32}$",
             "type": "string"
+          },
+          "email": {
+            "pattern": "^[A-Za-z0-9][-+._A-Za-z0-9]*@([A-Za-z0-9]+\\.)+[A-Za-z]{2,}$",
+            "type": "string"
           }
         },
-        "required": [
-          "email",
-          "userId"
-        ],
-        "type": "object"
-      },
-      "type": "array"
+        "additionalProperties": false
+      }
     }
   },
-  "required": [
-    "users"
-  ],
-  "title": "users",
-  "type": "object"
+  "additionalProperties": false
 }
 ```
 
@@ -3012,36 +3012,36 @@
 ##### Request body JSON Schema
 ```json
 {
-  "additionalProperties": false,
+  "title": "POST /users",
+  "required": [
+    "email"
+  ],
+  "type": "object",
   "properties": {
+    "name": {
+      "anyOf": [
+        {
+          "maxLength": 4096,
+          "type": "string",
+          "nullable": true
+        }
+      ]
+    },
     "avatar": {
       "anyOf": [
         {
           "maxLength": 131072,
-          "nullable": true,
-          "type": "string"
+          "type": "string",
+          "nullable": true
         }
       ]
     },
     "email": {
       "pattern": "^[A-Za-z0-9][-+._A-Za-z0-9]*@([A-Za-z0-9]+\\.)+[A-Za-z]{2,}$",
       "type": "string"
-    },
-    "name": {
-      "anyOf": [
-        {
-          "maxLength": 4096,
-          "nullable": true,
-          "type": "string"
-        }
-      ]
     }
   },
-  "required": [
-    "email"
-  ],
-  "title": "POST /users",
-  "type": "object"
+  "additionalProperties": false
 }
 ```
 
@@ -3049,41 +3049,41 @@
 ##### Response body JSON Schema
 ```json
 {
-  "additionalProperties": false,
+  "title": "user",
+  "required": [
+    "email",
+    "userId"
+  ],
+  "type": "object",
   "properties": {
-    "avatar": {
-      "anyOf": [
-        {
-          "maxLength": 131072,
-          "nullable": true,
-          "type": "string"
-        }
-      ]
-    },
-    "email": {
-      "pattern": "^[A-Za-z0-9][-+._A-Za-z0-9]*@([A-Za-z0-9]+\\.)+[A-Za-z]{2,}$",
-      "type": "string"
-    },
     "name": {
       "anyOf": [
         {
           "maxLength": 4096,
-          "nullable": true,
-          "type": "string"
+          "type": "string",
+          "nullable": true
+        }
+      ]
+    },
+    "avatar": {
+      "anyOf": [
+        {
+          "maxLength": 131072,
+          "type": "string",
+          "nullable": true
         }
       ]
     },
     "userId": {
       "pattern": "^las:user:[a-f0-9]{32}$",
       "type": "string"
+    },
+    "email": {
+      "pattern": "^[A-Za-z0-9][-+._A-Za-z0-9]*@([A-Za-z0-9]+\\.)+[A-Za-z]{2,}$",
+      "type": "string"
     }
   },
-  "required": [
-    "email",
-    "userId"
-  ],
-  "title": "user",
-  "type": "object"
+  "additionalProperties": false
 }
 ```
 
@@ -3111,41 +3111,41 @@
 ##### Response body JSON Schema
 ```json
 {
-  "additionalProperties": false,
+  "title": "user",
+  "required": [
+    "email",
+    "userId"
+  ],
+  "type": "object",
   "properties": {
-    "avatar": {
-      "anyOf": [
-        {
-          "maxLength": 131072,
-          "nullable": true,
-          "type": "string"
-        }
-      ]
-    },
-    "email": {
-      "pattern": "^[A-Za-z0-9][-+._A-Za-z0-9]*@([A-Za-z0-9]+\\.)+[A-Za-z]{2,}$",
-      "type": "string"
-    },
     "name": {
       "anyOf": [
         {
           "maxLength": 4096,
-          "nullable": true,
-          "type": "string"
+          "type": "string",
+          "nullable": true
+        }
+      ]
+    },
+    "avatar": {
+      "anyOf": [
+        {
+          "maxLength": 131072,
+          "type": "string",
+          "nullable": true
         }
       ]
     },
     "userId": {
       "pattern": "^las:user:[a-f0-9]{32}$",
       "type": "string"
+    },
+    "email": {
+      "pattern": "^[A-Za-z0-9][-+._A-Za-z0-9]*@([A-Za-z0-9]+\\.)+[A-Za-z]{2,}$",
+      "type": "string"
     }
   },
-  "required": [
-    "email",
-    "userId"
-  ],
-  "title": "user",
-  "type": "object"
+  "additionalProperties": false
 }
 ```
 
@@ -3173,41 +3173,41 @@
 ##### Response body JSON Schema
 ```json
 {
-  "additionalProperties": false,
+  "title": "user",
+  "required": [
+    "email",
+    "userId"
+  ],
+  "type": "object",
   "properties": {
-    "avatar": {
-      "anyOf": [
-        {
-          "maxLength": 131072,
-          "nullable": true,
-          "type": "string"
-        }
-      ]
-    },
-    "email": {
-      "pattern": "^[A-Za-z0-9][-+._A-Za-z0-9]*@([A-Za-z0-9]+\\.)+[A-Za-z]{2,}$",
-      "type": "string"
-    },
     "name": {
       "anyOf": [
         {
           "maxLength": 4096,
-          "nullable": true,
-          "type": "string"
+          "type": "string",
+          "nullable": true
+        }
+      ]
+    },
+    "avatar": {
+      "anyOf": [
+        {
+          "maxLength": 131072,
+          "type": "string",
+          "nullable": true
         }
       ]
     },
     "userId": {
       "pattern": "^las:user:[a-f0-9]{32}$",
       "type": "string"
+    },
+    "email": {
+      "pattern": "^[A-Za-z0-9][-+._A-Za-z0-9]*@([A-Za-z0-9]+\\.)+[A-Za-z]{2,}$",
+      "type": "string"
     }
   },
-  "required": [
-    "email",
-    "userId"
-  ],
-  "title": "user",
-  "type": "object"
+  "additionalProperties": false
 }
 ```
 
@@ -3233,30 +3233,30 @@
 ##### Request body JSON Schema
 ```json
 {
-  "additionalProperties": false,
+  "title": "PATCH /users/{userId}",
   "minProperties": 1,
+  "type": "object",
   "properties": {
-    "avatar": {
-      "anyOf": [
-        {
-          "maxLength": 131072,
-          "nullable": true,
-          "type": "string"
-        }
-      ]
-    },
     "name": {
       "anyOf": [
         {
           "maxLength": 4096,
-          "nullable": true,
-          "type": "string"
+          "type": "string",
+          "nullable": true
+        }
+      ]
+    },
+    "avatar": {
+      "anyOf": [
+        {
+          "maxLength": 131072,
+          "type": "string",
+          "nullable": true
         }
       ]
     }
   },
-  "title": "PATCH /users/{userId}",
-  "type": "object"
+  "additionalProperties": false
 }
 ```
 
@@ -3264,41 +3264,41 @@
 ##### Response body JSON Schema
 ```json
 {
-  "additionalProperties": false,
+  "title": "user",
+  "required": [
+    "email",
+    "userId"
+  ],
+  "type": "object",
   "properties": {
-    "avatar": {
-      "anyOf": [
-        {
-          "maxLength": 131072,
-          "nullable": true,
-          "type": "string"
-        }
-      ]
-    },
-    "email": {
-      "pattern": "^[A-Za-z0-9][-+._A-Za-z0-9]*@([A-Za-z0-9]+\\.)+[A-Za-z]{2,}$",
-      "type": "string"
-    },
     "name": {
       "anyOf": [
         {
           "maxLength": 4096,
-          "nullable": true,
-          "type": "string"
+          "type": "string",
+          "nullable": true
+        }
+      ]
+    },
+    "avatar": {
+      "anyOf": [
+        {
+          "maxLength": 131072,
+          "type": "string",
+          "nullable": true
         }
       ]
     },
     "userId": {
       "pattern": "^las:user:[a-f0-9]{32}$",
       "type": "string"
+    },
+    "email": {
+      "pattern": "^[A-Za-z0-9][-+._A-Za-z0-9]*@([A-Za-z0-9]+\\.)+[A-Za-z]{2,}$",
+      "type": "string"
     }
   },
-  "required": [
-    "email",
-    "userId"
-  ],
-  "title": "user",
-  "type": "object"
+  "additionalProperties": false
 }
 ```
 
@@ -3327,36 +3327,46 @@
 ##### Response body JSON Schema
 ```json
 {
-  "additionalProperties": false,
+  "title": "workflows",
+  "required": [
+    "workflows"
+  ],
+  "type": "object",
   "properties": {
     "nextToken": {
       "anyOf": [
         {
           "maxLength": 4096,
-          "nullable": true,
-          "type": "string"
+          "type": "string",
+          "nullable": true
         }
       ]
     },
     "workflows": {
+      "type": "array",
       "items": {
-        "additionalProperties": false,
+        "required": [
+          "description",
+          "name",
+          "workflowId"
+        ],
+        "type": "object",
         "properties": {
-          "description": {
-            "anyOf": [
-              {
-                "maxLength": 4096,
-                "nullable": true,
-                "type": "string"
-              }
-            ]
-          },
           "name": {
             "anyOf": [
               {
                 "maxLength": 4096,
-                "nullable": true,
-                "type": "string"
+                "type": "string",
+                "nullable": true
+              }
+            ]
+          },
+          "description": {
+            "anyOf": [
+              {
+                "maxLength": 4096,
+                "type": "string",
+                "nullable": true
               }
             ]
           },
@@ -3365,21 +3375,11 @@
             "type": "string"
           }
         },
-        "required": [
-          "description",
-          "name",
-          "workflowId"
-        ],
-        "type": "object"
-      },
-      "type": "array"
+        "additionalProperties": false
+      }
     }
   },
-  "required": [
-    "workflows"
-  ],
-  "title": "workflows",
-  "type": "object"
+  "additionalProperties": false
 }
 ```
 
@@ -3403,69 +3403,69 @@
 ##### Request body JSON Schema
 ```json
 {
-  "additionalProperties": false,
+  "title": "POST /workflows",
+  "required": [
+    "specification"
+  ],
+  "type": "object",
   "properties": {
+    "name": {
+      "anyOf": [
+        {
+          "maxLength": 4096,
+          "type": "string",
+          "nullable": true
+        }
+      ]
+    },
     "description": {
       "anyOf": [
         {
           "maxLength": 4096,
-          "nullable": true,
-          "type": "string"
+          "type": "string",
+          "nullable": true
         }
       ]
     },
+    "specification": {
+      "required": [
+        "definition"
+      ],
+      "type": "object",
+      "properties": {
+        "language": {
+          "type": "string",
+          "enum": [
+            "ASL"
+          ]
+        },
+        "definition": {
+          "type": "object"
+        },
+        "version": {
+          "type": "string",
+          "enum": [
+            "1.0.0"
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
     "errorConfig": {
-      "additionalProperties": false,
+      "required": [
+        "email"
+      ],
+      "type": "object",
       "properties": {
         "email": {
           "pattern": "^[A-Za-z0-9][-+._A-Za-z0-9]*@([A-Za-z0-9]+\\.)+[A-Za-z]{2,}$",
           "type": "string"
         }
       },
-      "required": [
-        "email"
-      ],
-      "type": "object"
-    },
-    "name": {
-      "anyOf": [
-        {
-          "maxLength": 4096,
-          "nullable": true,
-          "type": "string"
-        }
-      ]
-    },
-    "specification": {
-      "additionalProperties": false,
-      "properties": {
-        "definition": {
-          "type": "object"
-        },
-        "language": {
-          "enum": [
-            "ASL"
-          ],
-          "type": "string"
-        },
-        "version": {
-          "enum": [
-            "1.0.0"
-          ],
-          "type": "string"
-        }
-      },
-      "required": [
-        "definition"
-      ],
-      "type": "object"
+      "additionalProperties": false
     }
   },
-  "required": [
-    "specification"
-  ],
-  "title": "POST /workflows",
-  "type": "object"
+  "additionalProperties": false
 }
 ```
 
@@ -3473,23 +3473,29 @@
 ##### Response body JSON Schema
 ```json
 {
-  "additionalProperties": false,
+  "title": "workflow",
+  "required": [
+    "description",
+    "name",
+    "workflowId"
+  ],
+  "type": "object",
   "properties": {
-    "description": {
-      "anyOf": [
-        {
-          "maxLength": 4096,
-          "nullable": true,
-          "type": "string"
-        }
-      ]
-    },
     "name": {
       "anyOf": [
         {
           "maxLength": 4096,
-          "nullable": true,
-          "type": "string"
+          "type": "string",
+          "nullable": true
+        }
+      ]
+    },
+    "description": {
+      "anyOf": [
+        {
+          "maxLength": 4096,
+          "type": "string",
+          "nullable": true
         }
       ]
     },
@@ -3498,13 +3504,7 @@
       "type": "string"
     }
   },
-  "required": [
-    "description",
-    "name",
-    "workflowId"
-  ],
-  "title": "workflow",
-  "type": "object"
+  "additionalProperties": false
 }
 ```
 
@@ -3532,23 +3532,29 @@
 ##### Response body JSON Schema
 ```json
 {
-  "additionalProperties": false,
+  "title": "workflow",
+  "required": [
+    "description",
+    "name",
+    "workflowId"
+  ],
+  "type": "object",
   "properties": {
-    "description": {
-      "anyOf": [
-        {
-          "maxLength": 4096,
-          "nullable": true,
-          "type": "string"
-        }
-      ]
-    },
     "name": {
       "anyOf": [
         {
           "maxLength": 4096,
-          "nullable": true,
-          "type": "string"
+          "type": "string",
+          "nullable": true
+        }
+      ]
+    },
+    "description": {
+      "anyOf": [
+        {
+          "maxLength": 4096,
+          "type": "string",
+          "nullable": true
         }
       ]
     },
@@ -3557,13 +3563,7 @@
       "type": "string"
     }
   },
-  "required": [
-    "description",
-    "name",
-    "workflowId"
-  ],
-  "title": "workflow",
-  "type": "object"
+  "additionalProperties": false
 }
 ```
 
@@ -3589,30 +3589,30 @@
 ##### Request body JSON Schema
 ```json
 {
-  "additionalProperties": false,
+  "title": "PATCH /workflows/{workflowId}",
   "minProperties": 1,
+  "type": "object",
   "properties": {
-    "description": {
-      "anyOf": [
-        {
-          "maxLength": 4096,
-          "nullable": true,
-          "type": "string"
-        }
-      ]
-    },
     "name": {
       "anyOf": [
         {
           "maxLength": 4096,
-          "nullable": true,
-          "type": "string"
+          "type": "string",
+          "nullable": true
+        }
+      ]
+    },
+    "description": {
+      "anyOf": [
+        {
+          "maxLength": 4096,
+          "type": "string",
+          "nullable": true
         }
       ]
     }
   },
-  "title": "PATCH /workflows/{workflowId}",
-  "type": "object"
+  "additionalProperties": false
 }
 ```
 
@@ -3620,23 +3620,29 @@
 ##### Response body JSON Schema
 ```json
 {
-  "additionalProperties": false,
+  "title": "workflow",
+  "required": [
+    "description",
+    "name",
+    "workflowId"
+  ],
+  "type": "object",
   "properties": {
-    "description": {
-      "anyOf": [
-        {
-          "maxLength": 4096,
-          "nullable": true,
-          "type": "string"
-        }
-      ]
-    },
     "name": {
       "anyOf": [
         {
           "maxLength": 4096,
-          "nullable": true,
-          "type": "string"
+          "type": "string",
+          "nullable": true
+        }
+      ]
+    },
+    "description": {
+      "anyOf": [
+        {
+          "maxLength": 4096,
+          "type": "string",
+          "nullable": true
         }
       ]
     },
@@ -3645,13 +3651,7 @@
       "type": "string"
     }
   },
-  "required": [
-    "description",
-    "name",
-    "workflowId"
-  ],
-  "title": "workflow",
-  "type": "object"
+  "additionalProperties": false
 }
 ```
 
@@ -3685,33 +3685,39 @@
 ##### Response body JSON Schema
 ```json
 {
-  "additionalProperties": false,
+  "title": "workflow-executions",
+  "required": [
+    "executions",
+    "workflowId"
+  ],
+  "type": "object",
   "properties": {
     "executions": {
+      "type": "array",
       "items": {
-        "additionalProperties": false,
+        "required": [
+          "endTime",
+          "executionId",
+          "input",
+          "output",
+          "startTime",
+          "status",
+          "transitionExecutions",
+          "workflowId"
+        ],
+        "type": "object",
         "properties": {
-          "completedBy": {
-            "items": {
-              "anyOf": [
-                {
-                  "pattern": "^las:user:[a-f0-9]{32}$",
-                  "type": "string"
-                },
-                {
-                  "pattern": "^las:app-client:[a-f0-9]{32}$",
-                  "type": "string"
-                }
-              ]
-            },
-            "type": "array"
-          },
-          "endTime": {
+          "transitionExecutions": {
             "anyOf": [
               {
-                "nullable": true,
-                "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2} ?[0-9]{2}:?[0-9]{2}:?[0-9]{2}.?[0-9]{6}",
-                "type": "string"
+                "type": "object"
+              }
+            ]
+          },
+          "output": {
+            "anyOf": [
+              {
+                "type": "object"
               }
             ]
           },
@@ -3726,105 +3732,99 @@
               }
             ]
           },
-          "output": {
-            "anyOf": [
-              {
-                "type": "object"
-              }
-            ]
-          },
           "startTime": {
             "anyOf": [
               {
-                "nullable": true,
                 "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2} ?[0-9]{2}:?[0-9]{2}:?[0-9]{2}.?[0-9]{6}",
-                "type": "string"
+                "type": "string",
+                "nullable": true
               }
             ]
           },
-          "status": {
-            "enum": [
-              "running",
-              "succeeded",
-              "failed",
-              "rejected",
-              "retry"
-            ],
-            "type": "string"
-          },
-          "transitionExecutions": {
+          "endTime": {
             "anyOf": [
               {
-                "type": "object"
+                "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2} ?[0-9]{2}:?[0-9]{2}:?[0-9]{2}.?[0-9]{6}",
+                "type": "string",
+                "nullable": true
               }
             ]
           },
           "workflowId": {
             "pattern": "^las:workflow:[a-f0-9]{32}$",
             "type": "string"
+          },
+          "completedBy": {
+            "type": "array",
+            "items": {
+              "anyOf": [
+                {
+                  "pattern": "^las:user:[a-f0-9]{32}$",
+                  "type": "string"
+                },
+                {
+                  "pattern": "^las:app-client:[a-f0-9]{32}$",
+                  "type": "string"
+                }
+              ]
+            }
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "running",
+              "succeeded",
+              "failed",
+              "rejected",
+              "retry"
+            ]
           }
         },
-        "required": [
-          "endTime",
-          "executionId",
-          "input",
-          "output",
-          "startTime",
-          "status",
-          "transitionExecutions",
-          "workflowId"
-        ],
-        "type": "object"
-      },
-      "type": "array"
+        "additionalProperties": false
+      }
     },
     "nextToken": {
       "anyOf": [
         {
           "maxLength": 4096,
-          "nullable": true,
-          "type": "string"
+          "type": "string",
+          "nullable": true
         }
       ]
     },
-    "order": {
-      "enum": [
-        "ascending",
-        "descending"
-      ],
-      "type": "string"
-    },
     "sortBy": {
+      "type": "string",
       "enum": [
         "startTime",
         "endTime"
-      ],
+      ]
+    },
+    "workflowId": {
+      "pattern": "^las:workflow:[a-f0-9]{32}$",
       "type": "string"
     },
     "status": {
+      "type": "array",
       "items": {
+        "type": "string",
         "enum": [
           "running",
           "succeeded",
           "failed",
           "rejected",
           "retry"
-        ],
-        "type": "string"
-      },
-      "type": "array"
+        ]
+      }
     },
-    "workflowId": {
-      "pattern": "^las:workflow:[a-f0-9]{32}$",
-      "type": "string"
+    "order": {
+      "type": "string",
+      "enum": [
+        "ascending",
+        "descending"
+      ]
     }
   },
-  "required": [
-    "executions",
-    "workflowId"
-  ],
-  "title": "workflow-executions",
-  "type": "object"
+  "additionalProperties": false
 }
 ```
 
@@ -3850,17 +3850,17 @@
 ##### Request body JSON Schema
 ```json
 {
-  "additionalProperties": false,
+  "title": "POST /workflows/{workflowId}/executions",
+  "required": [
+    "input"
+  ],
+  "type": "object",
   "properties": {
     "input": {
       "type": "object"
     }
   },
-  "required": [
-    "input"
-  ],
-  "title": "POST /workflows/{workflowId}/executions",
-  "type": "object"
+  "additionalProperties": false
 }
 ```
 
@@ -3868,29 +3868,30 @@
 ##### Response body JSON Schema
 ```json
 {
-  "additionalProperties": false,
+  "title": "workflow-execution",
+  "required": [
+    "endTime",
+    "executionId",
+    "input",
+    "output",
+    "startTime",
+    "status",
+    "transitionExecutions",
+    "workflowId"
+  ],
+  "type": "object",
   "properties": {
-    "completedBy": {
-      "items": {
-        "anyOf": [
-          {
-            "pattern": "^las:user:[a-f0-9]{32}$",
-            "type": "string"
-          },
-          {
-            "pattern": "^las:app-client:[a-f0-9]{32}$",
-            "type": "string"
-          }
-        ]
-      },
-      "type": "array"
-    },
-    "endTime": {
+    "transitionExecutions": {
       "anyOf": [
         {
-          "nullable": true,
-          "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2} ?[0-9]{2}:?[0-9]{2}:?[0-9]{2}.?[0-9]{6}",
-          "type": "string"
+          "type": "object"
+        }
+      ]
+    },
+    "output": {
+      "anyOf": [
+        {
+          "type": "object"
         }
       ]
     },
@@ -3905,56 +3906,55 @@
         }
       ]
     },
-    "output": {
-      "anyOf": [
-        {
-          "type": "object"
-        }
-      ]
-    },
     "startTime": {
       "anyOf": [
         {
-          "nullable": true,
           "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2} ?[0-9]{2}:?[0-9]{2}:?[0-9]{2}.?[0-9]{6}",
-          "type": "string"
+          "type": "string",
+          "nullable": true
         }
       ]
     },
-    "status": {
-      "enum": [
-        "running",
-        "succeeded",
-        "failed",
-        "rejected",
-        "retry"
-      ],
-      "type": "string"
-    },
-    "transitionExecutions": {
+    "endTime": {
       "anyOf": [
         {
-          "type": "object"
+          "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2} ?[0-9]{2}:?[0-9]{2}:?[0-9]{2}.?[0-9]{6}",
+          "type": "string",
+          "nullable": true
         }
       ]
     },
     "workflowId": {
       "pattern": "^las:workflow:[a-f0-9]{32}$",
       "type": "string"
+    },
+    "completedBy": {
+      "type": "array",
+      "items": {
+        "anyOf": [
+          {
+            "pattern": "^las:user:[a-f0-9]{32}$",
+            "type": "string"
+          },
+          {
+            "pattern": "^las:app-client:[a-f0-9]{32}$",
+            "type": "string"
+          }
+        ]
+      }
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "running",
+        "succeeded",
+        "failed",
+        "rejected",
+        "retry"
+      ]
     }
   },
-  "required": [
-    "endTime",
-    "executionId",
-    "input",
-    "output",
-    "startTime",
-    "status",
-    "transitionExecutions",
-    "workflowId"
-  ],
-  "title": "workflow-execution",
-  "type": "object"
+  "additionalProperties": false
 }
 ```
 
@@ -3983,29 +3983,30 @@
 ##### Response body JSON Schema
 ```json
 {
-  "additionalProperties": false,
+  "title": "workflow-execution",
+  "required": [
+    "endTime",
+    "executionId",
+    "input",
+    "output",
+    "startTime",
+    "status",
+    "transitionExecutions",
+    "workflowId"
+  ],
+  "type": "object",
   "properties": {
-    "completedBy": {
-      "items": {
-        "anyOf": [
-          {
-            "pattern": "^las:user:[a-f0-9]{32}$",
-            "type": "string"
-          },
-          {
-            "pattern": "^las:app-client:[a-f0-9]{32}$",
-            "type": "string"
-          }
-        ]
-      },
-      "type": "array"
-    },
-    "endTime": {
+    "transitionExecutions": {
       "anyOf": [
         {
-          "nullable": true,
-          "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2} ?[0-9]{2}:?[0-9]{2}:?[0-9]{2}.?[0-9]{6}",
-          "type": "string"
+          "type": "object"
+        }
+      ]
+    },
+    "output": {
+      "anyOf": [
+        {
+          "type": "object"
         }
       ]
     },
@@ -4020,56 +4021,55 @@
         }
       ]
     },
-    "output": {
-      "anyOf": [
-        {
-          "type": "object"
-        }
-      ]
-    },
     "startTime": {
       "anyOf": [
         {
-          "nullable": true,
           "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2} ?[0-9]{2}:?[0-9]{2}:?[0-9]{2}.?[0-9]{6}",
-          "type": "string"
+          "type": "string",
+          "nullable": true
         }
       ]
     },
-    "status": {
-      "enum": [
-        "running",
-        "succeeded",
-        "failed",
-        "rejected",
-        "retry"
-      ],
-      "type": "string"
-    },
-    "transitionExecutions": {
+    "endTime": {
       "anyOf": [
         {
-          "type": "object"
+          "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2} ?[0-9]{2}:?[0-9]{2}:?[0-9]{2}.?[0-9]{6}",
+          "type": "string",
+          "nullable": true
         }
       ]
     },
     "workflowId": {
       "pattern": "^las:workflow:[a-f0-9]{32}$",
       "type": "string"
+    },
+    "completedBy": {
+      "type": "array",
+      "items": {
+        "anyOf": [
+          {
+            "pattern": "^las:user:[a-f0-9]{32}$",
+            "type": "string"
+          },
+          {
+            "pattern": "^las:app-client:[a-f0-9]{32}$",
+            "type": "string"
+          }
+        ]
+      }
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "running",
+        "succeeded",
+        "failed",
+        "rejected",
+        "retry"
+      ]
     }
   },
-  "required": [
-    "endTime",
-    "executionId",
-    "input",
-    "output",
-    "startTime",
-    "status",
-    "transitionExecutions",
-    "workflowId"
-  ],
-  "title": "workflow-execution",
-  "type": "object"
+  "additionalProperties": false
 }
 ```
 
