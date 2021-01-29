@@ -19,6 +19,70 @@
 
 
 
+##### JSON Schema for response body
+```json
+{
+  "additionalProperties": false,
+  "properties": {
+    "assets": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "assetId": {
+            "pattern": "^las:asset:[a-f0-9]{32}$",
+            "type": "string"
+          },
+          "content": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "description": {
+            "anyOf": [
+              {
+                "maxLength": 4096,
+                "nullable": true,
+                "type": "string"
+              }
+            ]
+          },
+          "name": {
+            "anyOf": [
+              {
+                "maxLength": 4096,
+                "nullable": true,
+                "type": "string"
+              }
+            ]
+          }
+        },
+        "required": [
+          "assetId",
+          "description",
+          "name"
+        ],
+        "type": "object"
+      },
+      "type": "array"
+    },
+    "nextToken": {
+      "anyOf": [
+        {
+          "maxLength": 4096,
+          "nullable": true,
+          "type": "string"
+        }
+      ]
+    }
+  },
+  "required": [
+    "assets"
+  ],
+  "title": "assets",
+  "type": "object"
+}
+```
+
+
 #### POST /assets
 
 
@@ -72,6 +136,49 @@
 ```
 
 
+##### JSON Schema for response body
+```json
+{
+  "additionalProperties": false,
+  "properties": {
+    "assetId": {
+      "pattern": "^las:asset:[a-f0-9]{32}$",
+      "type": "string"
+    },
+    "content": {
+      "minLength": 1,
+      "type": "string"
+    },
+    "description": {
+      "anyOf": [
+        {
+          "maxLength": 4096,
+          "nullable": true,
+          "type": "string"
+        }
+      ]
+    },
+    "name": {
+      "anyOf": [
+        {
+          "maxLength": 4096,
+          "nullable": true,
+          "type": "string"
+        }
+      ]
+    }
+  },
+  "required": [
+    "assetId",
+    "description",
+    "name"
+  ],
+  "title": "asset",
+  "type": "object"
+}
+```
+
+
 #### GET /assets/{assetId}
 
 
@@ -90,6 +197,49 @@
 
 
 
+
+
+##### JSON Schema for response body
+```json
+{
+  "additionalProperties": false,
+  "properties": {
+    "assetId": {
+      "pattern": "^las:asset:[a-f0-9]{32}$",
+      "type": "string"
+    },
+    "content": {
+      "minLength": 1,
+      "type": "string"
+    },
+    "description": {
+      "anyOf": [
+        {
+          "maxLength": 4096,
+          "nullable": true,
+          "type": "string"
+        }
+      ]
+    },
+    "name": {
+      "anyOf": [
+        {
+          "maxLength": 4096,
+          "nullable": true,
+          "type": "string"
+        }
+      ]
+    }
+  },
+  "required": [
+    "assetId",
+    "description",
+    "name"
+  ],
+  "title": "asset",
+  "type": "object"
+}
+```
 
 
 #### PATCH /assets/{assetId}
@@ -145,6 +295,49 @@
 ```
 
 
+##### JSON Schema for response body
+```json
+{
+  "additionalProperties": false,
+  "properties": {
+    "assetId": {
+      "pattern": "^las:asset:[a-f0-9]{32}$",
+      "type": "string"
+    },
+    "content": {
+      "minLength": 1,
+      "type": "string"
+    },
+    "description": {
+      "anyOf": [
+        {
+          "maxLength": 4096,
+          "nullable": true,
+          "type": "string"
+        }
+      ]
+    },
+    "name": {
+      "anyOf": [
+        {
+          "maxLength": 4096,
+          "nullable": true,
+          "type": "string"
+        }
+      ]
+    }
+  },
+  "required": [
+    "assetId",
+    "description",
+    "name"
+  ],
+  "title": "asset",
+  "type": "object"
+}
+```
+
+
 #### POST /batches
 
 
@@ -191,6 +384,45 @@
 ```
 
 
+##### JSON Schema for response body
+```json
+{
+  "additionalProperties": false,
+  "properties": {
+    "batchId": {
+      "pattern": "^las:batch:[a-f0-9]{32}$",
+      "type": "string"
+    },
+    "description": {
+      "anyOf": [
+        {
+          "maxLength": 4096,
+          "nullable": true,
+          "type": "string"
+        }
+      ]
+    },
+    "name": {
+      "anyOf": [
+        {
+          "maxLength": 4096,
+          "nullable": true,
+          "type": "string"
+        }
+      ]
+    }
+  },
+  "required": [
+    "batchId",
+    "description",
+    "name"
+  ],
+  "title": "batch",
+  "type": "object"
+}
+```
+
+
 #### DELETE /documents
 
 
@@ -209,6 +441,155 @@
 
 
 
+
+
+##### JSON Schema for response body
+```json
+{
+  "additionalProperties": false,
+  "properties": {
+    "batchId": {
+      "items": {
+        "pattern": "^las:batch:[a-f0-9]{32}$",
+        "type": "string"
+      },
+      "type": "array"
+    },
+    "consentId": {
+      "items": {
+        "pattern": "^las:consent:[a-f0-9]{32}$",
+        "type": "string"
+      },
+      "type": "array"
+    },
+    "documents": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "batchId": {
+            "pattern": "^las:batch:[a-f0-9]{32}$",
+            "type": "string"
+          },
+          "consentId": {
+            "pattern": "^las:consent:[a-f0-9]{32}$",
+            "type": "string"
+          },
+          "content": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "contentType": {
+            "enum": [
+              "application/pdf",
+              "image/jpeg"
+            ],
+            "type": "string"
+          },
+          "documentId": {
+            "pattern": "^las:document:[a-f0-9]{32}$",
+            "type": "string"
+          },
+          "groundTruth": {
+            "items": {
+              "additionalProperties": false,
+              "properties": {
+                "label": {
+                  "maxLength": 36,
+                  "minLength": 1,
+                  "pattern": "^[0-9A-Za-z_]+$",
+                  "type": "string"
+                },
+                "value": {
+                  "anyOf": [
+                    {
+                      "maxLength": 64,
+                      "minLength": 1,
+                      "nullable": true,
+                      "type": "string"
+                    },
+                    {
+                      "type": "boolean"
+                    }
+                  ]
+                }
+              },
+              "required": [
+                "label",
+                "value"
+              ],
+              "type": "object"
+            },
+            "type": "array"
+          },
+          "inferenceTime": {
+            "minimum": 0,
+            "type": "number"
+          },
+          "predictions": {
+            "items": {
+              "additionalProperties": false,
+              "properties": {
+                "confidence": {
+                  "maximum": 1,
+                  "minimum": 0,
+                  "type": "number"
+                },
+                "label": {
+                  "maxLength": 36,
+                  "minLength": 1,
+                  "pattern": "^[0-9A-Za-z_]+$",
+                  "type": "string"
+                },
+                "value": {
+                  "anyOf": [
+                    {
+                      "maxLength": 64,
+                      "minLength": 1,
+                      "nullable": true,
+                      "type": "string"
+                    }
+                  ]
+                }
+              },
+              "required": [
+                "confidence",
+                "label",
+                "value"
+              ],
+              "type": "object"
+            },
+            "type": "array"
+          },
+          "updated": {
+            "minimum": 1,
+            "type": "integer"
+          }
+        },
+        "required": [
+          "contentType",
+          "documentId"
+        ],
+        "type": "object"
+      },
+      "type": "array"
+    },
+    "nextToken": {
+      "anyOf": [
+        {
+          "maxLength": 4096,
+          "nullable": true,
+          "type": "string"
+        }
+      ]
+    }
+  },
+  "required": [
+    "documents"
+  ],
+  "title": "documents",
+  "type": "object"
+}
+```
 
 
 #### GET /documents
@@ -232,6 +613,155 @@
 
 
 
+
+
+##### JSON Schema for response body
+```json
+{
+  "additionalProperties": false,
+  "properties": {
+    "batchId": {
+      "items": {
+        "pattern": "^las:batch:[a-f0-9]{32}$",
+        "type": "string"
+      },
+      "type": "array"
+    },
+    "consentId": {
+      "items": {
+        "pattern": "^las:consent:[a-f0-9]{32}$",
+        "type": "string"
+      },
+      "type": "array"
+    },
+    "documents": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "batchId": {
+            "pattern": "^las:batch:[a-f0-9]{32}$",
+            "type": "string"
+          },
+          "consentId": {
+            "pattern": "^las:consent:[a-f0-9]{32}$",
+            "type": "string"
+          },
+          "content": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "contentType": {
+            "enum": [
+              "application/pdf",
+              "image/jpeg"
+            ],
+            "type": "string"
+          },
+          "documentId": {
+            "pattern": "^las:document:[a-f0-9]{32}$",
+            "type": "string"
+          },
+          "groundTruth": {
+            "items": {
+              "additionalProperties": false,
+              "properties": {
+                "label": {
+                  "maxLength": 36,
+                  "minLength": 1,
+                  "pattern": "^[0-9A-Za-z_]+$",
+                  "type": "string"
+                },
+                "value": {
+                  "anyOf": [
+                    {
+                      "maxLength": 64,
+                      "minLength": 1,
+                      "nullable": true,
+                      "type": "string"
+                    },
+                    {
+                      "type": "boolean"
+                    }
+                  ]
+                }
+              },
+              "required": [
+                "label",
+                "value"
+              ],
+              "type": "object"
+            },
+            "type": "array"
+          },
+          "inferenceTime": {
+            "minimum": 0,
+            "type": "number"
+          },
+          "predictions": {
+            "items": {
+              "additionalProperties": false,
+              "properties": {
+                "confidence": {
+                  "maximum": 1,
+                  "minimum": 0,
+                  "type": "number"
+                },
+                "label": {
+                  "maxLength": 36,
+                  "minLength": 1,
+                  "pattern": "^[0-9A-Za-z_]+$",
+                  "type": "string"
+                },
+                "value": {
+                  "anyOf": [
+                    {
+                      "maxLength": 64,
+                      "minLength": 1,
+                      "nullable": true,
+                      "type": "string"
+                    }
+                  ]
+                }
+              },
+              "required": [
+                "confidence",
+                "label",
+                "value"
+              ],
+              "type": "object"
+            },
+            "type": "array"
+          },
+          "updated": {
+            "minimum": 1,
+            "type": "integer"
+          }
+        },
+        "required": [
+          "contentType",
+          "documentId"
+        ],
+        "type": "object"
+      },
+      "type": "array"
+    },
+    "nextToken": {
+      "anyOf": [
+        {
+          "maxLength": 4096,
+          "nullable": true,
+          "type": "string"
+        }
+      ]
+    }
+  },
+  "required": [
+    "documents"
+  ],
+  "title": "documents",
+  "type": "object"
+}
+```
 
 
 #### POST /documents
@@ -317,6 +847,120 @@
 ```
 
 
+##### JSON Schema for response body
+```json
+{
+  "additionalProperties": false,
+  "properties": {
+    "batchId": {
+      "pattern": "^las:batch:[a-f0-9]{32}$",
+      "type": "string"
+    },
+    "consentId": {
+      "pattern": "^las:consent:[a-f0-9]{32}$",
+      "type": "string"
+    },
+    "content": {
+      "minLength": 1,
+      "type": "string"
+    },
+    "contentType": {
+      "enum": [
+        "application/pdf",
+        "image/jpeg"
+      ],
+      "type": "string"
+    },
+    "documentId": {
+      "pattern": "^las:document:[a-f0-9]{32}$",
+      "type": "string"
+    },
+    "groundTruth": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "label": {
+            "maxLength": 36,
+            "minLength": 1,
+            "pattern": "^[0-9A-Za-z_]+$",
+            "type": "string"
+          },
+          "value": {
+            "anyOf": [
+              {
+                "maxLength": 64,
+                "minLength": 1,
+                "nullable": true,
+                "type": "string"
+              },
+              {
+                "type": "boolean"
+              }
+            ]
+          }
+        },
+        "required": [
+          "label",
+          "value"
+        ],
+        "type": "object"
+      },
+      "type": "array"
+    },
+    "inferenceTime": {
+      "minimum": 0,
+      "type": "number"
+    },
+    "predictions": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "confidence": {
+            "maximum": 1,
+            "minimum": 0,
+            "type": "number"
+          },
+          "label": {
+            "maxLength": 36,
+            "minLength": 1,
+            "pattern": "^[0-9A-Za-z_]+$",
+            "type": "string"
+          },
+          "value": {
+            "anyOf": [
+              {
+                "maxLength": 64,
+                "minLength": 1,
+                "nullable": true,
+                "type": "string"
+              }
+            ]
+          }
+        },
+        "required": [
+          "confidence",
+          "label",
+          "value"
+        ],
+        "type": "object"
+      },
+      "type": "array"
+    },
+    "updated": {
+      "minimum": 1,
+      "type": "integer"
+    }
+  },
+  "required": [
+    "contentType",
+    "documentId"
+  ],
+  "title": "document",
+  "type": "object"
+}
+```
+
+
 #### GET /documents/{documentId}
 
 
@@ -335,6 +979,120 @@
 
 
 
+
+
+##### JSON Schema for response body
+```json
+{
+  "additionalProperties": false,
+  "properties": {
+    "batchId": {
+      "pattern": "^las:batch:[a-f0-9]{32}$",
+      "type": "string"
+    },
+    "consentId": {
+      "pattern": "^las:consent:[a-f0-9]{32}$",
+      "type": "string"
+    },
+    "content": {
+      "minLength": 1,
+      "type": "string"
+    },
+    "contentType": {
+      "enum": [
+        "application/pdf",
+        "image/jpeg"
+      ],
+      "type": "string"
+    },
+    "documentId": {
+      "pattern": "^las:document:[a-f0-9]{32}$",
+      "type": "string"
+    },
+    "groundTruth": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "label": {
+            "maxLength": 36,
+            "minLength": 1,
+            "pattern": "^[0-9A-Za-z_]+$",
+            "type": "string"
+          },
+          "value": {
+            "anyOf": [
+              {
+                "maxLength": 64,
+                "minLength": 1,
+                "nullable": true,
+                "type": "string"
+              },
+              {
+                "type": "boolean"
+              }
+            ]
+          }
+        },
+        "required": [
+          "label",
+          "value"
+        ],
+        "type": "object"
+      },
+      "type": "array"
+    },
+    "inferenceTime": {
+      "minimum": 0,
+      "type": "number"
+    },
+    "predictions": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "confidence": {
+            "maximum": 1,
+            "minimum": 0,
+            "type": "number"
+          },
+          "label": {
+            "maxLength": 36,
+            "minLength": 1,
+            "pattern": "^[0-9A-Za-z_]+$",
+            "type": "string"
+          },
+          "value": {
+            "anyOf": [
+              {
+                "maxLength": 64,
+                "minLength": 1,
+                "nullable": true,
+                "type": "string"
+              }
+            ]
+          }
+        },
+        "required": [
+          "confidence",
+          "label",
+          "value"
+        ],
+        "type": "object"
+      },
+      "type": "array"
+    },
+    "updated": {
+      "minimum": 1,
+      "type": "integer"
+    }
+  },
+  "required": [
+    "contentType",
+    "documentId"
+  ],
+  "title": "document",
+  "type": "object"
+}
+```
 
 
 #### PATCH /documents/{documentId}
@@ -402,6 +1160,120 @@
 ```
 
 
+##### JSON Schema for response body
+```json
+{
+  "additionalProperties": false,
+  "properties": {
+    "batchId": {
+      "pattern": "^las:batch:[a-f0-9]{32}$",
+      "type": "string"
+    },
+    "consentId": {
+      "pattern": "^las:consent:[a-f0-9]{32}$",
+      "type": "string"
+    },
+    "content": {
+      "minLength": 1,
+      "type": "string"
+    },
+    "contentType": {
+      "enum": [
+        "application/pdf",
+        "image/jpeg"
+      ],
+      "type": "string"
+    },
+    "documentId": {
+      "pattern": "^las:document:[a-f0-9]{32}$",
+      "type": "string"
+    },
+    "groundTruth": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "label": {
+            "maxLength": 36,
+            "minLength": 1,
+            "pattern": "^[0-9A-Za-z_]+$",
+            "type": "string"
+          },
+          "value": {
+            "anyOf": [
+              {
+                "maxLength": 64,
+                "minLength": 1,
+                "nullable": true,
+                "type": "string"
+              },
+              {
+                "type": "boolean"
+              }
+            ]
+          }
+        },
+        "required": [
+          "label",
+          "value"
+        ],
+        "type": "object"
+      },
+      "type": "array"
+    },
+    "inferenceTime": {
+      "minimum": 0,
+      "type": "number"
+    },
+    "predictions": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "confidence": {
+            "maximum": 1,
+            "minimum": 0,
+            "type": "number"
+          },
+          "label": {
+            "maxLength": 36,
+            "minLength": 1,
+            "pattern": "^[0-9A-Za-z_]+$",
+            "type": "string"
+          },
+          "value": {
+            "anyOf": [
+              {
+                "maxLength": 64,
+                "minLength": 1,
+                "nullable": true,
+                "type": "string"
+              }
+            ]
+          }
+        },
+        "required": [
+          "confidence",
+          "label",
+          "value"
+        ],
+        "type": "object"
+      },
+      "type": "array"
+    },
+    "updated": {
+      "minimum": 1,
+      "type": "integer"
+    }
+  },
+  "required": [
+    "contentType",
+    "documentId"
+  ],
+  "title": "document",
+  "type": "object"
+}
+```
+
+
 #### GET /logs/{logId}
 
 
@@ -420,6 +1292,48 @@
 
 
 
+
+
+##### JSON Schema for response body
+```json
+{
+  "additionalProperties": false,
+  "properties": {
+    "events": {
+      "items": {
+        "type": "object"
+      },
+      "type": "array"
+    },
+    "logId": {
+      "pattern": "^las:log:[a-f0-9]{32}$",
+      "type": "string"
+    },
+    "transitionId": {
+      "anyOf": [
+        {
+          "anyOf": [
+            {
+              "pattern": "^las:transition:[a-f0-9]{32}$",
+              "type": "string"
+            },
+            {
+              "pattern": "^las:transition:commons-[0-9A-Za-z-]+$",
+              "type": "string"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "required": [
+    "events",
+    "logId"
+  ],
+  "title": "log",
+  "type": "object"
+}
+```
 
 
 #### GET /models
@@ -443,6 +1357,74 @@
 
 
 
+##### JSON Schema for response body
+```json
+{
+  "additionalProperties": false,
+  "properties": {
+    "models": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "description": {
+            "anyOf": [
+              {
+                "maxLength": 4096,
+                "nullable": true,
+                "type": "string"
+              }
+            ]
+          },
+          "height": {
+            "type": "integer"
+          },
+          "modelId": {
+            "pattern": "^las:model:[0-9A-Za-z_]+$",
+            "type": "string"
+          },
+          "name": {
+            "anyOf": [
+              {
+                "maxLength": 4096,
+                "nullable": true,
+                "type": "string"
+              }
+            ]
+          },
+          "width": {
+            "type": "integer"
+          }
+        },
+        "required": [
+          "description",
+          "height",
+          "modelId",
+          "name",
+          "width"
+        ],
+        "type": "object"
+      },
+      "type": "array"
+    },
+    "nextToken": {
+      "anyOf": [
+        {
+          "maxLength": 4096,
+          "nullable": true,
+          "type": "string"
+        }
+      ]
+    }
+  },
+  "required": [
+    "models"
+  ],
+  "title": "models",
+  "type": "object"
+}
+```
+
+
 #### GET /predictions
 
 
@@ -462,6 +1444,81 @@
 
 
 
+
+
+##### JSON Schema for response body
+```json
+{
+  "additionalProperties": false,
+  "properties": {
+    "documentId": {
+      "pattern": "^las:document:[a-f0-9]{32}$",
+      "type": "string"
+    },
+    "inferenceTime": {
+      "minimum": 0,
+      "type": "number"
+    },
+    "modelId": {
+      "pattern": "^las:model:[0-9A-Za-z_]+$",
+      "type": "string"
+    },
+    "predictionId": {
+      "pattern": "^las:prediction:[a-f0-9]{32}$",
+      "type": "string"
+    },
+    "predictions": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "confidence": {
+            "maximum": 1,
+            "minimum": 0,
+            "type": "number"
+          },
+          "label": {
+            "maxLength": 36,
+            "minLength": 1,
+            "pattern": "^[0-9A-Za-z_]+$",
+            "type": "string"
+          },
+          "value": {
+            "anyOf": [
+              {
+                "maxLength": 64,
+                "minLength": 1,
+                "nullable": true,
+                "type": "string"
+              }
+            ]
+          }
+        },
+        "required": [
+          "confidence",
+          "label",
+          "value"
+        ],
+        "type": "object"
+      },
+      "type": "array"
+    },
+    "timestamp": {
+      "minimum": 1,
+      "type": "integer"
+    }
+  },
+  "required": [
+    "documentId",
+    "inferenceTime",
+    "modelId",
+    "predictionId",
+    "predictions",
+    "timestamp"
+  ],
+  "title": "prediction",
+  "type": "object"
+}
+```
 
 
 #### POST /predictions
@@ -512,6 +1569,81 @@
 ```
 
 
+##### JSON Schema for response body
+```json
+{
+  "additionalProperties": false,
+  "properties": {
+    "documentId": {
+      "pattern": "^las:document:[a-f0-9]{32}$",
+      "type": "string"
+    },
+    "inferenceTime": {
+      "minimum": 0,
+      "type": "number"
+    },
+    "modelId": {
+      "pattern": "^las:model:[0-9A-Za-z_]+$",
+      "type": "string"
+    },
+    "predictionId": {
+      "pattern": "^las:prediction:[a-f0-9]{32}$",
+      "type": "string"
+    },
+    "predictions": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "confidence": {
+            "maximum": 1,
+            "minimum": 0,
+            "type": "number"
+          },
+          "label": {
+            "maxLength": 36,
+            "minLength": 1,
+            "pattern": "^[0-9A-Za-z_]+$",
+            "type": "string"
+          },
+          "value": {
+            "anyOf": [
+              {
+                "maxLength": 64,
+                "minLength": 1,
+                "nullable": true,
+                "type": "string"
+              }
+            ]
+          }
+        },
+        "required": [
+          "confidence",
+          "label",
+          "value"
+        ],
+        "type": "object"
+      },
+      "type": "array"
+    },
+    "timestamp": {
+      "minimum": 1,
+      "type": "integer"
+    }
+  },
+  "required": [
+    "documentId",
+    "inferenceTime",
+    "modelId",
+    "predictionId",
+    "predictions",
+    "timestamp"
+  ],
+  "title": "prediction",
+  "type": "object"
+}
+```
+
+
 #### GET /secrets
 
 
@@ -531,6 +1663,66 @@
 
 
 
+
+
+##### JSON Schema for response body
+```json
+{
+  "additionalProperties": false,
+  "properties": {
+    "nextToken": {
+      "anyOf": [
+        {
+          "maxLength": 4096,
+          "nullable": true,
+          "type": "string"
+        }
+      ]
+    },
+    "secrets": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "description": {
+            "anyOf": [
+              {
+                "maxLength": 4096,
+                "nullable": true,
+                "type": "string"
+              }
+            ]
+          },
+          "name": {
+            "anyOf": [
+              {
+                "maxLength": 4096,
+                "nullable": true,
+                "type": "string"
+              }
+            ]
+          },
+          "secretId": {
+            "pattern": "^las:secret:[a-f0-9]{32}$",
+            "type": "string"
+          }
+        },
+        "required": [
+          "description",
+          "name",
+          "secretId"
+        ],
+        "type": "object"
+      },
+      "type": "array"
+    }
+  },
+  "required": [
+    "secrets"
+  ],
+  "title": "secrets",
+  "type": "object"
+}
+```
 
 
 #### POST /secrets
@@ -580,6 +1772,45 @@
     "data"
   ],
   "title": "POST /secrets",
+  "type": "object"
+}
+```
+
+
+##### JSON Schema for response body
+```json
+{
+  "additionalProperties": false,
+  "properties": {
+    "description": {
+      "anyOf": [
+        {
+          "maxLength": 4096,
+          "nullable": true,
+          "type": "string"
+        }
+      ]
+    },
+    "name": {
+      "anyOf": [
+        {
+          "maxLength": 4096,
+          "nullable": true,
+          "type": "string"
+        }
+      ]
+    },
+    "secretId": {
+      "pattern": "^las:secret:[a-f0-9]{32}$",
+      "type": "string"
+    }
+  },
+  "required": [
+    "description",
+    "name",
+    "secretId"
+  ],
+  "title": "secret",
   "type": "object"
 }
 ```
@@ -637,6 +1868,45 @@
 ```
 
 
+##### JSON Schema for response body
+```json
+{
+  "additionalProperties": false,
+  "properties": {
+    "description": {
+      "anyOf": [
+        {
+          "maxLength": 4096,
+          "nullable": true,
+          "type": "string"
+        }
+      ]
+    },
+    "name": {
+      "anyOf": [
+        {
+          "maxLength": 4096,
+          "nullable": true,
+          "type": "string"
+        }
+      ]
+    },
+    "secretId": {
+      "pattern": "^las:secret:[a-f0-9]{32}$",
+      "type": "string"
+    }
+  },
+  "required": [
+    "description",
+    "name",
+    "secretId"
+  ],
+  "title": "secret",
+  "type": "object"
+}
+```
+
+
 #### GET /transitions
 
 
@@ -657,6 +1927,111 @@
 
 
 
+
+
+##### JSON Schema for response body
+```json
+{
+  "additionalProperties": false,
+  "properties": {
+    "nextToken": {
+      "anyOf": [
+        {
+          "maxLength": 4096,
+          "nullable": true,
+          "type": "string"
+        }
+      ]
+    },
+    "transitionType": {
+      "items": {
+        "enum": [
+          "docker",
+          "manual"
+        ],
+        "type": "string"
+      },
+      "type": "array"
+    },
+    "transitions": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "assets": {
+            "additionalProperties": true,
+            "properties": {
+              "jsRemoteComponent": {
+                "pattern": "^las:asset:[a-f0-9]{32}$",
+                "type": "string"
+              }
+            },
+            "type": "object"
+          },
+          "description": {
+            "anyOf": [
+              {
+                "maxLength": 4096,
+                "nullable": true,
+                "type": "string"
+              }
+            ]
+          },
+          "inputJsonSchema": {
+            "type": "object"
+          },
+          "name": {
+            "anyOf": [
+              {
+                "maxLength": 4096,
+                "nullable": true,
+                "type": "string"
+              }
+            ]
+          },
+          "outputJsonSchema": {
+            "type": "object"
+          },
+          "parameters": {
+            "anyOf": [
+              {
+                "type": "object"
+              }
+            ]
+          },
+          "transitionId": {
+            "anyOf": [
+              {
+                "pattern": "^las:transition:[a-f0-9]{32}$",
+                "type": "string"
+              },
+              {
+                "pattern": "^las:transition:commons-[0-9A-Za-z-]+$",
+                "type": "string"
+              }
+            ]
+          },
+          "transitionType": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "description",
+          "name",
+          "transitionId",
+          "transitionType"
+        ],
+        "type": "object"
+      },
+      "type": "array"
+    }
+  },
+  "required": [
+    "transitions"
+  ],
+  "title": "transitions",
+  "type": "object"
+}
+```
 
 
 #### POST /transitions
@@ -782,6 +2157,80 @@
 ```
 
 
+##### JSON Schema for response body
+```json
+{
+  "additionalProperties": false,
+  "properties": {
+    "assets": {
+      "additionalProperties": true,
+      "properties": {
+        "jsRemoteComponent": {
+          "pattern": "^las:asset:[a-f0-9]{32}$",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "description": {
+      "anyOf": [
+        {
+          "maxLength": 4096,
+          "nullable": true,
+          "type": "string"
+        }
+      ]
+    },
+    "inputJsonSchema": {
+      "type": "object"
+    },
+    "name": {
+      "anyOf": [
+        {
+          "maxLength": 4096,
+          "nullable": true,
+          "type": "string"
+        }
+      ]
+    },
+    "outputJsonSchema": {
+      "type": "object"
+    },
+    "parameters": {
+      "anyOf": [
+        {
+          "type": "object"
+        }
+      ]
+    },
+    "transitionId": {
+      "anyOf": [
+        {
+          "pattern": "^las:transition:[a-f0-9]{32}$",
+          "type": "string"
+        },
+        {
+          "pattern": "^las:transition:commons-[0-9A-Za-z-]+$",
+          "type": "string"
+        }
+      ]
+    },
+    "transitionType": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "description",
+    "name",
+    "transitionId",
+    "transitionType"
+  ],
+  "title": "transition",
+  "type": "object"
+}
+```
+
+
 #### PATCH /transitions/{transitionId}
 
 
@@ -837,6 +2286,80 @@
 ```
 
 
+##### JSON Schema for response body
+```json
+{
+  "additionalProperties": false,
+  "properties": {
+    "assets": {
+      "additionalProperties": true,
+      "properties": {
+        "jsRemoteComponent": {
+          "pattern": "^las:asset:[a-f0-9]{32}$",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "description": {
+      "anyOf": [
+        {
+          "maxLength": 4096,
+          "nullable": true,
+          "type": "string"
+        }
+      ]
+    },
+    "inputJsonSchema": {
+      "type": "object"
+    },
+    "name": {
+      "anyOf": [
+        {
+          "maxLength": 4096,
+          "nullable": true,
+          "type": "string"
+        }
+      ]
+    },
+    "outputJsonSchema": {
+      "type": "object"
+    },
+    "parameters": {
+      "anyOf": [
+        {
+          "type": "object"
+        }
+      ]
+    },
+    "transitionId": {
+      "anyOf": [
+        {
+          "pattern": "^las:transition:[a-f0-9]{32}$",
+          "type": "string"
+        },
+        {
+          "pattern": "^las:transition:commons-[0-9A-Za-z-]+$",
+          "type": "string"
+        }
+      ]
+    },
+    "transitionType": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "description",
+    "name",
+    "transitionId",
+    "transitionType"
+  ],
+  "title": "transition",
+  "type": "object"
+}
+```
+
+
 #### GET /transitions/{transitionId}/executions
 
 
@@ -862,6 +2385,141 @@
 
 
 
+
+
+##### JSON Schema for response body
+```json
+{
+  "additionalProperties": false,
+  "properties": {
+    "executions": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "completedBy": {
+            "anyOf": [
+              {
+                "maxLength": 4096,
+                "nullable": true,
+                "type": "string"
+              }
+            ]
+          },
+          "endTime": {
+            "anyOf": [
+              {
+                "nullable": true,
+                "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2} ?[0-9]{2}:?[0-9]{2}:?[0-9]{2}.?[0-9]{6}",
+                "type": "string"
+              }
+            ]
+          },
+          "executionId": {
+            "pattern": "^las:transition-execution:[a-f0-9]{32}$",
+            "type": "string"
+          },
+          "input": {
+            "anyOf": [
+              {
+                "type": "object"
+              }
+            ]
+          },
+          "logId": {
+            "anyOf": [
+              {
+                "nullable": true,
+                "pattern": "^las:log:[a-f0-9]{32}$",
+                "type": "string"
+              }
+            ]
+          },
+          "startTime": {
+            "anyOf": [
+              {
+                "nullable": true,
+                "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2} ?[0-9]{2}:?[0-9]{2}:?[0-9]{2}.?[0-9]{6}",
+                "type": "string"
+              }
+            ]
+          },
+          "status": {
+            "enum": [
+              "running",
+              "succeeded",
+              "failed",
+              "rejected",
+              "retry"
+            ],
+            "type": "string"
+          },
+          "transitionId": {
+            "anyOf": [
+              {
+                "pattern": "^las:transition:[a-f0-9]{32}$",
+                "type": "string"
+              },
+              {
+                "pattern": "^las:transition:commons-[0-9A-Za-z-]+$",
+                "type": "string"
+              }
+            ]
+          }
+        },
+        "required": [
+          "completedBy",
+          "executionId",
+          "input",
+          "status",
+          "transitionId"
+        ],
+        "type": "object"
+      },
+      "type": "array"
+    },
+    "nextToken": {
+      "anyOf": [
+        {
+          "maxLength": 4096,
+          "nullable": true,
+          "type": "string"
+        }
+      ]
+    },
+    "status": {
+      "items": {
+        "enum": [
+          "running",
+          "succeeded",
+          "failed",
+          "rejected",
+          "retry"
+        ],
+        "type": "string"
+      },
+      "type": "array"
+    },
+    "transitionId": {
+      "anyOf": [
+        {
+          "pattern": "^las:transition:[a-f0-9]{32}$",
+          "type": "string"
+        },
+        {
+          "pattern": "^las:transition:commons-[0-9A-Za-z-]+$",
+          "type": "string"
+        }
+      ]
+    }
+  },
+  "required": [
+    "executions",
+    "transitionId"
+  ],
+  "title": "transition-executions",
+  "type": "object"
+}
+```
 
 
 #### POST /transitions/{transitionId}/executions
@@ -891,6 +2549,94 @@
 ```
 
 
+##### JSON Schema for response body
+```json
+{
+  "additionalProperties": false,
+  "properties": {
+    "completedBy": {
+      "anyOf": [
+        {
+          "maxLength": 4096,
+          "nullable": true,
+          "type": "string"
+        }
+      ]
+    },
+    "endTime": {
+      "anyOf": [
+        {
+          "nullable": true,
+          "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2} ?[0-9]{2}:?[0-9]{2}:?[0-9]{2}.?[0-9]{6}",
+          "type": "string"
+        }
+      ]
+    },
+    "executionId": {
+      "pattern": "^las:transition-execution:[a-f0-9]{32}$",
+      "type": "string"
+    },
+    "input": {
+      "anyOf": [
+        {
+          "type": "object"
+        }
+      ]
+    },
+    "logId": {
+      "anyOf": [
+        {
+          "nullable": true,
+          "pattern": "^las:log:[a-f0-9]{32}$",
+          "type": "string"
+        }
+      ]
+    },
+    "startTime": {
+      "anyOf": [
+        {
+          "nullable": true,
+          "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2} ?[0-9]{2}:?[0-9]{2}:?[0-9]{2}.?[0-9]{6}",
+          "type": "string"
+        }
+      ]
+    },
+    "status": {
+      "enum": [
+        "running",
+        "succeeded",
+        "failed",
+        "rejected",
+        "retry"
+      ],
+      "type": "string"
+    },
+    "transitionId": {
+      "anyOf": [
+        {
+          "pattern": "^las:transition:[a-f0-9]{32}$",
+          "type": "string"
+        },
+        {
+          "pattern": "^las:transition:commons-[0-9A-Za-z-]+$",
+          "type": "string"
+        }
+      ]
+    }
+  },
+  "required": [
+    "completedBy",
+    "executionId",
+    "input",
+    "status",
+    "transitionId"
+  ],
+  "title": "transition-execution",
+  "type": "object"
+}
+```
+
+
 #### GET /transitions/{transitionId}/executions/{executionId}
 
 
@@ -910,6 +2656,94 @@
 
 
 
+
+
+##### JSON Schema for response body
+```json
+{
+  "additionalProperties": false,
+  "properties": {
+    "completedBy": {
+      "anyOf": [
+        {
+          "maxLength": 4096,
+          "nullable": true,
+          "type": "string"
+        }
+      ]
+    },
+    "endTime": {
+      "anyOf": [
+        {
+          "nullable": true,
+          "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2} ?[0-9]{2}:?[0-9]{2}:?[0-9]{2}.?[0-9]{6}",
+          "type": "string"
+        }
+      ]
+    },
+    "executionId": {
+      "pattern": "^las:transition-execution:[a-f0-9]{32}$",
+      "type": "string"
+    },
+    "input": {
+      "anyOf": [
+        {
+          "type": "object"
+        }
+      ]
+    },
+    "logId": {
+      "anyOf": [
+        {
+          "nullable": true,
+          "pattern": "^las:log:[a-f0-9]{32}$",
+          "type": "string"
+        }
+      ]
+    },
+    "startTime": {
+      "anyOf": [
+        {
+          "nullable": true,
+          "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2} ?[0-9]{2}:?[0-9]{2}:?[0-9]{2}.?[0-9]{6}",
+          "type": "string"
+        }
+      ]
+    },
+    "status": {
+      "enum": [
+        "running",
+        "succeeded",
+        "failed",
+        "rejected",
+        "retry"
+      ],
+      "type": "string"
+    },
+    "transitionId": {
+      "anyOf": [
+        {
+          "pattern": "^las:transition:[a-f0-9]{32}$",
+          "type": "string"
+        },
+        {
+          "pattern": "^las:transition:commons-[0-9A-Za-z-]+$",
+          "type": "string"
+        }
+      ]
+    }
+  },
+  "required": [
+    "completedBy",
+    "executionId",
+    "input",
+    "status",
+    "transitionId"
+  ],
+  "title": "transition-execution",
+  "type": "object"
+}
+```
 
 
 #### PATCH /transitions/{transitionId}/executions/{executionId}
@@ -987,6 +2821,94 @@
 ```
 
 
+##### JSON Schema for response body
+```json
+{
+  "additionalProperties": false,
+  "properties": {
+    "completedBy": {
+      "anyOf": [
+        {
+          "maxLength": 4096,
+          "nullable": true,
+          "type": "string"
+        }
+      ]
+    },
+    "endTime": {
+      "anyOf": [
+        {
+          "nullable": true,
+          "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2} ?[0-9]{2}:?[0-9]{2}:?[0-9]{2}.?[0-9]{6}",
+          "type": "string"
+        }
+      ]
+    },
+    "executionId": {
+      "pattern": "^las:transition-execution:[a-f0-9]{32}$",
+      "type": "string"
+    },
+    "input": {
+      "anyOf": [
+        {
+          "type": "object"
+        }
+      ]
+    },
+    "logId": {
+      "anyOf": [
+        {
+          "nullable": true,
+          "pattern": "^las:log:[a-f0-9]{32}$",
+          "type": "string"
+        }
+      ]
+    },
+    "startTime": {
+      "anyOf": [
+        {
+          "nullable": true,
+          "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2} ?[0-9]{2}:?[0-9]{2}:?[0-9]{2}.?[0-9]{6}",
+          "type": "string"
+        }
+      ]
+    },
+    "status": {
+      "enum": [
+        "running",
+        "succeeded",
+        "failed",
+        "rejected",
+        "retry"
+      ],
+      "type": "string"
+    },
+    "transitionId": {
+      "anyOf": [
+        {
+          "pattern": "^las:transition:[a-f0-9]{32}$",
+          "type": "string"
+        },
+        {
+          "pattern": "^las:transition:commons-[0-9A-Za-z-]+$",
+          "type": "string"
+        }
+      ]
+    }
+  },
+  "required": [
+    "completedBy",
+    "executionId",
+    "input",
+    "status",
+    "transitionId"
+  ],
+  "title": "transition-execution",
+  "type": "object"
+}
+```
+
+
 #### GET /users
 
 
@@ -1006,6 +2928,69 @@
 
 
 
+
+
+##### JSON Schema for response body
+```json
+{
+  "additionalProperties": false,
+  "properties": {
+    "nextToken": {
+      "anyOf": [
+        {
+          "maxLength": 4096,
+          "nullable": true,
+          "type": "string"
+        }
+      ]
+    },
+    "users": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "avatar": {
+            "anyOf": [
+              {
+                "maxLength": 131072,
+                "nullable": true,
+                "type": "string"
+              }
+            ]
+          },
+          "email": {
+            "pattern": "^[A-Za-z0-9][-+._A-Za-z0-9]*@([A-Za-z0-9]+\\.)+[A-Za-z]{2,}$",
+            "type": "string"
+          },
+          "name": {
+            "anyOf": [
+              {
+                "maxLength": 4096,
+                "nullable": true,
+                "type": "string"
+              }
+            ]
+          },
+          "userId": {
+            "pattern": "^las:user:[a-f0-9]{32}$",
+            "type": "string"
+          }
+        },
+        "required": [
+          "email",
+          "userId"
+        ],
+        "type": "object"
+      },
+      "type": "array"
+    }
+  },
+  "required": [
+    "users"
+  ],
+  "title": "users",
+  "type": "object"
+}
+```
 
 
 #### POST /users
@@ -1061,6 +3046,48 @@
 ```
 
 
+##### JSON Schema for response body
+```json
+{
+  "additionalProperties": false,
+  "properties": {
+    "avatar": {
+      "anyOf": [
+        {
+          "maxLength": 131072,
+          "nullable": true,
+          "type": "string"
+        }
+      ]
+    },
+    "email": {
+      "pattern": "^[A-Za-z0-9][-+._A-Za-z0-9]*@([A-Za-z0-9]+\\.)+[A-Za-z]{2,}$",
+      "type": "string"
+    },
+    "name": {
+      "anyOf": [
+        {
+          "maxLength": 4096,
+          "nullable": true,
+          "type": "string"
+        }
+      ]
+    },
+    "userId": {
+      "pattern": "^las:user:[a-f0-9]{32}$",
+      "type": "string"
+    }
+  },
+  "required": [
+    "email",
+    "userId"
+  ],
+  "title": "user",
+  "type": "object"
+}
+```
+
+
 #### DELETE /users/{userId}
 
 
@@ -1081,6 +3108,48 @@
 
 
 
+##### JSON Schema for response body
+```json
+{
+  "additionalProperties": false,
+  "properties": {
+    "avatar": {
+      "anyOf": [
+        {
+          "maxLength": 131072,
+          "nullable": true,
+          "type": "string"
+        }
+      ]
+    },
+    "email": {
+      "pattern": "^[A-Za-z0-9][-+._A-Za-z0-9]*@([A-Za-z0-9]+\\.)+[A-Za-z]{2,}$",
+      "type": "string"
+    },
+    "name": {
+      "anyOf": [
+        {
+          "maxLength": 4096,
+          "nullable": true,
+          "type": "string"
+        }
+      ]
+    },
+    "userId": {
+      "pattern": "^las:user:[a-f0-9]{32}$",
+      "type": "string"
+    }
+  },
+  "required": [
+    "email",
+    "userId"
+  ],
+  "title": "user",
+  "type": "object"
+}
+```
+
+
 #### GET /users/{userId}
 
 
@@ -1099,6 +3168,48 @@
 
 
 
+
+
+##### JSON Schema for response body
+```json
+{
+  "additionalProperties": false,
+  "properties": {
+    "avatar": {
+      "anyOf": [
+        {
+          "maxLength": 131072,
+          "nullable": true,
+          "type": "string"
+        }
+      ]
+    },
+    "email": {
+      "pattern": "^[A-Za-z0-9][-+._A-Za-z0-9]*@([A-Za-z0-9]+\\.)+[A-Za-z]{2,}$",
+      "type": "string"
+    },
+    "name": {
+      "anyOf": [
+        {
+          "maxLength": 4096,
+          "nullable": true,
+          "type": "string"
+        }
+      ]
+    },
+    "userId": {
+      "pattern": "^las:user:[a-f0-9]{32}$",
+      "type": "string"
+    }
+  },
+  "required": [
+    "email",
+    "userId"
+  ],
+  "title": "user",
+  "type": "object"
+}
+```
 
 
 #### PATCH /users/{userId}
@@ -1150,6 +3261,48 @@
 ```
 
 
+##### JSON Schema for response body
+```json
+{
+  "additionalProperties": false,
+  "properties": {
+    "avatar": {
+      "anyOf": [
+        {
+          "maxLength": 131072,
+          "nullable": true,
+          "type": "string"
+        }
+      ]
+    },
+    "email": {
+      "pattern": "^[A-Za-z0-9][-+._A-Za-z0-9]*@([A-Za-z0-9]+\\.)+[A-Za-z]{2,}$",
+      "type": "string"
+    },
+    "name": {
+      "anyOf": [
+        {
+          "maxLength": 4096,
+          "nullable": true,
+          "type": "string"
+        }
+      ]
+    },
+    "userId": {
+      "pattern": "^las:user:[a-f0-9]{32}$",
+      "type": "string"
+    }
+  },
+  "required": [
+    "email",
+    "userId"
+  ],
+  "title": "user",
+  "type": "object"
+}
+```
+
+
 #### GET /workflows
 
 
@@ -1169,6 +3322,66 @@
 
 
 
+
+
+##### JSON Schema for response body
+```json
+{
+  "additionalProperties": false,
+  "properties": {
+    "nextToken": {
+      "anyOf": [
+        {
+          "maxLength": 4096,
+          "nullable": true,
+          "type": "string"
+        }
+      ]
+    },
+    "workflows": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "description": {
+            "anyOf": [
+              {
+                "maxLength": 4096,
+                "nullable": true,
+                "type": "string"
+              }
+            ]
+          },
+          "name": {
+            "anyOf": [
+              {
+                "maxLength": 4096,
+                "nullable": true,
+                "type": "string"
+              }
+            ]
+          },
+          "workflowId": {
+            "pattern": "^las:workflow:[a-f0-9]{32}$",
+            "type": "string"
+          }
+        },
+        "required": [
+          "description",
+          "name",
+          "workflowId"
+        ],
+        "type": "object"
+      },
+      "type": "array"
+    }
+  },
+  "required": [
+    "workflows"
+  ],
+  "title": "workflows",
+  "type": "object"
+}
+```
 
 
 #### POST /workflows
@@ -1257,6 +3470,45 @@
 ```
 
 
+##### JSON Schema for response body
+```json
+{
+  "additionalProperties": false,
+  "properties": {
+    "description": {
+      "anyOf": [
+        {
+          "maxLength": 4096,
+          "nullable": true,
+          "type": "string"
+        }
+      ]
+    },
+    "name": {
+      "anyOf": [
+        {
+          "maxLength": 4096,
+          "nullable": true,
+          "type": "string"
+        }
+      ]
+    },
+    "workflowId": {
+      "pattern": "^las:workflow:[a-f0-9]{32}$",
+      "type": "string"
+    }
+  },
+  "required": [
+    "description",
+    "name",
+    "workflowId"
+  ],
+  "title": "workflow",
+  "type": "object"
+}
+```
+
+
 #### DELETE /workflows/{workflowId}
 
 
@@ -1275,6 +3527,45 @@
 
 
 
+
+
+##### JSON Schema for response body
+```json
+{
+  "additionalProperties": false,
+  "properties": {
+    "description": {
+      "anyOf": [
+        {
+          "maxLength": 4096,
+          "nullable": true,
+          "type": "string"
+        }
+      ]
+    },
+    "name": {
+      "anyOf": [
+        {
+          "maxLength": 4096,
+          "nullable": true,
+          "type": "string"
+        }
+      ]
+    },
+    "workflowId": {
+      "pattern": "^las:workflow:[a-f0-9]{32}$",
+      "type": "string"
+    }
+  },
+  "required": [
+    "description",
+    "name",
+    "workflowId"
+  ],
+  "title": "workflow",
+  "type": "object"
+}
+```
 
 
 #### PATCH /workflows/{workflowId}
@@ -1326,6 +3617,45 @@
 ```
 
 
+##### JSON Schema for response body
+```json
+{
+  "additionalProperties": false,
+  "properties": {
+    "description": {
+      "anyOf": [
+        {
+          "maxLength": 4096,
+          "nullable": true,
+          "type": "string"
+        }
+      ]
+    },
+    "name": {
+      "anyOf": [
+        {
+          "maxLength": 4096,
+          "nullable": true,
+          "type": "string"
+        }
+      ]
+    },
+    "workflowId": {
+      "pattern": "^las:workflow:[a-f0-9]{32}$",
+      "type": "string"
+    }
+  },
+  "required": [
+    "description",
+    "name",
+    "workflowId"
+  ],
+  "title": "workflow",
+  "type": "object"
+}
+```
+
+
 #### GET /workflows/{workflowId}/executions
 
 
@@ -1350,6 +3680,153 @@
 
 
 
+
+
+##### JSON Schema for response body
+```json
+{
+  "additionalProperties": false,
+  "properties": {
+    "executions": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "completedBy": {
+            "items": {
+              "anyOf": [
+                {
+                  "pattern": "^las:user:[a-f0-9]{32}$",
+                  "type": "string"
+                },
+                {
+                  "pattern": "^las:app-client:[a-f0-9]{32}$",
+                  "type": "string"
+                }
+              ]
+            },
+            "type": "array"
+          },
+          "endTime": {
+            "anyOf": [
+              {
+                "nullable": true,
+                "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2} ?[0-9]{2}:?[0-9]{2}:?[0-9]{2}.?[0-9]{6}",
+                "type": "string"
+              }
+            ]
+          },
+          "executionId": {
+            "pattern": "^las:workflow-execution:[a-f0-9]{32}$",
+            "type": "string"
+          },
+          "input": {
+            "anyOf": [
+              {
+                "type": "object"
+              }
+            ]
+          },
+          "output": {
+            "anyOf": [
+              {
+                "type": "object"
+              }
+            ]
+          },
+          "startTime": {
+            "anyOf": [
+              {
+                "nullable": true,
+                "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2} ?[0-9]{2}:?[0-9]{2}:?[0-9]{2}.?[0-9]{6}",
+                "type": "string"
+              }
+            ]
+          },
+          "status": {
+            "enum": [
+              "running",
+              "succeeded",
+              "failed",
+              "rejected",
+              "retry"
+            ],
+            "type": "string"
+          },
+          "transitionExecutions": {
+            "anyOf": [
+              {
+                "type": "object"
+              }
+            ]
+          },
+          "workflowId": {
+            "pattern": "^las:workflow:[a-f0-9]{32}$",
+            "type": "string"
+          }
+        },
+        "required": [
+          "endTime",
+          "executionId",
+          "input",
+          "output",
+          "startTime",
+          "status",
+          "transitionExecutions",
+          "workflowId"
+        ],
+        "type": "object"
+      },
+      "type": "array"
+    },
+    "nextToken": {
+      "anyOf": [
+        {
+          "maxLength": 4096,
+          "nullable": true,
+          "type": "string"
+        }
+      ]
+    },
+    "order": {
+      "enum": [
+        "ascending",
+        "descending"
+      ],
+      "type": "string"
+    },
+    "sortBy": {
+      "enum": [
+        "startTime",
+        "endTime"
+      ],
+      "type": "string"
+    },
+    "status": {
+      "items": {
+        "enum": [
+          "running",
+          "succeeded",
+          "failed",
+          "rejected",
+          "retry"
+        ],
+        "type": "string"
+      },
+      "type": "array"
+    },
+    "workflowId": {
+      "pattern": "^las:workflow:[a-f0-9]{32}$",
+      "type": "string"
+    }
+  },
+  "required": [
+    "executions",
+    "workflowId"
+  ],
+  "title": "workflow-executions",
+  "type": "object"
+}
+```
 
 
 #### POST /workflows/{workflowId}/executions
@@ -1388,6 +3865,100 @@
 ```
 
 
+##### JSON Schema for response body
+```json
+{
+  "additionalProperties": false,
+  "properties": {
+    "completedBy": {
+      "items": {
+        "anyOf": [
+          {
+            "pattern": "^las:user:[a-f0-9]{32}$",
+            "type": "string"
+          },
+          {
+            "pattern": "^las:app-client:[a-f0-9]{32}$",
+            "type": "string"
+          }
+        ]
+      },
+      "type": "array"
+    },
+    "endTime": {
+      "anyOf": [
+        {
+          "nullable": true,
+          "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2} ?[0-9]{2}:?[0-9]{2}:?[0-9]{2}.?[0-9]{6}",
+          "type": "string"
+        }
+      ]
+    },
+    "executionId": {
+      "pattern": "^las:workflow-execution:[a-f0-9]{32}$",
+      "type": "string"
+    },
+    "input": {
+      "anyOf": [
+        {
+          "type": "object"
+        }
+      ]
+    },
+    "output": {
+      "anyOf": [
+        {
+          "type": "object"
+        }
+      ]
+    },
+    "startTime": {
+      "anyOf": [
+        {
+          "nullable": true,
+          "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2} ?[0-9]{2}:?[0-9]{2}:?[0-9]{2}.?[0-9]{6}",
+          "type": "string"
+        }
+      ]
+    },
+    "status": {
+      "enum": [
+        "running",
+        "succeeded",
+        "failed",
+        "rejected",
+        "retry"
+      ],
+      "type": "string"
+    },
+    "transitionExecutions": {
+      "anyOf": [
+        {
+          "type": "object"
+        }
+      ]
+    },
+    "workflowId": {
+      "pattern": "^las:workflow:[a-f0-9]{32}$",
+      "type": "string"
+    }
+  },
+  "required": [
+    "endTime",
+    "executionId",
+    "input",
+    "output",
+    "startTime",
+    "status",
+    "transitionExecutions",
+    "workflowId"
+  ],
+  "title": "workflow-execution",
+  "type": "object"
+}
+```
+
+
 #### DELETE /workflows/{workflowId}/executions/{executionId}
 
 
@@ -1407,4 +3978,98 @@
 
 
 
+
+
+##### JSON Schema for response body
+```json
+{
+  "additionalProperties": false,
+  "properties": {
+    "completedBy": {
+      "items": {
+        "anyOf": [
+          {
+            "pattern": "^las:user:[a-f0-9]{32}$",
+            "type": "string"
+          },
+          {
+            "pattern": "^las:app-client:[a-f0-9]{32}$",
+            "type": "string"
+          }
+        ]
+      },
+      "type": "array"
+    },
+    "endTime": {
+      "anyOf": [
+        {
+          "nullable": true,
+          "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2} ?[0-9]{2}:?[0-9]{2}:?[0-9]{2}.?[0-9]{6}",
+          "type": "string"
+        }
+      ]
+    },
+    "executionId": {
+      "pattern": "^las:workflow-execution:[a-f0-9]{32}$",
+      "type": "string"
+    },
+    "input": {
+      "anyOf": [
+        {
+          "type": "object"
+        }
+      ]
+    },
+    "output": {
+      "anyOf": [
+        {
+          "type": "object"
+        }
+      ]
+    },
+    "startTime": {
+      "anyOf": [
+        {
+          "nullable": true,
+          "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2} ?[0-9]{2}:?[0-9]{2}:?[0-9]{2}.?[0-9]{6}",
+          "type": "string"
+        }
+      ]
+    },
+    "status": {
+      "enum": [
+        "running",
+        "succeeded",
+        "failed",
+        "rejected",
+        "retry"
+      ],
+      "type": "string"
+    },
+    "transitionExecutions": {
+      "anyOf": [
+        {
+          "type": "object"
+        }
+      ]
+    },
+    "workflowId": {
+      "pattern": "^las:workflow:[a-f0-9]{32}$",
+      "type": "string"
+    }
+  },
+  "required": [
+    "endTime",
+    "executionId",
+    "input",
+    "output",
+    "startTime",
+    "status",
+    "transitionExecutions",
+    "workflowId"
+  ],
+  "title": "workflow-execution",
+  "type": "object"
+}
+```
 
