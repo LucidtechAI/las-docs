@@ -43,22 +43,14 @@
             "type": "string"
           },
           "name": {
-            "anyOf": [
-              {
-                "maxLength": 4096,
-                "type": "string",
-                "nullable": true
-              }
-            ]
+            "maxLength": 4096,
+            "type": "string",
+            "nullable": true
           },
           "description": {
-            "anyOf": [
-              {
-                "maxLength": 4096,
-                "type": "string",
-                "nullable": true
-              }
-            ]
+            "maxLength": 4096,
+            "type": "string",
+            "nullable": true
           },
           "content": {
             "minLength": 1,
@@ -69,13 +61,9 @@
       }
     },
     "nextToken": {
-      "anyOf": [
-        {
-          "maxLength": 4096,
-          "type": "string",
-          "nullable": true
-        }
-      ]
+      "maxLength": 4096,
+      "type": "string",
+      "nullable": true
     }
   },
   "additionalProperties": false
@@ -109,22 +97,14 @@
   "type": "object",
   "properties": {
     "name": {
-      "anyOf": [
-        {
-          "maxLength": 4096,
-          "type": "string",
-          "nullable": true
-        }
-      ]
+      "maxLength": 4096,
+      "type": "string",
+      "nullable": true
     },
     "description": {
-      "anyOf": [
-        {
-          "maxLength": 4096,
-          "type": "string",
-          "nullable": true
-        }
-      ]
+      "maxLength": 4096,
+      "type": "string",
+      "nullable": true
     },
     "content": {
       "minLength": 1,
@@ -152,22 +132,14 @@
       "type": "string"
     },
     "name": {
-      "anyOf": [
-        {
-          "maxLength": 4096,
-          "type": "string",
-          "nullable": true
-        }
-      ]
+      "maxLength": 4096,
+      "type": "string",
+      "nullable": true
     },
     "description": {
-      "anyOf": [
-        {
-          "maxLength": 4096,
-          "type": "string",
-          "nullable": true
-        }
-      ]
+      "maxLength": 4096,
+      "type": "string",
+      "nullable": true
     },
     "content": {
       "minLength": 1,
@@ -215,22 +187,14 @@
       "type": "string"
     },
     "name": {
-      "anyOf": [
-        {
-          "maxLength": 4096,
-          "type": "string",
-          "nullable": true
-        }
-      ]
+      "maxLength": 4096,
+      "type": "string",
+      "nullable": true
     },
     "description": {
-      "anyOf": [
-        {
-          "maxLength": 4096,
-          "type": "string",
-          "nullable": true
-        }
-      ]
+      "maxLength": 4096,
+      "type": "string",
+      "nullable": true
     },
     "content": {
       "minLength": 1,
@@ -268,22 +232,14 @@
   "type": "object",
   "properties": {
     "name": {
-      "anyOf": [
-        {
-          "maxLength": 4096,
-          "type": "string",
-          "nullable": true
-        }
-      ]
+      "maxLength": 4096,
+      "type": "string",
+      "nullable": true
     },
     "description": {
-      "anyOf": [
-        {
-          "maxLength": 4096,
-          "type": "string",
-          "nullable": true
-        }
-      ]
+      "maxLength": 4096,
+      "type": "string",
+      "nullable": true
     },
     "content": {
       "minLength": 1,
@@ -311,22 +267,14 @@
       "type": "string"
     },
     "name": {
-      "anyOf": [
-        {
-          "maxLength": 4096,
-          "type": "string",
-          "nullable": true
-        }
-      ]
+      "maxLength": 4096,
+      "type": "string",
+      "nullable": true
     },
     "description": {
-      "anyOf": [
-        {
-          "maxLength": 4096,
-          "type": "string",
-          "nullable": true
-        }
-      ]
+      "maxLength": 4096,
+      "type": "string",
+      "nullable": true
     },
     "content": {
       "minLength": 1,
@@ -361,22 +309,14 @@
   "type": "object",
   "properties": {
     "name": {
-      "anyOf": [
-        {
-          "maxLength": 4096,
-          "type": "string",
-          "nullable": true
-        }
-      ]
+      "maxLength": 4096,
+      "type": "string",
+      "nullable": true
     },
     "description": {
-      "anyOf": [
-        {
-          "maxLength": 4096,
-          "type": "string",
-          "nullable": true
-        }
-      ]
+      "maxLength": 4096,
+      "type": "string",
+      "nullable": true
     }
   },
   "additionalProperties": false
@@ -396,22 +336,14 @@
   "type": "object",
   "properties": {
     "name": {
-      "anyOf": [
-        {
-          "maxLength": 4096,
-          "type": "string",
-          "nullable": true
-        }
-      ]
+      "maxLength": 4096,
+      "type": "string",
+      "nullable": true
     },
     "description": {
-      "anyOf": [
-        {
-          "maxLength": 4096,
-          "type": "string",
-          "nullable": true
-        }
-      ]
+      "maxLength": 4096,
+      "type": "string",
+      "nullable": true
     },
     "batchId": {
       "pattern": "^las:batch:[a-f0-9]{32}$",
@@ -553,14 +485,10 @@
                   "type": "string"
                 },
                 "value": {
-                  "anyOf": [
-                    {
-                      "maxLength": 64,
-                      "minLength": 1,
-                      "type": "string",
-                      "nullable": true
-                    }
-                  ]
+                  "maxLength": 64,
+                  "minLength": 1,
+                  "type": "string",
+                  "nullable": true
                 }
               },
               "additionalProperties": false
@@ -571,13 +499,9 @@
       }
     },
     "nextToken": {
-      "anyOf": [
-        {
-          "maxLength": 4096,
-          "type": "string",
-          "nullable": true
-        }
-      ]
+      "maxLength": 4096,
+      "type": "string",
+      "nullable": true
     },
     "batchId": {
       "type": "array",
@@ -725,14 +649,10 @@
                   "type": "string"
                 },
                 "value": {
-                  "anyOf": [
-                    {
-                      "maxLength": 64,
-                      "minLength": 1,
-                      "type": "string",
-                      "nullable": true
-                    }
-                  ]
+                  "maxLength": 64,
+                  "minLength": 1,
+                  "type": "string",
+                  "nullable": true
                 }
               },
               "additionalProperties": false
@@ -743,13 +663,9 @@
       }
     },
     "nextToken": {
-      "anyOf": [
-        {
-          "maxLength": 4096,
-          "type": "string",
-          "nullable": true
-        }
-      ]
+      "maxLength": 4096,
+      "type": "string",
+      "nullable": true
     },
     "batchId": {
       "type": "array",
@@ -942,14 +858,10 @@
             "type": "string"
           },
           "value": {
-            "anyOf": [
-              {
-                "maxLength": 64,
-                "minLength": 1,
-                "type": "string",
-                "nullable": true
-              }
-            ]
+            "maxLength": 64,
+            "minLength": 1,
+            "type": "string",
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -1076,14 +988,10 @@
             "type": "string"
           },
           "value": {
-            "anyOf": [
-              {
-                "maxLength": 64,
-                "minLength": 1,
-                "type": "string",
-                "nullable": true
-              }
-            ]
+            "maxLength": 64,
+            "minLength": 1,
+            "type": "string",
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -1255,14 +1163,10 @@
             "type": "string"
           },
           "value": {
-            "anyOf": [
-              {
-                "maxLength": 64,
-                "minLength": 1,
-                "type": "string",
-                "nullable": true
-              }
-            ]
+            "maxLength": 64,
+            "minLength": 1,
+            "type": "string",
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -1307,16 +1211,12 @@
     "transitionId": {
       "anyOf": [
         {
-          "anyOf": [
-            {
-              "pattern": "^las:transition:[a-f0-9]{32}$",
-              "type": "string"
-            },
-            {
-              "pattern": "^las:transition:commons-[0-9A-Za-z-]+$",
-              "type": "string"
-            }
-          ]
+          "pattern": "^las:transition:[a-f0-9]{32}$",
+          "type": "string"
+        },
+        {
+          "pattern": "^las:transition:commons-[0-9A-Za-z-]+$",
+          "type": "string"
         }
       ]
     },
@@ -1383,25 +1283,17 @@
             "type": "string"
           },
           "name": {
-            "anyOf": [
-              {
-                "maxLength": 4096,
-                "type": "string",
-                "nullable": true
-              }
-            ]
+            "maxLength": 4096,
+            "type": "string",
+            "nullable": true
           },
           "width": {
             "type": "integer"
           },
           "description": {
-            "anyOf": [
-              {
-                "maxLength": 4096,
-                "type": "string",
-                "nullable": true
-              }
-            ]
+            "maxLength": 4096,
+            "type": "string",
+            "nullable": true
           },
           "height": {
             "type": "integer"
@@ -1411,13 +1303,9 @@
       }
     },
     "nextToken": {
-      "anyOf": [
-        {
-          "maxLength": 4096,
-          "type": "string",
-          "nullable": true
-        }
-      ]
+      "maxLength": 4096,
+      "type": "string",
+      "nullable": true
     }
   },
   "additionalProperties": false
@@ -1498,14 +1386,10 @@
             "type": "string"
           },
           "value": {
-            "anyOf": [
-              {
-                "maxLength": 64,
-                "minLength": 1,
-                "type": "string",
-                "nullable": true
-              }
-            ]
+            "maxLength": 64,
+            "minLength": 1,
+            "type": "string",
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -1621,14 +1505,10 @@
             "type": "string"
           },
           "value": {
-            "anyOf": [
-              {
-                "maxLength": 64,
-                "minLength": 1,
-                "type": "string",
-                "nullable": true
-              }
-            ]
+            "maxLength": 64,
+            "minLength": 1,
+            "type": "string",
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -1675,13 +1555,9 @@
   "type": "object",
   "properties": {
     "nextToken": {
-      "anyOf": [
-        {
-          "maxLength": 4096,
-          "type": "string",
-          "nullable": true
-        }
-      ]
+      "maxLength": 4096,
+      "type": "string",
+      "nullable": true
     },
     "secrets": {
       "type": "array",
@@ -1694,26 +1570,18 @@
         "type": "object",
         "properties": {
           "name": {
-            "anyOf": [
-              {
-                "maxLength": 4096,
-                "type": "string",
-                "nullable": true
-              }
-            ]
+            "maxLength": 4096,
+            "type": "string",
+            "nullable": true
           },
           "secretId": {
             "pattern": "^las:secret:[a-f0-9]{32}$",
             "type": "string"
           },
           "description": {
-            "anyOf": [
-              {
-                "maxLength": 4096,
-                "type": "string",
-                "nullable": true
-              }
-            ]
+            "maxLength": 4096,
+            "type": "string",
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -1754,22 +1622,14 @@
       "type": "object"
     },
     "name": {
-      "anyOf": [
-        {
-          "maxLength": 4096,
-          "type": "string",
-          "nullable": true
-        }
-      ]
+      "maxLength": 4096,
+      "type": "string",
+      "nullable": true
     },
     "description": {
-      "anyOf": [
-        {
-          "maxLength": 4096,
-          "type": "string",
-          "nullable": true
-        }
-      ]
+      "maxLength": 4096,
+      "type": "string",
+      "nullable": true
     }
   },
   "additionalProperties": false
@@ -1789,26 +1649,18 @@
   "type": "object",
   "properties": {
     "name": {
-      "anyOf": [
-        {
-          "maxLength": 4096,
-          "type": "string",
-          "nullable": true
-        }
-      ]
+      "maxLength": 4096,
+      "type": "string",
+      "nullable": true
     },
     "secretId": {
       "pattern": "^las:secret:[a-f0-9]{32}$",
       "type": "string"
     },
     "description": {
-      "anyOf": [
-        {
-          "maxLength": 4096,
-          "type": "string",
-          "nullable": true
-        }
-      ]
+      "maxLength": 4096,
+      "type": "string",
+      "nullable": true
     }
   },
   "additionalProperties": false
@@ -1845,22 +1697,14 @@
       "type": "object"
     },
     "name": {
-      "anyOf": [
-        {
-          "maxLength": 4096,
-          "type": "string",
-          "nullable": true
-        }
-      ]
+      "maxLength": 4096,
+      "type": "string",
+      "nullable": true
     },
     "description": {
-      "anyOf": [
-        {
-          "maxLength": 4096,
-          "type": "string",
-          "nullable": true
-        }
-      ]
+      "maxLength": 4096,
+      "type": "string",
+      "nullable": true
     }
   },
   "additionalProperties": false
@@ -1880,26 +1724,18 @@
   "type": "object",
   "properties": {
     "name": {
-      "anyOf": [
-        {
-          "maxLength": 4096,
-          "type": "string",
-          "nullable": true
-        }
-      ]
+      "maxLength": 4096,
+      "type": "string",
+      "nullable": true
     },
     "secretId": {
       "pattern": "^las:secret:[a-f0-9]{32}$",
       "type": "string"
     },
     "description": {
-      "anyOf": [
-        {
-          "maxLength": 4096,
-          "type": "string",
-          "nullable": true
-        }
-      ]
+      "maxLength": 4096,
+      "type": "string",
+      "nullable": true
     }
   },
   "additionalProperties": false
@@ -1939,13 +1775,9 @@
   "type": "object",
   "properties": {
     "nextToken": {
-      "anyOf": [
-        {
-          "maxLength": 4096,
-          "type": "string",
-          "nullable": true
-        }
-      ]
+      "maxLength": 4096,
+      "type": "string",
+      "nullable": true
     },
     "transitions": {
       "type": "array",
@@ -1984,22 +1816,14 @@
             ]
           },
           "name": {
-            "anyOf": [
-              {
-                "maxLength": 4096,
-                "type": "string",
-                "nullable": true
-              }
-            ]
+            "maxLength": 4096,
+            "type": "string",
+            "nullable": true
           },
           "description": {
-            "anyOf": [
-              {
-                "maxLength": 4096,
-                "type": "string",
-                "nullable": true
-              }
-            ]
+            "maxLength": 4096,
+            "type": "string",
+            "nullable": true
           },
           "transitionType": {
             "type": "string"
@@ -2008,11 +1832,7 @@
             "type": "object"
           },
           "parameters": {
-            "anyOf": [
-              {
-                "type": "object"
-              }
-            ]
+            "type": "object"
           }
         },
         "additionalProperties": false
@@ -2063,22 +1883,14 @@
       "type": "object"
     },
     "name": {
-      "anyOf": [
-        {
-          "maxLength": 4096,
-          "type": "string",
-          "nullable": true
-        }
-      ]
+      "maxLength": 4096,
+      "type": "string",
+      "nullable": true
     },
     "description": {
-      "anyOf": [
-        {
-          "maxLength": 4096,
-          "type": "string",
-          "nullable": true
-        }
-      ]
+      "maxLength": 4096,
+      "type": "string",
+      "nullable": true
     },
     "transitionType": {
       "type": "string",
@@ -2195,22 +2007,14 @@
       ]
     },
     "name": {
-      "anyOf": [
-        {
-          "maxLength": 4096,
-          "type": "string",
-          "nullable": true
-        }
-      ]
+      "maxLength": 4096,
+      "type": "string",
+      "nullable": true
     },
     "description": {
-      "anyOf": [
-        {
-          "maxLength": 4096,
-          "type": "string",
-          "nullable": true
-        }
-      ]
+      "maxLength": 4096,
+      "type": "string",
+      "nullable": true
     },
     "transitionType": {
       "type": "string"
@@ -2219,11 +2023,7 @@
       "type": "object"
     },
     "parameters": {
-      "anyOf": [
-        {
-          "type": "object"
-        }
-      ]
+      "type": "object"
     }
   },
   "additionalProperties": false
@@ -2260,22 +2060,14 @@
       "type": "object"
     },
     "name": {
-      "anyOf": [
-        {
-          "maxLength": 4096,
-          "type": "string",
-          "nullable": true
-        }
-      ]
+      "maxLength": 4096,
+      "type": "string",
+      "nullable": true
     },
     "description": {
-      "anyOf": [
-        {
-          "maxLength": 4096,
-          "type": "string",
-          "nullable": true
-        }
-      ]
+      "maxLength": 4096,
+      "type": "string",
+      "nullable": true
     },
     "inputJsonSchema": {
       "type": "object"
@@ -2324,22 +2116,14 @@
       ]
     },
     "name": {
-      "anyOf": [
-        {
-          "maxLength": 4096,
-          "type": "string",
-          "nullable": true
-        }
-      ]
+      "maxLength": 4096,
+      "type": "string",
+      "nullable": true
     },
     "description": {
-      "anyOf": [
-        {
-          "maxLength": 4096,
-          "type": "string",
-          "nullable": true
-        }
-      ]
+      "maxLength": 4096,
+      "type": "string",
+      "nullable": true
     },
     "transitionType": {
       "type": "string"
@@ -2348,11 +2132,7 @@
       "type": "object"
     },
     "parameters": {
-      "anyOf": [
-        {
-          "type": "object"
-        }
-      ]
+      "type": "object"
     }
   },
   "additionalProperties": false
@@ -2414,11 +2194,7 @@
             "type": "string"
           },
           "input": {
-            "anyOf": [
-              {
-                "type": "object"
-              }
-            ]
+            "type": "object"
           },
           "transitionId": {
             "anyOf": [
@@ -2433,40 +2209,24 @@
             ]
           },
           "startTime": {
-            "anyOf": [
-              {
-                "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2} ?[0-9]{2}:?[0-9]{2}:?[0-9]{2}.?[0-9]{6}",
-                "type": "string",
-                "nullable": true
-              }
-            ]
+            "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2} ?[0-9]{2}:?[0-9]{2}:?[0-9]{2}.?[0-9]{6}",
+            "type": "string",
+            "nullable": true
           },
           "logId": {
-            "anyOf": [
-              {
-                "pattern": "^las:log:[a-f0-9]{32}$",
-                "type": "string",
-                "nullable": true
-              }
-            ]
+            "pattern": "^las:log:[a-f0-9]{32}$",
+            "type": "string",
+            "nullable": true
           },
           "endTime": {
-            "anyOf": [
-              {
-                "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2} ?[0-9]{2}:?[0-9]{2}:?[0-9]{2}.?[0-9]{6}",
-                "type": "string",
-                "nullable": true
-              }
-            ]
+            "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2} ?[0-9]{2}:?[0-9]{2}:?[0-9]{2}.?[0-9]{6}",
+            "type": "string",
+            "nullable": true
           },
           "completedBy": {
-            "anyOf": [
-              {
-                "maxLength": 4096,
-                "type": "string",
-                "nullable": true
-              }
-            ]
+            "maxLength": 4096,
+            "type": "string",
+            "nullable": true
           },
           "status": {
             "type": "string",
@@ -2495,13 +2255,9 @@
       ]
     },
     "nextToken": {
-      "anyOf": [
-        {
-          "maxLength": 4096,
-          "type": "string",
-          "nullable": true
-        }
-      ]
+      "maxLength": 4096,
+      "type": "string",
+      "nullable": true
     },
     "status": {
       "type": "array",
@@ -2567,11 +2323,7 @@
       "type": "string"
     },
     "input": {
-      "anyOf": [
-        {
-          "type": "object"
-        }
-      ]
+      "type": "object"
     },
     "transitionId": {
       "anyOf": [
@@ -2586,40 +2338,24 @@
       ]
     },
     "startTime": {
-      "anyOf": [
-        {
-          "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2} ?[0-9]{2}:?[0-9]{2}:?[0-9]{2}.?[0-9]{6}",
-          "type": "string",
-          "nullable": true
-        }
-      ]
+      "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2} ?[0-9]{2}:?[0-9]{2}:?[0-9]{2}.?[0-9]{6}",
+      "type": "string",
+      "nullable": true
     },
     "logId": {
-      "anyOf": [
-        {
-          "pattern": "^las:log:[a-f0-9]{32}$",
-          "type": "string",
-          "nullable": true
-        }
-      ]
+      "pattern": "^las:log:[a-f0-9]{32}$",
+      "type": "string",
+      "nullable": true
     },
     "endTime": {
-      "anyOf": [
-        {
-          "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2} ?[0-9]{2}:?[0-9]{2}:?[0-9]{2}.?[0-9]{6}",
-          "type": "string",
-          "nullable": true
-        }
-      ]
+      "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2} ?[0-9]{2}:?[0-9]{2}:?[0-9]{2}.?[0-9]{6}",
+      "type": "string",
+      "nullable": true
     },
     "completedBy": {
-      "anyOf": [
-        {
-          "maxLength": 4096,
-          "type": "string",
-          "nullable": true
-        }
-      ]
+      "maxLength": 4096,
+      "type": "string",
+      "nullable": true
     },
     "status": {
       "type": "string",
@@ -2676,11 +2412,7 @@
       "type": "string"
     },
     "input": {
-      "anyOf": [
-        {
-          "type": "object"
-        }
-      ]
+      "type": "object"
     },
     "transitionId": {
       "anyOf": [
@@ -2695,40 +2427,24 @@
       ]
     },
     "startTime": {
-      "anyOf": [
-        {
-          "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2} ?[0-9]{2}:?[0-9]{2}:?[0-9]{2}.?[0-9]{6}",
-          "type": "string",
-          "nullable": true
-        }
-      ]
+      "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2} ?[0-9]{2}:?[0-9]{2}:?[0-9]{2}.?[0-9]{6}",
+      "type": "string",
+      "nullable": true
     },
     "logId": {
-      "anyOf": [
-        {
-          "pattern": "^las:log:[a-f0-9]{32}$",
-          "type": "string",
-          "nullable": true
-        }
-      ]
+      "pattern": "^las:log:[a-f0-9]{32}$",
+      "type": "string",
+      "nullable": true
     },
     "endTime": {
-      "anyOf": [
-        {
-          "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2} ?[0-9]{2}:?[0-9]{2}:?[0-9]{2}.?[0-9]{6}",
-          "type": "string",
-          "nullable": true
-        }
-      ]
+      "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2} ?[0-9]{2}:?[0-9]{2}:?[0-9]{2}.?[0-9]{6}",
+      "type": "string",
+      "nullable": true
     },
     "completedBy": {
-      "anyOf": [
-        {
-          "maxLength": 4096,
-          "type": "string",
-          "nullable": true
-        }
-      ]
+      "maxLength": 4096,
+      "type": "string",
+      "nullable": true
     },
     "status": {
       "type": "string",
@@ -2839,11 +2555,7 @@
       "type": "string"
     },
     "input": {
-      "anyOf": [
-        {
-          "type": "object"
-        }
-      ]
+      "type": "object"
     },
     "transitionId": {
       "anyOf": [
@@ -2858,40 +2570,24 @@
       ]
     },
     "startTime": {
-      "anyOf": [
-        {
-          "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2} ?[0-9]{2}:?[0-9]{2}:?[0-9]{2}.?[0-9]{6}",
-          "type": "string",
-          "nullable": true
-        }
-      ]
+      "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2} ?[0-9]{2}:?[0-9]{2}:?[0-9]{2}.?[0-9]{6}",
+      "type": "string",
+      "nullable": true
     },
     "logId": {
-      "anyOf": [
-        {
-          "pattern": "^las:log:[a-f0-9]{32}$",
-          "type": "string",
-          "nullable": true
-        }
-      ]
+      "pattern": "^las:log:[a-f0-9]{32}$",
+      "type": "string",
+      "nullable": true
     },
     "endTime": {
-      "anyOf": [
-        {
-          "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2} ?[0-9]{2}:?[0-9]{2}:?[0-9]{2}.?[0-9]{6}",
-          "type": "string",
-          "nullable": true
-        }
-      ]
+      "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2} ?[0-9]{2}:?[0-9]{2}:?[0-9]{2}.?[0-9]{6}",
+      "type": "string",
+      "nullable": true
     },
     "completedBy": {
-      "anyOf": [
-        {
-          "maxLength": 4096,
-          "type": "string",
-          "nullable": true
-        }
-      ]
+      "maxLength": 4096,
+      "type": "string",
+      "nullable": true
     },
     "status": {
       "type": "string",
@@ -2940,13 +2636,9 @@
   "type": "object",
   "properties": {
     "nextToken": {
-      "anyOf": [
-        {
-          "maxLength": 4096,
-          "type": "string",
-          "nullable": true
-        }
-      ]
+      "maxLength": 4096,
+      "type": "string",
+      "nullable": true
     },
     "users": {
       "type": "array",
@@ -2958,22 +2650,14 @@
         "type": "object",
         "properties": {
           "name": {
-            "anyOf": [
-              {
-                "maxLength": 4096,
-                "type": "string",
-                "nullable": true
-              }
-            ]
+            "maxLength": 4096,
+            "type": "string",
+            "nullable": true
           },
           "avatar": {
-            "anyOf": [
-              {
-                "maxLength": 131072,
-                "type": "string",
-                "nullable": true
-              }
-            ]
+            "maxLength": 131072,
+            "type": "string",
+            "nullable": true
           },
           "userId": {
             "pattern": "^las:user:[a-f0-9]{32}$",
@@ -3019,22 +2703,14 @@
   "type": "object",
   "properties": {
     "name": {
-      "anyOf": [
-        {
-          "maxLength": 4096,
-          "type": "string",
-          "nullable": true
-        }
-      ]
+      "maxLength": 4096,
+      "type": "string",
+      "nullable": true
     },
     "avatar": {
-      "anyOf": [
-        {
-          "maxLength": 131072,
-          "type": "string",
-          "nullable": true
-        }
-      ]
+      "maxLength": 131072,
+      "type": "string",
+      "nullable": true
     },
     "email": {
       "pattern": "^[A-Za-z0-9][-+._A-Za-z0-9]*@([A-Za-z0-9]+\\.)+[A-Za-z]{2,}$",
@@ -3057,22 +2733,14 @@
   "type": "object",
   "properties": {
     "name": {
-      "anyOf": [
-        {
-          "maxLength": 4096,
-          "type": "string",
-          "nullable": true
-        }
-      ]
+      "maxLength": 4096,
+      "type": "string",
+      "nullable": true
     },
     "avatar": {
-      "anyOf": [
-        {
-          "maxLength": 131072,
-          "type": "string",
-          "nullable": true
-        }
-      ]
+      "maxLength": 131072,
+      "type": "string",
+      "nullable": true
     },
     "userId": {
       "pattern": "^las:user:[a-f0-9]{32}$",
@@ -3119,22 +2787,14 @@
   "type": "object",
   "properties": {
     "name": {
-      "anyOf": [
-        {
-          "maxLength": 4096,
-          "type": "string",
-          "nullable": true
-        }
-      ]
+      "maxLength": 4096,
+      "type": "string",
+      "nullable": true
     },
     "avatar": {
-      "anyOf": [
-        {
-          "maxLength": 131072,
-          "type": "string",
-          "nullable": true
-        }
-      ]
+      "maxLength": 131072,
+      "type": "string",
+      "nullable": true
     },
     "userId": {
       "pattern": "^las:user:[a-f0-9]{32}$",
@@ -3181,22 +2841,14 @@
   "type": "object",
   "properties": {
     "name": {
-      "anyOf": [
-        {
-          "maxLength": 4096,
-          "type": "string",
-          "nullable": true
-        }
-      ]
+      "maxLength": 4096,
+      "type": "string",
+      "nullable": true
     },
     "avatar": {
-      "anyOf": [
-        {
-          "maxLength": 131072,
-          "type": "string",
-          "nullable": true
-        }
-      ]
+      "maxLength": 131072,
+      "type": "string",
+      "nullable": true
     },
     "userId": {
       "pattern": "^las:user:[a-f0-9]{32}$",
@@ -3238,22 +2890,14 @@
   "type": "object",
   "properties": {
     "name": {
-      "anyOf": [
-        {
-          "maxLength": 4096,
-          "type": "string",
-          "nullable": true
-        }
-      ]
+      "maxLength": 4096,
+      "type": "string",
+      "nullable": true
     },
     "avatar": {
-      "anyOf": [
-        {
-          "maxLength": 131072,
-          "type": "string",
-          "nullable": true
-        }
-      ]
+      "maxLength": 131072,
+      "type": "string",
+      "nullable": true
     }
   },
   "additionalProperties": false
@@ -3272,22 +2916,14 @@
   "type": "object",
   "properties": {
     "name": {
-      "anyOf": [
-        {
-          "maxLength": 4096,
-          "type": "string",
-          "nullable": true
-        }
-      ]
+      "maxLength": 4096,
+      "type": "string",
+      "nullable": true
     },
     "avatar": {
-      "anyOf": [
-        {
-          "maxLength": 131072,
-          "type": "string",
-          "nullable": true
-        }
-      ]
+      "maxLength": 131072,
+      "type": "string",
+      "nullable": true
     },
     "userId": {
       "pattern": "^las:user:[a-f0-9]{32}$",
@@ -3334,13 +2970,9 @@
   "type": "object",
   "properties": {
     "nextToken": {
-      "anyOf": [
-        {
-          "maxLength": 4096,
-          "type": "string",
-          "nullable": true
-        }
-      ]
+      "maxLength": 4096,
+      "type": "string",
+      "nullable": true
     },
     "workflows": {
       "type": "array",
@@ -3353,22 +2985,14 @@
         "type": "object",
         "properties": {
           "name": {
-            "anyOf": [
-              {
-                "maxLength": 4096,
-                "type": "string",
-                "nullable": true
-              }
-            ]
+            "maxLength": 4096,
+            "type": "string",
+            "nullable": true
           },
           "description": {
-            "anyOf": [
-              {
-                "maxLength": 4096,
-                "type": "string",
-                "nullable": true
-              }
-            ]
+            "maxLength": 4096,
+            "type": "string",
+            "nullable": true
           },
           "workflowId": {
             "pattern": "^las:workflow:[a-f0-9]{32}$",
@@ -3410,22 +3034,14 @@
   "type": "object",
   "properties": {
     "name": {
-      "anyOf": [
-        {
-          "maxLength": 4096,
-          "type": "string",
-          "nullable": true
-        }
-      ]
+      "maxLength": 4096,
+      "type": "string",
+      "nullable": true
     },
     "description": {
-      "anyOf": [
-        {
-          "maxLength": 4096,
-          "type": "string",
-          "nullable": true
-        }
-      ]
+      "maxLength": 4096,
+      "type": "string",
+      "nullable": true
     },
     "specification": {
       "required": [
@@ -3482,22 +3098,14 @@
   "type": "object",
   "properties": {
     "name": {
-      "anyOf": [
-        {
-          "maxLength": 4096,
-          "type": "string",
-          "nullable": true
-        }
-      ]
+      "maxLength": 4096,
+      "type": "string",
+      "nullable": true
     },
     "description": {
-      "anyOf": [
-        {
-          "maxLength": 4096,
-          "type": "string",
-          "nullable": true
-        }
-      ]
+      "maxLength": 4096,
+      "type": "string",
+      "nullable": true
     },
     "workflowId": {
       "pattern": "^las:workflow:[a-f0-9]{32}$",
@@ -3541,22 +3149,14 @@
   "type": "object",
   "properties": {
     "name": {
-      "anyOf": [
-        {
-          "maxLength": 4096,
-          "type": "string",
-          "nullable": true
-        }
-      ]
+      "maxLength": 4096,
+      "type": "string",
+      "nullable": true
     },
     "description": {
-      "anyOf": [
-        {
-          "maxLength": 4096,
-          "type": "string",
-          "nullable": true
-        }
-      ]
+      "maxLength": 4096,
+      "type": "string",
+      "nullable": true
     },
     "workflowId": {
       "pattern": "^las:workflow:[a-f0-9]{32}$",
@@ -3594,22 +3194,14 @@
   "type": "object",
   "properties": {
     "name": {
-      "anyOf": [
-        {
-          "maxLength": 4096,
-          "type": "string",
-          "nullable": true
-        }
-      ]
+      "maxLength": 4096,
+      "type": "string",
+      "nullable": true
     },
     "description": {
-      "anyOf": [
-        {
-          "maxLength": 4096,
-          "type": "string",
-          "nullable": true
-        }
-      ]
+      "maxLength": 4096,
+      "type": "string",
+      "nullable": true
     }
   },
   "additionalProperties": false
@@ -3629,22 +3221,14 @@
   "type": "object",
   "properties": {
     "name": {
-      "anyOf": [
-        {
-          "maxLength": 4096,
-          "type": "string",
-          "nullable": true
-        }
-      ]
+      "maxLength": 4096,
+      "type": "string",
+      "nullable": true
     },
     "description": {
-      "anyOf": [
-        {
-          "maxLength": 4096,
-          "type": "string",
-          "nullable": true
-        }
-      ]
+      "maxLength": 4096,
+      "type": "string",
+      "nullable": true
     },
     "workflowId": {
       "pattern": "^las:workflow:[a-f0-9]{32}$",
@@ -3708,47 +3292,27 @@
         "type": "object",
         "properties": {
           "transitionExecutions": {
-            "anyOf": [
-              {
-                "type": "object"
-              }
-            ]
+            "type": "object"
           },
           "output": {
-            "anyOf": [
-              {
-                "type": "object"
-              }
-            ]
+            "type": "object"
           },
           "executionId": {
             "pattern": "^las:workflow-execution:[a-f0-9]{32}$",
             "type": "string"
           },
           "input": {
-            "anyOf": [
-              {
-                "type": "object"
-              }
-            ]
+            "type": "object"
           },
           "startTime": {
-            "anyOf": [
-              {
-                "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2} ?[0-9]{2}:?[0-9]{2}:?[0-9]{2}.?[0-9]{6}",
-                "type": "string",
-                "nullable": true
-              }
-            ]
+            "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2} ?[0-9]{2}:?[0-9]{2}:?[0-9]{2}.?[0-9]{6}",
+            "type": "string",
+            "nullable": true
           },
           "endTime": {
-            "anyOf": [
-              {
-                "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2} ?[0-9]{2}:?[0-9]{2}:?[0-9]{2}.?[0-9]{6}",
-                "type": "string",
-                "nullable": true
-              }
-            ]
+            "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2} ?[0-9]{2}:?[0-9]{2}:?[0-9]{2}.?[0-9]{6}",
+            "type": "string",
+            "nullable": true
           },
           "workflowId": {
             "pattern": "^las:workflow:[a-f0-9]{32}$",
@@ -3784,13 +3348,9 @@
       }
     },
     "nextToken": {
-      "anyOf": [
-        {
-          "maxLength": 4096,
-          "type": "string",
-          "nullable": true
-        }
-      ]
+      "maxLength": 4096,
+      "type": "string",
+      "nullable": true
     },
     "sortBy": {
       "type": "string",
@@ -3882,47 +3442,27 @@
   "type": "object",
   "properties": {
     "transitionExecutions": {
-      "anyOf": [
-        {
-          "type": "object"
-        }
-      ]
+      "type": "object"
     },
     "output": {
-      "anyOf": [
-        {
-          "type": "object"
-        }
-      ]
+      "type": "object"
     },
     "executionId": {
       "pattern": "^las:workflow-execution:[a-f0-9]{32}$",
       "type": "string"
     },
     "input": {
-      "anyOf": [
-        {
-          "type": "object"
-        }
-      ]
+      "type": "object"
     },
     "startTime": {
-      "anyOf": [
-        {
-          "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2} ?[0-9]{2}:?[0-9]{2}:?[0-9]{2}.?[0-9]{6}",
-          "type": "string",
-          "nullable": true
-        }
-      ]
+      "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2} ?[0-9]{2}:?[0-9]{2}:?[0-9]{2}.?[0-9]{6}",
+      "type": "string",
+      "nullable": true
     },
     "endTime": {
-      "anyOf": [
-        {
-          "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2} ?[0-9]{2}:?[0-9]{2}:?[0-9]{2}.?[0-9]{6}",
-          "type": "string",
-          "nullable": true
-        }
-      ]
+      "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2} ?[0-9]{2}:?[0-9]{2}:?[0-9]{2}.?[0-9]{6}",
+      "type": "string",
+      "nullable": true
     },
     "workflowId": {
       "pattern": "^las:workflow:[a-f0-9]{32}$",
@@ -3997,47 +3537,27 @@
   "type": "object",
   "properties": {
     "transitionExecutions": {
-      "anyOf": [
-        {
-          "type": "object"
-        }
-      ]
+      "type": "object"
     },
     "output": {
-      "anyOf": [
-        {
-          "type": "object"
-        }
-      ]
+      "type": "object"
     },
     "executionId": {
       "pattern": "^las:workflow-execution:[a-f0-9]{32}$",
       "type": "string"
     },
     "input": {
-      "anyOf": [
-        {
-          "type": "object"
-        }
-      ]
+      "type": "object"
     },
     "startTime": {
-      "anyOf": [
-        {
-          "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2} ?[0-9]{2}:?[0-9]{2}:?[0-9]{2}.?[0-9]{6}",
-          "type": "string",
-          "nullable": true
-        }
-      ]
+      "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2} ?[0-9]{2}:?[0-9]{2}:?[0-9]{2}.?[0-9]{6}",
+      "type": "string",
+      "nullable": true
     },
     "endTime": {
-      "anyOf": [
-        {
-          "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2} ?[0-9]{2}:?[0-9]{2}:?[0-9]{2}.?[0-9]{6}",
-          "type": "string",
-          "nullable": true
-        }
-      ]
+      "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2} ?[0-9]{2}:?[0-9]{2}:?[0-9]{2}.?[0-9]{6}",
+      "type": "string",
+      "nullable": true
     },
     "workflowId": {
       "pattern": "^las:workflow:[a-f0-9]{32}$",
