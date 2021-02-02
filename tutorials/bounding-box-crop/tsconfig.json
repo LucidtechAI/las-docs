@@ -1,0 +1,62 @@
+{
+  "include": [
+    "src",
+  ],
+  "compilerOptions": {
+    "incremental": true,
+    "target": "es5",
+    "module": "commonjs",
+    "lib": [
+      "esnext",
+      "dom",
+      "DOM.Iterable"
+    ],
+    "allowJs": true,
+    "checkJs": true,
+    "jsx": "react",
+    "declaration": true,
+    "declarationMap": true,
+    "declarationDir": "./types",
+    "outDir": "./dist",
+    "rootDir": "./src",
+    "composite": true,
+    "removeComments": true,
+    "noEmit": false,
+    "importHelpers": true,
+    "downlevelIteration": true,
+    "isolatedModules": true,
+    "strict": true,
+    "noImplicitAny": false,
+    "strictNullChecks": true,
+    "strictFunctionTypes": true,
+    "strictBindCallApply": true,
+    "strictPropertyInitialization": true,
+    "noImplicitThis": true,
+    "alwaysStrict": true,
+    "noUnusedLocals": false,
+    "noUnusedParameters": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "moduleResolution": "node",
+    "baseUrl": "./",
+    "skipLibCheck": true,
+    "paths": {
+      
+    },
+    "rootDirs": [
+      
+    ],
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "preserveSymlinks": true,
+    "allowUmdGlobalAccess": true,
+    "sourceRoot": "./src",
+    "mapRoot": "",
+    "inlineSourceMap": true,
+    "inlineSources": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "forceConsistentCasingInFileNames": true,
+    "resolveJsonModule": true
+  }
+}
