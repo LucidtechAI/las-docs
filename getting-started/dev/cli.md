@@ -25,7 +25,7 @@ List models that are available for predictions
 ```
 
 Upload a document
-```
+```bash
 >> $ las documents create invoice.pdf
 {
   "documentId": "las:document:<hex>",
@@ -34,7 +34,7 @@ Upload a document
 ```
 
 Run inference on the document using a model
-```
+```bash
 >> $ las predictions create las:document:<hex> las:model:<hex>
 {
   "documentId": "las:document:<hex>",
