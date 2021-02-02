@@ -9,7 +9,7 @@ using Lucidtech.Las;
 
 Client client = new Client(<credentials>);
 string documentId = "las:document:39e2d47b04214610a66050d1c6ed8b6d";
-string modelId = "las:document:39e2d47b04214610a66050d1c6ed8b6d";
+string modelId = "las:model:39e2d47b04214610a66050d1c6ed8b6d";
 var response = client.CreatePrediction(documentId, modelId);
 ```
 
