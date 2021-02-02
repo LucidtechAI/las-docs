@@ -10,18 +10,34 @@ Install the CLI via the Python package manager [pip](https://pip.pypa.io/en/stab
 
 ## Make a prediction on a document
 
-Suppose we wish to run inference on a document using Lucidtech’s invoice model.
-
+List models that are available for predictions
 ```bash
+>> $ las models list
+{
+  "models": [
+    {
+      "modelId": "las:model:<hex>",
+      ...
+    }
+  ],
+  "nextToken": null
+}
+```
+
+Upload a document
+```
 >> $ las documents create invoice.pdf
 {
-  "documentId": "012345xxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
-  "contentType": "application/pdf",
-  "consentId": "default"
+  "documentId": "las:document:<hex>",
+  "contentType": "application/pdf"
 }
->> $ las predictions create 012345xxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx invoice
+```
+
+Run inference on the document using a model
+```
+>> $ las predictions create las:document:<hex> las:model:<hex>
 {
-  "documentId": "012345xxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+  "documentId": "las:document:<hex>",
   "predictions": [
     ...
   ]
@@ -35,14 +51,13 @@ Suppose we make a prediction that returns incorrect values and we wish to improv
 ```bash
 >> $ las documents create invoice.pdf
 {
-  "documentId": "012345xxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
-  "contentType": "application/pdf",
-  "consentId": "default"
+  "documentId": "las:document:<hex>",
+  "contentType": "application/pdf"
 }
->> $ las documents update 012345xxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx --fields total_amount=300.00 due_date=2020-02-28
+>> $ las documents update las:document:<hex> --fields total_amount=300.00 due_date=2020-02-28
 {
-  "documentId": "012345xxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
-  "feedback": [
+  "documentId": "las:document:<hex>",
+  "groundTruth": [
     ...
   ]
 }
@@ -55,28 +70,28 @@ Consent ID is an identifier you can assign to documents to keep track of documen
 {% endhint %}
 
 ```bash
->> $ las documents create invoice.pdf --consent-id foobar
+>> $ las documents create invoice.pdf --consent-id las:consent:<hex>
 {
-  "documentId": "012345xxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+  "documentId": "las:document:<hex>",
   "contentType": "application/pdf",
-  "consentId": "foobar"
+  "consentId": "las:consent:<hex>"
 }
 ```
 
 ## Get document and download document content
 
 ```bash
->> $ las documents create invoice.pdf --consent-id foobar
+>> $ las documents create invoice.pdf --consent-id las:consent:<hex>
 {
-  "documentId": "012345xxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+  "documentId": "las:document:<hex>",
   "contentType": "application/pdf",
-  "consentId": "foobar"
+  "consentId": "las:consent:<hex>"
 }
->> $ las documents get 012345xxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx --download-content invoice2.pdf
+>> $ las documents get las:document:<hex> --download-content invoice2.pdf
 {
-  "documentId": "012345xxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+  "documentId": "las:document:<hex>",
   "contentType": "application/pdf",
-  "consentId": "foobar",
+  "consentId": "las:consent:<hex>",
   "content": "XXXXXXXXX... [TRUNCATED]"
 }
 ```
@@ -86,9 +101,9 @@ Consent ID is an identifier you can assign to documents to keep track of documen
 Suppose we wish to delete all documents associated with a customer in our ERP database or other systems. We need to provide a consent\_id to the prediction method that uniquely identifies the customer and use that consent\_id to delete documents.
 
 ```bash
->> $ las consents delete foobar
+>> $ las consents delete las:consent:<hex>
 {
-  "consentId": "foobar",
+  "consentId": "las:consent:<hex>",
   "documentIds": [
     ...
   ]
@@ -102,8 +117,8 @@ Creating a batch is a way to group documents. This is useful for specifying batc
 ```bash
 >> $ las batches create
 {
-  "batchId": "012345xxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
-  "description": "default"
+  "batchId": "las:batch:<hex>",
+  ...
 }
 ```
 
