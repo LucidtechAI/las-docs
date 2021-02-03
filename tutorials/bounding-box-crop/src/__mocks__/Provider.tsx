@@ -2,7 +2,6 @@ import React, { ComponentType, useState } from 'react';
 import { Client as SDKClient } from '@lucidtech/las-sdk-core';
 import { Asset, TransitionExecution } from '@lucidtech/las-sdk-core/lib/types';
 
-import assets from '../__fixtures__/assets';
 import documents from '../__fixtures__/documents';
 import { QueueStatus, RemoteComponentExternalProps } from '../types';
 import { createTransition, createTransitionExecution } from '../__fixtures__/props';
@@ -59,11 +58,10 @@ const PropProvider = ({ Component }: PropProviderProps) => {
     });
   };
 
-  const getAsset = async (assetId: string): Promise<Asset> => {
-    return new Promise((resolve, _reject) => {
+  const getAsset = async (_assetId: string): Promise<Asset> => {
+    return new Promise((_resolve, reject) => {
       setTimeout(() => {
-        const asset = assets[assetId];
-        return resolve(asset);
+        return reject();
       }, 1000);
     });
   };

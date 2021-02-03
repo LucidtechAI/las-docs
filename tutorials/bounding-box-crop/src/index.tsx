@@ -2,6 +2,7 @@ import React, { ReactNode, useEffect, useMemo, useState } from 'react';
 
 import { QueueStatus, RemoteComponentExternalProps } from './types';
 import { Prediction } from '@lucidtech/las-sdk-core';
+import Canvas from './canvas';
 
 declare const ___TUTORIAL_VERSION___: string;
 
@@ -19,11 +20,10 @@ const RemoteComponent = ({
   onApprove,
   onReject,
   onRequestNew,
-  getAsset,
   onSkip,
   client,
   queueStatus
-}: RemoteComponentExternalProps): JSX.Element => {
+}: RemoteComponentExternalProps) => {
   const [doc, setDoc] = useState('');
   const [isLoadingDocument, setIsLoadingDocument] = useState(true);
 
@@ -70,42 +70,23 @@ const RemoteComponent = ({
   const somethingIsLoading = queueStatus === QueueStatus.LOADING || isLoadingDocument
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'row', width: '100%' }}>
+    <div style={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
       <div style={{ flexGrow: 1, display: 'flex', justifyContent: 'center', alignItems: 'center' }} className="mr-5">
         {isLoadingDocument || queueStatus === QueueStatus.LOADING ? (
-          <Spinner animation="border" variant="primary" />
+          'Loading...'
         ) : null}
       </div>
       <div style={{ minWidth: '40%' }}>
         <form onSubmit={(e) => e.preventDefault()}>
           <div className="card">
-            <div className="card-header">
-              <header style={{ display: 'flex', flexDirection: 'row' }}>
-                <h2 style={{ margin: 0 }}>
-                  <span
-                    className={`fe fe-file-text mr-3`}
-                    style={{
-                      backgroundColor: 'lightblue',
-                      color: 'white',
-                      borderRadius: '50%',
-                      padding: '0.3em',
-                    }}
-                  />
-                  {transition?.name || 'Document'}
-                </h2>
-              </header>
-            </div>
-
             <div className="card-body" style={ {display: 'flex', justifyContent: 'center', alignItems: 'center'} }>
               {somethingIsLoading ? (
-                <Spinner animation="border" variant="primary" />
+                'Loading...'
               ) : (
-                <Grid>
-                  {Object.entries(values).map(([fieldKey, value]) => {
-                    return <React.Fragment key={fieldKey}>{getFieldComponent(fieldKey, value)}</React.Fragment>;
-                  })}
-                </Grid>
-              )}
+       
+                <Canvas doc={doc} />
+        
+                )}
             </div>
 
             <div className="card-footer">
@@ -117,33 +98,33 @@ const RemoteComponent = ({
                 }}
               >
                 <div style={{ order: 2 }}>
-                  <Button
-                    variant="success"
+                  <button
+                  
                     style={{ width: '150px', order: 1 }}
                     onClick={approve}
-                    disabled={isLoadingDocument || isLoadingAssets}
+                    disabled={isLoadingDocument}
                   >
-                    {getButtonIcon('success')}
-                  </Button>
+                    Yes
+                  </button>
                 </div>
                 <div style={{ order: 1, display: 'flex', flexDirection: 'row' }}>
-                  <Button
-                    variant="soft"
+                  <button
+                    
                     style={{ order: 2 }}
                     onClick={skip}
-                    disabled={isLoadingDocument || isLoadingAssets}
+                    disabled={isLoadingDocument}
                   >
-                    {getButtonIcon('soft')}
-                  </Button>
-                  <Button
-                    variant="danger"
+                    Skip
+                  </button>
+                  <button
+                    
                     className="mr-2"
                     style={{ order: 1 }}
                     onClick={reject}
-                    disabled={isLoadingDocument || isLoadingAssets}
+                    disabled={isLoadingDocument}
                   >
-                    {getButtonIcon('danger')}
-                  </Button>
+                    No
+                  </button>
                 </div>
               </div>
             </div>
