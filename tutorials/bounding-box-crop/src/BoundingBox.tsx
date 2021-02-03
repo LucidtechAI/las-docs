@@ -60,19 +60,17 @@ const BoundingBox = ({ shapeProps, isSelected, onSelect, onChange }) => {
         {...shapeProps}
         onDragStart={onSelect}
         onDragEnd={(e) => {
-          console.log(e);
           onChange({
             ...shapeProps,
             x: e.target.x(),
             y: e.target.y(),
           });
         }}
-        onTransformEnd={(_event) => {
+        onTransform={(_event) => {
           // transformer is changing scale of the node
           // and NOT its width or height
           // but in the store we have only width and height
           // to match the data better we will reset scale on transform end
-          console.log(_event);
           const node = shapeRef.current;
           const scaleX = node?.scaleX();
           const scaleY = node?.scaleY();
@@ -90,8 +88,25 @@ const BoundingBox = ({ shapeProps, isSelected, onSelect, onChange }) => {
           });
         }}
       >
-        <KonvaRect stroke='green' strokeEnabled={!isSelected} x={0} y={0} width={shapeProps.width} height={shapeProps.height} strokeWidth={2} />
-        <KonvaRect fill='white' opacity={0.2} x={0} y={0} width={shapeProps.width} height={shapeProps.height} />
+        <KonvaRect
+          fill='white'
+          opacity={0.2}
+          x={0}
+          y={0}
+          width={shapeProps.width}
+          height={shapeProps.height}
+        />
+        <KonvaRect
+          stroke='green'
+          strokeEnabled
+          x={0}
+          y={0}
+          width={shapeProps.width}
+          height={shapeProps.height}
+          strokeWidth={2}
+          dashEnabled
+          dash={[5, 5]}
+        />
       </Group>
       {isSelected && (
         <Transformer
@@ -104,9 +119,7 @@ const BoundingBox = ({ shapeProps, isSelected, onSelect, onChange }) => {
             "bottom-left",
             "bottom-right",
           ]}
-          borderDash={[5,5]}
-          borderStrokeWidth={2}
-          borderStroke="green"
+borderEnabled={false}
           boundBoxFunc={(oldBox, newBox) => {
             // limit resize
             if (newBox.width < 10 || newBox.height < 10) {

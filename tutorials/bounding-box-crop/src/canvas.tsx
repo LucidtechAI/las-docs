@@ -76,7 +76,6 @@ const Canvas = ({ doc }: CanvasProps) => {
                 selectBox(box.id);
               }}
               onChange={(newAttrs: any) => {
-                console.log(newAttrs)
                 const boxCopy = boundingBoxes.slice();
                 boxCopy[i] = newAttrs;
                 setBoundingBoxes(boxCopy);
