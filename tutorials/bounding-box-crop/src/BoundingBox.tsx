@@ -1,13 +1,10 @@
-import { TransformerConfig } from "konva/types/shapes/Transformer";
 import React from "react";
-import { KonvaNodeComponent, Rect as KonvaRect, Transformer } from "react-konva";
+import { Rect as KonvaRect, Group, Transformer } from "react-konva";
 import Konva from "konva";
-import { Rect, RectConfig } from "konva/types/shapes/Rect";
 import { Vector2d } from "konva/types/types";
-import { NodeConfig, Node } from "konva/types/Node";
 
 const BoundingBox = ({ shapeProps, isSelected, onSelect, onChange }) => {
-  const shapeRef = React.useRef<Konva.Rect>(null);
+  const shapeRef = React.useRef<Konva.Group>(null);
   const trRef = React.useRef<Konva.Transformer>(null);
 
   React.useEffect(() => {
@@ -18,8 +15,7 @@ const BoundingBox = ({ shapeProps, isSelected, onSelect, onChange }) => {
     }
   }, [isSelected]);
 
-  function checkInBounds (this: any, pos: Vector2d) {
-    console.log(this, pos)
+  function checkInBounds(this: any, pos: Vector2d) {
     let newX = pos.x;
     let newY = pos.y;
 
@@ -51,19 +47,20 @@ const BoundingBox = ({ shapeProps, isSelected, onSelect, onChange }) => {
       x: newX,
       y: newY,
     };
-  };
+  }
 
   return (
     <>
-      <KonvaRect
+      <Group
+        ref={shapeRef}
         onClick={onSelect}
         onTap={onSelect}
-        ref={shapeRef}
-        {...shapeProps}
-        opacity={0.2}
         dragBoundFunc={checkInBounds}
         draggable
+        {...shapeProps}
+        onDragStart={onSelect}
         onDragEnd={(e) => {
+          console.log(e);
           onChange({
             ...shapeProps,
             x: e.target.x(),
@@ -75,6 +72,7 @@ const BoundingBox = ({ shapeProps, isSelected, onSelect, onChange }) => {
           // and NOT its width or height
           // but in the store we have only width and height
           // to match the data better we will reset scale on transform end
+          console.log(_event);
           const node = shapeRef.current;
           const scaleX = node?.scaleX();
           const scaleY = node?.scaleY();
@@ -91,7 +89,10 @@ const BoundingBox = ({ shapeProps, isSelected, onSelect, onChange }) => {
             height: Math.max((node?.height() || 1) * (scaleY || 1)),
           });
         }}
-      />
+      >
+        <KonvaRect stroke='green' strokeEnabled={!isSelected} x={0} y={0} width={shapeProps.width} height={shapeProps.height} strokeWidth={2} />
+        <KonvaRect fill='white' opacity={0.2} x={0} y={0} width={shapeProps.width} height={shapeProps.height} />
+      </Group>
       {isSelected && (
         <Transformer
           ref={trRef}
@@ -103,9 +104,12 @@ const BoundingBox = ({ shapeProps, isSelected, onSelect, onChange }) => {
             "bottom-left",
             "bottom-right",
           ]}
+          borderDash={[5,5]}
+          borderStrokeWidth={2}
+          borderStroke="green"
           boundBoxFunc={(oldBox, newBox) => {
             // limit resize
-            if (newBox.width < 5 || newBox.height < 5) {
+            if (newBox.width < 10 || newBox.height < 10) {
               return oldBox;
             }
             return newBox;

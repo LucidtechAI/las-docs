@@ -1,6 +1,6 @@
 import { KonvaEventObject } from "konva/types/Node";
-import React, { useState } from "react";
-import { Stage, Layer, Image, Transformer, Rect } from "react-konva";
+import React, { useRef, useState } from "react";
+import { Stage, Layer, Image, Rect } from "react-konva";
 import useImage from "use-image";
 
 import BoundingBox from "./BoundingBox";
@@ -14,9 +14,8 @@ type BoundingBox = {
   y: number;
   width: number;
   height: number;
-  fill: string;
   id: string;
-}
+};
 
 const initialBoundingBoxes = [
   {
@@ -24,7 +23,6 @@ const initialBoundingBoxes = [
     y: 10,
     width: 100,
     height: 100,
-    fill: "red",
     id: "rect1",
   },
   {
@@ -32,44 +30,53 @@ const initialBoundingBoxes = [
     y: 150,
     width: 100,
     height: 100,
-    fill: "green",
     id: "rect2",
   },
 ];
 
 const Canvas = ({ doc }: CanvasProps) => {
   const [image] = useImage(doc);
-  const [boundingBoxes, setBoundingBoxes] = useState<Array<BoundingBox>>(initialBoundingBoxes);
+  const [boundingBoxes, setBoundingBoxes] = useState<Array<BoundingBox>>(
+    initialBoundingBoxes
+  );
 
+  const backgroundOverlay = useRef(null)
 
   const [selectedId, selectBox] = React.useState<string | null>(null);
 
   const checkDeselect = (event: KonvaEventObject<MouseEvent | TouchEvent>) => {
     // deselect when clicked on empty area
-    const clickedOnEmpty = event.target === event.target.getStage();
+    const clickedOnEmpty = event.target === backgroundOverlay.current;
     if (clickedOnEmpty) {
       selectBox(null);
     }
   };
 
-  return (
-    <Stage width={window.innerWidth - 30} height={window.innerHeight - 100} onMouseDown={checkDeselect}
-    onTouchStart={checkDeselect}>
-      <Layer>
+  const width = window.innerWidth - 30;
+  const height = window.innerHeight - 100;
 
-        <Image image={image} />
-      </Layer>
+  return (
+    <Stage
+      width={window.innerWidth - 30}
+      height={window.innerHeight - 100}
+      onMouseDown={checkDeselect}
+      onTouchStart={checkDeselect}
+    >
       <Layer>
-      {boundingBoxes.map((box, i) => {
+        <Image image={image} />
+        <Rect fill='black' opacity={0.2} width={width} height={height} ref={backgroundOverlay} />
+</Layer><Layer>
+        {boundingBoxes.map((box, i) => {
           return (
             <BoundingBox
-              key={i}
+              key={box.id}
               shapeProps={box}
               isSelected={box.id === selectedId}
               onSelect={() => {
                 selectBox(box.id);
               }}
-              onChange={(newAttrs) => {
+              onChange={(newAttrs: any) => {
+                console.log(newAttrs)
                 const boxCopy = boundingBoxes.slice();
                 boxCopy[i] = newAttrs;
                 setBoundingBoxes(boxCopy);
