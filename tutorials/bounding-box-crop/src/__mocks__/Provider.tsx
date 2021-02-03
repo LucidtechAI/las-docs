@@ -12,7 +12,7 @@ class Client {
       setTimeout(() => {
         const document = documents[documentId];
         return resolve(document);
-      }, 2000);
+      }, 0);
     });
   }
 }
@@ -51,7 +51,7 @@ const PropProvider = ({ Component }: PropProviderProps) => {
       setTimeout(() => {
         const execution = createTransitionExecution(transition.transitionId);
         return resolve(execution);
-      }, 1000);
+      }, 0);
     }).then(res => {
       setQueueStatus(QueueStatus.READY)
       setTransitionExecution(createTransitionExecution(res.transitionId))
