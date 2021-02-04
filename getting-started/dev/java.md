@@ -18,19 +18,13 @@ client = new Client(credentials);
 
 ## Upload a document to get a document id
 
-{% hint style="info" %}
-Consent ID is an identifier you can assign to documents to keep track of document ownership for your customers.
-{% endhint %}
-
 ```java
 public void createDocument() throws IOException, APIException, MissingAccessTokenException {
     ContentType contentType = ContentType.fromString("image/jpeg");
     Path path = Paths.get("path/to/document");
     byte[] content = Files.readAllBytes(path);
-    String consentId = "consent id";
 
-    JSONObject document = client.createDocument(content, contentType, consentId);
-    Assert.assertTrue(document.has("consentId"));
+    JSONObject document = client.createDocument(content, contentType);
     Assert.assertTrue(document.has("contentType"));
     Assert.assertTrue(document.has("documentId"));
 }
@@ -38,24 +32,30 @@ public void createDocument() throws IOException, APIException, MissingAccessToke
 
 ## Make a prediction on a document
 
-Suppose we wish to run inference on a document using Lucidtech’s invoice model.
+Suppose we wish to run inference on a document using one of the available models.
 
 ```java
 public void createPrediction() throws IOException, APIException, MissingAccessTokenException {
-    String modelName = "invoice";
-    JSONObject prediction = client.createPrediction(documentId, modelName);
+    String modelId = "las:model:<hex-uuid>"; 
+    JSONObject prediction = client.createPrediction(documentId, modelId);
     JSONArray fields = prediction.getJSONArray("predictions");
     Assert.assertNotNull(fields);
 }
 ```
 
+{% hint style="info" %}
+See what models you have available and their model id by using the method `listModels()`
+{% endhint %}
+
+
 ## Set ground truth of document
 
-Suppose we make a prediction that returns incorrect values and we wish to improve the model for future use. We can do so by sending feedback to the model, telling it what the expected values should have been.
+Suppose we make a prediction that returns incorrect values and we wish to improve the model for future use. 
+We can do so by sending groundTruth to the model, telling it what the expected values should have been.
 
 ```java
-public void setDocumentFeedback() throws IOException, APIException, MissingAccessTokenException {
-    JSONObject feedback = new JSONObject();
+public void setDocumentGroundTruth() throws IOException, APIException, MissingAccessTokenException {
+    JSONObject groundTruth = new JSONObject();
 
     JSONObject totalAmount = new JSONObject();
     totalAmount.put("label", "total_amount");
@@ -67,23 +67,26 @@ public void setDocumentFeedback() throws IOException, APIException, MissingAcces
 
     List<JSONObject> fieldList = Arrays.asList(totalAmount, purchaseDate);
     JSONArray fields = new JSONArray(fieldList);
-    feedback.put("feedback", fields);
+    groundTruth.put("groundTruth", fields);
 
-    JSONObject feedbackResponse = client.updateDocument(documentId, feedback);
-    Assert.assertNotNull(feedbackResponse.get("documentId"));
-    Assert.assertNotNull(feedbackResponse.get("consentId"));
-    Assert.assertNotNull(feedbackResponse.get("feedback"));
+    JSONObject groundTruthResponse = client.updateDocument(documentId, groundTruth);
+    Assert.assertNotNull(groundTruthResponse.get("documentId"));
+    Assert.assertNotNull(groundTruthResponse.get("consentId"));
+    Assert.assertNotNull(groundTruthResponse.get("groundTruth"));
 }
 ```
 
 ## Create a batch and associate a few documents with it
 
-Creating a batch is a way to group documents. This is useful for specifying batches of documents to use in improving the model later.
+Creating a batch is a way to group documents. 
+This is useful for specifying batches of documents to use in improving the model later.
 
-```javascript
+```java
 public void createBatch() throws IOException, APIException, MissingAccessTokenException {
-    String description = "I'm gonna create a new batch, give me a batch id!";
-    JSONObject response = client.createBatch(description);
+    CreadBatchOptions options = new CreateBatchOptions()
+        .setName("TrainingData")
+        .setDescription("I'm gonna create a new batch, give me a batch id!");
+    JSONObject response = client.createBatch(options);
     Assert.assertNotNull(response.get("batchId"));
 }
 ```
