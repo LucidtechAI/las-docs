@@ -2,7 +2,7 @@ import React from "react";
 import { Rect as KonvaRect, Group, Transformer } from "react-konva";
 import Konva from "konva";
 import { Vector2d } from "konva/types/types";
-import { BoundingBox } from "./canvas";
+import { BoundingBox } from "./Canvas";
 
 type BoundingBoxProps = {
   bounds: BoundingBox;

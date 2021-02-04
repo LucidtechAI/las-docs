@@ -4,6 +4,7 @@ import { Stage, Layer, Image as KonvaImage, Rect } from "react-konva";
 import useImage from "use-image";
 
 import BoundingBoxGroup from "./BoundingBox";
+import Preview from "./Preview";
 
 type CanvasProps = {
   doc: string;
@@ -39,6 +40,16 @@ interface Dimensions {
   height: number;
 }
 
+function getCenteredXYProps(
+  stageDimensions: Dimensions,
+  shapeDimensions: Dimensions
+) {
+  const x = (stageDimensions.width - shapeDimensions.width) / 2;
+  const y = (stageDimensions.height - shapeDimensions.height) / 2;
+
+  return { x, y };
+}
+
 const Canvas = ({ doc }: CanvasProps) => {
   const [image] = useImage(doc);
   const [boundingBoxes, setBoundingBoxes] = useState<Array<BoundingBox>>(
@@ -60,25 +71,18 @@ const Canvas = ({ doc }: CanvasProps) => {
   const stageWidth = 600;
   const stageHeight = 600;
 
-  const getCenteredXYProps = (dimensions: Dimensions) => {
-    const x = (stageWidth - dimensions.width) / 2;
-    const y = (stageHeight - dimensions.height) / 2;
-
-    return { x, y };
-  };
-
   const imageSizeProps: BoundingBox = useMemo(() => {
     if (!image) return { width: 0, height: 0, x: 0, y: 0 };
 
     let { width, height } = image;
 
     // could add padding or extra dimension to make up for here
-    const targetW = stageWidth;
-    const targetH = stageHeight;
+    const targetWidth = stageWidth; // + (padding * 2) for instance
+    const targetHeight = stageHeight;
 
     // compute the ratios of image dimensions to aperture dimensions
-    const widthFit = targetW / width;
-    const heightFit = targetH / height;
+    const widthFit = targetWidth / width;
+    const heightFit = targetHeight / height;
 
     // compute a scale for best fit and apply it
     const scale = widthFit > heightFit ? heightFit : widthFit;
@@ -86,54 +90,60 @@ const Canvas = ({ doc }: CanvasProps) => {
     width = width * scale;
     height = height * scale;
 
-    const { x, y } = getCenteredXYProps({ width, height });
+    const { x, y } = getCenteredXYProps(
+      { width: stageWidth, height: stageHeight },
+      { width, height }
+    );
 
     return { width, height, x, y };
   }, [image]);
 
   return (
-    <Stage
-      width={stageWidth}
-      height={stageHeight}
-      onMouseDown={checkDeselect}
-      onTouchStart={checkDeselect}
-      style={{
-        backgroundPosition: "0px 0px, 10px 10px",
-        backgroundSize: "20px 20px",
-        backgroundImage:
-          "linear-gradient(45deg, #eee 25%, transparent 25%, transparent 75%, #eee 75%, #eee 100%),linear-gradient(45deg, #eee 25%, white 25%, white 75%, #eee 75%, #eee 100%)",
-      }}
-    >
-      <Layer>
-        <KonvaImage image={image} {...imageSizeProps} />
-        <Rect
-          fill='black'
-          opacity={0.2}
-          ref={backgroundOverlay}
-          {...imageSizeProps}
-        />
-      </Layer>
-      <Layer>
-        {boundingBoxes.map((box, i) => {
-          return (
-            <BoundingBoxGroup
-              key={box.id}
-              shapeProps={box}
-              isSelected={box.id === selectedId}
-              bounds={imageSizeProps}
-              onSelect={() => {
-                selectBox(box.id || null);
-              }}
-              onChange={(newAttrs: BoundingBox) => {
-                const boxCopy = boundingBoxes.slice();
-                boxCopy[i] = newAttrs;
-                setBoundingBoxes(boxCopy);
-              }}
-            />
-          );
-        })}
-      </Layer>
-    </Stage>
+    <>
+      <Stage
+        width={stageWidth}
+        height={stageHeight}
+        onMouseDown={checkDeselect}
+        onTouchStart={checkDeselect}
+        style={{
+          backgroundPosition: "0px 0px, 10px 10px",
+          backgroundSize: "20px 20px",
+          backgroundImage:
+            "linear-gradient(45deg, #eee 25%, transparent 25%, transparent 75%, #eee 75%, #eee 100%),linear-gradient(45deg, #eee 25%, white 25%, white 75%, #eee 75%, #eee 100%)",
+        }}
+      >
+        <Layer>
+          <KonvaImage image={image} {...imageSizeProps} />
+          <Rect
+            fill='black'
+            opacity={0.2}
+            ref={backgroundOverlay}
+            {...imageSizeProps}
+          />
+        </Layer>
+        <Layer>
+          {boundingBoxes.map((box, i) => {
+            return (
+              <BoundingBoxGroup
+                key={box.id}
+                shapeProps={box}
+                isSelected={box.id === selectedId}
+                bounds={imageSizeProps}
+                onSelect={() => {
+                  selectBox(box.id || null);
+                }}
+                onChange={(newAttrs: BoundingBox) => {
+                  const boxCopy = boundingBoxes.slice();
+                  boxCopy[i] = newAttrs;
+                  setBoundingBoxes(boxCopy);
+                }}
+              />
+            );
+          })}
+        </Layer>
+      </Stage>
+      <Preview thumbnails={boundingBoxes} width={200} height={600} image={image} onSelect={selectBox} />
+    </>
   );
 };
 
