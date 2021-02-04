@@ -41,9 +41,9 @@ function getCenteredXYProps(
 // normalize to pixel values
 function normalizePredictionsToPixels(
   predictions: Array<Prediction>,
-  imageDimensions: { width: number; height: number }
+  imageDimensions: { width: number; height: number, offsetX: number, offsetY: number }
 ): Array<BoundingBox> {
-  const { width: imageWidth, height: imageHeight } = imageDimensions;
+  const { width: imageWidth, height: imageHeight, offsetX, offsetY } = imageDimensions;
 
   // For now, expect prediction value to be an array of 4 values: x, y, width, height
   const filteredPredictions = predictions.filter(
@@ -53,8 +53,8 @@ function normalizePredictionsToPixels(
   const initialBoundingBoxes: Array<BoundingBox> = filteredPredictions.map(
     (prediction, index) => {
       const [x, y, width, height] = prediction.value;
-      const pixelX = x * imageWidth;
-      const pixelY = y * imageHeight;
+      const pixelX = (x * imageWidth) + offsetX;
+      const pixelY = (y * imageHeight) + offsetY;
       const pixelWidth = width * imageWidth;
       const pixelHeight = height * imageHeight;
       return {
@@ -119,8 +119,8 @@ const Canvas = ({ doc, predictions }: CanvasProps) => {
 
   // when we load our initial predictions
   useEffect(() => {
-    const { width: imageWidth, height: imageHeight } = imageSizeProps;
-    const initialBoundingBoxes = normalizePredictionsToPixels(predictions, { width: imageWidth, height: imageHeight})
+    const { width: imageWidth, height: imageHeight, x, y } = imageSizeProps;
+    const initialBoundingBoxes = normalizePredictionsToPixels(predictions, { width: imageWidth, height: imageHeight, offsetX: x, offsetY: y})
     setBoundingBoxes(initialBoundingBoxes);
   }, [predictions, imageSizeProps]);
 
@@ -153,8 +153,8 @@ const Canvas = ({ doc, predictions }: CanvasProps) => {
   };
 
   const reset = () => {
-    const { width: imageWidth, height: imageHeight } = imageSizeProps;
-    const initialBoundingBoxes = normalizePredictionsToPixels(predictions, { width: imageWidth, height: imageHeight})
+    const { width: imageWidth, height: imageHeight, x, y } = imageSizeProps;
+    const initialBoundingBoxes = normalizePredictionsToPixels(predictions, { width: imageWidth, height: imageHeight, offsetX: x, offsetY: y})
     setBoundingBoxes(initialBoundingBoxes);
   };
 
