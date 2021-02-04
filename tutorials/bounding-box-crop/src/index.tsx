@@ -99,7 +99,7 @@ const RemoteComponent = ({
                 alignItems: "center",
               }}
             >
-              {somethingIsLoading ? "Loading..." : <Canvas doc={doc} />}
+              {somethingIsLoading ? "Loading..." : <Canvas doc={doc} predictions={transitionExecution.input?.predictions} />}
             </div>
 
             <div className='card-footer'>

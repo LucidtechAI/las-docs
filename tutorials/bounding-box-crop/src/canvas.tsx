@@ -1,5 +1,5 @@
 import { KonvaEventObject } from "konva/types/Node";
-import React, { useMemo, useRef, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import { Stage, Layer, Image as KonvaImage, Rect } from "react-konva";
 import useImage from "use-image";
 
@@ -8,6 +8,7 @@ import Preview from "./Preview";
 
 type CanvasProps = {
   doc: string;
+  predictions: any;
 };
 
 export type BoundingBox = {
@@ -17,24 +18,6 @@ export type BoundingBox = {
   height: number;
   id?: string;
 };
-
-const initialBoundingBoxes = [
-  {
-    x: 10,
-    y: 10,
-    width: 100,
-    height: 100,
-    id: "rect1",
-  },
-  {
-    x: 150,
-    y: 150,
-    width: 100,
-    height: 100,
-    id: "rect2",
-  },
-];
-
 interface Dimensions {
   width: number;
   height: number;
@@ -50,11 +33,9 @@ function getCenteredXYProps(
   return { x, y };
 }
 
-const Canvas = ({ doc }: CanvasProps) => {
+const Canvas = ({ doc, predictions }: CanvasProps) => {
   const [image] = useImage(doc);
-  const [boundingBoxes, setBoundingBoxes] = useState<Array<BoundingBox>>(
-    initialBoundingBoxes
-  );
+  const [boundingBoxes, setBoundingBoxes] = useState<Array<BoundingBox>>([]);
 
   const backgroundOverlay = useRef(null);
 
@@ -71,6 +52,7 @@ const Canvas = ({ doc }: CanvasProps) => {
   const stageWidth = 600;
   const stageHeight = 600;
 
+  // get image scale for canvas (stage) size so it fits
   const imageSizeProps: BoundingBox = useMemo(() => {
     if (!image) return { width: 0, height: 0, x: 0, y: 0 };
 
@@ -97,6 +79,34 @@ const Canvas = ({ doc }: CanvasProps) => {
 
     return { width, height, x, y };
   }, [image]);
+
+  // when we load our initial predictions
+  useEffect(() => {
+    const { width: imageWidth, height: imageHeight } = imageSizeProps;
+
+    // normalize to pixel values
+    const initialBoundingBoxes: Array<BoundingBox> = predictions.map(
+      (prediction, index) => {
+        // For now, expect prediction value to be an array of 4 values: x, y, width, height
+        if (!Array.isArray(prediction.value) || prediction.value.length !== 4)
+          return;
+        const [x, y, width, height] = prediction.value;
+        const pixelX = x * imageWidth;
+        const pixelY = y * imageHeight;
+        const pixelWidth = width * imageWidth;
+        const pixelHeight = height * imageHeight;
+        return {
+          x: pixelX,
+          y: pixelY,
+          width: pixelWidth,
+          height: pixelHeight,
+          id: prediction.label || index.toString(),
+        };
+      }
+    );
+
+    setBoundingBoxes(initialBoundingBoxes);
+  }, [predictions, imageSizeProps]);
 
   return (
     <>
@@ -142,7 +152,13 @@ const Canvas = ({ doc }: CanvasProps) => {
           })}
         </Layer>
       </Stage>
-      <Preview thumbnails={boundingBoxes} width={200} height={600} image={image} onSelect={selectBox} />
+      <Preview
+        thumbnails={boundingBoxes}
+        width={200}
+        height={600}
+        image={image}
+        onSelect={selectBox}
+      />
     </>
   );
 };

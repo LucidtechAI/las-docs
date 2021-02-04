@@ -18,7 +18,6 @@ const PreviewThumbnail = ({
   crop,
 }: PreviewThumbnailProps) => {
   let { width, height } = crop;
-  console.log(width, height);
 
   // could add padding or extra dimension to make up for here
   const targetWidth = containerWidth; // + (padding * 2) for instance
@@ -33,7 +32,6 @@ const PreviewThumbnail = ({
 
   width = width * scale;
   height = height * scale;
-  console.log(width, height);
 
   return (
     <KonvaImage
@@ -44,7 +42,7 @@ const PreviewThumbnail = ({
       y={y}
       width={width}
       height={height}
-      crop={{ x: crop.x * scale, y: crop.y * scale, width: crop.width * scale, height: crop.height * scale}}
+      crop={{ x: crop.x * scale, y: crop.y * scale, width, height}}
     />
   );
 };
