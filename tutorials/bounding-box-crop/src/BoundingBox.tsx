@@ -2,8 +2,17 @@ import React from "react";
 import { Rect as KonvaRect, Group, Transformer } from "react-konva";
 import Konva from "konva";
 import { Vector2d } from "konva/types/types";
+import { BoundingBox } from "./canvas";
 
-const BoundingBox = ({ shapeProps, isSelected, onSelect, onChange }) => {
+type BoundingBoxProps = {
+  bounds: BoundingBox;
+  shapeProps: BoundingBox;
+  isSelected: boolean;
+  onSelect: () => void;
+  onChange: (newAttrs: BoundingBox) => void;
+}
+
+const BoundingBoxGroup = ({ shapeProps, isSelected, onSelect, onChange, bounds }: BoundingBoxProps) => {
   const shapeRef = React.useRef<Konva.Group>(null);
   const trRef = React.useRef<Konva.Transformer>(null);
 
@@ -20,27 +29,27 @@ const BoundingBox = ({ shapeProps, isSelected, onSelect, onChange }) => {
     let newY = pos.y;
 
     // check parent canvas for max width/height
-    if (this?.parent?.canvas) {
-      const maxHeight = this?.parent?.canvas.height;
-      const maxWidth = this?.parent?.canvas.width;
+    if (bounds) {
+      const maxHeight = bounds.height;
+      const maxWidth = bounds.width;
       const currentHeight = this?.attrs?.height;
       const currentWidth = this?.attrs?.width;
-      if (pos.y > maxHeight - currentHeight) {
-        newY = maxHeight - currentHeight;
+      if (pos.y > bounds.y + maxHeight - currentHeight) {
+        newY = bounds.y + maxHeight - currentHeight;
       }
 
-      if (pos.x > maxWidth - currentWidth) {
-        newX = maxWidth - currentWidth;
+      if (pos.x > bounds.x + maxWidth - currentWidth) {
+        newX = bounds.x + maxWidth - currentWidth;
       }
     }
 
     // use local position for < 0 bounds (top + left)
-    if (pos.x < 0) {
-      newX = 0;
+    if (pos.x < bounds.x) {
+      newX = bounds.x;
     }
 
-    if (pos.y < 0) {
-      newY = 0;
+    if (pos.y < bounds.y) {
+      newY = bounds.y;
     }
 
     return {
@@ -80,8 +89,8 @@ const BoundingBox = ({ shapeProps, isSelected, onSelect, onChange }) => {
           node?.scaleY(1);
           onChange({
             ...shapeProps,
-            x: node?.x(),
-            y: node?.y(),
+            x: node?.x() || 0,
+            y: node?.y() || 0,
             // set minimal value
             width: Math.max(5, (node?.width() || 1) * (scaleX || 1)),
             height: Math.max((node?.height() || 1) * (scaleY || 1)),
@@ -133,4 +142,4 @@ borderEnabled={false}
   );
 };
 
-export default BoundingBox;
+export default BoundingBoxGroup;
