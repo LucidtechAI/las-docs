@@ -32,7 +32,7 @@ public void createDocument() throws IOException, APIException, MissingAccessToke
 
 ## Make a prediction on a document
 
-Suppose we wish to run inference on a document using Lucidtech’s invoice model.
+Suppose we wish to run inference on a document using one of the available models.
 
 ```java
 public void createPrediction() throws IOException, APIException, MissingAccessTokenException {
@@ -55,7 +55,7 @@ We can do so by sending groundTruth to the model, telling it what the expected v
 
 ```java
 public void setDocumentGroundTruth() throws IOException, APIException, MissingAccessTokenException {
-    JSONObject groundTruth= new JSONObject();
+    JSONObject groundTruth = new JSONObject();
 
     JSONObject totalAmount = new JSONObject();
     totalAmount.put("label", "total_amount");
