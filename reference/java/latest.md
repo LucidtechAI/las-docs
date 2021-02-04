@@ -54,8 +54,8 @@
 `public inline JSONObject `[`listSecrets`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_client_1a033ed91fcc13ded508d96b8703393ceb)`(ListSecretsOptions options)` | List secrets available, calls the GET /secrets endpoint.
 `public inline JSONObject `[`listSecrets`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_client_1adec3f8a4d5c68d1859a28e4b019722a0)`()` | List secrets available, calls the GET /secrets endpoint.
 `public inline JSONObject `[`updateSecret`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_client_1a800e1d57fb377fb4be993e10f5ceb41e)`(String secretId,UpdateSecretOptions options)` | Updates a secret, calls the PATCH /secrets/{secretId} endpoint.
-`public inline JSONObject `[`createTransition`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_client_1a9e8d81510e5f505e466ca1c1e52197d2)`(String transitionType,CreateTransitionOptions options)` | Creates a transition, calls the POST /transitions endpoint.
-`public inline JSONObject `[`createTransition`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_client_1a8d94953ed37494e9a7e3fa3b8cda9ed0)`(String transitionType)` | Creates a transition, calls the POST /transitions endpoint.
+`public inline JSONObject `[`createTransition`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_client_1af67b7ae5c90e45b39204b09ae41e7907)`(TransitionType transitionType,CreateTransitionOptions options)` | Creates a transition, calls the POST /transitions endpoint.
+`public inline JSONObject `[`createTransition`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_client_1a0c9443f18366729461e4d39f91fa9ae1)`(TransitionType transitionType)` | Creates a transition, calls the POST /transitions endpoint.
 `public inline JSONObject `[`listTransitions`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_client_1a417f031cdad1b8e064d2f10d826f33a5)`(ListTransitionsOptions options)` | List transitions, calls the GET /transitions endpoint.
 `public inline JSONObject `[`listTransitions`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_client_1a0c59ae7206fef4cd589fc23c74e383a3)`()` | List transitions, calls the GET /transitions endpoint.
 `public inline JSONObject `[`updateTransition`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_client_1a43e8a50027043fdc06d9d98c07b8b1f9)`(String transitionId,UpdateTransitionOptions options)` | Updates a transition, calls the PATCH /transitions/{transitionId} endpoint.
@@ -63,7 +63,7 @@
 `public inline JSONObject `[`listTransitionExecutions`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_client_1a519a6577079943d09ea7a5772065ee1b)`(String transitionId,ListTransitionExecutionsOptions options)` | List executions in a transition, calls the GET /transitions/{transitionId}/executions endpoint.
 `public inline JSONObject `[`listTransitionExecutions`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_client_1a45bce253c738098c695d45b22ee2efef)`(String transitionId)` | List executions in a transition, calls the GET /transitions/{transitionId}/executions endpoint.
 `public inline JSONObject `[`getTransitionExecution`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_client_1ad875cb2e624bdc7b71655bad9bcacb10)`(String transitionId,String executionId)` | Get an execution of a transition, calls the GET /transitions/{transitionId}/executions/{executionId} endpoint
-`public inline JSONObject `[`updateTransitionExecution`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_client_1a8cb17c5c67ced8aaec631cd325351cf3)`(String transitionId,String executionId,String status,UpdateTransitionExecutionOptions options)` | Ends the processing of the transition execution, calls the PATCH /transitions/{transition_id}/executions/{execution_id} endpoint.
+`public inline JSONObject `[`updateTransitionExecution`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_client_1a7ec104fc53e3b5a04192b3483c68212b)`(String transitionId,String executionId,TransitionExecutionStatus status,UpdateTransitionExecutionOptions options)` | Ends the processing of the transition execution, calls the PATCH /transitions/{transition_id}/executions/{execution_id} endpoint.
 `public inline JSONObject `[`createUser`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_client_1a56a28c70eab9e47a472bfc3d56e32903)`(String email,CreateUserOptions options)` | Creates a new user, calls the POST /users endpoint.
 `public inline JSONObject `[`createUser`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_client_1aaa2b082e4d1ee85ba6f33c84e3e08251)`(String email)` | Creates a new user, calls the POST /users endpoint.
 `public inline JSONObject `[`listUsers`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_client_1ae9068989f2589270f09d40cf3db6efa8)`(ListUsersOptions options)` | List users, calls the GET /users endpoint.
@@ -727,14 +727,16 @@ Secret response from REST API
 
 * `MissingAccessTokenException` Raised if access token cannot be obtained
 
-#### `public inline JSONObject `[`createTransition`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_client_1a9e8d81510e5f505e466ca1c1e52197d2)`(String transitionType,CreateTransitionOptions options)` 
+#### `public inline JSONObject `[`createTransition`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_client_1af67b7ae5c90e45b39204b09ae41e7907)`(TransitionType transitionType,CreateTransitionOptions options)` 
 
 Creates a transition, calls the POST /transitions endpoint.
 
 **See also**: CreateTransitionOptions 
 
+**See also**: TransitionType 
+
 #### Parameters
-* `transitionType` Type of transition "docker"|"manual" 
+* `transitionType` Type of transition 
 
 * `options` Additional options to include in request body 
 
@@ -748,12 +750,14 @@ Transition response from API
 
 * `MissingAccessTokenException` Raised if access token cannot be obtained
 
-#### `public inline JSONObject `[`createTransition`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_client_1a8d94953ed37494e9a7e3fa3b8cda9ed0)`(String transitionType)` 
+#### `public inline JSONObject `[`createTransition`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_client_1a0c9443f18366729461e4d39f91fa9ae1)`(TransitionType transitionType)` 
 
 Creates a transition, calls the POST /transitions endpoint.
 
+**See also**: TransitionType 
+
 #### Parameters
-* `transitionType` Type of transition "docker"|"manual" 
+* `transitionType` Type of transition 
 
 #### Returns
 Transition response from API 
@@ -893,18 +897,20 @@ TransitionExecution response from REST API
 
 * `MissingAccessTokenException` Raised if access token cannot be obtained
 
-#### `public inline JSONObject `[`updateTransitionExecution`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_client_1a8cb17c5c67ced8aaec631cd325351cf3)`(String transitionId,String executionId,String status,UpdateTransitionExecutionOptions options)` 
+#### `public inline JSONObject `[`updateTransitionExecution`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_client_1a7ec104fc53e3b5a04192b3483c68212b)`(String transitionId,String executionId,TransitionExecutionStatus status,UpdateTransitionExecutionOptions options)` 
 
 Ends the processing of the transition execution, calls the PATCH /transitions/{transition_id}/executions/{execution_id} endpoint.
 
 **See also**: UpdateTransitionExecutionOptions 
+
+**See also**: TransitionExecutionStatus 
 
 #### Parameters
 * `transitionId` Id of the transition 
 
 * `executionId` Id of the execution 
 
-* `status` Status of the execution "succeeded"|"failed" 
+* `status` Status of the execution 
 
 * `options` Additional options to include in request body 
 
