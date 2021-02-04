@@ -70,6 +70,25 @@ function normalizePredictionsToPixels(
   return initialBoundingBoxes;
 }
 
+function normalizeOutput(boundingBoxes: Array<BoundingBox>, imageDimensions: { width: number; height: number, offsetX: number, offsetY: number }) {
+  const { width: imageWidth, height: imageHeight, offsetX, offsetY } = imageDimensions;
+  const output = boundingBoxes.map(box => {
+    const x = box.x - offsetX;
+    const y = box.y - offsetY;
+    const width = 1/imageWidth * box.width ;
+    const height = 1/imageHeight * box.height;
+    const outX = 1/imageWidth * x
+    const outY = 1/imageHeight * y
+    return {
+      raw: [box.x, box.y, box.width, box.height],
+      value: [outX, outY, width, height],
+      label: box.id
+    }
+  })
+
+  return output;
+}
+
 const Canvas = ({ doc, predictions }: CanvasProps) => {
   const [image] = useImage(doc);
   const [boundingBoxes, setBoundingBoxes] = useState<Array<BoundingBox>>([]);
@@ -143,13 +162,14 @@ const Canvas = ({ doc, predictions }: CanvasProps) => {
   };
 
   const deleteBox = (id: string) => {
-    console.log("called");
-    const copy = [...boundingBoxes];
+    setBoundingBoxes(prev => {
+    const copy = [...prev];
     const indexToDelete = copy.findIndex((box) => box.id === id);
     if (indexToDelete >= 0) {
       copy.splice(indexToDelete, 1);
     }
-    setBoundingBoxes(copy);
+    return copy;
+    });
   };
 
   const reset = () => {
@@ -157,6 +177,12 @@ const Canvas = ({ doc, predictions }: CanvasProps) => {
     const initialBoundingBoxes = normalizePredictionsToPixels(predictions, { width: imageWidth, height: imageHeight, offsetX: x, offsetY: y})
     setBoundingBoxes(initialBoundingBoxes);
   };
+
+  const output = () => {
+    const { width: imageWidth, height: imageHeight, x, y } = imageSizeProps;
+    const out = normalizeOutput(boundingBoxes, { width: imageWidth, height: imageHeight, offsetX: x, offsetY: y})
+    console.log(out)
+  }
 
   return (
     <>
@@ -213,6 +239,7 @@ const Canvas = ({ doc, predictions }: CanvasProps) => {
       <div>
         <button onClick={addBox}>+ Add box</button>
         <button onClick={reset}>Reset</button>
+        <button onClick={output}>Output</button>
       </div>
     </>
   );
