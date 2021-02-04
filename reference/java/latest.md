@@ -22,7 +22,7 @@
 `public inline  `[`Client`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_client_1afb65b879166c0ccae64fff9515a99d10)`(`[`Credentials`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_credentials)` credentials)` | A client to invoke api methods from Lucidtech AI Services.
 `public inline JSONObject `[`createAsset`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_client_1a81740f0c48031ee80a5f330ad2469171)`(byte [] content,CreateAssetOptions options)` | Creates an asset, calls the POST /assets endpoint.
 `public inline JSONObject `[`createAsset`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_client_1a2bb92bb23b32701d31ac242555f86969)`(InputStream content,CreateAssetOptions options)` | Creates an asset, calls the POST /assets endpoint.
-`public inline JSONObject `[`createAsset`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_client_1a793e80233e2a3f438e9c1a9d8bdbb987)`(byte [] content)` | #### Parameters
+`public inline JSONObject `[`createAsset`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_client_1a793e80233e2a3f438e9c1a9d8bdbb987)`(byte [] content)` | Creates an asset, calls the POST /assets endpoint.
 `public inline JSONObject `[`createAsset`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_client_1a921a5e0aaeb4f72b27af1279bb6b593c)`(InputStream content)` | Creates an asset, calls the POST /assets endpoint.
 `public inline JSONObject `[`listAssets`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_client_1a4ed339d8860dadb783cf838ba51cb2d9)`(ListAssetsOptions options)` | List assets available, calls the GET /assets endpoint.
 `public inline JSONObject `[`listAssets`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_client_1adea123f22256156832896e2a65624381)`()` | List assets available, calls the GET /assets endpoint.
@@ -136,6 +136,8 @@ Asset response from API
 * `MissingAccessTokenException` Raised if access token cannot be obtained
 
 #### `public inline JSONObject `[`createAsset`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_client_1a793e80233e2a3f438e9c1a9d8bdbb987)`(byte [] content)` 
+
+Creates an asset, calls the POST /assets endpoint.
 
 #### Parameters
 * `content` Binary data 
