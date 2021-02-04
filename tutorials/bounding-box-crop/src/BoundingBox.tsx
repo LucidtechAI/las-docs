@@ -1,5 +1,12 @@
 import React from "react";
-import { Rect as KonvaRect, Group, Transformer } from "react-konva";
+import {
+  Rect as KonvaRect,
+  Group,
+  Transformer,
+  Text,
+  Rect,
+  Circle,
+} from "react-konva";
 import Konva from "konva";
 import { Vector2d } from "konva/types/types";
 import { BoundingBox } from "./Canvas";
@@ -10,9 +17,17 @@ type BoundingBoxProps = {
   isSelected: boolean;
   onSelect: () => void;
   onChange: (newAttrs: BoundingBox) => void;
-}
+  onDelete: () => void;
+};
 
-const BoundingBoxGroup = ({ shapeProps, isSelected, onSelect, onChange, bounds }: BoundingBoxProps) => {
+const BoundingBoxGroup = ({
+  shapeProps,
+  isSelected,
+  onSelect,
+  onChange,
+  bounds,
+  onDelete,
+}: BoundingBoxProps) => {
   const shapeRef = React.useRef<Konva.Group>(null);
   const trRef = React.useRef<Konva.Transformer>(null);
 
@@ -68,7 +83,7 @@ const BoundingBoxGroup = ({ shapeProps, isSelected, onSelect, onChange, bounds }
         draggable
         {...shapeProps}
         onDragStart={onSelect}
-        onDragEnd={(e) => {
+        onDragMove={(e) => {
           onChange({
             ...shapeProps,
             x: e.target.x(),
@@ -113,8 +128,39 @@ const BoundingBoxGroup = ({ shapeProps, isSelected, onSelect, onChange, bounds }
           width={shapeProps.width}
           height={shapeProps.height}
           strokeWidth={2}
+          opacity={0.6}
           dashEnabled
           dash={[5, 5]}
+        />
+      </Group>
+      <Group
+        x={shapeProps.x + 10}
+        y={shapeProps.y + 10}
+        width={20}
+        height={20}
+        onClick={onDelete}
+        onMouseEnter={(e) => {
+          const container = e.target?.getStage()?.container();
+          if (container) {
+            container.style.cursor = "pointer";
+          } 
+        }}
+        onMouseLeave={(e) => {
+          const container = e.target?.getStage()?.container();
+          if (container) {
+            container.style.cursor = "default";
+          } 
+        }}
+      >
+        <Circle fill='red' opacity={0.4} x={10} y={10} radius={10} />
+        <Text
+          text='X'
+          x={5}
+          y={4}
+          fontSize={16}
+          width={20}
+          height={20}
+          fontStyle='bold'
         />
       </Group>
       {isSelected && (
@@ -122,13 +168,14 @@ const BoundingBoxGroup = ({ shapeProps, isSelected, onSelect, onChange, bounds }
           ref={trRef}
           rotateEnabled={false}
           keepRatio={false}
+          anchorCornerRadius={50}
           enabledAnchors={[
             "top-left",
             "top-right",
             "bottom-left",
             "bottom-right",
           ]}
-borderEnabled={false}
+          borderEnabled={false}
           boundBoxFunc={(oldBox, newBox) => {
             // limit resize
             if (newBox.width < 10 || newBox.height < 10) {

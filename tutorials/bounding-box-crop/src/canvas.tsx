@@ -23,6 +23,11 @@ interface Dimensions {
   height: number;
 }
 
+interface Prediction {
+  value: [number, number, number, number];
+  label: string | null;
+}
+
 function getCenteredXYProps(
   stageDimensions: Dimensions,
   shapeDimensions: Dimensions
@@ -31,6 +36,38 @@ function getCenteredXYProps(
   const y = (stageDimensions.height - shapeDimensions.height) / 2;
 
   return { x, y };
+}
+
+// normalize to pixel values
+function normalizePredictionsToPixels(
+  predictions: Array<Prediction>,
+  imageDimensions: { width: number; height: number }
+): Array<BoundingBox> {
+  const { width: imageWidth, height: imageHeight } = imageDimensions;
+
+  // For now, expect prediction value to be an array of 4 values: x, y, width, height
+  const filteredPredictions = predictions.filter(
+    (prediction) =>
+      Array.isArray(prediction.value) && prediction.value.length === 4
+  );
+  const initialBoundingBoxes: Array<BoundingBox> = filteredPredictions.map(
+    (prediction, index) => {
+      const [x, y, width, height] = prediction.value;
+      const pixelX = x * imageWidth;
+      const pixelY = y * imageHeight;
+      const pixelWidth = width * imageWidth;
+      const pixelHeight = height * imageHeight;
+      return {
+        x: pixelX,
+        y: pixelY,
+        width: pixelWidth,
+        height: pixelHeight,
+        id: `${prediction.label || "no-label"}-${index.toString()}`,
+      };
+    }
+  );
+
+  return initialBoundingBoxes;
 }
 
 const Canvas = ({ doc, predictions }: CanvasProps) => {
@@ -83,30 +120,43 @@ const Canvas = ({ doc, predictions }: CanvasProps) => {
   // when we load our initial predictions
   useEffect(() => {
     const { width: imageWidth, height: imageHeight } = imageSizeProps;
-
-    // normalize to pixel values
-    const initialBoundingBoxes: Array<BoundingBox> = predictions.map(
-      (prediction, index) => {
-        // For now, expect prediction value to be an array of 4 values: x, y, width, height
-        if (!Array.isArray(prediction.value) || prediction.value.length !== 4)
-          return;
-        const [x, y, width, height] = prediction.value;
-        const pixelX = x * imageWidth;
-        const pixelY = y * imageHeight;
-        const pixelWidth = width * imageWidth;
-        const pixelHeight = height * imageHeight;
-        return {
-          x: pixelX,
-          y: pixelY,
-          width: pixelWidth,
-          height: pixelHeight,
-          id: prediction.label || index.toString(),
-        };
-      }
-    );
-
+    const initialBoundingBoxes = normalizePredictionsToPixels(predictions, { width: imageWidth, height: imageHeight})
     setBoundingBoxes(initialBoundingBoxes);
   }, [predictions, imageSizeProps]);
+
+  const addBox = () => {
+    const { width: imageWidth, height: imageHeight } = imageSizeProps;
+    // should be good enough to not create duplicate ids
+    const newBoxId = `newBox-${new Date().getTime()}-${Math.floor(
+      Math.random() * 10000
+    )}`;
+    setBoundingBoxes((prev) => [
+      ...prev,
+      {
+        x: 0.5 * imageWidth,
+        y: 0.5 * imageHeight,
+        width: 100,
+        height: 100,
+        id: newBoxId,
+      },
+    ]);
+  };
+
+  const deleteBox = (id: string) => {
+    console.log("called");
+    const copy = [...boundingBoxes];
+    const indexToDelete = copy.findIndex((box) => box.id === id);
+    if (indexToDelete >= 0) {
+      copy.splice(indexToDelete, 1);
+    }
+    setBoundingBoxes(copy);
+  };
+
+  const reset = () => {
+    const { width: imageWidth, height: imageHeight } = imageSizeProps;
+    const initialBoundingBoxes = normalizePredictionsToPixels(predictions, { width: imageWidth, height: imageHeight})
+    setBoundingBoxes(initialBoundingBoxes);
+  };
 
   return (
     <>
@@ -139,6 +189,7 @@ const Canvas = ({ doc, predictions }: CanvasProps) => {
                 shapeProps={box}
                 isSelected={box.id === selectedId}
                 bounds={imageSizeProps}
+                onDelete={() => deleteBox(box.id || "")}
                 onSelect={() => {
                   selectBox(box.id || null);
                 }}
@@ -152,13 +203,17 @@ const Canvas = ({ doc, predictions }: CanvasProps) => {
           })}
         </Layer>
       </Stage>
-      <Preview
+      {/* <Preview
         thumbnails={boundingBoxes}
         width={200}
         height={600}
         image={image}
         onSelect={selectBox}
-      />
+      /> */}
+      <div>
+        <button onClick={addBox}>+ Add box</button>
+        <button onClick={reset}>Reset</button>
+      </div>
     </>
   );
 };
