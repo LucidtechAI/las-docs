@@ -3,20 +3,9 @@ import React, { useEffect, useState } from "react";
 import { QueueStatus, RemoteComponentExternalProps } from "./types";
 import { Prediction } from "@lucidtech/las-sdk-core";
 import Canvas from "./Canvas";
+import { Button } from "@lucidtech/flyt-form";
 
 declare const ___TUTORIAL_VERSION___: string;
-
-const getBestPrediction = (
-  fieldName: string,
-  predictions: Prediction[]
-): Prediction | undefined => {
-  const fieldPredictions = predictions.filter(
-    (prediction) => prediction.label === fieldName
-  );
-  fieldPredictions.sort((a, b) => b.confidence - a.confidence);
-
-  return fieldPredictions.pop();
-};
 
 const RemoteComponent = ({
   transitionExecution,
@@ -29,22 +18,27 @@ const RemoteComponent = ({
   queueStatus,
 }: RemoteComponentExternalProps) => {
   const [doc, setDoc] = useState("");
+  const [error, setError] = useState<string | null>(null)
   const [isLoadingDocument, setIsLoadingDocument] = useState(true);
 
   // new transition execution, get document, and set predictions
   useEffect(() => {
+    setError(null)
     if (!transitionExecution?.input.documentId) return;
-
     setIsLoadingDocument(true);
 
     client
       .getDocument(transitionExecution.input.documentId)
       .then((res) => {
+        if (res.contentType !== 'image/jpeg') {
+          throw Error('Only JPEG supported for cropping')
+        }
         const dataUrl = `data:${res.contentType};base64,${res.content}`;
         setDoc(dataUrl);
       })
       .catch((e) => {
         console.error(e);
+        setError(e)
       })
       .finally(() => {
         setIsLoadingDocument(false);
@@ -111,32 +105,35 @@ const RemoteComponent = ({
                 }}
               >
                 <div style={{ order: 2 }}>
-                  <button
+                  <Button
+                  variant="success"
                     style={{ width: "150px", order: 1 }}
                     onClick={approve}
                     disabled={isLoadingDocument}
                   >
-                    Yes
-                  </button>
+                    <span className="fe fe-check" />
+                  </Button>
                 </div>
                 <div
                   style={{ order: 1, display: "flex", flexDirection: "row" }}
                 >
-                  <button
+                  <Button
+                  variant="soft"
                     style={{ order: 2 }}
                     onClick={skip}
                     disabled={isLoadingDocument}
                   >
-                    Skip
-                  </button>
-                  <button
+                    <span className="fe fe-skip-forward" />
+                  </Button>
+                  <Button
+                  variant="danger"
                     className='mr-2'
                     style={{ order: 1 }}
                     onClick={reject}
                     disabled={isLoadingDocument}
                   >
-                    No
-                  </button>
+                    <span className="fe fe-slash" />
+                  </Button>
                 </div>
               </div>
             </div>

@@ -1,3 +1,4 @@
+import { Button } from "@lucidtech/flyt-form";
 import { KonvaEventObject } from "konva/types/Node";
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import { Stage, Layer, Image as KonvaImage, Rect } from "react-konva";
@@ -41,9 +42,19 @@ function getCenteredXYProps(
 // normalize to pixel values
 function normalizePredictionsToPixels(
   predictions: Array<Prediction>,
-  imageDimensions: { width: number; height: number, offsetX: number, offsetY: number }
+  imageDimensions: {
+    width: number;
+    height: number;
+    offsetX: number;
+    offsetY: number;
+  }
 ): Array<BoundingBox> {
-  const { width: imageWidth, height: imageHeight, offsetX, offsetY } = imageDimensions;
+  const {
+    width: imageWidth,
+    height: imageHeight,
+    offsetX,
+    offsetY,
+  } = imageDimensions;
 
   // For now, expect prediction value to be an array of 4 values: x, y, width, height
   const filteredPredictions = predictions.filter(
@@ -53,8 +64,8 @@ function normalizePredictionsToPixels(
   const initialBoundingBoxes: Array<BoundingBox> = filteredPredictions.map(
     (prediction, index) => {
       const [x, y, width, height] = prediction.value;
-      const pixelX = (x * imageWidth) + offsetX;
-      const pixelY = (y * imageHeight) + offsetY;
+      const pixelX = x * imageWidth + offsetX;
+      const pixelY = y * imageHeight + offsetY;
       const pixelWidth = width * imageWidth;
       const pixelHeight = height * imageHeight;
       return {
@@ -70,21 +81,34 @@ function normalizePredictionsToPixels(
   return initialBoundingBoxes;
 }
 
-function normalizeOutput(boundingBoxes: Array<BoundingBox>, imageDimensions: { width: number; height: number, offsetX: number, offsetY: number }) {
-  const { width: imageWidth, height: imageHeight, offsetX, offsetY } = imageDimensions;
-  const output = boundingBoxes.map(box => {
+function normalizeOutput(
+  boundingBoxes: Array<BoundingBox>,
+  imageDimensions: {
+    width: number;
+    height: number;
+    offsetX: number;
+    offsetY: number;
+  }
+) {
+  const {
+    width: imageWidth,
+    height: imageHeight,
+    offsetX,
+    offsetY,
+  } = imageDimensions;
+  const output = boundingBoxes.map((box) => {
     const x = box.x - offsetX;
     const y = box.y - offsetY;
-    const width = 1/imageWidth * box.width ;
-    const height = 1/imageHeight * box.height;
-    const outX = 1/imageWidth * x
-    const outY = 1/imageHeight * y
+    const width = (1 / imageWidth) * box.width;
+    const height = (1 / imageHeight) * box.height;
+    const outX = (1 / imageWidth) * x;
+    const outY = (1 / imageHeight) * y;
     return {
       raw: [box.x, box.y, box.width, box.height],
       value: [outX, outY, width, height],
-      label: box.id
-    }
-  })
+      label: box.id,
+    };
+  });
 
   return output;
 }
@@ -139,7 +163,12 @@ const Canvas = ({ doc, predictions }: CanvasProps) => {
   // when we load our initial predictions
   useEffect(() => {
     const { width: imageWidth, height: imageHeight, x, y } = imageSizeProps;
-    const initialBoundingBoxes = normalizePredictionsToPixels(predictions, { width: imageWidth, height: imageHeight, offsetX: x, offsetY: y})
+    const initialBoundingBoxes = normalizePredictionsToPixels(predictions, {
+      width: imageWidth,
+      height: imageHeight,
+      offsetX: x,
+      offsetY: y,
+    });
     setBoundingBoxes(initialBoundingBoxes);
   }, [predictions, imageSizeProps]);
 
@@ -162,27 +191,37 @@ const Canvas = ({ doc, predictions }: CanvasProps) => {
   };
 
   const deleteBox = (id: string) => {
-    setBoundingBoxes(prev => {
-    const copy = [...prev];
-    const indexToDelete = copy.findIndex((box) => box.id === id);
-    if (indexToDelete >= 0) {
-      copy.splice(indexToDelete, 1);
-    }
-    return copy;
+    setBoundingBoxes((prev) => {
+      const copy = [...prev];
+      const indexToDelete = copy.findIndex((box) => box.id === id);
+      if (indexToDelete >= 0) {
+        copy.splice(indexToDelete, 1);
+      }
+      return copy;
     });
   };
 
   const reset = () => {
     const { width: imageWidth, height: imageHeight, x, y } = imageSizeProps;
-    const initialBoundingBoxes = normalizePredictionsToPixels(predictions, { width: imageWidth, height: imageHeight, offsetX: x, offsetY: y})
+    const initialBoundingBoxes = normalizePredictionsToPixels(predictions, {
+      width: imageWidth,
+      height: imageHeight,
+      offsetX: x,
+      offsetY: y,
+    });
     setBoundingBoxes(initialBoundingBoxes);
   };
 
   const output = () => {
     const { width: imageWidth, height: imageHeight, x, y } = imageSizeProps;
-    const out = normalizeOutput(boundingBoxes, { width: imageWidth, height: imageHeight, offsetX: x, offsetY: y})
-    console.log(out)
-  }
+    const out = normalizeOutput(boundingBoxes, {
+      width: imageWidth,
+      height: imageHeight,
+      offsetX: x,
+      offsetY: y,
+    });
+    console.log(out);
+  };
 
   return (
     <>
@@ -237,9 +276,12 @@ const Canvas = ({ doc, predictions }: CanvasProps) => {
         onSelect={selectBox}
       /> */}
       <div>
-        <button onClick={addBox}>+ Add box</button>
-        <button onClick={reset}>Reset</button>
-        <button onClick={output}>Output</button>
+        <Button variant='success' onClick={addBox}>
+          <span className='fe fe-plus-square mr-2' /> Add box
+        </Button>
+        <Button variant='danger' onClick={reset}>
+          <span className='fe fe-refresh-ccw mr-2' /> Reset to predictions
+        </Button>
       </div>
     </>
   );

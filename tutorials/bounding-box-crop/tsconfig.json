@@ -1,6 +1,6 @@
 {
   "include": [
-    "src",
+    "src", "custom.d.ts"
   ],
   "compilerOptions": {
     "incremental": true,

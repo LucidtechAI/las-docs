@@ -19,12 +19,12 @@ module.exports = {
         test: /\.css$/,
         use: ['style-loader', 'css-loader'],
       },
+      // {
+      //   test: /\.svg$/,
+      //   use: ['@svgr/webpack'],
+      // },
       {
-        test: /\.svg$/,
-        use: ['@svgr/webpack'],
-      },
-      {
-        test: /\.(png|woff|woff2|eot|ttf)$/,
+        test: /\.(png|woff|woff2|eot|ttf|svg)$/,
         loaders: ['file-loader'],
       },
     ],

@@ -1,0 +1,36 @@
+:root {
+  --confidence-label-lowest-color: #ba4242;
+  --confidence-label-low-color: #ffc107;
+  --confidence-label-high-color: #6fcf97;
+  --confidence-label-highest-color: #3fa067;
+  --confidence-label-automated-color: #bfc6cf;
+  --confidence-label-ignored-color: #E3EBF6;
+}
+
+.btn-danger-soft {
+  color: #e63757;
+  background-color: #fad7dd;
+}
+
+.btn-primary-soft {
+  color: #2c7be5;
+  background-color: #d5e5fa;
+}
+
+.btn-success {
+  background-color: #6FCF97;
+  border-color: #6FCF97;
+}
+
+.form-control.automated:not(:focus), .form-control.ignored:not(:focus)  {
+  border-color: transparent;
+  color: transparent;
+}
+
+.input-group-text.automated, .input-group-text.ignored {
+  border-color: transparent;
+}
+
+.form-control {
+  height: calc(1.75em + 1rem + 2px);
+}

@@ -6,10 +6,13 @@ import {
   Text,
   Rect,
   Circle,
+  Image as KonvaImage
 } from "react-konva";
 import Konva from "konva";
 import { Vector2d } from "konva/types/types";
 import { BoundingBox } from "./Canvas";
+
+import trash from './trash-2.svg';
 
 type BoundingBoxProps = {
   bounds: BoundingBox;
@@ -19,6 +22,9 @@ type BoundingBoxProps = {
   onChange: (newAttrs: BoundingBox) => void;
   onDelete: () => void;
 };
+
+const deleteIcon = new Image()
+deleteIcon.src = trash;
 
 const BoundingBoxGroup = ({
   shapeProps,
@@ -113,55 +119,39 @@ const BoundingBoxGroup = ({
         }}
       >
         <KonvaRect
-          fill='white'
-          opacity={0.2}
+          fill='rgba(255,255,255,0.2)'
           x={0}
           y={0}
           width={shapeProps.width}
           height={shapeProps.height}
-        />
-        <KonvaRect
-          stroke='green'
+          stroke='rgba(0,0,0,0.8)'
           strokeEnabled
-          x={0}
-          y={0}
-          width={shapeProps.width}
-          height={shapeProps.height}
-          strokeWidth={2}
-          opacity={0.6}
+          strokeWidth={1}
           dashEnabled
           dash={[5, 5]}
         />
-      </Group>
-      <Group
-        x={shapeProps.x + 10}
-        y={shapeProps.y + 10}
-        width={20}
-        height={20}
-        onClick={onDelete}
-        onMouseEnter={(e) => {
-          const container = e.target?.getStage()?.container();
-          if (container) {
-            container.style.cursor = "pointer";
-          } 
-        }}
-        onMouseLeave={(e) => {
-          const container = e.target?.getStage()?.container();
-          if (container) {
-            container.style.cursor = "default";
-          } 
-        }}
-      >
-        <Circle fill='red' opacity={0.4} x={10} y={10} radius={10} />
-        <Text
-          text='X'
-          x={5}
-          y={4}
-          fontSize={16}
+        <Group
+          x={10}
+          y={10}
           width={20}
           height={20}
-          fontStyle='bold'
-        />
+          onClick={onDelete}
+          onMouseEnter={(e) => {
+            const container = e.target?.getStage()?.container();
+            if (container) {
+              container.style.cursor = "pointer";
+            }
+          }}
+          onMouseLeave={(e) => {
+            const container = e.target?.getStage()?.container();
+            if (container) {
+              container.style.cursor = "default";
+            }
+          }}
+        >
+          <Rect fill='rgba(255,0,0,0.5)' x={0} y={0} width={20} height={20} strokeEnabled stroke="black" cornerRadius={3}  strokeWidth={1}/>
+          <KonvaImage image={deleteIcon} width={14} height={14} x={3} y={3} />
+        </Group>
       </Group>
       {isSelected && (
         <Transformer
