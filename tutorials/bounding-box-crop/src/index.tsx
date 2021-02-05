@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 
 import { QueueStatus, RemoteComponentExternalProps } from "./types";
-import { Prediction } from "@lucidtech/las-sdk-core";
 import Canvas from "./Canvas";
 import { Button } from "@lucidtech/flyt-form";
 

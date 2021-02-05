@@ -1,6 +1,7 @@
 import { Button } from "@lucidtech/flyt-form";
 import React, { useEffect, useMemo, useState } from "react";
 import { Rnd } from "react-rnd";
+import CustomHandle from "./CustomHandle";
 
 type CanvasProps = {
   doc: string;
@@ -120,7 +121,7 @@ const RND = ({ doc, predictions }: CanvasProps) => {
     if (!imageSizeProps) return;
 
     const { width: imageWidth, height: imageHeight } = imageSizeProps;
-    console.log(imageWidth, imageHeight);
+
     const initialBoundingBoxes = normalizePredictionsToPixels(predictions, {
       width: imageWidth,
       height: imageHeight,
@@ -213,6 +214,9 @@ const RND = ({ doc, predictions }: CanvasProps) => {
         <Button variant='danger' onClick={reset}>
           <span className='fe fe-refresh-ccw mr-2' /> Reset to predictions
         </Button>
+        <Button variant='primary' onClick={output}>
+          <span className='fe fe-info mr-2' /> Output
+        </Button>
       </div>
       <div
         style={{
@@ -229,7 +233,10 @@ const RND = ({ doc, predictions }: CanvasProps) => {
       >
         <div
           id='imageContainer'
-          style={{ width: imageSizeProps?.width, height: imageSizeProps?.height }}
+          style={{
+            width: imageSizeProps?.width,
+            height: imageSizeProps?.height,
+          }}
         >
           <img
             src={doc}
@@ -264,15 +271,19 @@ const RND = ({ doc, predictions }: CanvasProps) => {
                     height: ref.offsetHeight,
                   });
                 }}
+                minHeight={40}
+                minWidth={40}
                 style={{
                   backgroundColor: "rgba(255,255,255,0.2)",
                   border: "1px dashed rgba(0,0,0,0.5)",
                 }}
+                resizeHandleComponent={{bottomLeft: <CustomHandle />, bottomRight: <CustomHandle />, topLeft: <CustomHandle />, topRight: <CustomHandle />}}
               >
                 <Button
                   variant='danger'
                   onClick={() => deleteBox(box.id || "")}
                   className='m-2 p-1'
+                  style={{ position: "absolute" }}
                 >
                   <span className='fe fe-trash-2' />
                 </Button>
