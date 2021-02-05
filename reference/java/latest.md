@@ -71,8 +71,8 @@
 `public inline JSONObject `[`getUser`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_client_1a20f91d81c208182343abb01a17ce166f)`(String userId)` | Get information about a specific user, calls the GET /users/{user_id} endpoint.
 `public inline JSONObject `[`updateUser`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_client_1acdf606ec8f63f43b4ab97e3eaa3e0926)`(String userId,UpdateUserOptions options)` | Updates a user, calls the PATCH /users/{userId} endpoint.
 `public inline JSONObject `[`deleteUser`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_client_1a1c6b2dda4b6935f0118f5f38082e7931)`(String userId)` | Delete a user, calls the PATCH /users/{userId} endpoint.
-`public inline JSONObject `[`createWorkflow`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_client_1a13d79b4da5daf9385fd83c2f0ed66074)`(JSONObject specification,CreateWorkflowOptions options)` | Creates a new workflow, calls the POST /workflows endpoint. Check out Lucidtech's tutorials for more info on how to create a workflow. 
-`public inline JSONObject `[`createWorkflow`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_client_1af2b4a31a375c0f6df3b2ad0542a2f616)`(JSONObject specification)` | Creates a new workflow, calls the POST /workflows endpoint. Check out Lucidtech's tutorials for more info on how to create a workflow. 
+`public inline JSONObject `[`createWorkflow`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_client_1a13d79b4da5daf9385fd83c2f0ed66074)`(JSONObject specification,CreateWorkflowOptions options)` | Creates a new workflow, calls the POST /workflows endpoint. Check out Lucidtech's tutorials for more info on how to create a workflow. see [https://docs.lucidtech.ai/getting-started/tutorials/tutorial_custom_predict_and_approve](https://docs.lucidtech.ai/getting-started/tutorials/tutorial_custom_predict_and_approve)
+`public inline JSONObject `[`createWorkflow`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_client_1af2b4a31a375c0f6df3b2ad0542a2f616)`(JSONObject specification)` | Creates a new workflow, calls the POST /workflows endpoint. Check out Lucidtech's tutorials for more info on how to create a workflow. see [https://docs.lucidtech.ai/getting-started/tutorials/tutorial_custom_predict_and_approve](https://docs.lucidtech.ai/getting-started/tutorials/tutorial_custom_predict_and_approve)
 `public inline JSONObject `[`listWorkflows`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_client_1a46fa269fd3dcb067d858eba91fb05e75)`(ListWorkflowsOptions options)` | List workflows, calls the GET /workflows endpoint.
 `public inline JSONObject `[`listWorkflows`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_client_1a8c2d549f4205f9cd9a0e58564ed3390b)`()` | List workflows, calls the GET /workflows endpoint.
 `public inline JSONObject `[`updateWorkflow`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_client_1ae4359d885d681461499be3c0464b4a69)`(String workflowId,UpdateWorkflowOptions options)` | Updates a workflow, calls the PATCH /workflows/{workflowId} endpoint.
@@ -351,8 +351,6 @@ Creates a document, calls the POST /documents endpoint.
 
 * `contentType` A mime type for the document 
 
-* `options` Additional options to include in request body 
-
 #### Returns
 Document response from REST API 
 
@@ -457,9 +455,8 @@ Update ground truth for a document, calls the PATCH /documents/{documentId} endp
 #### Parameters
 * `documentId` The document id to post groundTruth to. 
 
-* `groundTruth` List of json objects on the form {'label': <label>, 'value': 
+* `groundTruth` List of json objects containing label and value for the ground truth 
 
-} 
 #### Returns
 Document response from REST API 
 
@@ -1054,17 +1051,13 @@ User response from REST API
 
 #### `public inline JSONObject `[`createWorkflow`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_client_1a13d79b4da5daf9385fd83c2f0ed66074)`(JSONObject specification,CreateWorkflowOptions options)` 
 
-Creates a new workflow, calls the POST /workflows endpoint. Check out Lucidtech's tutorials for more info on how to create a workflow. 
-**See also**: [https://docs.lucidtech.ai/getting-started/tutorials/tutorial_custom_predict_and_approve](https://docs.lucidtech.ai/getting-started/tutorials/tutorial_custom_predict_and_approve)
+Creates a new workflow, calls the POST /workflows endpoint. Check out Lucidtech's tutorials for more info on how to create a workflow. see [https://docs.lucidtech.ai/getting-started/tutorials/tutorial_custom_predict_and_approve](https://docs.lucidtech.ai/getting-started/tutorials/tutorial_custom_predict_and_approve)
 
 **See also**: CreateWorkflowOptions 
 
 #### Parameters
-* `specification` Specification of the workflow, currently supporting ASL: [https://states-language.net/spec.html](https://states-language.net/spec.html)
+* `specification` Specification of the workflow, currently supporting ASL: [https://states-language.net/spec.html](https://states-language.net/spec.html). Check out the tutorials for more information: see [https://docs.lucidtech.ai/getting-started/tutorials/tutorial_custom_predict_and_approve#creating-the-workflow](https://docs.lucidtech.ai/getting-started/tutorials/tutorial_custom_predict_and_approve#creating-the-workflow)
 
-**See also**: [https://docs.lucidtech.ai/getting-started/tutorials/tutorial_custom_predict_and_approve#creating-the-workflow](https://docs.lucidtech.ai/getting-started/tutorials/tutorial_custom_predict_and_approve#creating-the-workflow)
-
-#### Parameters
 * `options` Additional options to include in request body 
 
 #### Returns
@@ -1079,13 +1072,10 @@ Workflow response from API
 
 #### `public inline JSONObject `[`createWorkflow`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_client_1af2b4a31a375c0f6df3b2ad0542a2f616)`(JSONObject specification)` 
 
-Creates a new workflow, calls the POST /workflows endpoint. Check out Lucidtech's tutorials for more info on how to create a workflow. 
-**See also**: [https://docs.lucidtech.ai/getting-started/tutorials/tutorial_custom_predict_and_approve](https://docs.lucidtech.ai/getting-started/tutorials/tutorial_custom_predict_and_approve)
+Creates a new workflow, calls the POST /workflows endpoint. Check out Lucidtech's tutorials for more info on how to create a workflow. see [https://docs.lucidtech.ai/getting-started/tutorials/tutorial_custom_predict_and_approve](https://docs.lucidtech.ai/getting-started/tutorials/tutorial_custom_predict_and_approve)
 
 #### Parameters
-* `specification` Specification of the workflow, currently supporting ASL: [https://states-language.net/spec.html](https://states-language.net/spec.html)
-
-**See also**: [https://docs.lucidtech.ai/getting-started/tutorials/tutorial_custom_predict_and_approve#creating-the-workflow](https://docs.lucidtech.ai/getting-started/tutorials/tutorial_custom_predict_and_approve#creating-the-workflow)
+* `specification` Specification of the workflow, currently supporting ASL: [https://states-language.net/spec.html](https://states-language.net/spec.html). Check out the tutorials for more information: see [https://docs.lucidtech.ai/getting-started/tutorials/tutorial_custom_predict_and_approve#creating-the-workflow](https://docs.lucidtech.ai/getting-started/tutorials/tutorial_custom_predict_and_approve#creating-the-workflow)
 
 #### Returns
 Workflow response from API 
@@ -1232,6 +1222,11 @@ Workflow executions response from REST API
 Deletes the execution with the provided executionId from workflowId, calls the DELETE /workflows/{workflowId}/executions/{executionId} endpoint.
 
 **See also**: [Client::executeWorkflow](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_client_1af80e370f399feb814fb05fc00583bb8e)
+
+#### Parameters
+* `workflowId` Id of the workflow 
+
+* `executionId` Id of the execution 
 
 #### Returns
 WorklowExecution response from REST API 
