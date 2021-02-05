@@ -1,3 +1,4 @@
+import { Button } from "@lucidtech/flyt-form";
 import React, { useEffect, useMemo, useState } from "react";
 import { Rnd } from "react-rnd";
 
@@ -23,32 +24,12 @@ interface Prediction {
   label: string | null;
 }
 
-function getCenteredXYProps(
-  stageDimensions: Dimensions,
-  shapeDimensions: Dimensions
-) {
-  const x = (stageDimensions.width - shapeDimensions.width) / 2;
-  const y = (stageDimensions.height - shapeDimensions.height) / 2;
-
-  return { x, y };
-}
-
 // normalize to pixel values
 function normalizePredictionsToPixels(
   predictions: Array<Prediction>,
-  imageDimensions: {
-    width: number;
-    height: number;
-    offsetX: number;
-    offsetY: number;
-  }
+  imageDimensions: Dimensions
 ): Array<BoundingBox> {
-  const {
-    width: imageWidth,
-    height: imageHeight,
-    offsetX,
-    offsetY,
-  } = imageDimensions;
+  const { width: imageWidth, height: imageHeight } = imageDimensions;
 
   // For now, expect prediction value to be an array of 4 values: x, y, width, height
   const filteredPredictions = predictions.filter(
@@ -58,8 +39,8 @@ function normalizePredictionsToPixels(
   const initialBoundingBoxes: Array<BoundingBox> = filteredPredictions.map(
     (prediction, index) => {
       const [x, y, width, height] = prediction.value;
-      const pixelX = x * imageWidth + offsetX;
-      const pixelY = y * imageHeight + offsetY;
+      const pixelX = x * imageWidth;
+      const pixelY = y * imageHeight;
       const pixelWidth = width * imageWidth;
       const pixelHeight = height * imageHeight;
       return {
@@ -75,25 +56,48 @@ function normalizePredictionsToPixels(
   return initialBoundingBoxes;
 }
 
+function normalizeOutput(
+  boundingBoxes: Array<BoundingBox>,
+  imageDimensions: {
+    width: number;
+    height: number;
+  }
+) {
+  const { width: imageWidth, height: imageHeight } = imageDimensions;
+  const output = boundingBoxes.map((box) => {
+    const { x, y } = box;
+    const width = (1 / imageWidth) * box.width;
+    const height = (1 / imageHeight) * box.height;
+    const outX = (1 / imageWidth) * x;
+    const outY = (1 / imageHeight) * y;
+    return {
+      raw: [box.x, box.y, box.width, box.height],
+      value: [outX, outY, width, height],
+      label: box.id,
+    };
+  });
+
+  return output;
+}
+
 const RND = ({ doc, predictions }: CanvasProps) => {
   const [boundingBoxes, setBoundingBoxes] = useState<Array<BoundingBox>>([]);
 
-  const stageWidth = 600;
-  const stageHeight = 600;
+  const CONTAINER_WIDTH = 700;
+  const CONTAINER_HEIGHT = 700;
 
   // get image scale for canvas (stage) size so it fits
-  const imageSizeProps: BoundingBox = useMemo(() => {
-    if (!doc) return { width: 0, height: 0, x: 0, y: 0 };
+  const imageSizeProps: Dimensions = useMemo(() => {
+    if (!doc) return { width: 0, height: 0 };
 
     const image = new Image();
     image.src = doc;
 
     let { width, height } = image;
-    console.log(width, height);
 
     // could add padding or extra dimension to make up for here
-    const targetWidth = stageWidth; // + (padding * 2) for instance
-    const targetHeight = stageHeight;
+    const targetWidth = CONTAINER_WIDTH; // + (padding * 2) for instance
+    const targetHeight = CONTAINER_HEIGHT;
 
     // compute the ratios of image dimensions to aperture dimensions
     const widthFit = targetWidth / width;
@@ -105,22 +109,15 @@ const RND = ({ doc, predictions }: CanvasProps) => {
     width = width * scale;
     height = height * scale;
 
-    const { x, y } = getCenteredXYProps(
-      { width: stageWidth, height: stageHeight },
-      { width, height }
-    );
-
-    return { width, height, x, y };
+    return { width, height };
   }, [doc]);
 
   // when we load our initial predictions
   useEffect(() => {
-    const { width: imageWidth, height: imageHeight, x, y } = imageSizeProps;
+    const { width: imageWidth, height: imageHeight } = imageSizeProps;
     const initialBoundingBoxes = normalizePredictionsToPixels(predictions, {
       width: imageWidth,
       height: imageHeight,
-      offsetX: x,
-      offsetY: y,
     });
     setBoundingBoxes(initialBoundingBoxes);
   }, [predictions, imageSizeProps]);
@@ -155,14 +152,21 @@ const RND = ({ doc, predictions }: CanvasProps) => {
   };
 
   const reset = () => {
-    const { width: imageWidth, height: imageHeight, x, y } = imageSizeProps;
+    const { width: imageWidth, height: imageHeight } = imageSizeProps;
     const initialBoundingBoxes = normalizePredictionsToPixels(predictions, {
       width: imageWidth,
       height: imageHeight,
-      offsetX: x,
-      offsetY: y,
     });
     setBoundingBoxes(initialBoundingBoxes);
+  };
+
+  const output = () => {
+    const { width: imageWidth, height: imageHeight } = imageSizeProps;
+    const out = normalizeOutput(boundingBoxes, {
+      width: imageWidth,
+      height: imageHeight,
+    });
+    console.log(out);
   };
 
   const onChange = (
@@ -185,47 +189,82 @@ const RND = ({ doc, predictions }: CanvasProps) => {
   };
 
   return (
-    <div
-      style={{
-        backgroundPosition: "0px 0px, 10px 10px",
-        backgroundSize: "20px 20px",
-        backgroundImage:
-          "linear-gradient(45deg, #eee 25%, transparent 25%, transparent 75%, #eee 75%, #eee 100%),linear-gradient(45deg, #eee 25%, white 25%, white 75%, #eee 75%, #eee 100%)",
-      }}
-    >
-      <img
-        src={doc}
-        style={{ objectFit: "contain", width: stageWidth, height: stageHeight }}
-      />
-      {boundingBoxes.map((box, index) => {
-        return (
-          <Rnd
-            key={box.id}
-            bounds='parent'
-            size={{
-              width: box.width,
-              height: box.height,
+    <div>
+      <div style={{display: 'flex', flexDirection: 'row', justifyContent: 'space-around'}} className="my-3">
+        <Button variant='success' onClick={addBox}>
+          <span className='fe fe-plus-square mr-2' /> Add box
+        </Button>
+        <Button variant='danger' onClick={reset}>
+          <span className='fe fe-refresh-ccw mr-2' /> Reset to predictions
+        </Button>
+      </div>
+      <div
+        style={{
+          backgroundPosition: "0px 0px, 10px 10px",
+          backgroundSize: "20px 20px",
+          backgroundImage:
+            "linear-gradient(45deg, #eee 25%, transparent 25%, transparent 75%, #eee 75%, #eee 100%),linear-gradient(45deg, #eee 25%, white 25%, white 75%, #eee 75%, #eee 100%)",
+          width: CONTAINER_WIDTH,
+          height: CONTAINER_HEIGHT,
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <div
+          id='imageContainer'
+          style={{ width: imageSizeProps.width, height: imageSizeProps.height }}
+        >
+          <img
+            src={doc}
+            style={{
+              objectFit: "contain",
+              width: "auto",
+              height: "auto",
+              maxWidth: "100%",
+              maxHeight: "100%",
             }}
-            position={{
-              x: box.x,
-              y: box.y,
-            }}
-            onDragStop={(e: any, d: any) => {
-              onChange(index, { x: d.x, y: d.y });
-            }}
-            onResize={(e, direction, ref, delta, position) => {
-              onChange(index, position, {
-                width: ref.offsetWidth,
-                height: ref.offsetHeight,
-              });
-            }}
-            style={{ backgroundColor: "green" }}
-          >
-            001
-            {/* <div onClick={() => deleteBox(box.id || "")}>Del</div> */}
-          </Rnd>
-        );
-      })}
+          />
+
+          {boundingBoxes.map((box, index) => {
+            return (
+              <Rnd
+                key={box.id}
+                bounds='parent'
+                size={{
+                  width: box.width,
+                  height: box.height,
+                }}
+                position={{
+                  x: box.x,
+                  y: box.y,
+                }}
+                onDragStop={(_event: any, d: any) => {
+                  onChange(index, { x: d.x, y: d.y });
+                }}
+                onResize={(_event, _direction, ref, _delta, position) => {
+                  onChange(index, position, {
+                    width: ref.offsetWidth,
+                    height: ref.offsetHeight,
+                  });
+                }}
+                style={{
+                  backgroundColor: "rgba(255,255,255,0.2)",
+                  border: "1px dashed rgba(0,0,0,0.5)",
+                }}
+              >
+                <Button
+                  variant='danger'
+                  onClick={() => deleteBox(box.id || "")}
+                  className='m-2 p-1'
+                >
+                  <span className='fe fe-trash-2' />
+                </Button>
+              </Rnd>
+            );
+          })}
+        </div>
+      </div>
     </div>
   );
 };
