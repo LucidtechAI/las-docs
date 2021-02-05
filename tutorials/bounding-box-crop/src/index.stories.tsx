@@ -1,7 +1,8 @@
 import React from 'react';
 import { Meta } from '@storybook/react';
 
-import RemoteComponent from './index'
+import Konva from './index'
+import RemoteComponent from './indexReact'
 import PropProvider from './__mocks__/Provider';
 
 export default {
@@ -10,3 +11,4 @@ export default {
 } as Meta;
 
 export const Default = (): JSX.Element => <PropProvider Component={RemoteComponent} />;
+export const KonvaTest = (): JSX.Element => <PropProvider Component={Konva} />;
