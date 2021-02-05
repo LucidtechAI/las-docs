@@ -6,7 +6,7 @@ import CustomHandle from "./CustomHandle";
 type CanvasProps = {
   doc: string;
   predictions: any;
-  dimensions: Dimensions
+  dimensions: Dimensions;
 };
 
 export type BoundingBox = {
@@ -21,65 +21,85 @@ interface Dimensions {
   height: number;
 }
 
+interface Position {
+  x: number;
+  y: number;
+}
+
 interface Prediction {
   value: [number, number, number, number];
   label: string | null;
 }
 
-// normalize to pixel values
-function normalizePredictionsToPixels(
-  predictions: Array<Prediction>,
+function normalizeToPixels(
+  dimensions: Dimensions & Position,
   imageDimensions: Dimensions
-): Array<BoundingBox> {
+): Dimensions & Position {
   const { width: imageWidth, height: imageHeight } = imageDimensions;
+  const { x, y, width, height } = dimensions;
+  const pixelX = x * imageWidth;
+  const pixelY = y * imageHeight;
+  const pixelWidth = width * imageWidth;
+  const pixelHeight = height * imageHeight;
 
-  // For now, expect prediction value to be an array of 4 values: x, y, width, height
-  const filteredPredictions = predictions.filter(
-    (prediction) =>
-      Array.isArray(prediction.value) && prediction.value.length === 4
-  );
-  const initialBoundingBoxes: Array<BoundingBox> = filteredPredictions.map(
-    (prediction, index) => {
-      const [x, y, width, height] = prediction.value;
-      const pixelX = x * imageWidth;
-      const pixelY = y * imageHeight;
-      const pixelWidth = width * imageWidth;
-      const pixelHeight = height * imageHeight;
-      return {
-        x: pixelX,
-        y: pixelY,
-        width: pixelWidth,
-        height: pixelHeight,
-        id: `${prediction.label || "no-label"}-${index.toString()}`,
-      };
-    }
-  );
-
-  return initialBoundingBoxes;
+  return { x: pixelX, y: pixelY, width: pixelWidth, height: pixelHeight };
 }
 
-function normalizeOutput(
-  boundingBoxes: Array<BoundingBox>,
-  imageDimensions: {
-    width: number;
-    height: number;
-  }
-) {
+function normalizePositionToScale(
+  position: Position,
+  imageDimensions: Dimensions
+): Position {
   const { width: imageWidth, height: imageHeight } = imageDimensions;
-  const output = boundingBoxes.map((box) => {
-    const { x, y } = box;
-    const width = (1 / imageWidth) * box.width;
-    const height = (1 / imageHeight) * box.height;
-    const outX = (1 / imageWidth) * x;
-    const outY = (1 / imageHeight) * y;
-    return {
-      raw: [box.x, box.y, box.width, box.height],
-      value: [outX, outY, width, height],
-      label: box.id,
-    };
-  });
+  const scaleX = (1 / imageWidth) * position.x;
+  const scaleY = (1 / imageHeight) * position.y;
+  return {
+    x: scaleX,
+    y: scaleY,
+  };
+}
 
-  return output;
+function normalizeDimensionsToScale(
+  dimensions: Dimensions,
+  imageDimensions: Dimensions
+): Dimensions {
+  const { width: imageWidth, height: imageHeight } = imageDimensions;
+  const scaleWidth = (1 / imageWidth) * dimensions.width;
+  const scaleHeight = (1 / imageHeight) * dimensions.height;
+  return {
+    width: scaleWidth,
+    height: scaleHeight,
+  };
+}
+
+function normalizeToScale(
+  box: Dimensions & Position,
+  imageDimensions: Dimensions
+): Dimensions & Position {
+  const { x, y, width, height } = box;
+  const { width: scaleWidth, height: scaleHeight } = normalizeDimensionsToScale(
+    { width, height },
+    imageDimensions
+  );
+  const { x: scaleX, y: scaleY } = normalizePositionToScale(
+    { x, y },
+    imageDimensions
+  );
+
+  return {
+    x: scaleX,
+    y: scaleY,
+    width: scaleWidth,
+    height: scaleHeight,
+  };
+}
+
+// good enough for our purpose ok
+function generateSemiRandomId(): string {
+  const newBoxId = `newBox-${new Date().getTime()}-${Math.floor(
+    Math.random() * 10000
+  )}`;
+
+  return newBoxId;
 }
 
 const MIN_CONTAINER_WIDTH = 600;
@@ -89,11 +109,10 @@ const RND = ({ doc, predictions, dimensions }: CanvasProps) => {
   const [boundingBoxes, setBoundingBoxes] = useState<Array<BoundingBox>>([]);
   const [imageSizeProps, setImageSizeProps] = useState<Dimensions | null>(null);
 
-
   // get image scale for canvas (stage) size so it fits
   useEffect(() => {
     if (!doc) return;
-    console.log(dimensions)
+
     const image = new Image();
     image.src = doc;
 
@@ -104,15 +123,13 @@ const RND = ({ doc, predictions, dimensions }: CanvasProps) => {
       let targetHeight = MIN_CONTAINER_HEIGHT;
 
       // check if we have more space we could use
-      const NAV_BAR_WIDTH = 300 // + some padding for safety 🤷‍♀️
+      const NAV_BAR_WIDTH = 300; // + some padding for safety 🤷‍♀️
       if (dimensions.width - NAV_BAR_WIDTH > targetWidth) {
-        targetWidth = dimensions.width - NAV_BAR_WIDTH
-        console.log(targetWidth)
+        targetWidth = dimensions.width - NAV_BAR_WIDTH;
       }
-      const HEIGHT_PADDING = 250 // for safety
+      const HEIGHT_PADDING = 250; // for safety
       if (dimensions.height - HEIGHT_PADDING > targetHeight) {
-        targetHeight = dimensions.height - HEIGHT_PADDING
-        console.log(targetHeight)
+        targetHeight = dimensions.height - HEIGHT_PADDING;
       }
 
       // compute the ratios of image dimensions to aperture dimensions
@@ -121,7 +138,6 @@ const RND = ({ doc, predictions, dimensions }: CanvasProps) => {
 
       // compute a scale for best fit and apply it
       const scale = widthFit > heightFit ? heightFit : widthFit;
-      console.log(widthFit > heightFit ? 'using heightFit' : 'using widthFit')
 
       width = width * scale;
       height = height * scale;
@@ -132,16 +148,27 @@ const RND = ({ doc, predictions, dimensions }: CanvasProps) => {
 
   // when we load our initial predictions
   useEffect(() => {
-    if (!imageSizeProps) return;
-
-    const { width: imageWidth, height: imageHeight } = imageSizeProps;
-
-    const initialBoundingBoxes = normalizePredictionsToPixels(predictions, {
-      width: imageWidth,
-      height: imageHeight,
-    });
+    const filteredPredictions = predictions.filter(
+      (prediction) =>
+        Array.isArray(prediction.value) && prediction.value.length === 4
+    );
+    const initialBoundingBoxes = filteredPredictions.map(
+      (prediction, index) => {
+        const [x, y, width, height] = prediction.value;
+        const box: BoundingBox = {
+          x,
+          y,
+          width,
+          height,
+          id: prediction.label
+            ? `${prediction.label}-${index}`
+            : generateSemiRandomId(),
+        };
+        return box;
+      }
+    );
     setBoundingBoxes(initialBoundingBoxes);
-  }, [predictions, imageSizeProps]);
+  }, [predictions]);
 
   const addBox = () => {
     if (!imageSizeProps) return;
@@ -174,38 +201,53 @@ const RND = ({ doc, predictions, dimensions }: CanvasProps) => {
   };
 
   const reset = () => {
-    if (!imageSizeProps) return;
-    const { width: imageWidth, height: imageHeight } = imageSizeProps;
-    const initialBoundingBoxes = normalizePredictionsToPixels(predictions, {
-      width: imageWidth,
-      height: imageHeight,
-    });
+    const filteredPredictions = predictions.filter(
+      (prediction) =>
+        Array.isArray(prediction.value) && prediction.value.length === 4
+    );
+    const initialBoundingBoxes = filteredPredictions.map(
+      (prediction, index) => {
+        const [x, y, width, height] = prediction.value;
+        const box: BoundingBox = {
+          x,
+          y,
+          width,
+          height,
+          id: prediction.label
+            ? `${prediction.label}-${index}`
+            : generateSemiRandomId(),
+        };
+        return box;
+      }
+    );
     setBoundingBoxes(initialBoundingBoxes);
   };
 
   const output = () => {
-    if (!imageSizeProps) return;
-    const { width: imageWidth, height: imageHeight } = imageSizeProps;
-    const out = normalizeOutput(boundingBoxes, {
-      width: imageWidth,
-      height: imageHeight,
-    });
-    console.log(out);
+    console.log(boundingBoxes);
   };
 
   const onChange = (
     index: number,
-    position?: { x: number; y: number },
-    dimensions?: { width: number; height: number }
+    position?: Position,
+    dimensions?: Dimensions
   ) => {
     setBoundingBoxes((prev) => {
       const boxArrayCopy = prev.slice();
       let boxCopy = { ...boxArrayCopy[index] };
       if (position) {
-        boxCopy = { ...boxCopy, ...position };
+        const scalePosition = normalizePositionToScale(
+          position,
+          imageSizeProps || { width: 1, height: 1 }
+        );
+        boxCopy = { ...boxCopy, ...scalePosition };
       }
       if (dimensions) {
-        boxCopy = { ...boxCopy, ...dimensions };
+        const scaleDimensions = normalizeDimensionsToScale(
+          dimensions,
+          imageSizeProps || { width: 1, height: 1 }
+        );
+        boxCopy = { ...boxCopy, ...scaleDimensions };
       }
       boxArrayCopy[index] = boxCopy;
       return boxArrayCopy;
@@ -256,59 +298,68 @@ const RND = ({ doc, predictions, dimensions }: CanvasProps) => {
             src={doc}
             style={{
               objectFit: "contain",
-              width: "auto",
+              width: imageSizeProps?.width,
               height: "auto",
               maxWidth: "100%",
               maxHeight: "100%",
             }}
+            draggable={false}
           />
 
-          {boundingBoxes.map((box, index) => {
-            return (
-              <Rnd
-                key={box.id}
-                bounds='parent'
-                size={{
-                  width: box.width,
-                  height: box.height,
-                }}
-                position={{
-                  x: box.x,
-                  y: box.y,
-                }}
-                onDragStop={(_event: any, d: any) => {
-                  onChange(index, { x: d.x, y: d.y });
-                }}
-                onResize={(_event, _direction, ref, _delta, position) => {
-                  onChange(index, position, {
-                    width: ref.offsetWidth,
-                    height: ref.offsetHeight,
-                  });
-                }}
-                minHeight={40}
-                minWidth={40}
-                style={{
-                  backgroundColor: "rgba(255,255,255,0.2)",
-                  border: "1px dashed rgba(0,0,0,0.5)",
-                }}
-                resizeHandleComponent={{
-                  bottomLeft: <CustomHandle />,
-                  bottomRight: <CustomHandle />,
-                  topLeft: <CustomHandle />,
-                  topRight: <CustomHandle />,
-                }}
-              >
-                <Button
-                  variant='danger'
-                  onClick={() => deleteBox(box.id || "")}
-                  className='m-2 p-1'
-                  style={{ position: "absolute", borderColor: "var(--danger)" }}
+          {imageSizeProps &&
+            boundingBoxes.map((box, index) => {
+              const { x, y, width, height } = normalizeToPixels(
+                box,
+                imageSizeProps
+              );
+              return (
+                <Rnd
+                  key={box.id}
+                  bounds='parent'
+                  size={{
+                    width: width,
+                    height: height,
+                  }}
+                  position={{
+                    x: x,
+                    y: y,
+                  }}
+                  onDragStop={(_event: any, d: any) => {
+                    onChange(index, { x: d.x, y: d.y });
+                  }}
+                  onResize={(_event, _direction, ref, _delta, position) => {
+                    onChange(index, position, {
+                      width: ref.offsetWidth,
+                      height: ref.offsetHeight,
+                    });
+                  }}
+                  minHeight={40}
+                  minWidth={40}
+                  style={{
+                    backgroundColor: "rgba(255,255,255,0.2)",
+                    border: "1px dashed rgba(0,0,0,0.5)",
+                  }}
+                  resizeHandleComponent={{
+                    bottomLeft: <CustomHandle />,
+                    bottomRight: <CustomHandle />,
+                    topLeft: <CustomHandle />,
+                    topRight: <CustomHandle />,
+                  }}
                 >
-                  <span className='fe fe-trash-2' />
-                </Button>
-              </Rnd>
-            );
-          })}
+                  <Button
+                    variant='danger'
+                    onClick={() => deleteBox(box.id || "")}
+                    className='m-2 p-1'
+                    style={{
+                      position: "absolute",
+                      borderColor: "var(--danger)",
+                    }}
+                  >
+                    <span className='fe fe-trash-2' />
+                  </Button>
+                </Rnd>
+              );
+            })}
         </div>
       </div>
     </div>
