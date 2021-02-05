@@ -108,13 +108,14 @@ const BoundingBoxGroup = ({
           // we will reset it back
           node?.scaleX(1);
           node?.scaleY(1);
+
           onChange({
             ...shapeProps,
             x: node?.x() || 0,
             y: node?.y() || 0,
             // set minimal value
-            width: Math.max(5, (node?.width() || 1) * (scaleX || 1)),
-            height: Math.max((node?.height() || 1) * (scaleY || 1)),
+            width: Math.max(40, (node?.width() || 1) * (scaleX || 1)),
+            height: Math.max(40, (node?.height() || 1) * (scaleY || 1)),
           });
         }}
       >
@@ -168,7 +169,7 @@ const BoundingBoxGroup = ({
           borderEnabled={false}
           boundBoxFunc={(oldBox, newBox) => {
             // limit resize
-            if (newBox.width < 10 || newBox.height < 10) {
+            if (newBox.width < 40 || newBox.height < 40) {
               return oldBox;
             }
             return newBox;
