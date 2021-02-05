@@ -1,5 +1,5 @@
 import { Button } from "@lucidtech/flyt-form";
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Rnd } from "react-rnd";
 import CustomHandle from "./CustomHandle";
 
@@ -81,8 +81,8 @@ function normalizeOutput(
   return output;
 }
 
-const CONTAINER_WIDTH = 700;
-const CONTAINER_HEIGHT = 700;
+const CONTAINER_WIDTH = 650;
+const CONTAINER_HEIGHT = 800;
 
 const RND = ({ doc, predictions }: CanvasProps) => {
   const [boundingBoxes, setBoundingBoxes] = useState<Array<BoundingBox>>([]);
@@ -236,6 +236,8 @@ const RND = ({ doc, predictions }: CanvasProps) => {
           style={{
             width: imageSizeProps?.width,
             height: imageSizeProps?.height,
+            border: '1px solid rgba(0,0,0,0.5)',
+            boxSizing: 'content-box'
           }}
         >
           <img
@@ -283,7 +285,7 @@ const RND = ({ doc, predictions }: CanvasProps) => {
                   variant='danger'
                   onClick={() => deleteBox(box.id || "")}
                   className='m-2 p-1'
-                  style={{ position: "absolute" }}
+                  style={{ position: "absolute", borderColor: 'var(--danger)' }}
                 >
                   <span className='fe fe-trash-2' />
                 </Button>
