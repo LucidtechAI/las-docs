@@ -6,6 +6,17 @@ import { Button } from "@lucidtech/flyt-form";
 
 declare const ___TUTORIAL_VERSION___: string;
 
+function debounce(fn: any, ms: number) {
+  let timer;
+  return () => {
+    clearTimeout(timer)
+    timer = setTimeout(function() {
+      timer = null
+      fn.apply(this, arguments)
+    }, ms)
+  };
+}
+
 const RemoteComponent = ({
   transitionExecution,
   transition,
@@ -19,6 +30,25 @@ const RemoteComponent = ({
   const [doc, setDoc] = useState("");
   const [error, setError] = useState<string | null>(null)
   const [isLoadingDocument, setIsLoadingDocument] = useState(true);
+  const [dimensions, setDimensions] = useState({
+    height: window.innerHeight,
+    width: window.innerWidth,
+  });
+
+  useEffect(() => {
+    const debouncedHandleResize = debounce(function handleResize() {
+      setDimensions({
+        height: window.innerHeight,
+        width: window.innerWidth
+      })
+    }, 100)
+
+    window.addEventListener("resize", debouncedHandleResize);
+
+    return () => {
+      window.removeEventListener("resize", debouncedHandleResize);
+    };
+  }, []);
 
   // new transition execution, get document, and set predictions
   useEffect(() => {
@@ -92,7 +122,7 @@ const RemoteComponent = ({
                 alignItems: "center",
               }}
             >
-              {somethingIsLoading ? "Loading..." : <RND doc={doc} predictions={transitionExecution.input?.predictions} />}
+              {somethingIsLoading ? "Loading..." : <RND doc={doc} predictions={transitionExecution.input?.predictions} dimensions={dimensions} />}
             </div>
 
             <div className='card-footer'>

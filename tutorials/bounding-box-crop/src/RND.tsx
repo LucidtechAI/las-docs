@@ -1,11 +1,12 @@
 import { Button } from "@lucidtech/flyt-form";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Rnd } from "react-rnd";
 import CustomHandle from "./CustomHandle";
 
 type CanvasProps = {
   doc: string;
   predictions: any;
+  dimensions: Dimensions
 };
 
 export type BoundingBox = {
@@ -81,26 +82,38 @@ function normalizeOutput(
   return output;
 }
 
-const CONTAINER_WIDTH = 650;
-const CONTAINER_HEIGHT = 800;
+const MIN_CONTAINER_WIDTH = 600;
+const MIN_CONTAINER_HEIGHT = 600;
 
-const RND = ({ doc, predictions }: CanvasProps) => {
+const RND = ({ doc, predictions, dimensions }: CanvasProps) => {
   const [boundingBoxes, setBoundingBoxes] = useState<Array<BoundingBox>>([]);
   const [imageSizeProps, setImageSizeProps] = useState<Dimensions | null>(null);
+
 
   // get image scale for canvas (stage) size so it fits
   useEffect(() => {
     if (!doc) return;
-
+    console.log(dimensions)
     const image = new Image();
     image.src = doc;
 
     image.onload = () => {
       let { width, height } = image;
 
-      // could add padding or extra dimension to make up for here
-      const targetWidth = CONTAINER_WIDTH; // + (padding * 2) for instance
-      const targetHeight = CONTAINER_HEIGHT;
+      let targetWidth = MIN_CONTAINER_WIDTH;
+      let targetHeight = MIN_CONTAINER_HEIGHT;
+
+      // check if we have more space we could use
+      const NAV_BAR_WIDTH = 300 // + some padding for safety 🤷‍♀️
+      if (dimensions.width - NAV_BAR_WIDTH > targetWidth) {
+        targetWidth = dimensions.width - NAV_BAR_WIDTH
+        console.log(targetWidth)
+      }
+      const HEIGHT_PADDING = 250 // for safety
+      if (dimensions.height - HEIGHT_PADDING > targetHeight) {
+        targetHeight = dimensions.height - HEIGHT_PADDING
+        console.log(targetHeight)
+      }
 
       // compute the ratios of image dimensions to aperture dimensions
       const widthFit = targetWidth / width;
@@ -108,13 +121,14 @@ const RND = ({ doc, predictions }: CanvasProps) => {
 
       // compute a scale for best fit and apply it
       const scale = widthFit > heightFit ? heightFit : widthFit;
+      console.log(widthFit > heightFit ? 'using heightFit' : 'using widthFit')
 
       width = width * scale;
       height = height * scale;
 
       setImageSizeProps({ width, height });
     };
-  }, [doc]);
+  }, [doc, dimensions]);
 
   // when we load our initial predictions
   useEffect(() => {
@@ -224,8 +238,6 @@ const RND = ({ doc, predictions }: CanvasProps) => {
           backgroundSize: "20px 20px",
           backgroundImage:
             "linear-gradient(45deg, #eee 25%, transparent 25%, transparent 75%, #eee 75%, #eee 100%),linear-gradient(45deg, #eee 25%, white 25%, white 75%, #eee 75%, #eee 100%)",
-          width: CONTAINER_WIDTH,
-          height: CONTAINER_HEIGHT,
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
@@ -236,8 +248,8 @@ const RND = ({ doc, predictions }: CanvasProps) => {
           style={{
             width: imageSizeProps?.width,
             height: imageSizeProps?.height,
-            border: '1px solid rgba(0,0,0,0.5)',
-            boxSizing: 'content-box'
+            border: "1px solid rgba(0,0,0,0.5)",
+            boxSizing: "content-box",
           }}
         >
           <img
@@ -279,13 +291,18 @@ const RND = ({ doc, predictions }: CanvasProps) => {
                   backgroundColor: "rgba(255,255,255,0.2)",
                   border: "1px dashed rgba(0,0,0,0.5)",
                 }}
-                resizeHandleComponent={{bottomLeft: <CustomHandle />, bottomRight: <CustomHandle />, topLeft: <CustomHandle />, topRight: <CustomHandle />}}
+                resizeHandleComponent={{
+                  bottomLeft: <CustomHandle />,
+                  bottomRight: <CustomHandle />,
+                  topLeft: <CustomHandle />,
+                  topRight: <CustomHandle />,
+                }}
               >
                 <Button
                   variant='danger'
                   onClick={() => deleteBox(box.id || "")}
                   className='m-2 p-1'
-                  style={{ position: "absolute", borderColor: 'var(--danger)' }}
+                  style={{ position: "absolute", borderColor: "var(--danger)" }}
                 >
                   <span className='fe fe-trash-2' />
                 </Button>
