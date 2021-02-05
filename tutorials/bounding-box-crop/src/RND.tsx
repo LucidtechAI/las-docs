@@ -80,41 +80,47 @@ function normalizeOutput(
   return output;
 }
 
+const CONTAINER_WIDTH = 700;
+const CONTAINER_HEIGHT = 700;
+
 const RND = ({ doc, predictions }: CanvasProps) => {
   const [boundingBoxes, setBoundingBoxes] = useState<Array<BoundingBox>>([]);
-
-  const CONTAINER_WIDTH = 700;
-  const CONTAINER_HEIGHT = 700;
+  const [imageSizeProps, setImageSizeProps] = useState<Dimensions | null>(null);
 
   // get image scale for canvas (stage) size so it fits
-  const imageSizeProps: Dimensions = useMemo(() => {
-    if (!doc) return { width: 0, height: 0 };
+  useEffect(() => {
+    if (!doc) return;
 
     const image = new Image();
     image.src = doc;
 
-    let { width, height } = image;
+    image.onload = () => {
+      let { width, height } = image;
 
-    // could add padding or extra dimension to make up for here
-    const targetWidth = CONTAINER_WIDTH; // + (padding * 2) for instance
-    const targetHeight = CONTAINER_HEIGHT;
+      // could add padding or extra dimension to make up for here
+      const targetWidth = CONTAINER_WIDTH; // + (padding * 2) for instance
+      const targetHeight = CONTAINER_HEIGHT;
 
-    // compute the ratios of image dimensions to aperture dimensions
-    const widthFit = targetWidth / width;
-    const heightFit = targetHeight / height;
+      // compute the ratios of image dimensions to aperture dimensions
+      const widthFit = targetWidth / width;
+      const heightFit = targetHeight / height;
 
-    // compute a scale for best fit and apply it
-    const scale = widthFit > heightFit ? heightFit : widthFit;
+      // compute a scale for best fit and apply it
+      const scale = widthFit > heightFit ? heightFit : widthFit;
 
-    width = width * scale;
-    height = height * scale;
+      width = width * scale;
+      height = height * scale;
 
-    return { width, height };
+      setImageSizeProps({ width, height });
+    };
   }, [doc]);
 
   // when we load our initial predictions
   useEffect(() => {
+    if (!imageSizeProps) return;
+
     const { width: imageWidth, height: imageHeight } = imageSizeProps;
+    console.log(imageWidth, imageHeight);
     const initialBoundingBoxes = normalizePredictionsToPixels(predictions, {
       width: imageWidth,
       height: imageHeight,
@@ -123,6 +129,7 @@ const RND = ({ doc, predictions }: CanvasProps) => {
   }, [predictions, imageSizeProps]);
 
   const addBox = () => {
+    if (!imageSizeProps) return;
     const { width: imageWidth, height: imageHeight } = imageSizeProps;
     // should be good enough to not create duplicate ids
     const newBoxId = `newBox-${new Date().getTime()}-${Math.floor(
@@ -152,6 +159,7 @@ const RND = ({ doc, predictions }: CanvasProps) => {
   };
 
   const reset = () => {
+    if (!imageSizeProps) return;
     const { width: imageWidth, height: imageHeight } = imageSizeProps;
     const initialBoundingBoxes = normalizePredictionsToPixels(predictions, {
       width: imageWidth,
@@ -161,6 +169,7 @@ const RND = ({ doc, predictions }: CanvasProps) => {
   };
 
   const output = () => {
+    if (!imageSizeProps) return;
     const { width: imageWidth, height: imageHeight } = imageSizeProps;
     const out = normalizeOutput(boundingBoxes, {
       width: imageWidth,
@@ -190,7 +199,14 @@ const RND = ({ doc, predictions }: CanvasProps) => {
 
   return (
     <div>
-      <div style={{display: 'flex', flexDirection: 'row', justifyContent: 'space-around'}} className="my-3">
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "row",
+          justifyContent: "space-around",
+        }}
+        className='my-3'
+      >
         <Button variant='success' onClick={addBox}>
           <span className='fe fe-plus-square mr-2' /> Add box
         </Button>
@@ -213,7 +229,7 @@ const RND = ({ doc, predictions }: CanvasProps) => {
       >
         <div
           id='imageContainer'
-          style={{ width: imageSizeProps.width, height: imageSizeProps.height }}
+          style={{ width: imageSizeProps?.width, height: imageSizeProps?.height }}
         >
           <img
             src={doc}
