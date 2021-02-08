@@ -9,11 +9,12 @@ declare const ___TUTORIAL_VERSION___: string;
 function debounce(fn: any, ms: number) {
   let timer;
   return () => {
-    clearTimeout(timer)
-    timer = setTimeout(function() {
-      timer = null
-      fn.apply(this, arguments)
-    }, ms)
+    clearTimeout(timer);
+    timer = setTimeout(function () {
+      timer = null;
+      // @ts-ignore 🤷‍♀️
+      fn.apply(this, arguments);
+    }, ms);
   };
 }
 
@@ -26,9 +27,9 @@ const RemoteComponent = ({
   onSkip,
   client,
   queueStatus,
-}: RemoteComponentExternalProps) => {
+}: RemoteComponentExternalProps): JSX.Element => {
   const [doc, setDoc] = useState("");
-  const [error, setError] = useState<string | null>(null)
+  const [error, setError] = useState<string | null>(null);
   const [isLoadingDocument, setIsLoadingDocument] = useState(true);
   const [dimensions, setDimensions] = useState({
     height: window.innerHeight,
@@ -39,9 +40,9 @@ const RemoteComponent = ({
     const debouncedHandleResize = debounce(function handleResize() {
       setDimensions({
         height: window.innerHeight,
-        width: window.innerWidth
-      })
-    }, 100)
+        width: window.innerWidth,
+      });
+    }, 100);
 
     window.addEventListener("resize", debouncedHandleResize);
 
@@ -52,22 +53,22 @@ const RemoteComponent = ({
 
   // new transition execution, get document, and set predictions
   useEffect(() => {
-    setError(null)
+    setError(null);
     if (!transitionExecution?.input.documentId) return;
     setIsLoadingDocument(true);
 
     client
       .getDocument(transitionExecution.input.documentId)
       .then((res) => {
-        if (res.contentType !== 'image/jpeg') {
-          throw Error('Only JPEG supported for cropping')
+        if (res.contentType !== "image/jpeg") {
+          throw Error("Only JPEG supported for cropping");
         }
         const dataUrl = `data:${res.contentType};base64,${res.content}`;
         setDoc(dataUrl);
       })
       .catch((e) => {
         console.error(e);
-        setError(e)
+        setError(e);
       })
       .finally(() => {
         setIsLoadingDocument(false);
@@ -122,7 +123,15 @@ const RemoteComponent = ({
                 alignItems: "center",
               }}
             >
-              {somethingIsLoading ? "Loading..." : <RND doc={doc} predictions={transitionExecution.input?.predictions} dimensions={dimensions} />}
+              {somethingIsLoading ? (
+                "Loading..."
+              ) : (
+                <RND
+                  doc={doc}
+                  predictions={transitionExecution.input?.predictions}
+                  dimensions={dimensions}
+                />
+              )}
             </div>
 
             <div className='card-footer'>
@@ -135,33 +144,33 @@ const RemoteComponent = ({
               >
                 <div style={{ order: 2 }}>
                   <Button
-                  variant="success"
+                    variant='success'
                     style={{ width: "150px", order: 1 }}
                     onClick={approve}
                     disabled={isLoadingDocument}
                   >
-                    <span className="fe fe-check" />
+                    <span className='fe fe-check' />
                   </Button>
                 </div>
                 <div
                   style={{ order: 1, display: "flex", flexDirection: "row" }}
                 >
                   <Button
-                  variant="soft"
+                    variant='soft'
                     style={{ order: 2 }}
                     onClick={skip}
                     disabled={isLoadingDocument}
                   >
-                    <span className="fe fe-skip-forward" />
+                    <span className='fe fe-skip-forward' />
                   </Button>
                   <Button
-                  variant="danger"
+                    variant='danger'
                     className='mr-2'
                     style={{ order: 1 }}
                     onClick={reject}
                     disabled={isLoadingDocument}
                   >
-                    <span className="fe fe-slash" />
+                    <span className='fe fe-slash' />
                   </Button>
                 </div>
               </div>
