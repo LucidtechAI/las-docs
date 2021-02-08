@@ -1,5 +1,5 @@
 import { Button } from "@lucidtech/flyt-form";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Rnd } from "react-rnd";
 import CustomHandle from "./CustomHandle";
 
@@ -312,9 +312,12 @@ const RND = ({ doc, predictions, dimensions }: CanvasProps) => {
                 box,
                 imageSizeProps
               );
+              // base key on window dimensions to force a re-render of boxes if window gets resized
+              // slightly hacky but necessary it seems
+              const key = `${box.id}-${dimensions.height}-${dimensions.width}-${imageSizeProps.width}-${imageSizeProps.height}`;
               return (
                 <Rnd
-                  key={box.id}
+                  key={key}
                   bounds='parent'
                   size={{
                     width: width,
