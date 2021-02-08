@@ -1,22 +1,12 @@
 import React, { useEffect, useState } from 'react';
 
-import { QueueStatus, RemoteComponentExternalProps } from './types';
+import { BoundingBox, QueueStatus, RemoteComponentExternalProps } from './types';
 import RND from './RND';
 import { Button } from '@lucidtech/flyt-form';
+import { debounce, generateSemiRandomId } from './utils';
+import ErrorAlert from './ErrorAlert';
 
 declare const ___TUTORIAL_VERSION___: string;
-
-function debounce(fn: (args: any) => void, ms: number) {
-  let timer;
-  return () => {
-    clearTimeout(timer);
-    timer = setTimeout(function () {
-      timer = null;
-      // @ts-ignore 🤷‍♀️
-      fn.apply(this, arguments);
-    }, ms);
-  };
-}
 
 const RemoteComponent = ({
   transitionExecution,
@@ -28,6 +18,7 @@ const RemoteComponent = ({
   client,
   queueStatus,
 }: RemoteComponentExternalProps): JSX.Element => {
+  const [boundingBoxes, setBoundingBoxes] = useState<Array<BoundingBox>>([]);
   const [doc, setDoc] = useState('');
   const [error, setError] = useState<string | null>(null);
   const [isLoadingDocument, setIsLoadingDocument] = useState(true);
@@ -36,13 +27,14 @@ const RemoteComponent = ({
     width: window.innerWidth,
   });
 
+  // handle window resizing
   useEffect(() => {
     const debouncedHandleResize = debounce(function handleResize() {
       setDimensions({
         height: window.innerHeight,
         width: window.innerWidth,
       });
-    }, 100);
+    }, 75);
 
     window.addEventListener('resize', debouncedHandleResize);
 
@@ -51,12 +43,40 @@ const RemoteComponent = ({
     };
   }, []);
 
-  // new transition execution, get document, and set predictions
+  // new transition execution, map predictions and get document (image)
   useEffect(() => {
-    setError(null);
-    if (!transitionExecution?.input.documentId) return;
+    if (!transitionExecution) return;
+
+    setError(null); // reset any errors
+    const { input } = transitionExecution;
+
+    // if no document, what are we even doing?
+    if (!input?.documentId) {
+      setError('No document');
+      return;
+    }
+
     setIsLoadingDocument(true);
 
+    // filter and map predictions into initial bounding boxes
+    const predictions = input?.predictions || [];
+    const filteredPredictions = predictions.filter(
+      (prediction) => Array.isArray(prediction.value) && prediction.value.length === 4,
+    );
+    const initialBoundingBoxes = filteredPredictions.map((prediction, index) => {
+      const [x, y, width, height] = prediction.value;
+      const box: BoundingBox = {
+        x,
+        y,
+        width,
+        height,
+        id: prediction.label ? `${prediction.label}-${index}` : generateSemiRandomId(),
+      };
+      return box;
+    });
+    setBoundingBoxes(initialBoundingBoxes);
+
+    // get document
     client
       .getDocument(transitionExecution.input.documentId)
       .then((res) => {
@@ -75,10 +95,58 @@ const RemoteComponent = ({
       });
   }, [transitionExecution]);
 
+  const reset = () => {
+    const predictions = transitionExecution?.input?.predictions || [];
+    const filteredPredictions = predictions.filter(
+      (prediction) => Array.isArray(prediction.value) && prediction.value.length === 4,
+    );
+    const initialBoundingBoxes = filteredPredictions.map((prediction, index) => {
+      const [x, y, width, height] = prediction.value;
+      const box: BoundingBox = {
+        x,
+        y,
+        width,
+        height,
+        id: prediction.label ? `${prediction.label}-${index}` : generateSemiRandomId(),
+      };
+      return box;
+    });
+    setBoundingBoxes(initialBoundingBoxes);
+  };
+
+  const onChange = (newBoxes: Array<BoundingBox>) => {
+    setBoundingBoxes(newBoxes);
+  };
+
+  const addBox = () => {
+    const newBoxId = `newBox-${generateSemiRandomId()}`;
+    setBoundingBoxes((prev) => [
+      ...prev,
+      {
+        x: 0.35,
+        y: 0.35,
+        width: 0.2,
+        height: 0.2,
+        id: newBoxId,
+      },
+    ]);
+  };
+
+  const deleteBox = (id: string) => {
+    setBoundingBoxes((prev) => {
+      const copy = [...prev];
+      const indexToDelete = copy.findIndex((box) => box.id === id);
+      if (indexToDelete >= 0) {
+        copy.splice(indexToDelete, 1);
+      }
+      return copy;
+    });
+  };
+
   const approve = () => {
     const payload = {
-      documentId: transitionExecution?.input.documentId,
-      verified: {},
+      documentId: transitionExecution?.input?.documentId,
+      verified: boundingBoxes,
     };
     onApprove(payload);
     onRequestNew();
@@ -98,20 +166,27 @@ const RemoteComponent = ({
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
-      <div
-        style={{
-          flexGrow: 1,
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-        }}
-        className="mr-5"
-      >
-        {isLoadingDocument || queueStatus === QueueStatus.LOADING ? 'Loading...' : null}
-      </div>
-      <div style={{ minWidth: '40%' }}>
+      <div style={{ width: '100%' }}>
         <form onSubmit={(e) => e.preventDefault()}>
           <div className="card">
+            <div className="card-header" style={{ display: 'flex', justifyContent: 'center' }}>
+              <div
+                style={{
+                  display: 'flex',
+                  flexDirection: 'row',
+                  justifyContent: 'space-between',
+                  maxWidth: '600px',
+                }}
+                className="my-3"
+              >
+                <Button variant="success" onClick={addBox}>
+                  <span className="fe fe-plus-square mr-2" /> Add box
+                </Button>
+                <Button variant="danger" onClick={reset}>
+                  <span className="fe fe-refresh-ccw mr-2" /> Reset to predictions
+                </Button>
+              </div>
+            </div>
             <div
               className="card-body"
               style={{
@@ -120,19 +195,30 @@ const RemoteComponent = ({
                 alignItems: 'center',
               }}
             >
-              {somethingIsLoading ? (
-                'Loading...'
+              {error ? (
+                <ErrorAlert>{error.toString()}</ErrorAlert>
               ) : (
-                <RND doc={doc} predictions={transitionExecution.input?.predictions} dimensions={dimensions} />
+                <RND
+                  key={transitionExecution?.input?.documentId || ''}
+                  doc={doc}
+                  predictions={transitionExecution.input?.predictions}
+                  dimensions={dimensions}
+                  loading={somethingIsLoading}
+                  boundingBoxes={boundingBoxes}
+                  onDelete={deleteBox}
+                  onChange={onChange}
+                />
               )}
             </div>
 
-            <div className="card-footer">
+            <div className="card-footer" style={{ display: 'flex', justifyContent: 'center' }}>
               <div
                 style={{
                   display: 'flex',
                   flexDirection: 'row',
                   justifyContent: 'space-between',
+                  maxWidth: '600px',
+                  width: '100%',
                 }}
               >
                 <div style={{ order: 2 }}>

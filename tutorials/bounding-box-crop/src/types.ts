@@ -23,3 +23,25 @@ export type RemoteComponentExternalProps = {
   transitionExecution: TransitionExecution;
   client: Client;
 };
+
+export type BoundingBox = {
+  x: number;
+  y: number;
+  width: number;
+  height: number;
+  id?: string;
+};
+export interface Dimensions {
+  width: number;
+  height: number;
+}
+
+interface Position {
+  x: number;
+  y: number;
+}
+
+interface Prediction {
+  value: [number, number, number, number];
+  label: string | null;
+}
