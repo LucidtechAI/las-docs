@@ -3,8 +3,8 @@ import React, { useEffect, useState } from 'react';
 import { Position, Rnd } from 'react-rnd';
 import CustomHandle from './CustomHandle';
 import Spinner from './Spinner';
-import { BoundingBox, Dimensions } from './types';
-import { normalizeDimensionsToScale, normalizePositionToScale, normalizeToPixels } from './utils';
+import { BoundingBox, Dimensions } from '../types';
+import { normalizeDimensionsToScale, normalizePositionToScale, normalizeToPixels } from '../utils';
 
 type RNDProps = {
   doc: string;

@@ -2,9 +2,9 @@ import React, { ComponentType, useState } from 'react';
 import { Client as SDKClient } from '@lucidtech/las-sdk-core';
 import { Asset, TransitionExecution } from '@lucidtech/las-sdk-core/lib/types';
 
-import documents from '../__fixtures__/documents';
+import documents from './documents';
 import { QueueStatus, RemoteComponentExternalProps } from '../types';
-import { createTransition, createTransitionExecution } from '../__fixtures__/props';
+import { createTransition, createTransitionExecution } from './props';
 
 class Client {
   async getDocument(documentId: string): Promise<any> {

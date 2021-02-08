@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 
 import { BoundingBox, QueueStatus, RemoteComponentExternalProps } from './types';
-import RND from './RND';
+import RND from './components/RND';
 import { Button } from '@lucidtech/flyt-form';
 import { debounce, generateSemiRandomId } from './utils';
-import ErrorAlert from './ErrorAlert';
+import ErrorAlert from './components/ErrorAlert';
 
 declare const ___TUTORIAL_VERSION___: string;
 

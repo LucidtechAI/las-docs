@@ -2,7 +2,7 @@ import React from 'react';
 import { Meta } from '@storybook/react';
 
 import RemoteComponent from '.';
-import PropProvider from './__mocks__/Provider';
+import PropProvider from './__fixtures__/Provider';
 
 export default {
   title: 'RemoteComponent',
