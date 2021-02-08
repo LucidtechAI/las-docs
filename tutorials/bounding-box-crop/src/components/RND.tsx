@@ -81,7 +81,7 @@ const RND = ({ doc, dimensions, loading, boundingBoxes, onDelete, onChange }: RN
         backgroundPosition: '0px 0px, 10px 10px',
         backgroundSize: '20px 20px',
         backgroundImage:
-          'linear-gradient(45deg, #eee 25%, transparent 25%, transparent 75%, #eee 75%, #eee 100%),linear-gradient(45deg, #eee 25%, white 25%, white 75%, #eee 75%, #eee 100%)',
+          'linear-gradient(45deg, rgb(247, 247, 247) 25%, transparent 25%, transparent 75%, rgb(247, 247, 247) 75%, rgb(247, 247, 247) 100%),linear-gradient(45deg, rgb(247, 247, 247) 25%, white 25%, white 75%, rgb(247, 247, 247) 75%, rgb(247, 247, 247) 100%)',
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
@@ -141,7 +141,7 @@ const RND = ({ doc, dimensions, loading, boundingBoxes, onDelete, onChange }: RN
                 minHeight={40}
                 minWidth={40}
                 style={{
-                  backgroundColor: 'rgba(255,255,255,0.2)',
+                  backgroundColor: 'rgba(0,255,0,0.05)',
                   border: '1px dashed rgba(0,0,0,0.5)',
                 }}
                 resizeHandleComponent={{
