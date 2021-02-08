@@ -36,12 +36,12 @@ export interface Dimensions {
   height: number;
 }
 
-interface Position {
+export interface Position {
   x: number;
   y: number;
 }
 
-interface Prediction {
+export interface Prediction {
   value: [number, number, number, number];
   label: string | null;
 }

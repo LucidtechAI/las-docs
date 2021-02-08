@@ -156,7 +156,6 @@ const RND = ({ doc, dimensions, loading, boundingBoxes, onDelete, onChange }: RN
                   onClick={() => box.id && onDelete(box.id)}
                   className="m-2 p-1"
                   style={{
-                    position: 'absolute',
                     borderColor: 'var(--danger)',
                   }}
                 >

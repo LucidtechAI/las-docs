@@ -34,7 +34,7 @@ const RemoteComponent = ({
         height: window.innerHeight,
         width: window.innerWidth,
       });
-    }, 75);
+    }, 30);
 
     window.addEventListener('resize', debouncedHandleResize);
 
