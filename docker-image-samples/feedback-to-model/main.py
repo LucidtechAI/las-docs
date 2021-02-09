@@ -12,7 +12,7 @@ def handler(las_client, event, environ):
     logging.info(f'Sending feedback to the model: {event} {environ}')
     document_id = event['documentId']
     verified = event['verified']
-    ground_truth = [{'label': k, 'value': v} for k, v in verified.items()]
+    ground_truth = [{'label': k, 'value': v} for k, v in verified.items() if v != '']
     logging.info(f'Posting ground_truth to API: {ground_truth}')
     response = las_client.update_document(document_id, ground_truth)
     logging.info(f'Update document response: {response}')
