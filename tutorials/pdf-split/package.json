@@ -39,6 +39,7 @@
     "webpack-cli": "^4.2.0"
   },
   "dependencies": {
-    "@lucidtech/flyt-form": "^1.2.3"
+    "@lucidtech/flyt-form": "^1.2.3",
+    "react-pdf": "^5.1.0"
   }
 }

@@ -19,10 +19,6 @@ module.exports = {
         test: /\.css$/,
         use: ['style-loader', 'css-loader'],
       },
-      // {
-      //   test: /\.svg$/,
-      //   use: ['@svgr/webpack'],
-      // },
       {
         test: /\.(png|woff|woff2|eot|ttf|svg)$/,
         loaders: ['file-loader'],
@@ -39,7 +35,7 @@ module.exports = {
     filename: 'remote.js',
   },
   externals: {
-    react: 'react'
+    react: 'react',
   },
   plugins: [new webpack.DefinePlugin({ ___TUTORIAL_VERSION___: JSON.stringify(version) })],
 };

@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { QueueStatus, RemoteComponentExternalProps } from './types';
 import { Button } from '@lucidtech/flyt-form';
 import ErrorAlert from './components/ErrorAlert';
+import PDFViewer from './components/PDFViewer';
 
 declare const ___TUTORIAL_VERSION___: string;
 
@@ -19,10 +20,7 @@ const RemoteComponent = ({
   const [doc, setDoc] = useState('');
   const [error, setError] = useState<string | null>(null);
   const [isLoadingDocument, setIsLoadingDocument] = useState(true);
-  const [dimensions, setDimensions] = useState({
-    height: window.innerHeight,
-    width: window.innerWidth,
-  });
+  const [predictions, setPredictions] = useState([]);
 
   // new transition execution, map predictions and get document (image)
   useEffect(() => {
@@ -105,11 +103,7 @@ const RemoteComponent = ({
                 alignItems: 'center',
               }}
             >
-              {error ? (
-                <ErrorAlert>{error.toString()}</ErrorAlert>
-              ) : (
-                <div>Split</div>
-              )}
+              {error ? <ErrorAlert>{error.toString()}</ErrorAlert> : <PDFViewer doc={doc} predictions={predictions} />}
             </div>
 
             <div className="card-footer" style={{ display: 'flex', justifyContent: 'center' }}>
