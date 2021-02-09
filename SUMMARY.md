@@ -4,6 +4,8 @@
 
 ## Getting Started
 
+* [Introduction](introduction/README.md)
+  * [Transitions and Workflows](introduction/transitions_and_workflows.md)
 * [Quickstart](getting-started/dev/README.md)
   * [Using the CLI](getting-started/dev/cli.md)
   * [Python](getting-started/dev/python.md)
