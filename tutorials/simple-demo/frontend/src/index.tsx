@@ -183,7 +183,7 @@ const RemoteComponent = ({
   const approve = () => {
     const valuesCopy = { ...values };
     const documentId = transitionExecution.input?.documentId;
-    Object.keys(valuesCopy).forEach((key) => valuesCopy[key] === undefined && delete valuesCopy[key]);
+    Object.keys(valuesCopy).forEach((key) => valuesCopy[key] = valuesCopy[key] || null);
     const payload = {
       documentId: documentId,
       verified: valuesCopy
