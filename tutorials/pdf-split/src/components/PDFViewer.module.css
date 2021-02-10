@@ -36,25 +36,31 @@
   position: absolute;
   z-index: 2;
   display: none;
+  padding: 5px 10px;
+  width: 37px;
+  height: 30px;
+  top: 60px;
 }
 
 .list-item-page:focus ~ .scissor-button,
 .list-item:hover .scissor-button {
-  display: block;
+  display: flex;
 }
 
 .scissor-button-prev {
-  left: -21px;
-  top: 50px;
+  left: -25px;
 }
 
 .scissor-button-next {
-  right: -21px;
-  top: 50px;
+  right: -25px;
 }
 
 .list-item {
   position: relative;
+}
+
+.list-item:hover {
+  cursor: pointer;
 }
 
 .list-item:not(:last-child) {
