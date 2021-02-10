@@ -1,6 +1,6 @@
 # *Documents*
 
- - A *Document* can be a .pdf, .jpeg or a .png file along with some meta information.
+ - A *Document* can be a .pdf or a .jpeg file along with some meta information.
     
 Lucidtech delivers services that helps you control and automate the flow
 of your documents, and a *Document* is therefore an important concept, and in this 
@@ -8,7 +8,8 @@ introduction you will see how a *Document* can be created, controlled and used t
 *Batches*, *Consents*, *Predictions*, and *Models*.
 
 # Creating a *Document*
-The simplest way to create a *Document* is to just specify a path;
+The simplest way to create a *Document* is to use the CLI 
+and use the path of the PDF or JPEG that you would like to upload.
 ```commandline
 >> las documents create path/to/my/document.pdf
 {
