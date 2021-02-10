@@ -3,6 +3,7 @@ import { Document, Page } from 'react-pdf/dist/esm/entry.webpack';
 import 'react-pdf/dist/esm/Page/AnnotationLayer.css';
 
 import styles from './PDFViewer.module.css';
+import ScissorButton from './ScissorButton';
 
 type PDFViewerProps = {
   doc: string;
@@ -41,13 +42,34 @@ const PDFViewer = ({ doc, predictions }: PDFViewerProps): JSX.Element => {
           <div key={`group_${i}-${group.join('-')}`} className={styles['group-container']}>
             <div className={styles['group-tab']}>{(i + 1).toString().padStart(2, '0')}</div>
             <ul>
-              {group.map((pageNumber) => (
-                <li className={`${styles['list-item']}`} tabIndex={0} key={`page_${pageNumber}`}>
-                  <div>
-                    <Page pageNumber={pageNumber} height={150} width={107} />
-                  </div>
-                </li>
-              ))}
+              {group.map((pageNumber, groupIndex) => {
+                const hasPrevPage = groupIndex !== 0;
+                const hasNextPage = groupIndex !== group.length - 1;
+                return (
+                  <li className={`${styles['list-item']}`} key={`page_${pageNumber}`}>
+                    <div
+                      className={styles['list-item-page']}
+                      tabIndex={0}
+                      data-has-prev={hasPrevPage ? true : undefined}
+                      data-has-next={hasNextPage ? true : undefined}
+                    >
+                      <Page pageNumber={pageNumber} height={150} width={107} />
+                    </div>
+                    {hasPrevPage && (
+                      <ScissorButton
+                        className={`${styles['scissor-button']} ${styles['scissor-button-prev']}`}
+                        tabIndex={-1}
+                      />
+                    )}
+                    {hasNextPage && (
+                      <ScissorButton
+                        className={`${styles['scissor-button']} ${styles['scissor-button-next']}`}
+                        tabIndex={-1}
+                      />
+                    )}
+                  </li>
+                );
+              })}
             </ul>
           </div>
         ))}

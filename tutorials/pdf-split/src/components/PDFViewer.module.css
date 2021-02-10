@@ -7,14 +7,14 @@
 .group-container {
   position: relative;
   padding-left: 15px;
-  background-color: rgb(154, 209, 154);
+  background-color: rgb(223, 238, 229);
   border-radius: 8px;
 }
 
 .group-tab {
   position: absolute;
-  background-color: rgb(154, 209, 154);
-  left: -40px;
+  background-color: rgb(125, 187, 158);
+  left: -30px;
   top: 30px;
   padding: 15px;
   color: white;
@@ -32,15 +32,72 @@
   border-radius: 10px;
 }
 
+.scissor-button {
+  position: absolute;
+  z-index: 2;
+  display: none;
+}
+
+.list-item-page:focus ~ .scissor-button,
+.list-item:hover .scissor-button {
+  display: block;
+}
+
+.scissor-button-prev {
+  left: -21px;
+  top: 50px;
+}
+
+.scissor-button-next {
+  right: -21px;
+  top: 50px;
+}
+
 .list-item {
-  border: 1px solid black;
-  outline: none;
+  position: relative;
 }
 
 .list-item:not(:last-child) {
-  margin-right: 10px;
+  margin-right: 13px;
 }
 
-li.list-item:focus {
+.list-item-page {
+  outline: none;
+  border: 1px solid rgb(129, 129, 129);
+  overflow: hidden;
+  border-radius: 5px;
+}
+
+.list-item-page:focus {
   border: 1px solid red;
+}
+
+.list-item-page[data-has-prev]:focus::before,
+.list-item:hover .list-item-page[data-has-prev]::before,
+.list-item:hover .list-item-page[data-has-next]::after,
+.list-item-page[data-has-next]:focus::after {
+  top: 0;
+  position: absolute;
+  content: '';
+  width: 1px;
+  height: 100%;
+  background-image: linear-gradient(
+    0deg,
+    rgb(145, 145, 145),
+    rgb(145, 145, 145) 75%,
+    transparent 75%,
+    transparent 100%
+  );
+  background-size: 1px 15px;
+  background-repeat: repeat-y;
+}
+
+.list-item-page:focus::before,
+.list-item:hover .list-item-page[data-has-prev]::before {
+  left: -7px;
+}
+
+.list-item-page:focus::after,
+.list-item:hover .list-item-page[data-has-next]::after {
+  right: -7px;
 }
