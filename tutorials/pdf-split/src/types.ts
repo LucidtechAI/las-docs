@@ -23,4 +23,3 @@ export type RemoteComponentExternalProps = {
   transitionExecution: TransitionExecution;
   client: Client;
 };
-

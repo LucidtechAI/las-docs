@@ -19,10 +19,24 @@ const PDFViewer = ({ doc, predictions }: PDFViewerProps): JSX.Element => {
     setNumPages(numPages);
   }
 
+  // Split a group into two groups, where cutIndex indicates where the second group
+  // should start.
+  const cutGroup = (groupIndex: number, cutIndex: number): void => {
+    const groupsCopy = [...groups];
+    const oldGroup = groupsCopy[groupIndex];
+    const newFirstGroup = oldGroup.slice(0, cutIndex);
+    const newSecondGroup = oldGroup.slice(cutIndex);
+
+    groupsCopy.splice(groupIndex, 1, newFirstGroup, newSecondGroup);
+
+    setGroups(groupsCopy);
+  };
+
   useEffect(() => {
     if (!numPages) return;
-    // no predictions, group all pages together by default?
-    if (predictions?.length === 0) {
+    // for now no predictions are expected, but this should make it possible to receive them in the future
+    // if no predictions, group all pages together by default
+    if (predictions?.length === 0 || !predictions) {
       const allPages = [...Array(numPages).keys()].map((key) => key + 1);
       setGroups([allPages]);
     }
@@ -58,12 +72,14 @@ const PDFViewer = ({ doc, predictions }: PDFViewerProps): JSX.Element => {
                     {hasPrevPage && (
                       <ScissorButton
                         className={`${styles['scissor-button']} ${styles['scissor-button-prev']}`}
+                        onClick={() => cutGroup(i, groupIndex)}
                         tabIndex={-1}
                       />
                     )}
                     {hasNextPage && (
                       <ScissorButton
                         className={`${styles['scissor-button']} ${styles['scissor-button-next']}`}
+                        onClick={() => cutGroup(i, groupIndex + 1)}
                         tabIndex={-1}
                       />
                     )}

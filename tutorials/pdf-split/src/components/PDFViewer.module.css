@@ -11,6 +11,10 @@
   border-radius: 8px;
 }
 
+.group-container:not(:last-child) {
+  margin-right: 50px;
+}
+
 .group-tab {
   position: absolute;
   background-color: rgb(125, 187, 158);

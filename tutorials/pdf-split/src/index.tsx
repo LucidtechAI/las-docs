@@ -103,7 +103,7 @@ const RemoteComponent = ({
                 alignItems: 'center',
               }}
             >
-              {error ? <ErrorAlert>{error.toString()}</ErrorAlert> : <PDFViewer doc={doc} predictions={predictions} />}
+              {error ? <ErrorAlert>{error.toString()}</ErrorAlert> : <PDFViewer doc={doc} />}
             </div>
 
             <div className="card-footer" style={{ display: 'flex', justifyContent: 'center' }}>
