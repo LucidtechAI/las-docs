@@ -60,17 +60,14 @@ const RemoteComponent = ({
 
     // filter and map predictions into initial bounding boxes
     const predictions = input?.predictions || [];
-    const filteredPredictions = predictions.filter(
-      (prediction) => Array.isArray(prediction.value) && prediction.value.length === 4,
-    );
-    const initialBoundingBoxes = filteredPredictions.map((prediction, index) => {
-      const [x, y, width, height] = prediction.value;
+    const initialBoundingBoxes = predictions.map((prediction) => {
+      const { x, y, w, h } = prediction;
       const box: BoundingBox = {
         x,
         y,
-        width,
-        height,
-        id: prediction.label ? `${prediction.label}-${index}` : generateSemiRandomId(),
+        width: w,
+        height: h,
+        id: generateSemiRandomId(),
       };
       return box;
     });
@@ -97,17 +94,14 @@ const RemoteComponent = ({
 
   const reset = () => {
     const predictions = transitionExecution?.input?.predictions || [];
-    const filteredPredictions = predictions.filter(
-      (prediction) => Array.isArray(prediction.value) && prediction.value.length === 4,
-    );
-    const initialBoundingBoxes = filteredPredictions.map((prediction, index) => {
-      const [x, y, width, height] = prediction.value;
+    const initialBoundingBoxes = predictions.map((prediction) => {
+      const { x, y, w, h } = prediction;
       const box: BoundingBox = {
         x,
         y,
-        width,
-        height,
-        id: prediction.label ? `${prediction.label}-${index}` : generateSemiRandomId(),
+        width: w,
+        height: h,
+        id: generateSemiRandomId(),
       };
       return box;
     });
@@ -144,9 +138,10 @@ const RemoteComponent = ({
   };
 
   const approve = () => {
+    const output = boundingBoxes.map(box => ({ x: box.x, y: box.y, w: box.width, h: box.height }))
     const payload = {
       documentId: transitionExecution?.input?.documentId,
-      verified: boundingBoxes,
+      verified: output,
     };
     onApprove(payload);
     onRequestNew();
