@@ -53,3 +53,6 @@ fabric.properties
 .idea/
 
 **/.hypothesis/
+
+# Node packages
+node_modules
