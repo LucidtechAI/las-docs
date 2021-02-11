@@ -43,8 +43,7 @@ const RemoteComponent = ({
         if (res.contentType !== 'application/pdf') {
           throw Error('Only PDF supported for splitting');
         }
-        const dataUrl = `data:${res.contentType};base64,${res.content}`;
-        setDoc(dataUrl);
+        res.content && setDoc(res.content);
       })
       .catch((e) => {
         console.error(e);
@@ -82,11 +81,7 @@ const RemoteComponent = ({
         <form onSubmit={(e) => e.preventDefault()}>
           <div className="card">
             <div className="card-body">
-              {error ? (
-                <ErrorAlert>{error.toString()}</ErrorAlert>
-              ) : (
-                <PDFViewer doc={doc} loading={somethingIsLoading} />
-              )}
+              {error ? <ErrorAlert>{error.toString()}</ErrorAlert> : !somethingIsLoading && <PDFViewer doc={doc} />}
             </div>
 
             <div className="card-footer" style={{ display: 'flex', justifyContent: 'center' }}>

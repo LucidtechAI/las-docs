@@ -1,4 +1,4 @@
-import React, { useEffect, useLayoutEffect, useRef, useState } from 'react';
+import React, { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import { Document, Page } from 'react-pdf/dist/esm/entry.webpack';
 import { GlobalHotKeys } from 'react-hotkeys';
 
@@ -9,10 +9,9 @@ import MergeButton from './MergeButton';
 type PDFViewerProps = {
   doc: string;
   predictions?: Array<Array<number>>;
-  loading?: boolean;
 };
 
-const PDFViewer = ({ doc, predictions, loading }: PDFViewerProps): JSX.Element => {
+const PDFViewer = ({ doc, predictions }: PDFViewerProps): JSX.Element => {
   const [numPages, setNumPages] = useState(null);
   const [previewPage, setPreviewPage] = useState(1);
   const [groups, setGroups] = useState<Array<Array<number>>>([]);
@@ -22,6 +21,12 @@ const PDFViewer = ({ doc, predictions, loading }: PDFViewerProps): JSX.Element =
   function onDocumentLoadSuccess({ numPages }) {
     setNumPages(numPages);
   }
+
+  const docBinary = useMemo(() => {
+    if (!doc) return '';
+
+    return atob(doc);
+  }, [doc]);
 
   // This assumes groups are always sequential,
   // we don't support joining arbitrary groups
@@ -88,7 +93,7 @@ const PDFViewer = ({ doc, predictions, loading }: PDFViewerProps): JSX.Element =
 
   return (
     <Document
-      file={doc}
+      file={{ data: docBinary }}
       onLoadSuccess={onDocumentLoadSuccess}
       options={{
         cMapUrl: 'cmaps/',
