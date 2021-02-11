@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { Document, Page } from 'react-pdf/dist/esm/entry.webpack';
 import { GlobalHotKeys } from 'react-hotkeys';
 
@@ -16,6 +16,8 @@ const PDFViewer = ({ doc, predictions, loading }: PDFViewerProps): JSX.Element =
   const [numPages, setNumPages] = useState(null);
   const [previewPage, setPreviewPage] = useState(1);
   const [groups, setGroups] = useState<Array<Array<number>>>([]);
+  // ref for looking for focusable elements
+  const groupContainerRef = useRef<HTMLDivElement>(null);
 
   function onDocumentLoadSuccess({ numPages }) {
     setNumPages(numPages);
@@ -72,6 +74,18 @@ const PDFViewer = ({ doc, predictions, loading }: PDFViewerProps): JSX.Element =
     }
   }, [predictions, numPages]);
 
+  // Unclear what behavior should be like after cutting a group, but for now when the groups changes,
+  // we will focus the last focused page again. This also makes the first page focus on page load.
+  // Nothing but divs should be returned, so we know it's HTMLElement instead of Element in the NodeList
+  useLayoutEffect(() => {
+    const nodes: NodeListOf<HTMLElement> | undefined = groupContainerRef.current?.querySelectorAll(
+      `[data-page-number="${previewPage}"]`,
+    );
+    if (nodes && nodes.length > 0) {
+      nodes[0].focus();
+    }
+  }, [groups]);
+
   return (
     <Document
       file={doc}
@@ -86,7 +100,7 @@ const PDFViewer = ({ doc, predictions, loading }: PDFViewerProps): JSX.Element =
       <div className={styles['page-preview']}>
         <Page pageNumber={previewPage} width={600} className={styles['page-preview-canvas']} />
       </div>
-      <div className={styles['group-container']}>
+      <div className={styles['group-container']} ref={groupContainerRef}>
         {groups.map((group, groupIndex) => {
           const hasNextGroup = groupIndex !== groups.length - 1;
           return (
@@ -103,6 +117,7 @@ const PDFViewer = ({ doc, predictions, loading }: PDFViewerProps): JSX.Element =
                         tabIndex={0}
                         data-has-prev={hasPrevPage ? true : undefined}
                         data-has-next={hasNextPage ? true : undefined}
+                        data-page-number={pageNumber}
                         onFocus={() => onFocus(groupIndex, pageIndex, pageNumber)}
                       >
                         <Page pageNumber={pageNumber} height={150} />
