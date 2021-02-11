@@ -23,9 +23,7 @@ const PDFViewer = ({ doc, predictions }: PDFViewerProps): JSX.Element => {
   }
 
   const docBinary = useMemo(() => {
-    if (!doc) return '';
-
-    return atob(doc);
+    return atob(doc || '');
   }, [doc]);
 
   // This assumes groups are always sequential,
