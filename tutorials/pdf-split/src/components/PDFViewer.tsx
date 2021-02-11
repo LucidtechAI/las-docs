@@ -16,7 +16,7 @@ type PDFViewerProps = {
 
 const PDFViewer = ({ doc, predictions, loading }: PDFViewerProps): JSX.Element => {
   const [numPages, setNumPages] = useState(null);
-  const [pageNumber, setPageNumber] = useState(1);
+  const [previewPage, setPreviewPage] = useState(1);
   const [groups, setGroups] = useState<Array<Array<number>>>([]);
 
   function onDocumentLoadSuccess({ numPages }) {
@@ -78,13 +78,17 @@ const PDFViewer = ({ doc, predictions, loading }: PDFViewerProps): JSX.Element =
         cMapUrl: 'cmaps/',
         cMapPacked: true,
       }}
+      className={styles['outer-container']}
     >
       <GlobalHotKeys keyMap={keyMap} handlers={handlers} />
-      <div className={styles['outer-container']}>
+      <div className={styles['page-preview']}>
+        <Page pageNumber={previewPage} width={500} />
+      </div>
+      <div className={styles['group-container']}>
         {groups.map((group, groupIndex) => {
           const hasNextGroup = groupIndex !== groups.length - 1;
           return (
-            <div key={`group_${groupIndex}-${group.join('-')}`} className={styles['group-container']}>
+            <div key={`group_${groupIndex}-${group.join('-')}`} className={styles['page-container']}>
               <div className={styles['group-tab']}>{(groupIndex + 1).toString().padStart(2, '0')}</div>
               <ul>
                 {group.map((pageNumber, pageIndex) => {
@@ -98,7 +102,7 @@ const PDFViewer = ({ doc, predictions, loading }: PDFViewerProps): JSX.Element =
                         data-has-prev={hasPrevPage ? true : undefined}
                         data-has-next={hasNextPage ? true : undefined}
                       >
-                        <Page pageNumber={pageNumber} height={150} width={107} />
+                        <Page pageNumber={pageNumber} height={150} />
                       </div>
                       {hasPrevPage && (
                         <ScissorButton
