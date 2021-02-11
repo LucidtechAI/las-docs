@@ -1,16 +1,19 @@
-import React, { useEffect, useState } from 'react';
+import React, { ComponentType, useEffect, useState } from 'react';
 import { Document, Page } from 'react-pdf/dist/esm/entry.webpack';
+import { GlobalHotKeys } from 'react-hotkeys';
 import 'react-pdf/dist/esm/Page/AnnotationLayer.css';
 
 import styles from './PDFViewer.module.css';
 import ScissorButton from './ScissorButton';
+import { Button } from '@lucidtech/flyt-form';
 
 type PDFViewerProps = {
   doc: string;
   predictions?: Array<Array<number>>;
+  loading?: boolean;
 };
 
-const PDFViewer = ({ doc, predictions }: PDFViewerProps): JSX.Element => {
+const PDFViewer = ({ doc, predictions, loading }: PDFViewerProps): JSX.Element => {
   const [numPages, setNumPages] = useState(null);
   const [pageNumber, setPageNumber] = useState(1);
   const [groups, setGroups] = useState<Array<Array<number>>>([]);
@@ -18,6 +21,22 @@ const PDFViewer = ({ doc, predictions }: PDFViewerProps): JSX.Element => {
   function onDocumentLoadSuccess({ numPages }) {
     setNumPages(numPages);
   }
+
+  // This assumes groups are always sequential,
+  // we don't support joining arbitrary groups
+  const joinGroups = (firstGroupIndex: number, secondGroupIndex: number): void => {
+    if (secondGroupIndex !== firstGroupIndex + 1) {
+      console.error('Attempted to join non-sequential groups');
+    }
+
+    const groupsCopy = [...groups];
+    const firstGroup = groupsCopy[firstGroupIndex];
+    const secondGroup = groupsCopy[secondGroupIndex];
+    const combinedGroup = [...firstGroup, ...secondGroup];
+    groupsCopy.splice(firstGroupIndex, 2, combinedGroup);
+
+    setGroups(groupsCopy);
+  };
 
   // Split a group into two groups, where cutIndex indicates where the second group
   // should start.
@@ -30,6 +49,13 @@ const PDFViewer = ({ doc, predictions }: PDFViewerProps): JSX.Element => {
     groupsCopy.splice(groupIndex, 1, newFirstGroup, newSecondGroup);
 
     setGroups(groupsCopy);
+  };
+
+  const handlers = {
+    MOVE_UP: (event?: KeyboardEvent) => console.log(event),
+  };
+  const keyMap = {
+    MOVE_UP: ['ctrl+up'],
   };
 
   useEffect(() => {
@@ -51,44 +77,51 @@ const PDFViewer = ({ doc, predictions }: PDFViewerProps): JSX.Element => {
         cMapPacked: true,
       }}
     >
+      <GlobalHotKeys keyMap={keyMap} handlers={handlers} />
       <div className={styles['outer-container']}>
-        {groups.map((group, i) => (
-          <div key={`group_${i}-${group.join('-')}`} className={styles['group-container']}>
-            <div className={styles['group-tab']}>{(i + 1).toString().padStart(2, '0')}</div>
-            <ul>
-              {group.map((pageNumber, groupIndex) => {
-                const hasPrevPage = groupIndex !== 0;
-                const hasNextPage = groupIndex !== group.length - 1;
-                return (
-                  <li className={`${styles['list-item']}`} key={`page_${pageNumber}`}>
-                    <div
-                      className={styles['list-item-page']}
-                      tabIndex={0}
-                      data-has-prev={hasPrevPage ? true : undefined}
-                      data-has-next={hasNextPage ? true : undefined}
-                    >
-                      <Page pageNumber={pageNumber} height={150} width={107} />
-                    </div>
-                    {hasPrevPage && (
-                      <ScissorButton
-                        className={`${styles['scissor-button']} ${styles['scissor-button-prev']}`}
-                        onClick={() => cutGroup(i, groupIndex)}
-                        tabIndex={-1}
-                      />
-                    )}
-                    {hasNextPage && (
-                      <ScissorButton
-                        className={`${styles['scissor-button']} ${styles['scissor-button-next']}`}
-                        onClick={() => cutGroup(i, groupIndex + 1)}
-                        tabIndex={-1}
-                      />
-                    )}
-                  </li>
-                );
-              })}
-            </ul>
-          </div>
-        ))}
+        {groups.map((group, groupIndex) => {
+          const hasPrevGroup = groupIndex !== 0;
+          const hasNextGroup = groupIndex !== groups.length - 1;
+          return (
+            <div key={`group_${groupIndex}-${group.join('-')}`} className={styles['group-container']}>
+              <div className={styles['group-tab']}>{(groupIndex + 1).toString().padStart(2, '0')}</div>
+              {hasPrevGroup && <Button onClick={() => joinGroups(groupIndex - 1, groupIndex)}>+</Button>}
+              {hasNextGroup && <Button onClick={() => joinGroups(groupIndex, groupIndex + 1)}>+</Button>}
+              <ul>
+                {group.map((pageNumber, pageIndex) => {
+                  const hasPrevPage = pageIndex !== 0;
+                  const hasNextPage = pageIndex !== group.length - 1;
+                  return (
+                    <li className={`${styles['list-item']}`} key={`page_${pageNumber}`}>
+                      <div
+                        className={styles['list-item-page']}
+                        tabIndex={0}
+                        data-has-prev={hasPrevPage ? true : undefined}
+                        data-has-next={hasNextPage ? true : undefined}
+                      >
+                        <Page pageNumber={pageNumber} height={150} width={107} />
+                      </div>
+                      {hasPrevPage && (
+                        <ScissorButton
+                          className={`${styles['scissor-button']} ${styles['scissor-button-prev']}`}
+                          onClick={() => cutGroup(groupIndex, pageIndex)}
+                          tabIndex={-1}
+                        />
+                      )}
+                      {hasNextPage && (
+                        <ScissorButton
+                          className={`${styles['scissor-button']} ${styles['scissor-button-next']}`}
+                          onClick={() => cutGroup(groupIndex, pageIndex + 1)}
+                          tabIndex={-1}
+                        />
+                      )}
+                    </li>
+                  );
+                })}
+              </ul>
+            </div>
+          );
+        })}
       </div>
     </Document>
   );

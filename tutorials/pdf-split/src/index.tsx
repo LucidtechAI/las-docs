@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
+import { Button } from '@lucidtech/flyt-form';
 
 import { QueueStatus, RemoteComponentExternalProps } from './types';
-import { Button } from '@lucidtech/flyt-form';
 import ErrorAlert from './components/ErrorAlert';
 import PDFViewer from './components/PDFViewer';
 
@@ -20,7 +20,6 @@ const RemoteComponent = ({
   const [doc, setDoc] = useState('');
   const [error, setError] = useState<string | null>(null);
   const [isLoadingDocument, setIsLoadingDocument] = useState(true);
-  const [predictions, setPredictions] = useState([]);
 
   // new transition execution, map predictions and get document (image)
   useEffect(() => {
@@ -36,12 +35,6 @@ const RemoteComponent = ({
     }
 
     setIsLoadingDocument(true);
-
-    // filter and map predictions
-    const predictions = input?.predictions || [];
-    const filteredPredictions = predictions.filter(
-      (prediction) => Array.isArray(prediction.value) && prediction.value.length === 4,
-    );
 
     // get document
     client
@@ -61,13 +54,6 @@ const RemoteComponent = ({
         setIsLoadingDocument(false);
       });
   }, [transitionExecution]);
-
-  const reset = () => {
-    const predictions = transitionExecution?.input?.predictions || [];
-    const filteredPredictions = predictions.filter(
-      (prediction) => Array.isArray(prediction.value) && prediction.value.length === 4,
-    );
-  };
 
   const approve = () => {
     const payload = {
@@ -103,7 +89,11 @@ const RemoteComponent = ({
                 alignItems: 'center',
               }}
             >
-              {error ? <ErrorAlert>{error.toString()}</ErrorAlert> : <PDFViewer doc={doc} />}
+              {error ? (
+                <ErrorAlert>{error.toString()}</ErrorAlert>
+              ) : (
+                <PDFViewer doc={doc} loading={somethingIsLoading} />
+              )}
             </div>
 
             <div className="card-footer" style={{ display: 'flex', justifyContent: 'center' }}>
