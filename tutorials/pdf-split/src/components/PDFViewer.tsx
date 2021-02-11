@@ -1,11 +1,9 @@
-import React, { ComponentType, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Document, Page } from 'react-pdf/dist/esm/entry.webpack';
 import { GlobalHotKeys } from 'react-hotkeys';
-import 'react-pdf/dist/esm/Page/AnnotationLayer.css';
 
 import styles from './PDFViewer.module.css';
 import ScissorButton from './ScissorButton';
-import { Button } from '@lucidtech/flyt-form';
 import MergeButton from './MergeButton';
 
 type PDFViewerProps = {
@@ -53,6 +51,10 @@ const PDFViewer = ({ doc, predictions, loading }: PDFViewerProps): JSX.Element =
     setGroups(groupsCopy);
   };
 
+  const onFocus = (_groupIndex: number, _pageIndex: number, pageNumber: number): void => {
+    setPreviewPage(pageNumber);
+  };
+
   const handlers = {
     MOVE_UP: (event?: KeyboardEvent) => console.log(event),
   };
@@ -82,7 +84,7 @@ const PDFViewer = ({ doc, predictions, loading }: PDFViewerProps): JSX.Element =
     >
       <GlobalHotKeys keyMap={keyMap} handlers={handlers} />
       <div className={styles['page-preview']}>
-        <Page pageNumber={previewPage} width={500} />
+        <Page pageNumber={previewPage} width={600} className={styles['page-preview-canvas']} />
       </div>
       <div className={styles['group-container']}>
         {groups.map((group, groupIndex) => {
@@ -101,6 +103,7 @@ const PDFViewer = ({ doc, predictions, loading }: PDFViewerProps): JSX.Element =
                         tabIndex={0}
                         data-has-prev={hasPrevPage ? true : undefined}
                         data-has-next={hasNextPage ? true : undefined}
+                        onFocus={() => onFocus(groupIndex, pageIndex, pageNumber)}
                       >
                         <Page pageNumber={pageNumber} height={150} />
                       </div>

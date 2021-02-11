@@ -81,14 +81,7 @@ const RemoteComponent = ({
       <div style={{ width: '100%' }}>
         <form onSubmit={(e) => e.preventDefault()}>
           <div className="card">
-            <div
-              className="card-body"
-              style={{
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
-              }}
-            >
+            <div className="card-body">
               {error ? (
                 <ErrorAlert>{error.toString()}</ErrorAlert>
               ) : (
