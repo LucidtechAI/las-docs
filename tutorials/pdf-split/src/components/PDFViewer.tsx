@@ -6,6 +6,7 @@ import 'react-pdf/dist/esm/Page/AnnotationLayer.css';
 import styles from './PDFViewer.module.css';
 import ScissorButton from './ScissorButton';
 import { Button } from '@lucidtech/flyt-form';
+import MergeButton from './MergeButton';
 
 type PDFViewerProps = {
   doc: string;
@@ -27,6 +28,7 @@ const PDFViewer = ({ doc, predictions, loading }: PDFViewerProps): JSX.Element =
   const joinGroups = (firstGroupIndex: number, secondGroupIndex: number): void => {
     if (secondGroupIndex !== firstGroupIndex + 1) {
       console.error('Attempted to join non-sequential groups');
+      return;
     }
 
     const groupsCopy = [...groups];
@@ -80,13 +82,10 @@ const PDFViewer = ({ doc, predictions, loading }: PDFViewerProps): JSX.Element =
       <GlobalHotKeys keyMap={keyMap} handlers={handlers} />
       <div className={styles['outer-container']}>
         {groups.map((group, groupIndex) => {
-          const hasPrevGroup = groupIndex !== 0;
           const hasNextGroup = groupIndex !== groups.length - 1;
           return (
             <div key={`group_${groupIndex}-${group.join('-')}`} className={styles['group-container']}>
               <div className={styles['group-tab']}>{(groupIndex + 1).toString().padStart(2, '0')}</div>
-              {hasPrevGroup && <Button onClick={() => joinGroups(groupIndex - 1, groupIndex)}>+</Button>}
-              {hasNextGroup && <Button onClick={() => joinGroups(groupIndex, groupIndex + 1)}>+</Button>}
               <ul>
                 {group.map((pageNumber, pageIndex) => {
                   const hasPrevPage = pageIndex !== 0;
@@ -119,6 +118,14 @@ const PDFViewer = ({ doc, predictions, loading }: PDFViewerProps): JSX.Element =
                   );
                 })}
               </ul>
+              {hasNextGroup && (
+                <MergeButton
+                  className={`${styles['merge-button']} ${styles['merge-button-next']}`}
+                  onClick={() => joinGroups(groupIndex, groupIndex + 1)}
+                >
+                  +
+                </MergeButton>
+              )}
             </div>
           );
         })}

@@ -9,6 +9,7 @@
   padding-left: 15px;
   background-color: rgb(223, 238, 229);
   border-radius: 8px;
+  margin-bottom: 15px;
 }
 
 .group-container:not(:last-child) {
@@ -20,10 +21,20 @@
   background-color: rgb(125, 187, 158);
   left: -30px;
   top: 30px;
-  padding: 15px;
+  padding: 10px 15px;
   color: white;
   font-weight: bold;
   border-radius: 8px;
+}
+
+.merge-button {
+  position: absolute;
+  top: 80px;
+  z-index: 2;
+}
+
+.merge-button-next {
+  right: -39px;
 }
 
 .group-container ul {
