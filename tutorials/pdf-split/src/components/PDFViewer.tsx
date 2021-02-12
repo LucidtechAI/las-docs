@@ -74,7 +74,7 @@ const PDFViewer = ({ doc, predictions }: PDFViewerProps): JSX.Element => {
 
   const handlers = {
     // focus first page in previous group
-    PREV_GROUP: () => {
+    SELECT_PREV_GROUP: () => {
       const currentGroupIndex = groups.findIndex((group) => group.includes(previewPage));
       const hasPrevGroup = currentGroupIndex > 0;
 
@@ -85,7 +85,7 @@ const PDFViewer = ({ doc, predictions }: PDFViewerProps): JSX.Element => {
       }
     },
     // focus first page in next group
-    NEXT_GROUP: () => {
+    SELECT_NEXT_GROUP: () => {
       const currentGroupIndex = groups.findIndex((group) => group.includes(previewPage));
       const hasNextGroup = currentGroupIndex >= 0 && currentGroupIndex !== groups.length - 1;
 
@@ -95,11 +95,29 @@ const PDFViewer = ({ doc, predictions }: PDFViewerProps): JSX.Element => {
         focusPage(firstPageOfNextGroup);
       }
     },
+    CUT_PREV: () => {
+      const currentGroupIndex = groups.findIndex((group) => group.includes(previewPage));
+      if (currentGroupIndex >= 0) {
+        const currentPageIndex = groups[currentGroupIndex].findIndex((page) => page === previewPage);
+        const hasPrevPage = currentPageIndex > 0;
+        hasPrevPage && cutGroup(currentGroupIndex, currentPageIndex);
+      }
+    },
+    CUT_NEXT: () => {
+      const currentGroupIndex = groups.findIndex((group) => group.includes(previewPage));
+      if (currentGroupIndex >= 0) {
+        const currentPageIndex = groups[currentGroupIndex].findIndex((page) => page === previewPage);
+        const hasNextPage = currentPageIndex >= 0 && currentPageIndex !== groups.length - 1;
+        hasNextPage && cutGroup(currentGroupIndex, currentPageIndex + 1);
+      }
+    },
   };
 
   const keyMap = {
-    PREV_GROUP: ['ctrl+left', 'cmd+left'],
-    NEXT_GROUP: ['ctrl+right', 'cmd+right'],
+    SELECT_PREV_GROUP: ['ctrl+left', 'cmd+left'],
+    SELECT_NEXT_GROUP: ['ctrl+right', 'cmd+right'],
+    CUT_PREV: ['ctrl+z', 'cmd+z'],
+    CUT_NEXT: ['ctrl+x', 'cmd+x'],
   };
 
   useEffect(() => {
