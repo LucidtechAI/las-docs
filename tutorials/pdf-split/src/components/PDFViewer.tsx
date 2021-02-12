@@ -1,4 +1,4 @@
-import React, { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import { Document, Page } from 'react-pdf/dist/esm/entry.webpack';
 import { GlobalHotKeys } from 'react-hotkeys';
 
@@ -107,8 +107,22 @@ const PDFViewer = ({ doc, predictions }: PDFViewerProps): JSX.Element => {
       const currentGroupIndex = groups.findIndex((group) => group.includes(previewPage));
       if (currentGroupIndex >= 0) {
         const currentPageIndex = groups[currentGroupIndex].findIndex((page) => page === previewPage);
-        const hasNextPage = currentPageIndex >= 0 && currentPageIndex !== groups.length - 1;
+        const hasNextPage = currentPageIndex >= 0 && currentPageIndex !== groups[currentGroupIndex].length - 1;
         hasNextPage && cutGroup(currentGroupIndex, currentPageIndex + 1);
+      }
+    },
+    MERGE_PREV_GROUP: () => {
+      const currentGroupIndex = groups.findIndex((group) => group.includes(previewPage));
+      const hasPrevGroup = currentGroupIndex > 0;
+      if (hasPrevGroup) {
+        joinGroups(currentGroupIndex - 1, currentGroupIndex);
+      }
+    },
+    MERGE_NEXT_GROUP: () => {
+      const currentGroupIndex = groups.findIndex((group) => group.includes(previewPage));
+      const hasNextGroup = currentGroupIndex >= 0 && currentGroupIndex !== groups.length - 1;
+      if (hasNextGroup) {
+        joinGroups(currentGroupIndex, currentGroupIndex + 1);
       }
     },
   };
@@ -118,6 +132,8 @@ const PDFViewer = ({ doc, predictions }: PDFViewerProps): JSX.Element => {
     SELECT_NEXT_GROUP: ['ctrl+right', 'cmd+right'],
     CUT_PREV: ['ctrl+z', 'cmd+z'],
     CUT_NEXT: ['ctrl+x', 'cmd+x'],
+    MERGE_PREV_GROUP: ['shift+z', 'shift+z'],
+    MERGE_NEXT_GROUP: ['shift+x', 'shift+x'],
   };
 
   useEffect(() => {
@@ -196,9 +212,8 @@ const PDFViewer = ({ doc, predictions }: PDFViewerProps): JSX.Element => {
                 <MergeButton
                   className={`${styles['merge-button']} ${styles['merge-button-next']}`}
                   onClick={() => joinGroups(groupIndex, groupIndex + 1)}
-                >
-                  +
-                </MergeButton>
+                  tabIndex={-1}
+                />
               )}
             </div>
           );
