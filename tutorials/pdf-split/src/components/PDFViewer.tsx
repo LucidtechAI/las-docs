@@ -61,15 +61,51 @@ const PDFViewer = ({ doc, predictions }: PDFViewerProps): JSX.Element => {
     setPreviewPage(pageNumber);
   };
 
-  const handlers = {
-    MOVE_UP: (event?: KeyboardEvent) => console.log(event),
+  const focusPage = (pageNumber: number) => {
+    // Nothing but divs should be returned, so we know it's HTMLElement instead of Element in the NodeList
+    // (Element does not have .focus() so TS will complain)
+    const nodes: NodeListOf<HTMLElement> | undefined = groupContainerRef.current?.querySelectorAll(
+      `[data-page-number="${pageNumber}"]`,
+    );
+    if (nodes && nodes.length > 0) {
+      nodes[0].focus();
+    }
   };
+
+  const handlers = {
+    // focus first page in previous group
+    PREV_GROUP: () => {
+      const currentGroupIndex = groups.findIndex((group) => group.includes(previewPage));
+      const hasPrevGroup = currentGroupIndex > 0;
+
+      if (hasPrevGroup) {
+        const firstPageOfPrevGroup = groups[currentGroupIndex - 1][0];
+        onFocus(currentGroupIndex - 1, 0, firstPageOfPrevGroup);
+        focusPage(firstPageOfPrevGroup);
+      }
+    },
+    // focus first page in next group
+    NEXT_GROUP: () => {
+      const currentGroupIndex = groups.findIndex((group) => group.includes(previewPage));
+      const hasNextGroup = currentGroupIndex >= 0 && currentGroupIndex !== groups.length - 1;
+
+      if (hasNextGroup) {
+        const firstPageOfNextGroup = groups[currentGroupIndex + 1][0];
+        onFocus(currentGroupIndex - 1, 0, firstPageOfNextGroup);
+        focusPage(firstPageOfNextGroup);
+      }
+    },
+  };
+
   const keyMap = {
-    MOVE_UP: ['ctrl+up'],
+    PREV_GROUP: ['ctrl+left', 'cmd+left'],
+    NEXT_GROUP: ['ctrl+right', 'cmd+right'],
   };
 
   useEffect(() => {
     if (!numPages) return;
+    setPreviewPage(1); // reset focus to first page when new doc is loaded (from numPages changing)
+
     // for now no predictions are expected, but this should make it possible to receive them in the future
     // if no predictions, group all pages together by default
     if (predictions?.length === 0 || !predictions) {
@@ -80,14 +116,8 @@ const PDFViewer = ({ doc, predictions }: PDFViewerProps): JSX.Element => {
 
   // Unclear what behavior should be like after cutting a group, but for now when the groups changes,
   // we will focus the last focused page again. This also makes the first page focus on page load.
-  // Nothing but divs should be returned, so we know it's HTMLElement instead of Element in the NodeList
   useLayoutEffect(() => {
-    const nodes: NodeListOf<HTMLElement> | undefined = groupContainerRef.current?.querySelectorAll(
-      `[data-page-number="${previewPage}"]`,
-    );
-    if (nodes && nodes.length > 0) {
-      nodes[0].focus();
-    }
+    focusPage(previewPage);
   }, [groups]);
 
   return (
@@ -100,7 +130,7 @@ const PDFViewer = ({ doc, predictions }: PDFViewerProps): JSX.Element => {
       }}
       className={styles['outer-container']}
     >
-      <GlobalHotKeys keyMap={keyMap} handlers={handlers} />
+      <GlobalHotKeys keyMap={keyMap} handlers={handlers} allowChanges />
       <div className={styles['page-preview']}>
         <Page pageNumber={previewPage} width={600} className={styles['page-preview-canvas']} />
       </div>
