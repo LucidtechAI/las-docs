@@ -23,7 +23,8 @@ const PDFViewer = ({ doc, predictions }: PDFViewerProps): JSX.Element => {
   }
 
   const docBinary = useMemo(() => {
-    return atob(doc || '');
+    const docBinary = atob(doc || '');
+    return { data: docBinary };
   }, [doc]);
 
   // This assumes groups are always sequential,
@@ -91,7 +92,7 @@ const PDFViewer = ({ doc, predictions }: PDFViewerProps): JSX.Element => {
 
   return (
     <Document
-      file={{ data: docBinary }}
+      file={docBinary}
       onLoadSuccess={onDocumentLoadSuccess}
       options={{
         cMapUrl: 'cmaps/',
