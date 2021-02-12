@@ -1,10 +1,11 @@
-import React, { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
+import React, { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import { Document, Page } from 'react-pdf/dist/esm/entry.webpack';
 import { GlobalHotKeys } from 'react-hotkeys';
 
 import styles from './PDFViewer.module.css';
 import ScissorButton from './ScissorButton';
 import MergeButton from './MergeButton';
+import HotkeyHint from './HotkeyHint';
 
 type PDFViewerProps = {
   doc: string;
@@ -127,13 +128,32 @@ const PDFViewer = ({ doc, predictions }: PDFViewerProps): JSX.Element => {
     },
   };
 
-  const keyMap = {
-    SELECT_PREV_GROUP: ['ctrl+left', 'cmd+left'],
-    SELECT_NEXT_GROUP: ['ctrl+right', 'cmd+right'],
-    CUT_PREV: ['ctrl+z', 'cmd+z'],
-    CUT_NEXT: ['ctrl+x', 'cmd+x'],
-    MERGE_PREV_GROUP: ['shift+z', 'shift+z'],
-    MERGE_NEXT_GROUP: ['shift+x', 'shift+x'],
+  // react-hotkeys types aren't 100% correct sadly
+  const keyMap: any = {
+    SELECT_PREV_GROUP: {
+      name: 'Select first page in previous group',
+      sequences: ['ctrl+left', 'cmd+left'],
+    },
+    SELECT_NEXT_GROUP: {
+      name: 'Select first page in next group',
+      sequences: ['ctrl+right', 'cmd+right'],
+    },
+    CUT_PREV: {
+      name: 'Cut between current and previous page',
+      sequences: ['ctrl+z', 'cmd+z'],
+    },
+    CUT_NEXT: {
+      name: 'Cut between current and next page',
+      sequences: ['ctrl+x', 'cmd+x'],
+    },
+    MERGE_PREV_GROUP: {
+      name: 'Merge current and previous group',
+      sequences: 'shift+z',
+    },
+    MERGE_NEXT_GROUP: {
+      name: 'Merge current and next group',
+      sequences: 'shift+x',
+    },
   };
 
   useEffect(() => {
@@ -155,71 +175,74 @@ const PDFViewer = ({ doc, predictions }: PDFViewerProps): JSX.Element => {
   }, [groups]);
 
   return (
-    <Document
-      file={docBinary}
-      onLoadSuccess={onDocumentLoadSuccess}
-      options={{
-        cMapUrl: 'cmaps/',
-        cMapPacked: true,
-      }}
-      className={styles['outer-container']}
-    >
+    <>
       <GlobalHotKeys keyMap={keyMap} handlers={handlers} allowChanges />
-      <div className={styles['page-preview']}>
-        <Page pageNumber={previewPage} width={600} className={styles['page-preview-canvas']} />
-      </div>
-      <div className={styles['group-container']} ref={groupContainerRef}>
-        {groups.map((group, groupIndex) => {
-          const hasNextGroup = groupIndex !== groups.length - 1;
-          return (
-            <div key={`group_${groupIndex}-${group.join('-')}`} className={styles['page-container']}>
-              <div className={styles['group-tab']}>{(groupIndex + 1).toString().padStart(2, '0')}</div>
-              <ul>
-                {group.map((pageNumber, pageIndex) => {
-                  const hasPrevPage = pageIndex !== 0;
-                  const hasNextPage = pageIndex !== group.length - 1;
-                  return (
-                    <li className={`${styles['list-item']}`} key={`page_${pageNumber}`}>
-                      <div
-                        className={styles['list-item-page']}
-                        tabIndex={0}
-                        data-has-prev={hasPrevPage ? true : undefined}
-                        data-has-next={hasNextPage ? true : undefined}
-                        data-page-number={pageNumber}
-                        onFocus={() => onFocus(groupIndex, pageIndex, pageNumber)}
-                      >
-                        <Page pageNumber={pageNumber} height={150} />
-                      </div>
-                      {hasPrevPage && (
-                        <ScissorButton
-                          className={`${styles['scissor-button']} ${styles['scissor-button-prev']}`}
-                          onClick={() => cutGroup(groupIndex, pageIndex)}
-                          tabIndex={-1}
-                        />
-                      )}
-                      {hasNextPage && (
-                        <ScissorButton
-                          className={`${styles['scissor-button']} ${styles['scissor-button-next']}`}
-                          onClick={() => cutGroup(groupIndex, pageIndex + 1)}
-                          tabIndex={-1}
-                        />
-                      )}
-                    </li>
-                  );
-                })}
-              </ul>
-              {hasNextGroup && (
-                <MergeButton
-                  className={`${styles['merge-button']} ${styles['merge-button-next']}`}
-                  onClick={() => joinGroups(groupIndex, groupIndex + 1)}
-                  tabIndex={-1}
-                />
-              )}
-            </div>
-          );
-        })}
-      </div>
-    </Document>
+      <HotkeyHint />
+      <Document
+        file={docBinary}
+        onLoadSuccess={onDocumentLoadSuccess}
+        options={{
+          cMapUrl: 'cmaps/',
+          cMapPacked: true,
+        }}
+        className={styles['outer-container']}
+      >
+        <div className={styles['page-preview']}>
+          <Page pageNumber={previewPage} width={600} className={styles['page-preview-canvas']} />
+        </div>
+        <div className={styles['group-container']} ref={groupContainerRef}>
+          {groups.map((group, groupIndex) => {
+            const hasNextGroup = groupIndex !== groups.length - 1;
+            return (
+              <div key={`group_${groupIndex}-${group.join('-')}`} className={styles['page-container']}>
+                <div className={styles['group-tab']}>{(groupIndex + 1).toString().padStart(2, '0')}</div>
+                <ul>
+                  {group.map((pageNumber, pageIndex) => {
+                    const hasPrevPage = pageIndex !== 0;
+                    const hasNextPage = pageIndex !== group.length - 1;
+                    return (
+                      <li className={`${styles['list-item']}`} key={`page_${pageNumber}`}>
+                        <div
+                          className={styles['list-item-page']}
+                          tabIndex={0}
+                          data-has-prev={hasPrevPage ? true : undefined}
+                          data-has-next={hasNextPage ? true : undefined}
+                          data-page-number={pageNumber}
+                          onFocus={() => onFocus(groupIndex, pageIndex, pageNumber)}
+                        >
+                          <Page pageNumber={pageNumber} height={150} />
+                        </div>
+                        {hasPrevPage && (
+                          <ScissorButton
+                            className={`${styles['scissor-button']} ${styles['scissor-button-prev']}`}
+                            onClick={() => cutGroup(groupIndex, pageIndex)}
+                            tabIndex={-1}
+                          />
+                        )}
+                        {hasNextPage && (
+                          <ScissorButton
+                            className={`${styles['scissor-button']} ${styles['scissor-button-next']}`}
+                            onClick={() => cutGroup(groupIndex, pageIndex + 1)}
+                            tabIndex={-1}
+                          />
+                        )}
+                      </li>
+                    );
+                  })}
+                </ul>
+                {hasNextGroup && (
+                  <MergeButton
+                    className={`${styles['merge-button']} ${styles['merge-button-next']}`}
+                    onClick={() => joinGroups(groupIndex, groupIndex + 1)}
+                    tabIndex={-1}
+                  />
+                )}
+              </div>
+            );
+          })}
+        </div>
+      </Document>
+    </>
   );
 };
 
