@@ -5,19 +5,19 @@ import { GlobalHotKeys } from 'react-hotkeys';
 import styles from './PDFViewer.module.css';
 import ScissorButton from './ScissorButton';
 import MergeButton from './MergeButton';
-import HotkeyHint from './HotkeyHint';
 
+type Groups = Array<Array<number>>;
 type PDFViewerProps = {
   doc: string;
-  predictions?: Array<Array<number>>;
-  showHint?: boolean;
-  toggleHint: () => void;
+  loading?: boolean;
+  groups: Groups;
+  setGroups: (groups: Groups) => void;
 };
 
-const PDFViewer = ({ doc, predictions, showHint = true, toggleHint }: PDFViewerProps): JSX.Element => {
+const PDFViewer = ({ doc, loading = true, groups, setGroups }: PDFViewerProps): JSX.Element => {
   const [numPages, setNumPages] = useState(null);
   const [previewPage, setPreviewPage] = useState(1);
-  const [groups, setGroups] = useState<Array<Array<number>>>([]);
+
   // ref for looking for focusable elements
   const groupContainerRef = useRef<HTMLDivElement>(null);
 
@@ -162,13 +162,9 @@ const PDFViewer = ({ doc, predictions, showHint = true, toggleHint }: PDFViewerP
     if (!numPages) return;
     setPreviewPage(1); // reset focus to first page when new doc is loaded (from numPages changing)
 
-    // for now no predictions are expected, but this should make it possible to receive them in the future
-    // if no predictions, group all pages together by default
-    if (predictions?.length === 0 || !predictions) {
-      const allPages = [...Array(numPages).keys()].map((key) => key + 1);
-      setGroups([allPages]);
-    }
-  }, [predictions, numPages]);
+    const allPages = [...Array(numPages).keys()].map((key) => key + 1);
+    setGroups([allPages]);
+  }, [numPages]);
 
   // Unclear what behavior should be like after cutting a group, but for now when the groups changes,
   // we will focus the last focused page again. This also makes the first page focus on page load.
@@ -179,7 +175,6 @@ const PDFViewer = ({ doc, predictions, showHint = true, toggleHint }: PDFViewerP
   return (
     <>
       <GlobalHotKeys keyMap={keyMap} handlers={handlers} allowChanges />
-      <HotkeyHint show={showHint} toggleHint={toggleHint} />
       <Document
         file={docBinary}
         onLoadSuccess={onDocumentLoadSuccess}

@@ -5,12 +5,12 @@ import { QueueStatus, RemoteComponentExternalProps } from './types';
 import ErrorAlert from './components/ErrorAlert';
 import PDFViewer from './components/PDFViewer';
 import { GlobalHotKeys } from 'react-hotkeys';
+import HotkeyHint from './components/HotkeyHint';
 
 declare const ___TUTORIAL_VERSION___: string;
 
 const RemoteComponent = ({
   transitionExecution,
-  transition,
   onApprove,
   onReject,
   onRequestNew,
@@ -21,6 +21,7 @@ const RemoteComponent = ({
   const [doc, setDoc] = useState('');
   const [error, setError] = useState<string | null>(null);
   const [isLoadingDocument, setIsLoadingDocument] = useState(true);
+  const [groups, setGroups] = useState<Array<Array<number>>>([]);
 
   // keybinds
   const [showKeybinds, setShowKeybinds] = useState(true);
@@ -111,13 +112,14 @@ const RemoteComponent = ({
     <div style={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
       <GlobalHotKeys keyMap={keyMap} handlers={handlers} />
       <div style={{ width: '100%' }}>
+        <HotkeyHint show={showKeybinds} toggleHint={onToggleHint} />
         <form onSubmit={(e) => e.preventDefault()}>
           <div className="card">
-            <div className="card-body">
+            <div className="card-body" style={{ minHeight: '900px' }}>
               {error ? (
                 <ErrorAlert>{error.toString()}</ErrorAlert>
               ) : (
-                !somethingIsLoading && <PDFViewer doc={doc} toggleHint={onToggleHint} showHint={showKeybinds} />
+                <PDFViewer doc={doc} loading={somethingIsLoading} groups={groups} setGroups={setGroups} />
               )}
             </div>
 
