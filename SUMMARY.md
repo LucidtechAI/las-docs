@@ -38,7 +38,7 @@
 * [Python SDK](reference/python-sdk/README.md)
   * [latest](reference/python-sdk/latest.md)
 * [.NET SDK](reference/dotnet/README.md)
-  * [latest](reference/dotnet/v3.0.md)
+  * [latest](reference/dotnet/latest.md)
 * [JavaScript SDK](reference/js/README.md)
   * [v3.3](reference/js/latest.md)
 * [Java SDK](reference/java/README.md)
