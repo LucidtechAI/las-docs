@@ -8,32 +8,21 @@ const keyMap = {
   left: '←',
 };
 
-const HotkeyHint = (): JSX.Element => {
-  const [showKeybinds, setShowKeybinds] = useState(true);
+type HotkeyHintProps = {
+  toggleHint: () => void;
+  show: boolean;
+}
+
+const HotkeyHint = ({show, toggleHint}: HotkeyHintProps): JSX.Element => {
   const keybinds = getApplicationKeyMap();
-
-  // check user preference for showing/displaying keybinds
-  useEffect(() => {
-    const preference = localStorage.getItem('showKeybindHints');
-    setShowKeybinds(preference === 'true');
-  }, []);
-
-  const storePreference = (show: boolean) => {
-    localStorage.setItem('showKeybindHints', show.toString());
-  };
-
-  const onToggle = () => {
-    storePreference(!showKeybinds);
-    setShowKeybinds((prev) => !prev);
-  };
 
   return (
     <>
-      <div className={styles['hint-toggle']} onClick={onToggle}>
+      <div className={styles['hint-toggle']} onClick={toggleHint}>
         <span className="fe fe-help-circle" />
-        {showKeybinds ? 'Hide ' : 'Show '} keybinds (ctrl + F1)
+        {show ? 'Hide ' : 'Show '} keybinds (ctrl + F1)
       </div>
-      {showKeybinds && (
+      {show && (
         <div className={styles.container}>
           {Object.keys(keybinds).map((command) => {
             const { name, sequences } = keybinds[command];
@@ -49,10 +38,10 @@ const HotkeyHint = (): JSX.Element => {
                           .toString()
                           .split('+')
                           .map((key, i) => (
-                            <>
+                            <Fragment key={key}>
                               {i === 0 ? '' : ' + '}
                               <kbd className={styles.key}>{keyMap[key] || key}</kbd>
-                            </>
+                            </Fragment>
                           ))}
                         {sequences.length > i + 1 && ', '}
                       </Fragment>

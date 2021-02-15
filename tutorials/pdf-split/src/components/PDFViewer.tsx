@@ -10,9 +10,11 @@ import HotkeyHint from './HotkeyHint';
 type PDFViewerProps = {
   doc: string;
   predictions?: Array<Array<number>>;
+  showHint?: boolean;
+  toggleHint: () => void;
 };
 
-const PDFViewer = ({ doc, predictions }: PDFViewerProps): JSX.Element => {
+const PDFViewer = ({ doc, predictions, showHint = true, toggleHint }: PDFViewerProps): JSX.Element => {
   const [numPages, setNumPages] = useState(null);
   const [previewPage, setPreviewPage] = useState(1);
   const [groups, setGroups] = useState<Array<Array<number>>>([]);
@@ -177,7 +179,7 @@ const PDFViewer = ({ doc, predictions }: PDFViewerProps): JSX.Element => {
   return (
     <>
       <GlobalHotKeys keyMap={keyMap} handlers={handlers} allowChanges />
-      <HotkeyHint />
+      <HotkeyHint show={showHint} toggleHint={toggleHint} />
       <Document
         file={docBinary}
         onLoadSuccess={onDocumentLoadSuccess}

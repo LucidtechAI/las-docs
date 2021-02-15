@@ -4,6 +4,7 @@ import { Button } from '@lucidtech/flyt-form';
 import { QueueStatus, RemoteComponentExternalProps } from './types';
 import ErrorAlert from './components/ErrorAlert';
 import PDFViewer from './components/PDFViewer';
+import { GlobalHotKeys } from 'react-hotkeys';
 
 declare const ___TUTORIAL_VERSION___: string;
 
@@ -20,6 +21,25 @@ const RemoteComponent = ({
   const [doc, setDoc] = useState('');
   const [error, setError] = useState<string | null>(null);
   const [isLoadingDocument, setIsLoadingDocument] = useState(true);
+
+  // keybinds
+  const [showKeybinds, setShowKeybinds] = useState(true);
+  const localStorageIdentifier = 'pdfSplit:showKeybindHints';
+
+  // check user preference for showing/displaying keybinds
+  useEffect(() => {
+    const preference = localStorage.getItem(localStorageIdentifier);
+    setShowKeybinds(preference === 'true');
+  }, []);
+
+  const storePreference = (show: boolean) => {
+    localStorage.setItem(localStorageIdentifier, show.toString());
+  };
+
+  const onToggleHint = () => {
+    storePreference(!showKeybinds);
+    setShowKeybinds((prev) => !prev);
+  };
 
   // new transition execution, map predictions and get document (image)
   useEffect(() => {
@@ -75,13 +95,30 @@ const RemoteComponent = ({
 
   const somethingIsLoading = queueStatus === QueueStatus.LOADING || isLoadingDocument;
 
+  const handlers = {
+    TOGGLE_HINT: onToggleHint,
+  };
+
+  // react-hotkeys types aren't 100% correct sadly
+  const keyMap: any = {
+    TOGGLE_HINT: {
+      name: 'Toggle hint',
+      sequences: ['ctrl+F1'],
+    },
+  };
+
   return (
     <div style={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
+      <GlobalHotKeys keyMap={keyMap} handlers={handlers} />
       <div style={{ width: '100%' }}>
         <form onSubmit={(e) => e.preventDefault()}>
           <div className="card">
             <div className="card-body">
-              {error ? <ErrorAlert>{error.toString()}</ErrorAlert> : !somethingIsLoading && <PDFViewer doc={doc} />}
+              {error ? (
+                <ErrorAlert>{error.toString()}</ErrorAlert>
+              ) : (
+                !somethingIsLoading && <PDFViewer doc={doc} toggleHint={onToggleHint} showHint={showKeybinds} />
+              )}
             </div>
 
             <div className="card-footer" style={{ display: 'flex', justifyContent: 'center' }}>
