@@ -10,7 +10,6 @@ declare const ___TUTORIAL_VERSION___: string;
 
 const RemoteComponent = ({
   transitionExecution,
-  transition,
   onApprove,
   onReject,
   onRequestNew,
@@ -138,7 +137,7 @@ const RemoteComponent = ({
   };
 
   const approve = () => {
-    const output = boundingBoxes.map(box => ({ x: box.x, y: box.y, w: box.width, h: box.height }))
+    const output = boundingBoxes.map((box) => ({ x: box.x, y: box.y, w: box.width, h: box.height }));
     const payload = {
       documentId: transitionExecution?.input?.documentId,
       verified: output,
