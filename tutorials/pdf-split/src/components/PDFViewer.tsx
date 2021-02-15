@@ -131,27 +131,27 @@ const PDFViewer = ({ doc, predictions }: PDFViewerProps): JSX.Element => {
   // react-hotkeys types aren't 100% correct sadly
   const keyMap: any = {
     SELECT_PREV_GROUP: {
-      name: 'Select first page in previous group',
-      sequences: ['ctrl+left', 'cmd+left'],
+      name: 'Move to previous group',
+      sequences: ['ctrl+left'],
     },
     SELECT_NEXT_GROUP: {
-      name: 'Select first page in next group',
-      sequences: ['ctrl+right', 'cmd+right'],
+      name: 'Move to next group',
+      sequences: ['ctrl+right'],
     },
     CUT_PREV: {
-      name: 'Cut between current and previous page',
-      sequences: ['ctrl+z', 'cmd+z'],
+      name: 'Cut previous page',
+      sequences: ['ctrl+z'],
     },
     CUT_NEXT: {
-      name: 'Cut between current and next page',
-      sequences: ['ctrl+x', 'cmd+x'],
+      name: 'Cut next page',
+      sequences: ['ctrl+x'],
     },
     MERGE_PREV_GROUP: {
-      name: 'Merge current and previous group',
+      name: 'Merge with previous group',
       sequences: 'shift+z',
     },
     MERGE_NEXT_GROUP: {
-      name: 'Merge current and next group',
+      name: 'Merge with next group',
       sequences: 'shift+x',
     },
   };

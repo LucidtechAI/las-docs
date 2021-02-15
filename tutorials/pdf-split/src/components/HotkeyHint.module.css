@@ -6,9 +6,30 @@
   flex-direction: row;
   flex-wrap: nowrap;
   margin-bottom: 30px;
-  padding: 20px;
+  padding: 10px 15px 15px;
 }
 
 .container > *:not(:last-child) {
   margin-right: 50px;
 }
+
+.description {
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.key {
+  border: 1px solid rgb(117, 118, 122);
+  background-color: rgb(155, 170, 190);
+  
+}
+
+.hint-toggle span {
+  margin-right: 0.5em;
+}
+
+.hint-toggle {
+  color: var(--gray);
+  cursor: pointer;
+}
+
