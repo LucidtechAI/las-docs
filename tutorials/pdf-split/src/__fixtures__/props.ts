@@ -24,18 +24,7 @@ export function createTransitionExecution(transitionId?: string): TransitionExec
     modelId: 'las:model:abc',
     predictionId: 'las:prediction:abc',
     timestamp: 0,
-    predictions: [
-      {
-        label: 'something',
-        value: [0, 0, 0.2, 0.2],
-        confidence: 0.9833426,
-      },
-      {
-        label: 'something',
-        value: [0.2, 0.2, 0.2, 0.2],
-        confidence: 0.9833426,
-      },
-    ],
+    predictions: [],
   };
 
   const execution: TransitionExecution = {

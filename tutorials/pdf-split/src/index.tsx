@@ -79,7 +79,7 @@ const RemoteComponent = ({
   const approve = () => {
     const payload = {
       documentId: transitionExecution?.input?.documentId,
-      verified: {},
+      verified: groups,
     };
     onApprove(payload);
     onRequestNew();
@@ -141,6 +141,7 @@ const RemoteComponent = ({
                   setGroups={setGroups}
                   extraKeymap={keyMap}
                   extraHandlers={handlers}
+                  predictions={transitionExecution?.input?.predictions}
                 />
               )}
             </div>

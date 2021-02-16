@@ -15,6 +15,7 @@ type PDFViewerProps = {
   setGroups: (groups: Groups) => void;
   extraKeymap?: Record<string, any>;
   extraHandlers?: Record<string, any>;
+  predictions?: Groups;
 };
 
 const PDFViewer = ({
@@ -24,8 +25,9 @@ const PDFViewer = ({
   setGroups,
   extraHandlers = {},
   extraKeymap = {},
+  predictions,
 }: PDFViewerProps): JSX.Element => {
-  const [numPages, setNumPages] = useState(null);
+  const [numPages, setNumPages] = useState<number | null>(null);
   const [previewPage, setPreviewPage] = useState(1);
 
   // ref for looking for focusable elements
@@ -39,6 +41,24 @@ const PDFViewer = ({
     const docBinary = atob(doc || '');
     return { data: docBinary };
   }, [doc]);
+
+  useEffect(() => {
+    if (!numPages) return;
+    setPreviewPage(1); // reset focus to first page when new doc is loaded (from numPages changing)
+
+    // for now no predictions are expected, but this should make it possible to receive them in the future
+    // if no predictions, group all pages together by default
+    if (!predictions || predictions?.length === 0) {
+      const allPages = [...Array(numPages).keys()].map((key) => key + 1);
+      setGroups([allPages]);
+    }
+  }, [numPages, predictions]);
+
+  // Unclear what behavior should be like after cutting a group, but for now when the groups changes,
+  // we will focus the last focused page again. This also makes the first page focus on page load.
+  useLayoutEffect(() => {
+    focusPage(previewPage);
+  }, [groups]);
 
   // This assumes groups are always sequential,
   // we don't support joining arbitrary groups
@@ -170,20 +190,6 @@ const PDFViewer = ({
     ...extraKeymap,
   };
 
-  useEffect(() => {
-    if (!numPages) return;
-    setPreviewPage(1); // reset focus to first page when new doc is loaded (from numPages changing)
-
-    const allPages = [...Array(numPages).keys()].map((key) => key + 1);
-    setGroups([allPages]);
-  }, [numPages]);
-
-  // Unclear what behavior should be like after cutting a group, but for now when the groups changes,
-  // we will focus the last focused page again. This also makes the first page focus on page load.
-  useLayoutEffect(() => {
-    focusPage(previewPage);
-  }, [groups]);
-
   return (
     <>
       <GlobalHotKeys keyMap={keyMap} handlers={handlers} allowChanges />
@@ -193,6 +199,7 @@ const PDFViewer = ({
         <Document
           file={docBinary}
           onLoadSuccess={onDocumentLoadSuccess}
+          onSourceSuccess={() => setNumPages(null)}
           loading={<Spinner />}
           options={{
             cMapUrl: 'cmaps/',
