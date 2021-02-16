@@ -187,75 +187,76 @@ const PDFViewer = ({
   return (
     <>
       <GlobalHotKeys keyMap={keyMap} handlers={handlers} allowChanges />
-      <Document
-        file={docBinary}
-        onLoadSuccess={onDocumentLoadSuccess}
-        options={{
-          cMapUrl: 'cmaps/',
-          cMapPacked: true,
-        }}
-        className={styles['outer-container']}
-      >
-        <div className={styles['page-preview']}>
-          {loading ? (
-            <Spinner />
-          ) : (
+      {loading ? (
+        <Spinner />
+      ) : (
+        <Document
+          file={docBinary}
+          onLoadSuccess={onDocumentLoadSuccess}
+          loading={<Spinner />}
+          options={{
+            cMapUrl: 'cmaps/',
+            cMapPacked: true,
+          }}
+          className={styles['outer-container']}
+        >
+          <div className={styles['page-preview']}>
             <Page pageNumber={previewPage} width={600} className={styles['page-preview-canvas']} />
-          )}
-        </div>
-        <div className={styles['group-container']} ref={groupContainerRef}>
-          {!loading &&
-            groups.map((group, groupIndex) => {
-              const hasNextGroup = groupIndex !== groups.length - 1;
-              return (
-                <div key={`group_${groupIndex}-${group.join('-')}`} className={styles['page-container']}>
-                  <div className={styles['group-tab']}>{(groupIndex + 1).toString().padStart(2, '0')}</div>
-                  <ul>
-                    {group.map((pageNumber, pageIndex) => {
-                      const hasPrevPage = pageIndex !== 0;
-                      const hasNextPage = pageIndex !== group.length - 1;
-                      return (
-                        <li className={`${styles['list-item']}`} key={`page_${pageNumber}`}>
-                          <div
-                            className={styles['list-item-page']}
-                            tabIndex={0}
-                            data-has-prev={hasPrevPage ? true : undefined}
-                            data-has-next={hasNextPage ? true : undefined}
-                            data-page-number={pageNumber}
-                            onFocus={() => onFocus(groupIndex, pageIndex, pageNumber)}
-                          >
-                            <Page pageNumber={pageNumber} height={150} />
-                          </div>
-                          {hasPrevPage && (
-                            <ScissorButton
-                              className={`${styles['scissor-button']} ${styles['scissor-button-prev']}`}
-                              onClick={() => cutGroup(groupIndex, pageIndex)}
-                              tabIndex={-1}
-                            />
-                          )}
-                          {hasNextPage && (
-                            <ScissorButton
-                              className={`${styles['scissor-button']} ${styles['scissor-button-next']}`}
-                              onClick={() => cutGroup(groupIndex, pageIndex + 1)}
-                              tabIndex={-1}
-                            />
-                          )}
-                        </li>
-                      );
-                    })}
-                  </ul>
-                  {hasNextGroup && (
-                    <MergeButton
-                      className={`${styles['merge-button']} ${styles['merge-button-next']}`}
-                      onClick={() => joinGroups(groupIndex, groupIndex + 1)}
-                      tabIndex={-1}
-                    />
-                  )}
-                </div>
-              );
-            })}
-        </div>
-      </Document>
+          </div>
+          <div className={styles['group-container']} ref={groupContainerRef}>
+            {!loading &&
+              groups.map((group, groupIndex) => {
+                const hasNextGroup = groupIndex !== groups.length - 1;
+                return (
+                  <div key={`group_${groupIndex}-${group.join('-')}`} className={styles['page-container']}>
+                    <div className={styles['group-tab']}>{(groupIndex + 1).toString().padStart(2, '0')}</div>
+                    <ul>
+                      {group.map((pageNumber, pageIndex) => {
+                        const hasPrevPage = pageIndex !== 0;
+                        const hasNextPage = pageIndex !== group.length - 1;
+                        return (
+                          <li className={`${styles['list-item']}`} key={`page_${pageNumber}`}>
+                            <div
+                              className={styles['list-item-page']}
+                              tabIndex={0}
+                              data-has-prev={hasPrevPage ? true : undefined}
+                              data-has-next={hasNextPage ? true : undefined}
+                              data-page-number={pageNumber}
+                              onFocus={() => onFocus(groupIndex, pageIndex, pageNumber)}
+                            >
+                              <Page pageNumber={pageNumber} height={150} />
+                            </div>
+                            {hasPrevPage && (
+                              <ScissorButton
+                                className={`${styles['scissor-button']} ${styles['scissor-button-prev']}`}
+                                onClick={() => cutGroup(groupIndex, pageIndex)}
+                                tabIndex={-1}
+                              />
+                            )}
+                            {hasNextPage && (
+                              <ScissorButton
+                                className={`${styles['scissor-button']} ${styles['scissor-button-next']}`}
+                                onClick={() => cutGroup(groupIndex, pageIndex + 1)}
+                                tabIndex={-1}
+                              />
+                            )}
+                          </li>
+                        );
+                      })}
+                    </ul>
+                    {hasNextGroup && (
+                      <MergeButton
+                        className={`${styles['merge-button']} ${styles['merge-button-next']}`}
+                        onClick={() => joinGroups(groupIndex, groupIndex + 1)}
+                        tabIndex={-1}
+                      />
+                    )}
+                  </div>
+                );
+              })}
+          </div>
+        </Document>
+      )}
     </>
   );
 };

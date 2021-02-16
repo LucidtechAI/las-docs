@@ -12,7 +12,7 @@ class Client {
       setTimeout(() => {
         const document = documents[documentId];
         return resolve(document);
-      }, 500);
+      }, 3500);
     });
   }
 }

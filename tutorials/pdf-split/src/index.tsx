@@ -4,8 +4,9 @@ import { Button } from '@lucidtech/flyt-form';
 import { QueueStatus, RemoteComponentExternalProps } from './types';
 import ErrorAlert from './components/ErrorAlert';
 import PDFViewer from './components/PDFViewer';
-import { GlobalHotKeys } from 'react-hotkeys';
 import HotkeyHint from './components/HotkeyHint';
+
+import styles from './index.module.css';
 
 declare const ___TUTORIAL_VERSION___: string;
 
@@ -129,7 +130,7 @@ const RemoteComponent = ({
         <HotkeyHint show={showKeybinds} toggleHint={onToggleHint} />
         <form onSubmit={(e) => e.preventDefault()}>
           <div className="card">
-            <div className="card-body" style={{ minHeight: '900px' }}>
+            <div className={`card-body ${styles['card-body']} ${somethingIsLoading ? styles['loading'] : ''}`}>
               {error ? (
                 <ErrorAlert>{error.toString()}</ErrorAlert>
               ) : (

@@ -2,6 +2,7 @@
   display: flex;
   flex-direction: row;
   max-height: 98vh;
+  height: 100%;
 }
 
 .group-container {
@@ -17,6 +18,10 @@
 .page-preview {
   min-width: 600px;
   max-width: 600px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
 }
 
 @media all and (max-width: 1200px) {
