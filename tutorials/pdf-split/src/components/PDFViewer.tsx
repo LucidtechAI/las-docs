@@ -13,9 +13,18 @@ type PDFViewerProps = {
   loading?: boolean;
   groups: Groups;
   setGroups: (groups: Groups) => void;
+  extraKeymap?: Record<string, any>;
+  extraHandlers?: Record<string, any>;
 };
 
-const PDFViewer = ({ doc, loading = true, groups, setGroups }: PDFViewerProps): JSX.Element => {
+const PDFViewer = ({
+  doc,
+  loading = true,
+  groups,
+  setGroups,
+  extraHandlers = {},
+  extraKeymap = {},
+}: PDFViewerProps): JSX.Element => {
   const [numPages, setNumPages] = useState(null);
   const [previewPage, setPreviewPage] = useState(1);
 
@@ -129,6 +138,7 @@ const PDFViewer = ({ doc, loading = true, groups, setGroups }: PDFViewerProps): 
         joinGroups(currentGroupIndex, currentGroupIndex + 1);
       }
     },
+    ...extraHandlers,
   };
 
   // react-hotkeys types aren't 100% correct sadly
@@ -157,6 +167,7 @@ const PDFViewer = ({ doc, loading = true, groups, setGroups }: PDFViewerProps): 
       name: 'Merge with next group',
       sequences: 'shift+x',
     },
+    ...extraKeymap,
   };
 
   useEffect(() => {

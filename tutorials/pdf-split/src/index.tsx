@@ -99,6 +99,8 @@ const RemoteComponent = ({
   const handlers = {
     TOGGLE_HINT: onToggleHint,
     APPROVE: approve,
+    REJECT: reject,
+    SKIP: skip,
   };
 
   // react-hotkeys types aren't 100% correct sadly
@@ -109,13 +111,20 @@ const RemoteComponent = ({
     },
     APPROVE: {
       name: 'Approve',
-      sequences: ['enter'],
+      sequences: ['shift+enter'],
+    },
+    REJECT: {
+      name: 'Reject',
+      sequences: ['shift+q'],
+    },
+    SKIP: {
+      name: 'Skip',
+      sequences: ['shift+space'],
     },
   };
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
-      <GlobalHotKeys keyMap={keyMap} handlers={handlers} allowChanges />
       <div style={{ width: '100%' }}>
         <HotkeyHint show={showKeybinds} toggleHint={onToggleHint} />
         <form onSubmit={(e) => e.preventDefault()}>
@@ -124,7 +133,14 @@ const RemoteComponent = ({
               {error ? (
                 <ErrorAlert>{error.toString()}</ErrorAlert>
               ) : (
-                <PDFViewer doc={doc} loading={somethingIsLoading} groups={groups} setGroups={setGroups} />
+                <PDFViewer
+                  doc={doc}
+                  loading={somethingIsLoading}
+                  groups={groups}
+                  setGroups={setGroups}
+                  extraKeymap={keyMap}
+                  extraHandlers={handlers}
+                />
               )}
             </div>
 
@@ -143,13 +159,13 @@ const RemoteComponent = ({
                     variant="success"
                     style={{ width: '150px', order: 1 }}
                     onClick={approve}
-                    disabled={isLoadingDocument}
+                    disabled={somethingIsLoading}
                   >
                     <span className="fe fe-check" />
                   </Button>
                 </div>
                 <div style={{ order: 1, display: 'flex', flexDirection: 'row' }}>
-                  <Button variant="soft" style={{ order: 2 }} onClick={skip} disabled={isLoadingDocument}>
+                  <Button variant="soft" style={{ order: 2 }} onClick={skip} disabled={somethingIsLoading}>
                     <span className="fe fe-skip-forward" />
                   </Button>
                   <Button
@@ -157,7 +173,7 @@ const RemoteComponent = ({
                     className="mr-2"
                     style={{ order: 1 }}
                     onClick={reject}
-                    disabled={isLoadingDocument}
+                    disabled={somethingIsLoading}
                   >
                     <span className="fe fe-slash" />
                   </Button>
