@@ -98,18 +98,14 @@ const RemoteComponent = ({
   const somethingIsLoading = queueStatus === QueueStatus.LOADING || isLoadingDocument;
 
   const handlers = {
-    TOGGLE_HINT: onToggleHint,
     APPROVE: approve,
     REJECT: reject,
     SKIP: skip,
+    TOGGLE_HINT: onToggleHint,
   };
 
   // react-hotkeys types aren't 100% correct sadly
   const keyMap: any = {
-    TOGGLE_HINT: {
-      name: 'Toggle hint',
-      sequences: ['shift+?'],
-    },
     APPROVE: {
       name: 'Approve',
       sequences: ['shift+enter'],
@@ -121,6 +117,10 @@ const RemoteComponent = ({
     SKIP: {
       name: 'Skip',
       sequences: ['shift+space'],
+    },
+    TOGGLE_HINT: {
+      name: 'Toggle hint',
+      sequences: ['shift+?'],
     },
   };
 
@@ -162,12 +162,19 @@ const RemoteComponent = ({
                     style={{ width: '150px', order: 1 }}
                     onClick={approve}
                     disabled={somethingIsLoading}
+                    title="Approve and submit"
                   >
                     <span className="fe fe-check" />
                   </Button>
                 </div>
                 <div style={{ order: 1, display: 'flex', flexDirection: 'row' }}>
-                  <Button variant="soft" style={{ order: 2 }} onClick={skip} disabled={somethingIsLoading}>
+                  <Button
+                    variant="soft"
+                    style={{ order: 2 }}
+                    onClick={skip}
+                    disabled={somethingIsLoading}
+                    title="Skip document"
+                  >
                     <span className="fe fe-skip-forward" />
                   </Button>
                   <Button
@@ -176,6 +183,7 @@ const RemoteComponent = ({
                     style={{ order: 1 }}
                     onClick={reject}
                     disabled={somethingIsLoading}
+                    title="Reject document"
                   >
                     <span className="fe fe-slash" />
                   </Button>
