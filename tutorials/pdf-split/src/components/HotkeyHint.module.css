@@ -2,20 +2,21 @@
   border: 1px solid rgba(0, 0, 0, 0.1);
   background-color: rgba(91, 124, 216, 0.123);
   border-radius: 5px;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: nowrap;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-column-gap: 60px;
   margin-bottom: 30px;
   padding: 10px 15px 15px;
 }
 
-.container > *:not(:last-child) {
-  margin-right: 50px;
+.command {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
 .description {
   font-weight: bold;
-  margin-bottom: 10px;
 }
 
 .key {

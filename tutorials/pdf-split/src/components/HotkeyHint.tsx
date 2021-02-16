@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useState } from 'react';
+import React, { Fragment } from 'react';
 import { getApplicationKeyMap } from 'react-hotkeys';
 
 import styles from './HotkeyHint.module.css';
@@ -11,16 +11,16 @@ const keyMap = {
 type HotkeyHintProps = {
   toggleHint: () => void;
   show: boolean;
-}
+};
 
-const HotkeyHint = ({show, toggleHint}: HotkeyHintProps): JSX.Element => {
+const HotkeyHint = ({ show, toggleHint }: HotkeyHintProps): JSX.Element => {
   const keybinds = getApplicationKeyMap();
 
   return (
     <>
       <div className={styles['hint-toggle']} onClick={toggleHint}>
         <span className="fe fe-help-circle" />
-        {show ? 'Hide ' : 'Show '} keybinds (ctrl + F1)
+        {show ? 'Hide ' : 'Show '} keybinds (shift + ?)
       </div>
       {show && (
         <div className={styles.container}>
@@ -28,7 +28,7 @@ const HotkeyHint = ({show, toggleHint}: HotkeyHintProps): JSX.Element => {
             const { name, sequences } = keybinds[command];
 
             return (
-              <div key={command}>
+              <div key={command} className={styles.command}>
                 <div className={styles.description}>{name}:</div>
                 <div className={styles.keybinds}>
                   {sequences.map((seq, i) => {

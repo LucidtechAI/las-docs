@@ -104,7 +104,7 @@ const RemoteComponent = ({
   const keyMap: any = {
     TOGGLE_HINT: {
       name: 'Toggle hint',
-      sequences: ['ctrl+F1'],
+      sequences: ['shift+?'],
     },
   };
 
