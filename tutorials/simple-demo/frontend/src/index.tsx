@@ -54,6 +54,16 @@ const getBestPrediction = (fieldName: string, predictions: Prediction[]): Predic
   return fieldPredictions.pop();
 };
 
+/**
+ * Decode base64 encoded content to unicode string
+ * @param str
+ */
+function b64DecodeUnicode(str: string): string {
+  return decodeURIComponent(atob(str).split('').map(function(c) {
+      return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+  }).join(''));
+}
+
 type Field = {
   type: string;
   display: string;
@@ -89,7 +99,7 @@ const RemoteComponent = ({
     if (!fieldsAssetId) return;
     getAsset(fieldsAssetId)
       .then((res) => {
-        const decoded = window.atob(res.content!);
+        const decoded = b64DecodeUnicode(res.content!);
         const fields = JSON.parse(decoded);
 
         setFields(fields);
