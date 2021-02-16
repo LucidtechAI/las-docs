@@ -98,6 +98,7 @@ const RemoteComponent = ({
 
   const handlers = {
     TOGGLE_HINT: onToggleHint,
+    APPROVE: approve,
   };
 
   // react-hotkeys types aren't 100% correct sadly
@@ -106,11 +107,15 @@ const RemoteComponent = ({
       name: 'Toggle hint',
       sequences: ['shift+?'],
     },
+    APPROVE: {
+      name: 'Approve',
+      sequences: ['enter'],
+    },
   };
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
-      <GlobalHotKeys keyMap={keyMap} handlers={handlers} />
+      <GlobalHotKeys keyMap={keyMap} handlers={handlers} allowChanges />
       <div style={{ width: '100%' }}>
         <HotkeyHint show={showKeybinds} toggleHint={onToggleHint} />
         <form onSubmit={(e) => e.preventDefault()}>
