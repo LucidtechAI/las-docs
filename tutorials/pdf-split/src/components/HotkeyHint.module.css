@@ -5,6 +5,7 @@
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   grid-column-gap: 60px;
+  grid-row-gap: 5px;
   margin-bottom: 30px;
   padding: 10px 15px 15px;
 }
@@ -20,8 +21,8 @@
 }
 
 .key {
-  border: 1px solid rgb(117, 118, 122);
-  background-color: rgb(155, 170, 190);
+  border: 1px solid rgb(130, 131, 136);
+  background-color: rgb(166, 183, 204);
 }
 
 .hint-toggle span {
