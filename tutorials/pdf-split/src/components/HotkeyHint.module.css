@@ -1,0 +1,38 @@
+.container {
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  background-color: rgba(91, 124, 216, 0.123);
+  border-radius: 5px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-column-gap: 60px;
+  grid-row-gap: 5px;
+  margin-bottom: 30px;
+  padding: 10px 15px 15px;
+}
+
+.command {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.description {
+  font-weight: bold;
+}
+
+.key {
+  border: 1px solid rgb(130, 131, 136);
+  background-color: rgb(166, 183, 204);
+}
+
+.hint-toggle span {
+  margin-right: 0.5em;
+}
+
+.hint-toggle {
+  color: var(--gray);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  margin-bottom: 5px;
+}

@@ -1,0 +1,172 @@
+.outer-container {
+  display: flex;
+  flex-direction: row;
+  max-height: 98vh;
+  height: 100%;
+}
+
+.group-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  overflow-y: auto;
+  padding: 0 30px;
+  max-height: 100%;
+  align-content: flex-start;
+}
+
+.page-preview {
+  min-width: 600px;
+  max-width: 600px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+@media all and (max-width: 1200px) {
+  .page-preview {
+    min-width: 450px;
+    max-width: 450px;
+  }
+}
+
+@media all and (max-width: 1000px) {
+  .page-preview {
+    min-width: 350px;
+    max-width: 350px;
+  }
+}
+
+.page-preview {
+  margin-right: 10px;
+}
+
+.page-preview-canvas canvas {
+  border: 1px solid black;
+  border-radius: 5px;
+  height: auto !important;
+  width: auto !important;
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.page-container {
+  position: relative;
+  padding-left: 15px;
+  background-color: rgb(229, 241, 234);
+  border-radius: 8px;
+  margin-bottom: 15px;
+}
+
+.page-container:not(:last-child) {
+  margin-right: 50px;
+}
+
+.group-tab {
+  position: absolute;
+  background-color: rgb(125, 187, 158);
+  left: -30px;
+  top: 30px;
+  padding: 10px 15px;
+  color: white;
+  font-weight: bold;
+  border-radius: 8px;
+}
+
+.merge-button {
+  position: absolute;
+  top: 80px;
+  z-index: 2;
+}
+
+.merge-button-next {
+  right: -39px;
+}
+
+.page-container ul {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  list-style: none;
+  margin: 0;
+  padding: 5px 15px 15px 15px;
+  border-radius: 10px;
+}
+
+.scissor-button {
+  position: absolute;
+  z-index: 2;
+  display: none;
+  padding: 5px 10px;
+  width: 37px;
+  height: 30px;
+  top: 60px;
+}
+
+.list-item-page:focus ~ .scissor-button,
+.list-item:hover .scissor-button {
+  display: flex;
+}
+
+.scissor-button-prev {
+  left: -25px;
+}
+
+.scissor-button-next {
+  right: -25px;
+}
+
+.list-item {
+  margin-top: 10px;
+  position: relative;
+}
+
+.list-item:hover {
+  cursor: pointer;
+}
+
+.list-item:not(:last-child) {
+  margin-right: 13px;
+}
+
+.list-item-page {
+  outline: none;
+  border: 1px solid rgb(129, 129, 129);
+  overflow: hidden;
+  border-radius: 5px;
+}
+
+.list-item-page:focus {
+  border: 1px solid red;
+}
+
+.list-item-page[data-has-prev]:focus::before,
+.list-item:hover .list-item-page[data-has-prev]::before,
+.list-item:hover .list-item-page[data-has-next]::after,
+.list-item-page[data-has-next]:focus::after {
+  top: 0;
+  position: absolute;
+  content: '';
+  width: 1px;
+  height: 100%;
+  background-image: linear-gradient(
+    0deg,
+    rgb(145, 145, 145),
+    rgb(145, 145, 145) 75%,
+    transparent 75%,
+    transparent 100%
+  );
+  background-size: 1px 15px;
+  background-repeat: repeat-y;
+}
+
+.list-item-page:focus::before,
+.list-item:hover .list-item-page[data-has-prev]::before {
+  left: -7px;
+}
+
+.list-item-page:focus::after,
+.list-item:hover .list-item-page[data-has-next]::after {
+  right: -7px;
+}

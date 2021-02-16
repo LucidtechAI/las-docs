@@ -1,0 +1,9 @@
+.card-body {
+  min-height: 900px;
+}
+
+.card-body.loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
