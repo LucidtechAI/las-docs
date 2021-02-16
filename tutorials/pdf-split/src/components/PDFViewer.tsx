@@ -1,11 +1,13 @@
 import React, { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
-import { Document, Page } from 'react-pdf/dist/esm/entry.webpack';
+import { pdfjs, Document, Page } from 'react-pdf';
 import { GlobalHotKeys } from 'react-hotkeys';
 
 import styles from './PDFViewer.module.css';
 import ScissorButton from './ScissorButton';
 import MergeButton from './MergeButton';
 import Spinner from './Spinner';
+
+pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.min.js`;
 
 type Groups = Array<Array<number>>;
 type PDFViewerProps = {
@@ -44,7 +46,7 @@ const PDFViewer = ({
 
   useEffect(() => {
     if (!numPages) return;
-    setPreviewPage(1); // reset focus to first page when new doc is loaded (from numPages changing)
+    setPreviewPage(1);
 
     // for now no predictions are expected, but this should make it possible to receive them in the future
     // if no predictions, group all pages together by default
@@ -202,7 +204,7 @@ const PDFViewer = ({
           onSourceSuccess={() => setNumPages(null)}
           loading={<Spinner />}
           options={{
-            cMapUrl: 'cmaps/',
+            cMapUrl: `//cdn.jsdelivr.net/npm/pdfjs-dist@${pdfjs.version}/cmaps/`,
             cMapPacked: true,
           }}
           className={styles['outer-container']}
