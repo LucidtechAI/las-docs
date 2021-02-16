@@ -16,7 +16,24 @@
 
 .page-preview {
   min-width: 600px;
-  max-width: 800px;
+  max-width: 600px;
+}
+
+@media all and (max-width: 1200px) {
+  .page-preview {
+    min-width: 450px;
+    max-width: 450px;
+  }
+}
+
+@media all and (max-width: 1000px) {
+  .page-preview {
+    min-width: 350px;
+    max-width: 350px;
+  }
+}
+
+.page-preview {
   margin-right: 10px;
 }
 
