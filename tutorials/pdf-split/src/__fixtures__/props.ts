@@ -19,7 +19,7 @@ export function createTransition(): Transition {
 
 export function createTransitionExecution(transitionId?: string): TransitionExecution {
   const input: any = {
-    documentId: 'las:document:abc',
+    documentId: 'las:document:a',
     inferenceTime: 0,
     modelId: 'las:model:abc',
     predictionId: 'las:prediction:abc',
