@@ -41,7 +41,7 @@ las transitions create manual params.json
 ## Automatic prediction (docker transition)
 An automatic step is made by creating a docker image that will perform a task 
 without any user involved. Check out our 
-[sample images](https://github.com/LucidtechAI/las-docs/tree/master/docker-sample-images)
+[sample images](https://github.com/LucidtechAI/las-docs/tree/master/docker-image-samples)
 for inspiration and best practices. 
 
 The first step is to build a docker image and push it to some repository
