@@ -8,6 +8,10 @@ import MergeButton from './MergeButton';
 import Spinner from './Spinner';
 
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.min.js`;
+const options = {
+  cMapUrl: `//cdn.jsdelivr.net/npm/pdfjs-dist@${pdfjs.version}/cmaps/`,
+  cMapPacked: true,
+};
 
 type Groups = Array<Array<number>>;
 type PDFViewerProps = {
@@ -203,10 +207,7 @@ const PDFViewer = ({
           onLoadSuccess={onDocumentLoadSuccess}
           onSourceSuccess={() => setNumPages(null)}
           loading={<Spinner />}
-          options={{
-            cMapUrl: `//cdn.jsdelivr.net/npm/pdfjs-dist@${pdfjs.version}/cmaps/`,
-            cMapPacked: true,
-          }}
+          options={options}
           className={styles['outer-container']}
         >
           <div className={styles['page-preview']}>
@@ -216,8 +217,9 @@ const PDFViewer = ({
             {!loading &&
               groups.map((group, groupIndex) => {
                 const hasNextGroup = groupIndex !== groups.length - 1;
+                const groupKey = `group_${groupIndex}-${group.join('-')}`;
                 return (
-                  <div key={`group_${groupIndex}-${group.join('-')}`} className={styles['page-container']}>
+                  <div key={groupKey} className={styles['page-container']}>
                     <div className={styles['group-tab']}>{(groupIndex + 1).toString().padStart(2, '0')}</div>
                     <ul>
                       {group.map((pageNumber, pageIndex) => {
