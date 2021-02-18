@@ -10,7 +10,7 @@ A low level client to invoke api methods from Lucidtech AI Services.
 
 
 #### create_asset(content: Union[bytes, bytearray, str, pathlib.Path, io.IOBase], \*\*optional_args)
-Creates an asset handle, calls the POST /assets endpoint.
+Creates an asset, calls the POST /assets endpoint.
 
 ```python
 >>> from las.client import Client
@@ -89,7 +89,7 @@ Creates a batch, calls the POST /batches endpoint.
 
 
 #### create_document(content: Union[bytes, bytearray, str, pathlib.Path, io.IOBase], content_type: str, \*, consent_id: Optional[str] = None, batch_id: str = None, ground_truth: Sequence[Dict[str, str]] = None)
-Creates a document handle, calls the POST /documents endpoint.
+Creates a document, calls the POST /documents endpoint.
 
 ```python
 >>> from las.client import Client
@@ -104,10 +104,10 @@ Creates a document handle, calls the POST /documents endpoint.
     * **content** (*Content*) – Content to POST
 
 
-    * **content_type** (*str*) – MIME type for the document handle
+    * **content_type** (*str*) – MIME type for the document
 
 
-    * **consent_id** (*Optional**[**str**]*) – Id of the consent that marks the owner of the document handle
+    * **consent_id** (*Optional**[**str**]*) – Id of the consent that marks the owner of the document
 
 
     * **batch_id** (*Optional**[**str**]*) – Id of the associated batch
@@ -180,7 +180,7 @@ Create a prediction on a document using specified model, calls the POST /predict
 
 
 #### create_secret(data: dict, \*\*optional_args)
-Creates an secret handle, calls the POST /secrets endpoint.
+Creates an secret, calls the POST /secrets endpoint.
 
 ```python
 >>> from las.client import Client
@@ -222,7 +222,7 @@ Creates an secret handle, calls the POST /secrets endpoint.
 
 
 #### create_transition(transition_type: str, \*, in_schema: Optional[dict] = None, out_schema: Optional[dict] = None, parameters: Optional[dict] = None, \*\*optional_args)
-Creates a transition handle, calls the POST /transitions endpoint.
+Creates a transition, calls the POST /transitions endpoint.
 
 ```python
 >>> import json
@@ -259,7 +259,7 @@ Creates a transition handle, calls the POST /transitions endpoint.
     * **name** (*Optional**[**str**]*) – Name of the transition
 
 
-    * **params** (*Optional**[**dict**]*) – Parameters to the corresponding transition type
+    * **parameters** (*Optional**[**dict**]*) – Parameters to the corresponding transition type
 
 
     * **description** (*Optional**[**str**]*) – Description of the transition
@@ -386,13 +386,47 @@ Delete documents with the provided consent_id, calls the DELETE /documents endpo
 
 * **Parameters**
 
-    **consent_id** (*Optional**[**Queryparam**]*) – Ids of the consents that marks the owner of the document handle
+    **consent_id** (*Optional**[**Queryparam**]*) – Ids of the consents that marks the owner of the document
 
 
 
 * **Returns**
 
     Documents response from REST API
+
+
+
+* **Return type**
+
+    dict
+
+
+
+* **Raises**
+
+    `InvalidCredentialsException`, `TooManyRequestsException`, `LimitExceededException`, `requests.exception.RequestException`
+
+
+
+#### delete_transition(transition_id: str)
+Delete the transition with the provided transition_id, calls the DELETE /transitions/{transitionId} endpoint.
+
+```python
+>>> from las.client import Client
+>>> client = Client()
+>>> client.delete_transition('<transition_id>')
+```
+
+
+* **Parameters**
+
+    **transition_id** (*str*) – Id of the transition
+
+
+
+* **Returns**
+
+    Transition response from REST API
 
 
 
@@ -590,7 +624,7 @@ Start a workflow execution, calls the POST /workflows/{workflowId}/executions en
 
 
 #### get_asset(asset_id: str)
-Get asset from the REST API, calls the GET /assets/{assetId} endpoint.
+Get asset, calls the GET /assets/{assetId} endpoint.
 
 ```python
 >>> from las.client import Client
@@ -624,7 +658,7 @@ Get asset from the REST API, calls the GET /assets/{assetId} endpoint.
 
 
 #### get_document(document_id: str)
-Get document from the REST API, calls the GET /documents/{documentId} endpoint.
+Get document, calls the GET /documents/{documentId} endpoint.
 
 ```python
 >>> from las.client import Client
@@ -676,6 +710,40 @@ get log, calls the GET /logs/{logId} endpoint.
 * **Returns**
 
     Log response from REST API
+
+
+
+* **Return type**
+
+    dict
+
+
+
+* **Raises**
+
+    `InvalidCredentialsException`, `TooManyRequestsException`, `LimitExceededException`, `requests.exception.RequestException`
+
+
+
+#### get_transition(transition_id: str)
+Get the transition with the provided transition_id, calls the GET /transitions/{transitionId} endpoint.
+
+```python
+>>> from las.client import Client
+>>> client = Client()
+>>> client.get_transition('<transition_id>')
+```
+
+
+* **Parameters**
+
+    **transition_id** (*str*) – Id of the transition
+
+
+
+* **Returns**
+
+    Transition response from REST API
 
 
 
@@ -763,6 +831,40 @@ Get information about a specific user, calls the GET /users/{user_id} endpoint.
 
 
 
+#### get_workflow(workflow_id: str)
+Get the workflow with the provided workflow_id, calls the GET /workflows/{workflowId} endpoint.
+
+```python
+>>> from las.client import Client
+>>> client = Client()
+>>> client.get_workflow('<workflow_id>')
+```
+
+
+* **Parameters**
+
+    **workflow_id** (*str*) – Id of the workflow
+
+
+
+* **Returns**
+
+    Workflow response from REST API
+
+
+
+* **Return type**
+
+    dict
+
+
+
+* **Raises**
+
+    `InvalidCredentialsException`, `TooManyRequestsException`, `LimitExceededException`, `requests.exception.RequestException`
+
+
+
 #### list_assets(\*, max_results: Optional[int] = None, next_token: Optional[str] = None)
 List assets available, calls the GET /assets endpoint.
 
@@ -817,7 +919,7 @@ List documents available for inference, calls the GET /documents endpoint.
     * **batch_id** (*Optional**[**Queryparam**]*) – Ids of batches that contains the documents of interest
 
 
-    * **consent_id** (*Optional**[**Queryparam**]*) – Ids of the consents that marks the owner of the document handle
+    * **consent_id** (*Optional**[**Queryparam**]*) – Ids of the consents that marks the owner of the document
 
 
     * **max_results** (*Optional**[**int**]*) – Maximum number of results to be returned
@@ -1224,8 +1326,8 @@ Updates an asset, calls the PATCH /assets/{assetId} endpoint.
 
 
 #### update_document(document_id: str, ground_truth: Sequence[Dict[str, Union[str, None, bool]]])
-Post ground truth to the REST API, calls the PATCH /documents/{documentId} endpoint.
-Posting ground truth means posting the ground truth data for the particular document.
+Update ground truth for a document, calls the PATCH /documents/{documentId} endpoint.
+Updating ground truth means adding the ground truth data for the particular document.
 This enables the API to learn from past mistakes.
 
 ```python
@@ -1310,7 +1412,7 @@ Updates an secret, calls the PATCH /secrets/secretId endpoint.
 
 
 #### update_transition(transition_id: str, \*, in_schema: Optional[dict] = None, out_schema: Optional[dict] = None, \*\*optional_args)
-Creates a transition handle, calls the PATCH /transitions/{transitionId} endpoint.
+Updates a transition, calls the PATCH /transitions/{transitionId} endpoint.
 
 ```python
 >>> import json
@@ -1451,7 +1553,7 @@ Updates a user, calls the PATCH /users/{userId} endpoint.
 
 
 #### update_workflow(workflow_id: str, \*\*optional_args)
-Creates a workflow handle, calls the PATCH /workflows/{workflowId} endpoint.
+Updates a workflow, calls the PATCH /workflows/{workflowId} endpoint.
 
 ```python
 >>> import json
