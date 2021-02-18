@@ -1337,67 +1337,84 @@
 ##### Response body JSON Schema
 ```json
 {
-  "title": "prediction",
+  "title": "predictions",
   "required": [
-    "documentId",
-    "inferenceTime",
-    "modelId",
-    "predictionId",
-    "predictions",
-    "timestamp"
+    "predictions"
   ],
   "type": "object",
   "properties": {
-    "modelId": {
-      "pattern": "^las:model:[0-9A-Za-z_]+$",
-      "type": "string"
-    },
-    "inferenceTime": {
-      "minimum": 0,
-      "type": "number"
-    },
-    "documentId": {
-      "pattern": "^las:document:[a-f0-9]{32}$",
-      "type": "string"
-    },
-    "predictionId": {
-      "pattern": "^las:prediction:[a-f0-9]{32}$",
-      "type": "string"
+    "nextToken": {
+      "maxLength": 4096,
+      "type": "string",
+      "nullable": true
     },
     "predictions": {
       "type": "array",
       "items": {
         "required": [
-          "confidence",
-          "label",
-          "value"
+          "documentId",
+          "inferenceTime",
+          "modelId",
+          "predictionId",
+          "predictions",
+          "timestamp"
         ],
         "type": "object",
         "properties": {
-          "confidence": {
-            "maximum": 1,
+          "modelId": {
+            "pattern": "^las:model:[0-9A-Za-z_]+$",
+            "type": "string"
+          },
+          "inferenceTime": {
             "minimum": 0,
             "type": "number"
           },
-          "label": {
-            "maxLength": 36,
-            "minLength": 1,
-            "pattern": "^[0-9A-Za-z_]+$",
+          "documentId": {
+            "pattern": "^las:document:[a-f0-9]{32}$",
             "type": "string"
           },
-          "value": {
-            "maxLength": 64,
-            "minLength": 1,
-            "type": "string",
-            "nullable": true
+          "predictionId": {
+            "pattern": "^las:prediction:[a-f0-9]{32}$",
+            "type": "string"
+          },
+          "predictions": {
+            "type": "array",
+            "items": {
+              "required": [
+                "confidence",
+                "label",
+                "value"
+              ],
+              "type": "object",
+              "properties": {
+                "confidence": {
+                  "maximum": 1,
+                  "minimum": 0,
+                  "type": "number"
+                },
+                "label": {
+                  "maxLength": 36,
+                  "minLength": 1,
+                  "pattern": "^[0-9A-Za-z_]+$",
+                  "type": "string"
+                },
+                "value": {
+                  "maxLength": 64,
+                  "minLength": 1,
+                  "type": "string",
+                  "nullable": true
+                }
+              },
+              "additionalProperties": false
+            }
+          },
+          "timestamp": {
+            "minimum": 1,
+            "type": "integer"
           }
         },
         "additionalProperties": false
       }
-    },
-    "timestamp": {
-      "minimum": 1,
-      "type": "integer"
     }
   },
   "additionalProperties": false
@@ -1967,6 +1984,170 @@
   "additionalProperties": false
 }
 ```
+
+
+##### Response body JSON Schema
+```json
+{
+  "title": "transition",
+  "required": [
+    "description",
+    "name",
+    "transitionId",
+    "transitionType"
+  ],
+  "type": "object",
+  "properties": {
+    "outputJsonSchema": {
+      "type": "object"
+    },
+    "assets": {
+      "type": "object",
+      "properties": {
+        "jsRemoteComponent": {
+          "pattern": "^las:asset:[a-f0-9]{32}$",
+          "type": "string"
+        }
+      },
+      "additionalProperties": true
+    },
+    "transitionId": {
+      "anyOf": [
+        {
+          "pattern": "^las:transition:[a-f0-9]{32}$",
+          "type": "string"
+        },
+        {
+          "pattern": "^las:transition:commons-[0-9A-Za-z-]+$",
+          "type": "string"
+        }
+      ]
+    },
+    "name": {
+      "maxLength": 4096,
+      "type": "string",
+      "nullable": true
+    },
+    "description": {
+      "maxLength": 4096,
+      "type": "string",
+      "nullable": true
+    },
+    "transitionType": {
+      "type": "string"
+    },
+    "inputJsonSchema": {
+      "type": "object"
+    },
+    "parameters": {
+      "type": "object"
+    }
+  },
+  "additionalProperties": false
+}
+```
+
+
+#### DELETE /transitions/{transitionId}
+
+
+| Path name | Path value |
+| --- | --- |
+| transitionId | Id of transition on the form las:transition:&lt;hex&gt; |
+
+
+| Header name | Header value |
+| --- | --- |
+| Authorization | Bearer &lt;your access token here&gt; |
+| x-api-key | &lt;your api key here&gt; |
+
+
+
+
+
+
+
+
+##### Response body JSON Schema
+```json
+{
+  "title": "transition",
+  "required": [
+    "description",
+    "name",
+    "transitionId",
+    "transitionType"
+  ],
+  "type": "object",
+  "properties": {
+    "outputJsonSchema": {
+      "type": "object"
+    },
+    "assets": {
+      "type": "object",
+      "properties": {
+        "jsRemoteComponent": {
+          "pattern": "^las:asset:[a-f0-9]{32}$",
+          "type": "string"
+        }
+      },
+      "additionalProperties": true
+    },
+    "transitionId": {
+      "anyOf": [
+        {
+          "pattern": "^las:transition:[a-f0-9]{32}$",
+          "type": "string"
+        },
+        {
+          "pattern": "^las:transition:commons-[0-9A-Za-z-]+$",
+          "type": "string"
+        }
+      ]
+    },
+    "name": {
+      "maxLength": 4096,
+      "type": "string",
+      "nullable": true
+    },
+    "description": {
+      "maxLength": 4096,
+      "type": "string",
+      "nullable": true
+    },
+    "transitionType": {
+      "type": "string"
+    },
+    "inputJsonSchema": {
+      "type": "object"
+    },
+    "parameters": {
+      "type": "object"
+    }
+  },
+  "additionalProperties": false
+}
+```
+
+
+#### GET /transitions/{transitionId}
+
+
+| Path name | Path value |
+| --- | --- |
+| transitionId | Id of transition on the form las:transition:&lt;hex&gt; |
+
+
+| Header name | Header value |
+| --- | --- |
+| Authorization | Bearer &lt;your access token here&gt; |
+| x-api-key | &lt;your api key here&gt; |
+
+
+
+
+
+
 
 
 ##### Response body JSON Schema
@@ -3118,6 +3299,57 @@
 
 
 #### DELETE /workflows/{workflowId}
+
+
+| Path name | Path value |
+| --- | --- |
+| workflowId | Id of workflow on the form las:workflow:&lt;hex&gt; |
+
+
+| Header name | Header value |
+| --- | --- |
+| Authorization | Bearer &lt;your access token here&gt; |
+| x-api-key | &lt;your api key here&gt; |
+
+
+
+
+
+
+
+
+##### Response body JSON Schema
+```json
+{
+  "title": "workflow",
+  "required": [
+    "description",
+    "name",
+    "workflowId"
+  ],
+  "type": "object",
+  "properties": {
+    "name": {
+      "maxLength": 4096,
+      "type": "string",
+      "nullable": true
+    },
+    "description": {
+      "maxLength": 4096,
+      "type": "string",
+      "nullable": true
+    },
+    "workflowId": {
+      "pattern": "^las:workflow:[a-f0-9]{32}$",
+      "type": "string"
+    }
+  },
+  "additionalProperties": false
+}
+```
+
+
+#### GET /workflows/{workflowId}
 
 
 | Path name | Path value |
