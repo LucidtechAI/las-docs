@@ -46,5 +46,4 @@ jobs:
           body: This is an auto-generated PR with updated docs from the SDK.
           labels: automated pr
           branch: auto/update-sdk-reference
-          path: reference
           base: master
