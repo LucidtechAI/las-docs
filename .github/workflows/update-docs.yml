@@ -30,12 +30,11 @@ jobs:
         run: |
           ls
           cd python-sdk
-          pip install requirements.docs.txt
+          pip install -r requirements.docs.txt
           make docs
           mv docs/las.md reference/python-sdk/latest.md
           git add reference/python-sdk/latest.md
           git commit -m 'Automatically update python SDK reference'
-          git push -u origin auto/update-python-sdk-reference
           git status
           EOF
 
