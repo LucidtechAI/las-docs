@@ -19,3 +19,27 @@ jobs:
         uses: actions/setup-python@v2
         with:
           python-version: 3.8
+
+      - name: python sdk
+        run: |
+          ls
+          git clone git@github.com:LucidtechAI/las-sdk-python.git python-sdk
+          ls
+          cd python-sdk
+          pip install requirements.docs.txt
+          make docs
+          mv docs/las.md reference/python-sdk/latest.md
+          git add reference/python-sdk/latest.md
+          git commit -m 'Automatically update python SDK reference'
+          git push -u origin auto/update-python-sdk-reference
+          git status
+          EOF
+
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v3
+        with:
+          commit-message: Update SDK reference docs
+          title: Update SDK reference docs
+          body: This is an auto-generated PR with updated docs from the SDK.
+          labels: automated pr
+          branch: auto/update-sdk-reference
