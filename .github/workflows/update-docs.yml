@@ -15,6 +15,12 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
+      - name: Check out my python sdk
+        uses: actions/checkout@master
+        with:
+          repository: lucidtech/las-sdk-python
+          path: python-sdk
+
       - name: Set up Python 3.8
         uses: actions/setup-python@v2
         with:
@@ -22,8 +28,6 @@ jobs:
 
       - name: python sdk
         run: |
-          ls
-          git clone git@github.com:LucidtechAI/las-sdk-python.git python-sdk
           ls
           cd python-sdk
           pip install requirements.docs.txt
