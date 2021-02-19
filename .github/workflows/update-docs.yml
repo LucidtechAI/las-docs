@@ -5,7 +5,7 @@
 name: Update SDK references
 
 on:
-  workflow_dispath
+  workflow_dispatch
 
 jobs:
   build:
