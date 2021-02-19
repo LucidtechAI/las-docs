@@ -26,13 +26,28 @@ jobs:
         with:
           python-version: 3.8
 
-      - name: python sdk
+      - name: Python SDK
         run: |
           cd python-sdk
           pip install -r requirements.docs.txt
           pip install tox
           make docs
           mv docs/las.md ../reference/python-sdk/latest.md
+
+      - name: Check out my java sdk
+        uses: actions/checkout@master
+        with:
+          repository: LucidtechAI/las-sdk-java
+          path: java-sdk
+
+      - name: Java SDK
+        run: |
+          sudo apt-get install doxygen
+          sudo apt-get install moxygen
+          cd java-sdk
+          doxygen
+          moxygen xml
+          mv las.md ../reference/java/latest.md
 
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v3
