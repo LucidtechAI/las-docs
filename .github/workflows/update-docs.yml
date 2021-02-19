@@ -21,11 +21,6 @@ jobs:
           repository: LucidtechAI/las-sdk-python
           path: python-sdk
 
-      - name: Set up Python 3.8
-        uses: actions/setup-python@v2
-        with:
-          python-version: 3.8
-
       - name: Python SDK
         run: |
           cd python-sdk
@@ -50,6 +45,12 @@ jobs:
           npx moxygen xml
           mv api.md ../reference/java/latest.md
 
+      - name: Clean up
+        run: |
+          rm -rf java-sdk
+          rm -rf python-sdk
+          git stash push package-lock.json
+
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v3
         with:
@@ -59,4 +60,3 @@ jobs:
           labels: automated pr
           branch: auto/update-sdk-reference
           base: master
-          path: reference
