@@ -40,7 +40,7 @@
 * [.NET SDK](reference/dotnet/README.md)
   * [latest](reference/dotnet/latest.md)
 * [JavaScript SDK](reference/js/README.md)
-  * [v3.3](reference/js/latest.md)
+  * [latest](reference/js/latest.md)
 * [Java SDK](reference/java/README.md)
   * [latest](reference/java/latest.md)
 
