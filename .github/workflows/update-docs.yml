@@ -47,3 +47,4 @@ jobs:
           labels: automated pr
           branch: auto/update-sdk-reference
           path: reference
+          base: master
