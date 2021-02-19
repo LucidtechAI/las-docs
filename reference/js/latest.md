@@ -89,6 +89,7 @@ A high-level http client for communicating with the Lucidtech REST API
 - [createUser](#createuser)
 - [createWorkflow](#createworkflow)
 - [deleteDocuments](#deletedocuments)
+- [deleteTransition](#deletetransition)
 - [deleteUser](#deleteuser)
 - [deleteWorkflow](#deleteworkflow)
 - [deleteWorkflowExecution](#deleteworkflowexecution)
@@ -97,7 +98,9 @@ A high-level http client for communicating with the Lucidtech REST API
 - [getAsset](#getasset)
 - [getDocument](#getdocument)
 - [getLog](#getlog)
+- [getTransition](#gettransition)
 - [getUser](#getuser)
+- [getWorkflow](#getworkflow)
 - [listAssets](#listassets)
 - [listDocuments](#listdocuments)
 - [listModels](#listmodels)
@@ -117,6 +120,7 @@ A high-level http client for communicating with the Lucidtech REST API
 - [updateSecret](#updatesecret)
 - [updateTransition](#updatetransition)
 - [updateTransitionExecution](#updatetransitionexecution)
+- [updateUser](#updateuser)
 - [updateWorkflow](#updateworkflow)
 
 ## Constructors
@@ -133,7 +137,7 @@ Name | Type |
 
 **Returns:** [*Client*](#classesclientclient-1md)
 
-Defined in: [client.ts:63](https://github.com/LucidtechAI/las-sdk-js/blob/fd4fff8/packages/las-sdk-core/src/client.ts#L63)
+Defined in: [client.ts:65](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/client.ts#L65)
 
 ## Properties
 
@@ -141,7 +145,7 @@ Defined in: [client.ts:63](https://github.com/LucidtechAI/las-sdk-js/blob/fd4fff
 
 • **credentials**: [*Credentials*](#classescredentialscredentials-1md)
 
-Defined in: [client.ts:63](https://github.com/LucidtechAI/las-sdk-js/blob/fd4fff8/packages/las-sdk-core/src/client.ts#L63)
+Defined in: [client.ts:65](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/client.ts#L65)
 
 ## Methods
 
@@ -161,7 +165,7 @@ Name | Type | Description |
 
 Asset response from REST API
 
-Defined in: [client.ts:374](https://github.com/LucidtechAI/las-sdk-js/blob/fd4fff8/packages/las-sdk-core/src/client.ts#L374)
+Defined in: [client.ts:407](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/client.ts#L407)
 
 ___
 
@@ -181,7 +185,7 @@ Name | Type |
 
 Batch response from REST API
 
-Defined in: [client.ts:427](https://github.com/LucidtechAI/las-sdk-js/blob/fd4fff8/packages/las-sdk-core/src/client.ts#L427)
+Defined in: [client.ts:460](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/client.ts#L460)
 
 ___
 
@@ -203,7 +207,7 @@ Name | Type | Description |
 
 Document response from REST API
 
-Defined in: [client.ts:79](https://github.com/LucidtechAI/las-sdk-js/blob/fd4fff8/packages/las-sdk-core/src/client.ts#L79)
+Defined in: [client.ts:81](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/client.ts#L81)
 
 ___
 
@@ -225,7 +229,7 @@ Name | Type | Description |
 
 Predicion response from REST API
 
-Defined in: [client.ts:347](https://github.com/LucidtechAI/las-sdk-js/blob/fd4fff8/packages/las-sdk-core/src/client.ts#L347)
+Defined in: [client.ts:380](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/client.ts#L380)
 
 ___
 
@@ -246,7 +250,7 @@ Name | Type | Description |
 
 Secret response from REST API
 
-Defined in: [client.ts:479](https://github.com/LucidtechAI/las-sdk-js/blob/fd4fff8/packages/las-sdk-core/src/client.ts#L479)
+Defined in: [client.ts:530](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/client.ts#L530)
 
 ___
 
@@ -267,13 +271,13 @@ Name | Type | Description |
 
 Transition response from REST API
 
-Defined in: [client.ts:151](https://github.com/LucidtechAI/las-sdk-js/blob/fd4fff8/packages/las-sdk-core/src/client.ts#L151)
+Defined in: [client.ts:153](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/client.ts#L153)
 
 ___
 
 ### createUser
 
-▸ **createUser**(`email`: *string*): *Promise*<[*User*](#user)\>
+▸ **createUser**(`email`: *string*, `data?`: [*CreateUserOptions*](#createuseroptions)): *Promise*<[*User*](#user)\>
 
 Creates a new user, calls the POST /users endpoint.
 
@@ -282,12 +286,13 @@ Creates a new user, calls the POST /users endpoint.
 Name | Type | Description |
 ------ | ------ | ------ |
 `email` | *string* | Email to the new user   |
+`data?` | [*CreateUserOptions*](#createuseroptions) | - |
 
 **Returns:** *Promise*<[*User*](#user)\>
 
 User response from REST API
 
-Defined in: [client.ts:437](https://github.com/LucidtechAI/las-sdk-js/blob/fd4fff8/packages/las-sdk-core/src/client.ts#L437)
+Defined in: [client.ts:472](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/client.ts#L472)
 
 ___
 
@@ -309,7 +314,7 @@ Name | Type | Description |
 
 Workflow response from REST API
 
-Defined in: [client.ts:244](https://github.com/LucidtechAI/las-sdk-js/blob/fd4fff8/packages/las-sdk-core/src/client.ts#L244)
+Defined in: [client.ts:267](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/client.ts#L267)
 
 ___
 
@@ -330,7 +335,28 @@ Name | Type |
 
 Documents response from REST API
 
-Defined in: [client.ts:136](https://github.com/LucidtechAI/las-sdk-js/blob/fd4fff8/packages/las-sdk-core/src/client.ts#L136)
+Defined in: [client.ts:138](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/client.ts#L138)
+
+___
+
+### deleteTransition
+
+▸ **deleteTransition**(`transitionId`: *string*): *Promise*<[*Transition*](#transition)\>
+
+Delete the transition with the provided transitionId, calls the DELETE /transitions/{transitionId} endpoint.
+Will fail if transition is in use by one or more workflows.
+
+#### Parameters:
+
+Name | Type | Description |
+------ | ------ | ------ |
+`transitionId` | *string* | Id of the transition   |
+
+**Returns:** *Promise*<[*Transition*](#transition)\>
+
+Transition response from REST API
+
+Defined in: [client.ts:208](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/client.ts#L208)
 
 ___
 
@@ -350,7 +376,7 @@ Name | Type | Description |
 
 User response from REST API
 
-Defined in: [client.ts:468](https://github.com/LucidtechAI/las-sdk-js/blob/fd4fff8/packages/las-sdk-core/src/client.ts#L468)
+Defined in: [client.ts:519](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/client.ts#L519)
 
 ___
 
@@ -370,7 +396,7 @@ Name | Type | Description |
 
 Workflow response from REST API
 
-Defined in: [client.ts:278](https://github.com/LucidtechAI/las-sdk-js/blob/fd4fff8/packages/las-sdk-core/src/client.ts#L278)
+Defined in: [client.ts:311](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/client.ts#L311)
 
 ___
 
@@ -392,7 +418,7 @@ Name | Type | Description |
 
 WorkflowExecution response from REST API
 
-Defined in: [client.ts:333](https://github.com/LucidtechAI/las-sdk-js/blob/fd4fff8/packages/las-sdk-core/src/client.ts#L333)
+Defined in: [client.ts:366](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/client.ts#L366)
 
 ___
 
@@ -412,7 +438,7 @@ Name | Type | Description |
 
 Transition execution response from REST API
 
-Defined in: [client.ts:195](https://github.com/LucidtechAI/las-sdk-js/blob/fd4fff8/packages/las-sdk-core/src/client.ts#L195)
+Defined in: [client.ts:218](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/client.ts#L218)
 
 ___
 
@@ -433,7 +459,7 @@ Name | Type | Description |
 
 Workflow execution response from REST API
 
-Defined in: [client.ts:299](https://github.com/LucidtechAI/las-sdk-js/blob/fd4fff8/packages/las-sdk-core/src/client.ts#L299)
+Defined in: [client.ts:332](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/client.ts#L332)
 
 ___
 
@@ -453,7 +479,7 @@ Name | Type | Description |
 
 Asset response from REST API
 
-Defined in: [client.ts:396](https://github.com/LucidtechAI/las-sdk-js/blob/fd4fff8/packages/las-sdk-core/src/client.ts#L396)
+Defined in: [client.ts:429](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/client.ts#L429)
 
 ___
 
@@ -473,7 +499,7 @@ Name | Type | Description |
 
 Document response from REST API
 
-Defined in: [client.ts:99](https://github.com/LucidtechAI/las-sdk-js/blob/fd4fff8/packages/las-sdk-core/src/client.ts#L99)
+Defined in: [client.ts:101](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/client.ts#L101)
 
 ___
 
@@ -493,7 +519,27 @@ Name | Type | Description |
 
 Log response from REST API
 
-Defined in: [client.ts:517](https://github.com/LucidtechAI/las-sdk-js/blob/fd4fff8/packages/las-sdk-core/src/client.ts#L517)
+Defined in: [client.ts:568](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/client.ts#L568)
+
+___
+
+### getTransition
+
+▸ **getTransition**(`transitionId`: *string*): *Promise*<[*Transition*](#transition)\>
+
+Get the transition with the provided transitionId, calls the GET /transitions/{transitionId} endpoint.
+
+#### Parameters:
+
+Name | Type | Description |
+------ | ------ | ------ |
+`transitionId` | *string* | Id of the transition   |
+
+**Returns:** *Promise*<[*Transition*](#transition)\>
+
+Transition response from REST API
+
+Defined in: [client.ts:174](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/client.ts#L174)
 
 ___
 
@@ -513,7 +559,27 @@ Name | Type | Description |
 
 User response from REST API
 
-Defined in: [client.ts:458](https://github.com/LucidtechAI/las-sdk-js/blob/fd4fff8/packages/las-sdk-core/src/client.ts#L458)
+Defined in: [client.ts:497](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/client.ts#L497)
+
+___
+
+### getWorkflow
+
+▸ **getWorkflow**(`workflowId`: *string*): *Promise*<[*Workflow*](#workflow)\>
+
+Get the workflow with the provided workflowId, calls the GET /workflows/{workflowId} endpoint.
+
+#### Parameters:
+
+Name | Type | Description |
+------ | ------ | ------ |
+`workflowId` | *string* | Id of the workflow   |
+
+**Returns:** *Promise*<[*Workflow*](#workflow)\>
+
+Workflow response from REST API
+
+Defined in: [client.ts:290](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/client.ts#L290)
 
 ___
 
@@ -533,7 +599,7 @@ Name | Type |
 
 Assets response from REST API without the content of each asset
 
-Defined in: [client.ts:386](https://github.com/LucidtechAI/las-sdk-js/blob/fd4fff8/packages/las-sdk-core/src/client.ts#L386)
+Defined in: [client.ts:419](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/client.ts#L419)
 
 ___
 
@@ -553,7 +619,7 @@ Name | Type |
 
 Documents response from REST API
 
-Defined in: [client.ts:112](https://github.com/LucidtechAI/las-sdk-js/blob/fd4fff8/packages/las-sdk-core/src/client.ts#L112)
+Defined in: [client.ts:114](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/client.ts#L114)
 
 ___
 
@@ -573,7 +639,7 @@ Name | Type |
 
 Models response from the REST API
 
-Defined in: [client.ts:507](https://github.com/LucidtechAI/las-sdk-js/blob/fd4fff8/packages/las-sdk-core/src/client.ts#L507)
+Defined in: [client.ts:558](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/client.ts#L558)
 
 ___
 
@@ -589,7 +655,7 @@ Name | Type |
 
 **Returns:** *Promise*<[*PredictionList*](#predictionlist)\>
 
-Defined in: [client.ts:364](https://github.com/LucidtechAI/las-sdk-js/blob/fd4fff8/packages/las-sdk-core/src/client.ts#L364)
+Defined in: [client.ts:397](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/client.ts#L397)
 
 ___
 
@@ -609,7 +675,7 @@ Name | Type |
 
 Secrets response from REST API without the username of each secret
 
-Defined in: [client.ts:496](https://github.com/LucidtechAI/las-sdk-js/blob/fd4fff8/packages/las-sdk-core/src/client.ts#L496)
+Defined in: [client.ts:547](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/client.ts#L547)
 
 ___
 
@@ -630,7 +696,7 @@ Name | Type | Description |
 
 Transition executions responses from REST API
 
-Defined in: [client.ts:228](https://github.com/LucidtechAI/las-sdk-js/blob/fd4fff8/packages/las-sdk-core/src/client.ts#L228)
+Defined in: [client.ts:251](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/client.ts#L251)
 
 ___
 
@@ -650,7 +716,7 @@ Name | Type |
 
 Transitions response from REST API
 
-Defined in: [client.ts:174](https://github.com/LucidtechAI/las-sdk-js/blob/fd4fff8/packages/las-sdk-core/src/client.ts#L174)
+Defined in: [client.ts:186](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/client.ts#L186)
 
 ___
 
@@ -670,7 +736,7 @@ Name | Type |
 
 User response from REST API
 
-Defined in: [client.ts:448](https://github.com/LucidtechAI/las-sdk-js/blob/fd4fff8/packages/las-sdk-core/src/client.ts#L448)
+Defined in: [client.ts:487](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/client.ts#L487)
 
 ___
 
@@ -691,7 +757,7 @@ Name | Type | Description |
 
 Workflow executions responses from REST API
 
-Defined in: [client.ts:318](https://github.com/LucidtechAI/las-sdk-js/blob/fd4fff8/packages/las-sdk-core/src/client.ts#L318)
+Defined in: [client.ts:351](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/client.ts#L351)
 
 ___
 
@@ -711,7 +777,7 @@ Name | Type |
 
 Workflows response from REST API
 
-Defined in: [client.ts:268](https://github.com/LucidtechAI/las-sdk-js/blob/fd4fff8/packages/las-sdk-core/src/client.ts#L268)
+Defined in: [client.ts:301](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/client.ts#L301)
 
 ___
 
@@ -734,7 +800,7 @@ Name | Type |
 
 **Returns:** *Promise*<T\>
 
-Defined in: [client.ts:538](https://github.com/LucidtechAI/las-sdk-js/blob/fd4fff8/packages/las-sdk-core/src/client.ts#L538)
+Defined in: [client.ts:589](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/client.ts#L589)
 
 ___
 
@@ -757,7 +823,7 @@ Name | Type |
 
 **Returns:** *Promise*<T\>
 
-Defined in: [client.ts:534](https://github.com/LucidtechAI/las-sdk-js/blob/fd4fff8/packages/las-sdk-core/src/client.ts#L534)
+Defined in: [client.ts:585](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/client.ts#L585)
 
 ___
 
@@ -780,7 +846,7 @@ Name | Type |
 
 **Returns:** *Promise*<T\>
 
-Defined in: [client.ts:546](https://github.com/LucidtechAI/las-sdk-js/blob/fd4fff8/packages/las-sdk-core/src/client.ts#L546)
+Defined in: [client.ts:597](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/client.ts#L597)
 
 ___
 
@@ -803,7 +869,7 @@ Name | Type |
 
 **Returns:** *Promise*<T\>
 
-Defined in: [client.ts:542](https://github.com/LucidtechAI/las-sdk-js/blob/fd4fff8/packages/las-sdk-core/src/client.ts#L542)
+Defined in: [client.ts:593](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/client.ts#L593)
 
 ___
 
@@ -824,7 +890,7 @@ Name | Type | Description |
 
 Asset response from REST API with content
 
-Defined in: [client.ts:407](https://github.com/LucidtechAI/las-sdk-js/blob/fd4fff8/packages/las-sdk-core/src/client.ts#L407)
+Defined in: [client.ts:440](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/client.ts#L440)
 
 ___
 
@@ -847,7 +913,7 @@ Name | Type | Description |
 
 Document response from REST API
 
-Defined in: [client.ts:125](https://github.com/LucidtechAI/las-sdk-js/blob/fd4fff8/packages/las-sdk-core/src/client.ts#L125)
+Defined in: [client.ts:127](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/client.ts#L127)
 
 ___
 
@@ -866,7 +932,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<[*Secret*](#secret)\>
 
-Defined in: [client.ts:529](https://github.com/LucidtechAI/las-sdk-js/blob/fd4fff8/packages/las-sdk-core/src/client.ts#L529)
+Defined in: [client.ts:580](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/client.ts#L580)
 
 ___
 
@@ -887,7 +953,7 @@ Name | Type | Description |
 
 Transition response from REST API
 
-Defined in: [client.ts:185](https://github.com/LucidtechAI/las-sdk-js/blob/fd4fff8/packages/las-sdk-core/src/client.ts#L185)
+Defined in: [client.ts:197](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/client.ts#L197)
 
 ___
 
@@ -910,7 +976,28 @@ Name | Type | Description |
 
 Transition execution response from REST API
 
-Defined in: [client.ts:210](https://github.com/LucidtechAI/las-sdk-js/blob/fd4fff8/packages/las-sdk-core/src/client.ts#L210)
+Defined in: [client.ts:233](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/client.ts#L233)
+
+___
+
+### updateUser
+
+▸ **updateUser**(`userId`: *string*, `data`: [*UpdateUserOptions*](#updateuseroptions)): *Promise*<[*User*](#user)\>
+
+Updates a user, calls the PATCH /users/{userId} endpoint.
+
+#### Parameters:
+
+Name | Type | Description |
+------ | ------ | ------ |
+`userId` | *string* | Id of the user   |
+`data` | [*UpdateUserOptions*](#updateuseroptions) | - |
+
+**Returns:** *Promise*<[*User*](#user)\>
+
+User response from REST API
+
+Defined in: [client.ts:509](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/client.ts#L509)
 
 ___
 
@@ -931,7 +1018,7 @@ Name | Type | Description |
 
 Workflow response from REST API
 
-Defined in: [client.ts:288](https://github.com/LucidtechAI/las-sdk-js/blob/fd4fff8/packages/las-sdk-core/src/client.ts#L288)
+Defined in: [client.ts:321](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/client.ts#L321)
 
 
 <a name="classescredentialscredentials-1md"></a>
@@ -979,7 +1066,7 @@ Name | Type |
 
 **Returns:** [*Credentials*](#classescredentialscredentials-1md)
 
-Defined in: [credentials.ts:43](https://github.com/LucidtechAI/las-sdk-js/blob/fd4fff8/packages/las-sdk-core/src/credentials.ts#L43)
+Defined in: [credentials.ts:43](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/credentials.ts#L43)
 
 ## Properties
 
@@ -987,7 +1074,7 @@ Defined in: [credentials.ts:43](https://github.com/LucidtechAI/las-sdk-js/blob/f
 
 • `Readonly` **apiEndpoint**: *string*
 
-Defined in: [credentials.ts:37](https://github.com/LucidtechAI/las-sdk-js/blob/fd4fff8/packages/las-sdk-core/src/credentials.ts#L37)
+Defined in: [credentials.ts:37](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/credentials.ts#L37)
 
 ___
 
@@ -995,7 +1082,7 @@ ___
 
 • `Readonly` **apiKey**: *string*
 
-Defined in: [credentials.ts:39](https://github.com/LucidtechAI/las-sdk-js/blob/fd4fff8/packages/las-sdk-core/src/credentials.ts#L39)
+Defined in: [credentials.ts:39](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/credentials.ts#L39)
 
 ## Methods
 
@@ -1010,7 +1097,7 @@ Method used to get and cache an access token. Algorithm used:
 
 **Returns:** *Promise*<*string*\>
 
-Defined in: [credentials.ts:57](https://github.com/LucidtechAI/las-sdk-js/blob/fd4fff8/packages/las-sdk-core/src/credentials.ts#L57)
+Defined in: [credentials.ts:57](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/credentials.ts#L57)
 
 
 <a name="classescredentialstokenmd"></a>
@@ -1059,7 +1146,7 @@ Name | Type |
 
 **Returns:** [*Token*](#classescredentialstokenmd)
 
-Defined in: [credentials.ts:19](https://github.com/LucidtechAI/las-sdk-js/blob/fd4fff8/packages/las-sdk-core/src/credentials.ts#L19)
+Defined in: [credentials.ts:19](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/credentials.ts#L19)
 
 ## Properties
 
@@ -1067,7 +1154,7 @@ Defined in: [credentials.ts:19](https://github.com/LucidtechAI/las-sdk-js/blob/f
 
 • `Readonly` **accessToken**: *string*
 
-Defined in: [credentials.ts:8](https://github.com/LucidtechAI/las-sdk-js/blob/fd4fff8/packages/las-sdk-core/src/credentials.ts#L8)
+Defined in: [credentials.ts:8](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/credentials.ts#L8)
 
 ___
 
@@ -1075,7 +1162,7 @@ ___
 
 • `Readonly` **expiration**: *number*
 
-Defined in: [credentials.ts:10](https://github.com/LucidtechAI/las-sdk-js/blob/fd4fff8/packages/las-sdk-core/src/credentials.ts#L10)
+Defined in: [credentials.ts:10](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/credentials.ts#L10)
 
 ___
 
@@ -1083,7 +1170,7 @@ ___
 
 • `Optional` `Readonly` **refreshToken**: *undefined* \| *string*
 
-Defined in: [credentials.ts:12](https://github.com/LucidtechAI/las-sdk-js/blob/fd4fff8/packages/las-sdk-core/src/credentials.ts#L12)
+Defined in: [credentials.ts:12](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/credentials.ts#L12)
 
 ## Methods
 
@@ -1095,7 +1182,421 @@ Checks if current timestamp is larger than token expiration time
 
 **Returns:** *boolean*
 
-Defined in: [credentials.ts:17](https://github.com/LucidtechAI/las-sdk-js/blob/fd4fff8/packages/las-sdk-core/src/credentials.ts#L17)
+Defined in: [credentials.ts:17](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/credentials.ts#L17)
+
+
+<a name="interfacesindexcreatedocumentoptionsmd"></a>
+
+[@lucidtech/las-sdk-core](#readmemd) / [Exports](#modulesmd) / [index](#modulesindexmd) / CreateDocumentOptions
+
+# Interface: CreateDocumentOptions
+
+[index](#modulesindexmd).CreateDocumentOptions
+
+## Hierarchy
+
+* **CreateDocumentOptions**
+
+## Table of contents
+
+### Properties
+
+- [batchId](#batchid)
+- [consentId](#consentid)
+- [groundTruth](#groundtruth)
+
+## Properties
+
+### batchId
+
+• `Optional` **batchId**: *undefined* \| *string*
+
+Defined in: [types.ts:23](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/types.ts#L23)
+
+___
+
+### consentId
+
+• `Optional` **consentId**: *undefined* \| *string*
+
+Defined in: [types.ts:22](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/types.ts#L22)
+
+___
+
+### groundTruth
+
+• `Optional` **groundTruth**: *undefined* \| [*GroundTruth*](#groundtruth)[]
+
+Defined in: [types.ts:24](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/types.ts#L24)
+
+
+<a name="interfacesindexcreatepredictionsoptionsmd"></a>
+
+[@lucidtech/las-sdk-core](#readmemd) / [Exports](#modulesmd) / [index](#modulesindexmd) / CreatePredictionsOptions
+
+# Interface: CreatePredictionsOptions
+
+[index](#modulesindexmd).CreatePredictionsOptions
+
+## Hierarchy
+
+* **CreatePredictionsOptions**
+
+## Table of contents
+
+### Properties
+
+- [autoRotate](#autorotate)
+- [maxPages](#maxpages)
+
+## Properties
+
+### autoRotate
+
+• `Optional` **autoRotate**: *undefined* \| *boolean*
+
+Defined in: [types.ts:9](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/types.ts#L9)
+
+___
+
+### maxPages
+
+• `Optional` **maxPages**: *undefined* \| *number*
+
+Defined in: [types.ts:8](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/types.ts#L8)
+
+
+<a name="interfacesindexcreatesecretoptionsmd"></a>
+
+[@lucidtech/las-sdk-core](#readmemd) / [Exports](#modulesmd) / [index](#modulesindexmd) / CreateSecretOptions
+
+# Interface: CreateSecretOptions
+
+[index](#modulesindexmd).CreateSecretOptions
+
+## Hierarchy
+
+* **CreateSecretOptions**
+
+## Table of contents
+
+### Properties
+
+- [description](#description)
+
+## Properties
+
+### description
+
+• `Optional` **description**: *undefined* \| *string*
+
+Defined in: [types.ts:258](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/types.ts#L258)
+
+
+<a name="interfacesindexcreatetransitionoptionsmd"></a>
+
+[@lucidtech/las-sdk-core](#readmemd) / [Exports](#modulesmd) / [index](#modulesindexmd) / CreateTransitionOptions
+
+# Interface: CreateTransitionOptions
+
+[index](#modulesindexmd).CreateTransitionOptions
+
+## Hierarchy
+
+* **CreateTransitionOptions**
+
+## Table of contents
+
+### Properties
+
+- [description](#description)
+- [inputJsonSchema](#inputjsonschema)
+- [name](#name)
+- [outputJsonSchema](#outputjsonschema)
+- [parameters](#parameters)
+
+## Properties
+
+### description
+
+• `Optional` **description**: *undefined* \| *null* \| *string*
+
+Defined in: [types.ts:59](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/types.ts#L59)
+
+___
+
+### inputJsonSchema
+
+• `Optional` **inputJsonSchema**: *undefined* \| *Record*<*any*, *any*\>
+
+Defined in: [types.ts:57](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/types.ts#L57)
+
+___
+
+### name
+
+• `Optional` **name**: *undefined* \| *null* \| *string*
+
+Defined in: [types.ts:56](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/types.ts#L56)
+
+___
+
+### outputJsonSchema
+
+• `Optional` **outputJsonSchema**: *undefined* \| *Record*<*any*, *any*\>
+
+Defined in: [types.ts:58](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/types.ts#L58)
+
+___
+
+### parameters
+
+• `Optional` **parameters**: *undefined* \| [*CreateTransitionDockerParams*](#createtransitiondockerparams) \| [*CreateTransitionManualParams*](#createtransitionmanualparams)
+
+Defined in: [types.ts:60](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/types.ts#L60)
+
+
+<a name="interfacesindexdeletedocumentoptionsmd"></a>
+
+[@lucidtech/las-sdk-core](#readmemd) / [Exports](#modulesmd) / [index](#modulesindexmd) / DeleteDocumentOptions
+
+# Interface: DeleteDocumentOptions
+
+[index](#modulesindexmd).DeleteDocumentOptions
+
+## Hierarchy
+
+* **DeleteDocumentOptions**
+
+## Table of contents
+
+### Properties
+
+- [consentId](#consentid)
+
+## Properties
+
+### consentId
+
+• `Optional` **consentId**: *undefined* \| *string* \| *string*[]
+
+Defined in: [types.ts:185](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/types.ts#L185)
+
+
+<a name="interfacesindexpaginationoptionsmd"></a>
+
+[@lucidtech/las-sdk-core](#readmemd) / [Exports](#modulesmd) / [index](#modulesindexmd) / PaginationOptions
+
+# Interface: PaginationOptions
+
+[index](#modulesindexmd).PaginationOptions
+
+## Hierarchy
+
+* **PaginationOptions**
+
+## Table of contents
+
+### Properties
+
+- [maxResults](#maxresults)
+- [nextToken](#nexttoken)
+
+## Properties
+
+### maxResults
+
+• `Optional` **maxResults**: *undefined* \| *number*
+
+Defined in: [types.ts:13](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/types.ts#L13)
+
+___
+
+### nextToken
+
+• `Optional` **nextToken**: *undefined* \| *string*
+
+Defined in: [types.ts:14](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/types.ts#L14)
+
+
+<a name="interfacesindexupdateassetoptionsmd"></a>
+
+[@lucidtech/las-sdk-core](#readmemd) / [Exports](#modulesmd) / [index](#modulesindexmd) / UpdateAssetOptions
+
+# Interface: UpdateAssetOptions
+
+[index](#modulesindexmd).UpdateAssetOptions
+
+## Hierarchy
+
+* **UpdateAssetOptions**
+
+## Table of contents
+
+### Properties
+
+- [content](#content)
+
+## Properties
+
+### content
+
+• `Optional` **content**: *undefined* \| *string* \| *Buffer*
+
+Defined in: [types.ts:320](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/types.ts#L320)
+
+
+<a name="interfacesindexupdatedocumentoptionsmd"></a>
+
+[@lucidtech/las-sdk-core](#readmemd) / [Exports](#modulesmd) / [index](#modulesindexmd) / UpdateDocumentOptions
+
+# Interface: UpdateDocumentOptions
+
+[index](#modulesindexmd).UpdateDocumentOptions
+
+## Hierarchy
+
+* **UpdateDocumentOptions**
+
+## Table of contents
+
+### Properties
+
+- [groundTruth](#groundtruth)
+
+## Properties
+
+### groundTruth
+
+• `Optional` **groundTruth**: *undefined* \| [*GroundTruth*](#groundtruth)[]
+
+Defined in: [types.ts:28](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/types.ts#L28)
+
+
+<a name="interfacesindexupdatesecretoptionsmd"></a>
+
+[@lucidtech/las-sdk-core](#readmemd) / [Exports](#modulesmd) / [index](#modulesindexmd) / UpdateSecretOptions
+
+# Interface: UpdateSecretOptions
+
+[index](#modulesindexmd).UpdateSecretOptions
+
+## Hierarchy
+
+* **UpdateSecretOptions**
+
+## Table of contents
+
+### Properties
+
+- [data](#data)
+- [description](#description)
+- [name](#name)
+
+## Properties
+
+### data
+
+• `Optional` **data**: *undefined* \| *Record*<*any*, *any*\>
+
+Defined in: [types.ts:262](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/types.ts#L262)
+
+___
+
+### description
+
+• `Optional` **description**: *undefined* \| *null* \| *string*
+
+Defined in: [types.ts:263](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/types.ts#L263)
+
+___
+
+### name
+
+• `Optional` **name**: *undefined* \| *null* \| *string*
+
+Defined in: [types.ts:264](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/types.ts#L264)
+
+
+<a name="interfacesindexupdatetransitionexecutionmd"></a>
+
+[@lucidtech/las-sdk-core](#readmemd) / [Exports](#modulesmd) / [index](#modulesindexmd) / UpdateTransitionExecution
+
+# Interface: UpdateTransitionExecution
+
+[index](#modulesindexmd).UpdateTransitionExecution
+
+## Hierarchy
+
+* **UpdateTransitionExecution**
+
+## Table of contents
+
+### Properties
+
+- [error](#error)
+- [output](#output)
+- [status](#status)
+
+## Properties
+
+### error
+
+• `Optional` **error**: *undefined* \| { `message`: *string*  }
+
+Defined in: [types.ts:52](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/types.ts#L52)
+
+___
+
+### output
+
+• `Optional` **output**: *undefined* \| *Record*<*any*, *any*\>
+
+Defined in: [types.ts:51](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/types.ts#L51)
+
+___
+
+### status
+
+• **status**: *succeeded* \| *failed* \| *retry* \| *rejected*
+
+Defined in: [types.ts:50](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/types.ts#L50)
+
+
+<a name="interfacesindexupdateworkflowoptionsmd"></a>
+
+[@lucidtech/las-sdk-core](#readmemd) / [Exports](#modulesmd) / [index](#modulesindexmd) / UpdateWorkflowOptions
+
+# Interface: UpdateWorkflowOptions
+
+[index](#modulesindexmd).UpdateWorkflowOptions
+
+## Hierarchy
+
+* **UpdateWorkflowOptions**
+
+## Table of contents
+
+### Properties
+
+- [description](#description)
+- [name](#name)
+
+## Properties
+
+### description
+
+• `Optional` **description**: *undefined* \| *string*
+
+Defined in: [types.ts:151](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/types.ts#L151)
+
+___
+
+### name
+
+• `Optional` **name**: *undefined* \| *string*
+
+Defined in: [types.ts:150](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/types.ts#L150)
 
 
 <a name="interfacesstoragetokenstoragemd"></a>
@@ -1129,7 +1630,7 @@ Name | Type |
 
 • **getPersistentToken**: () => *null* \| T
 
-Defined in: [storage.ts:5](https://github.com/LucidtechAI/las-sdk-js/blob/fd4fff8/packages/las-sdk-core/src/storage.ts#L5)
+Defined in: [storage.ts:5](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/storage.ts#L5)
 
 ___
 
@@ -1137,7 +1638,7 @@ ___
 
 • **setPersistentToken**: (`value`: T) => *void*
 
-Defined in: [storage.ts:6](https://github.com/LucidtechAI/las-sdk-js/blob/fd4fff8/packages/las-sdk-core/src/storage.ts#L6)
+Defined in: [storage.ts:6](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/storage.ts#L6)
 
 
 <a name="interfacestypescreatedocumentoptionsmd"></a>
@@ -1166,7 +1667,7 @@ Defined in: [storage.ts:6](https://github.com/LucidtechAI/las-sdk-js/blob/fd4fff
 
 • `Optional` **batchId**: *undefined* \| *string*
 
-Defined in: [types.ts:23](https://github.com/LucidtechAI/las-sdk-js/blob/fd4fff8/packages/las-sdk-core/src/types.ts#L23)
+Defined in: [types.ts:23](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/types.ts#L23)
 
 ___
 
@@ -1174,7 +1675,7 @@ ___
 
 • `Optional` **consentId**: *undefined* \| *string*
 
-Defined in: [types.ts:22](https://github.com/LucidtechAI/las-sdk-js/blob/fd4fff8/packages/las-sdk-core/src/types.ts#L22)
+Defined in: [types.ts:22](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/types.ts#L22)
 
 ___
 
@@ -1182,7 +1683,7 @@ ___
 
 • `Optional` **groundTruth**: *undefined* \| [*GroundTruth*](#groundtruth)[]
 
-Defined in: [types.ts:24](https://github.com/LucidtechAI/las-sdk-js/blob/fd4fff8/packages/las-sdk-core/src/types.ts#L24)
+Defined in: [types.ts:24](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/types.ts#L24)
 
 
 <a name="interfacestypescreatepredictionsoptionsmd"></a>
@@ -1210,7 +1711,7 @@ Defined in: [types.ts:24](https://github.com/LucidtechAI/las-sdk-js/blob/fd4fff8
 
 • `Optional` **autoRotate**: *undefined* \| *boolean*
 
-Defined in: [types.ts:9](https://github.com/LucidtechAI/las-sdk-js/blob/fd4fff8/packages/las-sdk-core/src/types.ts#L9)
+Defined in: [types.ts:9](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/types.ts#L9)
 
 ___
 
@@ -1218,7 +1719,7 @@ ___
 
 • `Optional` **maxPages**: *undefined* \| *number*
 
-Defined in: [types.ts:8](https://github.com/LucidtechAI/las-sdk-js/blob/fd4fff8/packages/las-sdk-core/src/types.ts#L8)
+Defined in: [types.ts:8](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/types.ts#L8)
 
 
 <a name="interfacestypescreatesecretoptionsmd"></a>
@@ -1245,7 +1746,7 @@ Defined in: [types.ts:8](https://github.com/LucidtechAI/las-sdk-js/blob/fd4fff8/
 
 • `Optional` **description**: *undefined* \| *string*
 
-Defined in: [types.ts:246](https://github.com/LucidtechAI/las-sdk-js/blob/fd4fff8/packages/las-sdk-core/src/types.ts#L246)
+Defined in: [types.ts:258](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/types.ts#L258)
 
 
 <a name="interfacestypescreatetransitionoptionsmd"></a>
@@ -1276,7 +1777,7 @@ Defined in: [types.ts:246](https://github.com/LucidtechAI/las-sdk-js/blob/fd4fff
 
 • `Optional` **description**: *undefined* \| *null* \| *string*
 
-Defined in: [types.ts:59](https://github.com/LucidtechAI/las-sdk-js/blob/fd4fff8/packages/las-sdk-core/src/types.ts#L59)
+Defined in: [types.ts:59](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/types.ts#L59)
 
 ___
 
@@ -1284,7 +1785,7 @@ ___
 
 • `Optional` **inputJsonSchema**: *undefined* \| *Record*<*any*, *any*\>
 
-Defined in: [types.ts:57](https://github.com/LucidtechAI/las-sdk-js/blob/fd4fff8/packages/las-sdk-core/src/types.ts#L57)
+Defined in: [types.ts:57](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/types.ts#L57)
 
 ___
 
@@ -1292,7 +1793,7 @@ ___
 
 • `Optional` **name**: *undefined* \| *null* \| *string*
 
-Defined in: [types.ts:56](https://github.com/LucidtechAI/las-sdk-js/blob/fd4fff8/packages/las-sdk-core/src/types.ts#L56)
+Defined in: [types.ts:56](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/types.ts#L56)
 
 ___
 
@@ -1300,7 +1801,7 @@ ___
 
 • `Optional` **outputJsonSchema**: *undefined* \| *Record*<*any*, *any*\>
 
-Defined in: [types.ts:58](https://github.com/LucidtechAI/las-sdk-js/blob/fd4fff8/packages/las-sdk-core/src/types.ts#L58)
+Defined in: [types.ts:58](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/types.ts#L58)
 
 ___
 
@@ -1308,7 +1809,7 @@ ___
 
 • `Optional` **parameters**: *undefined* \| [*CreateTransitionDockerParams*](#createtransitiondockerparams) \| [*CreateTransitionManualParams*](#createtransitionmanualparams)
 
-Defined in: [types.ts:60](https://github.com/LucidtechAI/las-sdk-js/blob/fd4fff8/packages/las-sdk-core/src/types.ts#L60)
+Defined in: [types.ts:60](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/types.ts#L60)
 
 
 <a name="interfacestypesdeletedocumentoptionsmd"></a>
@@ -1335,7 +1836,7 @@ Defined in: [types.ts:60](https://github.com/LucidtechAI/las-sdk-js/blob/fd4fff8
 
 • `Optional` **consentId**: *undefined* \| *string* \| *string*[]
 
-Defined in: [types.ts:185](https://github.com/LucidtechAI/las-sdk-js/blob/fd4fff8/packages/las-sdk-core/src/types.ts#L185)
+Defined in: [types.ts:185](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/types.ts#L185)
 
 
 <a name="interfacestypespaginationoptionsmd"></a>
@@ -1363,7 +1864,7 @@ Defined in: [types.ts:185](https://github.com/LucidtechAI/las-sdk-js/blob/fd4fff
 
 • `Optional` **maxResults**: *undefined* \| *number*
 
-Defined in: [types.ts:13](https://github.com/LucidtechAI/las-sdk-js/blob/fd4fff8/packages/las-sdk-core/src/types.ts#L13)
+Defined in: [types.ts:13](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/types.ts#L13)
 
 ___
 
@@ -1371,7 +1872,7 @@ ___
 
 • `Optional` **nextToken**: *undefined* \| *string*
 
-Defined in: [types.ts:14](https://github.com/LucidtechAI/las-sdk-js/blob/fd4fff8/packages/las-sdk-core/src/types.ts#L14)
+Defined in: [types.ts:14](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/types.ts#L14)
 
 
 <a name="interfacestypesupdateassetoptionsmd"></a>
@@ -1398,7 +1899,7 @@ Defined in: [types.ts:14](https://github.com/LucidtechAI/las-sdk-js/blob/fd4fff8
 
 • `Optional` **content**: *undefined* \| *string* \| *Buffer*
 
-Defined in: [types.ts:304](https://github.com/LucidtechAI/las-sdk-js/blob/fd4fff8/packages/las-sdk-core/src/types.ts#L304)
+Defined in: [types.ts:320](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/types.ts#L320)
 
 
 <a name="interfacestypesupdatedocumentoptionsmd"></a>
@@ -1425,7 +1926,7 @@ Defined in: [types.ts:304](https://github.com/LucidtechAI/las-sdk-js/blob/fd4fff
 
 • `Optional` **groundTruth**: *undefined* \| [*GroundTruth*](#groundtruth)[]
 
-Defined in: [types.ts:28](https://github.com/LucidtechAI/las-sdk-js/blob/fd4fff8/packages/las-sdk-core/src/types.ts#L28)
+Defined in: [types.ts:28](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/types.ts#L28)
 
 
 <a name="interfacestypesupdatesecretoptionsmd"></a>
@@ -1454,7 +1955,7 @@ Defined in: [types.ts:28](https://github.com/LucidtechAI/las-sdk-js/blob/fd4fff8
 
 • `Optional` **data**: *undefined* \| *Record*<*any*, *any*\>
 
-Defined in: [types.ts:250](https://github.com/LucidtechAI/las-sdk-js/blob/fd4fff8/packages/las-sdk-core/src/types.ts#L250)
+Defined in: [types.ts:262](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/types.ts#L262)
 
 ___
 
@@ -1462,7 +1963,7 @@ ___
 
 • `Optional` **description**: *undefined* \| *null* \| *string*
 
-Defined in: [types.ts:251](https://github.com/LucidtechAI/las-sdk-js/blob/fd4fff8/packages/las-sdk-core/src/types.ts#L251)
+Defined in: [types.ts:263](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/types.ts#L263)
 
 ___
 
@@ -1470,7 +1971,7 @@ ___
 
 • `Optional` **name**: *undefined* \| *null* \| *string*
 
-Defined in: [types.ts:252](https://github.com/LucidtechAI/las-sdk-js/blob/fd4fff8/packages/las-sdk-core/src/types.ts#L252)
+Defined in: [types.ts:264](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/types.ts#L264)
 
 
 <a name="interfacestypesupdatetransitionexecutionmd"></a>
@@ -1499,7 +2000,7 @@ Defined in: [types.ts:252](https://github.com/LucidtechAI/las-sdk-js/blob/fd4fff
 
 • `Optional` **error**: *undefined* \| { `message`: *string*  }
 
-Defined in: [types.ts:52](https://github.com/LucidtechAI/las-sdk-js/blob/fd4fff8/packages/las-sdk-core/src/types.ts#L52)
+Defined in: [types.ts:52](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/types.ts#L52)
 
 ___
 
@@ -1507,7 +2008,7 @@ ___
 
 • `Optional` **output**: *undefined* \| *Record*<*any*, *any*\>
 
-Defined in: [types.ts:51](https://github.com/LucidtechAI/las-sdk-js/blob/fd4fff8/packages/las-sdk-core/src/types.ts#L51)
+Defined in: [types.ts:51](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/types.ts#L51)
 
 ___
 
@@ -1515,7 +2016,7 @@ ___
 
 • **status**: *succeeded* \| *failed* \| *retry* \| *rejected*
 
-Defined in: [types.ts:50](https://github.com/LucidtechAI/las-sdk-js/blob/fd4fff8/packages/las-sdk-core/src/types.ts#L50)
+Defined in: [types.ts:50](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/types.ts#L50)
 
 
 <a name="interfacestypesupdateworkflowoptionsmd"></a>
@@ -1543,7 +2044,7 @@ Defined in: [types.ts:50](https://github.com/LucidtechAI/las-sdk-js/blob/fd4fff8
 
 • `Optional` **description**: *undefined* \| *string*
 
-Defined in: [types.ts:151](https://github.com/LucidtechAI/las-sdk-js/blob/fd4fff8/packages/las-sdk-core/src/types.ts#L151)
+Defined in: [types.ts:151](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/types.ts#L151)
 
 ___
 
@@ -1551,7 +2052,7 @@ ___
 
 • `Optional` **name**: *undefined* \| *string*
 
-Defined in: [types.ts:150](https://github.com/LucidtechAI/las-sdk-js/blob/fd4fff8/packages/las-sdk-core/src/types.ts#L150)
+Defined in: [types.ts:150](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/types.ts#L150)
 
 
 <a name="modulesmd"></a>
@@ -1623,6 +2124,72 @@ Renames and exports: [Client](#classesclientclient-1md)
 - [Token](#token)
 - [TokenStorage](#tokenstorage)
 
+### Interfaces
+
+- [CreateDocumentOptions](#interfacesindexcreatedocumentoptionsmd)
+- [CreatePredictionsOptions](#interfacesindexcreatepredictionsoptionsmd)
+- [CreateSecretOptions](#interfacesindexcreatesecretoptionsmd)
+- [CreateTransitionOptions](#interfacesindexcreatetransitionoptionsmd)
+- [DeleteDocumentOptions](#interfacesindexdeletedocumentoptionsmd)
+- [PaginationOptions](#interfacesindexpaginationoptionsmd)
+- [UpdateAssetOptions](#interfacesindexupdateassetoptionsmd)
+- [UpdateDocumentOptions](#interfacesindexupdatedocumentoptionsmd)
+- [UpdateSecretOptions](#interfacesindexupdatesecretoptionsmd)
+- [UpdateTransitionExecution](#interfacesindexupdatetransitionexecutionmd)
+- [UpdateWorkflowOptions](#interfacesindexupdateworkflowoptionsmd)
+
+### Type aliases
+
+- [Asset](#asset)
+- [AssetList](#assetlist)
+- [AssetWithoutContent](#assetwithoutcontent)
+- [AuthorizationHeaders](#authorizationheaders)
+- [AxiosFn](#axiosfn)
+- [Batch](#batch)
+- [ContentType](#contenttype)
+- [CreateBatchOptions](#createbatchoptions)
+- [CreateTransitionDockerParams](#createtransitiondockerparams)
+- [CreateTransitionManualParams](#createtransitionmanualparams)
+- [CreateTransitionParams](#createtransitionparams)
+- [CreateUserOptions](#createuseroptions)
+- [CreateWorkflowOptions](#createworkflowoptions)
+- [GroundTruth](#groundtruth)
+- [LasDocument](#lasdocument)
+- [LasDocumentList](#lasdocumentlist)
+- [ListAssetsOptions](#listassetsoptions)
+- [ListDocumentsOptions](#listdocumentsoptions)
+- [ListModelsOptions](#listmodelsoptions)
+- [ListPredictionsOptions](#listpredictionsoptions)
+- [ListSecretsOptions](#listsecretsoptions)
+- [ListTransitionOptions](#listtransitionoptions)
+- [ListUsersOptions](#listusersoptions)
+- [ListWorkflowExecutionsOptions](#listworkflowexecutionsoptions)
+- [ListWorkflowOptions](#listworkflowoptions)
+- [Log](#log)
+- [Model](#model)
+- [ModelList](#modellist)
+- [PostPredictions](#postpredictions)
+- [Prediction](#prediction)
+- [PredictionList](#predictionlist)
+- [PredictionResponse](#predictionresponse)
+- [Secret](#secret)
+- [SecretList](#secretlist)
+- [Transition](#transition)
+- [TransitionExecution](#transitionexecution)
+- [TransitionExecutionList](#transitionexecutionlist)
+- [TransitionExecutionListOptions](#transitionexecutionlistoptions)
+- [TransitionList](#transitionlist)
+- [TransitionType](#transitiontype)
+- [UpdateTransitionOptions](#updatetransitionoptions)
+- [UpdateUserOptions](#updateuseroptions)
+- [User](#user)
+- [UserList](#userlist)
+- [Workflow](#workflow)
+- [WorkflowExecution](#workflowexecution)
+- [WorkflowExecutionList](#workflowexecutionlist)
+- [WorkflowList](#workflowlist)
+- [WorkflowSpecification](#workflowspecification)
+
 ## References
 
 ### Client
@@ -1646,6 +2213,674 @@ ___
 ### TokenStorage
 
 Re-exports: [TokenStorage](#interfacesstoragetokenstoragemd)
+
+## Type aliases
+
+### Asset
+
+Ƭ **Asset**: { `assetId`: *string* ; `content`: *string*  }
+
+#### Type declaration:
+
+Name | Type |
+------ | ------ |
+`assetId` | *string* |
+`content` | *string* |
+
+Defined in: [types.ts:285](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/types.ts#L285)
+
+___
+
+### AssetList
+
+Ƭ **AssetList**: { `assets`: [*AssetWithoutContent*](#assetwithoutcontent)[] ; `nextToken`: *string* \| *null*  }
+
+#### Type declaration:
+
+Name | Type |
+------ | ------ |
+`assets` | [*AssetWithoutContent*](#assetwithoutcontent)[] |
+`nextToken` | *string* \| *null* |
+
+Defined in: [types.ts:294](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/types.ts#L294)
+
+___
+
+### AssetWithoutContent
+
+Ƭ **AssetWithoutContent**: { `assetId`: *string*  }
+
+#### Type declaration:
+
+Name | Type |
+------ | ------ |
+`assetId` | *string* |
+
+Defined in: [types.ts:290](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/types.ts#L290)
+
+___
+
+### AuthorizationHeaders
+
+Ƭ **AuthorizationHeaders**: { `Authorization`: *string* ; `X-Api-Key`: *string*  }
+
+#### Type declaration:
+
+Name | Type |
+------ | ------ |
+`Authorization` | *string* |
+`X-Api-Key` | *string* |
+
+Defined in: [types.ts:331](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/types.ts#L331)
+
+___
+
+### AxiosFn
+
+Ƭ **AxiosFn**: <T, R\>(`url`: *string*, `body?`: *any*, `config?`: AxiosRequestConfig) => *Promise*<R\>
+
+Defined in: [types.ts:336](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/types.ts#L336)
+
+___
+
+### Batch
+
+Ƭ **Batch**: { `batchId`: *string* ; `description`: *string* ; `name`: *string*  }
+
+#### Type declaration:
+
+Name | Type |
+------ | ------ |
+`batchId` | *string* |
+`description` | *string* |
+`name` | *string* |
+
+Defined in: [types.ts:214](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/types.ts#L214)
+
+___
+
+### ContentType
+
+Ƭ **ContentType**: *application/pdf* \| *image/jpeg*
+
+Defined in: [types.ts:5](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/types.ts#L5)
+
+___
+
+### CreateBatchOptions
+
+Ƭ **CreateBatchOptions**: { `description?`: *string* ; `name?`: *string*  }
+
+#### Type declaration:
+
+Name | Type |
+------ | ------ |
+`description?` | *string* |
+`name?` | *string* |
+
+Defined in: [types.ts:314](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/types.ts#L314)
+
+___
+
+### CreateTransitionDockerParams
+
+Ƭ **CreateTransitionDockerParams**: { `cpu?`: *256* ; `credentials?`: { `password`: *string* ; `username`: *string*  } ; `environment?`: *object* ; `imageUrl`: *string* ; `memory?`: *512* \| *1024* \| *2048*  }
+
+#### Type declaration:
+
+Name | Type |
+------ | ------ |
+`cpu?` | *256* |
+`credentials?` | { `password`: *string* ; `username`: *string*  } |
+`environment?` | *object* |
+`imageUrl` | *string* |
+`memory?` | *512* \| *1024* \| *2048* |
+
+Defined in: [types.ts:70](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/types.ts#L70)
+
+___
+
+### CreateTransitionManualParams
+
+Ƭ **CreateTransitionManualParams**: { `assets?`: { `jsRemoteComponent?`: *string*  } & *Record*<*string*, *string*\>  }
+
+#### Type declaration:
+
+Name | Type |
+------ | ------ |
+`assets?` | { `jsRemoteComponent?`: *string*  } & *Record*<*string*, *string*\> |
+
+Defined in: [types.ts:81](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/types.ts#L81)
+
+___
+
+### CreateTransitionParams
+
+Ƭ **CreateTransitionParams**: [*CreateTransitionDockerParams*](#createtransitiondockerparams) \| [*CreateTransitionManualParams*](#createtransitionmanualparams)
+
+Defined in: [types.ts:88](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/types.ts#L88)
+
+___
+
+### CreateUserOptions
+
+Ƭ **CreateUserOptions**: { `avatar?`: *string* \| *null* ; `name?`: *string* \| *null*  }
+
+#### Type declaration:
+
+Name | Type |
+------ | ------ |
+`avatar?` | *string* \| *null* |
+`name?` | *string* \| *null* |
+
+Defined in: [types.ts:227](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/types.ts#L227)
+
+___
+
+### CreateWorkflowOptions
+
+Ƭ **CreateWorkflowOptions**: { `description?`: *string* ; `errorConfig?`: { `email`: *string*  }  }
+
+#### Type declaration:
+
+Name | Type |
+------ | ------ |
+`description?` | *string* |
+`errorConfig?` | { `email`: *string*  } |
+
+Defined in: [types.ts:144](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/types.ts#L144)
+
+___
+
+### GroundTruth
+
+Ƭ **GroundTruth**: { `label`: *string* ; `value`: *string* \| *boolean* \| *null*  }
+
+#### Type declaration:
+
+Name | Type | Description |
+------ | ------ | ------ |
+`label` | *string* | maxLength: 36, minLength: 1, pattern: ^[0-9A-Za-z_]+$   |
+`value` | *string* \| *boolean* \| *null* | maxLength: 64, minLength: 1   |
+
+Defined in: [types.ts:177](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/types.ts#L177)
+
+___
+
+### LasDocument
+
+Ƭ **LasDocument**: { `batchId?`: *string* ; `consentId?`: *string* ; `content?`: *string* ; `contentType`: [*ContentType*](#contenttype) ; `documentId`: *string* ; `groundTruth?`: [*GroundTruth*](#groundtruth)[] ; `inferenceTime?`: *number* ; `predictions?`: [*Prediction*](#prediction)[] ; `updated?`: *number*  }
+
+#### Type declaration:
+
+Name | Type | Description |
+------ | ------ | ------ |
+`batchId?` | *string* | pattern: ^las:batch:[a-f0-9]{32}$   |
+`consentId?` | *string* | pattern: ^las:consent:[a-f0-9]{32}$   |
+`content?` | *string* | minimum: 1   |
+`contentType` | [*ContentType*](#contenttype) | - |
+`documentId` | *string* | pattern: ^las:document:[a-f0-9]{32}$   |
+`groundTruth?` | [*GroundTruth*](#groundtruth)[] | - |
+`inferenceTime?` | *number* | minimum: 0   |
+`predictions?` | [*Prediction*](#prediction)[] | - |
+`updated?` | *number* | minimum: 1   |
+
+Defined in: [types.ts:267](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/types.ts#L267)
+
+___
+
+### LasDocumentList
+
+Ƭ **LasDocumentList**: { `batchId?`: *string* ; `consentId?`: *string* ; `documents`: [*LasDocument*](#lasdocument)[] ; `nextToken?`: *string*  }
+
+#### Type declaration:
+
+Name | Type |
+------ | ------ |
+`batchId?` | *string* |
+`consentId?` | *string* |
+`documents` | [*LasDocument*](#lasdocument)[] |
+`nextToken?` | *string* |
+
+Defined in: [types.ts:63](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/types.ts#L63)
+
+___
+
+### ListAssetsOptions
+
+Ƭ **ListAssetsOptions**: [*PaginationOptions*](#interfacestypespaginationoptionsmd)
+
+Defined in: [types.ts:323](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/types.ts#L323)
+
+___
+
+### ListDocumentsOptions
+
+Ƭ **ListDocumentsOptions**: [*PaginationOptions*](#interfacestypespaginationoptionsmd) & { `batchId?`: *string* \| *string*[] ; `consentId?`: *string* \| *string*[]  }
+
+Defined in: [types.ts:31](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/types.ts#L31)
+
+___
+
+### ListModelsOptions
+
+Ƭ **ListModelsOptions**: [*PaginationOptions*](#interfacestypespaginationoptionsmd)
+
+Defined in: [types.ts:307](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/types.ts#L307)
+
+___
+
+### ListPredictionsOptions
+
+Ƭ **ListPredictionsOptions**: [*PaginationOptions*](#interfacestypespaginationoptionsmd)
+
+Defined in: [types.ts:207](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/types.ts#L207)
+
+___
+
+### ListSecretsOptions
+
+Ƭ **ListSecretsOptions**: [*PaginationOptions*](#interfacestypespaginationoptionsmd)
+
+Defined in: [types.ts:250](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/types.ts#L250)
+
+___
+
+### ListTransitionOptions
+
+Ƭ **ListTransitionOptions**: [*PaginationOptions*](#interfacestypespaginationoptionsmd) & { `transitionType?`: *string* \| *string*[]  }
+
+Defined in: [types.ts:17](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/types.ts#L17)
+
+___
+
+### ListUsersOptions
+
+Ƭ **ListUsersOptions**: [*PaginationOptions*](#interfacestypespaginationoptionsmd)
+
+Defined in: [types.ts:237](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/types.ts#L237)
+
+___
+
+### ListWorkflowExecutionsOptions
+
+Ƭ **ListWorkflowExecutionsOptions**: [*PaginationOptions*](#interfacestypespaginationoptionsmd) & { `order?`: *ascending* \| *descending* ; `sortBy?`: *startTime* \| *endTime* ; `status?`: *string* \| *string*[]  }
+
+Defined in: [types.ts:138](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/types.ts#L138)
+
+___
+
+### ListWorkflowOptions
+
+Ƭ **ListWorkflowOptions**: [*PaginationOptions*](#interfacestypespaginationoptionsmd)
+
+Defined in: [types.ts:136](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/types.ts#L136)
+
+___
+
+### Log
+
+Ƭ **Log**: { `events`: *Record*<*any*, *any*\>[] ; `logId`: *string* ; `transitionId?`: *string* \| *null*  }
+
+#### Type declaration:
+
+Name | Type |
+------ | ------ |
+`events` | *Record*<*any*, *any*\>[] |
+`logId` | *string* |
+`transitionId?` | *string* \| *null* |
+
+Defined in: [types.ts:325](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/types.ts#L325)
+
+___
+
+### Model
+
+Ƭ **Model**: { `description`: *string* \| *null* ; `height`: *number* ; `modelId`: *string* ; `name`: *string* \| *null* ; `width`: *number*  }
+
+#### Type declaration:
+
+Name | Type |
+------ | ------ |
+`description` | *string* \| *null* |
+`height` | *number* |
+`modelId` | *string* |
+`name` | *string* \| *null* |
+`width` | *number* |
+
+Defined in: [types.ts:299](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/types.ts#L299)
+
+___
+
+### ModelList
+
+Ƭ **ModelList**: { `models`: [*Model*](#model)[] ; `nextToken`: *string* \| *null*  }
+
+#### Type declaration:
+
+Name | Type |
+------ | ------ |
+`models` | [*Model*](#model)[] |
+`nextToken` | *string* \| *null* |
+
+Defined in: [types.ts:309](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/types.ts#L309)
+
+___
+
+### PostPredictions
+
+Ƭ **PostPredictions**: [*CreatePredictionsOptions*](#interfacestypescreatepredictionsoptionsmd) & { `documentId`: *string* ; `modelId`: *string*  }
+
+Defined in: [types.ts:188](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/types.ts#L188)
+
+___
+
+### Prediction
+
+Ƭ **Prediction**: [*GroundTruth*](#groundtruth) & { `confidence`: *number*  }
+
+Defined in: [types.ts:193](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/types.ts#L193)
+
+___
+
+### PredictionList
+
+Ƭ **PredictionList**: { `nextToken`: *string* \| *null* ; `predictions`: [*PredictionResponse*](#predictionresponse)[]  }
+
+#### Type declaration:
+
+Name | Type |
+------ | ------ |
+`nextToken` | *string* \| *null* |
+`predictions` | [*PredictionResponse*](#predictionresponse)[] |
+
+Defined in: [types.ts:209](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/types.ts#L209)
+
+___
+
+### PredictionResponse
+
+Ƭ **PredictionResponse**: { `documentId`: *string* ; `inferenceTime`: *number* ; `modelId`: *string* ; `predictionId`: *string* ; `predictions`: [*Prediction*](#prediction)[] ; `timestamp`: *number*  }
+
+#### Type declaration:
+
+Name | Type |
+------ | ------ |
+`documentId` | *string* |
+`inferenceTime` | *number* |
+`modelId` | *string* |
+`predictionId` | *string* |
+`predictions` | [*Prediction*](#prediction)[] |
+`timestamp` | *number* |
+
+Defined in: [types.ts:198](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/types.ts#L198)
+
+___
+
+### Secret
+
+Ƭ **Secret**: { `description`: *string* \| *null* ; `name`: *string* \| *null* ; `secredId`: *string*  }
+
+#### Type declaration:
+
+Name | Type |
+------ | ------ |
+`description` | *string* \| *null* |
+`name` | *string* \| *null* |
+`secredId` | *string* |
+
+Defined in: [types.ts:244](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/types.ts#L244)
+
+___
+
+### SecretList
+
+Ƭ **SecretList**: { `nextToken?`: *string* \| *null* ; `secrets`: [*Secret*](#secret)[]  }
+
+#### Type declaration:
+
+Name | Type |
+------ | ------ |
+`nextToken?` | *string* \| *null* |
+`secrets` | [*Secret*](#secret)[] |
+
+Defined in: [types.ts:252](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/types.ts#L252)
+
+___
+
+### Transition
+
+Ƭ **Transition**: { `assets?`: *Record*<*string*, *string*\> ; `description`: *string* ; `inputJsonSchema`: *unknown* ; `name`: *string* ; `outputJsonSchema?`: *unknown* ; `transitionId`: *string* ; `transitionType`: [*TransitionType*](#transitiontype)  }
+
+#### Type declaration:
+
+Name | Type |
+------ | ------ |
+`assets?` | *Record*<*string*, *string*\> |
+`description` | *string* |
+`inputJsonSchema` | *unknown* |
+`name` | *string* |
+`outputJsonSchema?` | *unknown* |
+`transitionId` | *string* |
+`transitionType` | [*TransitionType*](#transitiontype) |
+
+Defined in: [types.ts:99](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/types.ts#L99)
+
+___
+
+### TransitionExecution
+
+Ƭ **TransitionExecution**: { `completedBy`: *string* \| *null* ; `endTime`: *string* \| *null* ; `executionId`: *string* ; `input`: *Record*<*any*, *any*\> ; `startTime`: *string* \| *null* ; `status`: *succeeded* \| *failed* \| *retry* \| *running* \| *rejected* ; `transitionId`: *string*  }
+
+#### Type declaration:
+
+Name | Type |
+------ | ------ |
+`completedBy` | *string* \| *null* |
+`endTime` | *string* \| *null* |
+`executionId` | *string* |
+`input` | *Record*<*any*, *any*\> |
+`startTime` | *string* \| *null* |
+`status` | *succeeded* \| *failed* \| *retry* \| *running* \| *rejected* |
+`transitionId` | *string* |
+
+Defined in: [types.ts:114](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/types.ts#L114)
+
+___
+
+### TransitionExecutionList
+
+Ƭ **TransitionExecutionList**: { `executions`: [*TransitionExecution*](#transitionexecution)[] ; `nextToken`: *string* \| *null* ; `transitionId`: *string*  }
+
+#### Type declaration:
+
+Name | Type |
+------ | ------ |
+`executions` | [*TransitionExecution*](#transitionexecution)[] |
+`nextToken` | *string* \| *null* |
+`transitionId` | *string* |
+
+Defined in: [types.ts:36](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/types.ts#L36)
+
+___
+
+### TransitionExecutionListOptions
+
+Ƭ **TransitionExecutionListOptions**: [*PaginationOptions*](#interfacestypespaginationoptionsmd) & { `executionId?`: *string* \| *string*[] ; `order?`: *ascending* \| *descending* ; `sortBy?`: *startTime* \| *endTime* ; `status?`: *succeeded* \| *failed* \| *retry* \| *running* \| *rejected*  }
+
+Defined in: [types.ts:42](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/types.ts#L42)
+
+___
+
+### TransitionList
+
+Ƭ **TransitionList**: { `nextToken?`: *string* ; `transitions`: [*Transition*](#transition)[]  }
+
+#### Type declaration:
+
+Name | Type |
+------ | ------ |
+`nextToken?` | *string* |
+`transitions` | [*Transition*](#transition)[] |
+
+Defined in: [types.ts:109](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/types.ts#L109)
+
+___
+
+### TransitionType
+
+Ƭ **TransitionType**: *docker* \| *manual*
+
+Defined in: [types.ts:90](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/types.ts#L90)
+
+___
+
+### UpdateTransitionOptions
+
+Ƭ **UpdateTransitionOptions**: { `description?`: *string* ; `inputJsonSchema?`: *Record*<*any*, *any*\> ; `name?`: *string* ; `outputJsonSchema?`: *Record*<*any*, *any*\>  }
+
+#### Type declaration:
+
+Name | Type |
+------ | ------ |
+`description?` | *string* |
+`inputJsonSchema?` | *Record*<*any*, *any*\> |
+`name?` | *string* |
+`outputJsonSchema?` | *Record*<*any*, *any*\> |
+
+Defined in: [types.ts:92](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/types.ts#L92)
+
+___
+
+### UpdateUserOptions
+
+Ƭ **UpdateUserOptions**: { `avatar?`: *string* \| *null* ; `name?`: *string* \| *null*  }
+
+#### Type declaration:
+
+Name | Type |
+------ | ------ |
+`avatar?` | *string* \| *null* |
+`name?` | *string* \| *null* |
+
+Defined in: [types.ts:232](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/types.ts#L232)
+
+___
+
+### User
+
+Ƭ **User**: { `avatar`: *string* \| *null* ; `email`: *string* ; `name`: *string* \| *null* ; `userId`: *string*  }
+
+#### Type declaration:
+
+Name | Type |
+------ | ------ |
+`avatar` | *string* \| *null* |
+`email` | *string* |
+`name` | *string* \| *null* |
+`userId` | *string* |
+
+Defined in: [types.ts:220](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/types.ts#L220)
+
+___
+
+### UserList
+
+Ƭ **UserList**: { `nextToken?`: *string* ; `users`: [*User*](#user)[]  }
+
+#### Type declaration:
+
+Name | Type |
+------ | ------ |
+`nextToken?` | *string* |
+`users` | [*User*](#user)[] |
+
+Defined in: [types.ts:239](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/types.ts#L239)
+
+___
+
+### Workflow
+
+Ƭ **Workflow**: { `description?`: *string* ; `name`: *string* ; `workflowId`: *string*  }
+
+#### Type declaration:
+
+Name | Type |
+------ | ------ |
+`description?` | *string* |
+`name` | *string* |
+`workflowId` | *string* |
+
+Defined in: [types.ts:130](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/types.ts#L130)
+
+___
+
+### WorkflowExecution
+
+Ƭ **WorkflowExecution**: { `completedBy`: *string*[] ; `endTime`: *string* \| *null* ; `executionId`: *string* ; `input`: *Record*<*any*, *any*\> ; `output`: *Record*<*any*, *any*\> ; `startTime`: *string* \| *null* ; `status?`: *succeeded* \| *failed* \| *running* \| *rejected* ; `transitionExecutions`: *Record*<*string*, *string*[]\> \| *null* ; `workflowId`: *string*  }
+
+#### Type declaration:
+
+Name | Type |
+------ | ------ |
+`completedBy` | *string*[] |
+`endTime` | *string* \| *null* |
+`executionId` | *string* |
+`input` | *Record*<*any*, *any*\> |
+`output` | *Record*<*any*, *any*\> |
+`startTime` | *string* \| *null* |
+`status?` | *succeeded* \| *failed* \| *running* \| *rejected* |
+`transitionExecutions` | *Record*<*string*, *string*[]\> \| *null* |
+`workflowId` | *string* |
+
+Defined in: [types.ts:158](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/types.ts#L158)
+
+___
+
+### WorkflowExecutionList
+
+Ƭ **WorkflowExecutionList**: { `executions`: *Required*<[*WorkflowExecution*](#workflowexecution)\>[] ; `nextToken?`: *string* ; `status?`: *succeeded* \| *failed* \| *running* \| *rejected* ; `workflowId`: *string*  }
+
+#### Type declaration:
+
+Name | Type |
+------ | ------ |
+`executions` | *Required*<[*WorkflowExecution*](#workflowexecution)\>[] |
+`nextToken?` | *string* |
+`status?` | *succeeded* \| *failed* \| *running* \| *rejected* |
+`workflowId` | *string* |
+
+Defined in: [types.ts:170](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/types.ts#L170)
+
+___
+
+### WorkflowList
+
+Ƭ **WorkflowList**: { `workflows`: [*Workflow*](#workflow)[]  }
+
+#### Type declaration:
+
+Name | Type |
+------ | ------ |
+`workflows` | [*Workflow*](#workflow)[] |
+
+Defined in: [types.ts:154](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/types.ts#L154)
+
+___
+
+### WorkflowSpecification
+
+Ƭ **WorkflowSpecification**: { `definition`: *object* ; `language?`: *ASL* ; `version?`: *1.0.0*  }
+
+#### Type declaration:
+
+Name | Type |
+------ | ------ |
+`definition` | *object* |
+`language?` | *ASL* |
+`version?` | *1.0.0* |
+
+Defined in: [types.ts:124](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/types.ts#L124)
 
 
 <a name="modulesstoragemd"></a>
@@ -1687,6 +2922,7 @@ Re-exports: [TokenStorage](#interfacesstoragetokenstoragemd)
 
 - [Asset](#asset)
 - [AssetList](#assetlist)
+- [AssetWithoutContent](#assetwithoutcontent)
 - [AuthorizationHeaders](#authorizationheaders)
 - [AxiosFn](#axiosfn)
 - [Batch](#batch)
@@ -1695,6 +2931,7 @@ Re-exports: [TokenStorage](#interfacesstoragetokenstoragemd)
 - [CreateTransitionDockerParams](#createtransitiondockerparams)
 - [CreateTransitionManualParams](#createtransitionmanualparams)
 - [CreateTransitionParams](#createtransitionparams)
+- [CreateUserOptions](#createuseroptions)
 - [CreateWorkflowOptions](#createworkflowoptions)
 - [GroundTruth](#groundtruth)
 - [LasDocument](#lasdocument)
@@ -1724,6 +2961,7 @@ Re-exports: [TokenStorage](#interfacesstoragetokenstoragemd)
 - [TransitionList](#transitionlist)
 - [TransitionType](#transitiontype)
 - [UpdateTransitionOptions](#updatetransitionoptions)
+- [UpdateUserOptions](#updateuseroptions)
 - [User](#user)
 - [UserList](#userlist)
 - [Workflow](#workflow)
@@ -1736,31 +2974,45 @@ Re-exports: [TokenStorage](#interfacesstoragetokenstoragemd)
 
 ### Asset
 
-Ƭ **Asset**: { `assetId`: *string* ; `content?`: *string*  }
+Ƭ **Asset**: { `assetId`: *string* ; `content`: *string*  }
 
 #### Type declaration:
 
 Name | Type |
 ------ | ------ |
 `assetId` | *string* |
-`content?` | *string* |
+`content` | *string* |
 
-Defined in: [types.ts:273](https://github.com/LucidtechAI/las-sdk-js/blob/fd4fff8/packages/las-sdk-core/src/types.ts#L273)
+Defined in: [types.ts:285](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/types.ts#L285)
 
 ___
 
 ### AssetList
 
-Ƭ **AssetList**: { `assets`: [*Asset*](#asset)[] ; `nextToken`: *string* \| *null*  }
+Ƭ **AssetList**: { `assets`: [*AssetWithoutContent*](#assetwithoutcontent)[] ; `nextToken`: *string* \| *null*  }
 
 #### Type declaration:
 
 Name | Type |
 ------ | ------ |
-`assets` | [*Asset*](#asset)[] |
+`assets` | [*AssetWithoutContent*](#assetwithoutcontent)[] |
 `nextToken` | *string* \| *null* |
 
-Defined in: [types.ts:278](https://github.com/LucidtechAI/las-sdk-js/blob/fd4fff8/packages/las-sdk-core/src/types.ts#L278)
+Defined in: [types.ts:294](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/types.ts#L294)
+
+___
+
+### AssetWithoutContent
+
+Ƭ **AssetWithoutContent**: { `assetId`: *string*  }
+
+#### Type declaration:
+
+Name | Type |
+------ | ------ |
+`assetId` | *string* |
+
+Defined in: [types.ts:290](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/types.ts#L290)
 
 ___
 
@@ -1775,7 +3027,7 @@ Name | Type |
 `Authorization` | *string* |
 `X-Api-Key` | *string* |
 
-Defined in: [types.ts:315](https://github.com/LucidtechAI/las-sdk-js/blob/fd4fff8/packages/las-sdk-core/src/types.ts#L315)
+Defined in: [types.ts:331](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/types.ts#L331)
 
 ___
 
@@ -1783,7 +3035,7 @@ ___
 
 Ƭ **AxiosFn**: <T, R\>(`url`: *string*, `body?`: *any*, `config?`: AxiosRequestConfig) => *Promise*<R\>
 
-Defined in: [types.ts:320](https://github.com/LucidtechAI/las-sdk-js/blob/fd4fff8/packages/las-sdk-core/src/types.ts#L320)
+Defined in: [types.ts:336](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/types.ts#L336)
 
 ___
 
@@ -1799,7 +3051,7 @@ Name | Type |
 `description` | *string* |
 `name` | *string* |
 
-Defined in: [types.ts:214](https://github.com/LucidtechAI/las-sdk-js/blob/fd4fff8/packages/las-sdk-core/src/types.ts#L214)
+Defined in: [types.ts:214](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/types.ts#L214)
 
 ___
 
@@ -1807,7 +3059,7 @@ ___
 
 Ƭ **ContentType**: *application/pdf* \| *image/jpeg*
 
-Defined in: [types.ts:5](https://github.com/LucidtechAI/las-sdk-js/blob/fd4fff8/packages/las-sdk-core/src/types.ts#L5)
+Defined in: [types.ts:5](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/types.ts#L5)
 
 ___
 
@@ -1822,7 +3074,7 @@ Name | Type |
 `description?` | *string* |
 `name?` | *string* |
 
-Defined in: [types.ts:298](https://github.com/LucidtechAI/las-sdk-js/blob/fd4fff8/packages/las-sdk-core/src/types.ts#L298)
+Defined in: [types.ts:314](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/types.ts#L314)
 
 ___
 
@@ -1840,7 +3092,7 @@ Name | Type |
 `imageUrl` | *string* |
 `memory?` | *512* \| *1024* \| *2048* |
 
-Defined in: [types.ts:70](https://github.com/LucidtechAI/las-sdk-js/blob/fd4fff8/packages/las-sdk-core/src/types.ts#L70)
+Defined in: [types.ts:70](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/types.ts#L70)
 
 ___
 
@@ -1854,7 +3106,7 @@ Name | Type |
 ------ | ------ |
 `assets?` | { `jsRemoteComponent?`: *string*  } & *Record*<*string*, *string*\> |
 
-Defined in: [types.ts:81](https://github.com/LucidtechAI/las-sdk-js/blob/fd4fff8/packages/las-sdk-core/src/types.ts#L81)
+Defined in: [types.ts:81](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/types.ts#L81)
 
 ___
 
@@ -1862,7 +3114,22 @@ ___
 
 Ƭ **CreateTransitionParams**: [*CreateTransitionDockerParams*](#createtransitiondockerparams) \| [*CreateTransitionManualParams*](#createtransitionmanualparams)
 
-Defined in: [types.ts:88](https://github.com/LucidtechAI/las-sdk-js/blob/fd4fff8/packages/las-sdk-core/src/types.ts#L88)
+Defined in: [types.ts:88](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/types.ts#L88)
+
+___
+
+### CreateUserOptions
+
+Ƭ **CreateUserOptions**: { `avatar?`: *string* \| *null* ; `name?`: *string* \| *null*  }
+
+#### Type declaration:
+
+Name | Type |
+------ | ------ |
+`avatar?` | *string* \| *null* |
+`name?` | *string* \| *null* |
+
+Defined in: [types.ts:227](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/types.ts#L227)
 
 ___
 
@@ -1877,7 +3144,7 @@ Name | Type |
 `description?` | *string* |
 `errorConfig?` | { `email`: *string*  } |
 
-Defined in: [types.ts:144](https://github.com/LucidtechAI/las-sdk-js/blob/fd4fff8/packages/las-sdk-core/src/types.ts#L144)
+Defined in: [types.ts:144](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/types.ts#L144)
 
 ___
 
@@ -1892,7 +3159,7 @@ Name | Type | Description |
 `label` | *string* | maxLength: 36, minLength: 1, pattern: ^[0-9A-Za-z_]+$   |
 `value` | *string* \| *boolean* \| *null* | maxLength: 64, minLength: 1   |
 
-Defined in: [types.ts:177](https://github.com/LucidtechAI/las-sdk-js/blob/fd4fff8/packages/las-sdk-core/src/types.ts#L177)
+Defined in: [types.ts:177](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/types.ts#L177)
 
 ___
 
@@ -1914,7 +3181,7 @@ Name | Type | Description |
 `predictions?` | [*Prediction*](#prediction)[] | - |
 `updated?` | *number* | minimum: 1   |
 
-Defined in: [types.ts:255](https://github.com/LucidtechAI/las-sdk-js/blob/fd4fff8/packages/las-sdk-core/src/types.ts#L255)
+Defined in: [types.ts:267](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/types.ts#L267)
 
 ___
 
@@ -1931,7 +3198,7 @@ Name | Type |
 `documents` | [*LasDocument*](#lasdocument)[] |
 `nextToken?` | *string* |
 
-Defined in: [types.ts:63](https://github.com/LucidtechAI/las-sdk-js/blob/fd4fff8/packages/las-sdk-core/src/types.ts#L63)
+Defined in: [types.ts:63](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/types.ts#L63)
 
 ___
 
@@ -1939,7 +3206,7 @@ ___
 
 Ƭ **ListAssetsOptions**: [*PaginationOptions*](#interfacestypespaginationoptionsmd)
 
-Defined in: [types.ts:307](https://github.com/LucidtechAI/las-sdk-js/blob/fd4fff8/packages/las-sdk-core/src/types.ts#L307)
+Defined in: [types.ts:323](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/types.ts#L323)
 
 ___
 
@@ -1947,7 +3214,7 @@ ___
 
 Ƭ **ListDocumentsOptions**: [*PaginationOptions*](#interfacestypespaginationoptionsmd) & { `batchId?`: *string* \| *string*[] ; `consentId?`: *string* \| *string*[]  }
 
-Defined in: [types.ts:31](https://github.com/LucidtechAI/las-sdk-js/blob/fd4fff8/packages/las-sdk-core/src/types.ts#L31)
+Defined in: [types.ts:31](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/types.ts#L31)
 
 ___
 
@@ -1955,7 +3222,7 @@ ___
 
 Ƭ **ListModelsOptions**: [*PaginationOptions*](#interfacestypespaginationoptionsmd)
 
-Defined in: [types.ts:291](https://github.com/LucidtechAI/las-sdk-js/blob/fd4fff8/packages/las-sdk-core/src/types.ts#L291)
+Defined in: [types.ts:307](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/types.ts#L307)
 
 ___
 
@@ -1963,7 +3230,7 @@ ___
 
 Ƭ **ListPredictionsOptions**: [*PaginationOptions*](#interfacestypespaginationoptionsmd)
 
-Defined in: [types.ts:207](https://github.com/LucidtechAI/las-sdk-js/blob/fd4fff8/packages/las-sdk-core/src/types.ts#L207)
+Defined in: [types.ts:207](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/types.ts#L207)
 
 ___
 
@@ -1971,7 +3238,7 @@ ___
 
 Ƭ **ListSecretsOptions**: [*PaginationOptions*](#interfacestypespaginationoptionsmd)
 
-Defined in: [types.ts:238](https://github.com/LucidtechAI/las-sdk-js/blob/fd4fff8/packages/las-sdk-core/src/types.ts#L238)
+Defined in: [types.ts:250](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/types.ts#L250)
 
 ___
 
@@ -1979,7 +3246,7 @@ ___
 
 Ƭ **ListTransitionOptions**: [*PaginationOptions*](#interfacestypespaginationoptionsmd) & { `transitionType?`: *string* \| *string*[]  }
 
-Defined in: [types.ts:17](https://github.com/LucidtechAI/las-sdk-js/blob/fd4fff8/packages/las-sdk-core/src/types.ts#L17)
+Defined in: [types.ts:17](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/types.ts#L17)
 
 ___
 
@@ -1987,7 +3254,7 @@ ___
 
 Ƭ **ListUsersOptions**: [*PaginationOptions*](#interfacestypespaginationoptionsmd)
 
-Defined in: [types.ts:225](https://github.com/LucidtechAI/las-sdk-js/blob/fd4fff8/packages/las-sdk-core/src/types.ts#L225)
+Defined in: [types.ts:237](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/types.ts#L237)
 
 ___
 
@@ -1995,7 +3262,7 @@ ___
 
 Ƭ **ListWorkflowExecutionsOptions**: [*PaginationOptions*](#interfacestypespaginationoptionsmd) & { `order?`: *ascending* \| *descending* ; `sortBy?`: *startTime* \| *endTime* ; `status?`: *string* \| *string*[]  }
 
-Defined in: [types.ts:138](https://github.com/LucidtechAI/las-sdk-js/blob/fd4fff8/packages/las-sdk-core/src/types.ts#L138)
+Defined in: [types.ts:138](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/types.ts#L138)
 
 ___
 
@@ -2003,7 +3270,7 @@ ___
 
 Ƭ **ListWorkflowOptions**: [*PaginationOptions*](#interfacestypespaginationoptionsmd)
 
-Defined in: [types.ts:136](https://github.com/LucidtechAI/las-sdk-js/blob/fd4fff8/packages/las-sdk-core/src/types.ts#L136)
+Defined in: [types.ts:136](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/types.ts#L136)
 
 ___
 
@@ -2019,7 +3286,7 @@ Name | Type |
 `logId` | *string* |
 `transitionId?` | *string* \| *null* |
 
-Defined in: [types.ts:309](https://github.com/LucidtechAI/las-sdk-js/blob/fd4fff8/packages/las-sdk-core/src/types.ts#L309)
+Defined in: [types.ts:325](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/types.ts#L325)
 
 ___
 
@@ -2037,7 +3304,7 @@ Name | Type |
 `name` | *string* \| *null* |
 `width` | *number* |
 
-Defined in: [types.ts:283](https://github.com/LucidtechAI/las-sdk-js/blob/fd4fff8/packages/las-sdk-core/src/types.ts#L283)
+Defined in: [types.ts:299](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/types.ts#L299)
 
 ___
 
@@ -2052,7 +3319,7 @@ Name | Type |
 `models` | [*Model*](#model)[] |
 `nextToken` | *string* \| *null* |
 
-Defined in: [types.ts:293](https://github.com/LucidtechAI/las-sdk-js/blob/fd4fff8/packages/las-sdk-core/src/types.ts#L293)
+Defined in: [types.ts:309](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/types.ts#L309)
 
 ___
 
@@ -2060,7 +3327,7 @@ ___
 
 Ƭ **PostPredictions**: [*CreatePredictionsOptions*](#interfacestypescreatepredictionsoptionsmd) & { `documentId`: *string* ; `modelId`: *string*  }
 
-Defined in: [types.ts:188](https://github.com/LucidtechAI/las-sdk-js/blob/fd4fff8/packages/las-sdk-core/src/types.ts#L188)
+Defined in: [types.ts:188](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/types.ts#L188)
 
 ___
 
@@ -2068,7 +3335,7 @@ ___
 
 Ƭ **Prediction**: [*GroundTruth*](#groundtruth) & { `confidence`: *number*  }
 
-Defined in: [types.ts:193](https://github.com/LucidtechAI/las-sdk-js/blob/fd4fff8/packages/las-sdk-core/src/types.ts#L193)
+Defined in: [types.ts:193](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/types.ts#L193)
 
 ___
 
@@ -2083,13 +3350,13 @@ Name | Type |
 `nextToken` | *string* \| *null* |
 `predictions` | [*PredictionResponse*](#predictionresponse)[] |
 
-Defined in: [types.ts:209](https://github.com/LucidtechAI/las-sdk-js/blob/fd4fff8/packages/las-sdk-core/src/types.ts#L209)
+Defined in: [types.ts:209](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/types.ts#L209)
 
 ___
 
 ### PredictionResponse
 
-Ƭ **PredictionResponse**: { `documentId`: *string* ; `inferenceTime`: *number* ; `modelId`: *string* ; `predictionId`: *string* ; `predictions?`: [*Prediction*](#prediction)[] ; `timestamp`: *number*  }
+Ƭ **PredictionResponse**: { `documentId`: *string* ; `inferenceTime`: *number* ; `modelId`: *string* ; `predictionId`: *string* ; `predictions`: [*Prediction*](#prediction)[] ; `timestamp`: *number*  }
 
 #### Type declaration:
 
@@ -2099,10 +3366,10 @@ Name | Type |
 `inferenceTime` | *number* |
 `modelId` | *string* |
 `predictionId` | *string* |
-`predictions?` | [*Prediction*](#prediction)[] |
+`predictions` | [*Prediction*](#prediction)[] |
 `timestamp` | *number* |
 
-Defined in: [types.ts:198](https://github.com/LucidtechAI/las-sdk-js/blob/fd4fff8/packages/las-sdk-core/src/types.ts#L198)
+Defined in: [types.ts:198](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/types.ts#L198)
 
 ___
 
@@ -2118,7 +3385,7 @@ Name | Type |
 `name` | *string* \| *null* |
 `secredId` | *string* |
 
-Defined in: [types.ts:232](https://github.com/LucidtechAI/las-sdk-js/blob/fd4fff8/packages/las-sdk-core/src/types.ts#L232)
+Defined in: [types.ts:244](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/types.ts#L244)
 
 ___
 
@@ -2133,7 +3400,7 @@ Name | Type |
 `nextToken?` | *string* \| *null* |
 `secrets` | [*Secret*](#secret)[] |
 
-Defined in: [types.ts:240](https://github.com/LucidtechAI/las-sdk-js/blob/fd4fff8/packages/las-sdk-core/src/types.ts#L240)
+Defined in: [types.ts:252](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/types.ts#L252)
 
 ___
 
@@ -2153,7 +3420,7 @@ Name | Type |
 `transitionId` | *string* |
 `transitionType` | [*TransitionType*](#transitiontype) |
 
-Defined in: [types.ts:99](https://github.com/LucidtechAI/las-sdk-js/blob/fd4fff8/packages/las-sdk-core/src/types.ts#L99)
+Defined in: [types.ts:99](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/types.ts#L99)
 
 ___
 
@@ -2173,7 +3440,7 @@ Name | Type |
 `status` | *succeeded* \| *failed* \| *retry* \| *running* \| *rejected* |
 `transitionId` | *string* |
 
-Defined in: [types.ts:114](https://github.com/LucidtechAI/las-sdk-js/blob/fd4fff8/packages/las-sdk-core/src/types.ts#L114)
+Defined in: [types.ts:114](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/types.ts#L114)
 
 ___
 
@@ -2189,7 +3456,7 @@ Name | Type |
 `nextToken` | *string* \| *null* |
 `transitionId` | *string* |
 
-Defined in: [types.ts:36](https://github.com/LucidtechAI/las-sdk-js/blob/fd4fff8/packages/las-sdk-core/src/types.ts#L36)
+Defined in: [types.ts:36](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/types.ts#L36)
 
 ___
 
@@ -2197,7 +3464,7 @@ ___
 
 Ƭ **TransitionExecutionListOptions**: [*PaginationOptions*](#interfacestypespaginationoptionsmd) & { `executionId?`: *string* \| *string*[] ; `order?`: *ascending* \| *descending* ; `sortBy?`: *startTime* \| *endTime* ; `status?`: *succeeded* \| *failed* \| *retry* \| *running* \| *rejected*  }
 
-Defined in: [types.ts:42](https://github.com/LucidtechAI/las-sdk-js/blob/fd4fff8/packages/las-sdk-core/src/types.ts#L42)
+Defined in: [types.ts:42](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/types.ts#L42)
 
 ___
 
@@ -2212,7 +3479,7 @@ Name | Type |
 `nextToken?` | *string* |
 `transitions` | [*Transition*](#transition)[] |
 
-Defined in: [types.ts:109](https://github.com/LucidtechAI/las-sdk-js/blob/fd4fff8/packages/las-sdk-core/src/types.ts#L109)
+Defined in: [types.ts:109](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/types.ts#L109)
 
 ___
 
@@ -2220,7 +3487,7 @@ ___
 
 Ƭ **TransitionType**: *docker* \| *manual*
 
-Defined in: [types.ts:90](https://github.com/LucidtechAI/las-sdk-js/blob/fd4fff8/packages/las-sdk-core/src/types.ts#L90)
+Defined in: [types.ts:90](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/types.ts#L90)
 
 ___
 
@@ -2237,22 +3504,39 @@ Name | Type |
 `name?` | *string* |
 `outputJsonSchema?` | *Record*<*any*, *any*\> |
 
-Defined in: [types.ts:92](https://github.com/LucidtechAI/las-sdk-js/blob/fd4fff8/packages/las-sdk-core/src/types.ts#L92)
+Defined in: [types.ts:92](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/types.ts#L92)
 
 ___
 
-### User
+### UpdateUserOptions
 
-Ƭ **User**: { `email`: *string* ; `userId`: *string*  }
+Ƭ **UpdateUserOptions**: { `avatar?`: *string* \| *null* ; `name?`: *string* \| *null*  }
 
 #### Type declaration:
 
 Name | Type |
 ------ | ------ |
+`avatar?` | *string* \| *null* |
+`name?` | *string* \| *null* |
+
+Defined in: [types.ts:232](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/types.ts#L232)
+
+___
+
+### User
+
+Ƭ **User**: { `avatar`: *string* \| *null* ; `email`: *string* ; `name`: *string* \| *null* ; `userId`: *string*  }
+
+#### Type declaration:
+
+Name | Type |
+------ | ------ |
+`avatar` | *string* \| *null* |
 `email` | *string* |
+`name` | *string* \| *null* |
 `userId` | *string* |
 
-Defined in: [types.ts:220](https://github.com/LucidtechAI/las-sdk-js/blob/fd4fff8/packages/las-sdk-core/src/types.ts#L220)
+Defined in: [types.ts:220](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/types.ts#L220)
 
 ___
 
@@ -2267,7 +3551,7 @@ Name | Type |
 `nextToken?` | *string* |
 `users` | [*User*](#user)[] |
 
-Defined in: [types.ts:227](https://github.com/LucidtechAI/las-sdk-js/blob/fd4fff8/packages/las-sdk-core/src/types.ts#L227)
+Defined in: [types.ts:239](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/types.ts#L239)
 
 ___
 
@@ -2283,7 +3567,7 @@ Name | Type |
 `name` | *string* |
 `workflowId` | *string* |
 
-Defined in: [types.ts:130](https://github.com/LucidtechAI/las-sdk-js/blob/fd4fff8/packages/las-sdk-core/src/types.ts#L130)
+Defined in: [types.ts:130](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/types.ts#L130)
 
 ___
 
@@ -2305,7 +3589,7 @@ Name | Type |
 `transitionExecutions` | *Record*<*string*, *string*[]\> \| *null* |
 `workflowId` | *string* |
 
-Defined in: [types.ts:158](https://github.com/LucidtechAI/las-sdk-js/blob/fd4fff8/packages/las-sdk-core/src/types.ts#L158)
+Defined in: [types.ts:158](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/types.ts#L158)
 
 ___
 
@@ -2322,7 +3606,7 @@ Name | Type |
 `status?` | *succeeded* \| *failed* \| *running* \| *rejected* |
 `workflowId` | *string* |
 
-Defined in: [types.ts:170](https://github.com/LucidtechAI/las-sdk-js/blob/fd4fff8/packages/las-sdk-core/src/types.ts#L170)
+Defined in: [types.ts:170](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/types.ts#L170)
 
 ___
 
@@ -2336,7 +3620,7 @@ Name | Type |
 ------ | ------ |
 `workflows` | [*Workflow*](#workflow)[] |
 
-Defined in: [types.ts:154](https://github.com/LucidtechAI/las-sdk-js/blob/fd4fff8/packages/las-sdk-core/src/types.ts#L154)
+Defined in: [types.ts:154](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/types.ts#L154)
 
 ___
 
@@ -2352,4 +3636,4 @@ Name | Type |
 `language?` | *ASL* |
 `version?` | *1.0.0* |
 
-Defined in: [types.ts:124](https://github.com/LucidtechAI/las-sdk-js/blob/fd4fff8/packages/las-sdk-core/src/types.ts#L124)
+Defined in: [types.ts:124](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/types.ts#L124)
