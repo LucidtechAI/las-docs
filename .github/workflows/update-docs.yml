@@ -48,7 +48,7 @@ jobs:
           cd java-sdk
           doxygen
           npx moxygen xml
-          mv las.md ../reference/java/latest.md
+          mv api.md ../reference/java/latest.md
 
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v3
