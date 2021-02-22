@@ -35,8 +35,8 @@
 
 * [Rest API](reference/restapi/README.md)
   * [latest](reference/restapi/latest/README.md)
-* [Python SDK](reference/python-sdk/README.md)
-  * [latest](reference/python-sdk/latest.md)
+* [Python SDK](reference/python/README.md)
+  * [latest](reference/python/latest.md)
 * [.NET SDK](reference/dotnet/README.md)
   * [latest](reference/dotnet/latest.md)
 * [JavaScript SDK](reference/js/README.md)
