@@ -16,7 +16,7 @@
   * [JavaScript](getting-started/dev/js.md)
   * [.NET](getting-started/dev/net.md)
   * [Java](getting-started/dev/java.md)
-  * [Simple demo workflow](getting-started/simple_demo_workflow.md)
+  <!-- * [Simple demo workflow](getting-started/simple_demo_workflow.md) -->
 * [Tutorials](tutorials/README.md)
   * [Setup workflow](tutorials/setup_predict_and_approve.md)
   * [Setup approve view](tutorials/setup_approve_view.md)
