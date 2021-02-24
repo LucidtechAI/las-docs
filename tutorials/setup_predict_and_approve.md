@@ -4,6 +4,7 @@
 In this tutorial you will learn how to setup a simple workflow that 
 allows you to handle any type of documents in a safe and semi-automatic way.
 
+TODO: ADD AN IMAGE OF THE WORKFLOW HERE! 
 
 The workflow in this tutorial will consist of two steps:
 * automatic prediction
@@ -11,19 +12,35 @@ The workflow in this tutorial will consist of two steps:
 
 ## Prerequisites
 * Download the [lucidtech CLI](https://github.com/LucidtechAI/las-cli)
-* Create a remote component [tutorial](custom_approve_view.md)
+* Create a remote component by following [this tutorial](custom_approve_view.md) or just use 
+[this standard remote component](https://github.com/LucidtechAI/las-docs/tree/master/tutorials/simple-demo/backend/src/Invoice/assets/jsRemoteComponent.js)
 
 
 ## Manual approval (manual transition)
 To create a manual step you first need a remote component that will serve 
 as a user interface. For an example on a simple remote component see 
-[This tutorial](https://github.com/LucidtechAI/flyt-form/tree/master/examples) 
+[This tutorial](https://github.com/LucidtechAI/flyt-form/tree/master/examples). 
 
+#### Create the remote component asset
+When you have created your javascript remote component, 
+lets call it `remote_component.js` you are ready to create an asset.
 ```commandline
-$ las assets create remote_component.js 
+$ las assets create remote_component.js
 ```
+This should give the following output:
+```commandline
+{
+  "assetId": "las:asset:<hex-uuid>",
+  "name": null,
+  "description": null
+}
+```
+Where as you can see you have an assetId that we will use to refer to this specific asset in the future. 
+Note that you can also add a name and a description to help you identify the asset.
 
-Create a json file with the following structure,
+
+#### Create the transition
+Create a json file, let's call it `params.json` with the following structure:
 ```json
 {
   "assets": {
@@ -31,17 +48,40 @@ Create a json file with the following structure,
   }
 }
 ```
-
+Where `"las:asset:<hex:uuid>` is replaced with the `assetId` you got in the previous step.
 Now you are ready to create the manual step
 ```commandline
-las transitions create manual params.json
+las transitions create manual -p params.json
 ```
+This should give the following output
+```commandline 
+{
+  "transitionId": "las:transition:<hex-uuid>",
+  "name": null,
+  "description": null,
+  "transitionType": "manual",
+  "inputJsonSchema": {
+    "$schema": "https://json-schema.org/draft-04/schema#"
+  },
+  "outputJsonSchema": {
+    "$schema": "https://json-schema.org/draft-04/schema#"
+  },
+  "parameters": {
+    "assets": {
+      "jsRemoteComponent": "las:asset:<hex-uuid>"    
+    }
+  }
+}
+``` 
+as you can see the transition can also accept name and description arguments, that is common for most resources in LAS.
+In addition we recommend to provide input and output [json-schemas](https://json-schema.org/understanding-json-schema/) 
+that can help you catch bad input immediately instead of triggering bugs at a later point in the workflow. 
+Use `las transitions update --help` for more information on how to update your transitions.
 
 
 ## Automatic prediction (docker transition)
-An automatic step is made by creating a docker image that will perform a task 
-without any user involved. Check out our 
-[sample images](https://github.com/LucidtechAI/las-docs/tree/master/docker-image-samples)
+An automatic step is made by creating a docker image that will perform a task without any user involved. 
+Check our [sample images](https://github.com/LucidtechAI/las-docs/tree/master/docker-image-samples)
 for inspiration and best practices. 
 
 The first step is to build a docker image and push it to some repository
