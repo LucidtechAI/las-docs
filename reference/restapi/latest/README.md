@@ -452,7 +452,9 @@
             "type": "string",
             "enum": [
               "application/pdf",
-              "image/jpeg"
+              "image/jpeg",
+              "image/png",
+              "image/tiff"
             ]
           },
           "updated": {
@@ -616,7 +618,9 @@
             "type": "string",
             "enum": [
               "application/pdf",
-              "image/jpeg"
+              "image/jpeg",
+              "image/png",
+              "image/tiff"
             ]
           },
           "updated": {
@@ -750,7 +754,9 @@
       "type": "string",
       "enum": [
         "application/pdf",
-        "image/jpeg"
+        "image/jpeg",
+        "image/png",
+        "image/tiff"
       ]
     },
     "content": {
@@ -825,7 +831,9 @@
       "type": "string",
       "enum": [
         "application/pdf",
-        "image/jpeg"
+        "image/jpeg",
+        "image/png",
+        "image/tiff"
       ]
     },
     "updated": {
@@ -955,7 +963,9 @@
       "type": "string",
       "enum": [
         "application/pdf",
-        "image/jpeg"
+        "image/jpeg",
+        "image/png",
+        "image/tiff"
       ]
     },
     "updated": {
@@ -1130,7 +1140,9 @@
       "type": "string",
       "enum": [
         "application/pdf",
-        "image/jpeg"
+        "image/jpeg",
+        "image/png",
+        "image/tiff"
       ]
     },
     "updated": {
@@ -1274,10 +1286,35 @@
           "height",
           "modelId",
           "name",
+          "preprocessConfig",
           "width"
         ],
         "type": "object",
         "properties": {
+          "preprocessConfig": {
+            "required": [
+              "autoRotate",
+              "imageQuality",
+              "maxPages"
+            ],
+            "type": "object",
+            "properties": {
+              "maxPages": {
+                "type": "integer"
+              },
+              "autoRotate": {
+                "type": "boolean"
+              },
+              "imageQuality": {
+                "type": "string",
+                "enum": [
+                  "LOW",
+                  "HIGH"
+                ]
+              }
+            },
+            "additionalProperties": false
+          },
           "modelId": {
             "pattern": "^las:model:[0-9A-Za-z_]+$",
             "type": "string"
@@ -1463,6 +1500,13 @@
     },
     "autoRotate": {
       "type": "boolean"
+    },
+    "imageQuality": {
+      "type": "string",
+      "enum": [
+        "LOW",
+        "HIGH"
+      ]
     }
   },
   "additionalProperties": false
@@ -2671,6 +2715,11 @@
     "output": {
       "type": "object"
     },
+    "startTime": {
+      "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2} ?[0-9]{2}:?[0-9]{2}:?[0-9]{2}.?[0-9]{6}",
+      "type": "string",
+      "nullable": true
+    },
     "error": {
       "required": [
         "message"
@@ -2784,6 +2833,37 @@
   "additionalProperties": false
 }
 ```
+
+
+#### POST /transitions/{transitionId}/executions/{executionId}/heartbeats
+
+
+| Path name | Path value |
+| --- | --- |
+| transitionId | Id of transition on the form las:transition:&lt;hex&gt; |
+| executionId | Id of execution on the form las:transition-execution:&lt;hex&gt; |
+
+
+| Header name | Header value |
+| --- | --- |
+| Content-Type | application/json |
+| Authorization | Bearer &lt;your access token here&gt; |
+| x-api-key | &lt;your api key here&gt; |
+
+
+
+
+
+##### Request body JSON Schema
+```json
+{
+  "title": "POST /transitions/{transitionId}/executions/{executionId}/heartbeats",
+  "type": "object"
+}
+```
+
+
+
 
 
 #### GET /users
