@@ -101,10 +101,12 @@ Let us first take a look at the input:
 If this is the first transition in the workflow then the input to the workflow will be the input to this transition. 
 - `environ`: The environment consists of some pre-defined variables, such as the TRANSITION_ID and the EXECUTION_ID. 
 In addition to these you can also define variables by specifying them as `parameters` directly in your transition, 
-or through *secrets* if the information is sensitive.
+or through *secrets* if the information is sensitive. See the example at the end of this tutorial.
 
 ```python 
 def handler(las_client, event, environ):
+'''A simple handler that uses the LAS API to make predictions on a document from a specified model.'''
+
     document_id = event['documentId'] 
     model_id = event.get('modelId', environ.get('MODEL_ID'))
 
@@ -130,12 +132,14 @@ First step is to build a docker image and push it to some repository
 $ docker build . -t <image-url> && docker push <image-url>
 ```
 
-####Note:
-*It is recommended to place the docker image in a private repository, 
-if that is the case you need to store your credentials as a secret.*
+{% hint style="info" %}
+It is recommended to place the docker image in a private repository, 
+if that is the case you need to store your credentials as a secret.
 ```commandline
 $ las secrets create  username=<username> password=<password> --description 'docker credentials'
 ```
+{% endhint %}
+
 The next step is to create a json-file - let's call it `params.json` - 
 that contains the parameters you need to run the docker image. 
 The variables you define in `environment` and `environmentSecrets` 
@@ -152,7 +156,9 @@ will end up in the `environ`-variable in the handler in the example above.
   ]
 }
 ```
-*Note that secretId is only needed if you are using a private image.*
+{% hint style="info" %}
+The secretId field is only needed if you are using a private image.
+{% endhint %}
 
 
 Now you are ready to create the automatic transition

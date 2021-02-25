@@ -81,7 +81,8 @@ Use `las transitions update --help` for more information on how to update your t
 
 ## Automatic prediction (docker transition)
 An automatic step is made by creating a docker image that will perform a task without any user involved. 
-Check our [sample images](https://github.com/LucidtechAI/las-docs/tree/master/docker-image-samples)
+Check our [sample images](https://github.com/LucidtechAI/las-docs/tree/master/docker-image-samples) and 
+[tutorial](~/tutorials/create_your_own_docker_transition.md)
 for inspiration and best practices. 
 
 The first step is to build a docker image and push it to some repository
@@ -89,20 +90,24 @@ The first step is to build a docker image and push it to some repository
 $ docker build . -t <image-url> && docker push <image-url>
 ```
 
-####Note:
+{% hint style="info" %}
 *It is recommended to place the docker image in a private repository, 
 if that is the case you need to store your credentials as a secret.*
 ```commandline
 $ las secrets create  username=<username> password=<password> --description 'docker credentials'
 ```
+{% endhint %}
 The next step is to create a json-file that contains the parameters you need to run the docker image.
-*Note that secretId is only needed if you are using a private image.*
+
 ```json
 {
   "imageUrl": "<image-url>",
   "secretId": "las:secret:<hex-uuid>"
 }
 ```
+{% hint style="info" %}
+The secretId field is only needed if you are using a private image.
+{% endhint %}
 
 Now we are ready to create the transition
 ```commandline 

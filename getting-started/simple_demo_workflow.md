@@ -21,8 +21,9 @@ cd tutorials/simple-demo/backend/
 python backend/build.py --workflow-spec src/invoice.json
 ```
 
-####Note:
-*This will create resources and if ran multiple times you will eventually reach the limits of the API.*
+{% hint style="info" %}
+This will create resources and if ran multiple times you will eventually reach the limits of the API.
+{% endhint %}
 
 ## Execute the workflow
 Alright, you are good to go! Test the workflow by running the following script:
