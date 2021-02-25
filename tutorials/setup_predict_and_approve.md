@@ -4,12 +4,12 @@
 In this tutorial you will learn how to setup a simple workflow that 
 allows you to handle any type of documents in a safe and semi-automatic way.
 
-TODO: ADD AN IMAGE OF THE WORKFLOW HERE! 
 
 The workflow in this tutorial will consist of two steps:
 * automatic prediction
 * manual verification 
 
+![Workflow](../.gitbook/assets/simple-workflow.png)
 ## Prerequisites
 * Download the [lucidtech CLI](https://github.com/LucidtechAI/las-cli)
 * Create a remote component by following [this tutorial](custom_approve_view.md) or just use 
