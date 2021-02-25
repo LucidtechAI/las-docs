@@ -21,7 +21,7 @@ To create a manual step you first need a remote component that will serve
 as a user interface. For an example on a simple remote component see 
 [This tutorial](https://github.com/LucidtechAI/flyt-form/tree/master/examples). 
 
-#### Create the remote component asset
+#### Create the remote component *asset*
 When you have created your javascript remote component, 
 lets call it `remote_component.js` you are ready to create an asset.
 ```commandline
@@ -35,11 +35,11 @@ This should give the following output:
   "description": null
 }
 ```
-Where as you can see you have an assetId that we will use to refer to this specific asset in the future. 
+You now have an assetId that we will use to refer to this specific asset in the future. 
 Note that you can also add a name and a description to help you identify the asset.
 
 
-#### Create the transition
+#### Create the *transition*
 Create a json file, let's call it `params.json` with the following structure:
 ```json
 {
@@ -48,7 +48,7 @@ Create a json file, let's call it `params.json` with the following structure:
   }
 }
 ```
-Where `"las:asset:<hex:uuid>` is replaced with the `assetId` you got in the previous step.
+Where `las:asset:<hex:uuid>` is replaced with the `assetId` you got in the previous step.
 Now you are ready to create the manual step
 ```commandline
 las transitions create manual -p params.json
@@ -73,7 +73,8 @@ This should give the following output
   }
 }
 ``` 
-as you can see the transition can also accept name and description arguments, that is common for most resources in LAS.
+As you can see from the output the transition can also accept name and description arguments, 
+that is common for most resources in LAS.
 In addition we recommend to provide input and output [json-schemas](https://json-schema.org/understanding-json-schema/) 
 that can help you catch bad input immediately instead of triggering bugs at a later point in the workflow. 
 Use `las transitions update --help` for more information on how to update your transitions.
@@ -151,3 +152,19 @@ store the file and use it as input for creating the workflow
 ```commandline
 $ las workflows create workflow.json --name 'Predict and Approve' 
 ```
+
+###Execute workflow
+You can now define your `input.json` and execute your workflow with a simple call from the CLI
+```json
+{
+  "documentId": "las:document:<hex-uuid>",
+  "modelId": "las:model:<hex-uuid>"
+}
+```
+```commandline
+$ las workflows execute las:workflow:<hex-uuid> input.json 
+```
+You can also use [this](simple-demo/start_execution.py) script for execution, 
+or use or standard email-integration that will allow you to send in your documents by email. 
+ 
+
