@@ -152,8 +152,7 @@ Creates an asset handle, calls the POST /assets endpoint.
 
 #### Parameters:
 
-Name Type Description
-:------ :------ :------
+
 `content` *string* Content to POST (base64-encoded string \| Buffer)  
 
 **Returns:** *Promise*<[*Asset*](#asset)\>
@@ -191,8 +190,7 @@ Creates a document handle, calls the POST /documents endpoint.
 
 #### Parameters:
 
-Name Type Description
-:------ :------ :------
+
 `content` *string* \| *Buffer* Content to POST (base64 string \| Buffer)  
 `contentType` [*ContentType*](#contenttype) MIME type for the document handle  
 `options?` [*CreateDocumentOptions*](#interfacestypescreatedocumentoptionsmd) -
@@ -213,8 +211,7 @@ Create a prediction on a document using specified model, calls the POST /predict
 
 #### Parameters:
 
-Name Type Description
-:------ :------ :------
+
 `documentId` *string* Id of the document to run inference and create a prediction on  
 `modelId` *string* Id of the model to use for inference  
 `options?` [*CreatePredictionsOptions*](#interfacestypescreatepredictionsoptionsmd) -
@@ -235,8 +232,7 @@ Creates an secret handle, calls the POST /secrets endpoint.
 
 #### Parameters:
 
-Name Type Description
-:------ :------ :------
+
 `data` *Record*<any, any\> Object containing the data you want to keep secret  
 `options?` [*CreateSecretOptions*](#interfacestypescreatesecretoptionsmd) -
 
@@ -256,8 +252,7 @@ Creates a transition handle, calls the POST /transitions endpoint.
 
 #### Parameters:
 
-Name Type Description
-:------ :------ :------
+
 `transitionType` [*TransitionType*](#transitiontype) Type of transition "docker"\|"manual"  
 `options?` [*CreateTransitionOptions*](#interfacestypescreatetransitionoptionsmd) -
 
@@ -277,8 +272,7 @@ Creates a new user, calls the POST /users endpoint.
 
 #### Parameters:
 
-Name Type Description
-:------ :------ :------
+
 `email` *string* Email to the new user  
 `data?` [*CreateUserOptions*](#createuseroptions) -
 
@@ -298,8 +292,7 @@ Creates a new workflow, calls the POST /workflows endpoint.
 
 #### Parameters:
 
-Name Type Description
-:------ :------ :------
+
 `name` *string* Name of the workflow  
 `specification` [*WorkflowSpecification*](#workflowspecification) Specification of the workflow  
 `options?` [*CreateWorkflowOptions*](#createworkflowoptions) -
@@ -341,8 +334,7 @@ Will fail if transition is in use by one or more workflows.
 
 #### Parameters:
 
-Name Type Description
-:------ :------ :------
+
 `transitionId` *string* Id of the transition  
 
 **Returns:** *Promise*<[*Transition*](#transition)\>
@@ -361,8 +353,7 @@ Delete the user with the provided user_id, calls the DELETE /users/{userId} endp
 
 #### Parameters:
 
-Name Type Description
-:------ :------ :------
+
 `userId` *string* Id of the user  
 
 **Returns:** *Promise*<[*User*](#user)\>
@@ -381,8 +372,7 @@ Delete the workflow with the provided workflowId, calls the DELETE /workflows/{w
 
 #### Parameters:
 
-Name Type Description
-:------ :------ :------
+
 `workflowId` *string* Id of the workflow  
 
 **Returns:** *Promise*<[*Workflow*](#workflow)\>
@@ -402,8 +392,7 @@ calls the DELETE /workflows/{workflowId}/executions/{executionId} endpoint.
 
 #### Parameters:
 
-Name Type Description
-:------ :------ :------
+
 `workflowId` *string* Id of the workflow  
 `executionId` *string* Id of the execution  
 
@@ -423,8 +412,7 @@ Start executing a manual transition, calls the POST /transitions/{transitionId}/
 
 #### Parameters:
 
-Name Type Description
-:------ :------ :------
+
 `transitionId` *string* Id of the transition  
 
 **Returns:** *Promise*<[*TransitionExecution*](#transitionexecution)\>
@@ -443,8 +431,7 @@ Start a workflow execution, calls the POST /workflows/{workflowId}/executions en
 
 #### Parameters:
 
-Name Type Description
-:------ :------ :------
+
 `workflowId` *string* Id of the workflow  
 `input` *object* Input to the first step of the workflow  
 
@@ -464,8 +451,7 @@ Get asset from the REST API, calls the GET /assets/{assetId} endpoint.
 
 #### Parameters:
 
-Name Type Description
-:------ :------ :------
+
 `assetId` *string* Id of the asset  
 
 **Returns:** *Promise*<[*Asset*](#asset)\>
@@ -484,8 +470,7 @@ Get document from the REST API, calls the GET /documents/{documentId} endpoint.
 
 #### Parameters:
 
-Name Type Description
-:------ :------ :------
+
 `documentId` *string* Id of the document  
 
 **Returns:** *Promise*<[*LasDocument*](#lasdocument)\>
@@ -504,8 +489,7 @@ Get log, calls the GET /logs/{logId} endpoint.
 
 #### Parameters:
 
-Name Type Description
-:------ :------ :------
+
 `logId` *string* Id of the log  
 
 **Returns:** *Promise*<[*Log*](#log)\>
@@ -524,8 +508,7 @@ Get the transition with the provided transitionId, calls the GET /transitions/{t
 
 #### Parameters:
 
-Name Type Description
-:------ :------ :------
+
 `transitionId` *string* Id of the transition  
 
 **Returns:** *Promise*<[*Transition*](#transition)\>
@@ -544,8 +527,7 @@ Get information about a specific user, calls the GET /users/{user_id} endpoint.
 
 #### Parameters:
 
-Name Type Description
-:------ :------ :------
+
 `userId` *string* Id of the user  
 
 **Returns:** *Promise*<[*User*](#user)\>
@@ -564,8 +546,7 @@ Get the workflow with the provided workflowId, calls the GET /workflows/{workflo
 
 #### Parameters:
 
-Name Type Description
-:------ :------ :------
+
 `workflowId` *string* Id of the workflow  
 
 **Returns:** *Promise*<[*Workflow*](#workflow)\>
@@ -675,8 +656,7 @@ List executions in a transition, calls the GET /transitions/{transitionId}/execu
 
 #### Parameters:
 
-Name Type Description
-:------ :------ :------
+
 `transitionId` *string* Id of the transition  
 `options?` [*TransitionExecutionListOptions*](#transitionexecutionlistoptions) -
 
@@ -734,8 +714,7 @@ List executions in a workflow, calls the GET /workflows/{workflowId}/executions 
 
 #### Parameters:
 
-Name Type Description
-:------ :------ :------
+
 `workflowId` *string* Id of the workflow  
 `options?` [*ListWorkflowExecutionsOptions*](#listworkflowexecutionsoptions) -
 
@@ -772,8 +751,7 @@ ___
 
 #### Type parameters:
 
-Name
-:------
+
 `T`
 
 #### Parameters:
@@ -794,8 +772,7 @@ ___
 
 #### Type parameters:
 
-Name
-:------
+
 `T`
 
 #### Parameters:
@@ -816,8 +793,7 @@ ___
 
 #### Type parameters:
 
-Name
-:------
+
 `T`
 
 #### Parameters:
@@ -838,8 +814,7 @@ ___
 
 #### Type parameters:
 
-Name
-:------
+
 `T`
 
 #### Parameters:
@@ -862,8 +837,7 @@ Updates an asset, calls the PATCH /assets/assetId endpoint.
 
 #### Parameters:
 
-Name Type Description
-:------ :------ :------
+
 `assetId` *string* Id of the asset  
 `data` [*UpdateAssetOptions*](#interfacestypesupdateassetoptionsmd) -
 
@@ -885,8 +859,7 @@ This enables the API to learn from past mistakes.
 
 #### Parameters:
 
-Name Type Description
-:------ :------ :------
+
 `documentId` *string* Id of the document  
 `data` [*UpdateDocumentOptions*](#interfacestypesupdatedocumentoptionsmd) -
 
@@ -906,8 +879,7 @@ Updates a secret, calls the PATCH /secrets/secretId endpoint.
 
 #### Parameters:
 
-Name Type Description
-:------ :------ :------
+
 `secretId` *string* Id of the secret  
 `data` [*UpdateSecretOptions*](#interfacestypesupdatesecretoptionsmd) -
 
@@ -925,8 +897,7 @@ Updates a transition, calls the PATCH /transitions/transitionId endpoint.
 
 #### Parameters:
 
-Name Type Description
-:------ :------ :------
+
 `transitionId` *string* Id of the transition  
 `data` [*UpdateTransitionOptions*](#updatetransitionoptions) Transition fields to PATCH  
 
@@ -947,8 +918,7 @@ PATCH /transitions/{transition_id}/executions/{execution_id} endpoint.
 
 #### Parameters:
 
-Name Type Description
-:------ :------ :------
+
 `transitionId` *string* Id of the transition that performs the execution  
 `executionId` *string* Id of the execution to update  
 `data` [*UpdateTransitionExecution*](#interfacestypesupdatetransitionexecutionmd) -
@@ -969,8 +939,7 @@ Updates a user, calls the PATCH /users/{userId} endpoint.
 
 #### Parameters:
 
-Name Type Description
-:------ :------ :------
+
 `userId` *string* Id of the user  
 `data` [*UpdateUserOptions*](#updateuseroptions) -
 
@@ -990,8 +959,7 @@ Updates a workflow, calls the PATCH /workflows/workflowId endpoint.
 
 #### Parameters:
 
-Name Type Description
-:------ :------ :------
+
 `workflowId` *string* Id of the workflow  
 `data` [*UpdateWorkflowOptions*](#interfacestypesupdateworkflowoptionsmd) Workflow fields to PATCH  
 
@@ -2288,8 +2256,7 @@ ___
 
 #### Type declaration:
 
-Name Type Description
-:------ :------ :------
+
 `label` *string* maxLength: 36, minLength: 1, pattern: ^[0-9A-Za-z_]+$  
 `value` *string* \| *boolean* \| *null* maxLength: 64, minLength: 1  
 
@@ -2303,8 +2270,7 @@ ___
 
 #### Type declaration:
 
-Name Type Description
-:------ :------ :------
+
 `batchId`? *string* pattern: ^las:batch:[a-f0-9]{32}$  
 `consentId`? *string* pattern: ^las:consent:[a-f0-9]{32}$  
 `content`? *string* minimum: 1  
@@ -3035,8 +3001,7 @@ ___
 
 #### Type declaration:
 
-Name Type Description
-:------ :------ :------
+
 `label` *string* maxLength: 36, minLength: 1, pattern: ^[0-9A-Za-z_]+$  
 `value` *string* \| *boolean* \| *null* maxLength: 64, minLength: 1  
 
@@ -3050,8 +3015,7 @@ ___
 
 #### Type declaration:
 
-Name Type Description
-:------ :------ :------
+
 `batchId`? *string* pattern: ^las:batch:[a-f0-9]{32}$  
 `consentId`? *string* pattern: ^las:consent:[a-f0-9]{32}$  
 `content`? *string* minimum: 1  
@@ -3279,7 +3243,7 @@ ___
 
 ### Transition
 
-Ƭ **Transition**: *object*
+Ƭ **Transition**: *object*s
 
 #### Type declaration:
 
@@ -3302,13 +3266,14 @@ ___
 
 #### Type declaration:
 
+
 `completedBy` *string* \| *null*
-`endTime` *string* \| *null* 
-`executionId` *string* 
+`endTime` *string* \| *null*
+`executionId` *string*
 `input` *Record*<any, any\>
 `startTime` *string* \| *null*
 `status` *succeeded* \| *failed* \| *retry* \| *running* \| *rejected*
-`transitionId`*string*
+`transitionId` *string*
 
 Defined in: [types.ts:114](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/types.ts#L114)
 
