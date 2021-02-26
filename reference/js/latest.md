@@ -64,10 +64,6 @@ $ npm run test test
 
 A high-level http client for communicating with the Lucidtech REST API
 
-## Hierarchy
-
-* **Client**
-
 ## Table of contents
 
 ### Constructors
@@ -131,9 +127,8 @@ A high-level http client for communicating with the Lucidtech REST API
 
 #### Parameters:
 
-Name | Type |
------- | ------ |
-`credentials` | [*Credentials*](#classescredentialscredentials-1md) |
+
+`credentials` [*Credentials*](#classescredentialscredentials-1md)
 
 **Returns:** [*Client*](#classesclientclient-1md)
 
@@ -157,9 +152,9 @@ Creates an asset handle, calls the POST /assets endpoint.
 
 #### Parameters:
 
-Name | Type | Description |
------- | ------ | ------ |
-`content` | *string* | Content to POST (base64-encoded string | Buffer)   |
+Name Type Description
+:------ :------ :------
+`content` *string* Content to POST (base64-encoded string \| Buffer)  
 
 **Returns:** *Promise*<[*Asset*](#asset)\>
 
@@ -177,9 +172,8 @@ Creates a batch, calls the POST /batches endpoint.
 
 #### Parameters:
 
-Name | Type |
------- | ------ |
-`options` | [*CreateBatchOptions*](#createbatchoptions) |
+
+`options` [*CreateBatchOptions*](#createbatchoptions)
 
 **Returns:** *Promise*<[*Batch*](#batch)\>
 
@@ -197,11 +191,11 @@ Creates a document handle, calls the POST /documents endpoint.
 
 #### Parameters:
 
-Name | Type | Description |
------- | ------ | ------ |
-`content` | *string* \| *Buffer* | Content to POST (base64 string | Buffer)   |
-`contentType` | [*ContentType*](#contenttype) | MIME type for the document handle   |
-`options?` | [*CreateDocumentOptions*](#interfacestypescreatedocumentoptionsmd) | - |
+Name Type Description
+:------ :------ :------
+`content` *string* \| *Buffer* Content to POST (base64 string \| Buffer)  
+`contentType` [*ContentType*](#contenttype) MIME type for the document handle  
+`options?` [*CreateDocumentOptions*](#interfacestypescreatedocumentoptionsmd) -
 
 **Returns:** *Promise*<[*LasDocument*](#lasdocument)\>
 
@@ -219,11 +213,11 @@ Create a prediction on a document using specified model, calls the POST /predict
 
 #### Parameters:
 
-Name | Type | Description |
------- | ------ | ------ |
-`documentId` | *string* | Id of the document to run inference and create a prediction on   |
-`modelId` | *string* | Id of the model to use for inference   |
-`options?` | [*CreatePredictionsOptions*](#interfacestypescreatepredictionsoptionsmd) | - |
+Name Type Description
+:------ :------ :------
+`documentId` *string* Id of the document to run inference and create a prediction on  
+`modelId` *string* Id of the model to use for inference  
+`options?` [*CreatePredictionsOptions*](#interfacestypescreatepredictionsoptionsmd) -
 
 **Returns:** *Promise*<[*PredictionResponse*](#predictionresponse)\>
 
@@ -235,16 +229,16 @@ ___
 
 ### createSecret
 
-▸ **createSecret**(`data`: *Record*<*any*, *any*\>, `options?`: [*CreateSecretOptions*](#interfacestypescreatesecretoptionsmd)): *Promise*<[*Secret*](#secret)\>
+▸ **createSecret**(`data`: *Record*<any, any\>, `options?`: [*CreateSecretOptions*](#interfacestypescreatesecretoptionsmd)): *Promise*<[*Secret*](#secret)\>
 
 Creates an secret handle, calls the POST /secrets endpoint.
 
 #### Parameters:
 
-Name | Type | Description |
------- | ------ | ------ |
-`data` | *Record*<*any*, *any*\> | Object containing the data you want to keep secret   |
-`options?` | [*CreateSecretOptions*](#interfacestypescreatesecretoptionsmd) | - |
+Name Type Description
+:------ :------ :------
+`data` *Record*<any, any\> Object containing the data you want to keep secret  
+`options?` [*CreateSecretOptions*](#interfacestypescreatesecretoptionsmd) -
 
 **Returns:** *Promise*<[*Secret*](#secret)\>
 
@@ -262,10 +256,10 @@ Creates a transition handle, calls the POST /transitions endpoint.
 
 #### Parameters:
 
-Name | Type | Description |
------- | ------ | ------ |
-`transitionType` | [*TransitionType*](#transitiontype) | Type of transition "docker"|"manual"   |
-`options?` | [*CreateTransitionOptions*](#interfacestypescreatetransitionoptionsmd) | - |
+Name Type Description
+:------ :------ :------
+`transitionType` [*TransitionType*](#transitiontype) Type of transition "docker"\|"manual"  
+`options?` [*CreateTransitionOptions*](#interfacestypescreatetransitionoptionsmd) -
 
 **Returns:** *Promise*<[*Transition*](#transition)\>
 
@@ -283,10 +277,10 @@ Creates a new user, calls the POST /users endpoint.
 
 #### Parameters:
 
-Name | Type | Description |
------- | ------ | ------ |
-`email` | *string* | Email to the new user   |
-`data?` | [*CreateUserOptions*](#createuseroptions) | - |
+Name Type Description
+:------ :------ :------
+`email` *string* Email to the new user  
+`data?` [*CreateUserOptions*](#createuseroptions) -
 
 **Returns:** *Promise*<[*User*](#user)\>
 
@@ -304,11 +298,11 @@ Creates a new workflow, calls the POST /workflows endpoint.
 
 #### Parameters:
 
-Name | Type | Description |
------- | ------ | ------ |
-`name` | *string* | Name of the workflow   |
-`specification` | [*WorkflowSpecification*](#workflowspecification) | Specification of the workflow   |
-`options?` | [*CreateWorkflowOptions*](#createworkflowoptions) | - |
+Name Type Description
+:------ :------ :------
+`name` *string* Name of the workflow  
+`specification` [*WorkflowSpecification*](#workflowspecification) Specification of the workflow  
+`options?` [*CreateWorkflowOptions*](#createworkflowoptions) -
 
 **Returns:** *Promise*<[*Workflow*](#workflow)\>
 
@@ -327,9 +321,8 @@ Will delete all documents when no consentId is provided.
 
 #### Parameters:
 
-Name | Type |
------- | ------ |
-`options?` | [*DeleteDocumentOptions*](#interfacestypesdeletedocumentoptionsmd) |
+
+`options?` [*DeleteDocumentOptions*](#interfacestypesdeletedocumentoptionsmd)
 
 **Returns:** *Promise*<[*LasDocumentList*](#lasdocumentlist)\>
 
@@ -348,9 +341,9 @@ Will fail if transition is in use by one or more workflows.
 
 #### Parameters:
 
-Name | Type | Description |
------- | ------ | ------ |
-`transitionId` | *string* | Id of the transition   |
+Name Type Description
+:------ :------ :------
+`transitionId` *string* Id of the transition  
 
 **Returns:** *Promise*<[*Transition*](#transition)\>
 
@@ -368,9 +361,9 @@ Delete the user with the provided user_id, calls the DELETE /users/{userId} endp
 
 #### Parameters:
 
-Name | Type | Description |
------- | ------ | ------ |
-`userId` | *string* | Id of the user   |
+Name Type Description
+:------ :------ :------
+`userId` *string* Id of the user  
 
 **Returns:** *Promise*<[*User*](#user)\>
 
@@ -388,9 +381,9 @@ Delete the workflow with the provided workflowId, calls the DELETE /workflows/{w
 
 #### Parameters:
 
-Name | Type | Description |
------- | ------ | ------ |
-`workflowId` | *string* | Id of the workflow   |
+Name Type Description
+:------ :------ :------
+`workflowId` *string* Id of the workflow  
 
 **Returns:** *Promise*<[*Workflow*](#workflow)\>
 
@@ -409,10 +402,10 @@ calls the DELETE /workflows/{workflowId}/executions/{executionId} endpoint.
 
 #### Parameters:
 
-Name | Type | Description |
------- | ------ | ------ |
-`workflowId` | *string* | Id of the workflow   |
-`executionId` | *string* | Id of the execution   |
+Name Type Description
+:------ :------ :------
+`workflowId` *string* Id of the workflow  
+`executionId` *string* Id of the execution  
 
 **Returns:** *Promise*<[*WorkflowExecution*](#workflowexecution)\>
 
@@ -430,9 +423,9 @@ Start executing a manual transition, calls the POST /transitions/{transitionId}/
 
 #### Parameters:
 
-Name | Type | Description |
------- | ------ | ------ |
-`transitionId` | *string* | Id of the transition   |
+Name Type Description
+:------ :------ :------
+`transitionId` *string* Id of the transition  
 
 **Returns:** *Promise*<[*TransitionExecution*](#transitionexecution)\>
 
@@ -450,10 +443,10 @@ Start a workflow execution, calls the POST /workflows/{workflowId}/executions en
 
 #### Parameters:
 
-Name | Type | Description |
------- | ------ | ------ |
-`workflowId` | *string* | Id of the workflow   |
-`input` | *object* | Input to the first step of the workflow   |
+Name Type Description
+:------ :------ :------
+`workflowId` *string* Id of the workflow  
+`input` *object* Input to the first step of the workflow  
 
 **Returns:** *Promise*<[*WorkflowExecution*](#workflowexecution)\>
 
@@ -471,9 +464,9 @@ Get asset from the REST API, calls the GET /assets/{assetId} endpoint.
 
 #### Parameters:
 
-Name | Type | Description |
------- | ------ | ------ |
-`assetId` | *string* | Id of the asset   |
+Name Type Description
+:------ :------ :------
+`assetId` *string* Id of the asset  
 
 **Returns:** *Promise*<[*Asset*](#asset)\>
 
@@ -491,9 +484,9 @@ Get document from the REST API, calls the GET /documents/{documentId} endpoint.
 
 #### Parameters:
 
-Name | Type | Description |
------- | ------ | ------ |
-`documentId` | *string* | Id of the document   |
+Name Type Description
+:------ :------ :------
+`documentId` *string* Id of the document  
 
 **Returns:** *Promise*<[*LasDocument*](#lasdocument)\>
 
@@ -511,9 +504,9 @@ Get log, calls the GET /logs/{logId} endpoint.
 
 #### Parameters:
 
-Name | Type | Description |
------- | ------ | ------ |
-`logId` | *string* | Id of the log   |
+Name Type Description
+:------ :------ :------
+`logId` *string* Id of the log  
 
 **Returns:** *Promise*<[*Log*](#log)\>
 
@@ -531,9 +524,9 @@ Get the transition with the provided transitionId, calls the GET /transitions/{t
 
 #### Parameters:
 
-Name | Type | Description |
------- | ------ | ------ |
-`transitionId` | *string* | Id of the transition   |
+Name Type Description
+:------ :------ :------
+`transitionId` *string* Id of the transition  
 
 **Returns:** *Promise*<[*Transition*](#transition)\>
 
@@ -551,9 +544,9 @@ Get information about a specific user, calls the GET /users/{user_id} endpoint.
 
 #### Parameters:
 
-Name | Type | Description |
------- | ------ | ------ |
-`userId` | *string* | Id of the user   |
+Name Type Description
+:------ :------ :------
+`userId` *string* Id of the user  
 
 **Returns:** *Promise*<[*User*](#user)\>
 
@@ -571,9 +564,9 @@ Get the workflow with the provided workflowId, calls the GET /workflows/{workflo
 
 #### Parameters:
 
-Name | Type | Description |
------- | ------ | ------ |
-`workflowId` | *string* | Id of the workflow   |
+Name Type Description
+:------ :------ :------
+`workflowId` *string* Id of the workflow  
 
 **Returns:** *Promise*<[*Workflow*](#workflow)\>
 
@@ -591,9 +584,8 @@ List assets available, calls the GET /assets endpoint.
 
 #### Parameters:
 
-Name | Type |
------- | ------ |
-`options?` | [*PaginationOptions*](#interfacestypespaginationoptionsmd) |
+
+`options?` [*PaginationOptions*](#interfacestypespaginationoptionsmd)
 
 **Returns:** *Promise*<[*AssetList*](#assetlist)\>
 
@@ -611,9 +603,8 @@ List documents available for inference, calls the GET /documents endpoint.
 
 #### Parameters:
 
-Name | Type |
------- | ------ |
-`options?` | [*ListDocumentsOptions*](#listdocumentsoptions) |
+
+`options?` [*ListDocumentsOptions*](#listdocumentsoptions)
 
 **Returns:** *Promise*<[*LasDocumentList*](#lasdocumentlist)\>
 
@@ -631,9 +622,8 @@ List models available, calls the GET /models endpoint.
 
 #### Parameters:
 
-Name | Type |
------- | ------ |
-`options?` | [*PaginationOptions*](#interfacestypespaginationoptionsmd) |
+
+`options?` [*PaginationOptions*](#interfacestypespaginationoptionsmd)
 
 **Returns:** *Promise*<[*ModelList*](#modellist)\>
 
@@ -649,9 +639,8 @@ ___
 
 #### Parameters:
 
-Name | Type |
------- | ------ |
-`options?` | [*PaginationOptions*](#interfacestypespaginationoptionsmd) |
+
+`options?` [*PaginationOptions*](#interfacestypespaginationoptionsmd)
 
 **Returns:** *Promise*<[*PredictionList*](#predictionlist)\>
 
@@ -667,9 +656,8 @@ List secrets available, calls the GET /secrets endpoint.
 
 #### Parameters:
 
-Name | Type |
------- | ------ |
-`options?` | [*PaginationOptions*](#interfacestypespaginationoptionsmd) |
+
+`options?` [*PaginationOptions*](#interfacestypespaginationoptionsmd)
 
 **Returns:** *Promise*<[*SecretList*](#secretlist)\>
 
@@ -687,10 +675,10 @@ List executions in a transition, calls the GET /transitions/{transitionId}/execu
 
 #### Parameters:
 
-Name | Type | Description |
------- | ------ | ------ |
-`transitionId` | *string* | Id of the transition   |
-`options?` | [*TransitionExecutionListOptions*](#transitionexecutionlistoptions) | - |
+Name Type Description
+:------ :------ :------
+`transitionId` *string* Id of the transition  
+`options?` [*TransitionExecutionListOptions*](#transitionexecutionlistoptions) -
 
 **Returns:** *Promise*<[*TransitionExecutionList*](#transitionexecutionlist)\>
 
@@ -708,9 +696,8 @@ List transitions, calls the GET /transitions endpoint.
 
 #### Parameters:
 
-Name | Type |
------- | ------ |
-`options?` | [*ListTransitionOptions*](#listtransitionoptions) |
+
+`options?` [*ListTransitionOptions*](#listtransitionoptions)
 
 **Returns:** *Promise*<[*TransitionList*](#transitionlist)\>
 
@@ -728,9 +715,8 @@ List users, calls the GET /users endpoint.
 
 #### Parameters:
 
-Name | Type |
------- | ------ |
-`options?` | [*PaginationOptions*](#interfacestypespaginationoptionsmd) |
+
+`options?` [*PaginationOptions*](#interfacestypespaginationoptionsmd)
 
 **Returns:** *Promise*<[*UserList*](#userlist)\>
 
@@ -748,10 +734,10 @@ List executions in a workflow, calls the GET /workflows/{workflowId}/executions 
 
 #### Parameters:
 
-Name | Type | Description |
------- | ------ | ------ |
-`workflowId` | *string* | Id of the workflow   |
-`options?` | [*ListWorkflowExecutionsOptions*](#listworkflowexecutionsoptions) | - |
+Name Type Description
+:------ :------ :------
+`workflowId` *string* Id of the workflow  
+`options?` [*ListWorkflowExecutionsOptions*](#listworkflowexecutionsoptions) -
 
 **Returns:** *Promise*<[*WorkflowExecutionList*](#workflowexecutionlist)\>
 
@@ -769,9 +755,8 @@ List workflows, calls the GET /workflows endpoint.
 
 #### Parameters:
 
-Name | Type |
------- | ------ |
-`options?` | [*PaginationOptions*](#interfacestypespaginationoptionsmd) |
+
+`options?` [*PaginationOptions*](#interfacestypespaginationoptionsmd)
 
 **Returns:** *Promise*<[*WorkflowList*](#workflowlist)\>
 
@@ -787,16 +772,15 @@ ___
 
 #### Type parameters:
 
-Name |
------- |
-`T` |
+Name
+:------
+`T`
 
 #### Parameters:
 
-Name | Type |
------- | ------ |
-`path` | *string* |
-`query?` | *any* |
+
+`path` *string*
+`query?` *any*
 
 **Returns:** *Promise*<T\>
 
@@ -810,16 +794,15 @@ ___
 
 #### Type parameters:
 
-Name |
------- |
-`T` |
+Name
+:------
+`T`
 
 #### Parameters:
 
-Name | Type |
------- | ------ |
-`path` | *string* |
-`query?` | *any* |
+
+`path` *string*
+`query?` *any*
 
 **Returns:** *Promise*<T\>
 
@@ -833,16 +816,15 @@ ___
 
 #### Type parameters:
 
-Name |
------- |
-`T` |
+Name
+:------
+`T`
 
 #### Parameters:
 
-Name | Type |
------- | ------ |
-`path` | *string* |
-`body` | *any* |
+
+`path` *string*
+`body` *any*
 
 **Returns:** *Promise*<T\>
 
@@ -856,16 +838,15 @@ ___
 
 #### Type parameters:
 
-Name |
------- |
-`T` |
+Name
+:------
+`T`
 
 #### Parameters:
 
-Name | Type |
------- | ------ |
-`path` | *string* |
-`body` | *any* |
+
+`path` *string*
+`body` *any*
 
 **Returns:** *Promise*<T\>
 
@@ -881,10 +862,10 @@ Updates an asset, calls the PATCH /assets/assetId endpoint.
 
 #### Parameters:
 
-Name | Type | Description |
------- | ------ | ------ |
-`assetId` | *string* | Id of the asset   |
-`data` | [*UpdateAssetOptions*](#interfacestypesupdateassetoptionsmd) | - |
+Name Type Description
+:------ :------ :------
+`assetId` *string* Id of the asset  
+`data` [*UpdateAssetOptions*](#interfacestypesupdateassetoptionsmd) -
 
 **Returns:** *Promise*<[*Asset*](#asset)\>
 
@@ -904,10 +885,10 @@ This enables the API to learn from past mistakes.
 
 #### Parameters:
 
-Name | Type | Description |
------- | ------ | ------ |
-`documentId` | *string* | Id of the document   |
-`data` | [*UpdateDocumentOptions*](#interfacestypesupdatedocumentoptionsmd) | - |
+Name Type Description
+:------ :------ :------
+`documentId` *string* Id of the document  
+`data` [*UpdateDocumentOptions*](#interfacestypesupdatedocumentoptionsmd) -
 
 **Returns:** *Promise*<[*LasDocument*](#lasdocument)\>
 
@@ -925,10 +906,10 @@ Updates a secret, calls the PATCH /secrets/secretId endpoint.
 
 #### Parameters:
 
-Name | Type | Description |
------- | ------ | ------ |
-`secretId` | *string* | Id of the secret   |
-`data` | [*UpdateSecretOptions*](#interfacestypesupdatesecretoptionsmd) | - |
+Name Type Description
+:------ :------ :------
+`secretId` *string* Id of the secret  
+`data` [*UpdateSecretOptions*](#interfacestypesupdatesecretoptionsmd) -
 
 **Returns:** *Promise*<[*Secret*](#secret)\>
 
@@ -944,10 +925,10 @@ Updates a transition, calls the PATCH /transitions/transitionId endpoint.
 
 #### Parameters:
 
-Name | Type | Description |
------- | ------ | ------ |
-`transitionId` | *string* | Id of the transition   |
-`data` | [*UpdateTransitionOptions*](#updatetransitionoptions) | Transition fields to PATCH   |
+Name Type Description
+:------ :------ :------
+`transitionId` *string* Id of the transition  
+`data` [*UpdateTransitionOptions*](#updatetransitionoptions) Transition fields to PATCH  
 
 **Returns:** *Promise*<[*Transition*](#transition)\>
 
@@ -966,11 +947,11 @@ PATCH /transitions/{transition_id}/executions/{execution_id} endpoint.
 
 #### Parameters:
 
-Name | Type | Description |
------- | ------ | ------ |
-`transitionId` | *string* | Id of the transition that performs the execution   |
-`executionId` | *string* | Id of the execution to update   |
-`data` | [*UpdateTransitionExecution*](#interfacestypesupdatetransitionexecutionmd) | - |
+Name Type Description
+:------ :------ :------
+`transitionId` *string* Id of the transition that performs the execution  
+`executionId` *string* Id of the execution to update  
+`data` [*UpdateTransitionExecution*](#interfacestypesupdatetransitionexecutionmd) -
 
 **Returns:** *Promise*<[*TransitionExecution*](#transitionexecution)\>
 
@@ -988,10 +969,10 @@ Updates a user, calls the PATCH /users/{userId} endpoint.
 
 #### Parameters:
 
-Name | Type | Description |
------- | ------ | ------ |
-`userId` | *string* | Id of the user   |
-`data` | [*UpdateUserOptions*](#updateuseroptions) | - |
+Name Type Description
+:------ :------ :------
+`userId` *string* Id of the user  
+`data` [*UpdateUserOptions*](#updateuseroptions) -
 
 **Returns:** *Promise*<[*User*](#user)\>
 
@@ -1009,10 +990,10 @@ Updates a workflow, calls the PATCH /workflows/workflowId endpoint.
 
 #### Parameters:
 
-Name | Type | Description |
------- | ------ | ------ |
-`workflowId` | *string* | Id of the workflow   |
-`data` | [*UpdateWorkflowOptions*](#interfacestypesupdateworkflowoptionsmd) | Workflow fields to PATCH   |
+Name Type Description
+:------ :------ :------
+`workflowId` *string* Id of the workflow  
+`data` [*UpdateWorkflowOptions*](#interfacestypesupdateworkflowoptionsmd) Workflow fields to PATCH  
 
 **Returns:** *Promise*<[*Workflow*](#workflow)\>
 
@@ -1031,15 +1012,7 @@ Defined in: [client.ts:321](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7
 
 Use to fetch and store credentials and to generate/cache an access token
 
-## Hierarchy
-
-* **Credentials**
-
 ## Table of contents
-
-### Constructors
-
-- [constructor](#constructor)
 
 ### Properties
 
@@ -1049,24 +1022,6 @@ Use to fetch and store credentials and to generate/cache an access token
 ### Methods
 
 - [getAccessToken](#getaccesstoken)
-
-## Constructors
-
-### constructor
-
-\+ **new Credentials**(`apiEndpoint`: *string*, `apiKey`: *string*, `storage?`: [*TokenStorage*](#interfacesstoragetokenstoragemd)<[*Token*](#classescredentialstokenmd)\>): [*Credentials*](#classescredentialscredentials-1md)
-
-#### Parameters:
-
-Name | Type |
------- | ------ |
-`apiEndpoint` | *string* |
-`apiKey` | *string* |
-`storage?` | [*TokenStorage*](#interfacesstoragetokenstoragemd)<[*Token*](#classescredentialstokenmd)\> |
-
-**Returns:** [*Credentials*](#classescredentialscredentials-1md)
-
-Defined in: [credentials.ts:43](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/credentials.ts#L43)
 
 ## Properties
 
@@ -1088,14 +1043,14 @@ Defined in: [credentials.ts:39](https://github.com/LucidtechAI/las-sdk-js/blob/c
 
 ### getAccessToken
 
-▸ **getAccessToken**(): *Promise*<*string*\>
+▸ **getAccessToken**(): *Promise*<string\>
 
 Method used to get and cache an access token. Algorithm used:
 1. Look for a valid token in memory.
 2. Look for a valid token in the storage (if provided);
 3. Fetch a new token from server and cache it (both in memory and in storage).
 
-**Returns:** *Promise*<*string*\>
+**Returns:** *Promise*<string\>
 
 Defined in: [credentials.ts:57](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/credentials.ts#L57)
 
@@ -1109,10 +1064,6 @@ Defined in: [credentials.ts:57](https://github.com/LucidtechAI/las-sdk-js/blob/c
 [credentials](#modulescredentialsmd).Token
 
 Wrapper class for an AWS Cognito token
-
-## Hierarchy
-
-* **Token**
 
 ## Table of contents
 
@@ -1138,11 +1089,10 @@ Wrapper class for an AWS Cognito token
 
 #### Parameters:
 
-Name | Type |
------- | ------ |
-`accessToken` | *string* |
-`expiration` | *number* |
-`refreshToken?` | *string* |
+
+`accessToken` *string*
+`expiration` *number*
+`refreshToken?` *string*
 
 **Returns:** [*Token*](#classescredentialstokenmd)
 
@@ -1193,10 +1143,6 @@ Defined in: [credentials.ts:17](https://github.com/LucidtechAI/las-sdk-js/blob/c
 
 [index](#modulesindexmd).CreateDocumentOptions
 
-## Hierarchy
-
-* **CreateDocumentOptions**
-
 ## Table of contents
 
 ### Properties
@@ -1238,10 +1184,6 @@ Defined in: [types.ts:24](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5
 
 [index](#modulesindexmd).CreatePredictionsOptions
 
-## Hierarchy
-
-* **CreatePredictionsOptions**
-
 ## Table of contents
 
 ### Properties
@@ -1274,10 +1216,6 @@ Defined in: [types.ts:8](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/
 
 [index](#modulesindexmd).CreateSecretOptions
 
-## Hierarchy
-
-* **CreateSecretOptions**
-
 ## Table of contents
 
 ### Properties
@@ -1301,10 +1239,6 @@ Defined in: [types.ts:258](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a
 
 [index](#modulesindexmd).CreateTransitionOptions
 
-## Hierarchy
-
-* **CreateTransitionOptions**
-
 ## Table of contents
 
 ### Properties
@@ -1327,7 +1261,7 @@ ___
 
 ### inputJsonSchema
 
-• `Optional` **inputJsonSchema**: *undefined* \| *Record*<*any*, *any*\>
+• `Optional` **inputJsonSchema**: *undefined* \| *Record*<any, any\>
 
 Defined in: [types.ts:57](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/types.ts#L57)
 
@@ -1343,7 +1277,7 @@ ___
 
 ### outputJsonSchema
 
-• `Optional` **outputJsonSchema**: *undefined* \| *Record*<*any*, *any*\>
+• `Optional` **outputJsonSchema**: *undefined* \| *Record*<any, any\>
 
 Defined in: [types.ts:58](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/types.ts#L58)
 
@@ -1363,10 +1297,6 @@ Defined in: [types.ts:60](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5
 # Interface: DeleteDocumentOptions
 
 [index](#modulesindexmd).DeleteDocumentOptions
-
-## Hierarchy
-
-* **DeleteDocumentOptions**
 
 ## Table of contents
 
@@ -1390,10 +1320,6 @@ Defined in: [types.ts:185](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a
 # Interface: PaginationOptions
 
 [index](#modulesindexmd).PaginationOptions
-
-## Hierarchy
-
-* **PaginationOptions**
 
 ## Table of contents
 
@@ -1427,10 +1353,6 @@ Defined in: [types.ts:14](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5
 
 [index](#modulesindexmd).UpdateAssetOptions
 
-## Hierarchy
-
-* **UpdateAssetOptions**
-
 ## Table of contents
 
 ### Properties
@@ -1453,10 +1375,6 @@ Defined in: [types.ts:320](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a
 # Interface: UpdateDocumentOptions
 
 [index](#modulesindexmd).UpdateDocumentOptions
-
-## Hierarchy
-
-* **UpdateDocumentOptions**
 
 ## Table of contents
 
@@ -1481,10 +1399,6 @@ Defined in: [types.ts:28](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5
 
 [index](#modulesindexmd).UpdateSecretOptions
 
-## Hierarchy
-
-* **UpdateSecretOptions**
-
 ## Table of contents
 
 ### Properties
@@ -1497,7 +1411,7 @@ Defined in: [types.ts:28](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5
 
 ### data
 
-• `Optional` **data**: *undefined* \| *Record*<*any*, *any*\>
+• `Optional` **data**: *undefined* \| *Record*<any, any\>
 
 Defined in: [types.ts:262](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/types.ts#L262)
 
@@ -1526,10 +1440,6 @@ Defined in: [types.ts:264](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a
 
 [index](#modulesindexmd).UpdateTransitionExecution
 
-## Hierarchy
-
-* **UpdateTransitionExecution**
-
 ## Table of contents
 
 ### Properties
@@ -1550,7 +1460,7 @@ ___
 
 ### output
 
-• `Optional` **output**: *undefined* \| *Record*<*any*, *any*\>
+• `Optional` **output**: *undefined* \| *Record*<any, any\>
 
 Defined in: [types.ts:51](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/types.ts#L51)
 
@@ -1570,10 +1480,6 @@ Defined in: [types.ts:50](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5
 # Interface: UpdateWorkflowOptions
 
 [index](#modulesindexmd).UpdateWorkflowOptions
-
-## Hierarchy
-
-* **UpdateWorkflowOptions**
 
 ## Table of contents
 
@@ -1609,13 +1515,8 @@ Defined in: [types.ts:150](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a
 
 ## Type parameters
 
-Name | Type |
------- | ------ |
-`T` | [*Token*](#classescredentialstokenmd) |
 
-## Hierarchy
-
-* **TokenStorage**
+`T` [*Token*](#classescredentialstokenmd)
 
 ## Table of contents
 
@@ -1630,6 +1531,14 @@ Name | Type |
 
 • **getPersistentToken**: () => *null* \| T
 
+#### Type declaration:
+
+▸ (): *null* \| T
+
+**Returns:** *null* \| T
+
+Defined in: [storage.ts:5](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/storage.ts#L5)
+
 Defined in: [storage.ts:5](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/storage.ts#L5)
 
 ___
@@ -1637,6 +1546,19 @@ ___
 ### setPersistentToken
 
 • **setPersistentToken**: (`value`: T) => *void*
+
+#### Type declaration:
+
+▸ (`value`: T): *void*
+
+#### Parameters:
+
+
+`value` T
+
+**Returns:** *void*
+
+Defined in: [storage.ts:6](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/storage.ts#L6)
 
 Defined in: [storage.ts:6](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/storage.ts#L6)
 
@@ -1648,10 +1570,6 @@ Defined in: [storage.ts:6](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a
 # Interface: CreateDocumentOptions
 
 [types](#modulestypesmd).CreateDocumentOptions
-
-## Hierarchy
-
-* **CreateDocumentOptions**
 
 ## Table of contents
 
@@ -1694,10 +1612,6 @@ Defined in: [types.ts:24](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5
 
 [types](#modulestypesmd).CreatePredictionsOptions
 
-## Hierarchy
-
-* **CreatePredictionsOptions**
-
 ## Table of contents
 
 ### Properties
@@ -1730,10 +1644,6 @@ Defined in: [types.ts:8](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/
 
 [types](#modulestypesmd).CreateSecretOptions
 
-## Hierarchy
-
-* **CreateSecretOptions**
-
 ## Table of contents
 
 ### Properties
@@ -1757,10 +1667,6 @@ Defined in: [types.ts:258](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a
 
 [types](#modulestypesmd).CreateTransitionOptions
 
-## Hierarchy
-
-* **CreateTransitionOptions**
-
 ## Table of contents
 
 ### Properties
@@ -1783,7 +1689,7 @@ ___
 
 ### inputJsonSchema
 
-• `Optional` **inputJsonSchema**: *undefined* \| *Record*<*any*, *any*\>
+• `Optional` **inputJsonSchema**: *undefined* \| *Record*<any, any\>
 
 Defined in: [types.ts:57](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/types.ts#L57)
 
@@ -1799,7 +1705,7 @@ ___
 
 ### outputJsonSchema
 
-• `Optional` **outputJsonSchema**: *undefined* \| *Record*<*any*, *any*\>
+• `Optional` **outputJsonSchema**: *undefined* \| *Record*<any, any\>
 
 Defined in: [types.ts:58](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/types.ts#L58)
 
@@ -1819,10 +1725,6 @@ Defined in: [types.ts:60](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5
 # Interface: DeleteDocumentOptions
 
 [types](#modulestypesmd).DeleteDocumentOptions
-
-## Hierarchy
-
-* **DeleteDocumentOptions**
 
 ## Table of contents
 
@@ -1846,10 +1748,6 @@ Defined in: [types.ts:185](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a
 # Interface: PaginationOptions
 
 [types](#modulestypesmd).PaginationOptions
-
-## Hierarchy
-
-* **PaginationOptions**
 
 ## Table of contents
 
@@ -1883,10 +1781,6 @@ Defined in: [types.ts:14](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5
 
 [types](#modulestypesmd).UpdateAssetOptions
 
-## Hierarchy
-
-* **UpdateAssetOptions**
-
 ## Table of contents
 
 ### Properties
@@ -1909,10 +1803,6 @@ Defined in: [types.ts:320](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a
 # Interface: UpdateDocumentOptions
 
 [types](#modulestypesmd).UpdateDocumentOptions
-
-## Hierarchy
-
-* **UpdateDocumentOptions**
 
 ## Table of contents
 
@@ -1937,10 +1827,6 @@ Defined in: [types.ts:28](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5
 
 [types](#modulestypesmd).UpdateSecretOptions
 
-## Hierarchy
-
-* **UpdateSecretOptions**
-
 ## Table of contents
 
 ### Properties
@@ -1953,7 +1839,7 @@ Defined in: [types.ts:28](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5
 
 ### data
 
-• `Optional` **data**: *undefined* \| *Record*<*any*, *any*\>
+• `Optional` **data**: *undefined* \| *Record*<any, any\>
 
 Defined in: [types.ts:262](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/types.ts#L262)
 
@@ -1982,10 +1868,6 @@ Defined in: [types.ts:264](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a
 
 [types](#modulestypesmd).UpdateTransitionExecution
 
-## Hierarchy
-
-* **UpdateTransitionExecution**
-
 ## Table of contents
 
 ### Properties
@@ -2006,7 +1888,7 @@ ___
 
 ### output
 
-• `Optional` **output**: *undefined* \| *Record*<*any*, *any*\>
+• `Optional` **output**: *undefined* \| *Record*<any, any\>
 
 Defined in: [types.ts:51](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/types.ts#L51)
 
@@ -2026,10 +1908,6 @@ Defined in: [types.ts:50](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5
 # Interface: UpdateWorkflowOptions
 
 [types](#modulestypesmd).UpdateWorkflowOptions
-
-## Hierarchy
-
-* **UpdateWorkflowOptions**
 
 ## Table of contents
 
@@ -2218,14 +2096,13 @@ Re-exports: [TokenStorage](#interfacesstoragetokenstoragemd)
 
 ### Asset
 
-Ƭ **Asset**: { `assetId`: *string* ; `content`: *string*  }
+Ƭ **Asset**: *object*
 
 #### Type declaration:
 
-Name | Type |
------- | ------ |
-`assetId` | *string* |
-`content` | *string* |
+
+`assetId` *string*
+`content` *string*
 
 Defined in: [types.ts:285](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/types.ts#L285)
 
@@ -2233,14 +2110,13 @@ ___
 
 ### AssetList
 
-Ƭ **AssetList**: { `assets`: [*AssetWithoutContent*](#assetwithoutcontent)[] ; `nextToken`: *string* \| *null*  }
+Ƭ **AssetList**: *object*
 
 #### Type declaration:
 
-Name | Type |
------- | ------ |
-`assets` | [*AssetWithoutContent*](#assetwithoutcontent)[] |
-`nextToken` | *string* \| *null* |
+
+`assets` [*AssetWithoutContent*](#assetwithoutcontent)[]
+`nextToken` *string* \| *null*
 
 Defined in: [types.ts:294](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/types.ts#L294)
 
@@ -2248,13 +2124,12 @@ ___
 
 ### AssetWithoutContent
 
-Ƭ **AssetWithoutContent**: { `assetId`: *string*  }
+Ƭ **AssetWithoutContent**: *object*
 
 #### Type declaration:
 
-Name | Type |
------- | ------ |
-`assetId` | *string* |
+
+`assetId` *string*
 
 Defined in: [types.ts:290](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/types.ts#L290)
 
@@ -2262,14 +2137,13 @@ ___
 
 ### AuthorizationHeaders
 
-Ƭ **AuthorizationHeaders**: { `Authorization`: *string* ; `X-Api-Key`: *string*  }
+Ƭ **AuthorizationHeaders**: *object*
 
 #### Type declaration:
 
-Name | Type |
------- | ------ |
-`Authorization` | *string* |
-`X-Api-Key` | *string* |
+
+`Authorization` *string*
+`X-Api-Key` *string*
 
 Defined in: [types.ts:331](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/types.ts#L331)
 
@@ -2279,21 +2153,39 @@ ___
 
 Ƭ **AxiosFn**: <T, R\>(`url`: *string*, `body?`: *any*, `config?`: AxiosRequestConfig) => *Promise*<R\>
 
+#### Type declaration:
+
+▸ <T, R\>(`url`: *string*, `body?`: *any*, `config?`: AxiosRequestConfig): *Promise*<R\>
+
+#### Type parameters:
+
+
+`T` *any*
+`R` *AxiosResponse*<T\>
+
+#### Parameters:
+
+
+`url` *string*
+`body?` *any*
+`config?` AxiosRequestConfig
+
+**Returns:** *Promise*<R\>
+
 Defined in: [types.ts:336](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/types.ts#L336)
 
 ___
 
 ### Batch
 
-Ƭ **Batch**: { `batchId`: *string* ; `description`: *string* ; `name`: *string*  }
+Ƭ **Batch**: *object*
 
 #### Type declaration:
 
-Name | Type |
------- | ------ |
-`batchId` | *string* |
-`description` | *string* |
-`name` | *string* |
+
+`batchId` *string*
+`description` *string*
+`name` *string*
 
 Defined in: [types.ts:214](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/types.ts#L214)
 
@@ -2309,14 +2201,13 @@ ___
 
 ### CreateBatchOptions
 
-Ƭ **CreateBatchOptions**: { `description?`: *string* ; `name?`: *string*  }
+Ƭ **CreateBatchOptions**: *object*
 
 #### Type declaration:
 
-Name | Type |
------- | ------ |
-`description?` | *string* |
-`name?` | *string* |
+
+`description`? *string*
+`name`? *string*
 
 Defined in: [types.ts:314](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/types.ts#L314)
 
@@ -2324,17 +2215,18 @@ ___
 
 ### CreateTransitionDockerParams
 
-Ƭ **CreateTransitionDockerParams**: { `cpu?`: *256* ; `credentials?`: { `password`: *string* ; `username`: *string*  } ; `environment?`: *object* ; `imageUrl`: *string* ; `memory?`: *512* \| *1024* \| *2048*  }
+Ƭ **CreateTransitionDockerParams**: *object*
 
 #### Type declaration:
 
-Name | Type |
------- | ------ |
-`cpu?` | *256* |
-`credentials?` | { `password`: *string* ; `username`: *string*  } |
-`environment?` | *object* |
-`imageUrl` | *string* |
-`memory?` | *512* \| *1024* \| *2048* |
+
+`cpu`? *256*
+`credentials`? *object*
+`credentials.password` *string*
+`credentials.username` *string*
+`environment`? *object*
+`imageUrl` *string*
+`memory`? *512* \| *1024* \| *2048*
 
 Defined in: [types.ts:70](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/types.ts#L70)
 
@@ -2342,13 +2234,12 @@ ___
 
 ### CreateTransitionManualParams
 
-Ƭ **CreateTransitionManualParams**: { `assets?`: { `jsRemoteComponent?`: *string*  } & *Record*<*string*, *string*\>  }
+Ƭ **CreateTransitionManualParams**: *object*
 
 #### Type declaration:
 
-Name | Type |
------- | ------ |
-`assets?` | { `jsRemoteComponent?`: *string*  } & *Record*<*string*, *string*\> |
+
+`assets`? { `jsRemoteComponent?`: *string*  } & *Record*<string, string\>
 
 Defined in: [types.ts:81](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/types.ts#L81)
 
@@ -2364,14 +2255,13 @@ ___
 
 ### CreateUserOptions
 
-Ƭ **CreateUserOptions**: { `avatar?`: *string* \| *null* ; `name?`: *string* \| *null*  }
+Ƭ **CreateUserOptions**: *object*
 
 #### Type declaration:
 
-Name | Type |
------- | ------ |
-`avatar?` | *string* \| *null* |
-`name?` | *string* \| *null* |
+
+`avatar`? *string* \| *null*
+`name`? *string* \| *null*
 
 Defined in: [types.ts:227](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/types.ts#L227)
 
@@ -2379,14 +2269,14 @@ ___
 
 ### CreateWorkflowOptions
 
-Ƭ **CreateWorkflowOptions**: { `description?`: *string* ; `errorConfig?`: { `email`: *string*  }  }
+Ƭ **CreateWorkflowOptions**: *object*
 
 #### Type declaration:
 
-Name | Type |
------- | ------ |
-`description?` | *string* |
-`errorConfig?` | { `email`: *string*  } |
+
+`description`? *string*
+`errorConfig`? *object*
+`errorConfig.email` *string*
 
 Defined in: [types.ts:144](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/types.ts#L144)
 
@@ -2394,14 +2284,14 @@ ___
 
 ### GroundTruth
 
-Ƭ **GroundTruth**: { `label`: *string* ; `value`: *string* \| *boolean* \| *null*  }
+Ƭ **GroundTruth**: *object*
 
 #### Type declaration:
 
-Name | Type | Description |
------- | ------ | ------ |
-`label` | *string* | maxLength: 36, minLength: 1, pattern: ^[0-9A-Za-z_]+$   |
-`value` | *string* \| *boolean* \| *null* | maxLength: 64, minLength: 1   |
+Name Type Description
+:------ :------ :------
+`label` *string* maxLength: 36, minLength: 1, pattern: ^[0-9A-Za-z_]+$  
+`value` *string* \| *boolean* \| *null* maxLength: 64, minLength: 1  
 
 Defined in: [types.ts:177](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/types.ts#L177)
 
@@ -2409,21 +2299,21 @@ ___
 
 ### LasDocument
 
-Ƭ **LasDocument**: { `batchId?`: *string* ; `consentId?`: *string* ; `content?`: *string* ; `contentType`: [*ContentType*](#contenttype) ; `documentId`: *string* ; `groundTruth?`: [*GroundTruth*](#groundtruth)[] ; `inferenceTime?`: *number* ; `predictions?`: [*Prediction*](#prediction)[] ; `updated?`: *number*  }
+Ƭ **LasDocument**: *object*
 
 #### Type declaration:
 
-Name | Type | Description |
------- | ------ | ------ |
-`batchId?` | *string* | pattern: ^las:batch:[a-f0-9]{32}$   |
-`consentId?` | *string* | pattern: ^las:consent:[a-f0-9]{32}$   |
-`content?` | *string* | minimum: 1   |
-`contentType` | [*ContentType*](#contenttype) | - |
-`documentId` | *string* | pattern: ^las:document:[a-f0-9]{32}$   |
-`groundTruth?` | [*GroundTruth*](#groundtruth)[] | - |
-`inferenceTime?` | *number* | minimum: 0   |
-`predictions?` | [*Prediction*](#prediction)[] | - |
-`updated?` | *number* | minimum: 1   |
+Name Type Description
+:------ :------ :------
+`batchId`? *string* pattern: ^las:batch:[a-f0-9]{32}$  
+`consentId`? *string* pattern: ^las:consent:[a-f0-9]{32}$  
+`content`? *string* minimum: 1  
+`contentType` [*ContentType*](#contenttype) -
+`documentId` *string* pattern: ^las:document:[a-f0-9]{32}$  
+`groundTruth`? [*GroundTruth*](#groundtruth)[] -
+`inferenceTime`? *number* minimum: 0  
+`predictions`? [*Prediction*](#prediction)[] -
+`updated`? *number* minimum: 1  
 
 Defined in: [types.ts:267](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/types.ts#L267)
 
@@ -2431,16 +2321,15 @@ ___
 
 ### LasDocumentList
 
-Ƭ **LasDocumentList**: { `batchId?`: *string* ; `consentId?`: *string* ; `documents`: [*LasDocument*](#lasdocument)[] ; `nextToken?`: *string*  }
+Ƭ **LasDocumentList**: *object*
 
 #### Type declaration:
 
-Name | Type |
------- | ------ |
-`batchId?` | *string* |
-`consentId?` | *string* |
-`documents` | [*LasDocument*](#lasdocument)[] |
-`nextToken?` | *string* |
+
+`batchId`? *string*
+`consentId`? *string*
+`documents` [*LasDocument*](#lasdocument)[]
+`nextToken`? *string*
 
 Defined in: [types.ts:63](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/types.ts#L63)
 
@@ -2520,15 +2409,14 @@ ___
 
 ### Log
 
-Ƭ **Log**: { `events`: *Record*<*any*, *any*\>[] ; `logId`: *string* ; `transitionId?`: *string* \| *null*  }
+Ƭ **Log**: *object*
 
 #### Type declaration:
 
-Name | Type |
------- | ------ |
-`events` | *Record*<*any*, *any*\>[] |
-`logId` | *string* |
-`transitionId?` | *string* \| *null* |
+
+`events` *Record*<any, any\>[]
+`logId` *string*
+`transitionId`? *string* \| *null*
 
 Defined in: [types.ts:325](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/types.ts#L325)
 
@@ -2536,17 +2424,16 @@ ___
 
 ### Model
 
-Ƭ **Model**: { `description`: *string* \| *null* ; `height`: *number* ; `modelId`: *string* ; `name`: *string* \| *null* ; `width`: *number*  }
+Ƭ **Model**: *object*
 
 #### Type declaration:
 
-Name | Type |
------- | ------ |
-`description` | *string* \| *null* |
-`height` | *number* |
-`modelId` | *string* |
-`name` | *string* \| *null* |
-`width` | *number* |
+
+`description` *string* \| *null*
+`height` *number*
+`modelId` *string*
+`name` *string* \| *null*
+`width` *number*
 
 Defined in: [types.ts:299](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/types.ts#L299)
 
@@ -2554,14 +2441,13 @@ ___
 
 ### ModelList
 
-Ƭ **ModelList**: { `models`: [*Model*](#model)[] ; `nextToken`: *string* \| *null*  }
+Ƭ **ModelList**: *object*
 
 #### Type declaration:
 
-Name | Type |
------- | ------ |
-`models` | [*Model*](#model)[] |
-`nextToken` | *string* \| *null* |
+
+`models` [*Model*](#model)[]
+`nextToken` *string* \| *null*
 
 Defined in: [types.ts:309](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/types.ts#L309)
 
@@ -2585,14 +2471,13 @@ ___
 
 ### PredictionList
 
-Ƭ **PredictionList**: { `nextToken`: *string* \| *null* ; `predictions`: [*PredictionResponse*](#predictionresponse)[]  }
+Ƭ **PredictionList**: *object*
 
 #### Type declaration:
 
-Name | Type |
------- | ------ |
-`nextToken` | *string* \| *null* |
-`predictions` | [*PredictionResponse*](#predictionresponse)[] |
+
+`nextToken` *string* \| *null*
+`predictions` [*PredictionResponse*](#predictionresponse)[]
 
 Defined in: [types.ts:209](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/types.ts#L209)
 
@@ -2600,18 +2485,17 @@ ___
 
 ### PredictionResponse
 
-Ƭ **PredictionResponse**: { `documentId`: *string* ; `inferenceTime`: *number* ; `modelId`: *string* ; `predictionId`: *string* ; `predictions`: [*Prediction*](#prediction)[] ; `timestamp`: *number*  }
+Ƭ **PredictionResponse**: *object*
 
 #### Type declaration:
 
-Name | Type |
------- | ------ |
-`documentId` | *string* |
-`inferenceTime` | *number* |
-`modelId` | *string* |
-`predictionId` | *string* |
-`predictions` | [*Prediction*](#prediction)[] |
-`timestamp` | *number* |
+
+`documentId` *string*
+`inferenceTime` *number*
+`modelId` *string*
+`predictionId` *string*
+`predictions` [*Prediction*](#prediction)[]
+`timestamp` *number*
 
 Defined in: [types.ts:198](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/types.ts#L198)
 
@@ -2619,15 +2503,14 @@ ___
 
 ### Secret
 
-Ƭ **Secret**: { `description`: *string* \| *null* ; `name`: *string* \| *null* ; `secredId`: *string*  }
+Ƭ **Secret**: *object*
 
 #### Type declaration:
 
-Name | Type |
------- | ------ |
-`description` | *string* \| *null* |
-`name` | *string* \| *null* |
-`secredId` | *string* |
+
+`description` *string* \| *null*
+`name` *string* \| *null*
+`secredId` *string*
 
 Defined in: [types.ts:244](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/types.ts#L244)
 
@@ -2635,14 +2518,13 @@ ___
 
 ### SecretList
 
-Ƭ **SecretList**: { `nextToken?`: *string* \| *null* ; `secrets`: [*Secret*](#secret)[]  }
+Ƭ **SecretList**: *object*
 
 #### Type declaration:
 
-Name | Type |
------- | ------ |
-`nextToken?` | *string* \| *null* |
-`secrets` | [*Secret*](#secret)[] |
+
+`nextToken`? *string* \| *null*
+`secrets` [*Secret*](#secret)[]
 
 Defined in: [types.ts:252](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/types.ts#L252)
 
@@ -2650,19 +2532,18 @@ ___
 
 ### Transition
 
-Ƭ **Transition**: { `assets?`: *Record*<*string*, *string*\> ; `description`: *string* ; `inputJsonSchema`: *unknown* ; `name`: *string* ; `outputJsonSchema?`: *unknown* ; `transitionId`: *string* ; `transitionType`: [*TransitionType*](#transitiontype)  }
+Ƭ **Transition**: *object*
 
 #### Type declaration:
 
-Name | Type |
------- | ------ |
-`assets?` | *Record*<*string*, *string*\> |
-`description` | *string* |
-`inputJsonSchema` | *unknown* |
-`name` | *string* |
-`outputJsonSchema?` | *unknown* |
-`transitionId` | *string* |
-`transitionType` | [*TransitionType*](#transitiontype) |
+
+`assets`? *Record*<string, string\>
+`description` *string*
+`inputJsonSchema` *unknown*
+`name` *string*
+`outputJsonSchema`? *unknown*
+`transitionId` *string*
+`transitionType` [*TransitionType*](#transitiontype)
 
 Defined in: [types.ts:99](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/types.ts#L99)
 
@@ -2670,19 +2551,18 @@ ___
 
 ### TransitionExecution
 
-Ƭ **TransitionExecution**: { `completedBy`: *string* \| *null* ; `endTime`: *string* \| *null* ; `executionId`: *string* ; `input`: *Record*<*any*, *any*\> ; `startTime`: *string* \| *null* ; `status`: *succeeded* \| *failed* \| *retry* \| *running* \| *rejected* ; `transitionId`: *string*  }
+Ƭ **TransitionExecution**: *object*
 
 #### Type declaration:
 
-Name | Type |
------- | ------ |
-`completedBy` | *string* \| *null* |
-`endTime` | *string* \| *null* |
-`executionId` | *string* |
-`input` | *Record*<*any*, *any*\> |
-`startTime` | *string* \| *null* |
-`status` | *succeeded* \| *failed* \| *retry* \| *running* \| *rejected* |
-`transitionId` | *string* |
+
+`completedBy` *string* \| *null*
+`endTime` *string* \| *null*
+`executionId` *string*
+`input` *Record*<any, any\>
+`startTime` *string* \| *null*
+`status` *succeeded* \| *failed* \| *retry* \| *running* \| *rejected*
+`transitionId` *string*
 
 Defined in: [types.ts:114](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/types.ts#L114)
 
@@ -2690,15 +2570,14 @@ ___
 
 ### TransitionExecutionList
 
-Ƭ **TransitionExecutionList**: { `executions`: [*TransitionExecution*](#transitionexecution)[] ; `nextToken`: *string* \| *null* ; `transitionId`: *string*  }
+Ƭ **TransitionExecutionList**: *object*
 
 #### Type declaration:
 
-Name | Type |
------- | ------ |
-`executions` | [*TransitionExecution*](#transitionexecution)[] |
-`nextToken` | *string* \| *null* |
-`transitionId` | *string* |
+
+`executions` [*TransitionExecution*](#transitionexecution)[]
+`nextToken` *string* \| *null*
+`transitionId` *string*
 
 Defined in: [types.ts:36](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/types.ts#L36)
 
@@ -2714,14 +2593,13 @@ ___
 
 ### TransitionList
 
-Ƭ **TransitionList**: { `nextToken?`: *string* ; `transitions`: [*Transition*](#transition)[]  }
+Ƭ **TransitionList**: *object*
 
 #### Type declaration:
 
-Name | Type |
------- | ------ |
-`nextToken?` | *string* |
-`transitions` | [*Transition*](#transition)[] |
+
+`nextToken`? *string*
+`transitions` [*Transition*](#transition)[]
 
 Defined in: [types.ts:109](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/types.ts#L109)
 
@@ -2737,16 +2615,15 @@ ___
 
 ### UpdateTransitionOptions
 
-Ƭ **UpdateTransitionOptions**: { `description?`: *string* ; `inputJsonSchema?`: *Record*<*any*, *any*\> ; `name?`: *string* ; `outputJsonSchema?`: *Record*<*any*, *any*\>  }
+Ƭ **UpdateTransitionOptions**: *object*
 
 #### Type declaration:
 
-Name | Type |
------- | ------ |
-`description?` | *string* |
-`inputJsonSchema?` | *Record*<*any*, *any*\> |
-`name?` | *string* |
-`outputJsonSchema?` | *Record*<*any*, *any*\> |
+
+`description`? *string*
+`inputJsonSchema`? *Record*<any, any\>
+`name`? *string*
+`outputJsonSchema`? *Record*<any, any\>
 
 Defined in: [types.ts:92](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/types.ts#L92)
 
@@ -2754,14 +2631,13 @@ ___
 
 ### UpdateUserOptions
 
-Ƭ **UpdateUserOptions**: { `avatar?`: *string* \| *null* ; `name?`: *string* \| *null*  }
+Ƭ **UpdateUserOptions**: *object*
 
 #### Type declaration:
 
-Name | Type |
------- | ------ |
-`avatar?` | *string* \| *null* |
-`name?` | *string* \| *null* |
+
+`avatar`? *string* \| *null*
+`name`? *string* \| *null*
 
 Defined in: [types.ts:232](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/types.ts#L232)
 
@@ -2769,16 +2645,15 @@ ___
 
 ### User
 
-Ƭ **User**: { `avatar`: *string* \| *null* ; `email`: *string* ; `name`: *string* \| *null* ; `userId`: *string*  }
+Ƭ **User**: *object*
 
 #### Type declaration:
 
-Name | Type |
------- | ------ |
-`avatar` | *string* \| *null* |
-`email` | *string* |
-`name` | *string* \| *null* |
-`userId` | *string* |
+
+`avatar` *string* \| *null*
+`email` *string*
+`name` *string* \| *null*
+`userId` *string*
 
 Defined in: [types.ts:220](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/types.ts#L220)
 
@@ -2786,14 +2661,13 @@ ___
 
 ### UserList
 
-Ƭ **UserList**: { `nextToken?`: *string* ; `users`: [*User*](#user)[]  }
+Ƭ **UserList**: *object*
 
 #### Type declaration:
 
-Name | Type |
------- | ------ |
-`nextToken?` | *string* |
-`users` | [*User*](#user)[] |
+
+`nextToken`? *string*
+`users` [*User*](#user)[]
 
 Defined in: [types.ts:239](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/types.ts#L239)
 
@@ -2801,15 +2675,14 @@ ___
 
 ### Workflow
 
-Ƭ **Workflow**: { `description?`: *string* ; `name`: *string* ; `workflowId`: *string*  }
+Ƭ **Workflow**: *object*
 
 #### Type declaration:
 
-Name | Type |
------- | ------ |
-`description?` | *string* |
-`name` | *string* |
-`workflowId` | *string* |
+
+`description`? *string*
+`name` *string*
+`workflowId` *string*
 
 Defined in: [types.ts:130](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/types.ts#L130)
 
@@ -2817,21 +2690,20 @@ ___
 
 ### WorkflowExecution
 
-Ƭ **WorkflowExecution**: { `completedBy`: *string*[] ; `endTime`: *string* \| *null* ; `executionId`: *string* ; `input`: *Record*<*any*, *any*\> ; `output`: *Record*<*any*, *any*\> ; `startTime`: *string* \| *null* ; `status?`: *succeeded* \| *failed* \| *running* \| *rejected* ; `transitionExecutions`: *Record*<*string*, *string*[]\> \| *null* ; `workflowId`: *string*  }
+Ƭ **WorkflowExecution**: *object*
 
 #### Type declaration:
 
-Name | Type |
------- | ------ |
-`completedBy` | *string*[] |
-`endTime` | *string* \| *null* |
-`executionId` | *string* |
-`input` | *Record*<*any*, *any*\> |
-`output` | *Record*<*any*, *any*\> |
-`startTime` | *string* \| *null* |
-`status?` | *succeeded* \| *failed* \| *running* \| *rejected* |
-`transitionExecutions` | *Record*<*string*, *string*[]\> \| *null* |
-`workflowId` | *string* |
+
+`completedBy` *string*[]
+`endTime` *string* \| *null*
+`executionId` *string*
+`input` *Record*<any, any\>
+`output` *Record*<any, any\>
+`startTime` *string* \| *null*
+`status`? *succeeded* \| *failed* \| *running* \| *rejected*
+`transitionExecutions` *Record*<string, string[]\> \| *null*
+`workflowId` *string*
 
 Defined in: [types.ts:158](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/types.ts#L158)
 
@@ -2839,16 +2711,15 @@ ___
 
 ### WorkflowExecutionList
 
-Ƭ **WorkflowExecutionList**: { `executions`: *Required*<[*WorkflowExecution*](#workflowexecution)\>[] ; `nextToken?`: *string* ; `status?`: *succeeded* \| *failed* \| *running* \| *rejected* ; `workflowId`: *string*  }
+Ƭ **WorkflowExecutionList**: *object*
 
 #### Type declaration:
 
-Name | Type |
------- | ------ |
-`executions` | *Required*<[*WorkflowExecution*](#workflowexecution)\>[] |
-`nextToken?` | *string* |
-`status?` | *succeeded* \| *failed* \| *running* \| *rejected* |
-`workflowId` | *string* |
+
+`executions` *Required*<[*WorkflowExecution*](#workflowexecution)\>[]
+`nextToken`? *string*
+`status`? *succeeded* \| *failed* \| *running* \| *rejected*
+`workflowId` *string*
 
 Defined in: [types.ts:170](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/types.ts#L170)
 
@@ -2856,13 +2727,12 @@ ___
 
 ### WorkflowList
 
-Ƭ **WorkflowList**: { `workflows`: [*Workflow*](#workflow)[]  }
+Ƭ **WorkflowList**: *object*
 
 #### Type declaration:
 
-Name | Type |
------- | ------ |
-`workflows` | [*Workflow*](#workflow)[] |
+
+`workflows` [*Workflow*](#workflow)[]
 
 Defined in: [types.ts:154](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/types.ts#L154)
 
@@ -2870,15 +2740,14 @@ ___
 
 ### WorkflowSpecification
 
-Ƭ **WorkflowSpecification**: { `definition`: *object* ; `language?`: *ASL* ; `version?`: *1.0.0*  }
+Ƭ **WorkflowSpecification**: *object*
 
 #### Type declaration:
 
-Name | Type |
------- | ------ |
-`definition` | *object* |
-`language?` | *ASL* |
-`version?` | *1.0.0* |
+
+`definition` *object*
+`language`? *ASL*
+`version`? *1.0.0*
 
 Defined in: [types.ts:124](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/types.ts#L124)
 
@@ -2974,14 +2843,13 @@ Defined in: [types.ts:124](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a
 
 ### Asset
 
-Ƭ **Asset**: { `assetId`: *string* ; `content`: *string*  }
+Ƭ **Asset**: *object*
 
 #### Type declaration:
 
-Name | Type |
------- | ------ |
-`assetId` | *string* |
-`content` | *string* |
+
+`assetId` *string*
+`content` *string*
 
 Defined in: [types.ts:285](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/types.ts#L285)
 
@@ -2989,14 +2857,13 @@ ___
 
 ### AssetList
 
-Ƭ **AssetList**: { `assets`: [*AssetWithoutContent*](#assetwithoutcontent)[] ; `nextToken`: *string* \| *null*  }
+Ƭ **AssetList**: *object*
 
 #### Type declaration:
 
-Name | Type |
------- | ------ |
-`assets` | [*AssetWithoutContent*](#assetwithoutcontent)[] |
-`nextToken` | *string* \| *null* |
+
+`assets` [*AssetWithoutContent*](#assetwithoutcontent)[]
+`nextToken` *string* \| *null*
 
 Defined in: [types.ts:294](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/types.ts#L294)
 
@@ -3004,13 +2871,12 @@ ___
 
 ### AssetWithoutContent
 
-Ƭ **AssetWithoutContent**: { `assetId`: *string*  }
+Ƭ **AssetWithoutContent**: *object*
 
 #### Type declaration:
 
-Name | Type |
------- | ------ |
-`assetId` | *string* |
+
+`assetId` *string*
 
 Defined in: [types.ts:290](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/types.ts#L290)
 
@@ -3018,14 +2884,13 @@ ___
 
 ### AuthorizationHeaders
 
-Ƭ **AuthorizationHeaders**: { `Authorization`: *string* ; `X-Api-Key`: *string*  }
+Ƭ **AuthorizationHeaders**: *object*
 
 #### Type declaration:
 
-Name | Type |
------- | ------ |
-`Authorization` | *string* |
-`X-Api-Key` | *string* |
+
+`Authorization` *string*
+`X-Api-Key` *string*
 
 Defined in: [types.ts:331](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/types.ts#L331)
 
@@ -3035,21 +2900,39 @@ ___
 
 Ƭ **AxiosFn**: <T, R\>(`url`: *string*, `body?`: *any*, `config?`: AxiosRequestConfig) => *Promise*<R\>
 
+#### Type declaration:
+
+▸ <T, R\>(`url`: *string*, `body?`: *any*, `config?`: AxiosRequestConfig): *Promise*<R\>
+
+#### Type parameters:
+
+
+`T` *any*
+`R` *AxiosResponse*<T\>
+
+#### Parameters:
+
+
+`url` *string*
+`body?` *any*
+`config?` AxiosRequestConfig
+
+**Returns:** *Promise*<R\>
+
 Defined in: [types.ts:336](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/types.ts#L336)
 
 ___
 
 ### Batch
 
-Ƭ **Batch**: { `batchId`: *string* ; `description`: *string* ; `name`: *string*  }
+Ƭ **Batch**: *object*
 
 #### Type declaration:
 
-Name | Type |
------- | ------ |
-`batchId` | *string* |
-`description` | *string* |
-`name` | *string* |
+
+`batchId` *string*
+`description` *string*
+`name` *string*
 
 Defined in: [types.ts:214](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/types.ts#L214)
 
@@ -3065,14 +2948,13 @@ ___
 
 ### CreateBatchOptions
 
-Ƭ **CreateBatchOptions**: { `description?`: *string* ; `name?`: *string*  }
+Ƭ **CreateBatchOptions**: *object*
 
 #### Type declaration:
 
-Name | Type |
------- | ------ |
-`description?` | *string* |
-`name?` | *string* |
+
+`description`? *string*
+`name`? *string*
 
 Defined in: [types.ts:314](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/types.ts#L314)
 
@@ -3080,17 +2962,18 @@ ___
 
 ### CreateTransitionDockerParams
 
-Ƭ **CreateTransitionDockerParams**: { `cpu?`: *256* ; `credentials?`: { `password`: *string* ; `username`: *string*  } ; `environment?`: *object* ; `imageUrl`: *string* ; `memory?`: *512* \| *1024* \| *2048*  }
+Ƭ **CreateTransitionDockerParams**: *object*
 
 #### Type declaration:
 
-Name | Type |
------- | ------ |
-`cpu?` | *256* |
-`credentials?` | { `password`: *string* ; `username`: *string*  } |
-`environment?` | *object* |
-`imageUrl` | *string* |
-`memory?` | *512* \| *1024* \| *2048* |
+
+`cpu`? *256*
+`credentials`? *object*
+`credentials.password` *string*
+`credentials.username` *string*
+`environment`? *object*
+`imageUrl` *string*
+`memory`? *512* \| *1024* \| *2048*
 
 Defined in: [types.ts:70](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/types.ts#L70)
 
@@ -3098,13 +2981,12 @@ ___
 
 ### CreateTransitionManualParams
 
-Ƭ **CreateTransitionManualParams**: { `assets?`: { `jsRemoteComponent?`: *string*  } & *Record*<*string*, *string*\>  }
+Ƭ **CreateTransitionManualParams**: *object*
 
 #### Type declaration:
 
-Name | Type |
------- | ------ |
-`assets?` | { `jsRemoteComponent?`: *string*  } & *Record*<*string*, *string*\> |
+
+`assets`? { `jsRemoteComponent?`: *string*  } & *Record*<string, string\>
 
 Defined in: [types.ts:81](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/types.ts#L81)
 
@@ -3120,14 +3002,13 @@ ___
 
 ### CreateUserOptions
 
-Ƭ **CreateUserOptions**: { `avatar?`: *string* \| *null* ; `name?`: *string* \| *null*  }
+Ƭ **CreateUserOptions**: *object*
 
 #### Type declaration:
 
-Name | Type |
------- | ------ |
-`avatar?` | *string* \| *null* |
-`name?` | *string* \| *null* |
+
+`avatar`? *string* \| *null*
+`name`? *string* \| *null*
 
 Defined in: [types.ts:227](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/types.ts#L227)
 
@@ -3135,14 +3016,14 @@ ___
 
 ### CreateWorkflowOptions
 
-Ƭ **CreateWorkflowOptions**: { `description?`: *string* ; `errorConfig?`: { `email`: *string*  }  }
+Ƭ **CreateWorkflowOptions**: *object*
 
 #### Type declaration:
 
-Name | Type |
------- | ------ |
-`description?` | *string* |
-`errorConfig?` | { `email`: *string*  } |
+
+`description`? *string*
+`errorConfig`? *object*
+`errorConfig.email` *string*
 
 Defined in: [types.ts:144](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/types.ts#L144)
 
@@ -3150,14 +3031,14 @@ ___
 
 ### GroundTruth
 
-Ƭ **GroundTruth**: { `label`: *string* ; `value`: *string* \| *boolean* \| *null*  }
+Ƭ **GroundTruth**: *object*
 
 #### Type declaration:
 
-Name | Type | Description |
------- | ------ | ------ |
-`label` | *string* | maxLength: 36, minLength: 1, pattern: ^[0-9A-Za-z_]+$   |
-`value` | *string* \| *boolean* \| *null* | maxLength: 64, minLength: 1   |
+Name Type Description
+:------ :------ :------
+`label` *string* maxLength: 36, minLength: 1, pattern: ^[0-9A-Za-z_]+$  
+`value` *string* \| *boolean* \| *null* maxLength: 64, minLength: 1  
 
 Defined in: [types.ts:177](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/types.ts#L177)
 
@@ -3165,21 +3046,21 @@ ___
 
 ### LasDocument
 
-Ƭ **LasDocument**: { `batchId?`: *string* ; `consentId?`: *string* ; `content?`: *string* ; `contentType`: [*ContentType*](#contenttype) ; `documentId`: *string* ; `groundTruth?`: [*GroundTruth*](#groundtruth)[] ; `inferenceTime?`: *number* ; `predictions?`: [*Prediction*](#prediction)[] ; `updated?`: *number*  }
+Ƭ **LasDocument**: *object*
 
 #### Type declaration:
 
-Name | Type | Description |
------- | ------ | ------ |
-`batchId?` | *string* | pattern: ^las:batch:[a-f0-9]{32}$   |
-`consentId?` | *string* | pattern: ^las:consent:[a-f0-9]{32}$   |
-`content?` | *string* | minimum: 1   |
-`contentType` | [*ContentType*](#contenttype) | - |
-`documentId` | *string* | pattern: ^las:document:[a-f0-9]{32}$   |
-`groundTruth?` | [*GroundTruth*](#groundtruth)[] | - |
-`inferenceTime?` | *number* | minimum: 0   |
-`predictions?` | [*Prediction*](#prediction)[] | - |
-`updated?` | *number* | minimum: 1   |
+Name Type Description
+:------ :------ :------
+`batchId`? *string* pattern: ^las:batch:[a-f0-9]{32}$  
+`consentId`? *string* pattern: ^las:consent:[a-f0-9]{32}$  
+`content`? *string* minimum: 1  
+`contentType` [*ContentType*](#contenttype) -
+`documentId` *string* pattern: ^las:document:[a-f0-9]{32}$  
+`groundTruth`? [*GroundTruth*](#groundtruth)[] -
+`inferenceTime`? *number* minimum: 0  
+`predictions`? [*Prediction*](#prediction)[] -
+`updated`? *number* minimum: 1  
 
 Defined in: [types.ts:267](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/types.ts#L267)
 
@@ -3187,16 +3068,15 @@ ___
 
 ### LasDocumentList
 
-Ƭ **LasDocumentList**: { `batchId?`: *string* ; `consentId?`: *string* ; `documents`: [*LasDocument*](#lasdocument)[] ; `nextToken?`: *string*  }
+Ƭ **LasDocumentList**: *object*
 
 #### Type declaration:
 
-Name | Type |
------- | ------ |
-`batchId?` | *string* |
-`consentId?` | *string* |
-`documents` | [*LasDocument*](#lasdocument)[] |
-`nextToken?` | *string* |
+
+`batchId`? *string*
+`consentId`? *string*
+`documents` [*LasDocument*](#lasdocument)[]
+`nextToken`? *string*
 
 Defined in: [types.ts:63](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/types.ts#L63)
 
@@ -3276,15 +3156,14 @@ ___
 
 ### Log
 
-Ƭ **Log**: { `events`: *Record*<*any*, *any*\>[] ; `logId`: *string* ; `transitionId?`: *string* \| *null*  }
+Ƭ **Log**: *object*
 
 #### Type declaration:
 
-Name | Type |
------- | ------ |
-`events` | *Record*<*any*, *any*\>[] |
-`logId` | *string* |
-`transitionId?` | *string* \| *null* |
+
+`events` *Record*<any, any\>[]
+`logId` *string*
+`transitionId`? *string* \| *null*
 
 Defined in: [types.ts:325](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/types.ts#L325)
 
@@ -3292,17 +3171,16 @@ ___
 
 ### Model
 
-Ƭ **Model**: { `description`: *string* \| *null* ; `height`: *number* ; `modelId`: *string* ; `name`: *string* \| *null* ; `width`: *number*  }
+Ƭ **Model**: *object*
 
 #### Type declaration:
 
-Name | Type |
------- | ------ |
-`description` | *string* \| *null* |
-`height` | *number* |
-`modelId` | *string* |
-`name` | *string* \| *null* |
-`width` | *number* |
+
+`description` *string* \| *null*
+`height` *number*
+`modelId` *string*
+`name` *string* \| *null*
+`width` *number*
 
 Defined in: [types.ts:299](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/types.ts#L299)
 
@@ -3310,14 +3188,13 @@ ___
 
 ### ModelList
 
-Ƭ **ModelList**: { `models`: [*Model*](#model)[] ; `nextToken`: *string* \| *null*  }
+Ƭ **ModelList**: *object*
 
 #### Type declaration:
 
-Name | Type |
------- | ------ |
-`models` | [*Model*](#model)[] |
-`nextToken` | *string* \| *null* |
+
+`models` [*Model*](#model)[]
+`nextToken` *string* \| *null*
 
 Defined in: [types.ts:309](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/types.ts#L309)
 
@@ -3341,14 +3218,13 @@ ___
 
 ### PredictionList
 
-Ƭ **PredictionList**: { `nextToken`: *string* \| *null* ; `predictions`: [*PredictionResponse*](#predictionresponse)[]  }
+Ƭ **PredictionList**: *object*
 
 #### Type declaration:
 
-Name | Type |
------- | ------ |
-`nextToken` | *string* \| *null* |
-`predictions` | [*PredictionResponse*](#predictionresponse)[] |
+
+`nextToken` *string* \| *null*
+`predictions` [*PredictionResponse*](#predictionresponse)[]
 
 Defined in: [types.ts:209](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/types.ts#L209)
 
@@ -3356,18 +3232,17 @@ ___
 
 ### PredictionResponse
 
-Ƭ **PredictionResponse**: { `documentId`: *string* ; `inferenceTime`: *number* ; `modelId`: *string* ; `predictionId`: *string* ; `predictions`: [*Prediction*](#prediction)[] ; `timestamp`: *number*  }
+Ƭ **PredictionResponse**: *object*
 
 #### Type declaration:
 
-Name | Type |
------- | ------ |
-`documentId` | *string* |
-`inferenceTime` | *number* |
-`modelId` | *string* |
-`predictionId` | *string* |
-`predictions` | [*Prediction*](#prediction)[] |
-`timestamp` | *number* |
+
+`documentId` *string*
+`inferenceTime` *number*
+`modelId` *string*
+`predictionId` *string*
+`predictions` [*Prediction*](#prediction)[]
+`timestamp` *number*
 
 Defined in: [types.ts:198](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/types.ts#L198)
 
@@ -3375,15 +3250,14 @@ ___
 
 ### Secret
 
-Ƭ **Secret**: { `description`: *string* \| *null* ; `name`: *string* \| *null* ; `secredId`: *string*  }
+Ƭ **Secret**: *object*
 
 #### Type declaration:
 
-Name | Type |
------- | ------ |
-`description` | *string* \| *null* |
-`name` | *string* \| *null* |
-`secredId` | *string* |
+
+`description` *string* \| *null*
+`name` *string* \| *null*
+`secredId` *string*
 
 Defined in: [types.ts:244](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/types.ts#L244)
 
@@ -3391,14 +3265,13 @@ ___
 
 ### SecretList
 
-Ƭ **SecretList**: { `nextToken?`: *string* \| *null* ; `secrets`: [*Secret*](#secret)[]  }
+Ƭ **SecretList**: *object*
 
 #### Type declaration:
 
-Name | Type |
------- | ------ |
-`nextToken?` | *string* \| *null* |
-`secrets` | [*Secret*](#secret)[] |
+
+`nextToken`? *string* \| *null*
+`secrets` [*Secret*](#secret)[]
 
 Defined in: [types.ts:252](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/types.ts#L252)
 
@@ -3406,19 +3279,18 @@ ___
 
 ### Transition
 
-Ƭ **Transition**: { `assets?`: *Record*<*string*, *string*\> ; `description`: *string* ; `inputJsonSchema`: *unknown* ; `name`: *string* ; `outputJsonSchema?`: *unknown* ; `transitionId`: *string* ; `transitionType`: [*TransitionType*](#transitiontype)  }
+Ƭ **Transition**: *object*
 
 #### Type declaration:
 
-Name | Type |
------- | ------ |
-`assets?` | *Record*<*string*, *string*\> |
-`description` | *string* |
-`inputJsonSchema` | *unknown* |
-`name` | *string* |
-`outputJsonSchema?` | *unknown* |
-`transitionId` | *string* |
-`transitionType` | [*TransitionType*](#transitiontype) |
+
+`assets`? *Record*<string, string\>
+`description` *string*
+`inputJsonSchema` *unknown*
+`name` *string*
+`outputJsonSchema`? *unknown*
+`transitionId` *string*
+`transitionType` [*TransitionType*](#transitiontype)
 
 Defined in: [types.ts:99](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/types.ts#L99)
 
@@ -3426,19 +3298,17 @@ ___
 
 ### TransitionExecution
 
-Ƭ **TransitionExecution**: { `completedBy`: *string* \| *null* ; `endTime`: *string* \| *null* ; `executionId`: *string* ; `input`: *Record*<*any*, *any*\> ; `startTime`: *string* \| *null* ; `status`: *succeeded* \| *failed* \| *retry* \| *running* \| *rejected* ; `transitionId`: *string*  }
+Ƭ **TransitionExecution**: *object*
 
 #### Type declaration:
 
-Name | Type |
------- | ------ |
-`completedBy` | *string* \| *null* |
-`endTime` | *string* \| *null* |
-`executionId` | *string* |
-`input` | *Record*<*any*, *any*\> |
-`startTime` | *string* \| *null* |
-`status` | *succeeded* \| *failed* \| *retry* \| *running* \| *rejected* |
-`transitionId` | *string* |
+`completedBy` *string* \| *null*
+`endTime` *string* \| *null* 
+`executionId` *string* 
+`input` *Record*<any, any\>
+`startTime` *string* \| *null*
+`status` *succeeded* \| *failed* \| *retry* \| *running* \| *rejected*
+`transitionId`*string*
 
 Defined in: [types.ts:114](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/types.ts#L114)
 
@@ -3446,15 +3316,14 @@ ___
 
 ### TransitionExecutionList
 
-Ƭ **TransitionExecutionList**: { `executions`: [*TransitionExecution*](#transitionexecution)[] ; `nextToken`: *string* \| *null* ; `transitionId`: *string*  }
+Ƭ **TransitionExecutionList**: *object*
 
 #### Type declaration:
 
-Name | Type |
------- | ------ |
-`executions` | [*TransitionExecution*](#transitionexecution)[] |
-`nextToken` | *string* \| *null* |
-`transitionId` | *string* |
+
+`executions` [*TransitionExecution*](#transitionexecution)[]
+`nextToken` *string* \| *null*
+`transitionId` *string*
 
 Defined in: [types.ts:36](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/types.ts#L36)
 
@@ -3470,14 +3339,13 @@ ___
 
 ### TransitionList
 
-Ƭ **TransitionList**: { `nextToken?`: *string* ; `transitions`: [*Transition*](#transition)[]  }
+Ƭ **TransitionList**: *object*
 
 #### Type declaration:
 
-Name | Type |
------- | ------ |
-`nextToken?` | *string* |
-`transitions` | [*Transition*](#transition)[] |
+
+`nextToken`? *string*
+`transitions` [*Transition*](#transition)[]
 
 Defined in: [types.ts:109](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/types.ts#L109)
 
@@ -3493,16 +3361,15 @@ ___
 
 ### UpdateTransitionOptions
 
-Ƭ **UpdateTransitionOptions**: { `description?`: *string* ; `inputJsonSchema?`: *Record*<*any*, *any*\> ; `name?`: *string* ; `outputJsonSchema?`: *Record*<*any*, *any*\>  }
+Ƭ **UpdateTransitionOptions**: *object*
 
 #### Type declaration:
 
-Name | Type |
------- | ------ |
-`description?` | *string* |
-`inputJsonSchema?` | *Record*<*any*, *any*\> |
-`name?` | *string* |
-`outputJsonSchema?` | *Record*<*any*, *any*\> |
+
+`description`? *string*
+`inputJsonSchema`? *Record*<any, any\>
+`name`? *string*
+`outputJsonSchema`? *Record*<any, any\>
 
 Defined in: [types.ts:92](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/types.ts#L92)
 
@@ -3510,14 +3377,13 @@ ___
 
 ### UpdateUserOptions
 
-Ƭ **UpdateUserOptions**: { `avatar?`: *string* \| *null* ; `name?`: *string* \| *null*  }
+Ƭ **UpdateUserOptions**: *object*
 
 #### Type declaration:
 
-Name | Type |
------- | ------ |
-`avatar?` | *string* \| *null* |
-`name?` | *string* \| *null* |
+
+`avatar`? *string* \| *null*
+`name`? *string* \| *null*
 
 Defined in: [types.ts:232](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/types.ts#L232)
 
@@ -3525,16 +3391,15 @@ ___
 
 ### User
 
-Ƭ **User**: { `avatar`: *string* \| *null* ; `email`: *string* ; `name`: *string* \| *null* ; `userId`: *string*  }
+Ƭ **User**: *object*
 
 #### Type declaration:
 
-Name | Type |
------- | ------ |
-`avatar` | *string* \| *null* |
-`email` | *string* |
-`name` | *string* \| *null* |
-`userId` | *string* |
+
+`avatar` *string* \| *null*
+`email` *string*
+`name` *string* \| *null*
+`userId` *string*
 
 Defined in: [types.ts:220](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/types.ts#L220)
 
@@ -3542,14 +3407,13 @@ ___
 
 ### UserList
 
-Ƭ **UserList**: { `nextToken?`: *string* ; `users`: [*User*](#user)[]  }
+Ƭ **UserList**: *object*
 
 #### Type declaration:
 
-Name | Type |
------- | ------ |
-`nextToken?` | *string* |
-`users` | [*User*](#user)[] |
+
+`nextToken`? *string*
+`users` [*User*](#user)[]
 
 Defined in: [types.ts:239](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/types.ts#L239)
 
@@ -3557,15 +3421,14 @@ ___
 
 ### Workflow
 
-Ƭ **Workflow**: { `description?`: *string* ; `name`: *string* ; `workflowId`: *string*  }
+Ƭ **Workflow**: *object*
 
 #### Type declaration:
 
-Name | Type |
------- | ------ |
-`description?` | *string* |
-`name` | *string* |
-`workflowId` | *string* |
+
+`description`? *string*
+`name` *string*
+`workflowId` *string*
 
 Defined in: [types.ts:130](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/types.ts#L130)
 
@@ -3573,21 +3436,20 @@ ___
 
 ### WorkflowExecution
 
-Ƭ **WorkflowExecution**: { `completedBy`: *string*[] ; `endTime`: *string* \| *null* ; `executionId`: *string* ; `input`: *Record*<*any*, *any*\> ; `output`: *Record*<*any*, *any*\> ; `startTime`: *string* \| *null* ; `status?`: *succeeded* \| *failed* \| *running* \| *rejected* ; `transitionExecutions`: *Record*<*string*, *string*[]\> \| *null* ; `workflowId`: *string*  }
+Ƭ **WorkflowExecution**: *object*
 
 #### Type declaration:
 
-Name | Type |
------- | ------ |
-`completedBy` | *string*[] |
-`endTime` | *string* \| *null* |
-`executionId` | *string* |
-`input` | *Record*<*any*, *any*\> |
-`output` | *Record*<*any*, *any*\> |
-`startTime` | *string* \| *null* |
-`status?` | *succeeded* \| *failed* \| *running* \| *rejected* |
-`transitionExecutions` | *Record*<*string*, *string*[]\> \| *null* |
-`workflowId` | *string* |
+
+`completedBy` *string*[]
+`endTime` *string* \| *null*
+`executionId` *string*
+`input` *Record*<any, any\>
+`output` *Record*<any, any\>
+`startTime` *string* \| *null*
+`status`? *succeeded* \| *failed* \| *running* \| *rejected*
+`transitionExecutions` *Record*<string, string[]\> \| *null*
+`workflowId` *string*
 
 Defined in: [types.ts:158](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/types.ts#L158)
 
@@ -3595,16 +3457,15 @@ ___
 
 ### WorkflowExecutionList
 
-Ƭ **WorkflowExecutionList**: { `executions`: *Required*<[*WorkflowExecution*](#workflowexecution)\>[] ; `nextToken?`: *string* ; `status?`: *succeeded* \| *failed* \| *running* \| *rejected* ; `workflowId`: *string*  }
+Ƭ **WorkflowExecutionList**: *object*
 
 #### Type declaration:
 
-Name | Type |
------- | ------ |
-`executions` | *Required*<[*WorkflowExecution*](#workflowexecution)\>[] |
-`nextToken?` | *string* |
-`status?` | *succeeded* \| *failed* \| *running* \| *rejected* |
-`workflowId` | *string* |
+
+`executions` *Required*<[*WorkflowExecution*](#workflowexecution)\>[]
+`nextToken`? *string*
+`status`? *succeeded* \| *failed* \| *running* \| *rejected*
+`workflowId` *string*
 
 Defined in: [types.ts:170](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/types.ts#L170)
 
@@ -3612,13 +3473,12 @@ ___
 
 ### WorkflowList
 
-Ƭ **WorkflowList**: { `workflows`: [*Workflow*](#workflow)[]  }
+Ƭ **WorkflowList**: *object*
 
 #### Type declaration:
 
-Name | Type |
------- | ------ |
-`workflows` | [*Workflow*](#workflow)[] |
+
+`workflows` [*Workflow*](#workflow)[]
 
 Defined in: [types.ts:154](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/types.ts#L154)
 
@@ -3626,14 +3486,13 @@ ___
 
 ### WorkflowSpecification
 
-Ƭ **WorkflowSpecification**: { `definition`: *object* ; `language?`: *ASL* ; `version?`: *1.0.0*  }
+Ƭ **WorkflowSpecification**: *object*
 
 #### Type declaration:
 
-Name | Type |
------- | ------ |
-`definition` | *object* |
-`language?` | *ASL* |
-`version?` | *1.0.0* |
+
+`definition` *object*
+`language`? *ASL*
+`version`? *1.0.0*
 
 Defined in: [types.ts:124](https://github.com/LucidtechAI/las-sdk-js/blob/c39e7a5/packages/las-sdk-core/src/types.ts#L124)
