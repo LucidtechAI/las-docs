@@ -12,7 +12,7 @@ The workflow in this tutorial will consist of two steps:
 ![Workflow](../.gitbook/assets/simple-workflow.png)
 ## Prerequisites
 * Download the [lucidtech CLI](https://github.com/LucidtechAI/las-cli)
-* Create a remote component by following [this tutorial](custom_approve_view.md) or just use 
+* Create a remote component by following [this tutorial](setup_approve_view.md) or just use 
 [this standard remote component](https://github.com/LucidtechAI/las-docs/tree/master/tutorials/simple-demo/backend/src/Invoice/assets/jsRemoteComponent.js)
 
 
