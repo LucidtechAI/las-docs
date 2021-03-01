@@ -18,9 +18,9 @@
   * [Java](getting-started/dev/java.md)
   <!-- * [Simple demo workflow](getting-started/simple_demo_workflow.md) -->
 * [Tutorials](tutorials/README.md)
-  * [Setup docker transition](tutorials/create_your_own_docker_transition.md)
   * [Setup workflow](tutorials/setup_predict_and_approve.md)
   * [Setup approve view](tutorials/setup_approve_view.md)
+  * [Setup docker transition](tutorials/create_your_own_docker_transition.md)
   * [Docker samples](docker-image-samples/README.md)
 * [Authentication](authentication/README.md)
 * [Quotas](quotas/README.md)

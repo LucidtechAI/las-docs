@@ -12,14 +12,17 @@ The workflow in this tutorial will consist of two steps:
 ![Workflow](../.gitbook/assets/simple-workflow.png)
 ## Prerequisites
 * Download the [lucidtech CLI](https://github.com/LucidtechAI/las-cli)
-* Create a remote component by following [this tutorial](custom_approve_view.md) or just use 
+* Create a remote component by following [this tutorial](setup_approve_view.md) or just use 
 [this standard remote component](https://github.com/LucidtechAI/las-docs/tree/master/tutorials/simple-demo/backend/src/Invoice/assets/jsRemoteComponent.js)
 
 
 ## Manual approval (manual transition)
 To create a manual step you first need a remote component that will serve 
-as a user interface. For an example on a simple remote component see 
-[This tutorial](https://github.com/LucidtechAI/flyt-form/tree/master/examples). 
+as a user interface. If you are using [this standard remote component](https://github.com/LucidtechAI/las-docs/tree/master/tutorials/simple-demo/backend/src/Invoice/assets/jsRemoteComponent.js)
+you can also configure the fields to show and manipulate by adding an asset called `fieldConfig`. 
+[Here](https://github.com/LucidtechAI/las-docs/tree/master/tutorials/simple-demo/backend/src/Invoice/assets/fieldConfig.json)
+is an example of a field config for a typical invoice.
+
 
 #### Create the remote component *asset*
 When you have created your javascript remote component, 
@@ -44,10 +47,16 @@ Create a json file, let's call it `params.json` with the following structure:
 ```json
 {
   "assets": {
-    "jsRemoteComponent": "las:asset:<hex-uuid>" 
+    "jsRemoteComponent": "las:asset:<hex-uuid>", 
+    "fieldConfig": "las:asset:<hex-uuid>"
   }
 }
 ```
+{% hint style="info" %}
+`jsRemoteComponent` and `fieldConfig` are used to find the assets, 
+so they have to be named like this if you want to use them.
+{% endhint %}
+
 Where `las:asset:<hex:uuid>` is replaced with the `assetId` you got in the previous step.
 Now you are ready to create the manual step
 ```commandline
@@ -83,7 +92,7 @@ Use `las transitions update --help` for more information on how to update your t
 ## Automatic prediction (docker transition)
 An automatic step is made by creating a docker image that will perform a task without any user involved. 
 Check our [sample images](https://github.com/LucidtechAI/las-docs/tree/master/docker-image-samples) and 
-[tutorial](~/tutorials/create_your_own_docker_transition.md)
+[tutorial](create_your_own_docker_transition.md)
 for inspiration and best practices. 
 
 The first step is to build a docker image and push it to some repository
