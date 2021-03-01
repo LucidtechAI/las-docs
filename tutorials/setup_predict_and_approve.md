@@ -83,7 +83,7 @@ Use `las transitions update --help` for more information on how to update your t
 ## Automatic prediction (docker transition)
 An automatic step is made by creating a docker image that will perform a task without any user involved. 
 Check our [sample images](https://github.com/LucidtechAI/las-docs/tree/master/docker-image-samples) and 
-[tutorial](~/tutorials/create_your_own_docker_transition.md)
+[tutorial](create_your_own_docker_transition.md)
 for inspiration and best practices. 
 
 The first step is to build a docker image and push it to some repository
