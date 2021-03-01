@@ -2,7 +2,7 @@
   "openapi": "3.0.1",
   "info": {
     "title": "Lucidtech API",
-    "version": "2021-02-16T15:30:45Z"
+    "version": "2021-02-25T10:44:59Z"
   },
   "servers": [
     {
@@ -3854,6 +3854,202 @@
         ]
       }
     },
+    "/transitions/{transitionId}/executions/{executionId}/heartbeats": {
+      "options": {
+        "parameters": [
+          {
+            "in": "path",
+            "name": "transitionId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "executionId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Empty"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Empty"
+                }
+              }
+            },
+            "description": "200 response",
+            "headers": {
+              "Access-Control-Allow-Headers": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "Access-Control-Allow-Methods": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "parameters": [
+          {
+            "in": "header",
+            "name": "Content-Type",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "transitionId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "executionId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PostHeartbeats"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "204": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Empty"
+                }
+              }
+            },
+            "description": "204 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "400 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "404 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "415": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "415 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "500 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "OAuth2": [
+              "api.lucidtech.ai/transitions.transitionid.executions.executionid.heartbeats.post"
+            ]
+          },
+          {
+            "api_key": []
+          }
+        ]
+      }
+    },
     "/users": {
       "get": {
         "parameters": [
@@ -5873,6 +6069,10 @@
         },
         "additionalProperties": false
       },
+      "PostHeartbeats": {
+        "title": "POST /transitions/{transitionId}/executions/{executionId}/heartbeats",
+        "type": "object"
+      },
       "PostWorkflowExecutions": {
         "title": "POST /workflows/{workflowId}/executions",
         "required": [
@@ -6119,7 +6319,9 @@
             "type": "string",
             "enum": [
               "application/pdf",
-              "image/jpeg"
+              "image/jpeg",
+              "image/png",
+              "image/tiff"
             ]
           },
           "updated": {
@@ -6229,6 +6431,13 @@
           },
           "autoRotate": {
             "type": "boolean"
+          },
+          "imageQuality": {
+            "type": "string",
+            "enum": [
+              "LOW",
+              "HIGH"
+            ]
           }
         },
         "additionalProperties": false
@@ -6799,7 +7008,9 @@
             "type": "string",
             "enum": [
               "application/pdf",
-              "image/jpeg"
+              "image/jpeg",
+              "image/png",
+              "image/tiff"
             ]
           },
           "content": {
@@ -7075,7 +7286,9 @@
                   "type": "string",
                   "enum": [
                     "application/pdf",
-                    "image/jpeg"
+                    "image/jpeg",
+                    "image/png",
+                    "image/tiff"
                   ]
                 },
                 "updated": {
@@ -7439,10 +7652,35 @@
                 "height",
                 "modelId",
                 "name",
+                "preprocessConfig",
                 "width"
               ],
               "type": "object",
               "properties": {
+                "preprocessConfig": {
+                  "required": [
+                    "autoRotate",
+                    "imageQuality",
+                    "maxPages"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "maxPages": {
+                      "type": "integer"
+                    },
+                    "autoRotate": {
+                      "type": "boolean"
+                    },
+                    "imageQuality": {
+                      "type": "string",
+                      "enum": [
+                        "LOW",
+                        "HIGH"
+                      ]
+                    }
+                  },
+                  "additionalProperties": false
+                },
                 "modelId": {
                   "pattern": "^las:model:[0-9A-Za-z_]+$",
                   "type": "string"
@@ -7481,6 +7719,11 @@
         "properties": {
           "output": {
             "type": "object"
+          },
+          "startTime": {
+            "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2} ?[0-9]{2}:?[0-9]{2}:?[0-9]{2}.?[0-9]{6}",
+            "type": "string",
+            "nullable": true
           },
           "error": {
             "required": [
@@ -7586,6 +7829,7 @@
               "api.lucidtech.ai/secrets.secretid.patch": "Scope for PATCH /secrets/{secretId}",
               "api.lucidtech.ai/documents.post": "Scope for POST /documents",
               "api.lucidtech.ai/workflows.workflowid.patch": "Scope for PATCH /workflows/{workflowId}",
+              "api.lucidtech.ai/transitions.transitionid.executions.executionid.heartbeats.post": "Scope for POST /transitions/{transitionId}/executions/{executionId}/heartbeats",
               "api.lucidtech.ai/assets.post": "Scope for POST /assets",
               "api.lucidtech.ai/predictions.post": "Scope for POST /predictions",
               "api.lucidtech.ai/transitions.transitionid.get": "Scope for GET /transitions/{transitionId}",
