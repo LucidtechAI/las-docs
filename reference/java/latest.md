@@ -58,12 +58,15 @@
 `public inline JSONObject `[`createTransition`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_client_1a0c9443f18366729461e4d39f91fa9ae1)`(TransitionType transitionType)` | Creates a transition, calls the POST /transitions endpoint.
 `public inline JSONObject `[`listTransitions`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_client_1a417f031cdad1b8e064d2f10d826f33a5)`(ListTransitionsOptions options)` | List transitions, calls the GET /transitions endpoint.
 `public inline JSONObject `[`listTransitions`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_client_1a0c59ae7206fef4cd589fc23c74e383a3)`()` | List transitions, calls the GET /transitions endpoint.
+`public inline JSONObject `[`getTransition`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_client_1a0461154851aaa36a030f1803e853a6e0)`(String transitionId)` | Get transition, calls the GET /transitions/{transitionId} endpoint.
 `public inline JSONObject `[`updateTransition`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_client_1a43e8a50027043fdc06d9d98c07b8b1f9)`(String transitionId,UpdateTransitionOptions options)` | Updates a transition, calls the PATCH /transitions/{transitionId} endpoint.
 `public inline JSONObject `[`executeTransition`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_client_1a8f452013fb07a4b0538d59ba002628e3)`(String transitionId)` | Start executing a manual transition, calls the POST /transitions/{transitionId}/executions endpoint.
+`public inline JSONObject `[`deleteTransition`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_client_1a5539c47c22a7f32b40ca2676ce577d21)`(String transitionId)` | Delete a transition, calls the PATCH /transitions/{transitionId} endpoint. Will fail if transition is in use by one or more workflows.
 `public inline JSONObject `[`listTransitionExecutions`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_client_1a519a6577079943d09ea7a5772065ee1b)`(String transitionId,ListTransitionExecutionsOptions options)` | List executions in a transition, calls the GET /transitions/{transitionId}/executions endpoint.
 `public inline JSONObject `[`listTransitionExecutions`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_client_1a45bce253c738098c695d45b22ee2efef)`(String transitionId)` | List executions in a transition, calls the GET /transitions/{transitionId}/executions endpoint.
 `public inline JSONObject `[`getTransitionExecution`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_client_1ad875cb2e624bdc7b71655bad9bcacb10)`(String transitionId,String executionId)` | Get an execution of a transition, calls the GET /transitions/{transitionId}/executions/{executionId} endpoint
 `public inline JSONObject `[`updateTransitionExecution`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_client_1a7ec104fc53e3b5a04192b3483c68212b)`(String transitionId,String executionId,TransitionExecutionStatus status,UpdateTransitionExecutionOptions options)` | Ends the processing of the transition execution, calls the PATCH /transitions/{transition_id}/executions/{execution_id} endpoint.
+`public inline JSONObject `[`sendHeartbeat`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_client_1ae78d4889966bcacf3a8fc8c41d31de4d)`(String transitionId,String executionId)` | Send heartbeat for a manual execution to signal that we are still working on it. Must be done at minimum once every 60 seconds or the transition execution will time out, calls the POST /transitions/{transitionId}/executions/{executionId}/heartbeats endpoint.
 `public inline JSONObject `[`createUser`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_client_1a56a28c70eab9e47a472bfc3d56e32903)`(String email,CreateUserOptions options)` | Creates a new user, calls the POST /users endpoint.
 `public inline JSONObject `[`createUser`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_client_1aaa2b082e4d1ee85ba6f33c84e3e08251)`(String email)` | Creates a new user, calls the POST /users endpoint.
 `public inline JSONObject `[`listUsers`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_client_1ae9068989f2589270f09d40cf3db6efa8)`(ListUsersOptions options)` | List users, calls the GET /users endpoint.
@@ -75,6 +78,7 @@
 `public inline JSONObject `[`createWorkflow`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_client_1af2b4a31a375c0f6df3b2ad0542a2f616)`(JSONObject specification)` | Creates a new workflow, calls the POST /workflows endpoint. Check out Lucidtech's tutorials for more info on how to create a workflow. see [https://docs.lucidtech.ai/getting-started/tutorials/tutorial_custom_predict_and_approve](https://docs.lucidtech.ai/getting-started/tutorials/tutorial_custom_predict_and_approve)
 `public inline JSONObject `[`listWorkflows`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_client_1a46fa269fd3dcb067d858eba91fb05e75)`(ListWorkflowsOptions options)` | List workflows, calls the GET /workflows endpoint.
 `public inline JSONObject `[`listWorkflows`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_client_1a8c2d549f4205f9cd9a0e58564ed3390b)`()` | List workflows, calls the GET /workflows endpoint.
+`public inline JSONObject `[`getWorkflow`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_client_1ab1c73efebc0768de2278212d094ceaf6)`(String workflowId)` | Get workflow, calls the GET /workflows/{workflowId} endpoint.
 `public inline JSONObject `[`updateWorkflow`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_client_1ae4359d885d681461499be3c0464b4a69)`(String workflowId,UpdateWorkflowOptions options)` | Updates a workflow, calls the PATCH /workflows/{workflowId} endpoint.
 `public inline JSONObject `[`deleteWorkflow`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_client_1a39129e1bc36e96d3fee684953ea531b1)`(String workflowId)` | Delete a workflow, calls the DELETE /workflows/{workflowId} endpoint.
 `public inline JSONObject `[`executeWorkflow`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_client_1af80e370f399feb814fb05fc00583bb8e)`(String workflowId,JSONObject content)` | Start a workflow execution, calls the POST /workflows/{workflowId}/executions endpoint.
@@ -801,6 +805,23 @@ Transitions response from REST API
 
 * `MissingAccessTokenException` Raised if access token cannot be obtained
 
+#### `public inline JSONObject `[`getTransition`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_client_1a0461154851aaa36a030f1803e853a6e0)`(String transitionId)` 
+
+Get transition, calls the GET /transitions/{transitionId} endpoint.
+
+#### Parameters
+* `transitionId` Id of the transition 
+
+#### Returns
+Transition response from REST API 
+
+#### Exceptions
+* `IOException` General IOException 
+
+* `APIException` Raised when API returns an erroneous status code 
+
+* `MissingAccessTokenException` Raised if access token cannot be obtained
+
 #### `public inline JSONObject `[`updateTransition`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_client_1a43e8a50027043fdc06d9d98c07b8b1f9)`(String transitionId,UpdateTransitionOptions options)` 
 
 Updates a transition, calls the PATCH /transitions/{transitionId} endpoint.
@@ -831,6 +852,23 @@ Start executing a manual transition, calls the POST /transitions/{transitionId}/
 
 #### Returns
 TransitionExecution response from REST API 
+
+#### Exceptions
+* `IOException` General IOException 
+
+* `APIException` Raised when API returns an erroneous status code 
+
+* `MissingAccessTokenException` Raised if access token cannot be obtained
+
+#### `public inline JSONObject `[`deleteTransition`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_client_1a5539c47c22a7f32b40ca2676ce577d21)`(String transitionId)` 
+
+Delete a transition, calls the PATCH /transitions/{transitionId} endpoint. Will fail if transition is in use by one or more workflows.
+
+#### Parameters
+* `transitionId` Id of the transition 
+
+#### Returns
+Transition response from REST API 
 
 #### Exceptions
 * `IOException` General IOException 
@@ -915,6 +953,25 @@ Ends the processing of the transition execution, calls the PATCH /transitions/{t
 
 #### Returns
 Transition response from REST API 
+
+#### Exceptions
+* `IOException` General IOException 
+
+* `APIException` Raised when API returns an erroneous status code 
+
+* `MissingAccessTokenException` Raised if access token cannot be obtained
+
+#### `public inline JSONObject `[`sendHeartbeat`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_client_1ae78d4889966bcacf3a8fc8c41d31de4d)`(String transitionId,String executionId)` 
+
+Send heartbeat for a manual execution to signal that we are still working on it. Must be done at minimum once every 60 seconds or the transition execution will time out, calls the POST /transitions/{transitionId}/executions/{executionId}/heartbeats endpoint.
+
+#### Parameters
+* `transitionId` Id of the transition 
+
+* `executionId` Id of the execution 
+
+#### Returns
+Empty response 
 
 #### Exceptions
 * `IOException` General IOException 
@@ -1112,6 +1169,23 @@ List workflows, calls the GET /workflows endpoint.
 
 #### Returns
 Workflows response from REST API 
+
+#### Exceptions
+* `IOException` General IOException 
+
+* `APIException` Raised when API returns an erroneous status code 
+
+* `MissingAccessTokenException` Raised if access token cannot be obtained
+
+#### `public inline JSONObject `[`getWorkflow`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_client_1ab1c73efebc0768de2278212d094ceaf6)`(String workflowId)` 
+
+Get workflow, calls the GET /workflows/{workflowId} endpoint.
+
+#### Parameters
+* `workflowId` Id of the workflow 
+
+#### Returns
+Workflow response from REST API 
 
 #### Exceptions
 * `IOException` General IOException 

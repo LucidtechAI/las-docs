@@ -88,7 +88,7 @@ Creates a batch, calls the POST /batches endpoint.
 
 
 
-#### create_document(content: Union[bytes, bytearray, str, pathlib.Path, io.IOBase], content_type: str, \*, consent_id: Optional[str] = None, batch_id: str = None, ground_truth: Sequence[Dict[str, str]] = None)
+#### create_document(content: Union[bytes, bytearray, str, pathlib.Path, io.IOBase], content_type: str, \*, consent_id: Optional[str] = None, batch_id: Optional[str] = None, ground_truth: Optional[Sequence[Dict[str, str]]] = None)
 Creates a document, calls the POST /documents endpoint.
 
 ```python
@@ -135,7 +135,7 @@ Creates a document, calls the POST /documents endpoint.
 
 
 
-#### create_prediction(document_id: str, model_id: str, \*, max_pages: Optional[int] = None, auto_rotate: Optional[bool] = None)
+#### create_prediction(document_id: str, model_id: str, \*, max_pages: Optional[int] = None, auto_rotate: Optional[bool] = None, image_quality: Optional[str] = None)
 Create a prediction on a document using specified model, calls the POST /predictions endpoint.
 
 ```python
@@ -157,7 +157,10 @@ Create a prediction on a document using specified model, calls the POST /predict
     * **max_pages** (*Optional**[**int**]*) – Maximum number of pages to run predictions on
 
 
-    * **auto_rotate** (*Optional**[**bool**]*) – Whether or not to let the API try different rotations on the document when running predictions
+    * **auto_rotate** (*Optional**[**bool**]*) – Whether or not to let the API try different rotations on            the document when running predictions
+
+
+    * **image_quality** (*Optional**[**int**]*) – image quality for prediction “LOW|HIGH”.             high quality could give better result but will also take longer time.
 
 
 
@@ -410,6 +413,8 @@ Delete documents with the provided consent_id, calls the DELETE /documents endpo
 
 #### delete_transition(transition_id: str)
 Delete the transition with the provided transition_id, calls the DELETE /transitions/{transitionId} endpoint.
+
+    Will fail if transition is in use by one or more workflows.
 
 ```python
 >>> from las.client import Client
@@ -1281,6 +1286,46 @@ List workflows, calls the GET /workflows endpoint.
 
 
 
+#### send_heartbeat(transition_id: str, execution_id: str)
+Send heartbeat for a manual execution to signal that we are still working on it.
+Must be done at minimum once every 60 seconds or the transition execution will time out,
+calls the POST /transitions/{transitionId}/executions/{executionId}/heartbeats endpoint.
+
+```python
+>>> from las.client import Client
+>>> client = Client()
+>>> client.send_heartbeat('<transition_id>', '<execution_id>')
+```
+
+
+* **Parameters**
+
+    
+    * **transition_id** (*str*) – Id of the transition
+
+
+    * **execution_id** (*str*) – Id of the transition execution
+
+
+
+* **Returns**
+
+    Empty response
+
+
+
+* **Return type**
+
+    None
+
+
+
+* **Raises**
+
+    `InvalidCredentialsException`, `TooManyRequestsException`, `LimitExceededException`, `requests.exception.RequestException`
+
+
+
 #### update_asset(asset_id: str, \*\*optional_args)
 Updates an asset, calls the PATCH /assets/{assetId} endpoint.
 
@@ -1460,7 +1505,7 @@ Updates a transition, calls the PATCH /transitions/{transitionId} endpoint.
 
 
 
-#### update_transition_execution(transition_id: str, execution_id: str, status: str, \*, output: Optional[dict] = None, error: Optional[dict] = None)
+#### update_transition_execution(transition_id: str, execution_id: str, status: str, \*, output: Optional[dict] = None, error: Optional[dict] = None, start_time: Optional[Union[str, datetime.datetime]] = None)
 Ends the processing of the transition execution,
 calls the PATCH /transitions/{transition_id}/executions/{execution_id} endpoint.
 
@@ -1486,10 +1531,13 @@ calls the PATCH /transitions/{transition_id}/executions/{execution_id} endpoint.
     * **status** (*str*) – Status of the execution ‘succeeded|failed’
 
 
-    * **output** (*Optional**[**str**]*) – Output from the execution, required when status is ‘succeded’
+    * **output** (*Optional**[**dict**]*) – Output from the execution, required when status is ‘succeded’
 
 
-    * **error** (*Optional**[**str**]*) – Error from the execution, required when status is ‘failed’, needs to contain ‘message’
+    * **error** (*Optional**[**dict**]*) – Error from the execution, required when status is ‘failed’, needs to contain ‘message’
+
+
+    * **start_time** (*Optional**[**str**]*) – Utc start time that will replace the original start time of the execution
 
 
 

@@ -2,7 +2,7 @@
 
  Members                        | Descriptions                                
 --------------------------------|---------------------------------------------
-`namespace `[`Lucidtech::Las`](#a00021) | 
+`namespace `[`Lucidtech::Las`](#a00020) | 
 `namespace `[`Lucidtech::Las::Core`](#a00022) | 
 `namespace `[`Lucidtech::Las::Utils`](#a00023) | 
 
@@ -12,11 +12,11 @@
 
  Members                        | Descriptions                                
 --------------------------------|---------------------------------------------
-`class `[`Lucidtech::Las::Client`](#a00043) | [Client](#a00043) to invoke api methods from [Lucidtech](#a00020) AI Services.
+`class `[`Lucidtech::Las::Client`](#a00043) | [Client](#a00043) to invoke api methods from [Lucidtech](#a00021) AI Services.
 
 # class `Lucidtech::Las::Client` 
 
-[Client](#a00043) to invoke api methods from [Lucidtech](#a00020) AI Services.
+[Client](#a00043) to invoke api methods from [Lucidtech](#a00021) AI Services.
 
 ## Summary
 
@@ -26,17 +26,17 @@
 `{property} `[`Credentials`](#a00067)` `[`LasCredentials`](#a00043_1aed1258913a65f014aa0ce4ef63bd6dfe) | 
 `public inline  `[`Client`](#a00043_1a2a95a90e6dfa52e94d3e12a18d583fca)`(`[`Credentials`](#a00067)` credentials)` | [Client](#a00043) constructor.
 `public inline  `[`Client`](#a00043_1a0ba3cc00461a4ee4d4a346d9600efa4a)`()` | [Client](#a00043) constructor with credentials read from local file.
-`public inline object `[`CreateAsset`](#a00043_1afde4b9ed933fd6fc775770af3cd412e1)`(byte[] content,Dictionary< string, string?>? attributes)` | Creates an asset, calls the POST /assets endpoint.
+`public inline object `[`CreateAsset`](#a00043_1afde4b9ed933fd6fc775770af3cd412e1)`(byte [] content,Dictionary< string, string?>? attributes)` | Creates an asset, calls the POST /assets endpoint.
 `public inline object `[`ListAssets`](#a00043_1a3fe859d9bfd3d23d919c708f99141e4f)`(int? maxResults,string? nextToken)` | List available assets, calls the GET /assets endpoint.
 `public inline object `[`GetAsset`](#a00043_1a8e338146001a43c4b0ca59d3f4afb901)`(string assetId)` | Get asset from the REST API, calls the GET /assets/{assetId} endpoint.
-`public inline object `[`UpdateAsset`](#a00043_1a63e88e264995507702cfde3285150eae)`(string assetId,byte?[] content,Dictionary< string, string?>? attributes)` | Updates an asset, calls the PATCH /assets/{assetId} endpoint.
-`public inline object `[`CreateDocument`](#a00043_1aef5c33f1a06ea8010bb6a6ba0c97b236)`(byte[] content,string contentType,string? consentId,string? batchId,List< Dictionary< string, string >>? groundTruth)` | Creates a document handle, calls the POST /documents endpoint
+`public inline object `[`UpdateAsset`](#a00043_1a63e88e264995507702cfde3285150eae)`(string assetId,byte? [] content,Dictionary< string, string?>? attributes)` | Updates an asset, calls the PATCH /assets/{assetId} endpoint.
+`public inline object `[`CreateDocument`](#a00043_1aef5c33f1a06ea8010bb6a6ba0c97b236)`(byte [] content,string contentType,string? consentId,string? batchId,List< Dictionary< string, string >>? groundTruth)` | Creates a document handle, calls the POST /documents endpoint
 `public inline object `[`ListDocuments`](#a00043_1a6c1c9a3f3a20bad2ccf858ac490f57d5)`(string? batchId,string? consentId,int? maxResults,string? nextToken)` | Get documents from the REST API, calls the GET /documents endpoint.
 `public inline object `[`GetDocument`](#a00043_1a1638a8fd9c03e35934af0c16d05cf90b)`(string documentId)` | Get document from the REST API, calls the GET /documents/{documentId} endpoint.
 `public inline object `[`UpdateDocument`](#a00043_1a8aa65dc695c9b9918f63d12b92f329b3)`(string documentId,List< Dictionary< string, string >> groundTruth)` | Update ground truth of the document, calls the POST /documents/{documentId} endpoint. This enables the API to learn from past mistakes.
 `public inline object `[`DeleteDocuments`](#a00043_1aac8a79f4726c5e3a364dce5bf78d75d3)`(string? consentId)` | Delete documents with specified consentId, calls DELETE /documents endpoint.
 `public inline object `[`CreateBatch`](#a00043_1a67cccdf0e1af3c8ce8b660bf1074f38f)`(string? name,string? description)` | Create a batch handle, calls the POST /batches endpoint.
-`public inline object `[`CreatePrediction`](#a00043_1aa7021a3d1f0ce85f88b1b03152ccfcca)`(string documentId,string modelId,int? maxPages,bool? autoRotate)` | Run inference and create a prediction, calls the POST /predictions endpoint.
+`public inline object `[`CreatePrediction`](#a00043_1a4cb78d4caa5b0a3f6c077eec720bd4d2)`(string documentId,string modelId,int? maxPages,bool? autoRotate,string? imageQuality)` | Run inference and create a prediction, calls the POST /predictions endpoint.
 `public inline object `[`ListPredictions`](#a00043_1aa07c60058c89b9d2464ec8ccd2037a18)`(int? maxResults,string? nextToken)` | List predictions available, calls the GET /predictions endpoint.
 `public inline object `[`ListModels`](#a00043_1a2a5979f62ac58a13cdd2fce28c174508)`(int? maxResults,string? nextToken)` | List models available, calls the GET /models endpoint.
 `public inline object `[`CreateSecret`](#a00043_1ac9ee5b8c1cedfd849aa258bccdcd1de9)`(Dictionary< string, string > data,Dictionary< string, string?>? attributes)` | Creates an secret, calls the POST /secrets endpoint.
@@ -44,20 +44,24 @@
 `public inline object `[`UpdateSecret`](#a00043_1a881282cf8a8cc3618b25a25c64c7feeb)`(string secretId,Dictionary< string, string >? data,Dictionary< string, string?>? attributes)` | Updates a secret, calls the PATCH /secrets/secretId endpoint.
 `public inline object `[`CreateTransition`](#a00043_1a5b96f5977dd3041a45770692e81a9d45)`(string transitionType,Dictionary< string, string >? inputJsonSchema,Dictionary< string, string >? outputJsonSchema,Dictionary< string, object?>? parameters,Dictionary< string, string?>? attributes)` | Creates a transition, calls the POST /transitions endpoint.
 `public inline object `[`ListTransitions`](#a00043_1a7ecc9e71192ea2432b7efc410119477d)`(string? transitionType,int? maxResults,string? nextToken)` | List transitions, calls the GET /transitions endpoint.
+`public inline object `[`GetTransition`](#a00043_1a56a0e83c4b6b97cbd1c59486a71343df)`(string transitionId)` | Get information about a specific transition, calls the GET /transitions/{transition_id} endpoint.
+`public inline object `[`DeleteTransition`](#a00043_1aaf07d945d2519bd09cd48779d6d9fd27)`(string transitionId)` | Delete a transition, calls the DELETE /transitions/{transition_id} endpoint. Will fail if transition is in use by one or more workflows.
 `public inline object `[`GetTransitionExecution`](#a00043_1a88ae688b39cf43c94052f76afa77fd99)`(string transitionId,string executionId)` | Get an execution of a transition, calls the GET /transitions/{transitionId}/executions/{executionId} endpoint
 `public inline object `[`UpdateTransition`](#a00043_1a7a41277f4729358a82624d06d6d6ad78)`(string transitionId,Dictionary< string, string >? inputJsonSchema,Dictionary< string, string >? outputJsonSchema,Dictionary< string, string?> attributes)` | Updates an existing transition, calls the PATCH /transitions/{transitionId} endpoint.
 `public inline object `[`ExecuteTransition`](#a00043_1a4e071632c9d31b235242e5de961bfb79)`(string transitionId)` | Start executing a manual transition, calls the POST /transitions/{transitionId}/executions endpoint.
 `public inline object `[`ListTransitionExecutions`](#a00043_1af972fa3f12663bdc445c79f5a5e61257)`(string transitionId,string? status,List< string >? executionIds,int? maxResults,string? nextToken,string? sortBy,string? order)` | List executions in a transition, calls the GET /transitions/{transitionId}/executions endpoint.
 `public inline object `[`ListTransitionExecutions`](#a00043_1af764a1fbd83178bf38db12f79decfdc2)`(string transitionId,List< string >? statuses,List< string >? executionIds,int? maxResults,string? nextToken,string? sortBy,string? order)` | List executions in a transition, calls the GET /transitions/{transitionId}/executions endpoint.
-`public inline object `[`UpdateTransitionExecution`](#a00043_1a223b6f84e279d6310c53922eb54cb353)`(string transitionId,string executionId,string status,Dictionary< string, string >? output,Dictionary< string, string >? error)` | Ends the processing of the transition execution, calls the PATCH /transitions/{transitionId}/execution/{executionId} endpoint.
+`public inline object `[`UpdateTransitionExecution`](#a00043_1a900c5e8ccbe8b7273b782761cf7e6198)`(string transitionId,string executionId,string status,Dictionary< string, string >? output,Dictionary< string, string >? error,string? startTime)` | Ends the processing of the transition execution, calls the PATCH /transitions/{transitionId}/executions/{executionId} endpoint.
+`public inline object `[`SendHeartbeat`](#a00043_1a4d93ff7210887e14489f679963e38d25)`(string transitionId,string executionId)` | Send heartbeat for a manual execution, calls the POST /transitions/{transitionId}/executions/{executionId}/heartbeats endpoint.
 `public inline object `[`CreateUser`](#a00043_1aa8b132ac281a0619bc1154a328bf8168)`(string email,Dictionary< string, string?>? attributes)` | Creates a new user, calls the POST /users endpoint.
 `public inline object `[`ListUsers`](#a00043_1af3b5f1ae1ad592ed1891641c418506fd)`(int? maxResults,string? nextToken)` | List users, calls the GET /users endpoint.
 `public inline object `[`GetUser`](#a00043_1adfa785e09a46221c1603483a5e646142)`(string userId)` | Get information about a specific user, calls the GET /users/{user_id} endpoint.
 `public inline object `[`DeleteUser`](#a00043_1af045ddf4f025869ac32e393f8b6f52cb)`(string userId)` | Delete the user with the provided user_id, calls the DELETE /users/{userId} endpoint.
 `public inline object `[`UpdateUser`](#a00043_1aa4a3d7f47f150f04c6552953dd6ceb90)`(string userId,Dictionary< string, object?> attributes)` | Updates a user, calls the PATCH /users/{userId} endpoint.
-`public inline object `[`CreateWorkflow`](#a00043_1ab9e2e28491d47757858be2250b6351dc)`(Dictionary< string, object > spec,Dictionary< string, string >? errorConfig,Dictionary< string, string?>? attributes)` | Creates a new workflow, calls the POST /workflows endpoint. Check out [Lucidtech](#a00020)'s tutorials for more info on how to create a workflow.
+`public inline object `[`CreateWorkflow`](#a00043_1ab9e2e28491d47757858be2250b6351dc)`(Dictionary< string, object > spec,Dictionary< string, string >? errorConfig,Dictionary< string, string?>? attributes)` | Creates a new workflow, calls the POST /workflows endpoint. Check out [Lucidtech](#a00021)'s tutorials for more info on how to create a workflow.
 `public inline object `[`ListWorkflows`](#a00043_1a7938e99f5187033a817155e104d14641)`(int? maxResults,string nextToken)` | List workflows, calls the GET /workflows endpoint.
-`public inline object `[`UpdateWorkflow`](#a00043_1a8c0e3e9c06564ffd01a4ac5eabcaa997)`(string workflowId,Dictionary< string, string?> attributes)` | Creates a workflow handle, calls the PATCH /workflows/{workflowId} endpoint.
+`public inline object `[`UpdateWorkflow`](#a00043_1ab9bef59fbf9f83ff8804facd9bbedf76)`(string workflowId,Dictionary< string, string?> attributes)` | Creates a workflow handle, calls the PATCH /workflows/{workflowId} endpoint.
+`public inline object `[`GetWorkflow`](#a00043_1ae3a74c1ee4ab596c0b72f5e3c82c0262)`(string workflowId)` | Get information about a specific workflow, calls the GET /workflows/{workflow_id} endpoint.
 `public inline object `[`DeleteWorkflow`](#a00043_1aba8230db99366b8ede332149e8cb3473)`(string workflowId)` | Delete the workflow with the provided workflow_id, calls the DELETE /workflows/{workflowId} endpoint.
 `public inline object `[`ExecuteWorkflow`](#a00043_1ae85ba2f8addcba40182b0ac7cce0443d)`(string workflowId,Dictionary< string, object > content)` | Start a workflow execution, calls the POST /workflows/{workflowId}/executions endpoint.
 `public inline object `[`ListWorkflowExecutions`](#a00043_1ac2605a8e1b3cb18a76727146e3b5cb7c)`(string workflowId,string? status,int? maxResults,string? nextToken,string? sortBy,string? order)` | List executions in a workflow, calls the GET /workflows/{workflowId}/executions endpoint.
@@ -81,7 +85,7 @@
 
 [Client](#a00043) constructor with credentials read from local file.
 
-#### `public inline object `[`CreateAsset`](#a00043_1afde4b9ed933fd6fc775770af3cd412e1)`(byte[] content,Dictionary< string, string?>? attributes)` 
+#### `public inline object `[`CreateAsset`](#a00043_1afde4b9ed933fd6fc775770af3cd412e1)`(byte [] content,Dictionary< string, string?>? attributes)` 
 
 Creates an asset, calls the POST /assets endpoint.
 
@@ -135,7 +139,7 @@ var response = client.GetAsset("<asset_id>");
 #### Returns
 Asset object
 
-#### `public inline object `[`UpdateAsset`](#a00043_1a63e88e264995507702cfde3285150eae)`(string assetId,byte?[] content,Dictionary< string, string?>? attributes)` 
+#### `public inline object `[`UpdateAsset`](#a00043_1a63e88e264995507702cfde3285150eae)`(string assetId,byte? [] content,Dictionary< string, string?>? attributes)` 
 
 Updates an asset, calls the PATCH /assets/{assetId} endpoint.
 
@@ -155,7 +159,7 @@ var response = client.UpdateAsset("<asset_id>", newContent);
 #### Returns
 Asset object
 
-#### `public inline object `[`CreateDocument`](#a00043_1aef5c33f1a06ea8010bb6a6ba0c97b236)`(byte[] content,string contentType,string? consentId,string? batchId,List< Dictionary< string, string >>? groundTruth)` 
+#### `public inline object `[`CreateDocument`](#a00043_1aef5c33f1a06ea8010bb6a6ba0c97b236)`(byte [] content,string contentType,string? consentId,string? batchId,List< Dictionary< string, string >>? groundTruth)` 
 
 Creates a document handle, calls the POST /documents endpoint
 
@@ -273,7 +277,7 @@ var response = client.CreateBatch("Data gathered from the Mars Rover Invoice Sca
 #### Returns
 A deserialized object that can be interpreted as a Dictionary with the fields batchId and description. batchId can be used as an input when posting documents to make them a part of this batch.
 
-#### `public inline object `[`CreatePrediction`](#a00043_1aa7021a3d1f0ce85f88b1b03152ccfcca)`(string documentId,string modelId,int? maxPages,bool? autoRotate)` 
+#### `public inline object `[`CreatePrediction`](#a00043_1a4cb78d4caa5b0a3f6c077eec720bd4d2)`(string documentId,string modelId,int? maxPages,bool? autoRotate,string? imageQuality)` 
 
 Run inference and create a prediction, calls the POST /predictions endpoint.
 
@@ -456,6 +460,36 @@ var response = client.ListTransitions();
 #### Returns
 Transitions response from REST API
 
+#### `public inline object `[`GetTransition`](#a00043_1a56a0e83c4b6b97cbd1c59486a71343df)`(string transitionId)` 
+
+Get information about a specific transition, calls the GET /transitions/{transition_id} endpoint.
+
+```cpp
+Client client = new Client();
+var response = client.GetTransition("<transition_id>");
+```
+
+#### Parameters
+* `transitionId` Id of the transition
+
+#### Returns
+Transition response from REST API
+
+#### `public inline object `[`DeleteTransition`](#a00043_1aaf07d945d2519bd09cd48779d6d9fd27)`(string transitionId)` 
+
+Delete a transition, calls the DELETE /transitions/{transition_id} endpoint. Will fail if transition is in use by one or more workflows.
+
+```cpp
+Client client = new Client();
+var response = client.DeleteTransition("<transition_id>");
+```
+
+#### Parameters
+* `transitionId` Id of the transition
+
+#### Returns
+Transition response from REST API
+
 #### `public inline object `[`GetTransitionExecution`](#a00043_1a88ae688b39cf43c94052f76afa77fd99)`(string transitionId,string executionId)` 
 
 Get an execution of a transition, calls the GET /transitions/{transitionId}/executions/{executionId} endpoint
@@ -563,9 +597,9 @@ var response = client.ListTransitionExecutions("<transitionId>", new [] {"succee
 #### Returns
 Transition executions response from the REST API
 
-#### `public inline object `[`UpdateTransitionExecution`](#a00043_1a223b6f84e279d6310c53922eb54cb353)`(string transitionId,string executionId,string status,Dictionary< string, string >? output,Dictionary< string, string >? error)` 
+#### `public inline object `[`UpdateTransitionExecution`](#a00043_1a900c5e8ccbe8b7273b782761cf7e6198)`(string transitionId,string executionId,string status,Dictionary< string, string >? output,Dictionary< string, string >? error,string? startTime)` 
 
-Ends the processing of the transition execution, calls the PATCH /transitions/{transitionId}/execution/{executionId} endpoint.
+Ends the processing of the transition execution, calls the PATCH /transitions/{transitionId}/executions/{executionId} endpoint.
 
 ```cpp
 Client client = new Client();
@@ -584,8 +618,27 @@ client.UpdateTransitionExecution("<transitionId>", "<executionId>, "succeeded", 
 
 * `error` Error from the execution, required when status is "failed"
 
+* `startTime` Utc start time that will replace the original start time of the execution
+
 #### Returns
 Transition execution response from REST API
+
+#### `public inline object `[`SendHeartbeat`](#a00043_1a4d93ff7210887e14489f679963e38d25)`(string transitionId,string executionId)` 
+
+Send heartbeat for a manual execution, calls the POST /transitions/{transitionId}/executions/{executionId}/heartbeats endpoint.
+
+```cpp
+Client client = new Client();
+var response = client.sendHeartbeat("<transitionId>", "<executionId>");
+```
+
+#### Parameters
+* `transitionId` Id of the transition
+
+* `executionId` Id of the execution
+
+#### Returns
+Transition exexution response from REST API
 
 #### `public inline object `[`CreateUser`](#a00043_1aa8b132ac281a0619bc1154a328bf8168)`(string email,Dictionary< string, string?>? attributes)` 
 
@@ -673,7 +726,7 @@ User response from REST API
 
 #### `public inline object `[`CreateWorkflow`](#a00043_1ab9e2e28491d47757858be2250b6351dc)`(Dictionary< string, object > spec,Dictionary< string, string >? errorConfig,Dictionary< string, string?>? attributes)` 
 
-Creates a new workflow, calls the POST /workflows endpoint. Check out [Lucidtech](#a00020)'s tutorials for more info on how to create a workflow.
+Creates a new workflow, calls the POST /workflows endpoint. Check out [Lucidtech](#a00021)'s tutorials for more info on how to create a workflow.
 
 ```cpp
 Client client = new Client();
@@ -719,7 +772,7 @@ var response = client.ListWorkflows();
 #### Returns
 Workflows response from REST API
 
-#### `public inline object `[`UpdateWorkflow`](#a00043_1a8c0e3e9c06564ffd01a4ac5eabcaa997)`(string workflowId,Dictionary< string, string?> attributes)` 
+#### `public inline object `[`UpdateWorkflow`](#a00043_1ab9bef59fbf9f83ff8804facd9bbedf76)`(string workflowId,Dictionary< string, string?> attributes)` 
 
 Creates a workflow handle, calls the PATCH /workflows/{workflowId} endpoint.
 
@@ -736,6 +789,21 @@ var response = client.UpdateWorkflow("<workflow_id>, newParameters);
 * `workflowId` Id of the workflow
 
 * `attributes` Attributes to update. Currently supported are: name, description
+
+#### Returns
+Workflow response from REST API
+
+#### `public inline object `[`GetWorkflow`](#a00043_1ae3a74c1ee4ab596c0b72f5e3c82c0262)`(string workflowId)` 
+
+Get information about a specific workflow, calls the GET /workflows/{workflow_id} endpoint.
+
+```cpp
+Client client = new Client();
+var response = client.GetWorkflow("<workflow_id>");
+```
+
+#### Parameters
+* `workflowId` Id of the workflow
 
 #### Returns
 Workflow response from REST API
@@ -831,7 +899,7 @@ Deletes the execution with the provided execution_id from workflow_id, calls the
 
 ```cpp
 Client client = new Client();
-var response = client.DeleteWorkflowExecution("&ltworkflow_id>", "<execution_id>");
+var response = client.DeleteWorkflowExecution("<workflow_id>", "<execution_id>");
 ```
 
 #### Parameters
@@ -893,14 +961,14 @@ Get credentials by contacting [hello@lucidtech.ai](mailto:hello@lucidtech.ai)
 
  Members                        | Descriptions                                
 --------------------------------|---------------------------------------------
-`{property} string `[`ClientId`](#a00067_1a597f4891d6f0fe9ed9f04e7aae21608f) | [Client](#a00043) ID. Provided by [Lucidtech](#a00020).
-`{property} string `[`ClientSecret`](#a00067_1aec4e817805386c0c3c10e0d3fcd7b565) | [Client](#a00043) Secret. Provided by [Lucidtech](#a00020).
-`{property} string `[`ApiKey`](#a00067_1a08c0214e87897ef9229f99879a7a3b54) | AWS API Gateway API key. Provided by [Lucidtech](#a00020).
-`{property} string `[`AuthEndpoint`](#a00067_1aeb48746d4fcd7e93d0ba24aa1dd41659) | AWS Authorization endpoint. Provided by [Lucidtech](#a00020).
-`{property} string `[`ApiEndpoint`](#a00067_1a5dc9073eba2810493f73a112d9d076ee) | AWS API Gateway API endpoint. Provided by [Lucidtech](#a00020).
+`{property} string `[`ClientId`](#a00067_1a597f4891d6f0fe9ed9f04e7aae21608f) | [Client](#a00043) ID. Provided by [Lucidtech](#a00021).
+`{property} string `[`ClientSecret`](#a00067_1aec4e817805386c0c3c10e0d3fcd7b565) | [Client](#a00043) Secret. Provided by [Lucidtech](#a00021).
+`{property} string `[`ApiKey`](#a00067_1a08c0214e87897ef9229f99879a7a3b54) | AWS API Gateway API key. Provided by [Lucidtech](#a00021).
+`{property} string `[`AuthEndpoint`](#a00067_1aeb48746d4fcd7e93d0ba24aa1dd41659) | AWS Authorization endpoint. Provided by [Lucidtech](#a00021).
+`{property} string `[`ApiEndpoint`](#a00067_1a5dc9073eba2810493f73a112d9d076ee) | AWS API Gateway API endpoint. Provided by [Lucidtech](#a00021).
 `{property} RestClient `[`RestSharpClient`](#a00067_1a77da9eff9a94f2ac1f03d134d74636f4) | RestClient for making request to the authorization endpoint.
 `public inline string `[`GetAccessToken`](#a00067_1a02857d4f347be1b9481ee23fae2547a8)`()` | Get Access token to API endpoint.
-`public inline  `[`Credentials`](#a00067_1aa41b89dcd32d09c410fa0ec8c544a5e4)`(string clientId,string clientSecret,string apiKey,string authEndpoint,string apiEndpoint)` | [Credentials](#a00067) constructor where ClientId, ClientSecret, ApiKey, AuthEndpoint and ApiEndpoint are provided by [Lucidtech](#a00020).
+`public inline  `[`Credentials`](#a00067_1aa41b89dcd32d09c410fa0ec8c544a5e4)`(string clientId,string clientSecret,string apiKey,string authEndpoint,string apiEndpoint)` | [Credentials](#a00067) constructor where ClientId, ClientSecret, ApiKey, AuthEndpoint and ApiEndpoint are provided by [Lucidtech](#a00021).
 `public inline  `[`Credentials`](#a00067_1a6b90bc8b8d133da49e129036886eefd5)`(string credentialsPath)` | [Credentials](#a00067) constructor where the path to the credentials config is provided.
 `public inline  `[`Credentials`](#a00067_1aa5fba45758ca0f5651c6e92ebc0250eb)`()` | [Credentials](#a00067) constructor where the credentials are located at the default path. ~/.lucidtech/credentials.cfg for linux and USERPROFILE%.lucidtech\credentials.cfg for Windows.
 `protected  `[`string`](#a00067_1a276748a80f0a2bc01026b8b45ae6d9cd) | 
@@ -910,23 +978,23 @@ Get credentials by contacting [hello@lucidtech.ai](mailto:hello@lucidtech.ai)
 
 #### `{property} string `[`ClientId`](#a00067_1a597f4891d6f0fe9ed9f04e7aae21608f) 
 
-[Client](#a00043) ID. Provided by [Lucidtech](#a00020).
+[Client](#a00043) ID. Provided by [Lucidtech](#a00021).
 
 #### `{property} string `[`ClientSecret`](#a00067_1aec4e817805386c0c3c10e0d3fcd7b565) 
 
-[Client](#a00043) Secret. Provided by [Lucidtech](#a00020).
+[Client](#a00043) Secret. Provided by [Lucidtech](#a00021).
 
 #### `{property} string `[`ApiKey`](#a00067_1a08c0214e87897ef9229f99879a7a3b54) 
 
-AWS API Gateway API key. Provided by [Lucidtech](#a00020).
+AWS API Gateway API key. Provided by [Lucidtech](#a00021).
 
 #### `{property} string `[`AuthEndpoint`](#a00067_1aeb48746d4fcd7e93d0ba24aa1dd41659) 
 
-AWS Authorization endpoint. Provided by [Lucidtech](#a00020).
+AWS Authorization endpoint. Provided by [Lucidtech](#a00021).
 
 #### `{property} string `[`ApiEndpoint`](#a00067_1a5dc9073eba2810493f73a112d9d076ee) 
 
-AWS API Gateway API endpoint. Provided by [Lucidtech](#a00020).
+AWS API Gateway API endpoint. Provided by [Lucidtech](#a00021).
 
 #### `{property} RestClient `[`RestSharpClient`](#a00067_1a77da9eff9a94f2ac1f03d134d74636f4) 
 
@@ -938,7 +1006,7 @@ Get Access token to API endpoint.
 
 #### `public inline  `[`Credentials`](#a00067_1aa41b89dcd32d09c410fa0ec8c544a5e4)`(string clientId,string clientSecret,string apiKey,string authEndpoint,string apiEndpoint)` 
 
-[Credentials](#a00067) constructor where ClientId, ClientSecret, ApiKey, AuthEndpoint and ApiEndpoint are provided by [Lucidtech](#a00020).
+[Credentials](#a00067) constructor where ClientId, ClientSecret, ApiKey, AuthEndpoint and ApiEndpoint are provided by [Lucidtech](#a00021).
 
 #### Parameters
 * `clientId` client id 
