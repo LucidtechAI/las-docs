@@ -18,8 +18,11 @@ The workflow in this tutorial will consist of two steps:
 
 ## Manual approval (manual transition)
 To create a manual step you first need a remote component that will serve 
-as a user interface. For an example on a simple remote component see 
-[This tutorial](https://github.com/LucidtechAI/flyt-form/tree/master/examples). 
+as a user interface. If you are using [this standard remote component](https://github.com/LucidtechAI/las-docs/tree/master/tutorials/simple-demo/backend/src/Invoice/assets/jsRemoteComponent.js)
+you can also configure the fields to show and manipulate by adding an asset called `fieldConfig`. 
+[Here](https://github.com/LucidtechAI/las-docs/tree/master/tutorials/simple-demo/backend/src/Invoice/assets/fieldConfig.json)
+is an example of a field config for a typical invoice.
+
 
 #### Create the remote component *asset*
 When you have created your javascript remote component, 
@@ -44,10 +47,16 @@ Create a json file, let's call it `params.json` with the following structure:
 ```json
 {
   "assets": {
-    "jsRemoteComponent": "las:asset:<hex-uuid>" 
+    "jsRemoteComponent": "las:asset:<hex-uuid>", 
+    "fieldConfig": "las:asset:<hex-uuid>"
   }
 }
 ```
+{% hint style="info" %}
+`jsRemoteComponent` and `fieldConfig` are used to find the assets, 
+so they have to be named like this if you want to use them.
+{% endhint %}
+
 Where `las:asset:<hex:uuid>` is replaced with the `assetId` you got in the previous step.
 Now you are ready to create the manual step
 ```commandline
