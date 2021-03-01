@@ -38,7 +38,7 @@ jobs:
           pip install -r requirements.docs.txt
           pip install tox
           make docs
-          mv docs/las.md ../reference/python-sdk/latest.md
+          mv docs/las.md ../reference/python/latest.md
 
       - name: Check out java sdk
         uses: actions/checkout@master
@@ -72,12 +72,13 @@ jobs:
           repository: LucidtechAI/las-sdk-js
           path: js-sdk
 
-      - name: JavaScript SDK
-        run: |
-          cd js-sdk
-          npm install && npm run upgrade-lucidtech
-          npm run docs
-          mv docs.md ../reference/js/latest.md
+      # - name: JavaScript SDK
+      #   run: |
+      #     cd js-sdk
+      #     npm install && npm run upgrade-lucidtech
+      #     npm run docs
+      #     sed -i -E -e '/Defined in:.*/d' -e '/(Name|Type|Description) \|/d' -e '/------/d' -e 's/ \|//g' docs.md
+      #     mv docs.md ../reference/js/latest.md
 
       - name: Clean up
         run: |
