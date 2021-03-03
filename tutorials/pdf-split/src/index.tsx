@@ -8,7 +8,14 @@ import HotkeyHint from './components/HotkeyHint';
 
 import styles from './index.module.css';
 
-declare const ___TUTORIAL_VERSION___: string;
+declare const ___PDF_SPLIT_VERSION___: string;
+
+export type Group = {
+  pages: Array<number>;
+  category: Category;
+};
+export type Groups = Array<Group>;
+export type Category = 'INVOICE' | 'RECEIPT' | 'MULTIPLE_RECEIPTS';
 
 const RemoteComponent = ({
   transitionExecution,
@@ -22,7 +29,7 @@ const RemoteComponent = ({
   const [doc, setDoc] = useState('');
   const [error, setError] = useState<string | null>(null);
   const [isLoadingDocument, setIsLoadingDocument] = useState(true);
-  const [groups, setGroups] = useState<Array<Array<number>>>([]);
+  const [groups, setGroups] = useState<Groups>([]);
 
   // keybinds
   const [showKeybinds, setShowKeybinds] = useState(true);
@@ -193,7 +200,7 @@ const RemoteComponent = ({
             </div>
           </div>
         </form>
-        <p className="text-muted small text-right">Version: {___TUTORIAL_VERSION___}</p>
+        <p className="text-muted small text-right">Version: {___PDF_SPLIT_VERSION___}</p>
       </div>
     </div>
   );
