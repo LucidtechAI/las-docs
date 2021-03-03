@@ -15,7 +15,7 @@ export type Group = {
   category: Category;
 };
 export type Groups = Array<Group>;
-export type Category = 'INVOICE' | 'RECEIPT' | 'MULTIPLE_RECEIPTS';
+export type Category = 'INVOICE' | 'RECEIPT' | 'MULTIPLE_RECEIPTS' | 'MISC';
 
 const RemoteComponent = ({
   transitionExecution,
