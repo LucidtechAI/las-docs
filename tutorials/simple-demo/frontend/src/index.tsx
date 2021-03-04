@@ -28,7 +28,7 @@ const Grid = (props: { children: ReactNode }) => (
       rowGap: '5px',
       columnGap: '20px',
       alignItems: 'center',
-      width: '100%'
+      width: '100%',
     }}
     {...props}
   />
@@ -60,9 +60,14 @@ const getBestPrediction = (fieldName: string, predictions: Prediction[]): Predic
  * @param str
  */
 function b64DecodeUnicode(str: string): string {
-  return decodeURIComponent(atob(str).split('').map(function(c) {
-      return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
-  }).join(''));
+  return decodeURIComponent(
+    atob(str)
+      .split('')
+      .map(function (c) {
+        return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+      })
+      .join(''),
+  );
 }
 
 type Field = {
@@ -80,7 +85,7 @@ const RemoteComponent = ({
   getAsset,
   onSkip,
   client,
-  queueStatus
+  queueStatus,
 }: RemoteComponentExternalProps): JSX.Element => {
   // You'd probably prefer to use a form library like React Hook Forms, Formik, or similar.
   // For this example we'll simplify it and just make use of useState.
@@ -147,8 +152,7 @@ const RemoteComponent = ({
     client
       .getDocument(transitionExecution.input.documentId)
       .then((res) => {
-        const dataUrl = `data:${res.contentType};base64,${res.content}`;
-        setDoc(dataUrl);
+        setDoc(res.content!);
         setContentType(res.contentType);
       })
       .catch((e) => {
@@ -195,7 +199,7 @@ const RemoteComponent = ({
 
   const approve = () => {
     const valuesCopy = { ...values };
-    Object.keys(valuesCopy).forEach((key) => valuesCopy[key] = valuesCopy[key] || null);
+    Object.keys(valuesCopy).forEach((key) => (valuesCopy[key] = valuesCopy[key] || null));
     const payload = {
       ...transitionExecution.input,
       verified: valuesCopy,
@@ -250,7 +254,7 @@ const RemoteComponent = ({
     }
   };
 
-  const somethingIsLoading = isLoadingAssets || queueStatus === QueueStatus.LOADING || isLoadingDocument
+  const somethingIsLoading = isLoadingAssets || queueStatus === QueueStatus.LOADING || isLoadingDocument;
 
   return (
     <div style={{ display: 'flex', flexDirection: 'row', width: '100%' }}>
@@ -281,7 +285,7 @@ const RemoteComponent = ({
               </header>
             </div>
 
-            <div className="card-body" style={ {display: 'flex', justifyContent: 'center', alignItems: 'center'} }>
+            <div className="card-body" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
               {somethingIsLoading ? (
                 <Spinner animation="border" variant="primary" />
               ) : (
