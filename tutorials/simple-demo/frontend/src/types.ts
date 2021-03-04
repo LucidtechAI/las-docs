@@ -3,11 +3,7 @@ import { Asset, Transition, TransitionExecution } from "@lucidtech/las-sdk-core/
 
 export enum QueueStatus {
   LOADING = 'LOADING',
-  LOADING_FIRST_TASK = 'LOADING_FIRST_TASK',
-  EMPTY = 'EMPTY',
   READY = 'READY',
-  TIMEOUT = 'TIMEOUT',
-  REFRESH = 'REFRESH',
 }
 
 export type RemoteComponentExternalProps = {

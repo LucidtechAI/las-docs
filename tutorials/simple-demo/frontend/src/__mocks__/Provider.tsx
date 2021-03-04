@@ -22,11 +22,12 @@ const client = (new Client() as unknown) as SDKClient;
 
 type PropProviderProps = {
   Component: ComponentType<RemoteComponentExternalProps>;
+  documentId: string
 };
 
-const PropProvider = ({ Component }: PropProviderProps) => {
+const PropProvider = ({ Component, documentId }: PropProviderProps) => {
   const [transition, setTransition] = useState(createTransition());
-  const [transitionExecution, setTransitionExecution] = useState(createTransitionExecution(transition.transitionId));
+  const [transitionExecution, setTransitionExecution] = useState(createTransitionExecution(transition.transitionId, documentId));
   const [queueStatus, setQueueStatus] = useState(QueueStatus.READY)
 
   const onReject = (taskError: string): void => {

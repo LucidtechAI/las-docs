@@ -5,6 +5,7 @@ import { Button, DateInput, Input } from '@lucidtech/flyt-form';
 import { QueueStatus, RemoteComponentExternalProps } from './types';
 import { Prediction } from '@lucidtech/las-sdk-core/lib/types';
 import Spinner from 'react-bootstrap/Spinner';
+import DocumentViewer, { DocumentType } from './DocumentViewer';
 
 type ConfidenceLevel = 'lowest' | 'low' | 'high' | 'highest';
 type ButtonVariant = 'success' | 'soft' | 'danger' | 'primary';
@@ -88,7 +89,8 @@ const RemoteComponent = ({
   // predictions will serve as our initial values for the form
   const [predictions, setPredictions] = useState<Prediction[]>([]);
 
-  const [doc, setDoc] = useState('');
+  const [doc, setDoc] = useState<string | null>(null);
+  const [contentType, setContentType] = useState<DocumentType | null>(null);
   const [isLoadingDocument, setIsLoadingDocument] = useState(true);
 
   const [isLoadingAssets, setIsLoadingAssets] = useState(true);
@@ -147,6 +149,7 @@ const RemoteComponent = ({
       .then((res) => {
         const dataUrl = `data:${res.contentType};base64,${res.content}`;
         setDoc(dataUrl);
+        setContentType(res.contentType);
       })
       .catch((e) => {
         console.error(e);
@@ -255,7 +258,7 @@ const RemoteComponent = ({
         {isLoadingDocument || queueStatus === QueueStatus.LOADING ? (
           <Spinner animation="border" variant="primary" />
         ) : (
-          <PDFObject url={doc} containerProps={{ style: { width: '100%', height: '95vh' } }} />
+          <DocumentViewer doc={doc} documentType={contentType} />
         )}
       </div>
       <div style={{ minWidth: '40%' }}>

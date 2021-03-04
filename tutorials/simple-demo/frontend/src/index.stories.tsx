@@ -9,4 +9,5 @@ export default {
   component: RemoteComponent,
 } as Meta;
 
-export const Default = (): JSX.Element => <PropProvider Component={RemoteComponent} />;
+export const Default = (): JSX.Element => <PropProvider Component={RemoteComponent} documentId="las:document:abc" />;
+export const BigJPG = (): JSX.Element => <PropProvider Component={RemoteComponent} documentId="las:document:bigjpg" />;

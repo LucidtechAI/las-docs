@@ -18,9 +18,9 @@ export function createTransition(): Transition {
   return transition
 }
 
-export function createTransitionExecution(transitionId?: string): TransitionExecution {
+export function createTransitionExecution(transitionId?: string, documentId?: string): TransitionExecution {
   const input: PredictionResponse = {
-    documentId: 'las:document:abc',
+    documentId,
     predictions: [
       {
         label: 'bank_account',
