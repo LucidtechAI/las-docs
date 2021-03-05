@@ -1,10 +1,11 @@
-import React, { useRef } from 'react';
+import React from 'react';
 
 import PDFViewer from './PDFViewer';
 import SimpleImageViewer from './SimpleImageViewer';
 
 import styles from './DocumentViewer.module.css';
 import Spinner from './Spinner';
+import TIFFViewer from './TIFFViewer';
 
 export type DocumentType = 'image/jpeg' | 'application/pdf' | 'image/png' | 'image/tiff';
 
@@ -17,6 +18,7 @@ type DocumentViewerProps = {
 
 const DocumentViewer = ({ doc, documentType, className = '', loading = false }: DocumentViewerProps): JSX.Element => {
   const isSimpleImage = documentType === 'image/jpeg' || documentType === 'image/png';
+  const isTIFF = documentType === 'image/tiff';
   const isPDF = documentType === 'application/pdf';
   const dataUrl = (!isPDF && `data:${documentType};base64,${doc}`) || '';
   const containerClasses = `${styles.container} ${className}`;
@@ -32,6 +34,9 @@ const DocumentViewer = ({ doc, documentType, className = '', loading = false }: 
           <span className="fe fe-rotate-ccw" />
           <span className="fe fe-rotate-cw" />
         </div>
+        <div className={styles['toolbar-group']}>
+          <span className="fe fe-download" />
+        </div>
       </div>
       {loading ? (
         <div className={styles['loading-container']}>
@@ -42,6 +47,7 @@ const DocumentViewer = ({ doc, documentType, className = '', loading = false }: 
           {!loading && !doc && 'Waiting for document...'}
           {!loading && doc && isSimpleImage && <SimpleImageViewer doc={dataUrl} />}
           {!loading && doc && isPDF && <PDFViewer doc={doc} />}
+          {!loading && doc && isTIFF && <TIFFViewer doc={doc} />}
           {!loading && !documentType && 'Unsupported document format. Download to view locally.'}
         </div>
       )}
