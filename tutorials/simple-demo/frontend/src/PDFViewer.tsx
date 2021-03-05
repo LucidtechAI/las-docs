@@ -2,6 +2,8 @@ import React, { useMemo, useState } from 'react';
 import { pdfjs, Document, Page } from 'react-pdf';
 import Spinner from './Spinner';
 
+import styles from './PDFViewer.module.css';
+
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.min.js`;
 const options = {
   cMapUrl: `//cdn.jsdelivr.net/npm/pdfjs-dist@${pdfjs.version}/cmaps/`,
@@ -31,9 +33,9 @@ const PDFViewer = ({ doc }: PDFViewerProps): JSX.Element => {
       loading={<Spinner />}
       options={options}
     >
-      <div>
-        <Page pageNumber={1} width={600} />
-      </div>
+      {[...new Array(pages)].map((_page, pageIndex) => {
+        return <Page pageIndex={pageIndex} width={600} key={pageIndex} className={styles.page} />;
+      })}
     </Document>
   );
 };
