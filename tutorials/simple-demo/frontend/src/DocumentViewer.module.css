@@ -1,0 +1,34 @@
+.toolbar {
+  overflow: hidden;
+  padding-bottom: 10px;
+  display: flex;
+  background-color: #444;
+  color: white;
+  height: 30px;
+  font-size: 20px;
+}
+
+.toolbar-group {
+  height: 100%;
+}
+
+.container {
+  width: 100%;
+  height: 95vh;
+  background-color: #777;
+}
+
+.loading-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.content-container {
+  padding: 30px;
+  height: calc(100% - 30px);
+  overflow: auto;
+}
+
+

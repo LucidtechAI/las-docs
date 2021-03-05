@@ -259,11 +259,11 @@ const RemoteComponent = ({
   return (
     <div style={{ display: 'flex', flexDirection: 'row', width: '100%' }}>
       <div style={{ flexGrow: 1, display: 'flex', justifyContent: 'center', alignItems: 'center' }} className="mr-5">
-        {isLoadingDocument || queueStatus === QueueStatus.LOADING ? (
-          <Spinner animation="border" variant="primary" />
-        ) : (
-          <DocumentViewer doc={doc} documentType={contentType} />
-        )}
+        <DocumentViewer
+          doc={doc}
+          documentType={contentType}
+          loading={isLoadingDocument || queueStatus === QueueStatus.LOADING}
+        />
       </div>
       <div style={{ minWidth: '40%' }}>
         <form onSubmit={(e) => e.preventDefault()}>

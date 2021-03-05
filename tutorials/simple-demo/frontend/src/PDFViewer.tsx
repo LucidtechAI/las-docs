@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import React, { useLayoutEffect, useMemo, useRef, useState } from 'react';
 import { pdfjs, Document, Page } from 'react-pdf';
 import Spinner from './Spinner';
 
@@ -16,14 +16,25 @@ type PDFViewerProps = {
 
 const PDFViewer = ({ doc }: PDFViewerProps): JSX.Element => {
   const [pages, setPages] = useState(null);
+  const [width, setWidth] = useState(600);
   function onDocumentLoadSuccess({ numPages }) {
     setPages(numPages);
   }
+
+  const docContainerRef = useRef<HTMLDivElement | null>(null);
 
   const docBinary = useMemo(() => {
     const docBinary = atob(doc || '');
     return { data: docBinary };
   }, [doc]);
+
+  useLayoutEffect(() => {
+    console.log(docContainerRef.current);
+    if (docContainerRef.current) {
+      const containerWidth = docContainerRef.current.getBoundingClientRect().width;
+      setWidth(containerWidth);
+    }
+  }, []);
 
   return (
     <Document
@@ -32,9 +43,12 @@ const PDFViewer = ({ doc }: PDFViewerProps): JSX.Element => {
       onSourceSuccess={() => setPages(null)}
       loading={<Spinner />}
       options={options}
+      inputRef={(ref) => (docContainerRef.current = ref)}
+      rotate={0}
+      className={styles.document}
     >
       {[...new Array(pages)].map((_page, pageIndex) => {
-        return <Page pageIndex={pageIndex} width={600} key={pageIndex} className={styles.page} />;
+        return <Page pageIndex={pageIndex} width={width} key={pageIndex} className={styles.page} />;
       })}
     </Document>
   );

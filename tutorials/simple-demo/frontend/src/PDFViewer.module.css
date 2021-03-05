@@ -5,3 +5,7 @@
 .page:not(:last-child) {
   margin-bottom: 20px;
 }
+
+.document {
+  width: 100%;
+}
