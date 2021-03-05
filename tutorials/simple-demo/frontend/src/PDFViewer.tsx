@@ -3,6 +3,7 @@ import { pdfjs, Document, Page } from 'react-pdf';
 import Spinner from './Spinner';
 
 import styles from './PDFViewer.module.css';
+import { debounce } from './utils';
 
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.min.js`;
 const options = {
@@ -21,7 +22,7 @@ const PDFViewer = ({ doc }: PDFViewerProps): JSX.Element => {
     setPages(numPages);
   }
 
-  const docContainerRef = useRef<HTMLDivElement | null>(null);
+  const docContainerRef = useRef<HTMLElement | null>(null);
 
   const docBinary = useMemo(() => {
     const docBinary = atob(doc || '');
@@ -29,11 +30,25 @@ const PDFViewer = ({ doc }: PDFViewerProps): JSX.Element => {
   }, [doc]);
 
   useLayoutEffect(() => {
-    console.log(docContainerRef.current);
     if (docContainerRef.current) {
       const containerWidth = docContainerRef.current.getBoundingClientRect().width;
       setWidth(containerWidth);
     }
+  }, []);
+
+  useLayoutEffect(() => {
+    const debouncedHandleResize = debounce(function handleResize() {
+      if (docContainerRef.current) {
+        const containerWidth = docContainerRef.current.getBoundingClientRect().width;
+        setWidth(containerWidth);
+      }
+    }, 30);
+
+    window.addEventListener('resize', debouncedHandleResize);
+
+    return () => {
+      window.removeEventListener('resize', debouncedHandleResize);
+    };
   }, []);
 
   return (

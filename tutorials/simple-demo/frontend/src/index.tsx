@@ -258,14 +258,15 @@ const RemoteComponent = ({
 
   return (
     <div style={{ display: 'flex', flexDirection: 'row', width: '100%' }}>
-      <div style={{ flexGrow: 1, display: 'flex', justifyContent: 'center', alignItems: 'center' }} className="mr-5">
+      <div style={{ flexGrow: 1, display: 'flex', justifyContent: 'center', alignItems: 'center', maxWidth: '60%' }}>
         <DocumentViewer
           doc={doc}
           documentType={contentType}
           loading={isLoadingDocument || queueStatus === QueueStatus.LOADING}
+          className="mr-5"
         />
       </div>
-      <div style={{ minWidth: '40%' }}>
+      <div style={{ minWidth: '40%', flexShrink: 1 }}>
         <form onSubmit={(e) => e.preventDefault()}>
           <div className="card">
             <div className="card-header">
@@ -286,15 +287,11 @@ const RemoteComponent = ({
             </div>
 
             <div className="card-body" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-              {somethingIsLoading ? (
-                <Spinner animation="border" variant="primary" />
-              ) : (
-                <Grid>
-                  {Object.entries(values).map(([fieldKey, value]) => {
-                    return <React.Fragment key={fieldKey}>{getFieldComponent(fieldKey, value)}</React.Fragment>;
-                  })}
-                </Grid>
-              )}
+              <Grid>
+                {Object.entries(values).map(([fieldKey, value]) => {
+                  return <React.Fragment key={fieldKey}>{getFieldComponent(fieldKey, value)}</React.Fragment>;
+                })}
+              </Grid>
             </div>
 
             <div className="card-footer">

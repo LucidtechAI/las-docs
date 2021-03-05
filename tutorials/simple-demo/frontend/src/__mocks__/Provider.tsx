@@ -53,12 +53,12 @@ const PropProvider = ({ Component, documentId }: PropProviderProps): JSX.Element
     setQueueStatus(QueueStatus.LOADING);
     new Promise<TransitionExecution>((resolve, _reject) => {
       setTimeout(() => {
-        const execution = createTransitionExecution(transition.transitionId);
+        const execution = createTransitionExecution(transition.transitionId, documentId);
         return resolve(execution);
-      }, 1000);
+      }, 500);
     }).then((res) => {
       setQueueStatus(QueueStatus.READY);
-      setTransitionExecution(createTransitionExecution(res.transitionId));
+      setTransitionExecution(res);
     });
   };
 
