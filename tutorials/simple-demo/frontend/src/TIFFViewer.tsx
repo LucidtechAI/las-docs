@@ -2,6 +2,7 @@ import React, { CanvasHTMLAttributes, useLayoutEffect, useMemo, useRef, useState
 import UTIF from 'utif';
 import { debounce } from './utils';
 import styles from './TIFFViewer.module.css';
+import docStyles from './DocumentViewer.module.css';
 
 type RGBData = {
   data: Uint8Array;
@@ -25,9 +26,10 @@ const TIFFPage = ({ data, width, height, ...rest }: TIFFPageProps) => {
 
 type TIFFViewerProps = {
   doc: string;
+  zoom?: number;
 };
-const TIFFViewer = ({ doc }: TIFFViewerProps): JSX.Element => {
-  const [width, setWidth] = useState(600);
+const TIFFViewer = ({ doc, zoom = 1 }: TIFFViewerProps): JSX.Element => {
+  const [width, setWidth] = useState(600 * zoom);
 
   const docContainerRef = useRef<HTMLDivElement | null>(null);
 
@@ -51,7 +53,7 @@ const TIFFViewer = ({ doc }: TIFFViewerProps): JSX.Element => {
   useLayoutEffect(() => {
     if (docContainerRef.current) {
       const containerWidth = docContainerRef.current.getBoundingClientRect().width;
-      setWidth(containerWidth);
+      setWidth(containerWidth * zoom);
     }
   }, []);
 
@@ -59,7 +61,7 @@ const TIFFViewer = ({ doc }: TIFFViewerProps): JSX.Element => {
     const debouncedHandleResize = debounce(function handleResize() {
       if (docContainerRef.current) {
         const containerWidth = docContainerRef.current.getBoundingClientRect().width;
-        setWidth(containerWidth);
+        setWidth(containerWidth * zoom);
       }
     }, 30);
 
@@ -70,8 +72,22 @@ const TIFFViewer = ({ doc }: TIFFViewerProps): JSX.Element => {
     };
   }, []);
 
+  let zoomStyle = '';
+
+  switch (zoom) {
+    case 2:
+      zoomStyle = docStyles['zoom-200'];
+      break;
+    case 1.5:
+      zoomStyle = docStyles['zoom-150'];
+      break;
+    case 1:
+    default:
+      break;
+  }
+
   return (
-    <div ref={docContainerRef} className={styles.document}>
+    <div ref={docContainerRef} className={`${styles.document} ${zoomStyle}`}>
       {pages.map((page, index) => {
         return (
           <TIFFPage

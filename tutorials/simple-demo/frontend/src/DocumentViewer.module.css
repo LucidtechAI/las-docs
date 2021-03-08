@@ -54,4 +54,11 @@
   overflow: auto;
 }
 
+.zoom-150 {
+  transform: scale(1.5);
+}
+
+.zoom-200 {
+  transform: scale(2);
+}
 

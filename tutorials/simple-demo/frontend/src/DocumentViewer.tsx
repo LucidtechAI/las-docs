@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import PDFViewer from './PDFViewer';
 import SimpleImageViewer from './SimpleImageViewer';
@@ -18,6 +18,8 @@ type DocumentViewerProps = {
   className?: string;
 };
 
+type ZoomState = 1 | 1.5 | 2;
+
 const DocumentViewer = ({
   doc,
   documentType,
@@ -32,12 +34,44 @@ const DocumentViewer = ({
   const containerClasses = `${styles.container} ${className}`;
   const downloadDocument = useDownload(fileName, dataUrl);
 
+  const [zoom, setZoom] = useState<ZoomState>(1);
+
+  console.log(zoom);
+
+  const onZoomIn = (): void => {
+    switch (zoom) {
+      case 1:
+        setZoom(1.5);
+        break;
+      case 1.5:
+        setZoom(2);
+        break;
+      case 2:
+      default:
+        break;
+    }
+  };
+
+  const onZoomOut = (): void => {
+    switch (zoom) {
+      case 2:
+        setZoom(1.5);
+        break;
+      case 1.5:
+        setZoom(1);
+        break;
+      case 1:
+      default:
+        break;
+    }
+  };
+
   return (
     <div className={containerClasses}>
       <div className={styles.toolbar}>
         <div className={styles['toolbar-group']}>
-          <span className="fe fe-zoom-out" />
-          <span className="fe fe-zoom-in" />
+          <span className="fe fe-zoom-out" onClick={onZoomOut} />
+          <span className="fe fe-zoom-in" onClick={onZoomIn} />
         </div>
         <div className={styles['toolbar-group']}>
           <span className="fe fe-rotate-ccw" />
@@ -56,7 +90,7 @@ const DocumentViewer = ({
           {!loading && !doc && 'Waiting for document...'}
           {!loading && doc && isSimpleImage && <SimpleImageViewer doc={dataUrl} />}
           {!loading && doc && isPDF && <PDFViewer doc={doc} />}
-          {!loading && doc && isTIFF && <TIFFViewer doc={doc} />}
+          {!loading && doc && isTIFF && <TIFFViewer doc={doc} zoom={zoom} />}
           {!loading && !documentType && 'Unsupported document format. Download to view locally.'}
         </div>
       )}
