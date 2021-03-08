@@ -6,22 +6,31 @@ import SimpleImageViewer from './SimpleImageViewer';
 import styles from './DocumentViewer.module.css';
 import Spinner from './Spinner';
 import TIFFViewer from './TIFFViewer';
+import { useDownload } from './useDownload';
 
 export type DocumentType = 'image/jpeg' | 'application/pdf' | 'image/png' | 'image/tiff';
 
 type DocumentViewerProps = {
+  fileName?: string;
   doc?: string | null;
   documentType?: DocumentType | null;
   loading?: boolean;
   className?: string;
 };
 
-const DocumentViewer = ({ doc, documentType, className = '', loading = false }: DocumentViewerProps): JSX.Element => {
+const DocumentViewer = ({
+  doc,
+  documentType,
+  className = '',
+  loading = false,
+  fileName = 'flyt-download',
+}: DocumentViewerProps): JSX.Element => {
   const isSimpleImage = documentType === 'image/jpeg' || documentType === 'image/png';
   const isTIFF = documentType === 'image/tiff';
   const isPDF = documentType === 'application/pdf';
   const dataUrl = (!isPDF && `data:${documentType};base64,${doc}`) || '';
   const containerClasses = `${styles.container} ${className}`;
+  const downloadDocument = useDownload(fileName, dataUrl);
 
   return (
     <div className={containerClasses}>
@@ -35,7 +44,7 @@ const DocumentViewer = ({ doc, documentType, className = '', loading = false }: 
           <span className="fe fe-rotate-cw" />
         </div>
         <div className={styles['toolbar-group']}>
-          <span className="fe fe-download" />
+          <span className="fe fe-download" onClick={downloadDocument} />
         </div>
       </div>
       {loading ? (

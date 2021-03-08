@@ -1,10 +1,9 @@
 import React, { ReactNode, useEffect, useMemo, useState } from 'react';
-import { PDFObject } from 'react-pdfobject';
 
 import { Button, DateInput, Input } from '@lucidtech/flyt-form';
-import { QueueStatus, RemoteComponentExternalProps } from './types';
 import { Prediction } from '@lucidtech/las-sdk-core/lib/types';
-import Spinner from 'react-bootstrap/Spinner';
+
+import { QueueStatus, RemoteComponentExternalProps } from './types';
 import DocumentViewer, { DocumentType } from './DocumentViewer';
 
 type ConfidenceLevel = 'lowest' | 'low' | 'high' | 'highest';
@@ -260,6 +259,7 @@ const RemoteComponent = ({
     <div style={{ display: 'flex', flexDirection: 'row', width: '100%' }}>
       <div style={{ flexGrow: 1, display: 'flex', justifyContent: 'center', alignItems: 'center', maxWidth: '60%' }}>
         <DocumentViewer
+          fileName={transitionExecution.input.documentId}
           doc={doc}
           documentType={contentType}
           loading={isLoadingDocument || queueStatus === QueueStatus.LOADING}
