@@ -3,7 +3,7 @@ import { pdfjs, Document, Page } from 'react-pdf';
 import Spinner from './Spinner';
 
 import styles from './PDFViewer.module.css';
-import { debounce, getZoomStyle } from './utils';
+import { debounce } from './utils';
 import { ZoomState } from './DocumentViewer';
 
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.min.js`;
@@ -42,6 +42,7 @@ const PDFViewer = ({ doc, zoom = 1 }: PDFViewerProps): JSX.Element => {
     const debouncedHandleResize = debounce(function handleResize() {
       if (docContainerRef.current) {
         const containerWidth = docContainerRef.current.getBoundingClientRect().width;
+        console.log(containerWidth);
         setWidth(containerWidth);
       }
     }, 30);
@@ -53,8 +54,6 @@ const PDFViewer = ({ doc, zoom = 1 }: PDFViewerProps): JSX.Element => {
     };
   }, []);
 
-  const zoomStyle = getZoomStyle(zoom);
-
   return (
     <Document
       file={docBinary}
@@ -64,10 +63,10 @@ const PDFViewer = ({ doc, zoom = 1 }: PDFViewerProps): JSX.Element => {
       options={options}
       inputRef={(ref) => (docContainerRef.current = ref)}
       rotate={0}
-      className={`${styles.document} ${zoomStyle}`}
+      className={styles.document}
     >
       {[...new Array(pages)].map((_page, pageIndex) => {
-        return <Page pageIndex={pageIndex} width={width} key={pageIndex} className={styles.page} />;
+        return <Page pageIndex={pageIndex} width={width} key={pageIndex} className={styles.page} scale={zoom} />;
       })}
     </Document>
   );
