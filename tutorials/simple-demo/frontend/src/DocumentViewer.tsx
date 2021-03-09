@@ -86,8 +86,8 @@ const DocumentViewer = ({
           />
         </div>
         <div className={styles['toolbar-group']}>
-          <span className={`${styles.button} fe fe-rotate-ccw`} title="Rotate counter clockwise" />
-          <span className={`${styles.button} fe fe-rotate-cw`} title="Rotate clockwise" />
+          <span className={`${styles.button} ${styles.disabled} fe fe-rotate-ccw`} title="Rotate counter clockwise" />
+          <span className={`${styles.button} ${styles.disabled} fe fe-rotate-cw`} title="Rotate clockwise" />
         </div>
         <div className={styles['toolbar-group']}>
           <span className={`${styles.button} fe fe-download`} onClick={downloadDocument} title="Download document" />
