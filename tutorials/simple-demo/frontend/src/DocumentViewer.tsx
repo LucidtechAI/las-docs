@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import PDFViewer from './PDFViewer';
 import SimpleImageViewer from './SimpleImageViewer';
@@ -18,7 +18,7 @@ type DocumentViewerProps = {
   className?: string;
 };
 
-type ZoomState = 1 | 1.5 | 2;
+export type ZoomState = 1 | 1.5 | 2;
 
 const DocumentViewer = ({
   doc,
@@ -36,7 +36,10 @@ const DocumentViewer = ({
 
   const [zoom, setZoom] = useState<ZoomState>(1);
 
-  console.log(zoom);
+  useEffect(() => {
+    // reset zoom when new document is loaded
+    setZoom(1);
+  }, [doc]);
 
   const onZoomIn = (): void => {
     switch (zoom) {
@@ -70,15 +73,24 @@ const DocumentViewer = ({
     <div className={containerClasses}>
       <div className={styles.toolbar}>
         <div className={styles['toolbar-group']}>
-          <span className="fe fe-zoom-out" onClick={onZoomOut} />
-          <span className="fe fe-zoom-in" onClick={onZoomIn} />
+          <span
+            className={`${styles.button} ${zoom === 1 ? styles.disabled : ''} fe fe-zoom-out`}
+            onClick={onZoomOut}
+            title="Zoom out"
+          />
+          <span className={styles.info}>{Math.floor(zoom * 100)}%</span>
+          <span
+            className={`${styles.button} ${zoom === 2 ? styles.disabled : ''} fe fe-zoom-in`}
+            onClick={onZoomIn}
+            title="Zoom in"
+          />
         </div>
         <div className={styles['toolbar-group']}>
-          <span className="fe fe-rotate-ccw" />
-          <span className="fe fe-rotate-cw" />
+          <span className={`${styles.button} fe fe-rotate-ccw`} title="Rotate counter clockwise" />
+          <span className={`${styles.button} fe fe-rotate-cw`} title="Rotate clockwise" />
         </div>
         <div className={styles['toolbar-group']}>
-          <span className="fe fe-download" onClick={downloadDocument} />
+          <span className={`${styles.button} fe fe-download`} onClick={downloadDocument} title="Download document" />
         </div>
       </div>
       {loading ? (
@@ -88,8 +100,8 @@ const DocumentViewer = ({
       ) : (
         <div className={styles['content-container']}>
           {!loading && !doc && 'Waiting for document...'}
-          {!loading && doc && isSimpleImage && <SimpleImageViewer doc={dataUrl} />}
-          {!loading && doc && isPDF && <PDFViewer doc={doc} />}
+          {!loading && doc && isSimpleImage && <SimpleImageViewer doc={dataUrl} zoom={zoom} />}
+          {!loading && doc && isPDF && <PDFViewer doc={doc} zoom={zoom} />}
           {!loading && doc && isTIFF && <TIFFViewer doc={doc} zoom={zoom} />}
           {!loading && !documentType && 'Unsupported document format. Download to view locally.'}
         </div>

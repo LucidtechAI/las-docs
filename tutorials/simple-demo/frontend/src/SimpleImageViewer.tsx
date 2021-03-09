@@ -1,14 +1,17 @@
 import React from 'react';
+import { ZoomState } from './DocumentViewer';
 
 import styles from './SimpleImageViewer.module.css';
+import { getZoomStyle } from './utils';
 
 type SimpleImageViewerProps = {
   doc: string;
-  zoom?: 100 | 150 | 200;
+  zoom?: ZoomState;
 };
 
-const SimpleImageViewer = ({ doc, zoom = 100 }: SimpleImageViewerProps): JSX.Element => {
-  return <img src={doc} className={styles.image} />;
+const SimpleImageViewer = ({ doc, zoom = 1 }: SimpleImageViewerProps): JSX.Element => {
+  const zoomStyle = getZoomStyle(zoom);
+  return <img src={doc} className={`${styles.image} ${zoomStyle}`} />;
 };
 
 export default SimpleImageViewer;

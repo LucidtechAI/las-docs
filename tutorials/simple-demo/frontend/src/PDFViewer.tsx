@@ -3,7 +3,8 @@ import { pdfjs, Document, Page } from 'react-pdf';
 import Spinner from './Spinner';
 
 import styles from './PDFViewer.module.css';
-import { debounce } from './utils';
+import { debounce, getZoomStyle } from './utils';
+import { ZoomState } from './DocumentViewer';
 
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.min.js`;
 const options = {
@@ -13,9 +14,10 @@ const options = {
 
 type PDFViewerProps = {
   doc: string;
+  zoom?: ZoomState;
 };
 
-const PDFViewer = ({ doc }: PDFViewerProps): JSX.Element => {
+const PDFViewer = ({ doc, zoom = 1 }: PDFViewerProps): JSX.Element => {
   const [pages, setPages] = useState(null);
   const [width, setWidth] = useState(600);
   function onDocumentLoadSuccess({ numPages }) {
@@ -51,6 +53,8 @@ const PDFViewer = ({ doc }: PDFViewerProps): JSX.Element => {
     };
   }, []);
 
+  const zoomStyle = getZoomStyle(zoom);
+
   return (
     <Document
       file={docBinary}
@@ -60,7 +64,7 @@ const PDFViewer = ({ doc }: PDFViewerProps): JSX.Element => {
       options={options}
       inputRef={(ref) => (docContainerRef.current = ref)}
       rotate={0}
-      className={styles.document}
+      className={`${styles.document} ${zoomStyle}`}
     >
       {[...new Array(pages)].map((_page, pageIndex) => {
         return <Page pageIndex={pageIndex} width={width} key={pageIndex} className={styles.page} />;

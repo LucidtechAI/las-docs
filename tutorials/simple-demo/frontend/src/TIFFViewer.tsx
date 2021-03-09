@@ -1,8 +1,8 @@
 import React, { CanvasHTMLAttributes, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import UTIF from 'utif';
-import { debounce } from './utils';
+import { debounce, getZoomStyle } from './utils';
 import styles from './TIFFViewer.module.css';
-import docStyles from './DocumentViewer.module.css';
+import { ZoomState } from './DocumentViewer';
 
 type RGBData = {
   data: Uint8Array;
@@ -26,7 +26,7 @@ const TIFFPage = ({ data, width, height, ...rest }: TIFFPageProps) => {
 
 type TIFFViewerProps = {
   doc: string;
-  zoom?: number;
+  zoom?: ZoomState;
 };
 const TIFFViewer = ({ doc, zoom = 1 }: TIFFViewerProps): JSX.Element => {
   const [width, setWidth] = useState(600 * zoom);
@@ -72,19 +72,7 @@ const TIFFViewer = ({ doc, zoom = 1 }: TIFFViewerProps): JSX.Element => {
     };
   }, []);
 
-  let zoomStyle = '';
-
-  switch (zoom) {
-    case 2:
-      zoomStyle = docStyles['zoom-200'];
-      break;
-    case 1.5:
-      zoomStyle = docStyles['zoom-150'];
-      break;
-    case 1:
-    default:
-      break;
-  }
+  const zoomStyle = getZoomStyle(zoom);
 
   return (
     <div ref={docContainerRef} className={`${styles.document} ${zoomStyle}`}>
