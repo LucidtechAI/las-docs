@@ -3,11 +3,6 @@ import { getApplicationKeyMap } from 'react-hotkeys';
 
 import styles from './Keybinds.module.css';
 
-const keyMap = {
-  right: '→',
-  left: '←',
-};
-
 type KeybindsProps = {
   toggleHint: () => void;
   show: boolean;
@@ -38,9 +33,9 @@ const Keybinds = ({ show, toggleHint }: KeybindsProps): JSX.Element => {
                           .toString()
                           .split('+')
                           .map((key, i) => (
-                            <Fragment key={key}>
+                            <Fragment key={key + i}>
                               {i === 0 ? '' : ' + '}
-                              <kbd className={styles.key}>{keyMap[key] || key}</kbd>
+                              <kbd className={styles.key}>{key}</kbd>
                             </Fragment>
                           ))}
                         {sequences.length > i + 1 && ', '}

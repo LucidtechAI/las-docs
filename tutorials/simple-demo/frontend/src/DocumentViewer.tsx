@@ -7,6 +7,7 @@ import styles from './DocumentViewer.module.css';
 import Spinner from './Spinner';
 import TIFFViewer from './TIFFViewer';
 import { useDownload } from './useDownload';
+import { GlobalHotKeys } from 'react-hotkeys';
 
 export type DocumentType = 'image/jpeg' | 'application/pdf' | 'image/png' | 'image/tiff';
 
@@ -69,8 +70,14 @@ const DocumentViewer = ({
     }
   };
 
+  const handlers = {
+    ZOOM_IN: onZoomIn,
+    ZOOM_OUT: onZoomOut,
+  };
+
   return (
     <div className={containerClasses}>
+      <GlobalHotKeys handlers={handlers} allowChanges />
       <div className={styles.toolbar}>
         <div className={styles['toolbar-group']}>
           <span

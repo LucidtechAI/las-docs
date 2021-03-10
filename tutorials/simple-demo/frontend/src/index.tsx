@@ -6,6 +6,7 @@ import { Prediction } from '@lucidtech/las-sdk-core/lib/types';
 import { QueueStatus, RemoteComponentExternalProps } from './types';
 import DocumentViewer, { DocumentType } from './DocumentViewer';
 import Keybinds from './Keybinds';
+import { GlobalHotKeys, HotKeys } from 'react-hotkeys';
 
 type ConfidenceLevel = 'lowest' | 'low' | 'high' | 'highest';
 type ButtonVariant = 'success' | 'soft' | 'danger' | 'primary';
@@ -300,10 +301,50 @@ const RemoteComponent = ({
       name: 'Toggle hint',
       sequences: ['shift+?'],
     },
+    PAGE_UP: {
+      name: 'Page up (multi-page)',
+      sequences: ['PageUp'],
+    },
+    PAGE_DOWN: {
+      name: 'Page down (multi-page)',
+      sequences: ['PageDown'],
+    },
+    FIRST_PAGE: {
+      name: 'First page (multi-page)',
+      sequences: ['shift+home'],
+    },
+    LAST_PAGE: {
+      name: 'Last page (multi-page)',
+      sequences: ['shift+end'],
+    },
+    ZOOM_IN: {
+      name: 'Zoom in',
+      sequences: ['alt++'],
+    },
+    ZOOM_OUT: {
+      name: 'Zoom out',
+      sequences: ['alt+-'],
+    },
+    MOVE_UP: {
+      name: 'Move up (zoomed)',
+      sequences: ['alt+up'],
+    },
+    MOVE_DOWN: {
+      name: 'Move down (zoomed)',
+      sequences: ['alt+down'],
+    },
+    MOVE_RIGHT: {
+      name: 'Move right (zoomed)',
+      sequences: ['alt+right'],
+    },
+    MOVE_LEFT: {
+      name: 'Move down (zoomed)',
+      sequences: ['alt+left'],
+    },
   };
 
   return (
-    <>
+    <GlobalHotKeys keyMap={keyMap} handlers={handlers} allowChanges>
       <Keybinds toggleHint={onToggleHint} show={showKeybinds} />
 
       <div style={{ display: 'flex', flexDirection: 'row', width: '100%' }}>
@@ -387,7 +428,7 @@ const RemoteComponent = ({
           <p className="text-muted small text-right">Version: {___FORM_VERSION___}</p>
         </div>
       </div>
-    </>
+    </GlobalHotKeys>
   );
 };
 

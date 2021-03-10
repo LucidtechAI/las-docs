@@ -1,4 +1,4 @@
-import { PredictionResponse, Transition, TransitionExecution } from '@lucidtech/las-sdk-core/lib/types';
+import { Transition, TransitionExecution } from '@lucidtech/las-sdk-core/lib/types';
 import faker from 'faker';
 
 export function createTransition(): Transition {
@@ -18,7 +18,7 @@ export function createTransition(): Transition {
 }
 
 export function createTransitionExecution(transitionId?: string, documentId = ''): TransitionExecution {
-  const input: PredictionResponse = {
+  const input = {
     documentId,
     predictions: [
       {
@@ -34,6 +34,8 @@ export function createTransitionExecution(transitionId?: string, documentId = ''
     transitionId: transitionId || faker.random.uuid(),
     status: 'running',
     completedBy: null,
+    startTime: new Date().toISOString(),
+    endTime: null,
     input,
   };
 
