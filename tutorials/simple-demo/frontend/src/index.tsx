@@ -319,11 +319,11 @@ const RemoteComponent = ({
     // },
     ZOOM_IN: {
       name: 'Zoom in',
-      sequences: ['shift+2'],
+      sequences: ['shift+PageUp'],
     },
     ZOOM_OUT: {
       name: 'Zoom out',
-      sequences: ['shift+1'],
+      sequences: ['shift+PageDown'],
     },
     MOVE_UP: {
       name: 'Move up (zoomed)',
