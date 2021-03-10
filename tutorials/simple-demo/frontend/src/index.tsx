@@ -263,12 +263,11 @@ const RemoteComponent = ({
           doc={doc}
           documentType={contentType}
           loading={isLoadingDocument || queueStatus === QueueStatus.LOADING}
-          className="mr-5"
         />
       </div>
       <div style={{ minWidth: '40%', flexShrink: 1 }}>
         <form onSubmit={(e) => e.preventDefault()}>
-          <div className="card">
+          <div className="card ml-3">
             <div className="card-header">
               <header style={{ display: 'flex', flexDirection: 'row' }}>
                 <h2 style={{ margin: 0 }}>
