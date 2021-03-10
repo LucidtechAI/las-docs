@@ -8,6 +8,7 @@ import Spinner from './Spinner';
 import TIFFViewer from './TIFFViewer';
 import { useDownload } from './useDownload';
 import { GlobalHotKeys } from 'react-hotkeys';
+import { useRef } from 'react';
 
 export type DocumentType = 'image/jpeg' | 'application/pdf' | 'image/png' | 'image/tiff';
 
@@ -34,7 +35,7 @@ const DocumentViewer = ({
   const dataUrl = (!isPDF && `data:${documentType};base64,${doc}`) || '';
   const containerClasses = `${styles.container} ${className}`;
   const downloadDocument = useDownload(fileName, dataUrl);
-
+  const contentContainerRef = useRef<HTMLDivElement>(null);
   const [zoom, setZoom] = useState<ZoomState>(1);
 
   useEffect(() => {
@@ -70,9 +71,41 @@ const DocumentViewer = ({
     }
   };
 
+  const moveUp = (): void => {
+    if (!contentContainerRef.current) return;
+    const el = contentContainerRef.current;
+    const { height } = el.getBoundingClientRect();
+    el.scrollBy({ top: -(height / 2), behavior: 'smooth' });
+  };
+
+  const moveDown = (): void => {
+    if (!contentContainerRef.current) return;
+    const el = contentContainerRef.current;
+    const { height } = el.getBoundingClientRect();
+    el.scrollBy({ top: height / 2, behavior: 'smooth' });
+  };
+
+  const moveLeft = (): void => {
+    if (!contentContainerRef.current) return;
+    const el = contentContainerRef.current;
+    const { width } = el.getBoundingClientRect();
+    el.scrollBy({ left: -(width / 2), behavior: 'smooth' });
+  };
+
+  const moveRight = (): void => {
+    if (!contentContainerRef.current) return;
+    const el = contentContainerRef.current;
+    const { width } = el.getBoundingClientRect();
+    el.scrollBy({ left: width / 2, behavior: 'smooth' });
+  };
+
   const handlers = {
     ZOOM_IN: onZoomIn,
     ZOOM_OUT: onZoomOut,
+    MOVE_UP: moveUp,
+    MOVE_DOWN: moveDown,
+    MOVE_LEFT: moveLeft,
+    MOVE_RIGHT: moveRight,
   };
 
   return (
@@ -105,7 +138,7 @@ const DocumentViewer = ({
           <Spinner color="white" />
         </div>
       ) : (
-        <div className={styles['content-container']}>
+        <div className={styles['content-container']} ref={contentContainerRef}>
           {!loading && !doc && 'Waiting for document...'}
           {!loading && doc && isSimpleImage && <SimpleImageViewer doc={dataUrl} zoom={zoom} />}
           {!loading && doc && isPDF && <PDFViewer doc={doc} zoom={zoom} />}

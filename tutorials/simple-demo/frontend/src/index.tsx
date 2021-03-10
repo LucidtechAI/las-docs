@@ -301,45 +301,45 @@ const RemoteComponent = ({
       name: 'Toggle hint',
       sequences: ['shift+?'],
     },
-    PAGE_UP: {
-      name: 'Page up (multi-page)',
-      sequences: ['PageUp'],
-    },
-    PAGE_DOWN: {
-      name: 'Page down (multi-page)',
-      sequences: ['PageDown'],
-    },
-    FIRST_PAGE: {
-      name: 'First page (multi-page)',
-      sequences: ['shift+home'],
-    },
-    LAST_PAGE: {
-      name: 'Last page (multi-page)',
-      sequences: ['shift+end'],
-    },
+    // PAGE_UP: {
+    //   name: 'Page up (multi-page)',
+    //   sequences: ['PageUp'],
+    // },
+    // PAGE_DOWN: {
+    //   name: 'Page down (multi-page)',
+    //   sequences: ['PageDown'],
+    // },
+    // FIRST_PAGE: {
+    //   name: 'First page (multi-page)',
+    //   sequences: ['shift+home'],
+    // },
+    // LAST_PAGE: {
+    //   name: 'Last page (multi-page)',
+    //   sequences: ['shift+end'],
+    // },
     ZOOM_IN: {
       name: 'Zoom in',
-      sequences: ['alt++'],
+      sequences: ['shift+2'],
     },
     ZOOM_OUT: {
       name: 'Zoom out',
-      sequences: ['alt+-'],
+      sequences: ['shift+1'],
     },
     MOVE_UP: {
       name: 'Move up (zoomed)',
-      sequences: ['alt+up'],
+      sequences: ['shift+up'],
     },
     MOVE_DOWN: {
       name: 'Move down (zoomed)',
-      sequences: ['alt+down'],
+      sequences: ['shift+down'],
     },
     MOVE_RIGHT: {
       name: 'Move right (zoomed)',
-      sequences: ['alt+right'],
+      sequences: ['shift+right'],
     },
     MOVE_LEFT: {
       name: 'Move down (zoomed)',
-      sequences: ['alt+left'],
+      sequences: ['shift+left'],
     },
   };
 
