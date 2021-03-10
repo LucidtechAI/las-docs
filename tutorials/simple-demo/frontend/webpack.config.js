@@ -46,5 +46,5 @@ module.exports = {
   externals: {
     react: 'react',
   },
-  plugins: [new webpack.DefinePlugin({ ___TUTORIAL_VERSION___: JSON.stringify(version) })],
+  plugins: [new webpack.DefinePlugin({ ___FORM_VERSION___: JSON.stringify(version) })],
 };

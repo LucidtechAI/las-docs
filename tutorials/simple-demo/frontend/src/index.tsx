@@ -8,7 +8,7 @@ import DocumentViewer, { DocumentType } from './DocumentViewer';
 
 type ConfidenceLevel = 'lowest' | 'low' | 'high' | 'highest';
 type ButtonVariant = 'success' | 'soft' | 'danger' | 'primary';
-declare const ___TUTORIAL_VERSION___: string;
+declare const ___FORM_VERSION___: string;
 
 const btnIcons = {
   success: 'fe fe-check',
@@ -334,7 +334,7 @@ const RemoteComponent = ({
             </div>
           </div>
         </form>
-        <p className="text-muted small text-right">Version: {___TUTORIAL_VERSION___}</p>
+          <p className="text-muted small text-right">Version: {___FORM_VERSION___}</p>
       </div>
     </div>
   );

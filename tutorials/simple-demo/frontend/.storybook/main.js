@@ -10,7 +10,7 @@ module.exports = {
   webpackFinal: (config) => {
     const css_regex = '/\\.css$/';
     const cssRule = config.module.rules.find((_) => _.test.toString() === css_regex);
-    config.plugins.push(new webpack.DefinePlugin({ ___TUTORIAL_VERSION___: JSON.stringify(version) }));
+    config.plugins.push(new webpack.DefinePlugin({ ___FORM_VERSION___: JSON.stringify(version) }));
 
     return {
       ...config,
