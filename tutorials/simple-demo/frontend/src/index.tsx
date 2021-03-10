@@ -5,6 +5,7 @@ import { Prediction } from '@lucidtech/las-sdk-core/lib/types';
 
 import { QueueStatus, RemoteComponentExternalProps } from './types';
 import DocumentViewer, { DocumentType } from './DocumentViewer';
+import Keybinds from './Keybinds';
 
 type ConfidenceLevel = 'lowest' | 'low' | 'high' | 'highest';
 type ButtonVariant = 'success' | 'soft' | 'danger' | 'primary';
@@ -98,6 +99,25 @@ const RemoteComponent = ({
   const [isLoadingDocument, setIsLoadingDocument] = useState(true);
 
   const [isLoadingAssets, setIsLoadingAssets] = useState(true);
+  const [showKeybinds, setShowKeybinds] = useState(true);
+  const localStorageIdentifier = 'defaultForm:showKeybindHints';
+
+  // check user preference for showing/displaying keybinds
+  useEffect(() => {
+    const preference = localStorage.getItem(localStorageIdentifier);
+    setShowKeybinds(preference === 'true');
+  }, []);
+
+  const storePreference = (show: boolean) => {
+    localStorage.setItem(localStorageIdentifier, show.toString());
+  };
+
+  const onToggleHint = () => {
+    setShowKeybinds((prev) => {
+      storePreference(!prev);
+      return !prev;
+    });
+  };
 
   // load fields from asset
   useEffect(() => {
@@ -255,88 +275,119 @@ const RemoteComponent = ({
 
   const somethingIsLoading = isLoadingAssets || queueStatus === QueueStatus.LOADING || isLoadingDocument;
 
+  const handlers = {
+    APPROVE: approve,
+    REJECT: reject,
+    SKIP: skip,
+    TOGGLE_HINT: onToggleHint,
+  };
+
+  // react-hotkeys types aren't 100% correct sadly
+  const keyMap: any = {
+    APPROVE: {
+      name: 'Approve',
+      sequences: ['shift+enter'],
+    },
+    REJECT: {
+      name: 'Reject',
+      sequences: ['shift+q'],
+    },
+    SKIP: {
+      name: 'Skip',
+      sequences: ['shift+space'],
+    },
+    TOGGLE_HINT: {
+      name: 'Toggle hint',
+      sequences: ['shift+?'],
+    },
+  };
+
   return (
-    <div style={{ display: 'flex', flexDirection: 'row', width: '100%' }}>
-      <div style={{ flexGrow: 1, display: 'flex', justifyContent: 'center', alignItems: 'center', maxWidth: '60%' }}>
-        <DocumentViewer
-          fileName={transitionExecution.input.documentId}
-          doc={doc}
-          documentType={contentType}
-          loading={isLoadingDocument || queueStatus === QueueStatus.LOADING}
-        />
-      </div>
-      <div style={{ minWidth: '40%', flexShrink: 1 }}>
-        <form onSubmit={(e) => e.preventDefault()}>
-          <div className="card ml-3">
-            <div className="card-header">
-              <header style={{ display: 'flex', flexDirection: 'row' }}>
-                <h2 style={{ margin: 0 }}>
-                  <span
-                    className={`fe fe-file-text mr-3`}
-                    style={{
-                      backgroundColor: 'lightblue',
-                      color: 'white',
-                      borderRadius: '50%',
-                      padding: '0.3em',
-                    }}
-                  />
-                  {transition?.name || 'Document'}
-                </h2>
-              </header>
-            </div>
+    <>
+      <Keybinds toggleHint={onToggleHint} show={showKeybinds} />
 
-            <div className="card-body" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-              <Grid>
-                {Object.entries(values).map(([fieldKey, value]) => {
-                  return <React.Fragment key={fieldKey}>{getFieldComponent(fieldKey, value)}</React.Fragment>;
-                })}
-              </Grid>
-            </div>
+      <div style={{ display: 'flex', flexDirection: 'row', width: '100%' }}>
+        <div style={{ flexGrow: 1, display: 'flex', justifyContent: 'center', alignItems: 'center', maxWidth: '60%' }}>
+          <DocumentViewer
+            fileName={transitionExecution.input.documentId}
+            doc={doc}
+            documentType={contentType}
+            loading={isLoadingDocument || queueStatus === QueueStatus.LOADING}
+          />
+        </div>
+        <div style={{ minWidth: '40%', flexShrink: 1 }}>
+          <form onSubmit={(e) => e.preventDefault()}>
+            <div className="card ml-3">
+              <div className="card-header">
+                <header style={{ display: 'flex', flexDirection: 'row' }}>
+                  <h2 style={{ margin: 0 }}>
+                    <span
+                      className={`fe fe-file-text mr-3`}
+                      style={{
+                        backgroundColor: 'lightblue',
+                        color: 'white',
+                        borderRadius: '50%',
+                        padding: '0.3em',
+                      }}
+                    />
+                    {transition?.name || 'Document'}
+                  </h2>
+                </header>
+              </div>
 
-            <div className="card-footer">
-              <div
-                style={{
-                  display: 'flex',
-                  flexDirection: 'row',
-                  justifyContent: 'space-between',
-                }}
-              >
-                <div style={{ order: 2 }}>
-                  <Button
-                    variant="success"
-                    style={{ width: '150px', order: 1 }}
-                    onClick={approve}
-                    disabled={isLoadingDocument || isLoadingAssets}
-                  >
-                    {getButtonIcon('success')}
-                  </Button>
-                </div>
-                <div style={{ order: 1, display: 'flex', flexDirection: 'row' }}>
-                  <Button
-                    variant="soft"
-                    style={{ order: 2 }}
-                    onClick={skip}
-                    disabled={isLoadingDocument || isLoadingAssets}
-                  >
-                    {getButtonIcon('soft')}
-                  </Button>
-                  <Button
-                    variant="danger"
-                    className="mr-2"
-                    style={{ order: 1 }}
-                    onClick={reject}
-                    disabled={isLoadingDocument || isLoadingAssets}
-                  >
-                    {getButtonIcon('danger')}
-                  </Button>
+              <div className="card-body" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                <Grid>
+                  {Object.entries(values).map(([fieldKey, value]) => {
+                    return <React.Fragment key={fieldKey}>{getFieldComponent(fieldKey, value)}</React.Fragment>;
+                  })}
+                </Grid>
+              </div>
+
+              <div className="card-footer">
+                <div
+                  style={{
+                    display: 'flex',
+                    flexDirection: 'row',
+                    justifyContent: 'space-between',
+                  }}
+                >
+                  <div style={{ order: 2 }}>
+                    <Button
+                      variant="success"
+                      style={{ width: '150px', order: 1 }}
+                      onClick={approve}
+                      disabled={isLoadingDocument || isLoadingAssets}
+                    >
+                      {getButtonIcon('success')}
+                    </Button>
+                  </div>
+                  <div style={{ order: 1, display: 'flex', flexDirection: 'row' }}>
+                    <Button
+                      variant="soft"
+                      style={{ order: 2 }}
+                      onClick={skip}
+                      disabled={isLoadingDocument || isLoadingAssets}
+                    >
+                      {getButtonIcon('soft')}
+                    </Button>
+                    <Button
+                      variant="danger"
+                      className="mr-2"
+                      style={{ order: 1 }}
+                      onClick={reject}
+                      disabled={isLoadingDocument || isLoadingAssets}
+                    >
+                      {getButtonIcon('danger')}
+                    </Button>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-        </form>
+          </form>
           <p className="text-muted small text-right">Version: {___FORM_VERSION___}</p>
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 
