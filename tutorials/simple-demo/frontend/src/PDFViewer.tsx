@@ -42,7 +42,6 @@ const PDFViewer = ({ doc, zoom = 1 }: PDFViewerProps): JSX.Element => {
     const debouncedHandleResize = debounce(function handleResize() {
       if (docContainerRef.current) {
         const containerWidth = docContainerRef.current.getBoundingClientRect().width;
-        console.log(containerWidth);
         setWidth(containerWidth);
       }
     }, 30);
