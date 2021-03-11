@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 import { useRifm } from 'rifm';
 import { Input } from '@lucidtech/flyt-form';
 import { Field } from '.';
@@ -20,27 +20,31 @@ export type MaskedDateInputProps = {
   value: string | null | undefined;
   onChange: (fieldKey: string, value: string) => void;
 } & InputPropsWithoutOnChange;
-const MaskedDateInput = ({ value, fieldInfo, fieldKey, onChange, ...rest }: MaskedDateInputProps): JSX.Element => {
-  const maskedOnChange = (value: string) => {
-    onChange(fieldKey, value);
-  };
+const MaskedDateInput = forwardRef<HTMLInputElement, MaskedDateInputProps>(
+  ({ value, fieldInfo, fieldKey, onChange, ...rest }: MaskedDateInputProps, ref) => {
+    const maskedOnChange = (value: string) => {
+      onChange(fieldKey, value);
+    };
 
-  const rifm = useRifm({
-    value: value || '',
-    onChange: maskedOnChange,
-    format: formatDate,
-    accept: /\d/g,
-    mask: 8 <= (value?.length || 0),
-  });
+    const rifm = useRifm({
+      value: value || '',
+      onChange: maskedOnChange,
+      format: formatDate,
+      accept: /\d/g,
+      mask: 8 <= (value?.length || 0),
+    });
 
-  return (
-    <>
-      <label htmlFor={fieldKey} className={styles.label}>
-        {fieldInfo?.display || fieldKey}
-      </label>
-      <Input name={fieldKey} value={rifm.value} onChange={rifm.onChange} placeholder="dd.mm.yy" {...rest} />
-    </>
-  );
-};
+    return (
+      <>
+        <label htmlFor={fieldKey} className={styles.label}>
+          {fieldInfo?.display || fieldKey}
+        </label>
+        <Input name={fieldKey} value={rifm.value} onChange={rifm.onChange} placeholder="dd.mm.yy" ref={ref} {...rest} />
+      </>
+    );
+  },
+);
+
+MaskedDateInput.displayName = 'MaskedDateInput';
 
 export default MaskedDateInput;

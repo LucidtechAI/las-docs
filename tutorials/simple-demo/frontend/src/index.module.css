@@ -4,7 +4,7 @@
   width: 100%;
 }
 
-.document-viewer-container { 
+.document-viewer-container {
   flex-grow: 1;
   display: flex;
   justify-content: center;
@@ -12,7 +12,7 @@
   max-width: 60%;
 }
 
-.form-container { 
+.form-container {
   min-width: 40%;
   flex-shrink: 1;
 }
@@ -24,4 +24,10 @@
 
 .form-header h2 {
   margin: 0;
+}
+
+.form-body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

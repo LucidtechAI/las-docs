@@ -1,4 +1,4 @@
-import React, { ReactNode, useEffect, useMemo, useState } from 'react';
+import React, { createRef, ReactNode, useEffect, useMemo, useState } from 'react';
 import { GlobalHotKeys } from 'react-hotkeys';
 
 import { Button } from '@lucidtech/flyt-form';
@@ -94,6 +94,11 @@ const RemoteComponent = ({
   const [isLoadingAssets, setIsLoadingAssets] = useState(true);
   const { showKeybinds, onToggle } = useKeybinds();
 
+  // useState for array of refs
+  const [elRefs, setElRefs] = React.useState([]);
+
+  console.log(elRefs);
+
   // load fields from asset
   useEffect(() => {
     const fieldsAssetId = transition?.assets?.fieldConfig;
@@ -133,6 +138,13 @@ const RemoteComponent = ({
     });
 
     setValues(vals);
+
+    // reset refs
+    setElRefs((elRefs) =>
+      Array(Object.keys(fields).length)
+        .fill(null)
+        .map((_, i) => elRefs[i] || createRef()),
+    );
   }, [predictions, fields]);
 
   // new transition execution, get document, and set predictions
@@ -212,7 +224,7 @@ const RemoteComponent = ({
     onRequestNew();
   };
 
-  const getFieldComponent = (fieldKey: string, value: string | null | undefined): JSX.Element => {
+  const getFieldComponent = (fieldKey: string, value: string | null | undefined, ref?: any): JSX.Element => {
     const type = fields[fieldKey].type;
     switch (type) {
       case 'date':
@@ -222,6 +234,7 @@ const RemoteComponent = ({
             fieldKey={fieldKey}
             value={value || ''}
             onChange={onChange}
+            ref={ref}
             {...getConfidenceProps(fieldKey)}
           />
         );
@@ -232,6 +245,7 @@ const RemoteComponent = ({
             fieldKey={fieldKey}
             value={value || ''}
             onChange={onChange}
+            ref={ref}
             {...getConfidenceProps(fieldKey)}
           />
         );
@@ -340,10 +354,14 @@ const RemoteComponent = ({
                 </header>
               </div>
 
-              <div className="card-body" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+              <div className={`${styles['form-body']} card-body`}>
                 <Grid>
-                  {Object.entries(values).map(([fieldKey, value]) => {
-                    return <React.Fragment key={fieldKey}>{getFieldComponent(fieldKey, value)}</React.Fragment>;
+                  {Object.entries(values).map(([fieldKey, value], index) => {
+                    return (
+                      <React.Fragment key={fieldKey}>
+                        {getFieldComponent(fieldKey, value, elRefs[index])}
+                      </React.Fragment>
+                    );
                   })}
                 </Grid>
               </div>
