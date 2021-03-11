@@ -11,6 +11,8 @@ import styles from './index.module.css';
 import MaskedDateInput from './MaskedDateInput';
 import FieldInput from './FieldInput';
 import { useKeybinds } from './useKeybinds';
+import { parse } from 'date-fns';
+import { normalizeDate } from './utils';
 
 type ConfidenceLevel = 'lowest' | 'low' | 'high' | 'highest';
 type ButtonVariant = 'success' | 'soft' | 'danger' | 'primary';
@@ -121,6 +123,11 @@ const RemoteComponent = ({
     const vals: Record<string, Prediction | undefined> = {};
     Object.keys(fields).forEach((fieldName) => {
       const prediction = getBestPrediction(fieldName, predictions);
+      // normalize date values
+      if (fields[fieldName].type === 'date' && prediction?.value) {
+        const normalized = normalizeDate(prediction.value.toString());
+        prediction.value = normalized;
+      }
       vals[fieldName] = prediction;
     });
 
@@ -130,8 +137,7 @@ const RemoteComponent = ({
   // and also reset values
   useEffect(() => {
     const vals: Record<string, string | undefined | null> = {};
-    Object.keys(fields).forEach((fieldName) => {
-      const prediction = getBestPrediction(fieldName, predictions);
+    Object.entries(initialValues).forEach(([fieldName, prediction]) => {
       vals[fieldName] = prediction?.value as string | undefined | null;
     });
 
@@ -143,7 +149,7 @@ const RemoteComponent = ({
         .fill(null)
         .map((_, i) => elRefs[i] || createRef()),
     );
-  }, [predictions, fields]);
+  }, [initialValues, fields]);
 
   // focus first non-automated input after new transition execution
   useLayoutEffect(() => {

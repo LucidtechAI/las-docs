@@ -1,3 +1,5 @@
+import { format, parse } from 'date-fns';
+
 import { ZoomState } from './DocumentViewer';
 import docStyles from './DocumentViewer.module.css';
 
@@ -29,4 +31,23 @@ export function getZoomStyle(zoom: ZoomState): string {
   }
 
   return zoomStyle;
+}
+
+/**
+ * Attempt to normalize dates to dd.mm.yy format
+ * @param dateString
+ */
+export function normalizeDate(dateString: string): string {
+  const delimited = dateString.replaceAll(/[\,\-_\/\\]+/g, '.');
+  const inputFormat = delimited.length > 8 ? 'dd.MM.yyyy' : 'dd.MM.yy';
+  const referenceDate = new Date();
+  let formatted = '';
+  try {
+    const parsedDate = parse(delimited, inputFormat, referenceDate);
+    formatted = format(parsedDate, 'dd.MM.yy');
+  } catch (e) {
+    console.error(e);
+  }
+
+  return formatted;
 }
