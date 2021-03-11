@@ -26,6 +26,11 @@ export function createTransitionExecution(transitionId?: string, documentId = ''
         value: '1010101',
         confidence: 0.9833426,
       },
+      {
+        label: 'due_date',
+        value: '21.01.2021',
+        confidence: 0.913426,
+      },
     ],
   };
 

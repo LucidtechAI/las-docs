@@ -1,0 +1,27 @@
+.main-container {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+
+.document-viewer-container { 
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-width: 60%;
+}
+
+.form-container { 
+  min-width: 40%;
+  flex-shrink: 1;
+}
+
+.form-header {
+  display: flex;
+  flex-direction: row;
+}
+
+.form-header h2 {
+  margin: 0;
+}

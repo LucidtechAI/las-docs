@@ -1,12 +1,15 @@
 import React, { ReactNode, useEffect, useMemo, useState } from 'react';
+import { GlobalHotKeys } from 'react-hotkeys';
 
-import { Button, DateInput, Input } from '@lucidtech/flyt-form';
+import { Button } from '@lucidtech/flyt-form';
 import { Prediction } from '@lucidtech/las-sdk-core/lib/types';
 
 import { QueueStatus, RemoteComponentExternalProps } from './types';
 import DocumentViewer, { DocumentType } from './DocumentViewer';
 import Keybinds from './Keybinds';
-import { GlobalHotKeys, HotKeys } from 'react-hotkeys';
+import styles from './index.module.css';
+import MaskedDateInput from './MaskedDateInput';
+import FieldInput from './FieldInput';
 
 type ConfidenceLevel = 'lowest' | 'low' | 'high' | 'highest';
 type ButtonVariant = 'success' | 'soft' | 'danger' | 'primary';
@@ -35,19 +38,7 @@ const Grid = (props: { children: ReactNode }) => (
   />
 );
 
-const labelStyle: React.CSSProperties = {
-  marginBottom: 0,
-  fontWeight: 'bold',
-};
-
 const getPercentage = (confidenceValue: number): number => Math.floor(confidenceValue * 100);
-
-const formatDate = (date: Date): string => {
-  const year = new Intl.DateTimeFormat('en', { year: 'numeric' }).format(date);
-  const month = new Intl.DateTimeFormat('en', { month: 'numeric' }).format(date);
-  const day = new Intl.DateTimeFormat('en', { day: '2-digit' }).format(date);
-  return `${year}-${month}-${day}`;
-};
 
 const getBestPrediction = (fieldName: string, predictions: Prediction[]): Prediction | undefined => {
   const fieldPredictions = predictions.filter((prediction) => prediction.label === fieldName);
@@ -71,7 +62,7 @@ function b64DecodeUnicode(str: string): string {
   );
 }
 
-type Field = {
+export type Field = {
   type: string;
   display: string;
   confidenceLevels: { automated: number; highest: number; high: number; low: number };
@@ -243,34 +234,10 @@ const RemoteComponent = ({
     switch (type) {
       case 'date':
         return (
-          <>
-            <label htmlFor={fieldKey} style={labelStyle}>
-              {fields[fieldKey].display || fieldKey}
-            </label>
-            <div>
-              <DateInput
-                selected={value && typeof value === 'string' && new Date(value)}
-                onSelect={(date) => onChange(fieldKey, formatDate(date))}
-                onChange={(date) => onChange(fieldKey, formatDate(date as Date))}
-                {...getConfidenceProps(fieldKey)}
-              />
-            </div>
-          </>
+          <MaskedDateInput fieldInfo={fields[fieldKey]} fieldKey={fieldKey} value={value || ''} onChange={onChange} />
         );
       default:
-        return (
-          <>
-            <label htmlFor={fieldKey} style={labelStyle}>
-              {fields[fieldKey].display || fieldKey}
-            </label>
-            <Input
-              name={fieldKey}
-              value={value || ''}
-              onChange={(e) => onChange(fieldKey, e.target.value)}
-              {...getConfidenceProps(fieldKey)}
-            />
-          </>
-        );
+        return <FieldInput fieldInfo={fields[fieldKey]} fieldKey={fieldKey} value={value || ''} onChange={onChange} />;
     }
   };
 
@@ -347,8 +314,8 @@ const RemoteComponent = ({
     <GlobalHotKeys keyMap={keyMap} handlers={handlers} allowChanges>
       <Keybinds toggleHint={onToggleHint} show={showKeybinds} />
 
-      <div style={{ display: 'flex', flexDirection: 'row', width: '100%' }}>
-        <div style={{ flexGrow: 1, display: 'flex', justifyContent: 'center', alignItems: 'center', maxWidth: '60%' }}>
+      <div className={styles['main-container']}>
+        <div className={styles['document-viewer-container']}>
           <DocumentViewer
             fileName={transitionExecution.input.documentId}
             doc={doc}
@@ -356,12 +323,12 @@ const RemoteComponent = ({
             loading={isLoadingDocument || queueStatus === QueueStatus.LOADING}
           />
         </div>
-        <div style={{ minWidth: '40%', flexShrink: 1 }}>
+        <div className={styles['form-container']}>
           <form onSubmit={(e) => e.preventDefault()}>
             <div className="card ml-3">
               <div className="card-header">
-                <header style={{ display: 'flex', flexDirection: 'row' }}>
-                  <h2 style={{ margin: 0 }}>
+                <header className={styles['form-header']}>
+                  <h2>
                     <span
                       className={`fe fe-file-text mr-3`}
                       style={{
