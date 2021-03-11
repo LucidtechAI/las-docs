@@ -234,10 +234,24 @@ const RemoteComponent = ({
     switch (type) {
       case 'date':
         return (
-          <MaskedDateInput fieldInfo={fields[fieldKey]} fieldKey={fieldKey} value={value || ''} onChange={onChange} />
+          <MaskedDateInput
+            fieldInfo={fields[fieldKey]}
+            fieldKey={fieldKey}
+            value={value || ''}
+            onChange={onChange}
+            {...getConfidenceProps(fieldKey)}
+          />
         );
       default:
-        return <FieldInput fieldInfo={fields[fieldKey]} fieldKey={fieldKey} value={value || ''} onChange={onChange} />;
+        return (
+          <FieldInput
+            fieldInfo={fields[fieldKey]}
+            fieldKey={fieldKey}
+            value={value || ''}
+            onChange={onChange}
+            {...getConfidenceProps(fieldKey)}
+          />
+        );
     }
   };
 
