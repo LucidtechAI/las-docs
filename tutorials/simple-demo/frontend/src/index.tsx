@@ -10,6 +10,7 @@ import Keybinds from './Keybinds';
 import styles from './index.module.css';
 import MaskedDateInput from './MaskedDateInput';
 import FieldInput from './FieldInput';
+import { useKeybinds } from './useKeybinds';
 
 type ConfidenceLevel = 'lowest' | 'low' | 'high' | 'highest';
 type ButtonVariant = 'success' | 'soft' | 'danger' | 'primary';
@@ -91,25 +92,7 @@ const RemoteComponent = ({
   const [isLoadingDocument, setIsLoadingDocument] = useState(true);
 
   const [isLoadingAssets, setIsLoadingAssets] = useState(true);
-  const [showKeybinds, setShowKeybinds] = useState(true);
-  const localStorageIdentifier = 'defaultForm:showKeybindHints';
-
-  // check user preference for showing/displaying keybinds
-  useEffect(() => {
-    const preference = localStorage.getItem(localStorageIdentifier);
-    setShowKeybinds(preference === 'true');
-  }, []);
-
-  const storePreference = (show: boolean) => {
-    localStorage.setItem(localStorageIdentifier, show.toString());
-  };
-
-  const onToggleHint = () => {
-    setShowKeybinds((prev) => {
-      storePreference(!prev);
-      return !prev;
-    });
-  };
+  const { showKeybinds, onToggle } = useKeybinds();
 
   // load fields from asset
   useEffect(() => {
@@ -261,7 +244,7 @@ const RemoteComponent = ({
     APPROVE: approve,
     REJECT: reject,
     SKIP: skip,
-    TOGGLE_HINT: onToggleHint,
+    TOGGLE_HINT: onToggle,
   };
 
   // react-hotkeys types aren't 100% correct sadly
@@ -326,7 +309,7 @@ const RemoteComponent = ({
 
   return (
     <GlobalHotKeys keyMap={keyMap} handlers={handlers} allowChanges>
-      <Keybinds toggleHint={onToggleHint} show={showKeybinds} />
+      <Keybinds toggleHint={onToggle} show={showKeybinds} />
 
       <div className={styles['main-container']}>
         <div className={styles['document-viewer-container']}>
