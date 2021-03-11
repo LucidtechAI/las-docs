@@ -22,6 +22,11 @@ export function createTransitionExecution(transitionId?: string, documentId = ''
     documentId,
     predictions: [
       {
+        label: 'document_type',
+        value: 'INVOICE',
+        confidence: 0.9833426,
+      },
+      {
         label: 'bank_account',
         value: '1010101',
         confidence: 0.9833426,

@@ -1,6 +1,12 @@
 import { Asset } from '@lucidtech/las-sdk-core/lib/types';
 
 const fields = {
+  document_type: {
+    type: 'string',
+    enum: [{ value: 'INVOICE', display: 'Faktura' }, { value: 'REMINDER', display: 'Purring' }, 'CREDITNOTE'],
+    display: 'Dokument type',
+    confidenceLevels: { automated: 0.98, highest: 0.97, high: 0.9, low: 0.5 },
+  },
   bank_account: {
     type: 'string',
     display: 'Bank account',

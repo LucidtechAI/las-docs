@@ -11,8 +11,7 @@ import styles from './index.module.css';
 import MaskedDateInput from './MaskedDateInput';
 import FieldInput from './FieldInput';
 import { useKeybinds } from './useKeybinds';
-import { parse } from 'date-fns';
-import { normalizeDate } from './utils';
+import { b64DecodeUnicode, normalizeDate } from './utils';
 
 type ConfidenceLevel = 'lowest' | 'low' | 'high' | 'highest';
 type ButtonVariant = 'success' | 'soft' | 'danger' | 'primary';
@@ -27,19 +26,7 @@ const btnIcons = {
 export const getButtonIcon = (variant?: ButtonVariant): JSX.Element | null =>
   variant && variant !== 'primary' ? <span className={btnIcons[variant]} /> : null;
 
-const Grid = (props: { children: ReactNode }) => (
-  <div
-    style={{
-      display: 'grid',
-      gridTemplateColumns: 'minmax(auto, 1fr) 3fr',
-      rowGap: '5px',
-      columnGap: '20px',
-      alignItems: 'center',
-      width: '100%',
-    }}
-    {...props}
-  />
-);
+const Grid = (props: { children: ReactNode }) => <div className={styles['form-grid']} {...props} />;
 
 const getPercentage = (confidenceValue: number): number => Math.floor(confidenceValue * 100);
 
@@ -50,24 +37,17 @@ const getBestPrediction = (fieldName: string, predictions: Prediction[]): Predic
   return fieldPredictions.pop();
 };
 
-/**
- * Decode base64 encoded content to unicode string
- * @param str
- */
-function b64DecodeUnicode(str: string): string {
-  return decodeURIComponent(
-    atob(str)
-      .split('')
-      .map(function (c) {
-        return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
-      })
-      .join(''),
-  );
-}
+type EnumOption =
+  | string
+  | {
+      display: string;
+      value: string;
+    };
 
 export type Field = {
   type: string;
   display: string;
+  enum?: Array<EnumOption>;
   confidenceLevels: { automated: number; highest: number; high: number; low: number };
 };
 
@@ -239,6 +219,7 @@ const RemoteComponent = ({
   };
 
   const getFieldComponent = (fieldKey: string, value: string | null | undefined, ref?: any): JSX.Element => {
+    const isEnum = fields[fieldKey].enum;
     const type = fields[fieldKey].type;
     switch (type) {
       case 'date':

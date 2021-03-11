@@ -51,3 +51,18 @@ export function normalizeDate(dateString: string): string {
 
   return formatted;
 }
+
+/**
+ * Decode base64 encoded content to unicode string
+ * @param str
+ */
+export function b64DecodeUnicode(str: string): string {
+  return decodeURIComponent(
+    atob(str)
+      .split('')
+      .map(function (c) {
+        return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+      })
+      .join(''),
+  );
+}
