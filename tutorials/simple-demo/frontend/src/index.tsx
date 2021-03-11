@@ -1,4 +1,4 @@
-import React, { createRef, ReactNode, useEffect, useMemo, useState } from 'react';
+import React, { createRef, ReactNode, RefObject, useEffect, useMemo, useState, useLayoutEffect } from 'react';
 import { GlobalHotKeys } from 'react-hotkeys';
 
 import { Button } from '@lucidtech/flyt-form';
@@ -95,9 +95,7 @@ const RemoteComponent = ({
   const { showKeybinds, onToggle } = useKeybinds();
 
   // useState for array of refs
-  const [elRefs, setElRefs] = React.useState([]);
-
-  console.log(elRefs);
+  const [elRefs, setElRefs] = useState<Array<RefObject<HTMLElement>>>([]);
 
   // load fields from asset
   useEffect(() => {
@@ -146,6 +144,16 @@ const RemoteComponent = ({
         .map((_, i) => elRefs[i] || createRef()),
     );
   }, [predictions, fields]);
+
+  // focus first non-automated input after new transition execution
+  useLayoutEffect(() => {
+    const nonAutomatedFields = elRefs.filter((ref) => {
+      const isNotAutomated = !ref.current?.classList.contains('automated');
+      return isNotAutomated;
+    });
+
+    nonAutomatedFields[0]?.current?.focus();
+  }, [elRefs]);
 
   // new transition execution, get document, and set predictions
   useEffect(() => {
