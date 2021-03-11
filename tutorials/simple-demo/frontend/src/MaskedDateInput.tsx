@@ -38,7 +38,7 @@ const MaskedDateInput = ({ value, fieldInfo, fieldKey, onChange, ...rest }: Mask
       <label htmlFor={fieldKey} className={styles.label}>
         {fieldInfo?.display || fieldKey}
       </label>
-      <Input name={fieldKey} value={rifm.value} onChange={rifm.onChange} {...rest} />
+      <Input name={fieldKey} value={rifm.value} onChange={rifm.onChange} placeholder="dd.mm.yy" {...rest} />
     </>
   );
 };
