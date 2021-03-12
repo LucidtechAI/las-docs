@@ -1,5 +1,5 @@
 import React, { createRef, ReactNode, RefObject, useEffect, useMemo, useState, useLayoutEffect } from 'react';
-import { GlobalHotKeys } from 'react-hotkeys';
+import { configure, GlobalHotKeys } from 'react-hotkeys';
 
 import { Button } from '@lucidtech/flyt-form';
 import { Prediction } from '@lucidtech/las-sdk-core/lib/types';
@@ -12,6 +12,9 @@ import MaskedDateInput from './MaskedDateInput';
 import FieldInput from './FieldInput';
 import { useKeybinds } from './useKeybinds';
 import { b64DecodeUnicode, normalizeDate } from './utils';
+import Dropdown from './Dropdown';
+
+configure({ ignoreTags: [] });
 
 type ConfidenceLevel = 'lowest' | 'low' | 'high' | 'highest';
 type ButtonVariant = 'success' | 'soft' | 'danger' | 'primary';
@@ -220,30 +223,35 @@ const RemoteComponent = ({
 
   const getFieldComponent = (fieldKey: string, value: string | null | undefined, ref?: any): JSX.Element => {
     const isEnum = fields[fieldKey].enum;
-    const type = fields[fieldKey].type;
-    switch (type) {
-      case 'date':
-        return (
-          <MaskedDateInput
-            fieldInfo={fields[fieldKey]}
-            fieldKey={fieldKey}
-            value={value || ''}
-            onChange={onChange}
-            ref={ref}
-            {...getConfidenceProps(fieldKey)}
-          />
-        );
-      default:
-        return (
-          <FieldInput
-            fieldInfo={fields[fieldKey]}
-            fieldKey={fieldKey}
-            value={value || ''}
-            onChange={onChange}
-            ref={ref}
-            {...getConfidenceProps(fieldKey)}
-          />
-        );
+    if (Array.isArray(isEnum)) {
+      const options = fields[fieldKey].enum!.map((option) => {});
+      return <Dropdown options={} selected={value || ''} ref={ref} />;
+    } else {
+      const type = fields[fieldKey].type;
+      switch (type) {
+        case 'date':
+          return (
+            <MaskedDateInput
+              fieldInfo={fields[fieldKey]}
+              fieldKey={fieldKey}
+              value={value || ''}
+              onChange={onChange}
+              ref={ref}
+              {...getConfidenceProps(fieldKey)}
+            />
+          );
+        default:
+          return (
+            <FieldInput
+              fieldInfo={fields[fieldKey]}
+              fieldKey={fieldKey}
+              value={value || ''}
+              onChange={onChange}
+              ref={ref}
+              {...getConfidenceProps(fieldKey)}
+            />
+          );
+      }
     }
   };
 
@@ -260,19 +268,19 @@ const RemoteComponent = ({
   const keyMap: any = {
     APPROVE: {
       name: 'Approve',
-      sequences: ['shift+enter'],
+      sequences: ['ctrl+enter'],
     },
     REJECT: {
       name: 'Reject',
-      sequences: ['shift+q'],
+      sequences: ['ctrl+q'],
     },
     SKIP: {
       name: 'Skip',
-      sequences: ['shift+space'],
+      sequences: ['ctrl+space'],
     },
     TOGGLE_HINT: {
       name: 'Toggle hint',
-      sequences: ['shift+?'],
+      sequences: ['shift+alt+?'],
     },
     // PAGE_UP: {
     //   name: 'Page up (multi-page)',
@@ -292,27 +300,27 @@ const RemoteComponent = ({
     // },
     ZOOM_IN: {
       name: 'Zoom in',
-      sequences: ['shift+PageUp'],
+      sequences: ['shift+alt+PageUp'],
     },
     ZOOM_OUT: {
       name: 'Zoom out',
-      sequences: ['shift+PageDown'],
+      sequences: ['shift+alt+PageDown'],
     },
     MOVE_UP: {
       name: 'Move up (zoomed)',
-      sequences: ['shift+up'],
+      sequences: ['shift+alt+up'],
     },
     MOVE_DOWN: {
       name: 'Move down (zoomed)',
-      sequences: ['shift+down'],
+      sequences: ['shift+alt+down'],
     },
     MOVE_RIGHT: {
       name: 'Move right (zoomed)',
-      sequences: ['shift+right'],
+      sequences: ['shift+alt+right'],
     },
     MOVE_LEFT: {
       name: 'Move down (zoomed)',
-      sequences: ['shift+left'],
+      sequences: ['shift+alt+left'],
     },
   };
 
@@ -375,6 +383,7 @@ const RemoteComponent = ({
                       style={{ width: '150px', order: 1 }}
                       onClick={approve}
                       disabled={isLoadingDocument || isLoadingAssets}
+                      type="button"
                     >
                       {getButtonIcon('success')}
                     </Button>
@@ -385,6 +394,7 @@ const RemoteComponent = ({
                       style={{ order: 2 }}
                       onClick={skip}
                       disabled={isLoadingDocument || isLoadingAssets}
+                      type="button"
                     >
                       {getButtonIcon('soft')}
                     </Button>
@@ -394,6 +404,7 @@ const RemoteComponent = ({
                       style={{ order: 1 }}
                       onClick={reject}
                       disabled={isLoadingDocument || isLoadingAssets}
+                      type="button"
                     >
                       {getButtonIcon('danger')}
                     </Button>

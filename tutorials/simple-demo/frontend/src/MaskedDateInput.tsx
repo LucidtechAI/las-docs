@@ -1,9 +1,9 @@
 import React, { forwardRef } from 'react';
 import { useRifm } from 'rifm';
 import { Input } from '@lucidtech/flyt-form';
-import { Field } from '.';
-import styles from './FieldInput.module.css';
 import { InputProps } from '@lucidtech/flyt-form/dist/types/components/Input';
+import { Field } from '.';
+import styles from './Form.module.css';
 
 const parseDigits = (string: string) => (string.match(/\d+/g) || []).join('');
 
