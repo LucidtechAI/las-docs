@@ -1,4 +1,14 @@
-import React, { createRef, ReactNode, RefObject, useEffect, useMemo, useState, useLayoutEffect } from 'react';
+import React, {
+  createRef,
+  ReactNode,
+  RefObject,
+  useEffect,
+  useMemo,
+  useState,
+  useLayoutEffect,
+  KeyboardEventHandler,
+  useRef,
+} from 'react';
 import { configure, GlobalHotKeys } from 'react-hotkeys';
 
 import { Button } from '@lucidtech/flyt-form';
@@ -81,6 +91,7 @@ const RemoteComponent = ({
 
   // useState for array of refs
   const [elRefs, setElRefs] = useState<Array<RefObject<HTMLElement>>>([]);
+  const submitRef = useRef<HTMLButtonElement>(null);
 
   // load fields from asset
   useEffect(() => {
@@ -221,6 +232,30 @@ const RemoteComponent = ({
     onRequestNew();
   };
 
+  const focusNext = (current: HTMLElement) => {
+    const currentIndex = elRefs.findIndex((ref) => ref.current === current);
+
+    // couldn't find the currently active input in the ref list, which would be super weird
+    if (currentIndex === -1) {
+      console.debug('Unable to find current focused input');
+      return;
+    }
+
+    if (currentIndex < elRefs.length) {
+      const nextElement = elRefs[currentIndex + 1];
+      nextElement?.current?.focus();
+    } else {
+      // if no fields left, focus the submit button
+      submitRef.current?.focus();
+    }
+  };
+
+  const defaultKeyHandler: KeyboardEventHandler<HTMLInputElement> = (event) => {
+    if (event.key === 'Enter') {
+      focusNext(event.target as HTMLElement);
+    }
+  };
+
   const getFieldComponent = (fieldKey: string, value: string | null | undefined, ref?: any): JSX.Element => {
     const isEnum = fields[fieldKey].enum;
     if (Array.isArray(isEnum)) {
@@ -237,6 +272,7 @@ const RemoteComponent = ({
               value={value || ''}
               onChange={onChange}
               ref={ref}
+              onKeyDown={defaultKeyHandler}
               {...getConfidenceProps(fieldKey)}
             />
           );
@@ -248,6 +284,7 @@ const RemoteComponent = ({
               value={value || ''}
               onChange={onChange}
               ref={ref}
+              onKeyDown={defaultKeyHandler}
               {...getConfidenceProps(fieldKey)}
             />
           );
