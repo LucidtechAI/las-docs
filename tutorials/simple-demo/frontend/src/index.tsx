@@ -253,6 +253,7 @@ const RemoteComponent = ({
   const defaultKeyHandler: KeyboardEventHandler<HTMLInputElement> = (event) => {
     if (event.key === 'Enter') {
       focusNext(event.target as HTMLElement);
+      event.preventDefault();
     }
   };
 
