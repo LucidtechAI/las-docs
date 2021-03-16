@@ -11,11 +11,10 @@ import React, {
 } from 'react';
 import { configure, GlobalHotKeys } from 'react-hotkeys';
 
-import { Button } from '@lucidtech/flyt-form';
+import { Button, DocumentViewer } from '@lucidtech/flyt-form';
 import { Prediction } from '@lucidtech/las-sdk-core/lib/types';
 
 import { QueueStatus, RemoteComponentExternalProps } from './types';
-import DocumentViewer, { DocumentType } from './DocumentViewer';
 import Keybinds from './Keybinds';
 import styles from './index.module.css';
 import MaskedDateInput from './MaskedDateInput';
@@ -167,7 +166,7 @@ const RemoteComponent = ({
       .getDocument(transitionExecution.input.documentId)
       .then((res) => {
         setDoc(res.content!);
-        setContentType(res.contentType);
+        setContentType((res.contentType as unknown) as DocumentType);
       })
       .catch((e) => {
         console.error(e);
@@ -260,8 +259,14 @@ const RemoteComponent = ({
   const getFieldComponent = (fieldKey: string, value: string | null | undefined, ref?: any): JSX.Element => {
     const isEnum = fields[fieldKey].enum;
     if (Array.isArray(isEnum)) {
-      const options = fields[fieldKey].enum!.map((option) => {});
-      return <Dropdown options={} selected={value || ''} ref={ref} />;
+      // const options = fields[fieldKey].enum!.map((option) => {});
+      // return <Dropdown options={} selected={value || ''} ref={ref} />;
+      return (
+        <>
+          <div />
+          <div />
+        </>
+      );
     } else {
       const type = fields[fieldKey].type;
       switch (type) {
