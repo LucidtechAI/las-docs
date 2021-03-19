@@ -1,5 +1,5 @@
-import { Client } from "@lucidtech/las-sdk-core";
-import { Asset, Transition, TransitionExecution } from "@lucidtech/las-sdk-core/lib/types";
+import { Client } from '@lucidtech/las-sdk-core';
+import { Asset, Transition, TransitionExecution } from '@lucidtech/las-sdk-core/lib/types';
 
 export enum QueueStatus {
   LOADING = 'LOADING',
@@ -18,4 +18,18 @@ export type RemoteComponentExternalProps = {
   queueStatus: QueueStatus;
   transitionExecution: TransitionExecution;
   client: Client;
+};
+
+export type EnumOption =
+  | {
+      display: string;
+      value: string;
+    }
+  | string;
+
+export type Field = {
+  type: string;
+  display: string;
+  enum?: Array<EnumOption>;
+  confidenceLevels: { automated: number; highest: number; high: number; low: number };
 };

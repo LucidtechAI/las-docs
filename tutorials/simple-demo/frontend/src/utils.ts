@@ -1,4 +1,5 @@
 import { format, parse } from 'date-fns';
+import { EnumOption } from './types';
 
 /**
  * Attempt to normalize dates to dd.mm.yy format
@@ -17,6 +18,10 @@ export function normalizeDate(dateString: string): string {
   }
 
   return formatted;
+}
+
+export function normalizeEnum(str: string): EnumOption {
+  return { value: str, display: str };
 }
 
 /**

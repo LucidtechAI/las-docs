@@ -11,16 +11,16 @@ import React, {
 } from 'react';
 import { configure, GlobalHotKeys } from 'react-hotkeys';
 
-import { Button, DocumentViewer } from '@lucidtech/flyt-form';
+import { Button, DocumentViewer, DocumentType } from '@lucidtech/flyt-form';
 import { Prediction } from '@lucidtech/las-sdk-core/lib/types';
 
-import { QueueStatus, RemoteComponentExternalProps } from './types';
+import { Field, QueueStatus, RemoteComponentExternalProps } from './types';
 import Keybinds from './Keybinds';
 import styles from './index.module.css';
 import MaskedDateInput from './MaskedDateInput';
 import FieldInput from './FieldInput';
 import { useKeybinds } from './useKeybinds';
-import { b64DecodeUnicode, normalizeDate } from './utils';
+import { b64DecodeUnicode, normalizeDate, normalizeEnum } from './utils';
 import Dropdown from './Dropdown';
 
 configure({ ignoreTags: [] });
@@ -47,20 +47,6 @@ const getBestPrediction = (fieldName: string, predictions: Prediction[]): Predic
   fieldPredictions.sort((a, b) => b.confidence - a.confidence);
 
   return fieldPredictions.pop();
-};
-
-type EnumOption =
-  | string
-  | {
-      display: string;
-      value: string;
-    };
-
-export type Field = {
-  type: string;
-  display: string;
-  enum?: Array<EnumOption>;
-  confidenceLevels: { automated: number; highest: number; high: number; low: number };
 };
 
 const RemoteComponent = ({
@@ -236,6 +222,7 @@ const RemoteComponent = ({
 
     // couldn't find the currently active input in the ref list, which would be super weird
     if (currentIndex === -1) {
+      // except if we're in a dropdown and a menu/list item is focused...
       console.debug('Unable to find current focused input');
       return;
     }
@@ -259,13 +246,24 @@ const RemoteComponent = ({
   const getFieldComponent = (fieldKey: string, value: string | null | undefined, ref?: any): JSX.Element => {
     const isEnum = fields[fieldKey].enum;
     if (Array.isArray(isEnum)) {
-      // const options = fields[fieldKey].enum!.map((option) => {});
-      // return <Dropdown options={} selected={value || ''} ref={ref} />;
+      const options =
+        fields[fieldKey].enum?.map((option) => {
+          if (typeof option === 'string') {
+            return normalizeEnum(option);
+          } else {
+            return option;
+          }
+        }) || [];
       return (
-        <>
-          <div />
-          <div />
-        </>
+        <Dropdown
+          options={options}
+          selectedItem={value || undefined}
+          ref={ref}
+          onChange={onChange}
+          field={fields[fieldKey]}
+          fieldKey={fieldKey}
+          onKeyDown={defaultKeyHandler}
+        />
       );
     } else {
       const type = fields[fieldKey].type;
