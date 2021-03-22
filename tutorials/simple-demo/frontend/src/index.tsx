@@ -84,7 +84,7 @@ const RemoteComponent = ({
     if (!fieldsAssetId) return;
     getAsset(fieldsAssetId)
       .then((res) => {
-        const decoded = b64DecodeUnicode(res.content!);
+        const decoded = b64DecodeUnicode(res.content);
         const fields = JSON.parse(decoded);
 
         setFields(fields);
@@ -151,7 +151,7 @@ const RemoteComponent = ({
     client
       .getDocument(transitionExecution.input.documentId)
       .then((res) => {
-        setDoc(res.content!);
+        setDoc(res.content);
         setContentType((res.contentType as unknown) as DocumentType);
       })
       .catch((e) => {
