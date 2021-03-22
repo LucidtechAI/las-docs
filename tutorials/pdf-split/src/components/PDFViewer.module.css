@@ -53,7 +53,7 @@
 
 .page-container {
   position: relative;
-  padding-left: 15px;
+  padding: 15px 15px 15px 30px;
   background-color: rgb(229, 241, 234);
   border-radius: 8px;
   margin-bottom: 15px;
@@ -85,7 +85,7 @@
 }
 
 .select {
-  margin: 5px;
+
 }
 
 .group-list {
@@ -94,7 +94,7 @@
   flex-wrap: wrap;
   list-style: none;
   margin: 0;
-  padding: 5px 15px 15px 15px;
+  padding: 0;
   border-radius: 10px;
 }
 
