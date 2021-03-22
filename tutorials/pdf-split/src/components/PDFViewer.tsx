@@ -6,9 +6,10 @@ import styles from './PDFViewer.module.css';
 import ScissorButton from './ScissorButton';
 import MergeButton from './MergeButton';
 import Spinner from './Spinner';
-import { Groups } from 'src';
+import { GroupPrediction, Groups } from '..';
 import { Select } from '@lucidtech/flyt-form';
-import { EnumOption } from 'src/types';
+import { EnumOption } from '../types';
+import { normalizeEnum } from '../utils';
 
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.min.js`;
 const options = {
@@ -23,7 +24,7 @@ type PDFViewerProps = {
   setGroups: (groups: Groups) => void;
   extraKeymap?: Record<string, any>;
   extraHandlers?: Record<string, any>;
-  predictions?: Groups;
+  predictions?: Array<GroupPrediction>;
   categories?: Array<EnumOption>;
 };
 
@@ -52,20 +53,35 @@ const PDFViewer = ({
     return { data: docBinary };
   }, [doc]);
 
+  // enum options can be string or record. create a lookup map so we can normalize the predictions
+  // and map them to the fieldconfig options for enums.
+  const categoryLookup = useMemo(() => {
+    const lookupMap = new Map<string, string>();
+    for (const category of categories) {
+      if (typeof category !== 'string') {
+        lookupMap.set(category.value, category.display);
+      }
+    }
+
+    return lookupMap;
+  }, [categories]);
+
   useEffect(() => {
     if (!numPages) return;
     setPreviewPage(1);
 
-    // for now no predictions are expected, but this should make it possible to receive them in the future
     // if no predictions, group all pages together by default
     if (!predictions || predictions?.length === 0) {
       const allPages = [...Array(numPages).keys()].map((key) => key + 1);
       setGroups([{ pages: allPages, category: '' }]);
     } else if (predictions && predictions.length > 0) {
-      setGroups(predictions);
-      console.log(predictions);
+      const mapped: Groups = predictions.map((prediction) => ({
+        ...prediction,
+        category: categoryLookup.get(prediction.category) || prediction.category,
+      }));
+      setGroups(mapped);
     }
-  }, [numPages, predictions]);
+  }, [numPages, predictions, categoryLookup]);
 
   // Unclear what behavior should be like after cutting a group, but for now when the groups changes,
   // we will focus the last focused page again. This also makes the first page focus on page load.

@@ -13,6 +13,10 @@ declare const ___PDF_SPLIT_VERSION___: string;
 
 export type Group = {
   pages: Array<number>;
+  category: EnumOption | string;
+};
+export type GroupPrediction = {
+  pages: Array<number>;
   category: string;
 };
 export type Groups = Array<Group>;
@@ -34,6 +38,7 @@ const RemoteComponent = ({
   const [isLoadingAsset, setIsLoadingAsset] = useState(true);
   const [groups, setGroups] = useState<Groups>([]);
   const [categories, setCategories] = useState<Array<EnumOption>>([]);
+  console.log(groups);
 
   // keybinds
   const [showKeybinds, setShowKeybinds] = useState(true);
