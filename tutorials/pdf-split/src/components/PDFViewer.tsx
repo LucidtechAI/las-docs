@@ -122,7 +122,7 @@ const PDFViewer = ({
       const hasPrevGroup = currentGroupIndex > 0;
 
       if (hasPrevGroup) {
-        const firstPageOfPrevGroup = groups[currentGroupIndex - 1][0];
+        const firstPageOfPrevGroup = groups[currentGroupIndex - 1].pages[0];
         onFocus(currentGroupIndex - 1, 0, firstPageOfPrevGroup);
         focusPage(firstPageOfPrevGroup);
       }
@@ -133,7 +133,7 @@ const PDFViewer = ({
       const hasNextGroup = currentGroupIndex >= 0 && currentGroupIndex !== groups.length - 1;
 
       if (hasNextGroup) {
-        const firstPageOfNextGroup = groups[currentGroupIndex + 1][0];
+        const firstPageOfNextGroup = groups[currentGroupIndex + 1].pages[0];
         onFocus(currentGroupIndex - 1, 0, firstPageOfNextGroup);
         focusPage(firstPageOfNextGroup);
       }
