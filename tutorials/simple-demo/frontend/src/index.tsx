@@ -198,9 +198,10 @@ const RemoteComponent = ({
 
   const approve = () => {
     const valuesCopy = { ...values };
+    const input = transitionExecution?.input || {};
     Object.keys(valuesCopy).forEach((key) => (valuesCopy[key] = valuesCopy[key] || null));
     const payload = {
-      ...transitionExecution.input,
+      ...input,
       verified: valuesCopy,
     };
     onApprove(payload);
