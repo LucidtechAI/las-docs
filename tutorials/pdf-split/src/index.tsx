@@ -77,8 +77,9 @@ const RemoteComponent = ({
   }, [transitionExecution]);
 
   const approve = () => {
+    const input = transitionExecution?.input || {};
     const payload = {
-      documentId: transitionExecution?.input?.documentId,
+      ...input,
       verified: groups,
     };
     onApprove(payload);
