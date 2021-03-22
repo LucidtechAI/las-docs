@@ -245,7 +245,12 @@ const PDFViewer = ({
                 return (
                   <div key={groupKey} className={styles['page-container']}>
                     <div className={styles['group-tab']}>{(groupIndex + 1).toString().padStart(2, '0')}</div>
-                    <Select options={categories} className={styles.select} selectedItem={group.category} />
+                    <Select
+                      options={categories}
+                      className={styles.select}
+                      selectedItem={group.category}
+                      tabIndex={-1}
+                    />
                     <ul className={styles['group-list']}>
                       {group.pages.map((pageNumber, pageIndex) => {
                         const hasPrevPage = pageIndex !== 0;
