@@ -1,24 +1,26 @@
 import React, { useEffect, useState } from 'react';
 import { Button } from '@lucidtech/flyt-form';
 
-import { QueueStatus, RemoteComponentExternalProps } from './types';
+import { EnumOption, Field, QueueStatus, RemoteComponentExternalProps } from './types';
 import ErrorAlert from './components/ErrorAlert';
 import PDFViewer from './components/PDFViewer';
 import HotkeyHint from './components/HotkeyHint';
 
 import styles from './index.module.css';
+import { b64DecodeUnicode, normalizeEnum } from './utils';
 
 declare const ___PDF_SPLIT_VERSION___: string;
 
 export type Group = {
   pages: Array<number>;
-  category: Category;
+  category: string;
 };
 export type Groups = Array<Group>;
-export type Category = 'INVOICE' | 'RECEIPT' | 'MULTIPLE_RECEIPTS' | 'MISC';
 
 const RemoteComponent = ({
   transitionExecution,
+  transition,
+  getAsset,
   onApprove,
   onReject,
   onRequestNew,
@@ -29,7 +31,9 @@ const RemoteComponent = ({
   const [doc, setDoc] = useState('');
   const [error, setError] = useState<string | null>(null);
   const [isLoadingDocument, setIsLoadingDocument] = useState(true);
+  const [isLoadingAsset, setIsLoadingAsset] = useState(true);
   const [groups, setGroups] = useState<Groups>([]);
+  const [categories, setCategories] = useState<Array<EnumOption>>([]);
 
   // keybinds
   const [showKeybinds, setShowKeybinds] = useState(true);
@@ -49,6 +53,34 @@ const RemoteComponent = ({
     storePreference(!showKeybinds);
     setShowKeybinds((prev) => !prev);
   };
+
+  // load fields from asset
+  useEffect(() => {
+    const fieldsAssetId = transition?.assets?.fieldConfig;
+    if (!fieldsAssetId) return;
+    getAsset(fieldsAssetId)
+      .then((res) => {
+        const decoded = b64DecodeUnicode(res.content);
+        const fields: Record<string, Field> = JSON.parse(decoded);
+
+        const categories =
+          fields?.categories?.enum?.map((option) => {
+            if (typeof option === 'string') {
+              return normalizeEnum(option);
+            } else {
+              return option;
+            }
+          }) || [];
+
+        setCategories(categories);
+      })
+      .catch((e) => {
+        console.error(e);
+      })
+      .finally(() => {
+        setIsLoadingAsset(false);
+      });
+  }, [transition]);
 
   // new transition execution, map predictions and get document (image)
   useEffect(() => {
@@ -103,7 +135,7 @@ const RemoteComponent = ({
     onRequestNew();
   };
 
-  const somethingIsLoading = queueStatus === QueueStatus.LOADING || isLoadingDocument;
+  const somethingIsLoading = queueStatus === QueueStatus.LOADING || isLoadingDocument || isLoadingAsset;
 
   const handlers = {
     APPROVE: approve,
@@ -147,6 +179,7 @@ const RemoteComponent = ({
                   loading={somethingIsLoading}
                   groups={groups}
                   setGroups={setGroups}
+                  categories={categories}
                   extraKeymap={keyMap}
                   extraHandlers={handlers}
                   predictions={transitionExecution?.input?.predictions}

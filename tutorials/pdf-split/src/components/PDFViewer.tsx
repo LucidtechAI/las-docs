@@ -7,6 +7,8 @@ import ScissorButton from './ScissorButton';
 import MergeButton from './MergeButton';
 import Spinner from './Spinner';
 import { Groups } from 'src';
+import { Select } from '@lucidtech/flyt-form';
+import { EnumOption } from 'src/types';
 
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.min.js`;
 const options = {
@@ -22,6 +24,7 @@ type PDFViewerProps = {
   extraKeymap?: Record<string, any>;
   extraHandlers?: Record<string, any>;
   predictions?: Groups;
+  categories?: Array<EnumOption>;
 };
 
 const PDFViewer = ({
@@ -32,6 +35,7 @@ const PDFViewer = ({
   extraHandlers = {},
   extraKeymap = {},
   predictions,
+  categories = [],
 }: PDFViewerProps): JSX.Element => {
   const [numPages, setNumPages] = useState<number | null>(null);
   const [previewPage, setPreviewPage] = useState(1);
@@ -56,7 +60,7 @@ const PDFViewer = ({
     // if no predictions, group all pages together by default
     if (!predictions || predictions?.length === 0) {
       const allPages = [...Array(numPages).keys()].map((key) => key + 1);
-      setGroups([{ pages: allPages, category: 'INVOICE' }]);
+      setGroups([{ pages: allPages, category: '' }]);
     } else if (predictions && predictions.length > 0) {
       setGroups(predictions);
       console.log(predictions);
@@ -225,7 +229,8 @@ const PDFViewer = ({
                 return (
                   <div key={groupKey} className={styles['page-container']}>
                     <div className={styles['group-tab']}>{(groupIndex + 1).toString().padStart(2, '0')}</div>
-                    <ul>
+                    <Select options={categories} className={styles.select} selectedItem={group.category} />
+                    <ul className={styles['group-list']}>
                       {group.pages.map((pageNumber, pageIndex) => {
                         const hasPrevPage = pageIndex !== 0;
                         const hasNextPage = pageIndex !== group.pages.length - 1;

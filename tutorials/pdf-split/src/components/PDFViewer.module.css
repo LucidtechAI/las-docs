@@ -84,7 +84,11 @@
   right: -39px;
 }
 
-.page-container ul {
+.select {
+  margin: 5px;
+}
+
+.group-list {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
