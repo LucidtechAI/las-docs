@@ -9,7 +9,6 @@ import Spinner from './Spinner';
 import { GroupPrediction, Groups } from '..';
 import { Select } from '@lucidtech/flyt-form';
 import { EnumOption } from '../types';
-import { normalizeEnum } from '../utils';
 
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.min.js`;
 const options = {
@@ -77,7 +76,10 @@ const PDFViewer = ({
     } else if (predictions && predictions.length > 0) {
       const mapped: Groups = predictions.map((prediction) => ({
         ...prediction,
-        category: categoryLookup.get(prediction.category) || prediction.category,
+        category: {
+          display: categoryLookup.get(prediction.category) || prediction.category,
+          value: prediction.category,
+        },
       }));
       setGroups(mapped);
     }
@@ -249,7 +251,7 @@ const PDFViewer = ({
                       options={categories}
                       className={styles.select}
                       selectedItem={group.category}
-                      tabIndex={-1}
+                      innerTabIndex={-1}
                     />
                     <ul className={styles['group-list']}>
                       {group.pages.map((pageNumber, pageIndex) => {

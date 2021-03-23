@@ -4,6 +4,14 @@ export function normalizeEnum(str: string): EnumOption {
   return { value: str, display: str };
 }
 
+export function normalizeString(enumOption: EnumOption): string {
+  if (typeof enumOption === 'object') {
+    return enumOption.value;
+  } else {
+    return enumOption;
+  }
+}
+
 /**
  * Decode base64 encoded content to unicode string
  * @param str

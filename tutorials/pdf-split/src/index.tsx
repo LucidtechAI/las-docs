@@ -7,7 +7,7 @@ import PDFViewer from './components/PDFViewer';
 import HotkeyHint from './components/HotkeyHint';
 
 import styles from './index.module.css';
-import { b64DecodeUnicode, normalizeEnum } from './utils';
+import { b64DecodeUnicode, normalizeEnum, normalizeString } from './utils';
 
 declare const ___PDF_SPLIT_VERSION___: string;
 
@@ -38,7 +38,6 @@ const RemoteComponent = ({
   const [isLoadingAsset, setIsLoadingAsset] = useState(true);
   const [groups, setGroups] = useState<Groups>([]);
   const [categories, setCategories] = useState<Array<EnumOption>>([]);
-  console.log(groups);
 
   // keybinds
   const [showKeybinds, setShowKeybinds] = useState(true);
@@ -122,9 +121,13 @@ const RemoteComponent = ({
 
   const approve = () => {
     const input = transitionExecution?.input || {};
+    const normalizedOutput: Array<GroupPrediction> = groups.map((group) => {
+      return { ...group, category: normalizeString(group.category) };
+    });
+
     const payload = {
       ...input,
-      verified: groups,
+      verified: normalizedOutput,
     };
     onApprove(payload);
     onRequestNew();
