@@ -146,6 +146,16 @@ const PDFViewer = ({
   };
 
   const handlers = {
+    // focus the select in the current group
+    FOCUS_CATEGORY: () => {
+      const currentGroupIndex = groups.findIndex((group) => group.pages.includes(previewPage));
+      if (currentGroupIndex >= 0) {
+        const selectElements: NodeListOf<HTMLButtonElement> | undefined = groupContainerRef.current?.querySelectorAll(
+          `.${styles.select} button`,
+        );
+        selectElements?.[currentGroupIndex]?.focus();
+      }
+    },
     // focus first page in previous group
     SELECT_PREV_GROUP: () => {
       const currentGroupIndex = groups.findIndex((group) => group.pages.includes(previewPage));
@@ -203,6 +213,10 @@ const PDFViewer = ({
 
   // react-hotkeys types aren't 100% correct sadly
   const keyMap: any = {
+    FOCUS_CATEGORY: {
+      name: 'Select group category',
+      sequences: ['shift+a'],
+    },
     SELECT_PREV_GROUP: {
       name: 'Move to previous group',
       sequences: ['ctrl+left'],
