@@ -109,6 +109,14 @@ const PDFViewer = ({
     setGroups(groupsCopy);
   };
 
+  const changeCategory = (groupIndex: number, category: EnumOption): void => {
+    const groupsCopy = [...groups];
+    const selectedGroup = groupsCopy[groupIndex];
+    selectedGroup.category = category;
+
+    setGroups(groupsCopy);
+  };
+
   // Split a group into two groups, where cutIndex indicates where the second group
   // should start.
   const cutGroup = (groupIndex: number, cutIndex: number): void => {
@@ -252,6 +260,9 @@ const PDFViewer = ({
                       className={styles.select}
                       selectedItem={group.category}
                       innerTabIndex={-1}
+                      handleSelectedItemChange={(item) =>
+                        item.selectedItem && changeCategory(groupIndex, item.selectedItem)
+                      }
                     />
                     <ul className={styles['group-list']}>
                       {group.pages.map((pageNumber, pageIndex) => {
