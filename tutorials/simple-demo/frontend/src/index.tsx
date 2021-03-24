@@ -11,7 +11,7 @@ import React, {
 } from 'react';
 import { configure, GlobalHotKeys } from 'react-hotkeys';
 
-import { Button, DocumentViewer, DocumentType } from '@lucidtech/flyt-form';
+import { Button, DocumentViewer, DocumentType, ImperativeRef } from '@lucidtech/flyt-form';
 import { Prediction } from '@lucidtech/las-sdk-core/lib/types';
 
 import { Field, QueueStatus, RemoteComponentExternalProps } from './types';
@@ -77,6 +77,7 @@ const RemoteComponent = ({
   // useState for array of refs
   const [elRefs, setElRefs] = useState<Array<RefObject<HTMLElement>>>([]);
   const submitRef = useRef<HTMLButtonElement>(null);
+  const viewerRef = useRef<ImperativeRef>(null);
 
   // load fields from asset
   useEffect(() => {
@@ -189,11 +190,15 @@ const RemoteComponent = ({
   const getConfidenceProps = (field: string) => {
     const confidence = initialValues[field]?.confidence || 0;
     const isAutomated = !isChanged(field) && confidence >= (fields[field]?.confidenceLevels?.automated || 0.98);
-    return {
+    const props: Record<string, string | number | boolean | undefined> = {
       confidenceAutomated: isAutomated,
       confidenceLevel: isChanged(field) ? undefined : getConfidenceLevel(field, confidence),
       confidenceValue: getPercentage(confidence) || undefined,
     };
+    if (isAutomated) {
+      props.tabIndex = -1;
+    }
+    return props;
   };
 
   const approve = () => {
@@ -259,11 +264,11 @@ const RemoteComponent = ({
         <Dropdown
           options={options}
           selectedItem={value || undefined}
-          ref={ref}
           onChange={onChange}
           field={fields[fieldKey]}
           fieldKey={fieldKey}
           onKeyDown={defaultKeyHandler}
+          innerRef={ref}
         />
       );
     } else {
@@ -304,6 +309,12 @@ const RemoteComponent = ({
     REJECT: reject,
     SKIP: skip,
     TOGGLE_HINT: onToggle,
+    ZOOM_IN: () => viewerRef.current?.onZoomIn(),
+    ZOOM_OUT: () => viewerRef.current?.onZoomOut(),
+    MOVE_UP: () => viewerRef.current?.moveUp(),
+    MOVE_DOWN: () => viewerRef.current?.moveDown(),
+    MOVE_LEFT: () => viewerRef.current?.moveLeft(),
+    MOVE_RIGHT: () => viewerRef.current?.moveRight(),
   };
 
   // react-hotkeys types aren't 100% correct sadly
@@ -377,6 +388,7 @@ const RemoteComponent = ({
             doc={doc}
             documentType={contentType}
             loading={isLoadingDocument || queueStatus === QueueStatus.LOADING}
+            ref={viewerRef}
           />
         </div>
         <div className={styles['form-container']}>

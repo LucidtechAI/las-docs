@@ -15,7 +15,7 @@ const Keybinds = ({ show, toggleHint }: KeybindsProps): JSX.Element => {
     <>
       <div className={styles['hint-toggle']} onClick={toggleHint}>
         <span className="fe fe-help-circle" />
-        {show ? 'Hide ' : 'Show '} keybinds (shift + ?)
+        {show ? 'Hide ' : 'Show '} keybinds (shift + alt + ?)
       </div>
       {show && (
         <div className={styles.container}>
