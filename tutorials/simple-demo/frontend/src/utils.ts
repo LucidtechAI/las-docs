@@ -47,4 +47,14 @@ export function b64DecodeUnicode(str: string): string {
   );
 }
 
-export function normalizeOutput(values: Record<string, string | number | null | undefined>) {}
+export function normalizeOutput(values: Record<string, any>): Record<string, any> {
+  const copy = { ...values };
+  for (const [key, value] of Object.entries(copy)) {
+    // if it's an enumoption with display/value fields
+    if (value?.value) {
+      copy[key] = value.value;
+    }
+  }
+
+  return copy;
+}

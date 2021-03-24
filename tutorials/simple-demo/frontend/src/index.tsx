@@ -20,7 +20,7 @@ import styles from './index.module.css';
 import MaskedDateInput from './MaskedDateInput';
 import FieldInput from './FieldInput';
 import { useKeybinds } from './useKeybinds';
-import { b64DecodeUnicode, normalizeDate, normalizeEnumFromFieldConfig } from './utils';
+import { b64DecodeUnicode, normalizeDate, normalizeEnumFromFieldConfig, normalizeOutput } from './utils';
 import Dropdown from './Dropdown';
 
 configure({ ignoreTags: [] });
@@ -207,12 +207,12 @@ const RemoteComponent = ({
   };
 
   const approve = () => {
-    const valuesCopy = { ...values };
+    const normalizedCopy = normalizeOutput(values);
     const input = transitionExecution?.input || {};
-    Object.keys(valuesCopy).forEach((key) => (valuesCopy[key] = valuesCopy[key] || null));
+    Object.keys(normalizedCopy).forEach((key) => (normalizedCopy[key] = normalizedCopy[key] || null));
     const payload = {
       ...input,
-      verified: valuesCopy,
+      verified: normalizedCopy,
     };
     onApprove(payload);
     onRequestNew();
