@@ -32,6 +32,11 @@ export function createTransitionExecution(transitionId?: string, documentId = ''
         confidence: 0.9833426,
       },
       {
+        label: 'bank_account',
+        value: '1010201',
+        confidence: 0.8833426,
+      },
+      {
         label: 'due_date',
         value: '21.01.2021',
         confidence: 0.913426,

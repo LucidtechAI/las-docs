@@ -43,10 +43,15 @@ const Grid = (props: { children: ReactNode }) => <div className={styles['form-gr
 const getPercentage = (confidenceValue: number): number => Math.floor(confidenceValue * 100);
 
 const getBestPrediction = (fieldName: string, predictions: Prediction[]): Prediction | undefined => {
-  const fieldPredictions = predictions.filter((prediction) => prediction.label === fieldName);
+  const fieldPredictions = [...predictions].filter((prediction) => prediction.label === fieldName);
   fieldPredictions.sort((a, b) => b.confidence - a.confidence);
 
-  return fieldPredictions.pop();
+  const bestPrediction = fieldPredictions.shift();
+  if (bestPrediction) {
+    return { ...bestPrediction };
+  } else {
+    return undefined;
+  }
 };
 
 const RemoteComponent = ({
