@@ -20,16 +20,14 @@ export type RemoteComponentExternalProps = {
   client: Client;
 };
 
-export type EnumOption =
-  | {
-      display: string;
-      value: string;
-    }
-  | string;
+export type EnumOption = {
+  display: string;
+  value: string;
+};
 
 export type Field = {
   type: string;
   display: string;
-  enum?: Array<EnumOption>;
+  enum?: Array<EnumOption | string>;
   confidenceLevels: { automated: number; highest: number; high: number; low: number };
 };

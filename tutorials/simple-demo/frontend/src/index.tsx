@@ -12,7 +12,7 @@ import React, {
 import { configure, GlobalHotKeys } from 'react-hotkeys';
 
 import { Button, DocumentViewer, DocumentType, ImperativeRef } from '@lucidtech/flyt-form';
-import { Prediction } from '@lucidtech/las-sdk-core/lib/types';
+import { Prediction } from '@lucidtech/las-sdk-core';
 
 import { Field, QueueStatus, RemoteComponentExternalProps } from './types';
 import Keybinds from './Keybinds';
@@ -20,7 +20,7 @@ import styles from './index.module.css';
 import MaskedDateInput from './MaskedDateInput';
 import FieldInput from './FieldInput';
 import { useKeybinds } from './useKeybinds';
-import { b64DecodeUnicode, normalizeDate, normalizeEnum } from './utils';
+import { b64DecodeUnicode, normalizeDate, normalizeEnumFromFieldConfig } from './utils';
 import Dropdown from './Dropdown';
 
 configure({ ignoreTags: [] });
@@ -63,7 +63,7 @@ const RemoteComponent = ({
   // You'd probably prefer to use a form library like React Hook Forms, Formik, or similar.
   // For this example we'll simplify it and just make use of useState.
   const [fields, setFields] = useState<Record<string, Field>>({});
-  const [values, setValues] = useState<Record<string, string | undefined | null>>({});
+  const [values, setValues] = useState<Record<string, any>>({});
   // predictions will serve as our initial values for the form
   const [predictions, setPredictions] = useState<Prediction[]>([]);
 
@@ -102,10 +102,15 @@ const RemoteComponent = ({
   const initialValues = useMemo(() => {
     const vals: Record<string, Prediction | undefined> = {};
     Object.keys(fields).forEach((fieldName) => {
-      const prediction = getBestPrediction(fieldName, predictions);
+      const prediction: (Prediction & { value: any }) | undefined = getBestPrediction(fieldName, predictions);
       // normalize date values
       if (fields[fieldName].type === 'date' && prediction?.value) {
         const normalized = normalizeDate(prediction.value.toString());
+        prediction.value = normalized;
+      }
+      // normalize enum values
+      else if (fields[fieldName].enum && prediction?.value) {
+        const normalized = normalizeEnumFromFieldConfig(prediction.value.toString(), fields[fieldName]);
         prediction.value = normalized;
       }
       vals[fieldName] = prediction;
@@ -116,9 +121,9 @@ const RemoteComponent = ({
 
   // and also reset values
   useEffect(() => {
-    const vals: Record<string, string | undefined | null> = {};
+    const vals: Record<string, any> = {};
     Object.entries(initialValues).forEach(([fieldName, prediction]) => {
-      vals[fieldName] = prediction?.value as string | undefined | null;
+      vals[fieldName] = prediction?.value as any;
     });
 
     setValues(vals);
@@ -233,13 +238,22 @@ const RemoteComponent = ({
       return;
     }
 
-    if (currentIndex < elRefs.length) {
-      const nextElement = elRefs[currentIndex + 1];
-      nextElement?.current?.focus();
-    } else {
-      // if no fields left, focus the submit button
-      submitRef.current?.focus();
+    // find the next element to focus
+    let index = currentIndex;
+    while (index < elRefs.length - 1) {
+      const nextElement = elRefs[index + 1];
+      index += 1;
+      // if the next element is automated, try the next one
+      if (nextElement?.current?.classList.contains('automated')) {
+        continue;
+      } else if (nextElement?.current) {
+        nextElement?.current?.focus();
+        return;
+      }
     }
+
+    // if no fields left, focus the submit button
+    submitRef.current?.focus();
   };
 
   const defaultKeyHandler: KeyboardEventHandler<HTMLInputElement> = (event) => {
@@ -249,13 +263,13 @@ const RemoteComponent = ({
     }
   };
 
-  const getFieldComponent = (fieldKey: string, value: string | null | undefined, ref?: any): JSX.Element => {
+  const getFieldComponent = (fieldKey: string, value: any, ref?: any): JSX.Element => {
     const isEnum = fields[fieldKey].enum;
     if (Array.isArray(isEnum)) {
       const options =
         fields[fieldKey].enum?.map((option) => {
           if (typeof option === 'string') {
-            return normalizeEnum(option);
+            return { value: option, display: option };
           } else {
             return option;
           }
@@ -441,6 +455,7 @@ const RemoteComponent = ({
                       onClick={approve}
                       disabled={isLoadingDocument || isLoadingAssets}
                       type="button"
+                      ref={submitRef}
                     >
                       {getButtonIcon('success')}
                     </Button>

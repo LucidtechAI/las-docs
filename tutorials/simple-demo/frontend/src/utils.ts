@@ -1,5 +1,5 @@
 import { format, parse } from 'date-fns';
-import { EnumOption } from './types';
+import { EnumOption, Field } from './types';
 
 /**
  * Attempt to normalize dates to dd.mm.yy format
@@ -20,8 +20,16 @@ export function normalizeDate(dateString: string): string {
   return formatted;
 }
 
-export function normalizeEnum(str: string): EnumOption {
-  return { value: str, display: str };
+export function normalizeEnumFromFieldConfig(str: string, fieldConfig?: Field): EnumOption {
+  const normalized = { value: str, display: str };
+  if (Array.isArray(fieldConfig?.enum)) {
+    for (const enumOption of fieldConfig?.enum || []) {
+      if (typeof enumOption === 'object' && enumOption.value === str) {
+        normalized.display = enumOption.display;
+      }
+    }
+  }
+  return normalized;
 }
 
 /**
@@ -38,3 +46,5 @@ export function b64DecodeUnicode(str: string): string {
       .join(''),
   );
 }
+
+export function normalizeOutput(values: Record<string, string | number | null | undefined>) {}
