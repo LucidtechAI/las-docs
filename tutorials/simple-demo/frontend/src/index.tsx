@@ -264,10 +264,12 @@ const RemoteComponent = ({
         <Dropdown
           options={options}
           selectedItem={value || undefined}
-          onChange={onChange}
+          onChange={(fieldKey, value) => {
+            onChange(fieldKey, value);
+            focusNext(ref.current);
+          }}
           field={fields[fieldKey]}
           fieldKey={fieldKey}
-          onKeyDown={defaultKeyHandler}
           innerRef={ref}
         />
       );
@@ -295,6 +297,7 @@ const RemoteComponent = ({
               onChange={onChange}
               ref={ref}
               onKeyDown={defaultKeyHandler}
+              required
               {...getConfidenceProps(fieldKey)}
             />
           );
@@ -392,7 +395,7 @@ const RemoteComponent = ({
           />
         </div>
         <div className={styles['form-container']}>
-          <form onSubmit={(e) => e.preventDefault()}>
+          <form onSubmit={(e) => e.preventDefault()} noValidate>
             <div className="card ml-3">
               <div className="card-header">
                 <header className={styles['form-header']}>
