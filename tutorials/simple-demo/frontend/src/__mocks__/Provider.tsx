@@ -1,6 +1,5 @@
 import React, { ComponentType, useState } from 'react';
-import { Client as SDKClient } from '@lucidtech/las-sdk-core';
-import { Asset, TransitionExecution } from '@lucidtech/las-sdk-core/lib/types';
+import { Client as SDKClient, Asset, TransitionExecution } from '@lucidtech/las-sdk-core';
 
 import assets from '../__fixtures__/assets';
 import documents from '../__fixtures__/documents';

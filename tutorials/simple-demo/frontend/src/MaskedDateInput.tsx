@@ -1,7 +1,6 @@
 import React, { forwardRef } from 'react';
 import { useRifm } from 'rifm';
-import { Input } from '@lucidtech/flyt-form';
-import { InputProps } from '@lucidtech/flyt-form/dist/types/components/Input';
+import { Input, InputProps } from '@lucidtech/flyt-form';
 import { Field } from './types';
 import styles from './Form.module.css';
 

@@ -1,9 +1,7 @@
-import React from 'react';
-import { Input } from '@lucidtech/flyt-form';
-import { InputProps } from '@lucidtech/flyt-form/dist/types/components/Input';
+import React, { forwardRef } from 'react';
+import { Input, InputProps } from '@lucidtech/flyt-form';
 import { Field } from './types';
 import styles from './Form.module.css';
-import { forwardRef } from 'react';
 
 type InputPropsWithoutOnChange = Omit<InputProps, 'onChange'>;
 export type FieldInputProps = {

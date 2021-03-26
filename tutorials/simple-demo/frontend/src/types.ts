@@ -1,5 +1,4 @@
-import { Client } from '@lucidtech/las-sdk-core';
-import { Asset, Transition, TransitionExecution } from '@lucidtech/las-sdk-core/lib/types';
+import { Client, Asset, Transition, TransitionExecution } from '@lucidtech/las-sdk-core';
 
 export enum QueueStatus {
   LOADING = 'LOADING',

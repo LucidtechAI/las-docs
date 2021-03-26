@@ -1,4 +1,4 @@
-import { LasDocument } from '@lucidtech/las-sdk-core/lib/types';
+import { LasDocument } from '@lucidtech/las-sdk-core';
 import bigjpg from './documents/2500x3700jpg';
 import multiPageTiff from './documents/multi_page_tiff';
 import multiPagePDF from './documents/multi_page_pdf';

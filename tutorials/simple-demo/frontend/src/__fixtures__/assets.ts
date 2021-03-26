@@ -1,4 +1,4 @@
-import { Asset } from '@lucidtech/las-sdk-core/lib/types';
+import { Asset } from '@lucidtech/las-sdk-core';
 
 const fields = {
   document_type: {

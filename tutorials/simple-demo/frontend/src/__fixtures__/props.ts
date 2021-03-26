@@ -1,4 +1,4 @@
-import { Transition, TransitionExecution } from '@lucidtech/las-sdk-core/lib/types';
+import { Transition, TransitionExecution } from '@lucidtech/las-sdk-core';
 import faker from 'faker';
 
 export function createTransition(): Transition {
