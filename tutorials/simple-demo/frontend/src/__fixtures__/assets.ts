@@ -5,32 +5,32 @@ const fields = {
     type: 'string',
     enum: [{ value: 'INVOICE', display: 'Faktura' }, { value: 'REMINDER', display: 'Purring' }, 'CREDITNOTE'],
     display: 'Dokument type',
-    confidenceLevels: { automated: 0.98, highest: 0.97, high: 0.9, low: 0.5 },
+    confidenceLevels: { automated: 0.98, high: 0.95, medium: 0.75, low: 0.5 },
   },
   bank_account: {
     type: 'string',
     display: 'Bank account',
-    confidenceLevels: { automated: 0.98, highest: 0.97, high: 0.9, low: 0.5 },
+    confidenceLevels: { automated: 0.98, high: 0.95, medium: 0.7, low: 0.5 },
   },
   due_date: {
     type: 'date',
     display: 'Due date',
-    confidenceLevels: { automated: 0.98, highest: 0.97, high: 0.9, low: 0.5 },
+    confidenceLevels: { automated: 0.98, high: 0.95, medium: 0.7, low: 0.5 },
   },
   invoice_date: {
     type: 'date',
     display: 'Invoice date',
-    confidenceLevels: { automated: 0.98, highest: 0.97, high: 0.9, low: 0.5 },
+    confidenceLevels: { automated: 0.98, high: 0.95, medium: 0.7, low: 0.5 },
   },
-  total: {
+  total_amount: {
     type: 'amount',
     display: 'Total amount',
-    confidenceLevels: { automated: 0.98, highest: 0.97, high: 0.9, low: 0.5 },
+    confidenceLevels: { automated: 0.98, high: 0.95, medium: 0.7, low: 0.5 },
   },
   buyer: {
     type: 'buyer',
     display: 'Kjøper',
-    confidenceLevels: { automated: 0.98, highest: 0.97, high: 0.9, low: 0.5 },
+    confidenceLevels: { automated: 0.98, high: 0.95, medium: 0.7, low: 0.5 },
   },
 };
 

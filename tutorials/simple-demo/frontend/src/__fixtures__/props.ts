@@ -41,6 +41,21 @@ export function createTransitionExecution(transitionId?: string, documentId = ''
         value: '21.01.2021',
         confidence: 0.913426,
       },
+      {
+        label: 'invoice_date',
+        value: '04.01.2021',
+        confidence: 0.4903426,
+      },
+      {
+        label: 'total_amount',
+        value: '3213,10',
+        confidence: 0.69,
+      },
+      {
+        label: 'buyer',
+        value: '19382',
+        confidence: 0.95,
+      },
     ],
   };
 

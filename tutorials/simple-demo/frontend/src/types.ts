@@ -28,5 +28,5 @@ export type Field = {
   type: string;
   display: string;
   enum?: Array<EnumOption | string>;
-  confidenceLevels: { automated: number; highest: number; high: number; low: number };
+  confidenceLevels: { automated: number; high: number; medium: number; low: number };
 };
