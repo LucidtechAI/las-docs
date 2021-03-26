@@ -1,17 +1,30 @@
 import React, { useEffect, useState } from 'react';
 import { Button } from '@lucidtech/flyt-form';
 
-import { QueueStatus, RemoteComponentExternalProps } from './types';
+import { EnumOption, Field, QueueStatus, RemoteComponentExternalProps } from './types';
 import ErrorAlert from './components/ErrorAlert';
 import PDFViewer from './components/PDFViewer';
 import HotkeyHint from './components/HotkeyHint';
 
 import styles from './index.module.css';
+import { b64DecodeUnicode, normalizeEnum, normalizeString } from './utils';
 
-declare const ___TUTORIAL_VERSION___: string;
+declare const ___PDF_SPLIT_VERSION___: string;
+
+export type Group = {
+  pages: Array<number>;
+  category: EnumOption | string;
+};
+export type GroupPrediction = {
+  pages: Array<number>;
+  category: string;
+};
+export type Groups = Array<Group>;
 
 const RemoteComponent = ({
   transitionExecution,
+  transition,
+  getAsset,
   onApprove,
   onReject,
   onRequestNew,
@@ -22,7 +35,9 @@ const RemoteComponent = ({
   const [doc, setDoc] = useState('');
   const [error, setError] = useState<string | null>(null);
   const [isLoadingDocument, setIsLoadingDocument] = useState(true);
-  const [groups, setGroups] = useState<Array<Array<number>>>([]);
+  const [isLoadingAsset, setIsLoadingAsset] = useState(true);
+  const [groups, setGroups] = useState<Groups>([]);
+  const [categories, setCategories] = useState<Array<EnumOption>>([]);
 
   // keybinds
   const [showKeybinds, setShowKeybinds] = useState(true);
@@ -42,6 +57,34 @@ const RemoteComponent = ({
     storePreference(!showKeybinds);
     setShowKeybinds((prev) => !prev);
   };
+
+  // load fields from asset
+  useEffect(() => {
+    const fieldsAssetId = transition?.assets?.fieldConfig;
+    if (!fieldsAssetId) return;
+    getAsset(fieldsAssetId)
+      .then((res) => {
+        const decoded = b64DecodeUnicode(res.content);
+        const fields: Record<string, Field> = JSON.parse(decoded);
+
+        const categories =
+          fields?.categories?.enum?.map((option) => {
+            if (typeof option === 'string') {
+              return normalizeEnum(option);
+            } else {
+              return option;
+            }
+          }) || [];
+
+        setCategories(categories);
+      })
+      .catch((e) => {
+        console.error(e);
+      })
+      .finally(() => {
+        setIsLoadingAsset(false);
+      });
+  }, [transition]);
 
   // new transition execution, map predictions and get document (image)
   useEffect(() => {
@@ -78,9 +121,13 @@ const RemoteComponent = ({
 
   const approve = () => {
     const input = transitionExecution?.input || {};
+    const normalizedOutput: Array<GroupPrediction> = groups.map((group) => {
+      return { ...group, category: normalizeString(group.category) };
+    });
+
     const payload = {
       ...input,
-      verified: groups,
+      verified: normalizedOutput,
     };
     onApprove(payload);
     onRequestNew();
@@ -96,7 +143,7 @@ const RemoteComponent = ({
     onRequestNew();
   };
 
-  const somethingIsLoading = queueStatus === QueueStatus.LOADING || isLoadingDocument;
+  const somethingIsLoading = queueStatus === QueueStatus.LOADING || isLoadingDocument || isLoadingAsset;
 
   const handlers = {
     APPROVE: approve,
@@ -140,6 +187,7 @@ const RemoteComponent = ({
                   loading={somethingIsLoading}
                   groups={groups}
                   setGroups={setGroups}
+                  categories={categories}
                   extraKeymap={keyMap}
                   extraHandlers={handlers}
                   predictions={transitionExecution?.input?.predictions}
@@ -193,7 +241,7 @@ const RemoteComponent = ({
             </div>
           </div>
         </form>
-        <p className="text-muted small text-right">Version: {___TUTORIAL_VERSION___}</p>
+        <p className="text-muted small text-right">Version: {___PDF_SPLIT_VERSION___}</p>
       </div>
     </div>
   );

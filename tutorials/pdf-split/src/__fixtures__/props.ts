@@ -24,7 +24,11 @@ export function createTransitionExecution(transitionId?: string): TransitionExec
     modelId: 'las:model:abc',
     predictionId: 'las:prediction:abc',
     timestamp: 0,
-    predictions: [],
+    predictions: [
+      { pages: [1], category: 'INVOICE' },
+      { pages: [2], category: 'RECEIPT' },
+      { pages: [3, 4], category: 'MULTIPLE_RECEIPTS' },
+    ],
   };
 
   const execution: TransitionExecution = {

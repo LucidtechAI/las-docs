@@ -6,6 +6,9 @@ import styles from './PDFViewer.module.css';
 import ScissorButton from './ScissorButton';
 import MergeButton from './MergeButton';
 import Spinner from './Spinner';
+import { GroupPrediction, Groups } from '..';
+import { Select } from '@lucidtech/flyt-form';
+import { EnumOption } from '../types';
 
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.min.js`;
 const options = {
@@ -13,7 +16,6 @@ const options = {
   cMapPacked: true,
 };
 
-type Groups = Array<Array<number>>;
 type PDFViewerProps = {
   doc: string;
   loading?: boolean;
@@ -21,7 +23,8 @@ type PDFViewerProps = {
   setGroups: (groups: Groups) => void;
   extraKeymap?: Record<string, any>;
   extraHandlers?: Record<string, any>;
-  predictions?: Groups;
+  predictions?: Array<GroupPrediction>;
+  categories?: Array<EnumOption>;
 };
 
 const PDFViewer = ({
@@ -32,6 +35,7 @@ const PDFViewer = ({
   extraHandlers = {},
   extraKeymap = {},
   predictions,
+  categories = [],
 }: PDFViewerProps): JSX.Element => {
   const [numPages, setNumPages] = useState<number | null>(null);
   const [previewPage, setPreviewPage] = useState(1);
@@ -48,17 +52,38 @@ const PDFViewer = ({
     return { data: docBinary };
   }, [doc]);
 
+  // enum options can be string or record. create a lookup map so we can normalize the predictions
+  // and map them to the fieldconfig options for enums.
+  const categoryLookup = useMemo(() => {
+    const lookupMap = new Map<string, string>();
+    for (const category of categories) {
+      if (typeof category !== 'string') {
+        lookupMap.set(category.value, category.display);
+      }
+    }
+
+    return lookupMap;
+  }, [categories]);
+
   useEffect(() => {
     if (!numPages) return;
     setPreviewPage(1);
 
-    // for now no predictions are expected, but this should make it possible to receive them in the future
     // if no predictions, group all pages together by default
     if (!predictions || predictions?.length === 0) {
       const allPages = [...Array(numPages).keys()].map((key) => key + 1);
-      setGroups([allPages]);
+      setGroups([{ pages: allPages, category: '' }]);
+    } else if (predictions && predictions.length > 0) {
+      const mapped: Groups = predictions.map((prediction) => ({
+        ...prediction,
+        category: {
+          display: categoryLookup.get(prediction.category) || prediction.category,
+          value: prediction.category,
+        },
+      }));
+      setGroups(mapped);
     }
-  }, [numPages, predictions]);
+  }, [numPages, predictions, categoryLookup]);
 
   // Unclear what behavior should be like after cutting a group, but for now when the groups changes,
   // we will focus the last focused page again. This also makes the first page focus on page load.
@@ -77,8 +102,17 @@ const PDFViewer = ({
     const groupsCopy = [...groups];
     const firstGroup = groupsCopy[firstGroupIndex];
     const secondGroup = groupsCopy[secondGroupIndex];
-    const combinedGroup = [...firstGroup, ...secondGroup];
+    const combinedGroup = { ...firstGroup, pages: [...firstGroup.pages, ...secondGroup.pages] };
+
     groupsCopy.splice(firstGroupIndex, 2, combinedGroup);
+
+    setGroups(groupsCopy);
+  };
+
+  const changeCategory = (groupIndex: number, category: EnumOption): void => {
+    const groupsCopy = [...groups];
+    const selectedGroup = groupsCopy[groupIndex];
+    selectedGroup.category = category;
 
     setGroups(groupsCopy);
   };
@@ -88,8 +122,8 @@ const PDFViewer = ({
   const cutGroup = (groupIndex: number, cutIndex: number): void => {
     const groupsCopy = [...groups];
     const oldGroup = groupsCopy[groupIndex];
-    const newFirstGroup = oldGroup.slice(0, cutIndex);
-    const newSecondGroup = oldGroup.slice(cutIndex);
+    const newFirstGroup = { ...oldGroup, pages: oldGroup.pages.slice(0, cutIndex) };
+    const newSecondGroup = { ...oldGroup, pages: oldGroup.pages.slice(cutIndex) };
 
     groupsCopy.splice(groupIndex, 1, newFirstGroup, newSecondGroup);
 
@@ -112,53 +146,63 @@ const PDFViewer = ({
   };
 
   const handlers = {
+    // focus the select in the current group
+    FOCUS_CATEGORY: () => {
+      const currentGroupIndex = groups.findIndex((group) => group.pages.includes(previewPage));
+      if (currentGroupIndex >= 0) {
+        const selectElements: NodeListOf<HTMLButtonElement> | undefined = groupContainerRef.current?.querySelectorAll(
+          `.${styles.select} button`,
+        );
+        selectElements?.[currentGroupIndex]?.focus();
+      }
+    },
     // focus first page in previous group
     SELECT_PREV_GROUP: () => {
-      const currentGroupIndex = groups.findIndex((group) => group.includes(previewPage));
+      const currentGroupIndex = groups.findIndex((group) => group.pages.includes(previewPage));
       const hasPrevGroup = currentGroupIndex > 0;
 
       if (hasPrevGroup) {
-        const firstPageOfPrevGroup = groups[currentGroupIndex - 1][0];
+        const firstPageOfPrevGroup = groups[currentGroupIndex - 1].pages[0];
         onFocus(currentGroupIndex - 1, 0, firstPageOfPrevGroup);
         focusPage(firstPageOfPrevGroup);
       }
     },
     // focus first page in next group
     SELECT_NEXT_GROUP: () => {
-      const currentGroupIndex = groups.findIndex((group) => group.includes(previewPage));
+      const currentGroupIndex = groups.findIndex((group) => group.pages.includes(previewPage));
       const hasNextGroup = currentGroupIndex >= 0 && currentGroupIndex !== groups.length - 1;
 
       if (hasNextGroup) {
-        const firstPageOfNextGroup = groups[currentGroupIndex + 1][0];
+        const firstPageOfNextGroup = groups[currentGroupIndex + 1].pages[0];
         onFocus(currentGroupIndex - 1, 0, firstPageOfNextGroup);
         focusPage(firstPageOfNextGroup);
       }
     },
     CUT_PREV: () => {
-      const currentGroupIndex = groups.findIndex((group) => group.includes(previewPage));
+      const currentGroupIndex = groups.findIndex((group) => group.pages.includes(previewPage));
       if (currentGroupIndex >= 0) {
-        const currentPageIndex = groups[currentGroupIndex].findIndex((page) => page === previewPage);
+        const currentPageIndex = groups[currentGroupIndex].pages.findIndex((page) => page === previewPage);
         const hasPrevPage = currentPageIndex > 0;
         hasPrevPage && cutGroup(currentGroupIndex, currentPageIndex);
       }
     },
     CUT_NEXT: () => {
-      const currentGroupIndex = groups.findIndex((group) => group.includes(previewPage));
+      const currentGroupIndex = groups.findIndex((group) => group.pages.includes(previewPage));
       if (currentGroupIndex >= 0) {
-        const currentPageIndex = groups[currentGroupIndex].findIndex((page) => page === previewPage);
-        const hasNextPage = currentPageIndex >= 0 && currentPageIndex !== groups[currentGroupIndex].length - 1;
+        const currentPageIndex = groups[currentGroupIndex].pages.findIndex((page) => page === previewPage);
+        const hasNextPage = currentPageIndex >= 0 && currentPageIndex !== groups[currentGroupIndex].pages.length - 1;
         hasNextPage && cutGroup(currentGroupIndex, currentPageIndex + 1);
       }
     },
     MERGE_PREV_GROUP: () => {
-      const currentGroupIndex = groups.findIndex((group) => group.includes(previewPage));
+      const currentGroupIndex = groups.findIndex((group) => group.pages.includes(previewPage));
       const hasPrevGroup = currentGroupIndex > 0;
       if (hasPrevGroup) {
         joinGroups(currentGroupIndex - 1, currentGroupIndex);
       }
     },
     MERGE_NEXT_GROUP: () => {
-      const currentGroupIndex = groups.findIndex((group) => group.includes(previewPage));
+      const currentGroupIndex = groups.findIndex((group) => group.pages.includes(previewPage));
       const hasNextGroup = currentGroupIndex >= 0 && currentGroupIndex !== groups.length - 1;
       if (hasNextGroup) {
         joinGroups(currentGroupIndex, currentGroupIndex + 1);
@@ -169,6 +213,10 @@ const PDFViewer = ({
 
   // react-hotkeys types aren't 100% correct sadly
   const keyMap: any = {
+    FOCUS_CATEGORY: {
+      name: 'Select group category',
+      sequences: ['shift+a'],
+    },
     SELECT_PREV_GROUP: {
       name: 'Move to previous group',
       sequences: ['ctrl+left'],
@@ -217,14 +265,23 @@ const PDFViewer = ({
             {!loading &&
               groups.map((group, groupIndex) => {
                 const hasNextGroup = groupIndex !== groups.length - 1;
-                const groupKey = `group_${groupIndex}-${group.join('-')}`;
+                const groupKey = `group_${groupIndex}-${group.pages.join('-')}`;
                 return (
                   <div key={groupKey} className={styles['page-container']}>
                     <div className={styles['group-tab']}>{(groupIndex + 1).toString().padStart(2, '0')}</div>
-                    <ul>
-                      {group.map((pageNumber, pageIndex) => {
+                    <Select
+                      options={categories}
+                      className={styles.select}
+                      selectedItem={group.category}
+                      innerTabIndex={-1}
+                      handleSelectedItemChange={(item) =>
+                        item.selectedItem && changeCategory(groupIndex, item.selectedItem)
+                      }
+                    />
+                    <ul className={styles['group-list']}>
+                      {group.pages.map((pageNumber, pageIndex) => {
                         const hasPrevPage = pageIndex !== 0;
-                        const hasNextPage = pageIndex !== group.length - 1;
+                        const hasNextPage = pageIndex !== group.pages.length - 1;
                         return (
                           <li className={`${styles['list-item']}`} key={`page_${pageNumber}`}>
                             <div
