@@ -2,7 +2,7 @@ const path = require('path');
 const execSync = require('child_process').execSync;
 const webpack = require('webpack');
 
-const version = execSync('git rev-parse --short HEAD', { encoding: 'ascii' });
+const version = execSync(`git rev-list -1 --abbrev-commit HEAD -- ${__dirname}`, { encoding: 'ascii' });
 
 module.exports = {
   entry: path.resolve(__dirname, './src/index.tsx'),
