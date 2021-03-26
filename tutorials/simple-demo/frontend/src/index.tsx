@@ -54,6 +54,12 @@ const getBestPrediction = (fieldName: string, predictions: Prediction[]): Predic
   }
 };
 
+// default values if no fieldConfig value
+const CONFIDENCE_LOW = 0.5;
+const CONFIDENCE_MEDIUM = 0.95;
+const CONFIDENCE_HIGH = 0.97;
+const CONFIDENCE_AUTOMATED = 0.98;
+
 const RemoteComponent = ({
   transitionExecution,
   transition,
@@ -108,6 +114,13 @@ const RemoteComponent = ({
     const vals: Record<string, Prediction | undefined> = {};
     Object.keys(fields).forEach((fieldName) => {
       const prediction: (Prediction & { value: any }) | undefined = getBestPrediction(fieldName, predictions);
+      // don't show predicted values that are under "low" confidence
+      // look up from fieldConfig if there is a threshold set, otherwise use a default value
+      const lowThreshold = fields[fieldName]?.confidenceLevels?.low || CONFIDENCE_LOW;
+      if ((prediction?.confidence || 0) < lowThreshold) {
+        vals[fieldName] = undefined;
+        return;
+      }
       // normalize date values
       if (fields[fieldName].type === 'date' && prediction?.value) {
         const normalized = normalizeDate(prediction.value.toString());
@@ -182,14 +195,14 @@ const RemoteComponent = ({
 
   const getConfidenceLevel = (fieldName: string, confidenceLevel: number): ConfidenceLevel => {
     const levels = {
-      highest: fields[fieldName]?.confidenceLevels?.highest || 0.97,
-      high: fields[fieldName]?.confidenceLevels?.high || 0.9,
-      low: fields[fieldName]?.confidenceLevels?.low || 0.5,
+      high: fields[fieldName]?.confidenceLevels?.high || CONFIDENCE_HIGH,
+      medium: fields[fieldName]?.confidenceLevels?.medium || CONFIDENCE_MEDIUM,
+      low: fields[fieldName]?.confidenceLevels?.low || CONFIDENCE_LOW,
     };
-
-    if (confidenceLevel >= levels.highest) return 'highest';
-    if (confidenceLevel >= levels.high) return 'high';
-    if (confidenceLevel >= levels.low) return 'low';
+    // PS: currently the fieldConfig names do not match perfectly to the flyt-form ConfidenceLevel labels
+    // hence high = highest, medium = low
+    if (confidenceLevel >= levels.high) return 'highest';
+    if (confidenceLevel >= levels.medium) return 'low';
     return 'lowest';
   };
 
@@ -199,7 +212,8 @@ const RemoteComponent = ({
 
   const getConfidenceProps = (field: string) => {
     const confidence = initialValues[field]?.confidence || 0;
-    const isAutomated = !isChanged(field) && confidence >= (fields[field]?.confidenceLevels?.automated || 0.98);
+    const isAutomated =
+      !isChanged(field) && confidence >= (fields[field]?.confidenceLevels?.automated || CONFIDENCE_AUTOMATED);
     const props: Record<string, string | number | boolean | undefined> = {
       confidenceAutomated: isAutomated,
       confidenceLevel: isChanged(field) ? undefined : getConfidenceLevel(field, confidence),
@@ -290,6 +304,7 @@ const RemoteComponent = ({
           field={fields[fieldKey]}
           fieldKey={fieldKey}
           innerRef={ref}
+          {...getConfidenceProps(fieldKey)}
         />
       );
     } else {
