@@ -1,6 +1,5 @@
 import React, { ComponentType, useState } from 'react';
-import { Client as SDKClient } from '@lucidtech/las-sdk-core';
-import { Asset, TransitionExecution } from '@lucidtech/las-sdk-core/lib/types';
+import { Client as SDKClient, Asset, TransitionExecution } from '@lucidtech/las-sdk-core';
 
 import assets from '../__fixtures__/assets';
 import documents from '../__fixtures__/documents';
@@ -13,7 +12,7 @@ class Client {
       setTimeout(() => {
         const document = documents[documentId];
         return resolve(document);
-      }, 2000);
+      }, 1000);
     });
   }
 }
@@ -22,12 +21,15 @@ const client = (new Client() as unknown) as SDKClient;
 
 type PropProviderProps = {
   Component: ComponentType<RemoteComponentExternalProps>;
+  documentId: string;
 };
 
-const PropProvider = ({ Component }: PropProviderProps) => {
+const PropProvider = ({ Component, documentId }: PropProviderProps): JSX.Element => {
   const [transition, setTransition] = useState(createTransition());
-  const [transitionExecution, setTransitionExecution] = useState(createTransitionExecution(transition.transitionId));
-  const [queueStatus, setQueueStatus] = useState(QueueStatus.READY)
+  const [transitionExecution, setTransitionExecution] = useState(
+    createTransitionExecution(transition.transitionId, documentId),
+  );
+  const [queueStatus, setQueueStatus] = useState(QueueStatus.READY);
 
   const onReject = (taskError: string): void => {
     console.log(taskError);
@@ -47,15 +49,15 @@ const PropProvider = ({ Component }: PropProviderProps) => {
 
   const onRequestNew = (): void => {
     console.log('request new task');
-    setQueueStatus(QueueStatus.LOADING)
+    setQueueStatus(QueueStatus.LOADING);
     new Promise<TransitionExecution>((resolve, _reject) => {
       setTimeout(() => {
-        const execution = createTransitionExecution(transition.transitionId);
+        const execution = createTransitionExecution(transition.transitionId, documentId);
         return resolve(execution);
-      }, 1000);
-    }).then(res => {
-      setQueueStatus(QueueStatus.READY)
-      setTransitionExecution(createTransitionExecution(res.transitionId))
+      }, 500);
+    }).then((res) => {
+      setQueueStatus(QueueStatus.READY);
+      setTransitionExecution(res);
     });
   };
 

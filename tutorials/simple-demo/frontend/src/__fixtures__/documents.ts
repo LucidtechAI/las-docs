@@ -1,10 +1,23 @@
-import { LasDocument } from '@lucidtech/las-sdk-core/lib/types';
+import { LasDocument } from '@lucidtech/las-sdk-core';
+import bigjpg from './documents/2500x3700jpg';
+import multiPageTiff from './documents/multi_page_tiff';
+import multiPagePDF from './documents/multi_page_pdf';
 
 const documents: Record<string, LasDocument> = {
-  'las:document:abc': {
-    documentId: 'las:document:abc',
+  'las:document:bigjpg': {
+    documentId: 'las:document:bigjpg',
+    contentType: 'image/jpeg',
+    content: bigjpg,
+  },
+  'las:document:multipagetiff': {
+    documentId: 'las:document:multipagetiff',
+    contentType: 'image/tiff',
+    content: multiPageTiff,
+  },
+  'las:document:multipagepdf': {
+    documentId: 'las:document:multipagepdf',
     contentType: 'application/pdf',
-    content: 'JVBERi0xLjAKMSAwIG9iajw8L1BhZ2VzIDIgMCBSPj5lbmRvYmogMiAwIG9iajw8L0tpZHNbMyAwIFJdL0NvdW50IDE+PmVuZG9iaiAzIDAgb2JqPDwvTWVkaWFCb3hbMCAwIDMgM10+PmVuZG9iagp0cmFpbGVyPDwvUm9vdCAxIDAgUj4+Cg==',
+    content: multiPagePDF,
   },
 };
 

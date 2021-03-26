@@ -1,0 +1,42 @@
+.main-container {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+
+.document-viewer-container {
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-width: 60%;
+}
+
+.form-container {
+  min-width: 40%;
+  flex-shrink: 1;
+}
+
+.form-header {
+  display: flex;
+  flex-direction: row;
+}
+
+.form-header h2 {
+  margin: 0;
+}
+
+.form-body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: minmax(auto, 1fr) 3fr;
+  row-gap: 5px;
+  column-gap: 20px;
+  align-items: center;
+  width: 100%;
+}

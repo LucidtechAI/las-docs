@@ -1,13 +1,8 @@
-import { Client } from "@lucidtech/las-sdk-core";
-import { Asset, Transition, TransitionExecution } from "@lucidtech/las-sdk-core/lib/types";
+import { Client, Asset, Transition, TransitionExecution } from '@lucidtech/las-sdk-core';
 
 export enum QueueStatus {
   LOADING = 'LOADING',
-  LOADING_FIRST_TASK = 'LOADING_FIRST_TASK',
-  EMPTY = 'EMPTY',
   READY = 'READY',
-  TIMEOUT = 'TIMEOUT',
-  REFRESH = 'REFRESH',
 }
 
 export type RemoteComponentExternalProps = {
@@ -22,4 +17,16 @@ export type RemoteComponentExternalProps = {
   queueStatus: QueueStatus;
   transitionExecution: TransitionExecution;
   client: Client;
+};
+
+export type EnumOption = {
+  display: string;
+  value: string;
+};
+
+export type Field = {
+  type: string;
+  display: string;
+  enum?: Array<EnumOption | string>;
+  confidenceLevels: { automated: number; highest: number; high: number; low: number };
 };
