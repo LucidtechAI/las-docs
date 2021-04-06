@@ -123,13 +123,8 @@ const RemoteComponent = ({
       }
       // normalize date values
       if (fields[fieldName].type === 'date' && prediction?.value) {
-        try {
-          const normalized = normalizeDate(prediction.value.toString());
-          prediction.value = normalized;
-        } catch (e) {
-          console.log({ fieldName, prediction: prediction, value: prediction.value });
-          console.error(e);
-        }
+        const normalized = normalizeDate(prediction.value.toString());
+        prediction.value = normalized;
       }
       // normalize enum values
       else if (fields[fieldName].enum && prediction?.value) {

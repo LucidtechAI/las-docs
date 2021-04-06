@@ -6,7 +6,7 @@ import { EnumOption, Field } from './types';
  * @param dateString
  */
 export function normalizeDate(dateString: string): string {
-  const delimited = dateString.replaceAll(/[\,\-_\/\\]+/g, '.');
+  const delimited = dateString.replace(/[\,\-_\/\\]+/g, '.');
   let inputFormat = delimited.length > 8 ? 'dd.MM.yyyy' : 'dd.MM.yy';
 
   // check if date is in YYYY-MM-DD format
