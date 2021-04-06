@@ -436,10 +436,6 @@
             "pattern": "^las:consent:[a-f0-9]{32}$",
             "type": "string"
           },
-          "inferenceTime": {
-            "minimum": 0,
-            "type": "number"
-          },
           "documentId": {
             "pattern": "^las:document:[a-f0-9]{32}$",
             "type": "string"
@@ -457,44 +453,9 @@
               "image/tiff"
             ]
           },
-          "updated": {
-            "minimum": 1,
-            "type": "integer"
-          },
           "content": {
             "minLength": 1,
             "type": "string"
-          },
-          "predictions": {
-            "type": "array",
-            "items": {
-              "required": [
-                "confidence",
-                "label",
-                "value"
-              ],
-              "type": "object",
-              "properties": {
-                "confidence": {
-                  "maximum": 1,
-                  "minimum": 0,
-                  "type": "number"
-                },
-                "label": {
-                  "maxLength": 36,
-                  "minLength": 1,
-                  "pattern": "^[0-9A-Za-z_]+$",
-                  "type": "string"
-                },
-                "value": {
-                  "maxLength": 64,
-                  "minLength": 1,
-                  "type": "string",
-                  "nullable": true
-                }
-              },
-              "additionalProperties": false
-            }
           }
         },
         "additionalProperties": false
@@ -602,10 +563,6 @@
             "pattern": "^las:consent:[a-f0-9]{32}$",
             "type": "string"
           },
-          "inferenceTime": {
-            "minimum": 0,
-            "type": "number"
-          },
           "documentId": {
             "pattern": "^las:document:[a-f0-9]{32}$",
             "type": "string"
@@ -623,44 +580,9 @@
               "image/tiff"
             ]
           },
-          "updated": {
-            "minimum": 1,
-            "type": "integer"
-          },
           "content": {
             "minLength": 1,
             "type": "string"
-          },
-          "predictions": {
-            "type": "array",
-            "items": {
-              "required": [
-                "confidence",
-                "label",
-                "value"
-              ],
-              "type": "object",
-              "properties": {
-                "confidence": {
-                  "maximum": 1,
-                  "minimum": 0,
-                  "type": "number"
-                },
-                "label": {
-                  "maxLength": 36,
-                  "minLength": 1,
-                  "pattern": "^[0-9A-Za-z_]+$",
-                  "type": "string"
-                },
-                "value": {
-                  "maxLength": 64,
-                  "minLength": 1,
-                  "type": "string",
-                  "nullable": true
-                }
-              },
-              "additionalProperties": false
-            }
           }
         },
         "additionalProperties": false
@@ -815,10 +737,6 @@
       "pattern": "^las:consent:[a-f0-9]{32}$",
       "type": "string"
     },
-    "inferenceTime": {
-      "minimum": 0,
-      "type": "number"
-    },
     "documentId": {
       "pattern": "^las:document:[a-f0-9]{32}$",
       "type": "string"
@@ -836,44 +754,9 @@
         "image/tiff"
       ]
     },
-    "updated": {
-      "minimum": 1,
-      "type": "integer"
-    },
     "content": {
       "minLength": 1,
       "type": "string"
-    },
-    "predictions": {
-      "type": "array",
-      "items": {
-        "required": [
-          "confidence",
-          "label",
-          "value"
-        ],
-        "type": "object",
-        "properties": {
-          "confidence": {
-            "maximum": 1,
-            "minimum": 0,
-            "type": "number"
-          },
-          "label": {
-            "maxLength": 36,
-            "minLength": 1,
-            "pattern": "^[0-9A-Za-z_]+$",
-            "type": "string"
-          },
-          "value": {
-            "maxLength": 64,
-            "minLength": 1,
-            "type": "string",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      }
     }
   },
   "additionalProperties": false
@@ -947,10 +830,6 @@
       "pattern": "^las:consent:[a-f0-9]{32}$",
       "type": "string"
     },
-    "inferenceTime": {
-      "minimum": 0,
-      "type": "number"
-    },
     "documentId": {
       "pattern": "^las:document:[a-f0-9]{32}$",
       "type": "string"
@@ -968,44 +847,9 @@
         "image/tiff"
       ]
     },
-    "updated": {
-      "minimum": 1,
-      "type": "integer"
-    },
     "content": {
       "minLength": 1,
       "type": "string"
-    },
-    "predictions": {
-      "type": "array",
-      "items": {
-        "required": [
-          "confidence",
-          "label",
-          "value"
-        ],
-        "type": "object",
-        "properties": {
-          "confidence": {
-            "maximum": 1,
-            "minimum": 0,
-            "type": "number"
-          },
-          "label": {
-            "maxLength": 36,
-            "minLength": 1,
-            "pattern": "^[0-9A-Za-z_]+$",
-            "type": "string"
-          },
-          "value": {
-            "maxLength": 64,
-            "minLength": 1,
-            "type": "string",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      }
     }
   },
   "additionalProperties": false
@@ -1124,10 +968,6 @@
       "pattern": "^las:consent:[a-f0-9]{32}$",
       "type": "string"
     },
-    "inferenceTime": {
-      "minimum": 0,
-      "type": "number"
-    },
     "documentId": {
       "pattern": "^las:document:[a-f0-9]{32}$",
       "type": "string"
@@ -1145,44 +985,9 @@
         "image/tiff"
       ]
     },
-    "updated": {
-      "minimum": 1,
-      "type": "integer"
-    },
     "content": {
       "minLength": 1,
       "type": "string"
-    },
-    "predictions": {
-      "type": "array",
-      "items": {
-        "required": [
-          "confidence",
-          "label",
-          "value"
-        ],
-        "type": "object",
-        "properties": {
-          "confidence": {
-            "maximum": 1,
-            "minimum": 0,
-            "type": "number"
-          },
-          "label": {
-            "maxLength": 36,
-            "minLength": 1,
-            "pattern": "^[0-9A-Za-z_]+$",
-            "type": "string"
-          },
-          "value": {
-            "maxLength": 64,
-            "minLength": 1,
-            "type": "string",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      }
     }
   },
   "additionalProperties": false
@@ -1235,6 +1040,11 @@
     "logId": {
       "pattern": "^las:log:[a-f0-9]{32}$",
       "type": "string"
+    },
+    "workflowId": {
+      "pattern": "^las:workflow:[a-f0-9]{32}$",
+      "type": "string",
+      "nullable": true
     },
     "events": {
       "type": "array",
@@ -2281,7 +2091,20 @@
   "minProperties": 1,
   "type": "object",
   "properties": {
+    "environmentSecrets": {
+      "type": "array",
+      "items": {
+        "pattern": "^las:secret:[a-f0-9]{32}$",
+        "type": "string"
+      }
+    },
+    "environment": {
+      "type": "object"
+    },
     "outputJsonSchema": {
+      "type": "object"
+    },
+    "assets": {
       "type": "object"
     },
     "name": {
@@ -2434,7 +2257,7 @@
             ]
           },
           "startTime": {
-            "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2} ?[0-9]{2}:?[0-9]{2}:?[0-9]{2}.?[0-9]{6}",
+            "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2}( |T)?[0-9]{2}:?[0-9]{2}:?[0-9]{2}(.[0-9]{1,6})?(Z|[+][0-9]{2}(:|)[0-9]{2})$",
             "type": "string",
             "nullable": true
           },
@@ -2444,7 +2267,7 @@
             "nullable": true
           },
           "endTime": {
-            "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2} ?[0-9]{2}:?[0-9]{2}:?[0-9]{2}.?[0-9]{6}",
+            "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2}( |T)?[0-9]{2}:?[0-9]{2}:?[0-9]{2}(.[0-9]{1,6})?(Z|[+][0-9]{2}(:|)[0-9]{2})$",
             "type": "string",
             "nullable": true
           },
@@ -2460,7 +2283,8 @@
               "succeeded",
               "failed",
               "rejected",
-              "retry"
+              "retry",
+              "error"
             ]
           }
         },
@@ -2493,7 +2317,8 @@
           "succeeded",
           "failed",
           "rejected",
-          "retry"
+          "retry",
+          "error"
         ]
       }
     }
@@ -2563,7 +2388,7 @@
       ]
     },
     "startTime": {
-      "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2} ?[0-9]{2}:?[0-9]{2}:?[0-9]{2}.?[0-9]{6}",
+      "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2}( |T)?[0-9]{2}:?[0-9]{2}:?[0-9]{2}(.[0-9]{1,6})?(Z|[+][0-9]{2}(:|)[0-9]{2})$",
       "type": "string",
       "nullable": true
     },
@@ -2573,7 +2398,7 @@
       "nullable": true
     },
     "endTime": {
-      "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2} ?[0-9]{2}:?[0-9]{2}:?[0-9]{2}.?[0-9]{6}",
+      "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2}( |T)?[0-9]{2}:?[0-9]{2}:?[0-9]{2}(.[0-9]{1,6})?(Z|[+][0-9]{2}(:|)[0-9]{2})$",
       "type": "string",
       "nullable": true
     },
@@ -2589,7 +2414,8 @@
         "succeeded",
         "failed",
         "rejected",
-        "retry"
+        "retry",
+        "error"
       ]
     }
   },
@@ -2652,7 +2478,7 @@
       ]
     },
     "startTime": {
-      "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2} ?[0-9]{2}:?[0-9]{2}:?[0-9]{2}.?[0-9]{6}",
+      "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2}( |T)?[0-9]{2}:?[0-9]{2}:?[0-9]{2}(.[0-9]{1,6})?(Z|[+][0-9]{2}(:|)[0-9]{2})$",
       "type": "string",
       "nullable": true
     },
@@ -2662,7 +2488,7 @@
       "nullable": true
     },
     "endTime": {
-      "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2} ?[0-9]{2}:?[0-9]{2}:?[0-9]{2}.?[0-9]{6}",
+      "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2}( |T)?[0-9]{2}:?[0-9]{2}:?[0-9]{2}(.[0-9]{1,6})?(Z|[+][0-9]{2}(:|)[0-9]{2})$",
       "type": "string",
       "nullable": true
     },
@@ -2678,7 +2504,8 @@
         "succeeded",
         "failed",
         "rejected",
-        "retry"
+        "retry",
+        "error"
       ]
     }
   },
@@ -2716,7 +2543,7 @@
       "type": "object"
     },
     "startTime": {
-      "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2} ?[0-9]{2}:?[0-9]{2}:?[0-9]{2}.?[0-9]{6}",
+      "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2}( |T)?[0-9]{2}:?[0-9]{2}:?[0-9]{2}(.[0-9]{1,6})?(Z|[+][0-9]{2}(:|)[0-9]{2})$",
       "type": "string",
       "nullable": true
     },
@@ -2800,7 +2627,7 @@
       ]
     },
     "startTime": {
-      "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2} ?[0-9]{2}:?[0-9]{2}:?[0-9]{2}.?[0-9]{6}",
+      "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2}( |T)?[0-9]{2}:?[0-9]{2}:?[0-9]{2}(.[0-9]{1,6})?(Z|[+][0-9]{2}(:|)[0-9]{2})$",
       "type": "string",
       "nullable": true
     },
@@ -2810,7 +2637,7 @@
       "nullable": true
     },
     "endTime": {
-      "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2} ?[0-9]{2}:?[0-9]{2}:?[0-9]{2}.?[0-9]{6}",
+      "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2}( |T)?[0-9]{2}:?[0-9]{2}:?[0-9]{2}(.[0-9]{1,6})?(Z|[+][0-9]{2}(:|)[0-9]{2})$",
       "type": "string",
       "nullable": true
     },
@@ -2826,7 +2653,8 @@
         "succeeded",
         "failed",
         "rejected",
-        "retry"
+        "retry",
+        "error"
       ]
     }
   },
@@ -2925,7 +2753,7 @@
             "type": "string"
           },
           "email": {
-            "pattern": "^[A-Za-z0-9][-+._A-Za-z0-9]*@([A-Za-z0-9]+\\.)+[A-Za-z]{2,}$",
+            "pattern": "^[A-Za-z0-9][-+._A-Za-z0-9]*@([-_.A-Za-z0-9]+\\.)+[A-Za-z]{2,}$",
             "type": "string"
           }
         },
@@ -2974,7 +2802,7 @@
       "nullable": true
     },
     "email": {
-      "pattern": "^[A-Za-z0-9][-+._A-Za-z0-9]*@([A-Za-z0-9]+\\.)+[A-Za-z]{2,}$",
+      "pattern": "^[A-Za-z0-9][-+._A-Za-z0-9]*@([-_.A-Za-z0-9]+\\.)+[A-Za-z]{2,}$",
       "type": "string"
     }
   },
@@ -3008,7 +2836,7 @@
       "type": "string"
     },
     "email": {
-      "pattern": "^[A-Za-z0-9][-+._A-Za-z0-9]*@([A-Za-z0-9]+\\.)+[A-Za-z]{2,}$",
+      "pattern": "^[A-Za-z0-9][-+._A-Za-z0-9]*@([-_.A-Za-z0-9]+\\.)+[A-Za-z]{2,}$",
       "type": "string"
     }
   },
@@ -3062,7 +2890,7 @@
       "type": "string"
     },
     "email": {
-      "pattern": "^[A-Za-z0-9][-+._A-Za-z0-9]*@([A-Za-z0-9]+\\.)+[A-Za-z]{2,}$",
+      "pattern": "^[A-Za-z0-9][-+._A-Za-z0-9]*@([-_.A-Za-z0-9]+\\.)+[A-Za-z]{2,}$",
       "type": "string"
     }
   },
@@ -3116,7 +2944,7 @@
       "type": "string"
     },
     "email": {
-      "pattern": "^[A-Za-z0-9][-+._A-Za-z0-9]*@([A-Za-z0-9]+\\.)+[A-Za-z]{2,}$",
+      "pattern": "^[A-Za-z0-9][-+._A-Za-z0-9]*@([-_.A-Za-z0-9]+\\.)+[A-Za-z]{2,}$",
       "type": "string"
     }
   },
@@ -3191,7 +3019,7 @@
       "type": "string"
     },
     "email": {
-      "pattern": "^[A-Za-z0-9][-+._A-Za-z0-9]*@([A-Za-z0-9]+\\.)+[A-Za-z]{2,}$",
+      "pattern": "^[A-Za-z0-9][-+._A-Za-z0-9]*@([-_.A-Za-z0-9]+\\.)+[A-Za-z]{2,}$",
       "type": "string"
     }
   },
@@ -3239,12 +3067,41 @@
       "type": "array",
       "items": {
         "required": [
+          "completedConfig",
           "description",
+          "errorConfig",
           "name",
           "workflowId"
         ],
         "type": "object",
         "properties": {
+          "completedConfig": {
+            "required": [
+              "imageUrl"
+            ],
+            "type": "object",
+            "properties": {
+              "environmentSecrets": {
+                "type": "array",
+                "items": {
+                  "pattern": "^las:secret:[a-f0-9]{32}$",
+                  "type": "string"
+                }
+              },
+              "environment": {
+                "type": "object",
+                "additionalProperties": true
+              },
+              "imageUrl": {
+                "type": "string"
+              },
+              "secretId": {
+                "pattern": "^las:secret:[a-f0-9]{32}$",
+                "type": "string"
+              }
+            },
+            "additionalProperties": false
+          },
           "name": {
             "maxLength": 4096,
             "type": "string",
@@ -3258,6 +3115,22 @@
           "workflowId": {
             "pattern": "^las:workflow:[a-f0-9]{32}$",
             "type": "string"
+          },
+          "errorConfig": {
+            "required": [
+              "email"
+            ],
+            "type": "object",
+            "properties": {
+              "manualRetry": {
+                "type": "boolean"
+              },
+              "email": {
+                "pattern": "^[A-Za-z0-9][-+._A-Za-z0-9]*@([-_.A-Za-z0-9]+\\.)+[A-Za-z]{2,}$",
+                "type": "string"
+              }
+            },
+            "additionalProperties": false
           }
         },
         "additionalProperties": false
@@ -3294,6 +3167,33 @@
   ],
   "type": "object",
   "properties": {
+    "completedConfig": {
+      "required": [
+        "imageUrl"
+      ],
+      "type": "object",
+      "properties": {
+        "environmentSecrets": {
+          "type": "array",
+          "items": {
+            "pattern": "^las:secret:[a-f0-9]{32}$",
+            "type": "string"
+          }
+        },
+        "environment": {
+          "type": "object",
+          "additionalProperties": true
+        },
+        "imageUrl": {
+          "type": "string"
+        },
+        "secretId": {
+          "pattern": "^las:secret:[a-f0-9]{32}$",
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
     "name": {
       "maxLength": 4096,
       "type": "string",
@@ -3334,8 +3234,11 @@
       ],
       "type": "object",
       "properties": {
+        "manualRetry": {
+          "type": "boolean"
+        },
         "email": {
-          "pattern": "^[A-Za-z0-9][-+._A-Za-z0-9]*@([A-Za-z0-9]+\\.)+[A-Za-z]{2,}$",
+          "pattern": "^[A-Za-z0-9][-+._A-Za-z0-9]*@([-_.A-Za-z0-9]+\\.)+[A-Za-z]{2,}$",
           "type": "string"
         }
       },
@@ -3352,12 +3255,41 @@
 {
   "title": "workflow",
   "required": [
+    "completedConfig",
     "description",
+    "errorConfig",
     "name",
     "workflowId"
   ],
   "type": "object",
   "properties": {
+    "completedConfig": {
+      "required": [
+        "imageUrl"
+      ],
+      "type": "object",
+      "properties": {
+        "environmentSecrets": {
+          "type": "array",
+          "items": {
+            "pattern": "^las:secret:[a-f0-9]{32}$",
+            "type": "string"
+          }
+        },
+        "environment": {
+          "type": "object",
+          "additionalProperties": true
+        },
+        "imageUrl": {
+          "type": "string"
+        },
+        "secretId": {
+          "pattern": "^las:secret:[a-f0-9]{32}$",
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
     "name": {
       "maxLength": 4096,
       "type": "string",
@@ -3371,6 +3303,22 @@
     "workflowId": {
       "pattern": "^las:workflow:[a-f0-9]{32}$",
       "type": "string"
+    },
+    "errorConfig": {
+      "required": [
+        "email"
+      ],
+      "type": "object",
+      "properties": {
+        "manualRetry": {
+          "type": "boolean"
+        },
+        "email": {
+          "pattern": "^[A-Za-z0-9][-+._A-Za-z0-9]*@([-_.A-Za-z0-9]+\\.)+[A-Za-z]{2,}$",
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
     }
   },
   "additionalProperties": false
@@ -3403,12 +3351,41 @@
 {
   "title": "workflow",
   "required": [
+    "completedConfig",
     "description",
+    "errorConfig",
     "name",
     "workflowId"
   ],
   "type": "object",
   "properties": {
+    "completedConfig": {
+      "required": [
+        "imageUrl"
+      ],
+      "type": "object",
+      "properties": {
+        "environmentSecrets": {
+          "type": "array",
+          "items": {
+            "pattern": "^las:secret:[a-f0-9]{32}$",
+            "type": "string"
+          }
+        },
+        "environment": {
+          "type": "object",
+          "additionalProperties": true
+        },
+        "imageUrl": {
+          "type": "string"
+        },
+        "secretId": {
+          "pattern": "^las:secret:[a-f0-9]{32}$",
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
     "name": {
       "maxLength": 4096,
       "type": "string",
@@ -3422,6 +3399,22 @@
     "workflowId": {
       "pattern": "^las:workflow:[a-f0-9]{32}$",
       "type": "string"
+    },
+    "errorConfig": {
+      "required": [
+        "email"
+      ],
+      "type": "object",
+      "properties": {
+        "manualRetry": {
+          "type": "boolean"
+        },
+        "email": {
+          "pattern": "^[A-Za-z0-9][-+._A-Za-z0-9]*@([-_.A-Za-z0-9]+\\.)+[A-Za-z]{2,}$",
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
     }
   },
   "additionalProperties": false
@@ -3454,12 +3447,41 @@
 {
   "title": "workflow",
   "required": [
+    "completedConfig",
     "description",
+    "errorConfig",
     "name",
     "workflowId"
   ],
   "type": "object",
   "properties": {
+    "completedConfig": {
+      "required": [
+        "imageUrl"
+      ],
+      "type": "object",
+      "properties": {
+        "environmentSecrets": {
+          "type": "array",
+          "items": {
+            "pattern": "^las:secret:[a-f0-9]{32}$",
+            "type": "string"
+          }
+        },
+        "environment": {
+          "type": "object",
+          "additionalProperties": true
+        },
+        "imageUrl": {
+          "type": "string"
+        },
+        "secretId": {
+          "pattern": "^las:secret:[a-f0-9]{32}$",
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
     "name": {
       "maxLength": 4096,
       "type": "string",
@@ -3473,6 +3495,22 @@
     "workflowId": {
       "pattern": "^las:workflow:[a-f0-9]{32}$",
       "type": "string"
+    },
+    "errorConfig": {
+      "required": [
+        "email"
+      ],
+      "type": "object",
+      "properties": {
+        "manualRetry": {
+          "type": "boolean"
+        },
+        "email": {
+          "pattern": "^[A-Za-z0-9][-+._A-Za-z0-9]*@([-_.A-Za-z0-9]+\\.)+[A-Za-z]{2,}$",
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
     }
   },
   "additionalProperties": false
@@ -3505,6 +3543,33 @@
   "minProperties": 1,
   "type": "object",
   "properties": {
+    "completedConfig": {
+      "required": [
+        "imageUrl"
+      ],
+      "type": "object",
+      "properties": {
+        "environmentSecrets": {
+          "type": "array",
+          "items": {
+            "pattern": "^las:secret:[a-f0-9]{32}$",
+            "type": "string"
+          }
+        },
+        "environment": {
+          "type": "object",
+          "additionalProperties": true
+        },
+        "imageUrl": {
+          "type": "string"
+        },
+        "secretId": {
+          "pattern": "^las:secret:[a-f0-9]{32}$",
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
     "name": {
       "maxLength": 4096,
       "type": "string",
@@ -3514,6 +3579,22 @@
       "maxLength": 4096,
       "type": "string",
       "nullable": true
+    },
+    "errorConfig": {
+      "required": [
+        "email"
+      ],
+      "type": "object",
+      "properties": {
+        "manualRetry": {
+          "type": "boolean"
+        },
+        "email": {
+          "pattern": "^[A-Za-z0-9][-+._A-Za-z0-9]*@([-_.A-Za-z0-9]+\\.)+[A-Za-z]{2,}$",
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
     }
   },
   "additionalProperties": false
@@ -3526,12 +3607,41 @@
 {
   "title": "workflow",
   "required": [
+    "completedConfig",
     "description",
+    "errorConfig",
     "name",
     "workflowId"
   ],
   "type": "object",
   "properties": {
+    "completedConfig": {
+      "required": [
+        "imageUrl"
+      ],
+      "type": "object",
+      "properties": {
+        "environmentSecrets": {
+          "type": "array",
+          "items": {
+            "pattern": "^las:secret:[a-f0-9]{32}$",
+            "type": "string"
+          }
+        },
+        "environment": {
+          "type": "object",
+          "additionalProperties": true
+        },
+        "imageUrl": {
+          "type": "string"
+        },
+        "secretId": {
+          "pattern": "^las:secret:[a-f0-9]{32}$",
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
     "name": {
       "maxLength": 4096,
       "type": "string",
@@ -3545,6 +3655,22 @@
     "workflowId": {
       "pattern": "^las:workflow:[a-f0-9]{32}$",
       "type": "string"
+    },
+    "errorConfig": {
+      "required": [
+        "email"
+      ],
+      "type": "object",
+      "properties": {
+        "manualRetry": {
+          "type": "boolean"
+        },
+        "email": {
+          "pattern": "^[A-Za-z0-9][-+._A-Za-z0-9]*@([-_.A-Za-z0-9]+\\.)+[A-Za-z]{2,}$",
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
     }
   },
   "additionalProperties": false
@@ -3616,13 +3742,18 @@
           "input": {
             "type": "object"
           },
+          "logId": {
+            "pattern": "^las:log:[a-f0-9]{32}$",
+            "type": "string",
+            "nullable": true
+          },
           "startTime": {
-            "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2} ?[0-9]{2}:?[0-9]{2}:?[0-9]{2}.?[0-9]{6}",
+            "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2}( |T)?[0-9]{2}:?[0-9]{2}:?[0-9]{2}(.[0-9]{1,6})?(Z|[+][0-9]{2}(:|)[0-9]{2})$",
             "type": "string",
             "nullable": true
           },
           "endTime": {
-            "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2} ?[0-9]{2}:?[0-9]{2}:?[0-9]{2}.?[0-9]{6}",
+            "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2}( |T)?[0-9]{2}:?[0-9]{2}:?[0-9]{2}(.[0-9]{1,6})?(Z|[+][0-9]{2}(:|)[0-9]{2})$",
             "type": "string",
             "nullable": true
           },
@@ -3652,7 +3783,8 @@
               "succeeded",
               "failed",
               "rejected",
-              "retry"
+              "retry",
+              "error"
             ]
           }
         },
@@ -3684,7 +3816,8 @@
           "succeeded",
           "failed",
           "rejected",
-          "retry"
+          "retry",
+          "error"
         ]
       }
     },
@@ -3766,13 +3899,18 @@
     "input": {
       "type": "object"
     },
+    "logId": {
+      "pattern": "^las:log:[a-f0-9]{32}$",
+      "type": "string",
+      "nullable": true
+    },
     "startTime": {
-      "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2} ?[0-9]{2}:?[0-9]{2}:?[0-9]{2}.?[0-9]{6}",
+      "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2}( |T)?[0-9]{2}:?[0-9]{2}:?[0-9]{2}(.[0-9]{1,6})?(Z|[+][0-9]{2}(:|)[0-9]{2})$",
       "type": "string",
       "nullable": true
     },
     "endTime": {
-      "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2} ?[0-9]{2}:?[0-9]{2}:?[0-9]{2}.?[0-9]{6}",
+      "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2}( |T)?[0-9]{2}:?[0-9]{2}:?[0-9]{2}(.[0-9]{1,6})?(Z|[+][0-9]{2}(:|)[0-9]{2})$",
       "type": "string",
       "nullable": true
     },
@@ -3802,7 +3940,8 @@
         "succeeded",
         "failed",
         "rejected",
-        "retry"
+        "retry",
+        "error"
       ]
     }
   },
@@ -3861,13 +4000,18 @@
     "input": {
       "type": "object"
     },
+    "logId": {
+      "pattern": "^las:log:[a-f0-9]{32}$",
+      "type": "string",
+      "nullable": true
+    },
     "startTime": {
-      "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2} ?[0-9]{2}:?[0-9]{2}:?[0-9]{2}.?[0-9]{6}",
+      "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2}( |T)?[0-9]{2}:?[0-9]{2}:?[0-9]{2}(.[0-9]{1,6})?(Z|[+][0-9]{2}(:|)[0-9]{2})$",
       "type": "string",
       "nullable": true
     },
     "endTime": {
-      "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2} ?[0-9]{2}:?[0-9]{2}:?[0-9]{2}.?[0-9]{6}",
+      "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2}( |T)?[0-9]{2}:?[0-9]{2}:?[0-9]{2}(.[0-9]{1,6})?(Z|[+][0-9]{2}(:|)[0-9]{2})$",
       "type": "string",
       "nullable": true
     },
@@ -3897,7 +4041,235 @@
         "succeeded",
         "failed",
         "rejected",
-        "retry"
+        "retry",
+        "error"
+      ]
+    }
+  },
+  "additionalProperties": false
+}
+```
+
+
+#### GET /workflows/{workflowId}/executions/{executionId}
+
+
+| Path name | Path value |
+| --- | --- |
+| executionId | Id of execution on the form las:workflow-execution:&lt;hex&gt; |
+| workflowId | Id of workflow on the form las:workflow:&lt;hex&gt; |
+
+
+| Header name | Header value |
+| --- | --- |
+| Authorization | Bearer &lt;your access token here&gt; |
+| x-api-key | &lt;your api key here&gt; |
+
+
+
+
+
+
+
+
+##### Response body JSON Schema
+```json
+{
+  "title": "workflow-execution",
+  "required": [
+    "endTime",
+    "executionId",
+    "input",
+    "output",
+    "startTime",
+    "status",
+    "transitionExecutions",
+    "workflowId"
+  ],
+  "type": "object",
+  "properties": {
+    "transitionExecutions": {
+      "type": "object"
+    },
+    "output": {
+      "type": "object"
+    },
+    "executionId": {
+      "pattern": "^las:workflow-execution:[a-f0-9]{32}$",
+      "type": "string"
+    },
+    "input": {
+      "type": "object"
+    },
+    "logId": {
+      "pattern": "^las:log:[a-f0-9]{32}$",
+      "type": "string",
+      "nullable": true
+    },
+    "startTime": {
+      "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2}( |T)?[0-9]{2}:?[0-9]{2}:?[0-9]{2}(.[0-9]{1,6})?(Z|[+][0-9]{2}(:|)[0-9]{2})$",
+      "type": "string",
+      "nullable": true
+    },
+    "endTime": {
+      "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2}( |T)?[0-9]{2}:?[0-9]{2}:?[0-9]{2}(.[0-9]{1,6})?(Z|[+][0-9]{2}(:|)[0-9]{2})$",
+      "type": "string",
+      "nullable": true
+    },
+    "workflowId": {
+      "pattern": "^las:workflow:[a-f0-9]{32}$",
+      "type": "string"
+    },
+    "completedBy": {
+      "type": "array",
+      "items": {
+        "anyOf": [
+          {
+            "pattern": "^las:user:[a-f0-9]{32}$",
+            "type": "string"
+          },
+          {
+            "pattern": "^las:app-client:[a-f0-9]{32}$",
+            "type": "string"
+          }
+        ]
+      }
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "running",
+        "succeeded",
+        "failed",
+        "rejected",
+        "retry",
+        "error"
+      ]
+    }
+  },
+  "additionalProperties": false
+}
+```
+
+
+#### PATCH /workflows/{workflowId}/executions/{executionId}
+
+
+| Path name | Path value |
+| --- | --- |
+| executionId | Id of execution on the form las:workflow-execution:&lt;hex&gt; |
+| workflowId | Id of workflow on the form las:workflow:&lt;hex&gt; |
+
+
+| Header name | Header value |
+| --- | --- |
+| Content-Type | application/json |
+| Authorization | Bearer &lt;your access token here&gt; |
+| x-api-key | &lt;your api key here&gt; |
+
+
+
+
+
+##### Request body JSON Schema
+```json
+{
+  "title": "PATCH workflows/{workflowId}/executions/{executionId}",
+  "required": [
+    "nextTransitionId"
+  ],
+  "type": "object",
+  "properties": {
+    "nextTransitionId": {
+      "anyOf": [
+        {
+          "pattern": "^las:transition:[a-f0-9]{32}$",
+          "type": "string"
+        },
+        {
+          "pattern": "^las:transition:commons-[0-9A-Za-z-]+$",
+          "type": "string"
+        }
+      ]
+    }
+  },
+  "additionalProperties": false
+}
+```
+
+
+##### Response body JSON Schema
+```json
+{
+  "title": "workflow-execution",
+  "required": [
+    "endTime",
+    "executionId",
+    "input",
+    "output",
+    "startTime",
+    "status",
+    "transitionExecutions",
+    "workflowId"
+  ],
+  "type": "object",
+  "properties": {
+    "transitionExecutions": {
+      "type": "object"
+    },
+    "output": {
+      "type": "object"
+    },
+    "executionId": {
+      "pattern": "^las:workflow-execution:[a-f0-9]{32}$",
+      "type": "string"
+    },
+    "input": {
+      "type": "object"
+    },
+    "logId": {
+      "pattern": "^las:log:[a-f0-9]{32}$",
+      "type": "string",
+      "nullable": true
+    },
+    "startTime": {
+      "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2}( |T)?[0-9]{2}:?[0-9]{2}:?[0-9]{2}(.[0-9]{1,6})?(Z|[+][0-9]{2}(:|)[0-9]{2})$",
+      "type": "string",
+      "nullable": true
+    },
+    "endTime": {
+      "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2}( |T)?[0-9]{2}:?[0-9]{2}:?[0-9]{2}(.[0-9]{1,6})?(Z|[+][0-9]{2}(:|)[0-9]{2})$",
+      "type": "string",
+      "nullable": true
+    },
+    "workflowId": {
+      "pattern": "^las:workflow:[a-f0-9]{32}$",
+      "type": "string"
+    },
+    "completedBy": {
+      "type": "array",
+      "items": {
+        "anyOf": [
+          {
+            "pattern": "^las:user:[a-f0-9]{32}$",
+            "type": "string"
+          },
+          {
+            "pattern": "^las:app-client:[a-f0-9]{32}$",
+            "type": "string"
+          }
+        ]
+      }
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "running",
+        "succeeded",
+        "failed",
+        "rejected",
+        "retry",
+        "error"
       ]
     }
   },
