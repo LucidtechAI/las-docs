@@ -92,7 +92,7 @@ const RemoteComponent = ({
 
   // load fields from asset
   useEffect(() => {
-    const fieldsAssetId = transition?.assets?.fieldConfig;
+    const fieldsAssetId = transition?.parameters?.assets?.fieldConfig;
     if (!fieldsAssetId) return;
     getAsset(fieldsAssetId)
       .then((res) => {
@@ -226,7 +226,7 @@ const RemoteComponent = ({
   };
 
   const approve = () => {
-    const normalizedCopy = normalizeOutput(values);
+    const normalizedCopy = normalizeOutput(values, fields);
     const input = transitionExecution?.input || {};
     Object.keys(normalizedCopy).forEach((key) => (normalizedCopy[key] = normalizedCopy[key] || null));
     const payload = {

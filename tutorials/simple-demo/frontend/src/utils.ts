@@ -6,8 +6,13 @@ import { EnumOption, Field } from './types';
  * @param dateString
  */
 export function normalizeDate(dateString: string): string {
-  const delimited = dateString.replaceAll(/[\,\-_\/\\]+/g, '.');
-  const inputFormat = delimited.length > 8 ? 'dd.MM.yyyy' : 'dd.MM.yy';
+  const delimited = dateString.replace(/[\,\-_\/\\]+/g, '.');
+  let inputFormat = delimited.length > 8 ? 'dd.MM.yyyy' : 'dd.MM.yy';
+
+  // check if date is in YYYY-MM-DD format
+  if (delimited.match(/^\d{4}\./)) {
+    inputFormat = 'yyyy.MM.dd';
+  }
   const referenceDate = new Date();
   let formatted = '';
   try {
@@ -47,12 +52,26 @@ export function b64DecodeUnicode(str: string): string {
   );
 }
 
-export function normalizeOutput(values: Record<string, any>): Record<string, any> {
+export function normalizeOutput(values: Record<string, any>, fieldConfig?: Record<string, Field>): Record<string, any> {
   const copy = { ...values };
   for (const [key, value] of Object.entries(copy)) {
     // if it's an enumoption with display/value fields
     if (value?.value) {
       copy[key] = value.value;
+    }
+
+    // if it's a date field, normalize to YYYY-MM-DD format
+    if (fieldConfig?.[key]?.type === 'date' && value) {
+      try {
+        const inputFormat = 'dd.MM.yy';
+        const outputFormat = 'yyyy-MM-dd';
+        const referenceDate = new Date();
+        const parsedDate = parse(value, inputFormat, referenceDate);
+        const outputDate = format(parsedDate, outputFormat);
+        copy[key] = outputDate;
+      } catch (e) {
+        console.error('Error normalizing date output:', value, e);
+      }
     }
   }
 

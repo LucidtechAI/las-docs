@@ -8,9 +8,11 @@ export function createTransition(): Transition {
     inputJsonSchema: {},
     transitionId: faker.random.uuid(),
     transitionType: 'manual',
-    assets: {
-      jsRemoteComponent: 'las:asset:abcdefg',
-      fieldConfig: 'las:asset:fieldConfig',
+    parameters: {
+      assets: {
+        jsRemoteComponent: 'las:asset:abcdefg',
+        fieldConfig: 'las:asset:fieldConfig',
+      },
     },
   };
 

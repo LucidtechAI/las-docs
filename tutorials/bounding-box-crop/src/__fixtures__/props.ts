@@ -1,4 +1,4 @@
-import { Transition, TransitionExecution } from '@lucidtech/las-sdk-core/lib/types';
+import { Transition, TransitionExecution } from '@lucidtech/las-sdk-core';
 import faker from 'faker';
 
 export function createTransition(): Transition {
@@ -8,9 +8,11 @@ export function createTransition(): Transition {
     inputJsonSchema: {},
     transitionId: faker.random.uuid(),
     transitionType: 'manual',
-    assets: {
-      jsRemoteComponent: 'las:asset:abcdefg',
-      fieldConfig: 'las:asset:fieldConfig',
+    parameters: {
+      assets: {
+        jsRemoteComponent: 'las:asset:abcdefg',
+        fieldConfig: 'las:asset:fieldConfig',
+      },
     },
   };
 
