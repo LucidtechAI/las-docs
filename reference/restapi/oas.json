@@ -2,7 +2,7 @@
   "openapi": "3.0.1",
   "info": {
     "title": "Lucidtech API",
-    "version": "2021-04-06T10:19:32Z"
+    "version": "2021-04-09T16:08:43Z"
   },
   "servers": [
     {
@@ -293,6 +293,115 @@
       }
     },
     "/assets/{assetId}": {
+      "delete": {
+        "parameters": [
+          {
+            "in": "path",
+            "name": "assetId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Asset"
+                }
+              }
+            },
+            "description": "200 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "400 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "404 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "415": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "415 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "500 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "OAuth2": [
+              "api.lucidtech.ai/assets.assetid.delete"
+            ]
+          },
+          {
+            "api_key": []
+          }
+        ]
+      },
       "get": {
         "parameters": [
           {
@@ -749,6 +858,20 @@
           {
             "in": "query",
             "name": "consentId",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "nextToken",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "maxResults",
             "schema": {
               "type": "string"
             }
@@ -2349,6 +2472,115 @@
       }
     },
     "/secrets/{secretId}": {
+      "delete": {
+        "parameters": [
+          {
+            "in": "path",
+            "name": "secretId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Secret"
+                }
+              }
+            },
+            "description": "200 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "400 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "404 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "415": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "415 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "500 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "OAuth2": [
+              "api.lucidtech.ai/secrets.secretid.delete"
+            ]
+          },
+          {
+            "api_key": []
+          }
+        ]
+      },
       "options": {
         "parameters": [
           {
@@ -6406,6 +6638,7 @@
               "required": [
                 "description",
                 "name",
+                "parameters",
                 "transitionId",
                 "transitionType"
               ],
@@ -7781,6 +8014,7 @@
         "required": [
           "description",
           "name",
+          "parameters",
           "transitionId",
           "transitionType"
         ],
@@ -8202,6 +8436,7 @@
               "api.lucidtech.ai/assets.get": "Scope for GET /assets",
               "api.lucidtech.ai/documents.documentid.patch": "Scope for PATCH /documents/{documentId}",
               "api.lucidtech.ai/assets.assetid.patch": "Scope for PATCH /assets/{assetId}",
+              "api.lucidtech.ai/secrets.secretid.delete": "Scope for DELETE /secrets/{secretId}",
               "api.lucidtech.ai/transitions.transitionid.executions.executionid.patch": "Scope for PATCH /transitions/{transitionId}/executions/{executionId}",
               "api.lucidtech.ai/users.get": "Scope for GET /users",
               "api.lucidtech.ai/workflows.workflowid.executions.executionid.patch": "Scope for PATCH /workflows/{workflowId}/executions/{executionId}",
@@ -8210,6 +8445,7 @@
               "api.lucidtech.ai/users.userid.patch": "Scope for PATCH /users/{userId}",
               "api.lucidtech.ai/secrets.get": "Scope for GET /secrets",
               "api.lucidtech.ai/workflows.workflowid.delete": "Scope for DELETE /workflows/{workflowId}",
+              "api.lucidtech.ai/assets.assetid.delete": "Scope for DELETE /assets/{assetId}",
               "api.lucidtech.ai/documents.documentid.get": "Scope for GET /documents/{documentId}",
               "api.lucidtech.ai/transitions.transitionid.executions.get": "Scope for GET /transitions/{transitionId}/executions",
               "api.lucidtech.ai/batches.post": "Scope for POST /batches",
