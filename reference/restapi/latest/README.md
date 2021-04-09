@@ -151,6 +151,61 @@
 ```
 
 
+#### DELETE /assets/{assetId}
+
+
+| Path name | Path value |
+| --- | --- |
+| assetId | Id of asset on the form las:asset:&lt;hex&gt; |
+
+
+| Header name | Header value |
+| --- | --- |
+| Authorization | Bearer &lt;your access token here&gt; |
+| x-api-key | &lt;your api key here&gt; |
+
+
+
+
+
+
+
+
+##### Response body JSON Schema
+```json
+{
+  "title": "asset",
+  "required": [
+    "assetId",
+    "description",
+    "name"
+  ],
+  "type": "object",
+  "properties": {
+    "assetId": {
+      "pattern": "^las:asset:[a-f0-9]{32}$",
+      "type": "string"
+    },
+    "name": {
+      "maxLength": 4096,
+      "type": "string",
+      "nullable": true
+    },
+    "description": {
+      "maxLength": 4096,
+      "type": "string",
+      "nullable": true
+    },
+    "content": {
+      "minLength": 1,
+      "type": "string"
+    }
+  },
+  "additionalProperties": false
+}
+```
+
+
 #### GET /assets/{assetId}
 
 
@@ -370,6 +425,8 @@
 | Query name | Query value |
 | --- | --- |
 | consentId | Id of consent on the form las:consent:&lt;hex&gt; |
+| nextToken | String value as returned by a previous list operation |
+| maxResults | Integer representing maximum number of resources to list |
 
 
 
@@ -1539,6 +1596,57 @@
 ```
 
 
+#### DELETE /secrets/{secretId}
+
+
+| Path name | Path value |
+| --- | --- |
+| secretId | Id of secret on the form las:secret:&lt;hex&gt; |
+
+
+| Header name | Header value |
+| --- | --- |
+| Authorization | Bearer &lt;your access token here&gt; |
+| x-api-key | &lt;your api key here&gt; |
+
+
+
+
+
+
+
+
+##### Response body JSON Schema
+```json
+{
+  "title": "secret",
+  "required": [
+    "description",
+    "name",
+    "secretId"
+  ],
+  "type": "object",
+  "properties": {
+    "name": {
+      "maxLength": 4096,
+      "type": "string",
+      "nullable": true
+    },
+    "secretId": {
+      "pattern": "^las:secret:[a-f0-9]{32}$",
+      "type": "string"
+    },
+    "description": {
+      "maxLength": 4096,
+      "type": "string",
+      "nullable": true
+    }
+  },
+  "additionalProperties": false
+}
+```
+
+
 #### PATCH /secrets/{secretId}
 
 
@@ -1656,6 +1764,7 @@
         "required": [
           "description",
           "name",
+          "parameters",
           "transitionId",
           "transitionType"
         ],
@@ -1847,6 +1956,7 @@
   "required": [
     "description",
     "name",
+    "parameters",
     "transitionId",
     "transitionType"
   ],
@@ -1929,6 +2039,7 @@
   "required": [
     "description",
     "name",
+    "parameters",
     "transitionId",
     "transitionType"
   ],
@@ -2011,6 +2122,7 @@
   "required": [
     "description",
     "name",
+    "parameters",
     "transitionId",
     "transitionType"
   ],
@@ -2133,6 +2245,7 @@
   "required": [
     "description",
     "name",
+    "parameters",
     "transitionId",
     "transitionType"
   ],
