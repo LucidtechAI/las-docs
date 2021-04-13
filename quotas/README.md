@@ -7,6 +7,7 @@ create every month. If you want to increase this limit please contact us at supp
 
 | Resource             | Monthly limit | Total limit |
 | -------------------- | ------------- | ----------- |
+| AppClient            | No limit      | 3           |
 | Asset                | No limit      | 50          |
 | Batch                | No limit      | 100         |
 | Document             | 1000          | No limit    |
