@@ -4,6 +4,15 @@ You can find the Open API specification file [here](https://raw.githubuserconten
 
 ## Changelog
 
+### 2021-04-13
+
+- Added GET /batches
+- Added createdTime and numDocuments to /batches
+- Added POST /appClients
+- Added GET /appClients
+- Added DELETE /appClients/:id
+- Added createdTime, updatedTime, fieldConfig, preprocessConfig and status to /models
+
 ### 2021-04-09
 
 - Added DELETE /secrets/:id

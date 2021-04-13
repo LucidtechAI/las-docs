@@ -1,3 +1,213 @@
+#### GET /appClients
+
+
+
+
+
+| Header name | Header value |
+| --- | --- |
+| Authorization | Bearer &lt;your access token here&gt; |
+| x-api-key | &lt;your api key here&gt; |
+
+
+| Query name | Query value |
+| --- | --- |
+| nextToken | String value as returned by a previous list operation |
+| maxResults | Integer representing maximum number of resources to list |
+
+
+
+
+
+##### Response body JSON Schema
+```json
+{
+  "title": "appClients",
+  "required": [
+    "appClients"
+  ],
+  "type": "object",
+  "properties": {
+    "nextToken": {
+      "maxLength": 4096,
+      "type": "string",
+      "nullable": true
+    },
+    "appClients": {
+      "type": "array",
+      "items": {
+        "required": [
+          "appClientId",
+          "clientId",
+          "description",
+          "name"
+        ],
+        "type": "object",
+        "properties": {
+          "clientId": {
+            "type": "string"
+          },
+          "name": {
+            "maxLength": 4096,
+            "type": "string",
+            "nullable": true
+          },
+          "description": {
+            "maxLength": 4096,
+            "type": "string",
+            "nullable": true
+          },
+          "clientSecret": {
+            "type": "string"
+          },
+          "appClientId": {
+            "pattern": "^las:app-client:[a-f0-9]{32}$",
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}
+```
+
+
+#### POST /appClients
+
+
+
+
+
+| Header name | Header value |
+| --- | --- |
+| Content-Type | application/json |
+| Authorization | Bearer &lt;your access token here&gt; |
+| x-api-key | &lt;your api key here&gt; |
+
+
+
+
+
+##### Request body JSON Schema
+```json
+{
+  "title": "POST /appClients",
+  "type": "object",
+  "properties": {
+    "name": {
+      "maxLength": 4096,
+      "type": "string",
+      "nullable": true
+    },
+    "description": {
+      "maxLength": 4096,
+      "type": "string",
+      "nullable": true
+    }
+  },
+  "additionalProperties": false
+}
+```
+
+
+##### Response body JSON Schema
+```json
+{
+  "title": "appClient",
+  "required": [
+    "appClientId",
+    "clientId",
+    "description",
+    "name"
+  ],
+  "type": "object",
+  "properties": {
+    "clientId": {
+      "type": "string"
+    },
+    "name": {
+      "maxLength": 4096,
+      "type": "string",
+      "nullable": true
+    },
+    "description": {
+      "maxLength": 4096,
+      "type": "string",
+      "nullable": true
+    },
+    "clientSecret": {
+      "type": "string"
+    },
+    "appClientId": {
+      "pattern": "^las:app-client:[a-f0-9]{32}$",
+      "type": "string"
+    }
+  },
+  "additionalProperties": false
+}
+```
+
+
+#### DELETE /appClients/{appClientId}
+
+
+| Path name | Path value |
+| --- | --- |
+| appClientId | Id of appClient on the form las:appClient:&lt;hex&gt; |
+
+
+| Header name | Header value |
+| --- | --- |
+| Authorization | Bearer &lt;your access token here&gt; |
+| x-api-key | &lt;your api key here&gt; |
+
+
+
+
+
+
+
+
+##### Response body JSON Schema
+```json
+{
+  "title": "appClient",
+  "required": [
+    "appClientId",
+    "clientId",
+    "description",
+    "name"
+  ],
+  "type": "object",
+  "properties": {
+    "clientId": {
+      "type": "string"
+    },
+    "name": {
+      "maxLength": 4096,
+      "type": "string",
+      "nullable": true
+    },
+    "description": {
+      "maxLength": 4096,
+      "type": "string",
+      "nullable": true
+    },
+    "clientSecret": {
+      "type": "string"
+    },
+    "appClientId": {
+      "pattern": "^las:app-client:[a-f0-9]{32}$",
+      "type": "string"
+    }
+  },
+  "additionalProperties": false
+}
+```
+
+
 #### GET /assets
 
 
@@ -341,6 +551,85 @@
 ```
 
 
+#### GET /batches
+
+
+
+
+
+| Header name | Header value |
+| --- | --- |
+| Authorization | Bearer &lt;your access token here&gt; |
+| x-api-key | &lt;your api key here&gt; |
+
+
+| Query name | Query value |
+| --- | --- |
+| nextToken | String value as returned by a previous list operation |
+| maxResults | Integer representing maximum number of resources to list |
+
+
+
+
+
+##### Response body JSON Schema
+```json
+{
+  "title": "batches",
+  "required": [
+    "batches"
+  ],
+  "type": "object",
+  "properties": {
+    "batches": {
+      "type": "array",
+      "items": {
+        "required": [
+          "batchId",
+          "createdTime",
+          "description",
+          "numDocuments"
+        ],
+        "type": "object",
+        "properties": {
+          "name": {
+            "maxLength": 4096,
+            "type": "string",
+            "nullable": true
+          },
+          "description": {
+            "maxLength": 4096,
+            "type": "string",
+            "nullable": true
+          },
+          "createdTime": {
+            "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2}( |T)?[0-9]{2}:?[0-9]{2}:?[0-9]{2}(.[0-9]{1,6})?(Z|[+][0-9]{2}(:|)[0-9]{2})$",
+            "type": "string",
+            "nullable": true
+          },
+          "batchId": {
+            "pattern": "^las:batch:[a-f0-9]{32}$",
+            "type": "string"
+          },
+          "numDocuments": {
+            "minimum": 0,
+            "type": "integer"
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "nextToken": {
+      "maxLength": 4096,
+      "type": "string",
+      "nullable": true
+    }
+  },
+  "additionalProperties": false
+}
+```
+
+
 #### POST /batches
 
 
@@ -385,8 +674,9 @@
   "title": "batch",
   "required": [
     "batchId",
+    "createdTime",
     "description",
-    "name"
+    "numDocuments"
   ],
   "type": "object",
   "properties": {
@@ -400,9 +690,18 @@
       "type": "string",
       "nullable": true
     },
+    "createdTime": {
+      "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2}( |T)?[0-9]{2}:?[0-9]{2}:?[0-9]{2}(.[0-9]{1,6})?(Z|[+][0-9]{2}(:|)[0-9]{2})$",
+      "type": "string",
+      "nullable": true
+    },
     "batchId": {
       "pattern": "^las:batch:[a-f0-9]{32}$",
       "type": "string"
+    },
+    "numDocuments": {
+      "minimum": 0,
+      "type": "integer"
     }
   },
   "additionalProperties": false
@@ -1149,15 +1448,24 @@
       "type": "array",
       "items": {
         "required": [
+          "createdTime",
           "description",
+          "fieldConfig",
           "height",
           "modelId",
           "name",
           "preprocessConfig",
+          "status",
+          "updatedTime",
           "width"
         ],
         "type": "object",
         "properties": {
+          "updatedTime": {
+            "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2}( |T)?[0-9]{2}:?[0-9]{2}:?[0-9]{2}(.[0-9]{1,6})?(Z|[+][0-9]{2}(:|)[0-9]{2})$",
+            "type": "string",
+            "nullable": true
+          },
           "preprocessConfig": {
             "required": [
               "autoRotate",
@@ -1199,8 +1507,58 @@
             "type": "string",
             "nullable": true
           },
+          "createdTime": {
+            "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2}( |T)?[0-9]{2}:?[0-9]{2}:?[0-9]{2}(.[0-9]{1,6})?(Z|[+][0-9]{2}(:|)[0-9]{2})$",
+            "type": "string",
+            "nullable": true
+          },
+          "fieldConfig": {
+            "type": "object",
+            "additionalProperties": {
+              "required": [
+                "description",
+                "maxLength",
+                "type"
+              ],
+              "type": "object",
+              "properties": {
+                "description": {
+                  "anyOf": [
+                    {
+                      "maxLength": 4096,
+                      "type": "string"
+                    },
+                    null
+                  ]
+                },
+                "type": {
+                  "type": "string",
+                  "enum": [
+                    "date",
+                    "amount",
+                    "number",
+                    "letter",
+                    "phone",
+                    "alphanum",
+                    "alphanumext",
+                    "all"
+                  ]
+                },
+                "maxLength": {
+                  "type": "integer"
+                }
+              }
+            }
+          },
           "height": {
             "type": "integer"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "active",
+              "training"
+            ]
           }
         },
         "additionalProperties": false
