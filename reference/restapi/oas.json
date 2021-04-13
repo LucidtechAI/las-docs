@@ -2,7 +2,7 @@
   "openapi": "3.0.1",
   "info": {
     "title": "Lucidtech API",
-    "version": "2021-04-09T16:08:43Z"
+    "version": "2021-04-13T20:54:47Z"
   },
   "servers": [
     {
@@ -15,6 +15,445 @@
     }
   ],
   "paths": {
+    "/appClients": {
+      "get": {
+        "parameters": [
+          {
+            "in": "query",
+            "name": "nextToken",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "maxResults",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppClients"
+                }
+              }
+            },
+            "description": "200 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "400 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "404 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "415": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "415 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "500 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "OAuth2": [
+              "api.lucidtech.ai/appclients.get"
+            ]
+          },
+          {
+            "api_key": []
+          }
+        ]
+      },
+      "options": {
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Empty"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Empty"
+                }
+              }
+            },
+            "description": "200 response",
+            "headers": {
+              "Access-Control-Allow-Headers": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "Access-Control-Allow-Methods": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "parameters": [
+          {
+            "in": "header",
+            "name": "Content-Type",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PostAppClients"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppClient"
+                }
+              }
+            },
+            "description": "200 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "400 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "404 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "415": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "415 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "500 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "OAuth2": [
+              "api.lucidtech.ai/appclients.post"
+            ]
+          },
+          {
+            "api_key": []
+          }
+        ]
+      }
+    },
+    "/appClients/{appClientId}": {
+      "delete": {
+        "parameters": [
+          {
+            "in": "path",
+            "name": "appClientId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppClient"
+                }
+              }
+            },
+            "description": "200 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "400 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "404 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "415": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "415 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "500 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "OAuth2": [
+              "api.lucidtech.ai/appclients.appclientid.delete"
+            ]
+          },
+          {
+            "api_key": []
+          }
+        ]
+      },
+      "options": {
+        "parameters": [
+          {
+            "in": "path",
+            "name": "appClientId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Empty"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Empty"
+                }
+              }
+            },
+            "description": "200 response",
+            "headers": {
+              "Access-Control-Allow-Headers": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "Access-Control-Allow-Methods": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/assets": {
       "get": {
         "parameters": [
@@ -691,6 +1130,121 @@
       }
     },
     "/batches": {
+      "get": {
+        "parameters": [
+          {
+            "in": "query",
+            "name": "nextToken",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "maxResults",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Batches"
+                }
+              }
+            },
+            "description": "200 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "400 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "404 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "415": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "415 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "500 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "OAuth2": [
+              "api.lucidtech.ai/batches.get"
+            ]
+          },
+          {
+            "api_key": []
+          }
+        ]
+      },
       "options": {
         "requestBody": {
           "content": {
@@ -6903,8 +7457,9 @@
         "title": "batch",
         "required": [
           "batchId",
+          "createdTime",
           "description",
-          "name"
+          "numDocuments"
         ],
         "type": "object",
         "properties": {
@@ -6918,9 +7473,18 @@
             "type": "string",
             "nullable": true
           },
+          "createdTime": {
+            "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2}( |T)?[0-9]{2}:?[0-9]{2}:?[0-9]{2}(.[0-9]{1,6})?(Z|[+][0-9]{2}(:|)[0-9]{2})$",
+            "type": "string",
+            "nullable": true
+          },
           "batchId": {
             "pattern": "^las:batch:[a-f0-9]{32}$",
             "type": "string"
+          },
+          "numDocuments": {
+            "minimum": 0,
+            "type": "integer"
           }
         },
         "additionalProperties": false
@@ -6968,6 +7532,56 @@
             "maxLength": 4096,
             "type": "string",
             "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "AppClients": {
+        "title": "appClients",
+        "required": [
+          "appClients"
+        ],
+        "type": "object",
+        "properties": {
+          "nextToken": {
+            "maxLength": 4096,
+            "type": "string",
+            "nullable": true
+          },
+          "appClients": {
+            "type": "array",
+            "items": {
+              "required": [
+                "appClientId",
+                "clientId",
+                "description",
+                "name"
+              ],
+              "type": "object",
+              "properties": {
+                "clientId": {
+                  "type": "string"
+                },
+                "name": {
+                  "maxLength": 4096,
+                  "type": "string",
+                  "nullable": true
+                },
+                "description": {
+                  "maxLength": 4096,
+                  "type": "string",
+                  "nullable": true
+                },
+                "clientSecret": {
+                  "type": "string"
+                },
+                "appClientId": {
+                  "pattern": "^las:app-client:[a-f0-9]{32}$",
+                  "type": "string"
+                }
+              },
+              "additionalProperties": false
+            }
           }
         },
         "additionalProperties": false
@@ -7375,6 +7989,23 @@
               }
             },
             "additionalProperties": false
+          }
+        },
+        "additionalProperties": false
+      },
+      "PostAppClients": {
+        "title": "POST /appClients",
+        "type": "object",
+        "properties": {
+          "name": {
+            "maxLength": 4096,
+            "type": "string",
+            "nullable": true
+          },
+          "description": {
+            "maxLength": 4096,
+            "type": "string",
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -8067,6 +8698,39 @@
         },
         "additionalProperties": false
       },
+      "AppClient": {
+        "title": "appClient",
+        "required": [
+          "appClientId",
+          "clientId",
+          "description",
+          "name"
+        ],
+        "type": "object",
+        "properties": {
+          "clientId": {
+            "type": "string"
+          },
+          "name": {
+            "maxLength": 4096,
+            "type": "string",
+            "nullable": true
+          },
+          "description": {
+            "maxLength": 4096,
+            "type": "string",
+            "nullable": true
+          },
+          "clientSecret": {
+            "type": "string"
+          },
+          "appClientId": {
+            "pattern": "^las:app-client:[a-f0-9]{32}$",
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
       "PatchAssetId": {
         "title": "PATCH /assets/assetId",
         "minProperties": 1,
@@ -8251,6 +8915,59 @@
         },
         "additionalProperties": false
       },
+      "Batches": {
+        "title": "batches",
+        "required": [
+          "batches"
+        ],
+        "type": "object",
+        "properties": {
+          "batches": {
+            "type": "array",
+            "items": {
+              "required": [
+                "batchId",
+                "createdTime",
+                "description",
+                "numDocuments"
+              ],
+              "type": "object",
+              "properties": {
+                "name": {
+                  "maxLength": 4096,
+                  "type": "string",
+                  "nullable": true
+                },
+                "description": {
+                  "maxLength": 4096,
+                  "type": "string",
+                  "nullable": true
+                },
+                "createdTime": {
+                  "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2}( |T)?[0-9]{2}:?[0-9]{2}:?[0-9]{2}(.[0-9]{1,6})?(Z|[+][0-9]{2}(:|)[0-9]{2})$",
+                  "type": "string",
+                  "nullable": true
+                },
+                "batchId": {
+                  "pattern": "^las:batch:[a-f0-9]{32}$",
+                  "type": "string"
+                },
+                "numDocuments": {
+                  "minimum": 0,
+                  "type": "integer"
+                }
+              },
+              "additionalProperties": false
+            }
+          },
+          "nextToken": {
+            "maxLength": 4096,
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
       "Models": {
         "title": "models",
         "required": [
@@ -8262,15 +8979,24 @@
             "type": "array",
             "items": {
               "required": [
+                "createdTime",
                 "description",
+                "fieldConfig",
                 "height",
                 "modelId",
                 "name",
                 "preprocessConfig",
+                "status",
+                "updatedTime",
                 "width"
               ],
               "type": "object",
               "properties": {
+                "updatedTime": {
+                  "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2}( |T)?[0-9]{2}:?[0-9]{2}:?[0-9]{2}(.[0-9]{1,6})?(Z|[+][0-9]{2}(:|)[0-9]{2})$",
+                  "type": "string",
+                  "nullable": true
+                },
                 "preprocessConfig": {
                   "required": [
                     "autoRotate",
@@ -8312,8 +9038,58 @@
                   "type": "string",
                   "nullable": true
                 },
+                "createdTime": {
+                  "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2}( |T)?[0-9]{2}:?[0-9]{2}:?[0-9]{2}(.[0-9]{1,6})?(Z|[+][0-9]{2}(:|)[0-9]{2})$",
+                  "type": "string",
+                  "nullable": true
+                },
+                "fieldConfig": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "required": [
+                      "description",
+                      "maxLength",
+                      "type"
+                    ],
+                    "type": "object",
+                    "properties": {
+                      "description": {
+                        "anyOf": [
+                          {
+                            "maxLength": 4096,
+                            "type": "string"
+                          },
+                          null
+                        ]
+                      },
+                      "type": {
+                        "type": "string",
+                        "enum": [
+                          "date",
+                          "amount",
+                          "number",
+                          "letter",
+                          "phone",
+                          "alphanum",
+                          "alphanumext",
+                          "all"
+                        ]
+                      },
+                      "maxLength": {
+                        "type": "integer"
+                      }
+                    }
+                  }
+                },
                 "height": {
                   "type": "integer"
+                },
+                "status": {
+                  "type": "string",
+                  "enum": [
+                    "active",
+                    "training"
+                  ]
                 }
               },
               "additionalProperties": false
@@ -8445,13 +9221,16 @@
               "api.lucidtech.ai/users.userid.patch": "Scope for PATCH /users/{userId}",
               "api.lucidtech.ai/secrets.get": "Scope for GET /secrets",
               "api.lucidtech.ai/workflows.workflowid.delete": "Scope for DELETE /workflows/{workflowId}",
+              "api.lucidtech.ai/batches.get": "Scope for GET /batches",
               "api.lucidtech.ai/assets.assetid.delete": "Scope for DELETE /assets/{assetId}",
               "api.lucidtech.ai/documents.documentid.get": "Scope for GET /documents/{documentId}",
               "api.lucidtech.ai/transitions.transitionid.executions.get": "Scope for GET /transitions/{transitionId}/executions",
               "api.lucidtech.ai/batches.post": "Scope for POST /batches",
               "api.lucidtech.ai/workflows.workflowid.executions.executionid.get": "Scope for GET /workflows/{workflowId}/executions/{executionId}",
               "api.lucidtech.ai/transitions.transitionid.executions.post": "Scope for POST /transitions/{transitionId}/executions",
+              "api.lucidtech.ai/appclients.get": "Scope for GET /appClients",
               "api.lucidtech.ai/documents.get": "Scope for GET /documents",
+              "api.lucidtech.ai/appclients.appclientid.delete": "Scope for DELETE /appClients/{appClientId}",
               "api.lucidtech.ai/users.userid.get": "Scope for GET /users/{userId}",
               "api.lucidtech.ai/models.get": "Scope for GET /models",
               "api.lucidtech.ai/secrets.post": "Scope for POST /secrets",
@@ -8476,6 +9255,7 @@
               "api.lucidtech.ai/workflows.workflowid.get": "Scope for GET /workflows/{workflowId}",
               "api.lucidtech.ai/transitions.transitionid.executions.executionid.get": "Scope for GET /transitions/{transitionId}/executions/{executionId}",
               "api.lucidtech.ai/workflows.workflowid.executions.executionid.delete": "Scope for DELETE /workflows/{workflowId}/executions/{executionId}",
+              "api.lucidtech.ai/appclients.post": "Scope for POST /appClients",
               "api.lucidtech.ai/documents.delete": "Scope for DELETE /documents"
             }
           }
