@@ -2,7 +2,7 @@
 
  Members                        | Descriptions                                
 --------------------------------|---------------------------------------------
-`namespace `[`Lucidtech::Las`](#a00020) | 
+`namespace `[`Lucidtech::Las`](#a00021) | 
 `namespace `[`Lucidtech::Las::Core`](#a00022) | 
 `namespace `[`Lucidtech::Las::Utils`](#a00023) | 
 
@@ -12,11 +12,11 @@
 
  Members                        | Descriptions                                
 --------------------------------|---------------------------------------------
-`class `[`Lucidtech::Las::Client`](#a00043) | [Client](#a00043) to invoke api methods from [Lucidtech](#a00021) AI Services.
+`class `[`Lucidtech::Las::Client`](#a00043) | [Client](#a00043) to invoke api methods from [Lucidtech](#a00020) AI Services.
 
 # class `Lucidtech::Las::Client` 
 
-[Client](#a00043) to invoke api methods from [Lucidtech](#a00021) AI Services.
+[Client](#a00043) to invoke api methods from [Lucidtech](#a00020) AI Services.
 
 ## Summary
 
@@ -26,15 +26,15 @@
 `{property} `[`Credentials`](#a00067)` `[`LasCredentials`](#a00043_1aed1258913a65f014aa0ce4ef63bd6dfe) | 
 `public inline  `[`Client`](#a00043_1a2a95a90e6dfa52e94d3e12a18d583fca)`(`[`Credentials`](#a00067)` credentials)` | [Client](#a00043) constructor.
 `public inline  `[`Client`](#a00043_1a0ba3cc00461a4ee4d4a346d9600efa4a)`()` | [Client](#a00043) constructor with credentials read from local file.
-`public inline object `[`CreateAsset`](#a00043_1afde4b9ed933fd6fc775770af3cd412e1)`(byte [] content,Dictionary< string, string?>? attributes)` | Creates an asset, calls the POST /assets endpoint.
+`public inline object `[`CreateAsset`](#a00043_1afde4b9ed933fd6fc775770af3cd412e1)`(byte[] content,Dictionary< string, string?>? attributes)` | Creates an asset, calls the POST /assets endpoint.
 `public inline object `[`ListAssets`](#a00043_1a3fe859d9bfd3d23d919c708f99141e4f)`(int? maxResults,string? nextToken)` | List available assets, calls the GET /assets endpoint.
 `public inline object `[`GetAsset`](#a00043_1a8e338146001a43c4b0ca59d3f4afb901)`(string assetId)` | Get asset from the REST API, calls the GET /assets/{assetId} endpoint.
-`public inline object `[`UpdateAsset`](#a00043_1a63e88e264995507702cfde3285150eae)`(string assetId,byte? [] content,Dictionary< string, string?>? attributes)` | Updates an asset, calls the PATCH /assets/{assetId} endpoint.
-`public inline object `[`CreateDocument`](#a00043_1aef5c33f1a06ea8010bb6a6ba0c97b236)`(byte [] content,string contentType,string? consentId,string? batchId,List< Dictionary< string, string >>? groundTruth)` | Creates a document handle, calls the POST /documents endpoint
+`public inline object `[`UpdateAsset`](#a00043_1a63e88e264995507702cfde3285150eae)`(string assetId,byte?[] content,Dictionary< string, string?>? attributes)` | Updates an asset, calls the PATCH /assets/{assetId} endpoint.
+`public inline object `[`CreateDocument`](#a00043_1aef5c33f1a06ea8010bb6a6ba0c97b236)`(byte[] content,string contentType,string? consentId,string? batchId,List< Dictionary< string, string >>? groundTruth)` | Creates a document handle, calls the POST /documents endpoint
 `public inline object `[`ListDocuments`](#a00043_1a6c1c9a3f3a20bad2ccf858ac490f57d5)`(string? batchId,string? consentId,int? maxResults,string? nextToken)` | Get documents from the REST API, calls the GET /documents endpoint.
 `public inline object `[`GetDocument`](#a00043_1a1638a8fd9c03e35934af0c16d05cf90b)`(string documentId)` | Get document from the REST API, calls the GET /documents/{documentId} endpoint.
 `public inline object `[`UpdateDocument`](#a00043_1a8aa65dc695c9b9918f63d12b92f329b3)`(string documentId,List< Dictionary< string, string >> groundTruth)` | Update ground truth of the document, calls the POST /documents/{documentId} endpoint. This enables the API to learn from past mistakes.
-`public inline object `[`DeleteDocuments`](#a00043_1aac8a79f4726c5e3a364dce5bf78d75d3)`(string? consentId)` | Delete documents with specified consentId, calls DELETE /documents endpoint.
+`public inline object `[`DeleteDocuments`](#a00043_1a769dabfc8e4d814d5e4e90400e7895cd)`(string? consentId,int? maxResults,string? nextToken)` | Delete documents with specified consentId, calls DELETE /documents endpoint.
 `public inline object `[`CreateBatch`](#a00043_1a67cccdf0e1af3c8ce8b660bf1074f38f)`(string? name,string? description)` | Create a batch handle, calls the POST /batches endpoint.
 `public inline object `[`CreatePrediction`](#a00043_1a4cb78d4caa5b0a3f6c077eec720bd4d2)`(string documentId,string modelId,int? maxPages,bool? autoRotate,string? imageQuality)` | Run inference and create a prediction, calls the POST /predictions endpoint.
 `public inline object `[`ListPredictions`](#a00043_1aa07c60058c89b9d2464ec8ccd2037a18)`(int? maxResults,string? nextToken)` | List predictions available, calls the GET /predictions endpoint.
@@ -58,7 +58,7 @@
 `public inline object `[`GetUser`](#a00043_1adfa785e09a46221c1603483a5e646142)`(string userId)` | Get information about a specific user, calls the GET /users/{user_id} endpoint.
 `public inline object `[`DeleteUser`](#a00043_1af045ddf4f025869ac32e393f8b6f52cb)`(string userId)` | Delete the user with the provided user_id, calls the DELETE /users/{userId} endpoint.
 `public inline object `[`UpdateUser`](#a00043_1aa4a3d7f47f150f04c6552953dd6ceb90)`(string userId,Dictionary< string, object?> attributes)` | Updates a user, calls the PATCH /users/{userId} endpoint.
-`public inline object `[`CreateWorkflow`](#a00043_1ab9e2e28491d47757858be2250b6351dc)`(Dictionary< string, object > spec,Dictionary< string, string >? errorConfig,Dictionary< string, string?>? attributes)` | Creates a new workflow, calls the POST /workflows endpoint. Check out [Lucidtech](#a00021)'s tutorials for more info on how to create a workflow.
+`public inline object `[`CreateWorkflow`](#a00043_1ab9e2e28491d47757858be2250b6351dc)`(Dictionary< string, object > spec,Dictionary< string, string >? errorConfig,Dictionary< string, string?>? attributes)` | Creates a new workflow, calls the POST /workflows endpoint. Check out [Lucidtech](#a00020)'s tutorials for more info on how to create a workflow.
 `public inline object `[`ListWorkflows`](#a00043_1a7938e99f5187033a817155e104d14641)`(int? maxResults,string nextToken)` | List workflows, calls the GET /workflows endpoint.
 `public inline object `[`UpdateWorkflow`](#a00043_1ab9bef59fbf9f83ff8804facd9bbedf76)`(string workflowId,Dictionary< string, string?> attributes)` | Creates a workflow handle, calls the PATCH /workflows/{workflowId} endpoint.
 `public inline object `[`GetWorkflow`](#a00043_1ae3a74c1ee4ab596c0b72f5e3c82c0262)`(string workflowId)` | Get information about a specific workflow, calls the GET /workflows/{workflow_id} endpoint.
@@ -85,7 +85,7 @@
 
 [Client](#a00043) constructor with credentials read from local file.
 
-#### `public inline object `[`CreateAsset`](#a00043_1afde4b9ed933fd6fc775770af3cd412e1)`(byte [] content,Dictionary< string, string?>? attributes)` 
+#### `public inline object `[`CreateAsset`](#a00043_1afde4b9ed933fd6fc775770af3cd412e1)`(byte[] content,Dictionary< string, string?>? attributes)` 
 
 Creates an asset, calls the POST /assets endpoint.
 
@@ -139,7 +139,7 @@ var response = client.GetAsset("<asset_id>");
 #### Returns
 Asset object
 
-#### `public inline object `[`UpdateAsset`](#a00043_1a63e88e264995507702cfde3285150eae)`(string assetId,byte? [] content,Dictionary< string, string?>? attributes)` 
+#### `public inline object `[`UpdateAsset`](#a00043_1a63e88e264995507702cfde3285150eae)`(string assetId,byte?[] content,Dictionary< string, string?>? attributes)` 
 
 Updates an asset, calls the PATCH /assets/{assetId} endpoint.
 
@@ -159,7 +159,7 @@ var response = client.UpdateAsset("<asset_id>", newContent);
 #### Returns
 Asset object
 
-#### `public inline object `[`CreateDocument`](#a00043_1aef5c33f1a06ea8010bb6a6ba0c97b236)`(byte [] content,string contentType,string? consentId,string? batchId,List< Dictionary< string, string >>? groundTruth)` 
+#### `public inline object `[`CreateDocument`](#a00043_1aef5c33f1a06ea8010bb6a6ba0c97b236)`(byte[] content,string contentType,string? consentId,string? batchId,List< Dictionary< string, string >>? groundTruth)` 
 
 Creates a document handle, calls the POST /documents endpoint
 
@@ -244,7 +244,7 @@ var response = client.UpdateDocument('<documentId>', groundTruth);
 #### Returns
 A deserialized object that can be interpreted as a Dictionary with the fields documentId, consentId, uploadUrl, contentType and ground truth.
 
-#### `public inline object `[`DeleteDocuments`](#a00043_1aac8a79f4726c5e3a364dce5bf78d75d3)`(string? consentId)` 
+#### `public inline object `[`DeleteDocuments`](#a00043_1a769dabfc8e4d814d5e4e90400e7895cd)`(string? consentId,int? maxResults,string? nextToken)` 
 
 Delete documents with specified consentId, calls DELETE /documents endpoint.
 
@@ -256,8 +256,12 @@ var response = client.DeleteConsent('<consentId>');
 #### Parameters
 * `consentId` Delete documents with provided consentId 
 
+* `maxResults` Maximum number of items to delete
+
+* `nextToken` Token to retrieve the next page
+
 #### Returns
-A deserialized object that can be interpreted as a Dictionary with the fields consentId and documentIds
+A deserialized object that can be interpreted as a Dictionary with the fields consentId, nextToken and documents
 
 #### `public inline object `[`CreateBatch`](#a00043_1a67cccdf0e1af3c8ce8b660bf1074f38f)`(string? name,string? description)` 
 
@@ -726,7 +730,7 @@ User response from REST API
 
 #### `public inline object `[`CreateWorkflow`](#a00043_1ab9e2e28491d47757858be2250b6351dc)`(Dictionary< string, object > spec,Dictionary< string, string >? errorConfig,Dictionary< string, string?>? attributes)` 
 
-Creates a new workflow, calls the POST /workflows endpoint. Check out [Lucidtech](#a00021)'s tutorials for more info on how to create a workflow.
+Creates a new workflow, calls the POST /workflows endpoint. Check out [Lucidtech](#a00020)'s tutorials for more info on how to create a workflow.
 
 ```cpp
 Client client = new Client();
@@ -961,14 +965,14 @@ Get credentials by contacting [hello@lucidtech.ai](mailto:hello@lucidtech.ai)
 
  Members                        | Descriptions                                
 --------------------------------|---------------------------------------------
-`{property} string `[`ClientId`](#a00067_1a597f4891d6f0fe9ed9f04e7aae21608f) | [Client](#a00043) ID. Provided by [Lucidtech](#a00021).
-`{property} string `[`ClientSecret`](#a00067_1aec4e817805386c0c3c10e0d3fcd7b565) | [Client](#a00043) Secret. Provided by [Lucidtech](#a00021).
-`{property} string `[`ApiKey`](#a00067_1a08c0214e87897ef9229f99879a7a3b54) | AWS API Gateway API key. Provided by [Lucidtech](#a00021).
-`{property} string `[`AuthEndpoint`](#a00067_1aeb48746d4fcd7e93d0ba24aa1dd41659) | AWS Authorization endpoint. Provided by [Lucidtech](#a00021).
-`{property} string `[`ApiEndpoint`](#a00067_1a5dc9073eba2810493f73a112d9d076ee) | AWS API Gateway API endpoint. Provided by [Lucidtech](#a00021).
+`{property} string `[`ClientId`](#a00067_1a597f4891d6f0fe9ed9f04e7aae21608f) | [Client](#a00043) ID. Provided by [Lucidtech](#a00020).
+`{property} string `[`ClientSecret`](#a00067_1aec4e817805386c0c3c10e0d3fcd7b565) | [Client](#a00043) Secret. Provided by [Lucidtech](#a00020).
+`{property} string `[`ApiKey`](#a00067_1a08c0214e87897ef9229f99879a7a3b54) | AWS API Gateway API key. Provided by [Lucidtech](#a00020).
+`{property} string `[`AuthEndpoint`](#a00067_1aeb48746d4fcd7e93d0ba24aa1dd41659) | AWS Authorization endpoint. Provided by [Lucidtech](#a00020).
+`{property} string `[`ApiEndpoint`](#a00067_1a5dc9073eba2810493f73a112d9d076ee) | AWS API Gateway API endpoint. Provided by [Lucidtech](#a00020).
 `{property} RestClient `[`RestSharpClient`](#a00067_1a77da9eff9a94f2ac1f03d134d74636f4) | RestClient for making request to the authorization endpoint.
 `public inline string `[`GetAccessToken`](#a00067_1a02857d4f347be1b9481ee23fae2547a8)`()` | Get Access token to API endpoint.
-`public inline  `[`Credentials`](#a00067_1aa41b89dcd32d09c410fa0ec8c544a5e4)`(string clientId,string clientSecret,string apiKey,string authEndpoint,string apiEndpoint)` | [Credentials](#a00067) constructor where ClientId, ClientSecret, ApiKey, AuthEndpoint and ApiEndpoint are provided by [Lucidtech](#a00021).
+`public inline  `[`Credentials`](#a00067_1aa41b89dcd32d09c410fa0ec8c544a5e4)`(string clientId,string clientSecret,string apiKey,string authEndpoint,string apiEndpoint)` | [Credentials](#a00067) constructor where ClientId, ClientSecret, ApiKey, AuthEndpoint and ApiEndpoint are provided by [Lucidtech](#a00020).
 `public inline  `[`Credentials`](#a00067_1a6b90bc8b8d133da49e129036886eefd5)`(string credentialsPath)` | [Credentials](#a00067) constructor where the path to the credentials config is provided.
 `public inline  `[`Credentials`](#a00067_1aa5fba45758ca0f5651c6e92ebc0250eb)`()` | [Credentials](#a00067) constructor where the credentials are located at the default path. ~/.lucidtech/credentials.cfg for linux and USERPROFILE%.lucidtech\credentials.cfg for Windows.
 `protected  `[`string`](#a00067_1a276748a80f0a2bc01026b8b45ae6d9cd) | 
@@ -978,23 +982,23 @@ Get credentials by contacting [hello@lucidtech.ai](mailto:hello@lucidtech.ai)
 
 #### `{property} string `[`ClientId`](#a00067_1a597f4891d6f0fe9ed9f04e7aae21608f) 
 
-[Client](#a00043) ID. Provided by [Lucidtech](#a00021).
+[Client](#a00043) ID. Provided by [Lucidtech](#a00020).
 
 #### `{property} string `[`ClientSecret`](#a00067_1aec4e817805386c0c3c10e0d3fcd7b565) 
 
-[Client](#a00043) Secret. Provided by [Lucidtech](#a00021).
+[Client](#a00043) Secret. Provided by [Lucidtech](#a00020).
 
 #### `{property} string `[`ApiKey`](#a00067_1a08c0214e87897ef9229f99879a7a3b54) 
 
-AWS API Gateway API key. Provided by [Lucidtech](#a00021).
+AWS API Gateway API key. Provided by [Lucidtech](#a00020).
 
 #### `{property} string `[`AuthEndpoint`](#a00067_1aeb48746d4fcd7e93d0ba24aa1dd41659) 
 
-AWS Authorization endpoint. Provided by [Lucidtech](#a00021).
+AWS Authorization endpoint. Provided by [Lucidtech](#a00020).
 
 #### `{property} string `[`ApiEndpoint`](#a00067_1a5dc9073eba2810493f73a112d9d076ee) 
 
-AWS API Gateway API endpoint. Provided by [Lucidtech](#a00021).
+AWS API Gateway API endpoint. Provided by [Lucidtech](#a00020).
 
 #### `{property} RestClient `[`RestSharpClient`](#a00067_1a77da9eff9a94f2ac1f03d134d74636f4) 
 
@@ -1006,7 +1010,7 @@ Get Access token to API endpoint.
 
 #### `public inline  `[`Credentials`](#a00067_1aa41b89dcd32d09c410fa0ec8c544a5e4)`(string clientId,string clientSecret,string apiKey,string authEndpoint,string apiEndpoint)` 
 
-[Credentials](#a00067) constructor where ClientId, ClientSecret, ApiKey, AuthEndpoint and ApiEndpoint are provided by [Lucidtech](#a00021).
+[Credentials](#a00067) constructor where ClientId, ClientSecret, ApiKey, AuthEndpoint and ApiEndpoint are provided by [Lucidtech](#a00020).
 
 #### Parameters
 * `clientId` client id 

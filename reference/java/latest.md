@@ -20,9 +20,9 @@
  Members                        | Descriptions                                
 --------------------------------|---------------------------------------------
 `public inline  `[`Client`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_client_1afb65b879166c0ccae64fff9515a99d10)`(`[`Credentials`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_credentials)` credentials)` | A client to invoke api methods from Lucidtech AI Services.
-`public inline JSONObject `[`createAsset`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_client_1a81740f0c48031ee80a5f330ad2469171)`(byte [] content,CreateAssetOptions options)` | Creates an asset, calls the POST /assets endpoint.
+`public inline JSONObject `[`createAsset`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_client_1a81740f0c48031ee80a5f330ad2469171)`(byte[] content,CreateAssetOptions options)` | Creates an asset, calls the POST /assets endpoint.
 `public inline JSONObject `[`createAsset`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_client_1a2bb92bb23b32701d31ac242555f86969)`(InputStream content,CreateAssetOptions options)` | Creates an asset, calls the POST /assets endpoint.
-`public inline JSONObject `[`createAsset`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_client_1a793e80233e2a3f438e9c1a9d8bdbb987)`(byte [] content)` | Creates an asset, calls the POST /assets endpoint.
+`public inline JSONObject `[`createAsset`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_client_1a793e80233e2a3f438e9c1a9d8bdbb987)`(byte[] content)` | Creates an asset, calls the POST /assets endpoint.
 `public inline JSONObject `[`createAsset`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_client_1a921a5e0aaeb4f72b27af1279bb6b593c)`(InputStream content)` | Creates an asset, calls the POST /assets endpoint.
 `public inline JSONObject `[`listAssets`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_client_1a4ed339d8860dadb783cf838ba51cb2d9)`(ListAssetsOptions options)` | List assets available, calls the GET /assets endpoint.
 `public inline JSONObject `[`listAssets`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_client_1adea123f22256156832896e2a65624381)`()` | List assets available, calls the GET /assets endpoint.
@@ -30,10 +30,10 @@
 `public inline JSONObject `[`updateAsset`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_client_1a7b25f20184448f0780de690dd4419739)`(String assetId,UpdateAssetOptions options)` | Updates an asset, calls the PATCH /assets/{assetId} endpoint.
 `public inline JSONObject `[`createBatch`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_client_1af07728a2fb0b4805beae2c61543d3c5a)`(CreateBatchOptions options)` | Creates a batch, calls the POST /batches endpoint.
 `public inline JSONObject `[`createBatch`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_client_1a9a205e73eb71d82c36c122eceb982bd2)`()` | Creates a batch, calls the POST /batches endpoint.
-`public inline JSONObject `[`createDocument`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_client_1a20f4fcce80169d0d9b5444c13c1ef20f)`(byte [] content,ContentType contentType,CreateDocumentOptions options)` | Creates a document, calls the POST /documents endpoint.
+`public inline JSONObject `[`createDocument`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_client_1a20f4fcce80169d0d9b5444c13c1ef20f)`(byte[] content,ContentType contentType,CreateDocumentOptions options)` | Creates a document, calls the POST /documents endpoint.
 `public inline JSONObject `[`createDocument`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_client_1ac8925645725cd4cf79fe4d3503d394e7)`(InputStream content,ContentType contentType,CreateDocumentOptions options)` | Creates a document, calls the POST /documents endpoint.
 `public inline JSONObject `[`createDocument`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_client_1aabaf95b529aad728a0d5543adcec737c)`(InputStream content,ContentType contentType)` | Creates a document, calls the POST /documents endpoint.
-`public inline JSONObject `[`createDocument`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_client_1a144f0fe029a55ef9491605a5e967974c)`(byte [] content,ContentType contentType)` | Creates a document, calls the POST /documents endpoint.
+`public inline JSONObject `[`createDocument`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_client_1a144f0fe029a55ef9491605a5e967974c)`(byte[] content,ContentType contentType)` | Creates a document, calls the POST /documents endpoint.
 `public inline JSONObject `[`listDocuments`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_client_1a51910821bf6df9383a09e9690dd3d891)`(ListDocumentsOptions options)` | List documents, calls the GET /documents endpoint.
 `public inline JSONObject `[`listDocuments`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_client_1a15d880fed0ee9683e7f92c3a9966ba31)`()` | List documents, calls the GET /documents endpoint.
 `public inline JSONObject `[`deleteDocuments`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_client_1a6e15284a79148f819df27eb116e1523d)`()` | Delete documents, calls the DELETE /documents endpoint.
@@ -97,7 +97,7 @@ A client to invoke api methods from Lucidtech AI Services.
 
 **See also**: [Credentials](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_credentials)
 
-#### `public inline JSONObject `[`createAsset`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_client_1a81740f0c48031ee80a5f330ad2469171)`(byte [] content,CreateAssetOptions options)` 
+#### `public inline JSONObject `[`createAsset`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_client_1a81740f0c48031ee80a5f330ad2469171)`(byte[] content,CreateAssetOptions options)` 
 
 Creates an asset, calls the POST /assets endpoint.
 
@@ -139,7 +139,7 @@ Asset response from API
 
 * `MissingAccessTokenException` Raised if access token cannot be obtained
 
-#### `public inline JSONObject `[`createAsset`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_client_1a793e80233e2a3f438e9c1a9d8bdbb987)`(byte [] content)` 
+#### `public inline JSONObject `[`createAsset`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_client_1a793e80233e2a3f438e9c1a9d8bdbb987)`(byte[] content)` 
 
 Creates an asset, calls the POST /assets endpoint.
 
@@ -277,7 +277,7 @@ Batch response from REST API
 
 * `MissingAccessTokenException` Raised if access token cannot be obtained
 
-#### `public inline JSONObject `[`createDocument`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_client_1a20f4fcce80169d0d9b5444c13c1ef20f)`(byte [] content,ContentType contentType,CreateDocumentOptions options)` 
+#### `public inline JSONObject `[`createDocument`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_client_1a20f4fcce80169d0d9b5444c13c1ef20f)`(byte[] content,ContentType contentType,CreateDocumentOptions options)` 
 
 Creates a document, calls the POST /documents endpoint.
 
@@ -344,7 +344,7 @@ Document response from REST API
 
 * `MissingAccessTokenException` Raised if access token cannot be obtained
 
-#### `public inline JSONObject `[`createDocument`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_client_1a144f0fe029a55ef9491605a5e967974c)`(byte [] content,ContentType contentType)` 
+#### `public inline JSONObject `[`createDocument`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_client_1a144f0fe029a55ef9491605a5e967974c)`(byte[] content,ContentType contentType)` 
 
 Creates a document, calls the POST /documents endpoint.
 

@@ -328,7 +328,7 @@ Creates a new user, calls the POST /users endpoint.
 
 
 
-#### create_workflow(specification: dict, \*, error_config: Optional[dict] = None, \*\*optional_args)
+#### create_workflow(specification: dict, \*, error_config: Optional[dict] = None, completed_config: Optional[dict] = None, \*\*optional_args)
 Creates a new workflow, calls the POST /workflows endpoint.
 Check out Lucidtech’s tutorials for more info on how to create a workflow.
 
@@ -358,6 +358,9 @@ Check out Lucidtech’s tutorials for more info on how to create a workflow.
     * **error_config** (*Optional**[**dict**]*) – Configuration of error handler
 
 
+    * **completed_config** (*Optional**[**dict**]*) – Configuration of a job to run whenever a workflow execution ends
+
+
 
 * **Returns**
 
@@ -377,7 +380,41 @@ Check out Lucidtech’s tutorials for more info on how to create a workflow.
 
 
 
-#### delete_documents(\*, consent_id: Optional[Union[str, List[str]]] = None)
+#### delete_asset(asset_id: str)
+Delete the asset with the provided asset_id, calls the DELETE /assets/{assetId} endpoint.
+
+```python
+>>> from las.client import Client
+>>> client = Client()
+>>> client.delete_asset('<asset_id>')
+```
+
+
+* **Parameters**
+
+    **asset_id** (*str*) – Id of the asset
+
+
+
+* **Returns**
+
+    Asset response from REST API
+
+
+
+* **Return type**
+
+    dict
+
+
+
+* **Raises**
+
+    `InvalidCredentialsException`, `TooManyRequestsException`, `LimitExceededException`, `requests.exception.RequestException`
+
+
+
+#### delete_documents(\*, consent_id: Optional[Union[str, List[str]]] = None, max_results: Optional[int] = None, next_token: Optional[str] = None)
 Delete documents with the provided consent_id, calls the DELETE /documents endpoint.
 
 ```python
@@ -389,13 +426,54 @@ Delete documents with the provided consent_id, calls the DELETE /documents endpo
 
 * **Parameters**
 
-    **consent_id** (*Optional**[**Queryparam**]*) – Ids of the consents that marks the owner of the document
+    
+    * **consent_id** (*Optional**[**Queryparam**]*) – Ids of the consents that marks the owner of the document
+
+
+    * **max_results** (*Optional**[**int**]*) – Maximum number of documents that will be deleted
+
+
+    * **next_token** (*Optional**[**str**]*) – A unique token for each page, use the returned token to retrieve the next page.
 
 
 
 * **Returns**
 
     Documents response from REST API
+
+
+
+* **Return type**
+
+    dict
+
+
+
+* **Raises**
+
+    `InvalidCredentialsException`, `TooManyRequestsException`, `LimitExceededException`, `requests.exception.RequestException`
+
+
+
+#### delete_secret(secret_id: str)
+Delete the secret with the provided secret_id, calls the DELETE /secrets/{secretId} endpoint.
+
+```python
+>>> from las.client import Client
+>>> client = Client()
+>>> client.delete_secret('<secret_id>')
+```
+
+
+* **Parameters**
+
+    **secret_id** (*str*) – Id of the secret
+
+
+
+* **Returns**
+
+    Secret response from REST API
 
 
 
@@ -855,6 +933,44 @@ Get the workflow with the provided workflow_id, calls the GET /workflows/{workfl
 * **Returns**
 
     Workflow response from REST API
+
+
+
+* **Return type**
+
+    dict
+
+
+
+* **Raises**
+
+    `InvalidCredentialsException`, `TooManyRequestsException`, `LimitExceededException`, `requests.exception.RequestException`
+
+
+
+#### get_workflow_execution(workflow_id: str, execution_id: str)
+Get a workflow execution, calls the GET /workflows/{workflow_id}/executions/{execution_id} endpoint.
+
+```python
+>>> from las.client import Client
+>>> client = Client()
+>>> client.get_workflow_execution('<workflow_id>', '<execution_id>')
+```
+
+
+* **Parameters**
+
+    
+    * **workflow_id** (*str*) – Id of the workflow that performs the execution
+
+
+    * **execution_id** (*str*) – Id of the execution to get
+
+
+
+* **Returns**
+
+    Workflow execution response from REST API
 
 
 
@@ -1456,7 +1572,7 @@ Updates an secret, calls the PATCH /secrets/secretId endpoint.
 
 
 
-#### update_transition(transition_id: str, \*, in_schema: Optional[dict] = None, out_schema: Optional[dict] = None, \*\*optional_args)
+#### update_transition(transition_id: str, \*, in_schema: Optional[dict] = None, out_schema: Optional[dict] = None, assets: Optional[dict] = None, environment: Optional[dict] = None, environment_secrets: Optional[list] = None, \*\*optional_args)
 Updates a transition, calls the PATCH /transitions/{transitionId} endpoint.
 
 ```python
@@ -1471,7 +1587,7 @@ Updates a transition, calls the PATCH /transitions/{transitionId} endpoint.
 * **Parameters**
 
     
-    * **transition_id** – Id of the transition
+    * **transition_id** (*str*) – Id of the transition
 
 
     * **name** (*Optional**[**str**]*) – Name of the transition
@@ -1486,17 +1602,19 @@ Updates a transition, calls the PATCH /transitions/{transitionId} endpoint.
     * **out_schema** (*Optional**[**dict**]*) – Json-schema that defines the output of the transition
 
 
-
-* **Returns**
-
-    Transition response from REST API
+    * **assets** (*Optional**[**dict**]*) – A dictionary where the values are assetIds that can be used in a manual transition
 
 
+    * **environment** (*Optional**[**dict**]*) – Environment variables to use for a docker transition
 
-* **Return type**
 
-    dict
+    * **environment_secrets** – 
 
+
+A list of secretIds that contains environment variables to use for a docker transition
+:type environment_secrets: Optional[list]
+:return: Transition response from REST API
+:rtype: dict
 
 
 * **Raises**
@@ -1537,7 +1655,7 @@ calls the PATCH /transitions/{transition_id}/executions/{execution_id} endpoint.
     * **error** (*Optional**[**dict**]*) – Error from the execution, required when status is ‘failed’, needs to contain ‘message’
 
 
-    * **start_time** (*Optional**[**str**]*) – Utc start time that will replace the original start time of the execution
+    * **start_time** (*Optional**[**str**]*) – start time that will replace the original start time of the execution
 
 
 
@@ -1600,7 +1718,7 @@ Updates a user, calls the PATCH /users/{userId} endpoint.
 
 
 
-#### update_workflow(workflow_id: str, \*\*optional_args)
+#### update_workflow(workflow_id: str, \*, error_config: Optional[dict] = None, completed_config: Optional[dict] = None, \*\*optional_args)
 Updates a workflow, calls the PATCH /workflows/{workflowId} endpoint.
 
 ```python
@@ -1624,6 +1742,12 @@ Updates a workflow, calls the PATCH /workflows/{workflowId} endpoint.
     * **description** (*Optional**[**str**]*) – Description of the workflow
 
 
+    * **error_config** (*Optional**[**dict**]*) – Configuration of error handler
+
+
+    * **completed_config** (*Optional**[**dict**]*) – Configuration of a job to run whenever a workflow execution ends
+
+
 
 * **Returns**
 
@@ -1635,6 +1759,41 @@ Updates a workflow, calls the PATCH /workflows/{workflowId} endpoint.
 
     dict
 
+
+
+* **Raises**
+
+    `InvalidCredentialsException`, `TooManyRequestsException`, `LimitExceededException`, `requests.exception.RequestException`
+
+
+
+#### update_workflow_execution(workflow_id: str, execution_id: str, next_transition_id: str)
+Retry or end the processing of a workflow execution,
+calls the PATCH /workflows/{workflow_id}/executions/{execution_id} endpoint.
+
+```python
+>>> from las.client import Client
+>>> client = Client()
+>>> client.update_workflow_execution('<workflow_id>', '<execution_id>', '<next_transition_id>')
+```
+
+
+* **Parameters**
+
+    
+    * **workflow_id** (*str*) – Id of the workflow that performs the execution
+
+
+    * **execution_id** (*str*) – Id of the execution to update
+
+
+    * **next_transition_id** – the next transition to transition into, to end the workflow-execution,
+
+
+use: las:transition:commons-failed
+:type next_transition_id: str
+:return: Workflow execution response from REST API
+:rtype: dict
 
 
 * **Raises**
