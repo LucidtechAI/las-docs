@@ -11,7 +11,23 @@
 ## Create and list your batches
 When creating a batch it is recommended to provide a name and a description
 
-    >> las batches create --name train --description "documents for training a new model"
+```commandline
+>> las batches create --name train --description "documents for training a new model"
+{
+  "batchId": "las:batch:<hex-uuid>",
+  "name": "train",
+  "description": "documents for training a new model"
+  "numDocuments": 1,
+  "createdTime": "2021-04-14T14:13:02.021412+0000"
+}
+```
+    
+Too see what batches already exists and how many documents belong in them you can use *list*
+
+```commandline
+>> las batches list
+{
+  "batches": [
     {
       "batchId": "las:batch:<hex-uuid>",
       "name": "train",
@@ -19,22 +35,10 @@ When creating a batch it is recommended to provide a name and a description
       "numDocuments": 1,
       "createdTime": "2021-04-14T14:13:02.021412+0000"
     }
-    
-Too see what batches already exists and how many documents belong in them you can use *list*
-
-    >> las batches list
-    {
-      "batches": [
-        {
-          "batchId": "las:batch:<hex-uuid>",
-          "name": "train",
-          "description": "documents for training a new model"
-          "numDocuments": 1,
-          "createdTime": "2021-04-14T14:13:02.021412+0000"
-        }
-      ],
-      "nextToken": null
-    }
+  ],
+  "nextToken": null
+}
+```
 
 
 {% hint style="info" %}
@@ -45,12 +49,16 @@ There is no endpoint for *consents* yet, so please feel free to invent your own 
 
 Both *Batches* and *Consents* can be used as input when listing documents;
     
-    >> las documents list --batch-id las:batch:<hex-uuid>
-    >> las documents list --consent-id las:consent:<hex-uuid>
+```commandline
+>> las documents list --batch-id las:batch:<hex-uuid>
+>> las documents list --consent-id las:consent:<hex-uuid>
+```
 
 But only *consents* can be used as input when deleting documents;
 
-    >> las documents delete --consent-id las:consent:<hex-uuid>
+```commandline
+>> las documents delete --consent-id las:consent:<hex-uuid>
+```
 
 
 See more examples on how to use *batches* and *consents* in the 
