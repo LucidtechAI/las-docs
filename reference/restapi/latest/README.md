@@ -37,14 +37,25 @@
       "type": "array",
       "items": {
         "required": [
+          "apiKey",
           "appClientId",
+          "callbackUrls",
           "clientId",
+          "createdTime",
           "description",
+          "hasSecret",
+          "logoutUrls",
           "name"
         ],
         "type": "object",
         "properties": {
+          "hasSecret": {
+            "type": "boolean"
+          },
           "clientId": {
+            "type": "string"
+          },
+          "apiKey": {
             "type": "string"
           },
           "name": {
@@ -52,10 +63,27 @@
             "type": "string",
             "nullable": true
           },
+          "logoutUrls": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
           "description": {
             "maxLength": 4096,
             "type": "string",
             "nullable": true
+          },
+          "createdTime": {
+            "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2}( |T)?[0-9]{2}:?[0-9]{2}:?[0-9]{2}(.[0-9]{1,6})?(Z|[+][0-9]{2}(:|)[0-9]{2})$",
+            "type": "string",
+            "nullable": true
+          },
+          "callbackUrls": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
           },
           "clientSecret": {
             "type": "string"
@@ -96,10 +124,26 @@
   "title": "POST /appClients",
   "type": "object",
   "properties": {
+    "generateSecret": {
+      "type": "boolean",
+      "default": true
+    },
+    "logoutUrls": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
     "name": {
       "maxLength": 4096,
       "type": "string",
       "nullable": true
+    },
+    "callbackUrls": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
     },
     "description": {
       "maxLength": 4096,
@@ -117,14 +161,25 @@
 {
   "title": "appClient",
   "required": [
+    "apiKey",
     "appClientId",
+    "callbackUrls",
     "clientId",
+    "createdTime",
     "description",
+    "hasSecret",
+    "logoutUrls",
     "name"
   ],
   "type": "object",
   "properties": {
+    "hasSecret": {
+      "type": "boolean"
+    },
     "clientId": {
+      "type": "string"
+    },
+    "apiKey": {
       "type": "string"
     },
     "name": {
@@ -132,10 +187,27 @@
       "type": "string",
       "nullable": true
     },
+    "logoutUrls": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
     "description": {
       "maxLength": 4096,
       "type": "string",
       "nullable": true
+    },
+    "createdTime": {
+      "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2}( |T)?[0-9]{2}:?[0-9]{2}:?[0-9]{2}(.[0-9]{1,6})?(Z|[+][0-9]{2}(:|)[0-9]{2})$",
+      "type": "string",
+      "nullable": true
+    },
+    "callbackUrls": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
     },
     "clientSecret": {
       "type": "string"
@@ -175,14 +247,25 @@
 {
   "title": "appClient",
   "required": [
+    "apiKey",
     "appClientId",
+    "callbackUrls",
     "clientId",
+    "createdTime",
     "description",
+    "hasSecret",
+    "logoutUrls",
     "name"
   ],
   "type": "object",
   "properties": {
+    "hasSecret": {
+      "type": "boolean"
+    },
     "clientId": {
+      "type": "string"
+    },
+    "apiKey": {
       "type": "string"
     },
     "name": {
@@ -190,10 +273,27 @@
       "type": "string",
       "nullable": true
     },
+    "logoutUrls": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
     "description": {
       "maxLength": 4096,
       "type": "string",
       "nullable": true
+    },
+    "createdTime": {
+      "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2}( |T)?[0-9]{2}:?[0-9]{2}:?[0-9]{2}(.[0-9]{1,6})?(Z|[+][0-9]{2}(:|)[0-9]{2})$",
+      "type": "string",
+      "nullable": true
+    },
+    "callbackUrls": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
     },
     "clientSecret": {
       "type": "string"
