@@ -20,6 +20,7 @@ and use the path of the PDF or JPEG that you would like to upload.
 Use this `documentlId` along with a `modelId` to make a prediction on the document. 
 See [predictions](./predictions.md) for more details.
 
+### *Batches* and *Consents*
 Now let's say you have several documents that you want to group together 
 with a purpose of constructing a dataset for training a model. This is where *Batches* enter the picture
 ```commandline
@@ -41,11 +42,8 @@ with a purpose of constructing a dataset for training a model. This is where *Ba
 ```
 The exact same can be done for *Consents*, 
 but the purpose is to separate customers data rather that grouping them together for a training purposes.
-Both *Batches* and *Consents* can be used as input when listing documents;
-```commandline 
->> las documents list --consent-id las:consent:<hex-uuid>
->> las documents list --batch-id las:batch:<hex-uuid>
-```
+
+For more information on *batches* and *consents* see the page on [batches and consents](./batches_and_consents.md).
 
 ## Attaching *Ground Truth* to a document
 In order to train or evaluate a model we need a ground truth along with each document. 
