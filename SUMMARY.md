@@ -5,11 +5,12 @@
 ## Getting Started
 
 * [Introduction](introduction/README.md)
+  * [Documents](introduction/documents.md)
+  * [Predictions](introduction/predictions.md)
   * [Transitions and Workflows](introduction/transitions_and_workflows.md)
   * [Assets and Secrets](introduction/assets_and_secrets.md)
   * [Models](introduction/models.md)
-  * [Predictions](introduction/predictions.md)
-  * [Documents](introduction/documents.md)
+  * [Batches and Consents](introduction/batches_and_consents.md)
 * [Quickstart](getting-started/dev/README.md)
   * [Using the CLI](getting-started/dev/cli.md)
   * [Python](getting-started/dev/python.md)

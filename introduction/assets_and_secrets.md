@@ -1,6 +1,6 @@
 # *Assets* and *Secrets*
 
- - An *Asset* is can be any kind of resource you want to use across your transitions.
+ - An *Asset* can be any kind of resource you want to use across your transitions.
     It is flexible, easy to use and can be modified at any moment.
  - A *Secret* is a set of key-value pairs that are stored safely 
     and used as environment variables or docker credentials. 
