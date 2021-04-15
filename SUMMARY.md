@@ -9,6 +9,7 @@
   * [Predictions](introduction/predictions.md)
   * [Transitions and Workflows](introduction/transitions_and_workflows.md)
   * [Assets and Secrets](introduction/assets_and_secrets.md)
+  * [Logs](introduction/logs.md)
   * [Models](introduction/models.md)
   * [Batches and Consents](introduction/batches_and_consents.md)
 * [Quickstart](getting-started/dev/README.md)
