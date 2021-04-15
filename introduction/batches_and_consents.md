@@ -4,28 +4,29 @@
     is that they can later be used to train a model. A document can only belong to one batch.
     
  - A *Consent* is another way of grouping your documents. The main purpose of grouping documents 
-    together under the same *consentId* is that they can be removed at the same time. A document can only 
+    together under the same *consentId* is that they can be removed at the same time. 
+    Typically used to make it easier to execise GDPR right to be forgotten. A document can only 
     have one *consentId*.
     
 ## Create and list your batches
-When creating a batch it is recommended to provide a name and a description;
+When creating a batch it is recommended to provide a name and a description
 
     >> las batches create --name train --description "documents for training a new model"
     {
-      "batchId": "las:batch:84ed1bb2d2634072bd3134274ed56ebe",
+      "batchId": "las:batch:<hex-uuid>",
       "name": "train",
       "description": "documents for training a new model"
       "numDocuments": 1,
       "createdTime": "2021-04-14T14:13:02.021412+0000"
     }
     
-Too see what batches already exists and how many documents belong in them you can use *list*;
+Too see what batches already exists and how many documents belong in them you can use *list*
 
     >> las batches list
     {
       "batches": [
         {
-          "batchId": "las:batch:84ed1bb2d2634072bd3134274ed56ebe",
+          "batchId": "las:batch:<hex-uuid>",
           "name": "train",
           "description": "documents for training a new model"
           "numDocuments": 1,
