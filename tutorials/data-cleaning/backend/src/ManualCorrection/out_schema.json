@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft-04/schema#",
+  "title": "out",
+  "type": "object",
+  "properties": {
+    "documentId": {"type": "string"},
+    "verified": {
+      "type": "object",
+      "properties": {
+        "invoice_date": {"type": "string"},
+        "total_amount": {"type": "string"},
+        "currency": {"type": "string"}
+      }
+    }
+  },
+  "required": [
+    "documentId",
+    "verified"
+  ]
+}

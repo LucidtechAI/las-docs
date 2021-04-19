@@ -1,0 +1,7 @@
+{
+  "imageUrl": "lucidtechai/transition-samples:make-predictions",
+  "environmentSecrets": [
+    "las:secret:<hex>"
+  ]
+}
+

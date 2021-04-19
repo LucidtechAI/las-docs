@@ -18,8 +18,8 @@ def create_prediction(label, value, confidence):
 def handler(las_client, event, environ):
     document_id = event['documentId']
     predictions = event['predictions']
-    confidence_threshold = environ.get('CONFIDENCE_THRESHOLD', 0.0)
-    ground_truth_confidence = environ.get('GROUND_TRUTH_CONFIDENCE', 1.0)
+    confidence_threshold = float(environ.get('CONFIDENCE_THRESHOLD', 0.0))
+    ground_truth_confidence = float(environ.get('GROUND_TRUTH_CONFIDENCE', 1.0))
 
     document = las_client.get_document(document_id=document_id)
     ground_truth = {field['label']: field['value'] for field in document['groundTruth']}

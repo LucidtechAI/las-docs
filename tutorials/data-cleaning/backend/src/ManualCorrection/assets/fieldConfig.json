@@ -1,0 +1,17 @@
+{
+  "invoice_date": {
+    "type": "date",
+    "display": "Date",
+    "confidenceLevels": { "automated": 0.9999, "high": 0.97, "medium": 0.9, "low": 0.5 }
+  },
+  "total_amount": {
+    "type": "amount",
+    "display": "Total",
+    "confidenceLevels": { "automated": 0.9999, "high": 0.97, "medium": 0.9, "low": 0.5 }
+  },
+  "currency": {
+    "type": "string",
+    "display": "Currency",
+    "confidenceLevels": { "automated": 0.9999, "high": 0.97, "medium": 0.9, "low": 0.5 }
+  }
+}
