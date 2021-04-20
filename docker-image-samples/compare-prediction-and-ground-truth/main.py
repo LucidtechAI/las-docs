@@ -40,7 +40,7 @@ def handler(las_client, event, environ):
     # correction is needed unless all confidences are 1.0,
     # By setting the environment variable GROUND_TRUTH_CONFIDENCE < 1 you can choose to correct
     # values that either had no prediction or the prediction was lower than CONFIDENCE_THRESHOLD
-    needs_correction = min([p['confidence'] for p in enhanced_predictions]) == 1.0
+    needs_correction = min([p['confidence'] for p in enhanced_predictions]) < 1.0
 
     event.update({
         'predictions': enhanced_predictions,
