@@ -1,0 +1,11 @@
+{
+  "imageUrl": "lucidtechai/transition-samples:compare-prediction-and-gt",
+  "environmentSecrets": [
+    "las:secret:<hex>"
+  ],
+  "environment": {
+    "CONFIDENCE_THRESHOLD": "0.1",
+    "GROUND_TRUTH_CONFIDENCE": "1.0"
+  }
+}
+

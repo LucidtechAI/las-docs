@@ -1,0 +1,7 @@
+{
+  "imageUrl": "lucidtechai/transition-samples:feedback",
+  "environmentSecrets": [
+    "las:secret:<las-credentials-hex>"
+  ]
+}
+
