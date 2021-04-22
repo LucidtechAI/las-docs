@@ -5,13 +5,13 @@ In this tutorial you will learn how to setup a simple workflow that
 allows you to evaluate the models performance and at the same time 
 clean up badly labeled data. 
 Check out the complete folder with example values to get started 
-[here](https://github.com/LucidtechAI/las-docs/tree/master/tutorials/data-cleaning).
+[here](https://github.com/LucidtechAI/las-docs/tree/master/tutorials/data-cleaning/backend/src/).
 
 
-The workflow in this tutorial will consist of two steps:
+The workflow in this tutorial will consist of four steps:
 * automatic prediction
 * automatic comparison of the existing ground truth with the prediction to filter out badly labeled data
-* manual verification and correction of ground truth (This will only be performed when necessary)
+* manual verification and correction of ground truth (this will only be performed when necessary)
 * automatic feedback of the corrected ground truth back to the API
 
 ![Workflow](../.gitbook/assets/data-cleaning-workflow.png)
@@ -129,11 +129,13 @@ Now we are ready to create the transition
 las transitions create docker params.json
 ```
 
-### Configuration of the comparison
+### Configuration of the *compare* transition
 
 As you can see in main function of the 
 [compare docker image](https://github.com/LucidtechAI/las-docs/tree/master/docker-image-samples/compare-prediction-and-ground-truth)
-there are two environemnt variables that can be adjusted according to your needs.
+there are two environment variables that can be adjusted according to your needs. 
+Check out [this](https://github.com/LucidtechAI/las-docs/tree/master/tutorials/data-cleaning/backend/src/Compare) 
+folder to see an example of files that can be used to configure this transition.
 
 #### CONFIDENCE_THRESHOLD
 This variable sets the confidence limit that decides when to consider the predictions as relevant.
