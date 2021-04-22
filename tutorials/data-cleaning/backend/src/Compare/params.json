@@ -4,7 +4,7 @@
     "las:secret:<hex>"
   ],
   "environment": {
-    "CONFIDENCE_THRESHOLD": "0.0",
+    "CONFIDENCE_THRESHOLD": "0.1",
     "GROUND_TRUTH_CONFIDENCE": "1.0"
   }
 }
