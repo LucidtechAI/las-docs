@@ -21,7 +21,7 @@ def handler(las_client, event, environ):
 
     for prediction in predictions:
         label = prediction['label']
-        ground_truth_value = ground_truth.pop(label)
+        ground_truth_value = ground_truth.pop(label, '')
         if prediction['value'] == ground_truth_value:
             logging.info(f'Prediction and ground truth coincides: {label}={ground_truth_value}')
             prediction['confidence'] = 1.0
