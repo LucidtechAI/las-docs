@@ -22,6 +22,7 @@
 * [Tutorials](tutorials/README.md)
   * [Setup workflow](tutorials/setup_predict_and_approve.md)
   * [Setup approve view](tutorials/setup_approve_view.md)
+  * [Setup data cleaning view](tutorials/data_cleaning.md)
   * [Setup docker transition](tutorials/create_your_own_docker_transition.md)
   * [Docker samples](docker-image-samples/README.md)
 * [Authentication](authentication/README.md)
