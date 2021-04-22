@@ -4,7 +4,7 @@
 In this tutorial you will learn how to setup a simple workflow that 
 allows you to evaluate the models performance and at the same time 
 clean up badly labeled data. 
-Check out the complete folder with everything you need to get started 
+Check out the complete folder with example values to get started 
 [here](https://github.com/LucidtechAI/las-docs/tree/master/tutorials/data-cleaning).
 
 
