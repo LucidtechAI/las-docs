@@ -21,6 +21,7 @@
   <!-- * [Simple demo workflow](getting-started/simple_demo_workflow.md) -->
 * [Tutorials](tutorials/README.md)
   * [Setup workflow](tutorials/setup_predict_and_approve.md)
+  * [Setup data cleaning workflow](tutorials/data_cleaning.md)
   * [Setup approve view](tutorials/setup_approve_view.md)
   * [Setup docker transition](tutorials/create_your_own_docker_transition.md)
   * [Docker samples](docker-image-samples/README.md)

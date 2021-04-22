@@ -1,0 +1,43 @@
+{
+  "definition": {
+    "Comment": "Data Cleaning Workflow",
+    "StartAt": "MakePredictions",
+    "States": {
+      "MakePredictions": {
+        "Type": "Task",
+        "Resource": "las:transition:<hex>",
+        "Next": "Compare"
+      },
+      "Compare": {
+        "Type": "Task",
+        "Resource": "las:transition:<hex>",
+        "Next": "CorrectOrNot"
+      },
+      "CorrectOrNot": {
+        "Type": "Choice",
+        "Choices": [
+          {
+            "Variable": "$.needsCorrection",
+            "BooleanEquals": true,
+            "Next": "ManualCorrection"
+          },
+          {
+            "Variable": "$.needsCorrection",
+            "BooleanEquals": false,
+            "End": true
+          }
+        ]
+      },
+      "ManualCorrection": {
+        "Type": "Task",
+        "Resource": "las:transition:<hex>",
+        "Next": "Feedback"
+      },
+      "Feedback": {
+        "Type": "Task",
+        "Resource": "las:transition:<hex>",
+        "End": true
+      }
+    }
+  }
+}
