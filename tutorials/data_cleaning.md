@@ -3,14 +3,14 @@
 
 In this tutorial you will learn how to setup a simple workflow that 
 allows you to evaluate the models performance and at the same time 
-clean up badly labeled data. 
+clean up poorly labeled data. 
 Check out the complete folder with example values to get started 
 [here](https://github.com/LucidtechAI/las-docs/tree/master/tutorials/data-cleaning/backend/src/).
 
 
 The workflow in this tutorial will consist of four steps:
 * automatic prediction
-* automatic comparison of the existing ground truth with the prediction to filter out badly labeled data
+* automatic comparison of the existing ground truth with the prediction to filter out poorly labeled data
 * manual verification and correction of ground truth (this will only be performed when necessary)
 * automatic feedback of the corrected ground truth back to the API
 
@@ -234,8 +234,8 @@ You can now define your `input.json` and execute your workflow with a simple cal
 ```json
 {
   "documentId": "las:document:<hex-uuid>",
-  "modelId": "las:model:<hex-uuid>"
-  "autoRotate": true,
+  "modelId": "las:model:<hex-uuid>",
+  "autoRotate": true
 }
 ```
 ```commandline
