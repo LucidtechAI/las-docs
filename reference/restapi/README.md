@@ -4,6 +4,12 @@ You can find the Open API specification file [here](https://raw.githubuserconten
 
 ## Changelog
 
+### 2021-04-23
+
+- Added GET /logs. Use query parameters workflowId, workflowExecutionId, transitionId, transitionExecutionId to filter.
+- Added default retry configuration for workflow transitions that don't explicitly define one.
+- Added startTime, transitionExecutionId, workflowExecutionId to /logs
+
 ### 2021-04-14
 
 - Now possible to create public app clients by using the generateSecret parameter set to false (defaults to true) and 

@@ -2,7 +2,7 @@
   "openapi": "3.0.1",
   "info": {
     "title": "Lucidtech API",
-    "version": "2021-04-14T19:34:46Z"
+    "version": "2021-04-21T11:44:15Z"
   },
   "servers": [
     {
@@ -2109,6 +2109,156 @@
       }
     },
     "/logs": {
+      "get": {
+        "parameters": [
+          {
+            "in": "query",
+            "name": "workflowId",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "nextToken",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "order",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "transitionExecutionId",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "transitionId",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "maxResults",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "workflowExecutionId",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Logs"
+                }
+              }
+            },
+            "description": "200 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "400 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "404 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "415": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "415 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "500 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "OAuth2": [
+              "api.lucidtech.ai/logs.get"
+            ]
+          },
+          {
+            "api_key": []
+          }
+        ]
+      },
       "options": {
         "requestBody": {
           "content": {
@@ -7209,7 +7359,10 @@
                       "type": "string"
                     }
                   },
-                  "additionalProperties": true
+                  "additionalProperties": {
+                    "pattern": "^las:asset:[a-f0-9]{32}$",
+                    "type": "string"
+                  }
                 },
                 "transitionId": {
                   "anyOf": [
@@ -7691,8 +7844,12 @@
       "Log": {
         "title": "log",
         "required": [
-          "events",
-          "logId"
+          "logId",
+          "startTime",
+          "transitionExecutionId",
+          "transitionId",
+          "workflowExecutionId",
+          "workflowId"
         ],
         "type": "object",
         "properties": {
@@ -7708,9 +7865,24 @@
               }
             ]
           },
+          "transitionExecutionId": {
+            "pattern": "^las:transition-execution:[a-f0-9]{32}$",
+            "type": "string",
+            "nullable": true
+          },
           "logId": {
             "pattern": "^las:log:[a-f0-9]{32}$",
             "type": "string"
+          },
+          "workflowExecutionId": {
+            "pattern": "^las:workflow-execution:[a-f0-9]{32}$",
+            "type": "string",
+            "nullable": true
+          },
+          "startTime": {
+            "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2}( |T)?[0-9]{2}:?[0-9]{2}:?[0-9]{2}(.[0-9]{1,6})?(Z|[+][0-9]{2}(:|)[0-9]{2})$",
+            "type": "string",
+            "nullable": true
           },
           "workflowId": {
             "pattern": "^las:workflow:[a-f0-9]{32}$",
@@ -7765,7 +7937,9 @@
                     },
                     "environment": {
                       "type": "object",
-                      "additionalProperties": true
+                      "additionalProperties": {
+                        "type": "string"
+                      }
                     },
                     "imageUrl": {
                       "type": "string"
@@ -7792,9 +7966,6 @@
                   "type": "string"
                 },
                 "errorConfig": {
-                  "required": [
-                    "email"
-                  ],
                   "type": "object",
                   "properties": {
                     "manualRetry": {
@@ -7909,7 +8080,9 @@
               },
               "environment": {
                 "type": "object",
-                "additionalProperties": true
+                "additionalProperties": {
+                  "type": "string"
+                }
               },
               "imageUrl": {
                 "type": "string"
@@ -7932,9 +8105,6 @@
             "nullable": true
           },
           "errorConfig": {
-            "required": [
-              "email"
-            ],
             "type": "object",
             "properties": {
               "manualRetry": {
@@ -7976,7 +8146,9 @@
               },
               "environment": {
                 "type": "object",
-                "additionalProperties": true
+                "additionalProperties": {
+                  "type": "string"
+                }
               },
               "imageUrl": {
                 "type": "string"
@@ -8003,9 +8175,6 @@
             "type": "string"
           },
           "errorConfig": {
-            "required": [
-              "email"
-            ],
             "type": "object",
             "properties": {
               "manualRetry": {
@@ -8017,6 +8186,111 @@
               }
             },
             "additionalProperties": false
+          }
+        },
+        "additionalProperties": false
+      },
+      "Logs": {
+        "title": "logs",
+        "required": [
+          "logs"
+        ],
+        "type": "object",
+        "properties": {
+          "transitionId": {
+            "anyOf": [
+              {
+                "pattern": "^las:transition:[a-f0-9]{32}$",
+                "type": "string"
+              },
+              {
+                "pattern": "^las:transition:commons-[0-9A-Za-z-]+$",
+                "type": "string"
+              }
+            ]
+          },
+          "nextToken": {
+            "maxLength": 4096,
+            "type": "string",
+            "nullable": true
+          },
+          "transitionExecutionId": {
+            "pattern": "^las:transition-execution:[a-f0-9]{32}$",
+            "type": "string"
+          },
+          "workflowExecutionId": {
+            "pattern": "^las:workflow-execution:[a-f0-9]{32}$",
+            "type": "string"
+          },
+          "logs": {
+            "type": "array",
+            "items": {
+              "required": [
+                "logId",
+                "startTime",
+                "transitionExecutionId",
+                "transitionId",
+                "workflowExecutionId",
+                "workflowId"
+              ],
+              "type": "object",
+              "properties": {
+                "transitionId": {
+                  "anyOf": [
+                    {
+                      "pattern": "^las:transition:[a-f0-9]{32}$",
+                      "type": "string"
+                    },
+                    {
+                      "pattern": "^las:transition:commons-[0-9A-Za-z-]+$",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "transitionExecutionId": {
+                  "pattern": "^las:transition-execution:[a-f0-9]{32}$",
+                  "type": "string",
+                  "nullable": true
+                },
+                "logId": {
+                  "pattern": "^las:log:[a-f0-9]{32}$",
+                  "type": "string"
+                },
+                "workflowExecutionId": {
+                  "pattern": "^las:workflow-execution:[a-f0-9]{32}$",
+                  "type": "string",
+                  "nullable": true
+                },
+                "startTime": {
+                  "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2}( |T)?[0-9]{2}:?[0-9]{2}:?[0-9]{2}(.[0-9]{1,6})?(Z|[+][0-9]{2}(:|)[0-9]{2})$",
+                  "type": "string",
+                  "nullable": true
+                },
+                "workflowId": {
+                  "pattern": "^las:workflow:[a-f0-9]{32}$",
+                  "type": "string",
+                  "nullable": true
+                },
+                "events": {
+                  "type": "array",
+                  "items": {
+                    "type": "object"
+                  }
+                }
+              },
+              "additionalProperties": false
+            }
+          },
+          "workflowId": {
+            "pattern": "^las:workflow:[a-f0-9]{32}$",
+            "type": "string"
+          },
+          "order": {
+            "type": "string",
+            "enum": [
+              "ascending",
+              "descending"
+            ]
           }
         },
         "additionalProperties": false
@@ -8101,7 +8375,9 @@
                   },
                   "environment": {
                     "type": "object",
-                    "additionalProperties": true
+                    "additionalProperties": {
+                      "type": "string"
+                    }
                   },
                   "memory": {
                     "type": "integer",
@@ -8138,7 +8414,10 @@
                         "type": "string"
                       }
                     },
-                    "additionalProperties": true
+                    "additionalProperties": {
+                      "pattern": "^las:asset:[a-f0-9]{32}$",
+                      "type": "string"
+                    }
                   }
                 },
                 "additionalProperties": false
@@ -8706,7 +8985,10 @@
                 "type": "string"
               }
             },
-            "additionalProperties": true
+            "additionalProperties": {
+              "pattern": "^las:asset:[a-f0-9]{32}$",
+              "type": "string"
+            }
           },
           "transitionId": {
             "anyOf": [
@@ -8847,7 +9129,9 @@
               },
               "environment": {
                 "type": "object",
-                "additionalProperties": true
+                "additionalProperties": {
+                  "type": "string"
+                }
               },
               "imageUrl": {
                 "type": "string"
@@ -8894,9 +9178,6 @@
             "additionalProperties": false
           },
           "errorConfig": {
-            "required": [
-              "email"
-            ],
             "type": "object",
             "properties": {
               "manualRetry": {
@@ -9282,53 +9563,54 @@
             "tokenUrl": "https://auth.lucidtech.ai/oauth2/token",
             "scopes": {
               "api.lucidtech.ai/assets.get": "Scope for GET /assets",
+              "api.lucidtech.ai/workflows.workflowid.executions.executionid.patch": "Scope for PATCH /workflows/{workflowId}/executions/{executionId}",
+              "api.lucidtech.ai/transitions.transitionid.patch": "Scope for PATCH /transitions/{transitionId}",
+              "api.lucidtech.ai/secrets.get": "Scope for GET /secrets",
+              "api.lucidtech.ai/batches.get": "Scope for GET /batches",
+              "api.lucidtech.ai/assets.assetid.delete": "Scope for DELETE /assets/{assetId}",
+              "api.lucidtech.ai/documents.documentid.get": "Scope for GET /documents/{documentId}",
+              "api.lucidtech.ai/logs.get": "Scope for GET /logs",
+              "api.lucidtech.ai/transitions.transitionid.executions.post": "Scope for POST /transitions/{transitionId}/executions",
+              "api.lucidtech.ai/appclients.get": "Scope for GET /appClients",
+              "api.lucidtech.ai/models.get": "Scope for GET /models",
+              "api.lucidtech.ai/secrets.secretid.patch": "Scope for PATCH /secrets/{secretId}",
+              "api.lucidtech.ai/workflows.workflowid.patch": "Scope for PATCH /workflows/{workflowId}",
+              "api.lucidtech.ai/transitions.transitionid.executions.executionid.heartbeats.post": "Scope for POST /transitions/{transitionId}/executions/{executionId}/heartbeats",
+              "api.lucidtech.ai/assets.post": "Scope for POST /assets",
+              "api.lucidtech.ai/workflows.workflowid.executions.get": "Scope for GET /workflows/{workflowId}/executions",
+              "api.lucidtech.ai/transitions.transitionid.delete": "Scope for DELETE /transitions/{transitionId}",
+              "api.lucidtech.ai/users.userid.delete": "Scope for DELETE /users/{userId}",
+              "api.lucidtech.ai/transitions.transitionid.executions.executionid.get": "Scope for GET /transitions/{transitionId}/executions/{executionId}",
+              "api.lucidtech.ai/appclients.post": "Scope for POST /appClients",
+              "api.lucidtech.ai/documents.delete": "Scope for DELETE /documents",
               "api.lucidtech.ai/documents.documentid.patch": "Scope for PATCH /documents/{documentId}",
               "api.lucidtech.ai/assets.assetid.patch": "Scope for PATCH /assets/{assetId}",
               "api.lucidtech.ai/secrets.secretid.delete": "Scope for DELETE /secrets/{secretId}",
               "api.lucidtech.ai/transitions.transitionid.executions.executionid.patch": "Scope for PATCH /transitions/{transitionId}/executions/{executionId}",
               "api.lucidtech.ai/users.get": "Scope for GET /users",
-              "api.lucidtech.ai/workflows.workflowid.executions.executionid.patch": "Scope for PATCH /workflows/{workflowId}/executions/{executionId}",
-              "api.lucidtech.ai/transitions.transitionid.patch": "Scope for PATCH /transitions/{transitionId}",
               "api.lucidtech.ai/assets.assetid.get": "Scope for GET /assets/{assetId}",
               "api.lucidtech.ai/users.userid.patch": "Scope for PATCH /users/{userId}",
-              "api.lucidtech.ai/secrets.get": "Scope for GET /secrets",
               "api.lucidtech.ai/workflows.workflowid.delete": "Scope for DELETE /workflows/{workflowId}",
-              "api.lucidtech.ai/batches.get": "Scope for GET /batches",
-              "api.lucidtech.ai/assets.assetid.delete": "Scope for DELETE /assets/{assetId}",
-              "api.lucidtech.ai/documents.documentid.get": "Scope for GET /documents/{documentId}",
               "api.lucidtech.ai/transitions.transitionid.executions.get": "Scope for GET /transitions/{transitionId}/executions",
               "api.lucidtech.ai/batches.post": "Scope for POST /batches",
               "api.lucidtech.ai/workflows.workflowid.executions.executionid.get": "Scope for GET /workflows/{workflowId}/executions/{executionId}",
-              "api.lucidtech.ai/transitions.transitionid.executions.post": "Scope for POST /transitions/{transitionId}/executions",
-              "api.lucidtech.ai/appclients.get": "Scope for GET /appClients",
               "api.lucidtech.ai/documents.get": "Scope for GET /documents",
               "api.lucidtech.ai/appclients.appclientid.delete": "Scope for DELETE /appClients/{appClientId}",
               "api.lucidtech.ai/users.userid.get": "Scope for GET /users/{userId}",
-              "api.lucidtech.ai/models.get": "Scope for GET /models",
               "api.lucidtech.ai/secrets.post": "Scope for POST /secrets",
               "api.lucidtech.ai/users.post": "Scope for POST /users",
               "api.lucidtech.ai/workflows.post": "Scope for POST /workflows",
-              "api.lucidtech.ai/secrets.secretid.patch": "Scope for PATCH /secrets/{secretId}",
               "api.lucidtech.ai/documents.post": "Scope for POST /documents",
-              "api.lucidtech.ai/workflows.workflowid.patch": "Scope for PATCH /workflows/{workflowId}",
-              "api.lucidtech.ai/transitions.transitionid.executions.executionid.heartbeats.post": "Scope for POST /transitions/{transitionId}/executions/{executionId}/heartbeats",
-              "api.lucidtech.ai/assets.post": "Scope for POST /assets",
               "api.lucidtech.ai/predictions.post": "Scope for POST /predictions",
               "api.lucidtech.ai/transitions.transitionid.get": "Scope for GET /transitions/{transitionId}",
               "api.lucidtech.ai/transitions.post": "Scope for POST /transitions",
               "api.lucidtech.ai/transitions.get": "Scope for GET /transitions",
               "api.lucidtech.ai/predictions.get": "Scope for GET /predictions",
-              "api.lucidtech.ai/workflows.workflowid.executions.get": "Scope for GET /workflows/{workflowId}/executions",
-              "api.lucidtech.ai/transitions.transitionid.delete": "Scope for DELETE /transitions/{transitionId}",
               "api.lucidtech.ai/workflows.get": "Scope for GET /workflows",
               "api.lucidtech.ai/logs.logid.get": "Scope for GET /logs/{logId}",
-              "api.lucidtech.ai/users.userid.delete": "Scope for DELETE /users/{userId}",
               "api.lucidtech.ai/workflows.workflowid.executions.post": "Scope for POST /workflows/{workflowId}/executions",
               "api.lucidtech.ai/workflows.workflowid.get": "Scope for GET /workflows/{workflowId}",
-              "api.lucidtech.ai/transitions.transitionid.executions.executionid.get": "Scope for GET /transitions/{transitionId}/executions/{executionId}",
-              "api.lucidtech.ai/workflows.workflowid.executions.executionid.delete": "Scope for DELETE /workflows/{workflowId}/executions/{executionId}",
-              "api.lucidtech.ai/appclients.post": "Scope for POST /appClients",
-              "api.lucidtech.ai/documents.delete": "Scope for DELETE /documents"
+              "api.lucidtech.ai/workflows.workflowid.executions.executionid.delete": "Scope for DELETE /workflows/{workflowId}/executions/{executionId}"
             }
           }
         }
