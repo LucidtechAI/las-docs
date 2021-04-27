@@ -2,7 +2,7 @@
   "openapi": "3.0.1",
   "info": {
     "title": "Lucidtech API",
-    "version": "2021-04-21T11:44:15Z"
+    "version": "2021-04-27T19:09:35Z"
   },
   "servers": [
     {
@@ -1406,9 +1406,178 @@
         ]
       }
     },
+    "/batches/{batchId}": {
+      "delete": {
+        "parameters": [
+          {
+            "in": "path",
+            "name": "batchId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Batch"
+                }
+              }
+            },
+            "description": "200 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "400 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "404 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "415": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "415 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "500 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "OAuth2": [
+              "api.lucidtech.ai/batches.batchid.delete"
+            ]
+          },
+          {
+            "api_key": []
+          }
+        ]
+      },
+      "options": {
+        "parameters": [
+          {
+            "in": "path",
+            "name": "batchId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Empty"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Empty"
+                }
+              }
+            },
+            "description": "200 response",
+            "headers": {
+              "Access-Control-Allow-Headers": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "Access-Control-Allow-Methods": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/documents": {
       "delete": {
         "parameters": [
+          {
+            "in": "query",
+            "name": "batchId",
+            "schema": {
+              "type": "string"
+            }
+          },
           {
             "in": "query",
             "name": "consentId",
@@ -7106,6 +7275,9 @@
             "maxLength": 4096,
             "type": "string",
             "nullable": true
+          },
+          "containsPersonallyIdentifiableInformation": {
+            "type": "boolean"
           }
         },
         "additionalProperties": false
@@ -7114,6 +7286,7 @@
         "title": "workflow-executions",
         "required": [
           "executions",
+          "nextToken",
           "workflowId"
         ],
         "type": "object",
@@ -7284,6 +7457,7 @@
       "Secrets": {
         "title": "secrets",
         "required": [
+          "nextToken",
           "secrets"
         ],
         "type": "object",
@@ -7327,6 +7501,7 @@
       "Transitions": {
         "title": "transitions",
         "required": [
+          "nextToken",
           "transitions"
         ],
         "type": "object",
@@ -7415,6 +7590,7 @@
       "Users": {
         "title": "users",
         "required": [
+          "nextToken",
           "users"
         ],
         "type": "object",
@@ -7610,12 +7786,20 @@
         "title": "batch",
         "required": [
           "batchId",
+          "containsPersonallyIdentifiableInformation",
           "createdTime",
           "description",
-          "numDocuments"
+          "numDocuments",
+          "retentionInDays",
+          "storageLocation"
         ],
         "type": "object",
         "properties": {
+          "retentionInDays": {
+            "maximum": 1825,
+            "minimum": 0,
+            "type": "integer"
+          },
           "name": {
             "maxLength": 4096,
             "type": "string",
@@ -7631,6 +7815,15 @@
             "type": "string",
             "nullable": true
           },
+          "storageLocation": {
+            "type": "string",
+            "enum": [
+              "EU"
+            ]
+          },
+          "containsPersonallyIdentifiableInformation": {
+            "type": "boolean"
+          },
           "batchId": {
             "pattern": "^las:batch:[a-f0-9]{32}$",
             "type": "string"
@@ -7645,7 +7838,8 @@
       "Assets": {
         "title": "assets",
         "required": [
-          "assets"
+          "assets",
+          "nextToken"
         ],
         "type": "object",
         "properties": {
@@ -7692,7 +7886,8 @@
       "AppClients": {
         "title": "appClients",
         "required": [
-          "appClients"
+          "appClients",
+          "nextToken"
         ],
         "type": "object",
         "properties": {
@@ -7901,6 +8096,7 @@
       "Workflows": {
         "title": "workflows",
         "required": [
+          "nextToken",
           "workflows"
         ],
         "type": "object",
@@ -8193,7 +8389,8 @@
       "Logs": {
         "title": "logs",
         "required": [
-          "logs"
+          "logs",
+          "nextToken"
         ],
         "type": "object",
         "properties": {
@@ -8677,6 +8874,7 @@
         "title": "transition-executions",
         "required": [
           "executions",
+          "nextToken",
           "transitionId"
         ],
         "type": "object",
@@ -8784,7 +8982,8 @@
       "Documents": {
         "title": "documents",
         "required": [
-          "documents"
+          "documents",
+          "nextToken"
         ],
         "type": "object",
         "properties": {
@@ -8883,6 +9082,7 @@
       "Predictions": {
         "title": "predictions",
         "required": [
+          "nextToken",
           "predictions"
         ],
         "type": "object",
@@ -9271,7 +9471,8 @@
       "Batches": {
         "title": "batches",
         "required": [
-          "batches"
+          "batches",
+          "nextToken"
         ],
         "type": "object",
         "properties": {
@@ -9280,12 +9481,20 @@
             "items": {
               "required": [
                 "batchId",
+                "containsPersonallyIdentifiableInformation",
                 "createdTime",
                 "description",
-                "numDocuments"
+                "numDocuments",
+                "retentionInDays",
+                "storageLocation"
               ],
               "type": "object",
               "properties": {
+                "retentionInDays": {
+                  "maximum": 1825,
+                  "minimum": 0,
+                  "type": "integer"
+                },
                 "name": {
                   "maxLength": 4096,
                   "type": "string",
@@ -9300,6 +9509,15 @@
                   "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2}( |T)?[0-9]{2}:?[0-9]{2}:?[0-9]{2}(.[0-9]{1,6})?(Z|[+][0-9]{2}(:|)[0-9]{2})$",
                   "type": "string",
                   "nullable": true
+                },
+                "storageLocation": {
+                  "type": "string",
+                  "enum": [
+                    "EU"
+                  ]
+                },
+                "containsPersonallyIdentifiableInformation": {
+                  "type": "boolean"
                 },
                 "batchId": {
                   "pattern": "^las:batch:[a-f0-9]{32}$",
@@ -9324,7 +9542,8 @@
       "Models": {
         "title": "models",
         "required": [
-          "models"
+          "models",
+          "nextToken"
         ],
         "type": "object",
         "properties": {
@@ -9566,6 +9785,7 @@
               "api.lucidtech.ai/workflows.workflowid.executions.executionid.patch": "Scope for PATCH /workflows/{workflowId}/executions/{executionId}",
               "api.lucidtech.ai/transitions.transitionid.patch": "Scope for PATCH /transitions/{transitionId}",
               "api.lucidtech.ai/secrets.get": "Scope for GET /secrets",
+              "api.lucidtech.ai/batches.batchid.delete": "Scope for DELETE /batches/{batchId}",
               "api.lucidtech.ai/batches.get": "Scope for GET /batches",
               "api.lucidtech.ai/assets.assetid.delete": "Scope for DELETE /assets/{assetId}",
               "api.lucidtech.ai/documents.documentid.get": "Scope for GET /documents/{documentId}",
