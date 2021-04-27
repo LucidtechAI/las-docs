@@ -4,6 +4,12 @@ You can find the Open API specification file [here](https://raw.githubuserconten
 
 ## Changelog
 
+### 2021-04-27
+
+- Added storageLocation, retentionInDays, containsPersonallyIdentifiableInformation to /batches
+- Added DELETE /batches/:id. Documents in batch must be deleted before deleting the batch
+- Added batchId query parameter to DELETE /documents
+
 ### 2021-04-23
 
 - Added GET /logs. Use query parameters workflowId, workflowExecutionId, transitionId, transitionExecutionId to filter.
@@ -12,7 +18,7 @@ You can find the Open API specification file [here](https://raw.githubuserconten
 
 ### 2021-04-14
 
-- Now possible to create public app clients by using the generateSecret parameter set to false (defaults to true) and 
+- Now possible to create public app clients by using the generateSecret parameter set to false (defaults to true) and
 providing callback and logout urls
 - Added createdTime, apiKey, callbackUrls, logoutUrls, hasSecret to /appClients
 - Now preventing users from deleting themselves using DELETE /users/:id 

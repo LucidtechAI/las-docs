@@ -24,7 +24,8 @@
 {
   "title": "appClients",
   "required": [
-    "appClients"
+    "appClients",
+    "nextToken"
   ],
   "type": "object",
   "properties": {
@@ -334,7 +335,8 @@
 {
   "title": "assets",
   "required": [
-    "assets"
+    "assets",
+    "nextToken"
   ],
   "type": "object",
   "properties": {
@@ -677,7 +679,8 @@
 {
   "title": "batches",
   "required": [
-    "batches"
+    "batches",
+    "nextToken"
   ],
   "type": "object",
   "properties": {
@@ -686,12 +689,20 @@
       "items": {
         "required": [
           "batchId",
+          "containsPersonallyIdentifiableInformation",
           "createdTime",
           "description",
-          "numDocuments"
+          "numDocuments",
+          "retentionInDays",
+          "storageLocation"
         ],
         "type": "object",
         "properties": {
+          "retentionInDays": {
+            "maximum": 1825,
+            "minimum": 0,
+            "type": "integer"
+          },
           "name": {
             "maxLength": 4096,
             "type": "string",
@@ -706,6 +717,15 @@
             "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2}( |T)?[0-9]{2}:?[0-9]{2}:?[0-9]{2}(.[0-9]{1,6})?(Z|[+][0-9]{2}(:|)[0-9]{2})$",
             "type": "string",
             "nullable": true
+          },
+          "storageLocation": {
+            "type": "string",
+            "enum": [
+              "EU"
+            ]
+          },
+          "containsPersonallyIdentifiableInformation": {
+            "type": "boolean"
           },
           "batchId": {
             "pattern": "^las:batch:[a-f0-9]{32}$",
@@ -761,6 +781,9 @@
       "maxLength": 4096,
       "type": "string",
       "nullable": true
+    },
+    "containsPersonallyIdentifiableInformation": {
+      "type": "boolean"
     }
   },
   "additionalProperties": false
@@ -774,12 +797,20 @@
   "title": "batch",
   "required": [
     "batchId",
+    "containsPersonallyIdentifiableInformation",
     "createdTime",
     "description",
-    "numDocuments"
+    "numDocuments",
+    "retentionInDays",
+    "storageLocation"
   ],
   "type": "object",
   "properties": {
+    "retentionInDays": {
+      "maximum": 1825,
+      "minimum": 0,
+      "type": "integer"
+    },
     "name": {
       "maxLength": 4096,
       "type": "string",
@@ -794,6 +825,93 @@
       "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2}( |T)?[0-9]{2}:?[0-9]{2}:?[0-9]{2}(.[0-9]{1,6})?(Z|[+][0-9]{2}(:|)[0-9]{2})$",
       "type": "string",
       "nullable": true
+    },
+    "storageLocation": {
+      "type": "string",
+      "enum": [
+        "EU"
+      ]
+    },
+    "containsPersonallyIdentifiableInformation": {
+      "type": "boolean"
+    },
+    "batchId": {
+      "pattern": "^las:batch:[a-f0-9]{32}$",
+      "type": "string"
+    },
+    "numDocuments": {
+      "minimum": 0,
+      "type": "integer"
+    }
+  },
+  "additionalProperties": false
+}
+```
+
+
+#### DELETE /batches/{batchId}
+
+
+| Path name | Path value |
+| --- | --- |
+| batchId | Id of batch on the form las:batch:&lt;hex&gt; |
+
+
+| Header name | Header value |
+| --- | --- |
+| Authorization | Bearer &lt;your access token here&gt; |
+| x-api-key | &lt;your api key here&gt; |
+
+
+
+
+
+
+
+
+##### Response body JSON Schema
+```json
+{
+  "title": "batch",
+  "required": [
+    "batchId",
+    "containsPersonallyIdentifiableInformation",
+    "createdTime",
+    "description",
+    "numDocuments",
+    "retentionInDays",
+    "storageLocation"
+  ],
+  "type": "object",
+  "properties": {
+    "retentionInDays": {
+      "maximum": 1825,
+      "minimum": 0,
+      "type": "integer"
+    },
+    "name": {
+      "maxLength": 4096,
+      "type": "string",
+      "nullable": true
+    },
+    "description": {
+      "maxLength": 4096,
+      "type": "string",
+      "nullable": true
+    },
+    "createdTime": {
+      "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2}( |T)?[0-9]{2}:?[0-9]{2}:?[0-9]{2}(.[0-9]{1,6})?(Z|[+][0-9]{2}(:|)[0-9]{2})$",
+      "type": "string",
+      "nullable": true
+    },
+    "storageLocation": {
+      "type": "string",
+      "enum": [
+        "EU"
+      ]
+    },
+    "containsPersonallyIdentifiableInformation": {
+      "type": "boolean"
     },
     "batchId": {
       "pattern": "^las:batch:[a-f0-9]{32}$",
@@ -823,6 +941,7 @@
 
 | Query name | Query value |
 | --- | --- |
+| batchId | Id of batch on the form las:batch:&lt;hex&gt; |
 | consentId | Id of consent on the form las:consent:&lt;hex&gt; |
 | nextToken | String value as returned by a previous list operation |
 | maxResults | Integer representing maximum number of resources to list |
@@ -836,7 +955,8 @@
 {
   "title": "documents",
   "required": [
-    "documents"
+    "documents",
+    "nextToken"
   ],
   "type": "object",
   "properties": {
@@ -963,7 +1083,8 @@
 {
   "title": "documents",
   "required": [
-    "documents"
+    "documents",
+    "nextToken"
   ],
   "type": "object",
   "properties": {
@@ -1482,7 +1603,8 @@
 {
   "title": "logs",
   "required": [
-    "logs"
+    "logs",
+    "nextToken"
   ],
   "type": "object",
   "properties": {
@@ -1695,7 +1817,8 @@
 {
   "title": "models",
   "required": [
-    "models"
+    "models",
+    "nextToken"
   ],
   "type": "object",
   "properties": {
@@ -1856,6 +1979,7 @@
 {
   "title": "predictions",
   "required": [
+    "nextToken",
     "predictions"
   ],
   "type": "object",
@@ -2091,6 +2215,7 @@
 {
   "title": "secrets",
   "required": [
+    "nextToken",
     "secrets"
   ],
   "type": "object",
@@ -2362,6 +2487,7 @@
 {
   "title": "transitions",
   "required": [
+    "nextToken",
     "transitions"
   ],
   "type": "object",
@@ -2967,6 +3093,7 @@
   "title": "transition-executions",
   "required": [
     "executions",
+    "nextToken",
     "transitionId"
   ],
   "type": "object",
@@ -3466,6 +3593,7 @@
 {
   "title": "users",
   "required": [
+    "nextToken",
     "users"
   ],
   "type": "object",
@@ -3800,6 +3928,7 @@
 {
   "title": "workflows",
   "required": [
+    "nextToken",
     "workflows"
   ],
   "type": "object",
@@ -4449,6 +4578,7 @@
   "title": "workflow-executions",
   "required": [
     "executions",
+    "nextToken",
     "workflowId"
   ],
   "type": "object",
