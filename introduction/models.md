@@ -7,7 +7,7 @@ Whether it is extracting date and total amount from a receipt, specific payment 
 name and age from an ID-card Lucidtech is able to provide an adequate machine learning model 
 that can be accessed via *Models*.
 
-Request a model by contacting [support@lucidtech.ai](support@lucidtech.ai), 
+Request a model by contacting [support@lucidtech.ai](mailto:support@lucidtech.ai), 
 or by clicking [Get Started](https://lucidtech.ai) on our home page.
 
 See what models that are available by using `models list` available via the CLI;

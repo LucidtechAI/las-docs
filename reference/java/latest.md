@@ -20,9 +20,9 @@
  Members                        | Descriptions                                
 --------------------------------|---------------------------------------------
 `public inline  `[`Client`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_client_1afb65b879166c0ccae64fff9515a99d10)`(`[`Credentials`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_credentials)` credentials)` | A client to invoke api methods from Lucidtech AI Services.
-`public inline JSONObject `[`createAsset`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_client_1a81740f0c48031ee80a5f330ad2469171)`(byte[] content,CreateAssetOptions options)` | Creates an asset, calls the POST /assets endpoint.
+`public inline JSONObject `[`createAsset`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_client_1a81740f0c48031ee80a5f330ad2469171)`(byte [] content,CreateAssetOptions options)` | Creates an asset, calls the POST /assets endpoint.
 `public inline JSONObject `[`createAsset`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_client_1a2bb92bb23b32701d31ac242555f86969)`(InputStream content,CreateAssetOptions options)` | Creates an asset, calls the POST /assets endpoint.
-`public inline JSONObject `[`createAsset`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_client_1a793e80233e2a3f438e9c1a9d8bdbb987)`(byte[] content)` | Creates an asset, calls the POST /assets endpoint.
+`public inline JSONObject `[`createAsset`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_client_1a793e80233e2a3f438e9c1a9d8bdbb987)`(byte [] content)` | Creates an asset, calls the POST /assets endpoint.
 `public inline JSONObject `[`createAsset`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_client_1a921a5e0aaeb4f72b27af1279bb6b593c)`(InputStream content)` | Creates an asset, calls the POST /assets endpoint.
 `public inline JSONObject `[`listAssets`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_client_1a4ed339d8860dadb783cf838ba51cb2d9)`(ListAssetsOptions options)` | List assets available, calls the GET /assets endpoint.
 `public inline JSONObject `[`listAssets`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_client_1adea123f22256156832896e2a65624381)`()` | List assets available, calls the GET /assets endpoint.
@@ -30,10 +30,10 @@
 `public inline JSONObject `[`updateAsset`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_client_1a7b25f20184448f0780de690dd4419739)`(String assetId,UpdateAssetOptions options)` | Updates an asset, calls the PATCH /assets/{assetId} endpoint.
 `public inline JSONObject `[`createBatch`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_client_1af07728a2fb0b4805beae2c61543d3c5a)`(CreateBatchOptions options)` | Creates a batch, calls the POST /batches endpoint.
 `public inline JSONObject `[`createBatch`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_client_1a9a205e73eb71d82c36c122eceb982bd2)`()` | Creates a batch, calls the POST /batches endpoint.
-`public inline JSONObject `[`createDocument`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_client_1a20f4fcce80169d0d9b5444c13c1ef20f)`(byte[] content,ContentType contentType,CreateDocumentOptions options)` | Creates a document, calls the POST /documents endpoint.
+`public inline JSONObject `[`createDocument`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_client_1a20f4fcce80169d0d9b5444c13c1ef20f)`(byte [] content,ContentType contentType,CreateDocumentOptions options)` | Creates a document, calls the POST /documents endpoint.
 `public inline JSONObject `[`createDocument`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_client_1ac8925645725cd4cf79fe4d3503d394e7)`(InputStream content,ContentType contentType,CreateDocumentOptions options)` | Creates a document, calls the POST /documents endpoint.
 `public inline JSONObject `[`createDocument`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_client_1aabaf95b529aad728a0d5543adcec737c)`(InputStream content,ContentType contentType)` | Creates a document, calls the POST /documents endpoint.
-`public inline JSONObject `[`createDocument`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_client_1a144f0fe029a55ef9491605a5e967974c)`(byte[] content,ContentType contentType)` | Creates a document, calls the POST /documents endpoint.
+`public inline JSONObject `[`createDocument`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_client_1a144f0fe029a55ef9491605a5e967974c)`(byte [] content,ContentType contentType)` | Creates a document, calls the POST /documents endpoint.
 `public inline JSONObject `[`listDocuments`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_client_1a51910821bf6df9383a09e9690dd3d891)`(ListDocumentsOptions options)` | List documents, calls the GET /documents endpoint.
 `public inline JSONObject `[`listDocuments`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_client_1a15d880fed0ee9683e7f92c3a9966ba31)`()` | List documents, calls the GET /documents endpoint.
 `public inline JSONObject `[`deleteDocuments`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_client_1a6e15284a79148f819df27eb116e1523d)`()` | Delete documents, calls the DELETE /documents endpoint.
@@ -74,8 +74,8 @@
 `public inline JSONObject `[`getUser`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_client_1a20f91d81c208182343abb01a17ce166f)`(String userId)` | Get information about a specific user, calls the GET /users/{user_id} endpoint.
 `public inline JSONObject `[`updateUser`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_client_1acdf606ec8f63f43b4ab97e3eaa3e0926)`(String userId,UpdateUserOptions options)` | Updates a user, calls the PATCH /users/{userId} endpoint.
 `public inline JSONObject `[`deleteUser`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_client_1a1c6b2dda4b6935f0118f5f38082e7931)`(String userId)` | Delete a user, calls the PATCH /users/{userId} endpoint.
-`public inline JSONObject `[`createWorkflow`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_client_1a13d79b4da5daf9385fd83c2f0ed66074)`(JSONObject specification,CreateWorkflowOptions options)` | Creates a new workflow, calls the POST /workflows endpoint. Check out Lucidtech's tutorials for more info on how to create a workflow. see [https://docs.lucidtech.ai/getting-started/tutorials/tutorial_custom_predict_and_approve](https://docs.lucidtech.ai/getting-started/tutorials/tutorial_custom_predict_and_approve)
-`public inline JSONObject `[`createWorkflow`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_client_1af2b4a31a375c0f6df3b2ad0542a2f616)`(JSONObject specification)` | Creates a new workflow, calls the POST /workflows endpoint. Check out Lucidtech's tutorials for more info on how to create a workflow. see [https://docs.lucidtech.ai/getting-started/tutorials/tutorial_custom_predict_and_approve](https://docs.lucidtech.ai/getting-started/tutorials/tutorial_custom_predict_and_approve)
+`public inline JSONObject `[`createWorkflow`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_client_1a13d79b4da5daf9385fd83c2f0ed66074)`(JSONObject specification,CreateWorkflowOptions options)` | Creates a new workflow, calls the POST /workflows endpoint. Check out Lucidtech's tutorials for more info on how to create a workflow. see [https://docs.lucidtech.ai/getting-started/tutorials/setup_predict_and_approve](https://docs.lucidtech.ai/getting-started/tutorials/setup_predict_and_approve)
+`public inline JSONObject `[`createWorkflow`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_client_1af2b4a31a375c0f6df3b2ad0542a2f616)`(JSONObject specification)` | Creates a new workflow, calls the POST /workflows endpoint. Check out Lucidtech's tutorials for more info on how to create a workflow. see [https://docs.lucidtech.ai/getting-started/tutorials/setup_predict_and_approve](https://docs.lucidtech.ai/getting-started/tutorials/setup_predict_and_approve)
 `public inline JSONObject `[`listWorkflows`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_client_1a46fa269fd3dcb067d858eba91fb05e75)`(ListWorkflowsOptions options)` | List workflows, calls the GET /workflows endpoint.
 `public inline JSONObject `[`listWorkflows`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_client_1a8c2d549f4205f9cd9a0e58564ed3390b)`()` | List workflows, calls the GET /workflows endpoint.
 `public inline JSONObject `[`getWorkflow`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_client_1ab1c73efebc0768de2278212d094ceaf6)`(String workflowId)` | Get workflow, calls the GET /workflows/{workflowId} endpoint.
@@ -97,7 +97,7 @@ A client to invoke api methods from Lucidtech AI Services.
 
 **See also**: [Credentials](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_credentials)
 
-#### `public inline JSONObject `[`createAsset`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_client_1a81740f0c48031ee80a5f330ad2469171)`(byte[] content,CreateAssetOptions options)` 
+#### `public inline JSONObject `[`createAsset`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_client_1a81740f0c48031ee80a5f330ad2469171)`(byte [] content,CreateAssetOptions options)` 
 
 Creates an asset, calls the POST /assets endpoint.
 
@@ -139,7 +139,7 @@ Asset response from API
 
 * `MissingAccessTokenException` Raised if access token cannot be obtained
 
-#### `public inline JSONObject `[`createAsset`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_client_1a793e80233e2a3f438e9c1a9d8bdbb987)`(byte[] content)` 
+#### `public inline JSONObject `[`createAsset`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_client_1a793e80233e2a3f438e9c1a9d8bdbb987)`(byte [] content)` 
 
 Creates an asset, calls the POST /assets endpoint.
 
@@ -277,7 +277,7 @@ Batch response from REST API
 
 * `MissingAccessTokenException` Raised if access token cannot be obtained
 
-#### `public inline JSONObject `[`createDocument`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_client_1a20f4fcce80169d0d9b5444c13c1ef20f)`(byte[] content,ContentType contentType,CreateDocumentOptions options)` 
+#### `public inline JSONObject `[`createDocument`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_client_1a20f4fcce80169d0d9b5444c13c1ef20f)`(byte [] content,ContentType contentType,CreateDocumentOptions options)` 
 
 Creates a document, calls the POST /documents endpoint.
 
@@ -344,7 +344,7 @@ Document response from REST API
 
 * `MissingAccessTokenException` Raised if access token cannot be obtained
 
-#### `public inline JSONObject `[`createDocument`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_client_1a144f0fe029a55ef9491605a5e967974c)`(byte[] content,ContentType contentType)` 
+#### `public inline JSONObject `[`createDocument`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_client_1a144f0fe029a55ef9491605a5e967974c)`(byte [] content,ContentType contentType)` 
 
 Creates a document, calls the POST /documents endpoint.
 
@@ -1108,12 +1108,12 @@ User response from REST API
 
 #### `public inline JSONObject `[`createWorkflow`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_client_1a13d79b4da5daf9385fd83c2f0ed66074)`(JSONObject specification,CreateWorkflowOptions options)` 
 
-Creates a new workflow, calls the POST /workflows endpoint. Check out Lucidtech's tutorials for more info on how to create a workflow. see [https://docs.lucidtech.ai/getting-started/tutorials/tutorial_custom_predict_and_approve](https://docs.lucidtech.ai/getting-started/tutorials/tutorial_custom_predict_and_approve)
+Creates a new workflow, calls the POST /workflows endpoint. Check out Lucidtech's tutorials for more info on how to create a workflow. see [https://docs.lucidtech.ai/getting-started/tutorials/setup_predict_and_approve](https://docs.lucidtech.ai/getting-started/tutorials/setup_predict_and_approve)
 
 **See also**: CreateWorkflowOptions 
 
 #### Parameters
-* `specification` Specification of the workflow, currently supporting ASL: [https://states-language.net/spec.html](https://states-language.net/spec.html). Check out the tutorials for more information: see [https://docs.lucidtech.ai/getting-started/tutorials/tutorial_custom_predict_and_approve#creating-the-workflow](https://docs.lucidtech.ai/getting-started/tutorials/tutorial_custom_predict_and_approve#creating-the-workflow)
+* `specification` Specification of the workflow, currently supporting ASL: [https://states-language.net/spec.html](https://states-language.net/spec.html). Check out the tutorials for more information: see [https://docs.lucidtech.ai/getting-started/tutorials/setup_predict_and_approve#creating-the-workflow](https://docs.lucidtech.ai/getting-started/tutorials/setup_predict_and_approve#creating-the-workflow)
 
 * `options` Additional options to include in request body 
 
@@ -1129,10 +1129,10 @@ Workflow response from API
 
 #### `public inline JSONObject `[`createWorkflow`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_client_1af2b4a31a375c0f6df3b2ad0542a2f616)`(JSONObject specification)` 
 
-Creates a new workflow, calls the POST /workflows endpoint. Check out Lucidtech's tutorials for more info on how to create a workflow. see [https://docs.lucidtech.ai/getting-started/tutorials/tutorial_custom_predict_and_approve](https://docs.lucidtech.ai/getting-started/tutorials/tutorial_custom_predict_and_approve)
+Creates a new workflow, calls the POST /workflows endpoint. Check out Lucidtech's tutorials for more info on how to create a workflow. see [https://docs.lucidtech.ai/getting-started/tutorials/setup_predict_and_approve](https://docs.lucidtech.ai/getting-started/tutorials/setup_predict_and_approve)
 
 #### Parameters
-* `specification` Specification of the workflow, currently supporting ASL: [https://states-language.net/spec.html](https://states-language.net/spec.html). Check out the tutorials for more information: see [https://docs.lucidtech.ai/getting-started/tutorials/tutorial_custom_predict_and_approve#creating-the-workflow](https://docs.lucidtech.ai/getting-started/tutorials/tutorial_custom_predict_and_approve#creating-the-workflow)
+* `specification` Specification of the workflow, currently supporting ASL: [https://states-language.net/spec.html](https://states-language.net/spec.html). Check out the tutorials for more information: see [https://docs.lucidtech.ai/getting-started/tutorials/setup_predict_and_approve#creating-the-workflow](https://docs.lucidtech.ai/getting-started/tutorials/setup_predict_and_approve#creating-the-workflow)
 
 #### Returns
 Workflow response from API 
