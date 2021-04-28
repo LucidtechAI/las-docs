@@ -47,14 +47,28 @@ Run inference on the document using a model
 ## Set ground truth of document
 
 Suppose we make a prediction that returns incorrect values and we wish to improve the model for future use. We can do so by sending feedback to the model, telling it what the expected values should have been.
+We can then use the optional parameters `--ground-truth-path` or `--ground-truth-fields`.
 
 ```bash
->> $ las documents create invoice.pdf
+>> $ las documents create invoice.pdf --ground-truth-path ground_truth.json
 {
   "documentId": "las:document:<hex>",
   "contentType": "application/pdf"
+  "groundTruth": [
+    ...
+  ]
 }
->> $ las documents update las:document:<hex> --fields total_amount=300.00 due_date=2020-02-28
+```
+In this case the `ground_truth.json` should be on the following format
+```json 
+{
+    "total_amount": "300.00",
+    "due_date": "2020-02-20"
+}
+```
+You can also add the ground truth to an existing document 
+```bash
+>> $ las documents update las:document:<hex> --ground-truth-fields total_amount=300.00 due_date=2020-02-28
 {
   "documentId": "las:document:<hex>",
   "groundTruth": [
