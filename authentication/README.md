@@ -5,7 +5,6 @@ will typically handle authentication for you but should you wish to use the REST
 yourself. Here is a brief introduction to get you started
 
 
-<!-- markdown-link-check-disable --> 
 #### Credentials
 You should already have acquired a client id, client secret and api key before continuing. The client id and client 
 secret will be used to get an access token from the auth endpoint and the api key will be used together with the 
@@ -14,7 +13,6 @@ access token to authorize to the API.
 Unless specified otherwise in the credentials file you have received, the endpoint for authentication is 
 https://auth.lucidtech.ai and the endpoint for the API is https://api.lucidtech.ai
 
-<!-- markdown-link-check-enable--> 
 #### Getting an access token
 
 To acquire an access token we need to ask the auth endpoint with our client id and client secret for access. This is 

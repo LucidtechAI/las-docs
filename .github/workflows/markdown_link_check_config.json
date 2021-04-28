@@ -5,6 +5,12 @@
     },
     {
       "pattern": "^https://{prefix}.api.lucidtech.ai/{version}"
+    },
+    {
+      "pattern": "^https://auth.lucidtech.ai"
+    },
+    {
+      "pattern": "^https://api.lucidtech.ai"
     }
   ],
   "replacementPatterns": [
