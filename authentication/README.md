@@ -13,6 +13,7 @@ access token to authorize to the API.
 Unless specified otherwise in the credentials file you have received, the endpoint for authentication is 
 https://auth.lucidtech.ai and the endpoint for the API is https://api.lucidtech.ai
 
+<!-- markdown-link-check-enable--> 
 #### Getting an access token
 
 To acquire an access token we need to ask the auth endpoint with our client id and client secret for access. This is 
