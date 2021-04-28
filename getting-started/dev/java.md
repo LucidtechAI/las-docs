@@ -50,31 +50,31 @@ See what models you have available and their model id by using the method `listM
 
 ## Set ground truth of document
 
+When uploading data that will be used for training and evaluation, we need to provide a ground truth.
+```java
+File file = new File("myReceipt.pdf");
+InputStream content = new FileInputStream(file);
+JSONArray groundTruth = new JSONArray();
+groundTruth.put(new JSONObject(){{ put("label", "totalAmount"); put("value", "100.00"); }});
+groundTruth.put(new JSONObject(){{ put("label", "dueDate"); put("value", "2020-02-20"); }});
+CreateDocumentOptions options = new CreateDocumentOptions().setGroundTruth(groundTruth);
+JSONObject document = this.client.createDocument(content, ContentType.PDF, options);
+```
+
+### Update an existing document
+If for instance a prediction reveals incorrect values in the ground truth of a document, 
+we can update the existing document with new ground truth values.
+```java
+JSONArray groundTruth = new JSONArray();
+groundTruth.put(new JSONObject(){{ put("label", "totalAmount"); put("value", "199.00"); }});
+groundTruth.put(new JSONObject(){{ put("label", "dueDate"); put("value", "2020-03-20"); }});
+JSONObject document = this.client.createDocument("las:document:<hex-uuid>", groundTruth);
+```
+## Set ground truth of document
+
 Suppose we make a prediction that returns incorrect values and we wish to improve the model for future use. 
 We can do so by sending groundTruth to the model, telling it what the expected values should have been.
 
-```java
-public void setDocumentGroundTruth() throws IOException, APIException, MissingAccessTokenException {
-    JSONObject groundTruth = new JSONObject();
-
-    JSONObject totalAmount = new JSONObject();
-    totalAmount.put("label", "total_amount");
-    totalAmount.put("value", "123.00");
-
-    JSONObject purchaseDate = new JSONObject();
-    purchaseDate.put("label", "purchase_date");
-    purchaseDate.put("value", "2019-05-23");
-
-    List<JSONObject> fieldList = Arrays.asList(totalAmount, purchaseDate);
-    JSONArray fields = new JSONArray(fieldList);
-    groundTruth.put("groundTruth", fields);
-
-    JSONObject groundTruthResponse = client.updateDocument(documentId, groundTruth);
-    Assert.assertNotNull(groundTruthResponse.get("documentId"));
-    Assert.assertNotNull(groundTruthResponse.get("consentId"));
-    Assert.assertNotNull(groundTruthResponse.get("groundTruth"));
-}
-```
 
 ## Create a batch and associate a few documents with it
 
