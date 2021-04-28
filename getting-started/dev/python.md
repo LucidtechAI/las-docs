@@ -24,21 +24,23 @@ print(prediction)
 
 ## Set ground truth of document
 
-Suppose we make a prediction that returns incorrect values and we wish to improve the model for future use. 
-We can do so by sending feedback to the model, telling it what the expected values should have been.
-
+When uploading data that will be used for training and evaluation, we need to provide a ground truth.
 ```python
 from las import Client
 
 client = Client()
-document = client.create_document('invoice.pdf', 'application/pdf')
 ground_truth = [
     {'label': 'total_amount', 'value': '240.00'},
     {'label': 'due_date', 'value': '2020-01-31'}
 ]
-document = client.update_document(document['documentId'], ground_truth=ground_truth)
+document = client.create_document('invoice.pdf', 'application/pdf', ground_truth=ground_truth)
+```
 
-print(document)
+### Update an existing document
+If for instance a prediction reveals incorrect values in the ground truth of a document, 
+we can update the existing document with new ground truth values.
+```python
+document = client.update_document('las:document:<hex-uuid>', ground_truth=ground_truth)
 ```
 
 {% hint style="info" %}
