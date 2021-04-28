@@ -5,6 +5,7 @@ will typically handle authentication for you but should you wish to use the REST
 yourself. Here is a brief introduction to get you started
 
 
+<!-- markdown-link-check-disable --> 
 #### Credentials
 You should already have acquired a client id, client secret and api key before continuing. The client id and client 
 secret will be used to get an access token from the auth endpoint and the api key will be used together with the 
