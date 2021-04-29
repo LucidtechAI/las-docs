@@ -40,7 +40,35 @@ console.log(predictions);
 
 ## Set ground truth of document
 
-Suppose we make a prediction that returns incorrect values and we wish to improve the model for future use. We can do so by sending feedback to the model, telling it what the expected values should have been.
+When uploading data that will be used for training and evaluation, we need to provide a ground truth.
+```javascript
+const groundTruth = [
+  { 'label': 'total_amount', 'value': '240.01' },
+  { 'label': 'due_date', 'value': '2020-01-31' },
+];
+const { documentId } = await client.createDocument('<document content>', '<document mime type>', { groundTruth });
+```
+
+### Update an existing document
+
+If for instance a prediction reveals incorrect values in the ground truth of a document, 
+we can update the existing document with new ground truth values.
+
+```javascript
+const groundTruth = [
+  { 'label': 'total_amount', 'value': '240.01' },
+  { 'label': 'due_date', 'value': '2020-01-31' },
+];
+client.updateDocument('las:document:<hex-uuid>', groundTruth);
+```
+
+{% hint style="info" %}
+Providing ground truth is a necessary to re-train a model whether the model got it right or wrong. So always provide 
+the ground truth if it is available.
+{% endhint %}
+
+
+## Create a document with consent id
 
 {% hint style="info" %}
 Consent ID is an identifier you can assign to documents to keep track of document ownership for your customers.
@@ -48,11 +76,6 @@ Consent ID is an identifier you can assign to documents to keep track of documen
 
 ```javascript
 const { documentId } = await client.createDocument('<document content>', '<document mime type>', { consentId: '<consent id>' });
-const groundTruths = [
-  { 'label': 'total_amount', 'value': '240.01' },
-  { 'label': 'due_date', 'value': '2020-01-31' },
-];
-client.updateDocument(documentId, groundTruths);
 ```
 
 ## Create a batch and associate a few documents with it
