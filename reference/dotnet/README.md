@@ -2,7 +2,7 @@
 
 ## Installation
 The .NET SDK for Lucidtech AI Services (LAS) can be downloaded from 
-[nuget](nuget.org/packages/Lucidtech.Las)
+[nuget](https://www.nuget.org/packages/Lucidtech.Las)
 
 ```commandline
 $ dotnet add package Lucidtech.Las
