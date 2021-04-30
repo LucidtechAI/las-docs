@@ -16,17 +16,10 @@ you are ready to enhance your document-flow with the las client:
 using System;
 using Lucidtech.Las;
 
-namespace csharp
-{
-    class Program
-    {
-        static void Main(string[] args)
-        {
-            var client = new Client();
-            ... 
-        }
-    }
-}
+var client = new Client();
+var models = client.ListModels();
+var documents = client.ListDocuments();
+var workflows = client.ListWorkflows();
 ```
 If you are new to LAS we recommend you to check out the [key concepts](../../introduction) 
 for a better understanding of what is possible with LAS.
