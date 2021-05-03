@@ -50,7 +50,10 @@ jobs:
         run: |
           cd java-sdk
           doxygen
+          sed -i 's/inline="yes"/inline="no"/g' xml/* #Remove inline
           npx moxygen xml
+          sed -i 's/` `/ /g' api.md
+          perl -pi -e 's|(\(\#class.*?\))||' api.md # Remove identifier, use pearl to get a non-greedy match
           mv api.md ../reference/java/latest.md
 
       - name: Check out .NET sdk
@@ -63,7 +66,10 @@ jobs:
         run: |
           cd net-sdk
           doxygen documentation.conf
+          sed -i 's/inline="yes"/inline="no"/g' xml/* #Remove inline
           npx moxygen xml
+          sed -i 's/` `/ /g' api.md
+          perl -pi -e 's|(\(\#class.*?\))||' api.md # Remove identifier, use pearl to get a non-greedy match
           mv api.md ../reference/dotnet/latest.md
 
       - name: Check out java-script sdk
