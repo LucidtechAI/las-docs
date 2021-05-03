@@ -9,6 +9,53 @@ Bases: `object`
 A low level client to invoke api methods from Lucidtech AI Services.
 
 
+#### create_app_client(generate_secret=True, logout_urls=None, callback_urls=None, \*\*optional_args)
+Creates an appClient, calls the POST /appClients endpoint.
+
+```python
+>>> from las.client import Client
+>>> client = Client()
+>>> client.create_app_client(name='<name>', description='<description>')
+```
+
+
+* **Parameters**
+
+    
+    * **name** (*Optional**[**str**]*) – Name of the appClient
+
+
+    * **description** (*Optional**[**str**]*) – Description of the appClient
+
+
+    * **generate_secret** (*Boolean*) – Set to False to ceate a Public app client, default: True
+
+
+    * **logout_urls** (*List**[**str**]*) – List of logout urls
+
+
+    * **callback_urls** (*List**[**str**]*) – List of callback urls
+
+
+
+* **Returns**
+
+    AppClient response from REST API
+
+
+
+* **Return type**
+
+    dict
+
+
+
+* **Raises**
+
+    `InvalidCredentialsException`, `TooManyRequestsException`, `LimitExceededException`, `requests.exception.RequestException`
+
+
+
 #### create_asset(content: Union[bytes, bytearray, str, pathlib.Path, io.IOBase], \*\*optional_args)
 Creates an asset, calls the POST /assets endpoint.
 
@@ -113,20 +160,13 @@ Creates a document, calls the POST /documents endpoint.
     * **batch_id** (*Optional**[**str**]*) – Id of the associated batch
 
 
-    * **ground_truth** (*Optional**[**Sequence**[**Dict**[**str**, **str**]**]**]*) – List of items {label: value} representing the ground truth values for the document
+    * **ground_truth** – List of items {‘label’: label, ‘value’: value}
 
 
-
-* **Returns**
-
-    Document response from REST API
-
-
-
-* **Return type**
-
-    dict
-
+representing the ground truth values for the document
+:type ground_truth: Optional[Sequence[Dict[str, str]]]
+:return: Document response from REST API
+:rtype: dict
 
 
 * **Raises**
@@ -380,6 +420,40 @@ Check out Lucidtech’s tutorials for more info on how to create a workflow.
 
 
 
+#### delete_app_client(app_client_id: str)
+Delete the appClient with the provided appClientId, calls the DELETE /appClients/{appClientId} endpoint.
+
+```python
+>>> from las.client import Client
+>>> client = Client()
+>>> client.delete_app_client('<app_client_id>')
+```
+
+
+* **Parameters**
+
+    **app_client_id** (*str*) – Id of the appClient
+
+
+
+* **Returns**
+
+    AppClient response from REST API
+
+
+
+* **Return type**
+
+    dict
+
+
+
+* **Raises**
+
+    `InvalidCredentialsException`, `TooManyRequestsException`, `LimitExceededException`, `requests.exception.RequestException`
+
+
+
 #### delete_asset(asset_id: str)
 Delete the asset with the provided asset_id, calls the DELETE /assets/{assetId} endpoint.
 
@@ -414,7 +488,45 @@ Delete the asset with the provided asset_id, calls the DELETE /assets/{assetId} 
 
 
 
-#### delete_documents(\*, consent_id: Optional[Union[str, List[str]]] = None, max_results: Optional[int] = None, next_token: Optional[str] = None)
+#### delete_batch(batch_id: str, delete_documents=False)
+Delete the batch with the provided batch_id, calls the DELETE /batches/{batchId} endpoint.
+
+```python
+>>> from las.client import Client
+>>> client = Client()
+>>> client.delete_batch('<batch_id>')
+```
+
+
+* **Parameters**
+
+    
+    * **batch_id** (*str*) – Id of the batch
+
+
+    * **delete_documents** (*bool*) – Set to true to delete documents in batch before deleting batch
+
+
+
+* **Returns**
+
+    Batch response from REST API
+
+
+
+* **Return type**
+
+    dict
+
+
+
+* **Raises**
+
+    `InvalidCredentialsException`, `TooManyRequestsException`, `LimitExceededException`, `requests.exception.RequestException`
+
+
+
+#### delete_documents(\*, consent_id: Optional[Union[str, List[str]]] = None, batch_id: Optional[Union[str, List[str]]] = None, max_results: Optional[int] = None, next_token: Optional[str] = None)
 Delete documents with the provided consent_id, calls the DELETE /documents endpoint.
 
 ```python
@@ -427,6 +539,9 @@ Delete documents with the provided consent_id, calls the DELETE /documents endpo
 * **Parameters**
 
     
+    * **batch_id** (*Optional**[**Queryparam**]*) – Ids of the batches to be deleted
+
+
     * **consent_id** (*Optional**[**Queryparam**]*) – Ids of the consents that marks the owner of the document
 
 
@@ -986,6 +1101,44 @@ Get a workflow execution, calls the GET /workflows/{workflow_id}/executions/{exe
 
 
 
+#### list_app_clients(\*, max_results: Optional[int] = None, next_token: Optional[str] = None)
+List appClients available, calls the GET /appClients endpoint.
+
+```python
+>>> from las.client import Client
+>>> client = Client()
+>>> client.list_app_clients()
+```
+
+
+* **Parameters**
+
+    
+    * **max_results** (*Optional**[**int**]*) – Maximum number of results to be returned
+
+
+    * **next_token** (*Optional**[**str**]*) – A unique token for each page, use the returned token to retrieve the next page.
+
+
+
+* **Returns**
+
+    AppClients response from REST API without the content of each appClient
+
+
+
+* **Return type**
+
+    dict
+
+
+
+* **Raises**
+
+    `InvalidCredentialsException`, `TooManyRequestsException`, `LimitExceededException`, `requests.exception.RequestException`
+
+
+
 #### list_assets(\*, max_results: Optional[int] = None, next_token: Optional[str] = None)
 List assets available, calls the GET /assets endpoint.
 
@@ -1009,6 +1162,44 @@ List assets available, calls the GET /assets endpoint.
 * **Returns**
 
     Assets response from REST API without the content of each asset
+
+
+
+* **Return type**
+
+    dict
+
+
+
+* **Raises**
+
+    `InvalidCredentialsException`, `TooManyRequestsException`, `LimitExceededException`, `requests.exception.RequestException`
+
+
+
+#### list_batches(\*, max_results: Optional[int] = None, next_token: Optional[str] = None)
+List batches available, calls the GET /batches endpoint.
+
+```python
+>>> from las.client import Client
+>>> client = Client()
+>>> client.list_batches()
+```
+
+
+* **Parameters**
+
+    
+    * **max_results** (*Optional**[**int**]*) – Maximum number of results to be returned
+
+
+    * **next_token** (*Optional**[**str**]*) – A unique token for each page, use the returned token to retrieve the next page.
+
+
+
+* **Returns**
+
+    Batches response from REST API without the content of each batch
 
 
 
@@ -1053,6 +1244,56 @@ List documents available for inference, calls the GET /documents endpoint.
 * **Returns**
 
     Documents response from REST API
+
+
+
+* **Return type**
+
+    dict
+
+
+
+* **Raises**
+
+    `InvalidCredentialsException`, `TooManyRequestsException`, `LimitExceededException`, `requests.exception.RequestException`
+
+
+
+#### list_logs(\*, workflow_id: Optional[Union[str, List[str]]] = None, workflow_execution_id: Optional[Union[str, List[str]]] = None, transition_id: Optional[Union[str, List[str]]] = None, transition_execution_id: Optional[Union[str, List[str]]] = None, max_results: Optional[int] = None, next_token: Optional[str] = None)
+List logs, calls the GET /logs endpoint.
+
+```python
+>>> from las.client import Client
+>>> client = Client()
+>>> client.list_logs()
+```
+
+
+* **Parameters**
+
+    
+    * **workflow_id** (*Optional**[**Queryparam**]*) – 
+
+
+    * **workflow_execution_id** (*Optional**[**Queryparam**]*) – 
+
+
+    * **transition_id** (*Optional**[**Queryparam**]*) – 
+
+
+    * **transition_execution_id** (*Optional**[**Queryparam**]*) – 
+
+
+    * **max_results** (*Optional**[**int**]*) – Maximum number of results to be returned
+
+
+    * **next_token** (*Optional**[**str**]*) – A unique token for each page, use the returned token to retrieve the next page.
+
+
+
+* **Returns**
+
+    Logs response from REST API
 
 
 

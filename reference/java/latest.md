@@ -55,17 +55,17 @@ class ai::lucidtech::las::sdk::APIException
 
  Members                        | Descriptions                                
 --------------------------------|---------------------------------------------
-`public inline  `[`APIException`]`()` | 
-`public inline  `[`APIException`]`(String message)` | 
-`public inline  `[`APIException`]`(int code,String message)` | 
+`public  `[`APIException`]`()` | 
+`public  `[`APIException`]`(String message)` | 
+`public  `[`APIException`]`(int code,String message)` | 
 
 ## Members
 
-#### `public inline  `[`APIException`]`()` 
+#### `public  `[`APIException`]`()` 
 
-#### `public inline  `[`APIException`]`(String message)` 
+#### `public  `[`APIException`]`(String message)` 
 
-#### `public inline  `[`APIException`]`(int code,String message)` 
+#### `public  `[`APIException`]`(int code,String message)` 
 
 # class `ai::lucidtech::las::sdk::Client` 
 
@@ -73,76 +73,76 @@ class ai::lucidtech::las::sdk::APIException
 
  Members                        | Descriptions                                
 --------------------------------|---------------------------------------------
-`public inline  `[`Client`]`(`[`Credentials`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_credentials)` credentials)` | A client to invoke api methods from Lucidtech AI Services.
-`public inline JSONObject `[`createAsset`]`(byte [] content,`[`CreateAssetOptions`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_create_asset_options)` options)` | Creates an asset, calls the POST /assets endpoint.
-`public inline JSONObject `[`createAsset`]`(InputStream content,`[`CreateAssetOptions`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_create_asset_options)` options)` | Creates an asset, calls the POST /assets endpoint.
-`public inline JSONObject `[`createAsset`]`(byte [] content)` | Creates an asset, calls the POST /assets endpoint.
-`public inline JSONObject `[`createAsset`]`(InputStream content)` | Creates an asset, calls the POST /assets endpoint.
-`public inline JSONObject `[`listAssets`]`(`[`ListAssetsOptions`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_list_assets_options)` options)` | List assets available, calls the GET /assets endpoint.
-`public inline JSONObject `[`listAssets`]`()` | List assets available, calls the GET /assets endpoint.
-`public inline JSONObject `[`getAsset`]`(String assetId)` | Get asset, calls the GET /assets/{assetId} endpoint.
-`public inline JSONObject `[`updateAsset`]`(String assetId,`[`UpdateAssetOptions`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_update_asset_options)` options)` | Updates an asset, calls the PATCH /assets/{assetId} endpoint.
-`public inline JSONObject `[`createBatch`]`(`[`CreateBatchOptions`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_create_batch_options)` options)` | Creates a batch, calls the POST /batches endpoint.
-`public inline JSONObject `[`createBatch`]`()` | Creates a batch, calls the POST /batches endpoint.
-`public inline JSONObject `[`createDocument`]`(byte [] content,`[`ContentType`](#enumai_1_1lucidtech_1_1las_1_1sdk_1_1_content_type)` contentType,`[`CreateDocumentOptions`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_create_document_options)` options)` | Creates a document, calls the POST /documents endpoint.
-`public inline JSONObject `[`createDocument`]`(InputStream content,`[`ContentType`](#enumai_1_1lucidtech_1_1las_1_1sdk_1_1_content_type)` contentType,`[`CreateDocumentOptions`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_create_document_options)` options)` | Creates a document, calls the POST /documents endpoint.
-`public inline JSONObject `[`createDocument`]`(InputStream content,`[`ContentType`](#enumai_1_1lucidtech_1_1las_1_1sdk_1_1_content_type)` contentType)` | Creates a document, calls the POST /documents endpoint.
-`public inline JSONObject `[`createDocument`]`(byte [] content,`[`ContentType`](#enumai_1_1lucidtech_1_1las_1_1sdk_1_1_content_type)` contentType)` | Creates a document, calls the POST /documents endpoint.
-`public inline JSONObject `[`listDocuments`]`(`[`ListDocumentsOptions`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_list_documents_options)` options)` | List documents, calls the GET /documents endpoint.
-`public inline JSONObject `[`listDocuments`]`()` | List documents, calls the GET /documents endpoint.
-`public inline JSONObject `[`deleteDocuments`]`()` | Delete documents, calls the DELETE /documents endpoint.
-`public inline JSONObject `[`deleteDocuments`]`(String consentId)` | Delete documents with the provided consentId, calls the DELETE /documents endpoint.
-`public inline JSONObject `[`getDocument`]`(String documentId)` | Get document, calls the GET /documents/{documentId} endpoint.
-`public inline JSONObject `[`updateDocument`]`(String documentId,JSONArray groundTruth)` | Update ground truth for a document, calls the PATCH /documents/{documentId} endpoint.
-`public inline JSONObject `[`getLog`]`(String logId)` | Get log, calls the GET /logs/{logId} endpoint.
-`public inline JSONObject `[`listModels`]`(`[`ListModelsOptions`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_list_models_options)` options)` | List models available, calls the GET /models endpoint.
-`public inline JSONObject `[`listModels`]`()` | List models available, calls the GET /models endpoint.
-`public inline JSONObject `[`createPrediction`]`(String documentId,String modelId,`[`CreatePredictionOptions`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_create_prediction_options)` options)` | Create a prediction on a document using specified model, calls the POST /predictions endpoint.
-`public inline JSONObject `[`createPrediction`]`(String documentId,String modelId)` | Create a prediction on a document using specified model, calls the POST /predictions endpoint.
-`public inline JSONObject `[`listPredictions`]`(`[`ListPredictionsOptions`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_list_predictions_options)` options)` | List predictions available, calls the GET /predictions endpoint.
-`public inline JSONObject `[`listPredictions`]`()` | List predictions available, calls the GET /predictions endpoint.
-`public inline JSONObject `[`createSecret`]`(JSONObject data,`[`CreateSecretOptions`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_create_secret_options)` options)` | Creates a secret, calls the POST /secrets endpoint.
-`public inline JSONObject `[`createSecret`]`(Map< String, String > data,`[`CreateSecretOptions`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_create_secret_options)` options)` | Creates a secret, calls the POST /secrets endpoint.
-`public inline JSONObject `[`createSecret`]`(Map< String, String > data)` | Creates a secret, calls the POST /secrets endpoint.
-`public inline JSONObject `[`createSecret`]`(JSONObject data)` | Creates a secret, calls the POST /secrets endpoint.
-`public inline JSONObject `[`listSecrets`]`(`[`ListSecretsOptions`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_list_secrets_options)` options)` | List secrets available, calls the GET /secrets endpoint.
-`public inline JSONObject `[`listSecrets`]`()` | List secrets available, calls the GET /secrets endpoint.
-`public inline JSONObject `[`updateSecret`]`(String secretId,`[`UpdateSecretOptions`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_update_secret_options)` options)` | Updates a secret, calls the PATCH /secrets/{secretId} endpoint.
-`public inline JSONObject `[`createTransition`]`(`[`TransitionType`](#enumai_1_1lucidtech_1_1las_1_1sdk_1_1_transition_type)` transitionType,`[`CreateTransitionOptions`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_create_transition_options)` options)` | Creates a transition, calls the POST /transitions endpoint.
-`public inline JSONObject `[`createTransition`]`(`[`TransitionType`](#enumai_1_1lucidtech_1_1las_1_1sdk_1_1_transition_type)` transitionType)` | Creates a transition, calls the POST /transitions endpoint.
-`public inline JSONObject `[`listTransitions`]`(`[`ListTransitionsOptions`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_list_transitions_options)` options)` | List transitions, calls the GET /transitions endpoint.
-`public inline JSONObject `[`listTransitions`]`()` | List transitions, calls the GET /transitions endpoint.
-`public inline JSONObject `[`getTransition`]`(String transitionId)` | Get transition, calls the GET /transitions/{transitionId} endpoint.
-`public inline JSONObject `[`updateTransition`]`(String transitionId,`[`UpdateTransitionOptions`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_update_transition_options)` options)` | Updates a transition, calls the PATCH /transitions/{transitionId} endpoint.
-`public inline JSONObject `[`executeTransition`]`(String transitionId)` | Start executing a manual transition, calls the POST /transitions/{transitionId}/executions endpoint.
-`public inline JSONObject `[`deleteTransition`]`(String transitionId)` | Delete a transition, calls the PATCH /transitions/{transitionId} endpoint. Will fail if transition is in use by one or more workflows.
-`public inline JSONObject `[`listTransitionExecutions`]`(String transitionId,`[`ListTransitionExecutionsOptions`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_list_transition_executions_options)` options)` | List executions in a transition, calls the GET /transitions/{transitionId}/executions endpoint.
-`public inline JSONObject `[`listTransitionExecutions`]`(String transitionId)` | List executions in a transition, calls the GET /transitions/{transitionId}/executions endpoint.
-`public inline JSONObject `[`getTransitionExecution`]`(String transitionId,String executionId)` | Get an execution of a transition, calls the GET /transitions/{transitionId}/executions/{executionId} endpoint
-`public inline JSONObject `[`updateTransitionExecution`]`(String transitionId,String executionId,`[`TransitionExecutionStatus`](#enumai_1_1lucidtech_1_1las_1_1sdk_1_1_transition_execution_status)` status,`[`UpdateTransitionExecutionOptions`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_update_transition_execution_options)` options)` | Ends the processing of the transition execution, calls the PATCH /transitions/{transition_id}/executions/{execution_id} endpoint.
-`public inline JSONObject `[`sendHeartbeat`]`(String transitionId,String executionId)` | Send heartbeat for a manual execution to signal that we are still working on it. Must be done at minimum once every 60 seconds or the transition execution will time out, calls the POST /transitions/{transitionId}/executions/{executionId}/heartbeats endpoint.
-`public inline JSONObject `[`createUser`]`(String email,`[`CreateUserOptions`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_create_user_options)` options)` | Creates a new user, calls the POST /users endpoint.
-`public inline JSONObject `[`createUser`]`(String email)` | Creates a new user, calls the POST /users endpoint.
-`public inline JSONObject `[`listUsers`]`(`[`ListUsersOptions`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_list_users_options)` options)` | List users, calls the GET /users endpoint.
-`public inline JSONObject `[`listUsers`]`()` | List users, calls the GET /users endpoint.
-`public inline JSONObject `[`getUser`]`(String userId)` | Get information about a specific user, calls the GET /users/{user_id} endpoint.
-`public inline JSONObject `[`updateUser`]`(String userId,`[`UpdateUserOptions`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_update_user_options)` options)` | Updates a user, calls the PATCH /users/{userId} endpoint.
-`public inline JSONObject `[`deleteUser`]`(String userId)` | Delete a user, calls the PATCH /users/{userId} endpoint.
-`public inline JSONObject `[`createWorkflow`]`(JSONObject specification,`[`CreateWorkflowOptions`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_create_workflow_options)` options)` | Creates a new workflow, calls the POST /workflows endpoint. Check out Lucidtech's tutorials for more info on how to create a workflow. see [https://docs.lucidtech.ai/getting-started/tutorials/setup_predict_and_approve](https://docs.lucidtech.ai/getting-started/tutorials/setup_predict_and_approve)
-`public inline JSONObject `[`createWorkflow`]`(JSONObject specification)` | Creates a new workflow, calls the POST /workflows endpoint. Check out Lucidtech's tutorials for more info on how to create a workflow. see [https://docs.lucidtech.ai/getting-started/tutorials/setup_predict_and_approve](https://docs.lucidtech.ai/getting-started/tutorials/setup_predict_and_approve)
-`public inline JSONObject `[`listWorkflows`]`(`[`ListWorkflowsOptions`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_list_workflows_options)` options)` | List workflows, calls the GET /workflows endpoint.
-`public inline JSONObject `[`listWorkflows`]`()` | List workflows, calls the GET /workflows endpoint.
-`public inline JSONObject `[`getWorkflow`]`(String workflowId)` | Get workflow, calls the GET /workflows/{workflowId} endpoint.
-`public inline JSONObject `[`updateWorkflow`]`(String workflowId,`[`UpdateWorkflowOptions`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_update_workflow_options)` options)` | Updates a workflow, calls the PATCH /workflows/{workflowId} endpoint.
-`public inline JSONObject `[`deleteWorkflow`]`(String workflowId)` | Delete a workflow, calls the DELETE /workflows/{workflowId} endpoint.
-`public inline JSONObject `[`executeWorkflow`]`(String workflowId,JSONObject content)` | Start a workflow execution, calls the POST /workflows/{workflowId}/executions endpoint.
-`public inline JSONObject `[`listWorkflowExecutions`]`(String workflowId,`[`ListWorkflowExecutionsOptions`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_list_workflow_executions_options)` options)` | List executions in a workflow, calls the GET /workflows/{workflowId}/executions endpoint.
-`public inline JSONObject `[`listWorkflowExecutions`]`(String workflowId)` | List executions in a workflow, calls the GET /workflows/{workflowId}/executions endpoint.
-`public inline JSONObject `[`deleteWorkflowExecution`]`(String workflowId,String executionId)` | Deletes the execution with the provided executionId from workflowId, calls the DELETE /workflows/{workflowId}/executions/{executionId} endpoint.
+`public  `[`Client`]`(`[`Credentials`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_credentials)` credentials)` | A client to invoke api methods from Lucidtech AI Services.
+`public JSONObject `[`createAsset`]`(byte[] content,`[`CreateAssetOptions`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_create_asset_options)` options)` | Creates an asset, calls the POST /assets endpoint.
+`public JSONObject `[`createAsset`]`(InputStream content,`[`CreateAssetOptions`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_create_asset_options)` options)` | Creates an asset, calls the POST /assets endpoint.
+`public JSONObject `[`createAsset`]`(byte[] content)` | Creates an asset, calls the POST /assets endpoint.
+`public JSONObject `[`createAsset`]`(InputStream content)` | Creates an asset, calls the POST /assets endpoint.
+`public JSONObject `[`listAssets`]`(`[`ListAssetsOptions`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_list_assets_options)` options)` | List assets available, calls the GET /assets endpoint.
+`public JSONObject `[`listAssets`]`()` | List assets available, calls the GET /assets endpoint.
+`public JSONObject `[`getAsset`]`(String assetId)` | Get asset, calls the GET /assets/{assetId} endpoint.
+`public JSONObject `[`updateAsset`]`(String assetId,`[`UpdateAssetOptions`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_update_asset_options)` options)` | Updates an asset, calls the PATCH /assets/{assetId} endpoint.
+`public JSONObject `[`createBatch`]`(`[`CreateBatchOptions`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_create_batch_options)` options)` | Creates a batch, calls the POST /batches endpoint.
+`public JSONObject `[`createBatch`]`()` | Creates a batch, calls the POST /batches endpoint.
+`public JSONObject `[`createDocument`]`(byte[] content,`[`ContentType`](#enumai_1_1lucidtech_1_1las_1_1sdk_1_1_content_type)` contentType,`[`CreateDocumentOptions`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_create_document_options)` options)` | Creates a document, calls the POST /documents endpoint.
+`public JSONObject `[`createDocument`]`(InputStream content,`[`ContentType`](#enumai_1_1lucidtech_1_1las_1_1sdk_1_1_content_type)` contentType,`[`CreateDocumentOptions`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_create_document_options)` options)` | Creates a document, calls the POST /documents endpoint.
+`public JSONObject `[`createDocument`]`(InputStream content,`[`ContentType`](#enumai_1_1lucidtech_1_1las_1_1sdk_1_1_content_type)` contentType)` | Creates a document, calls the POST /documents endpoint.
+`public JSONObject `[`createDocument`]`(byte[] content,`[`ContentType`](#enumai_1_1lucidtech_1_1las_1_1sdk_1_1_content_type)` contentType)` | Creates a document, calls the POST /documents endpoint.
+`public JSONObject `[`listDocuments`]`(`[`ListDocumentsOptions`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_list_documents_options)` options)` | List documents, calls the GET /documents endpoint.
+`public JSONObject `[`listDocuments`]`()` | List documents, calls the GET /documents endpoint.
+`public JSONObject `[`deleteDocuments`]`()` | Delete documents, calls the DELETE /documents endpoint.
+`public JSONObject `[`deleteDocuments`]`(String consentId)` | Delete documents with the provided consentId, calls the DELETE /documents endpoint.
+`public JSONObject `[`getDocument`]`(String documentId)` | Get document, calls the GET /documents/{documentId} endpoint.
+`public JSONObject `[`updateDocument`]`(String documentId,JSONArray groundTruth)` | Update ground truth for a document, calls the PATCH /documents/{documentId} endpoint.
+`public JSONObject `[`getLog`]`(String logId)` | Get log, calls the GET /logs/{logId} endpoint.
+`public JSONObject `[`listModels`]`(`[`ListModelsOptions`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_list_models_options)` options)` | List models available, calls the GET /models endpoint.
+`public JSONObject `[`listModels`]`()` | List models available, calls the GET /models endpoint.
+`public JSONObject `[`createPrediction`]`(String documentId,String modelId,`[`CreatePredictionOptions`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_create_prediction_options)` options)` | Create a prediction on a document using specified model, calls the POST /predictions endpoint.
+`public JSONObject `[`createPrediction`]`(String documentId,String modelId)` | Create a prediction on a document using specified model, calls the POST /predictions endpoint.
+`public JSONObject `[`listPredictions`]`(`[`ListPredictionsOptions`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_list_predictions_options)` options)` | List predictions available, calls the GET /predictions endpoint.
+`public JSONObject `[`listPredictions`]`()` | List predictions available, calls the GET /predictions endpoint.
+`public JSONObject `[`createSecret`]`(JSONObject data,`[`CreateSecretOptions`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_create_secret_options)` options)` | Creates a secret, calls the POST /secrets endpoint.
+`public JSONObject `[`createSecret`]`(Map< String, String > data,`[`CreateSecretOptions`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_create_secret_options)` options)` | Creates a secret, calls the POST /secrets endpoint.
+`public JSONObject `[`createSecret`]`(Map< String, String > data)` | Creates a secret, calls the POST /secrets endpoint.
+`public JSONObject `[`createSecret`]`(JSONObject data)` | Creates a secret, calls the POST /secrets endpoint.
+`public JSONObject `[`listSecrets`]`(`[`ListSecretsOptions`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_list_secrets_options)` options)` | List secrets available, calls the GET /secrets endpoint.
+`public JSONObject `[`listSecrets`]`()` | List secrets available, calls the GET /secrets endpoint.
+`public JSONObject `[`updateSecret`]`(String secretId,`[`UpdateSecretOptions`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_update_secret_options)` options)` | Updates a secret, calls the PATCH /secrets/{secretId} endpoint.
+`public JSONObject `[`createTransition`]`(`[`TransitionType`](#enumai_1_1lucidtech_1_1las_1_1sdk_1_1_transition_type)` transitionType,`[`CreateTransitionOptions`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_create_transition_options)` options)` | Creates a transition, calls the POST /transitions endpoint.
+`public JSONObject `[`createTransition`]`(`[`TransitionType`](#enumai_1_1lucidtech_1_1las_1_1sdk_1_1_transition_type)` transitionType)` | Creates a transition, calls the POST /transitions endpoint.
+`public JSONObject `[`listTransitions`]`(`[`ListTransitionsOptions`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_list_transitions_options)` options)` | List transitions, calls the GET /transitions endpoint.
+`public JSONObject `[`listTransitions`]`()` | List transitions, calls the GET /transitions endpoint.
+`public JSONObject `[`getTransition`]`(String transitionId)` | Get transition, calls the GET /transitions/{transitionId} endpoint.
+`public JSONObject `[`updateTransition`]`(String transitionId,`[`UpdateTransitionOptions`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_update_transition_options)` options)` | Updates a transition, calls the PATCH /transitions/{transitionId} endpoint.
+`public JSONObject `[`executeTransition`]`(String transitionId)` | Start executing a manual transition, calls the POST /transitions/{transitionId}/executions endpoint.
+`public JSONObject `[`deleteTransition`]`(String transitionId)` | Delete a transition, calls the PATCH /transitions/{transitionId} endpoint. Will fail if transition is in use by one or more workflows.
+`public JSONObject `[`listTransitionExecutions`]`(String transitionId,`[`ListTransitionExecutionsOptions`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_list_transition_executions_options)` options)` | List executions in a transition, calls the GET /transitions/{transitionId}/executions endpoint.
+`public JSONObject `[`listTransitionExecutions`]`(String transitionId)` | List executions in a transition, calls the GET /transitions/{transitionId}/executions endpoint.
+`public JSONObject `[`getTransitionExecution`]`(String transitionId,String executionId)` | Get an execution of a transition, calls the GET /transitions/{transitionId}/executions/{executionId} endpoint
+`public JSONObject `[`updateTransitionExecution`]`(String transitionId,String executionId,`[`TransitionExecutionStatus`](#enumai_1_1lucidtech_1_1las_1_1sdk_1_1_transition_execution_status)` status,`[`UpdateTransitionExecutionOptions`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_update_transition_execution_options)` options)` | Ends the processing of the transition execution, calls the PATCH /transitions/{transition_id}/executions/{execution_id} endpoint.
+`public JSONObject `[`sendHeartbeat`]`(String transitionId,String executionId)` | Send heartbeat for a manual execution to signal that we are still working on it. Must be done at minimum once every 60 seconds or the transition execution will time out, calls the POST /transitions/{transitionId}/executions/{executionId}/heartbeats endpoint.
+`public JSONObject `[`createUser`]`(String email,`[`CreateUserOptions`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_create_user_options)` options)` | Creates a new user, calls the POST /users endpoint.
+`public JSONObject `[`createUser`]`(String email)` | Creates a new user, calls the POST /users endpoint.
+`public JSONObject `[`listUsers`]`(`[`ListUsersOptions`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_list_users_options)` options)` | List users, calls the GET /users endpoint.
+`public JSONObject `[`listUsers`]`()` | List users, calls the GET /users endpoint.
+`public JSONObject `[`getUser`]`(String userId)` | Get information about a specific user, calls the GET /users/{user_id} endpoint.
+`public JSONObject `[`updateUser`]`(String userId,`[`UpdateUserOptions`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_update_user_options)` options)` | Updates a user, calls the PATCH /users/{userId} endpoint.
+`public JSONObject `[`deleteUser`]`(String userId)` | Delete a user, calls the PATCH /users/{userId} endpoint.
+`public JSONObject `[`createWorkflow`]`(JSONObject specification,`[`CreateWorkflowOptions`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_create_workflow_options)` options)` | Creates a new workflow, calls the POST /workflows endpoint. Check out Lucidtech's tutorials for more info on how to create a workflow. see [https://docs.lucidtech.ai/getting-started/tutorials/setup_predict_and_approve](https://docs.lucidtech.ai/getting-started/tutorials/setup_predict_and_approve)
+`public JSONObject `[`createWorkflow`]`(JSONObject specification)` | Creates a new workflow, calls the POST /workflows endpoint. Check out Lucidtech's tutorials for more info on how to create a workflow. see [https://docs.lucidtech.ai/getting-started/tutorials/setup_predict_and_approve](https://docs.lucidtech.ai/getting-started/tutorials/setup_predict_and_approve)
+`public JSONObject `[`listWorkflows`]`(`[`ListWorkflowsOptions`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_list_workflows_options)` options)` | List workflows, calls the GET /workflows endpoint.
+`public JSONObject `[`listWorkflows`]`()` | List workflows, calls the GET /workflows endpoint.
+`public JSONObject `[`getWorkflow`]`(String workflowId)` | Get workflow, calls the GET /workflows/{workflowId} endpoint.
+`public JSONObject `[`updateWorkflow`]`(String workflowId,`[`UpdateWorkflowOptions`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_update_workflow_options)` options)` | Updates a workflow, calls the PATCH /workflows/{workflowId} endpoint.
+`public JSONObject `[`deleteWorkflow`]`(String workflowId)` | Delete a workflow, calls the DELETE /workflows/{workflowId} endpoint.
+`public JSONObject `[`executeWorkflow`]`(String workflowId,JSONObject content)` | Start a workflow execution, calls the POST /workflows/{workflowId}/executions endpoint.
+`public JSONObject `[`listWorkflowExecutions`]`(String workflowId,`[`ListWorkflowExecutionsOptions`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_list_workflow_executions_options)` options)` | List executions in a workflow, calls the GET /workflows/{workflowId}/executions endpoint.
+`public JSONObject `[`listWorkflowExecutions`]`(String workflowId)` | List executions in a workflow, calls the GET /workflows/{workflowId}/executions endpoint.
+`public JSONObject `[`deleteWorkflowExecution`]`(String workflowId,String executionId)` | Deletes the execution with the provided executionId from workflowId, calls the DELETE /workflows/{workflowId}/executions/{executionId} endpoint.
 
 ## Members
 
-#### `public inline  `[`Client`]`(`[`Credentials`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_credentials)` credentials)` 
+#### `public  `[`Client`]`(`[`Credentials`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_credentials)` credentials)` 
 
 A client to invoke api methods from Lucidtech AI Services.
 
@@ -151,7 +151,7 @@ A client to invoke api methods from Lucidtech AI Services.
 
 **See also**: [Credentials]
 
-#### `public inline JSONObject `[`createAsset`]`(byte [] content,`[`CreateAssetOptions`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_create_asset_options)` options)` 
+#### `public JSONObject `[`createAsset`]`(byte[] content,`[`CreateAssetOptions`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_create_asset_options)` options)` 
 
 Creates an asset, calls the POST /assets endpoint.
 
@@ -172,7 +172,7 @@ Asset response from API
 
 * `[MissingAccessTokenException]` Raised if access token cannot be obtained
 
-#### `public inline JSONObject `[`createAsset`]`(InputStream content,`[`CreateAssetOptions`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_create_asset_options)` options)` 
+#### `public JSONObject `[`createAsset`]`(InputStream content,`[`CreateAssetOptions`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_create_asset_options)` options)` 
 
 Creates an asset, calls the POST /assets endpoint.
 
@@ -193,7 +193,7 @@ Asset response from API
 
 * `[MissingAccessTokenException]` Raised if access token cannot be obtained
 
-#### `public inline JSONObject `[`createAsset`]`(byte [] content)` 
+#### `public JSONObject `[`createAsset`]`(byte[] content)` 
 
 Creates an asset, calls the POST /assets endpoint.
 
@@ -210,7 +210,7 @@ Asset response from API
 
 * `[MissingAccessTokenException]` Raised if access token cannot be obtained
 
-#### `public inline JSONObject `[`createAsset`]`(InputStream content)` 
+#### `public JSONObject `[`createAsset`]`(InputStream content)` 
 
 Creates an asset, calls the POST /assets endpoint.
 
@@ -227,7 +227,7 @@ Asset response from API
 
 * `[MissingAccessTokenException]` Raised if access token cannot be obtained
 
-#### `public inline JSONObject `[`listAssets`]`(`[`ListAssetsOptions`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_list_assets_options)` options)` 
+#### `public JSONObject `[`listAssets`]`(`[`ListAssetsOptions`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_list_assets_options)` options)` 
 
 List assets available, calls the GET /assets endpoint.
 
@@ -246,7 +246,7 @@ Assets response from REST API
 
 * `[MissingAccessTokenException]` Raised if access token cannot be obtained
 
-#### `public inline JSONObject `[`listAssets`]`()` 
+#### `public JSONObject `[`listAssets`]`()` 
 
 List assets available, calls the GET /assets endpoint.
 
@@ -260,7 +260,7 @@ Assets response from REST API
 
 * `[MissingAccessTokenException]` Raised if access token cannot be obtained
 
-#### `public inline JSONObject `[`getAsset`]`(String assetId)` 
+#### `public JSONObject `[`getAsset`]`(String assetId)` 
 
 Get asset, calls the GET /assets/{assetId} endpoint.
 
@@ -277,7 +277,7 @@ Asset response from REST API
 
 * `[MissingAccessTokenException]` Raised if access token cannot be obtained
 
-#### `public inline JSONObject `[`updateAsset`]`(String assetId,`[`UpdateAssetOptions`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_update_asset_options)` options)` 
+#### `public JSONObject `[`updateAsset`]`(String assetId,`[`UpdateAssetOptions`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_update_asset_options)` options)` 
 
 Updates an asset, calls the PATCH /assets/{assetId} endpoint.
 
@@ -298,7 +298,7 @@ Asset response from REST API
 
 * `[MissingAccessTokenException]` Raised if access token cannot be obtained
 
-#### `public inline JSONObject `[`createBatch`]`(`[`CreateBatchOptions`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_create_batch_options)` options)` 
+#### `public JSONObject `[`createBatch`]`(`[`CreateBatchOptions`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_create_batch_options)` options)` 
 
 Creates a batch, calls the POST /batches endpoint.
 
@@ -317,7 +317,7 @@ Batch response from REST API
 
 * `[MissingAccessTokenException]` Raised if access token cannot be obtained
 
-#### `public inline JSONObject `[`createBatch`]`()` 
+#### `public JSONObject `[`createBatch`]`()` 
 
 Creates a batch, calls the POST /batches endpoint.
 
@@ -331,7 +331,7 @@ Batch response from REST API
 
 * `[MissingAccessTokenException]` Raised if access token cannot be obtained
 
-#### `public inline JSONObject `[`createDocument`]`(byte [] content,`[`ContentType`](#enumai_1_1lucidtech_1_1las_1_1sdk_1_1_content_type)` contentType,`[`CreateDocumentOptions`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_create_document_options)` options)` 
+#### `public JSONObject `[`createDocument`]`(byte[] content,`[`ContentType`](#enumai_1_1lucidtech_1_1las_1_1sdk_1_1_content_type)` contentType,`[`CreateDocumentOptions`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_create_document_options)` options)` 
 
 Creates a document, calls the POST /documents endpoint.
 
@@ -354,7 +354,7 @@ Document response from REST API
 
 * `[MissingAccessTokenException]` Raised if access token cannot be obtained
 
-#### `public inline JSONObject `[`createDocument`]`(InputStream content,`[`ContentType`](#enumai_1_1lucidtech_1_1las_1_1sdk_1_1_content_type)` contentType,`[`CreateDocumentOptions`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_create_document_options)` options)` 
+#### `public JSONObject `[`createDocument`]`(InputStream content,`[`ContentType`](#enumai_1_1lucidtech_1_1las_1_1sdk_1_1_content_type)` contentType,`[`CreateDocumentOptions`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_create_document_options)` options)` 
 
 Creates a document, calls the POST /documents endpoint.
 
@@ -377,7 +377,7 @@ Document response from REST API
 
 * `[MissingAccessTokenException]` Raised if access token cannot be obtained
 
-#### `public inline JSONObject `[`createDocument`]`(InputStream content,`[`ContentType`](#enumai_1_1lucidtech_1_1las_1_1sdk_1_1_content_type)` contentType)` 
+#### `public JSONObject `[`createDocument`]`(InputStream content,`[`ContentType`](#enumai_1_1lucidtech_1_1las_1_1sdk_1_1_content_type)` contentType)` 
 
 Creates a document, calls the POST /documents endpoint.
 
@@ -398,7 +398,7 @@ Document response from REST API
 
 * `[MissingAccessTokenException]` Raised if access token cannot be obtained
 
-#### `public inline JSONObject `[`createDocument`]`(byte [] content,`[`ContentType`](#enumai_1_1lucidtech_1_1las_1_1sdk_1_1_content_type)` contentType)` 
+#### `public JSONObject `[`createDocument`]`(byte[] content,`[`ContentType`](#enumai_1_1lucidtech_1_1las_1_1sdk_1_1_content_type)` contentType)` 
 
 Creates a document, calls the POST /documents endpoint.
 
@@ -419,7 +419,7 @@ Document response from REST API
 
 * `[MissingAccessTokenException]` Raised if access token cannot be obtained
 
-#### `public inline JSONObject `[`listDocuments`]`(`[`ListDocumentsOptions`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_list_documents_options)` options)` 
+#### `public JSONObject `[`listDocuments`]`(`[`ListDocumentsOptions`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_list_documents_options)` options)` 
 
 List documents, calls the GET /documents endpoint.
 
@@ -438,7 +438,7 @@ Documents response from REST API
 
 * `[MissingAccessTokenException]` Raised if access token cannot be obtained
 
-#### `public inline JSONObject `[`listDocuments`]`()` 
+#### `public JSONObject `[`listDocuments`]`()` 
 
 List documents, calls the GET /documents endpoint.
 
@@ -452,7 +452,7 @@ Documents response from REST API
 
 * `[MissingAccessTokenException]` Raised if access token cannot be obtained
 
-#### `public inline JSONObject `[`deleteDocuments`]`()` 
+#### `public JSONObject `[`deleteDocuments`]`()` 
 
 Delete documents, calls the DELETE /documents endpoint.
 
@@ -468,7 +468,7 @@ Documents response from REST API
 
 * `[MissingAccessTokenException]` Raised if access token cannot be obtained
 
-#### `public inline JSONObject `[`deleteDocuments`]`(String consentId)` 
+#### `public JSONObject `[`deleteDocuments`]`(String consentId)` 
 
 Delete documents with the provided consentId, calls the DELETE /documents endpoint.
 
@@ -487,7 +487,7 @@ Documents response from REST API
 
 * `[MissingAccessTokenException]` Raised if access token cannot be obtained
 
-#### `public inline JSONObject `[`getDocument`]`(String documentId)` 
+#### `public JSONObject `[`getDocument`]`(String documentId)` 
 
 Get document, calls the GET /documents/{documentId} endpoint.
 
@@ -504,7 +504,7 @@ Document response from REST API
 
 * `[MissingAccessTokenException]` Raised if access token cannot be obtained
 
-#### `public inline JSONObject `[`updateDocument`]`(String documentId,JSONArray groundTruth)` 
+#### `public JSONObject `[`updateDocument`]`(String documentId,JSONArray groundTruth)` 
 
 Update ground truth for a document, calls the PATCH /documents/{documentId} endpoint.
 
@@ -525,7 +525,7 @@ Document response from REST API
 
 * `[MissingAccessTokenException]` Raised if access token cannot be obtained
 
-#### `public inline JSONObject `[`getLog`]`(String logId)` 
+#### `public JSONObject `[`getLog`]`(String logId)` 
 
 Get log, calls the GET /logs/{logId} endpoint.
 
@@ -542,7 +542,7 @@ Log response from REST API
 
 * `[MissingAccessTokenException]` Raised if access token cannot be obtained
 
-#### `public inline JSONObject `[`listModels`]`(`[`ListModelsOptions`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_list_models_options)` options)` 
+#### `public JSONObject `[`listModels`]`(`[`ListModelsOptions`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_list_models_options)` options)` 
 
 List models available, calls the GET /models endpoint.
 
@@ -561,7 +561,7 @@ Models response from REST API
 
 * `[MissingAccessTokenException]` Raised if access token cannot be obtained
 
-#### `public inline JSONObject `[`listModels`]`()` 
+#### `public JSONObject `[`listModels`]`()` 
 
 List models available, calls the GET /models endpoint.
 
@@ -575,7 +575,7 @@ Models response from REST API
 
 * `[MissingAccessTokenException]` Raised if access token cannot be obtained
 
-#### `public inline JSONObject `[`createPrediction`]`(String documentId,String modelId,`[`CreatePredictionOptions`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_create_prediction_options)` options)` 
+#### `public JSONObject `[`createPrediction`]`(String documentId,String modelId,`[`CreatePredictionOptions`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_create_prediction_options)` options)` 
 
 Create a prediction on a document using specified model, calls the POST /predictions endpoint.
 
@@ -600,7 +600,7 @@ Prediction response from REST API
 
 * `[MissingAccessTokenException]` Raised if access token cannot be obtained
 
-#### `public inline JSONObject `[`createPrediction`]`(String documentId,String modelId)` 
+#### `public JSONObject `[`createPrediction`]`(String documentId,String modelId)` 
 
 Create a prediction on a document using specified model, calls the POST /predictions endpoint.
 
@@ -621,7 +621,7 @@ Prediction response from REST API
 
 * `[MissingAccessTokenException]` Raised if access token cannot be obtained
 
-#### `public inline JSONObject `[`listPredictions`]`(`[`ListPredictionsOptions`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_list_predictions_options)` options)` 
+#### `public JSONObject `[`listPredictions`]`(`[`ListPredictionsOptions`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_list_predictions_options)` options)` 
 
 List predictions available, calls the GET /predictions endpoint.
 
@@ -640,7 +640,7 @@ Predictions response from REST API
 
 * `[MissingAccessTokenException]` Raised if access token cannot be obtained
 
-#### `public inline JSONObject `[`listPredictions`]`()` 
+#### `public JSONObject `[`listPredictions`]`()` 
 
 List predictions available, calls the GET /predictions endpoint.
 
@@ -654,7 +654,7 @@ Predictions response from REST API
 
 * `[MissingAccessTokenException]` Raised if access token cannot be obtained
 
-#### `public inline JSONObject `[`createSecret`]`(JSONObject data,`[`CreateSecretOptions`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_create_secret_options)` options)` 
+#### `public JSONObject `[`createSecret`]`(JSONObject data,`[`CreateSecretOptions`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_create_secret_options)` options)` 
 
 Creates a secret, calls the POST /secrets endpoint.
 
@@ -675,7 +675,7 @@ Secret response from API
 
 * `[MissingAccessTokenException]` Raised if access token cannot be obtained
 
-#### `public inline JSONObject `[`createSecret`]`(Map< String, String > data,`[`CreateSecretOptions`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_create_secret_options)` options)` 
+#### `public JSONObject `[`createSecret`]`(Map< String, String > data,`[`CreateSecretOptions`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_create_secret_options)` options)` 
 
 Creates a secret, calls the POST /secrets endpoint.
 
@@ -696,7 +696,7 @@ Secret response from API
 
 * `[MissingAccessTokenException]` Raised if access token cannot be obtained
 
-#### `public inline JSONObject `[`createSecret`]`(Map< String, String > data)` 
+#### `public JSONObject `[`createSecret`]`(Map< String, String > data)` 
 
 Creates a secret, calls the POST /secrets endpoint.
 
@@ -713,7 +713,7 @@ Secret response from API
 
 * `[MissingAccessTokenException]` Raised if access token cannot be obtained
 
-#### `public inline JSONObject `[`createSecret`]`(JSONObject data)` 
+#### `public JSONObject `[`createSecret`]`(JSONObject data)` 
 
 Creates a secret, calls the POST /secrets endpoint.
 
@@ -730,7 +730,7 @@ Secret response from API
 
 * `[MissingAccessTokenException]` Raised if access token cannot be obtained
 
-#### `public inline JSONObject `[`listSecrets`]`(`[`ListSecretsOptions`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_list_secrets_options)` options)` 
+#### `public JSONObject `[`listSecrets`]`(`[`ListSecretsOptions`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_list_secrets_options)` options)` 
 
 List secrets available, calls the GET /secrets endpoint.
 
@@ -749,7 +749,7 @@ Secrets response from REST API
 
 * `[MissingAccessTokenException]` Raised if access token cannot be obtained
 
-#### `public inline JSONObject `[`listSecrets`]`()` 
+#### `public JSONObject `[`listSecrets`]`()` 
 
 List secrets available, calls the GET /secrets endpoint.
 
@@ -763,7 +763,7 @@ Secrets response from REST API
 
 * `[MissingAccessTokenException]` Raised if access token cannot be obtained
 
-#### `public inline JSONObject `[`updateSecret`]`(String secretId,`[`UpdateSecretOptions`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_update_secret_options)` options)` 
+#### `public JSONObject `[`updateSecret`]`(String secretId,`[`UpdateSecretOptions`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_update_secret_options)` options)` 
 
 Updates a secret, calls the PATCH /secrets/{secretId} endpoint.
 
@@ -784,7 +784,7 @@ Secret response from REST API
 
 * `[MissingAccessTokenException]` Raised if access token cannot be obtained
 
-#### `public inline JSONObject `[`createTransition`]`(`[`TransitionType`](#enumai_1_1lucidtech_1_1las_1_1sdk_1_1_transition_type)` transitionType,`[`CreateTransitionOptions`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_create_transition_options)` options)` 
+#### `public JSONObject `[`createTransition`]`(`[`TransitionType`](#enumai_1_1lucidtech_1_1las_1_1sdk_1_1_transition_type)` transitionType,`[`CreateTransitionOptions`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_create_transition_options)` options)` 
 
 Creates a transition, calls the POST /transitions endpoint.
 
@@ -807,7 +807,7 @@ Transition response from API
 
 * `[MissingAccessTokenException]` Raised if access token cannot be obtained
 
-#### `public inline JSONObject `[`createTransition`]`(`[`TransitionType`](#enumai_1_1lucidtech_1_1las_1_1sdk_1_1_transition_type)` transitionType)` 
+#### `public JSONObject `[`createTransition`]`(`[`TransitionType`](#enumai_1_1lucidtech_1_1las_1_1sdk_1_1_transition_type)` transitionType)` 
 
 Creates a transition, calls the POST /transitions endpoint.
 
@@ -826,7 +826,7 @@ Transition response from API
 
 * `[MissingAccessTokenException]` Raised if access token cannot be obtained
 
-#### `public inline JSONObject `[`listTransitions`]`(`[`ListTransitionsOptions`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_list_transitions_options)` options)` 
+#### `public JSONObject `[`listTransitions`]`(`[`ListTransitionsOptions`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_list_transitions_options)` options)` 
 
 List transitions, calls the GET /transitions endpoint.
 
@@ -845,7 +845,7 @@ Transitions response from REST API
 
 * `[MissingAccessTokenException]` Raised if access token cannot be obtained
 
-#### `public inline JSONObject `[`listTransitions`]`()` 
+#### `public JSONObject `[`listTransitions`]`()` 
 
 List transitions, calls the GET /transitions endpoint.
 
@@ -859,7 +859,7 @@ Transitions response from REST API
 
 * `[MissingAccessTokenException]` Raised if access token cannot be obtained
 
-#### `public inline JSONObject `[`getTransition`]`(String transitionId)` 
+#### `public JSONObject `[`getTransition`]`(String transitionId)` 
 
 Get transition, calls the GET /transitions/{transitionId} endpoint.
 
@@ -876,7 +876,7 @@ Transition response from REST API
 
 * `[MissingAccessTokenException]` Raised if access token cannot be obtained
 
-#### `public inline JSONObject `[`updateTransition`]`(String transitionId,`[`UpdateTransitionOptions`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_update_transition_options)` options)` 
+#### `public JSONObject `[`updateTransition`]`(String transitionId,`[`UpdateTransitionOptions`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_update_transition_options)` options)` 
 
 Updates a transition, calls the PATCH /transitions/{transitionId} endpoint.
 
@@ -897,7 +897,7 @@ Transition response from REST API
 
 * `[MissingAccessTokenException]` Raised if access token cannot be obtained
 
-#### `public inline JSONObject `[`executeTransition`]`(String transitionId)` 
+#### `public JSONObject `[`executeTransition`]`(String transitionId)` 
 
 Start executing a manual transition, calls the POST /transitions/{transitionId}/executions endpoint.
 
@@ -914,7 +914,7 @@ TransitionExecution response from REST API
 
 * `[MissingAccessTokenException]` Raised if access token cannot be obtained
 
-#### `public inline JSONObject `[`deleteTransition`]`(String transitionId)` 
+#### `public JSONObject `[`deleteTransition`]`(String transitionId)` 
 
 Delete a transition, calls the PATCH /transitions/{transitionId} endpoint. Will fail if transition is in use by one or more workflows.
 
@@ -931,7 +931,7 @@ Transition response from REST API
 
 * `[MissingAccessTokenException]` Raised if access token cannot be obtained
 
-#### `public inline JSONObject `[`listTransitionExecutions`]`(String transitionId,`[`ListTransitionExecutionsOptions`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_list_transition_executions_options)` options)` 
+#### `public JSONObject `[`listTransitionExecutions`]`(String transitionId,`[`ListTransitionExecutionsOptions`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_list_transition_executions_options)` options)` 
 
 List executions in a transition, calls the GET /transitions/{transitionId}/executions endpoint.
 
@@ -952,7 +952,7 @@ Transition executions response from REST API
 
 * `[MissingAccessTokenException]` Raised if access token cannot be obtained
 
-#### `public inline JSONObject `[`listTransitionExecutions`]`(String transitionId)` 
+#### `public JSONObject `[`listTransitionExecutions`]`(String transitionId)` 
 
 List executions in a transition, calls the GET /transitions/{transitionId}/executions endpoint.
 
@@ -969,7 +969,7 @@ Transition executions response from REST API
 
 * `[MissingAccessTokenException]` Raised if access token cannot be obtained
 
-#### `public inline JSONObject `[`getTransitionExecution`]`(String transitionId,String executionId)` 
+#### `public JSONObject `[`getTransitionExecution`]`(String transitionId,String executionId)` 
 
 Get an execution of a transition, calls the GET /transitions/{transitionId}/executions/{executionId} endpoint
 
@@ -988,7 +988,7 @@ TransitionExecution response from REST API
 
 * `[MissingAccessTokenException]` Raised if access token cannot be obtained
 
-#### `public inline JSONObject `[`updateTransitionExecution`]`(String transitionId,String executionId,`[`TransitionExecutionStatus`](#enumai_1_1lucidtech_1_1las_1_1sdk_1_1_transition_execution_status)` status,`[`UpdateTransitionExecutionOptions`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_update_transition_execution_options)` options)` 
+#### `public JSONObject `[`updateTransitionExecution`]`(String transitionId,String executionId,`[`TransitionExecutionStatus`](#enumai_1_1lucidtech_1_1las_1_1sdk_1_1_transition_execution_status)` status,`[`UpdateTransitionExecutionOptions`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_update_transition_execution_options)` options)` 
 
 Ends the processing of the transition execution, calls the PATCH /transitions/{transition_id}/executions/{execution_id} endpoint.
 
@@ -1015,7 +1015,7 @@ Transition response from REST API
 
 * `[MissingAccessTokenException]` Raised if access token cannot be obtained
 
-#### `public inline JSONObject `[`sendHeartbeat`]`(String transitionId,String executionId)` 
+#### `public JSONObject `[`sendHeartbeat`]`(String transitionId,String executionId)` 
 
 Send heartbeat for a manual execution to signal that we are still working on it. Must be done at minimum once every 60 seconds or the transition execution will time out, calls the POST /transitions/{transitionId}/executions/{executionId}/heartbeats endpoint.
 
@@ -1034,7 +1034,7 @@ Empty response
 
 * `[MissingAccessTokenException]` Raised if access token cannot be obtained
 
-#### `public inline JSONObject `[`createUser`]`(String email,`[`CreateUserOptions`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_create_user_options)` options)` 
+#### `public JSONObject `[`createUser`]`(String email,`[`CreateUserOptions`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_create_user_options)` options)` 
 
 Creates a new user, calls the POST /users endpoint.
 
@@ -1055,7 +1055,7 @@ User response from API
 
 * `[MissingAccessTokenException]` Raised if access token cannot be obtained
 
-#### `public inline JSONObject `[`createUser`]`(String email)` 
+#### `public JSONObject `[`createUser`]`(String email)` 
 
 Creates a new user, calls the POST /users endpoint.
 
@@ -1072,7 +1072,7 @@ User response from API
 
 * `[MissingAccessTokenException]` Raised if access token cannot be obtained
 
-#### `public inline JSONObject `[`listUsers`]`(`[`ListUsersOptions`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_list_users_options)` options)` 
+#### `public JSONObject `[`listUsers`]`(`[`ListUsersOptions`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_list_users_options)` options)` 
 
 List users, calls the GET /users endpoint.
 
@@ -1091,7 +1091,7 @@ Users response from REST API
 
 * `[MissingAccessTokenException]` Raised if access token cannot be obtained
 
-#### `public inline JSONObject `[`listUsers`]`()` 
+#### `public JSONObject `[`listUsers`]`()` 
 
 List users, calls the GET /users endpoint.
 
@@ -1105,7 +1105,7 @@ Users response from REST API
 
 * `[MissingAccessTokenException]` Raised if access token cannot be obtained
 
-#### `public inline JSONObject `[`getUser`]`(String userId)` 
+#### `public JSONObject `[`getUser`]`(String userId)` 
 
 Get information about a specific user, calls the GET /users/{user_id} endpoint.
 
@@ -1122,7 +1122,7 @@ User response
 
 * `[MissingAccessTokenException]` Raised if access token cannot be obtained
 
-#### `public inline JSONObject `[`updateUser`]`(String userId,`[`UpdateUserOptions`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_update_user_options)` options)` 
+#### `public JSONObject `[`updateUser`]`(String userId,`[`UpdateUserOptions`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_update_user_options)` options)` 
 
 Updates a user, calls the PATCH /users/{userId} endpoint.
 
@@ -1143,7 +1143,7 @@ User response from REST API
 
 * `[MissingAccessTokenException]` Raised if access token cannot be obtained
 
-#### `public inline JSONObject `[`deleteUser`]`(String userId)` 
+#### `public JSONObject `[`deleteUser`]`(String userId)` 
 
 Delete a user, calls the PATCH /users/{userId} endpoint.
 
@@ -1160,7 +1160,7 @@ User response from REST API
 
 * `[MissingAccessTokenException]` Raised if access token cannot be obtained
 
-#### `public inline JSONObject `[`createWorkflow`]`(JSONObject specification,`[`CreateWorkflowOptions`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_create_workflow_options)` options)` 
+#### `public JSONObject `[`createWorkflow`]`(JSONObject specification,`[`CreateWorkflowOptions`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_create_workflow_options)` options)` 
 
 Creates a new workflow, calls the POST /workflows endpoint. Check out Lucidtech's tutorials for more info on how to create a workflow. see [https://docs.lucidtech.ai/getting-started/tutorials/setup_predict_and_approve](https://docs.lucidtech.ai/getting-started/tutorials/setup_predict_and_approve)
 
@@ -1181,7 +1181,7 @@ Workflow response from API
 
 * `[MissingAccessTokenException]` Raised if access token cannot be obtained
 
-#### `public inline JSONObject `[`createWorkflow`]`(JSONObject specification)` 
+#### `public JSONObject `[`createWorkflow`]`(JSONObject specification)` 
 
 Creates a new workflow, calls the POST /workflows endpoint. Check out Lucidtech's tutorials for more info on how to create a workflow. see [https://docs.lucidtech.ai/getting-started/tutorials/setup_predict_and_approve](https://docs.lucidtech.ai/getting-started/tutorials/setup_predict_and_approve)
 
@@ -1198,7 +1198,7 @@ Workflow response from API
 
 * `[MissingAccessTokenException]` Raised if access token cannot be obtained
 
-#### `public inline JSONObject `[`listWorkflows`]`(`[`ListWorkflowsOptions`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_list_workflows_options)` options)` 
+#### `public JSONObject `[`listWorkflows`]`(`[`ListWorkflowsOptions`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_list_workflows_options)` options)` 
 
 List workflows, calls the GET /workflows endpoint.
 
@@ -1217,7 +1217,7 @@ Workflows response from REST API
 
 * `[MissingAccessTokenException]` Raised if access token cannot be obtained
 
-#### `public inline JSONObject `[`listWorkflows`]`()` 
+#### `public JSONObject `[`listWorkflows`]`()` 
 
 List workflows, calls the GET /workflows endpoint.
 
@@ -1231,7 +1231,7 @@ Workflows response from REST API
 
 * `[MissingAccessTokenException]` Raised if access token cannot be obtained
 
-#### `public inline JSONObject `[`getWorkflow`]`(String workflowId)` 
+#### `public JSONObject `[`getWorkflow`]`(String workflowId)` 
 
 Get workflow, calls the GET /workflows/{workflowId} endpoint.
 
@@ -1248,7 +1248,7 @@ Workflow response from REST API
 
 * `[MissingAccessTokenException]` Raised if access token cannot be obtained
 
-#### `public inline JSONObject `[`updateWorkflow`]`(String workflowId,`[`UpdateWorkflowOptions`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_update_workflow_options)` options)` 
+#### `public JSONObject `[`updateWorkflow`]`(String workflowId,`[`UpdateWorkflowOptions`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_update_workflow_options)` options)` 
 
 Updates a workflow, calls the PATCH /workflows/{workflowId} endpoint.
 
@@ -1269,7 +1269,7 @@ Workflow response from REST API
 
 * `[MissingAccessTokenException]` Raised if access token cannot be obtained
 
-#### `public inline JSONObject `[`deleteWorkflow`]`(String workflowId)` 
+#### `public JSONObject `[`deleteWorkflow`]`(String workflowId)` 
 
 Delete a workflow, calls the DELETE /workflows/{workflowId} endpoint.
 
@@ -1288,7 +1288,7 @@ Workflow response from REST API
 
 * `[MissingAccessTokenException]` Raised if access token cannot be obtained
 
-#### `public inline JSONObject `[`executeWorkflow`]`(String workflowId,JSONObject content)` 
+#### `public JSONObject `[`executeWorkflow`]`(String workflowId,JSONObject content)` 
 
 Start a workflow execution, calls the POST /workflows/{workflowId}/executions endpoint.
 
@@ -1307,7 +1307,7 @@ WorkflowExecution response from REST API
 
 * `[MissingAccessTokenException]` Raised if access token cannot be obtained
 
-#### `public inline JSONObject `[`listWorkflowExecutions`]`(String workflowId,`[`ListWorkflowExecutionsOptions`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_list_workflow_executions_options)` options)` 
+#### `public JSONObject `[`listWorkflowExecutions`]`(String workflowId,`[`ListWorkflowExecutionsOptions`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_list_workflow_executions_options)` options)` 
 
 List executions in a workflow, calls the GET /workflows/{workflowId}/executions endpoint.
 
@@ -1328,7 +1328,7 @@ Workflow executions response from REST API
 
 * `[MissingAccessTokenException]` Raised if access token cannot be obtained
 
-#### `public inline JSONObject `[`listWorkflowExecutions`]`(String workflowId)` 
+#### `public JSONObject `[`listWorkflowExecutions`]`(String workflowId)` 
 
 List executions in a workflow, calls the GET /workflows/{workflowId}/executions endpoint.
 
@@ -1345,7 +1345,7 @@ Workflow executions response from REST API
 
 * `[MissingAccessTokenException]` Raised if access token cannot be obtained
 
-#### `public inline JSONObject `[`deleteWorkflowExecution`]`(String workflowId,String executionId)` 
+#### `public JSONObject `[`deleteWorkflowExecution`]`(String workflowId,String executionId)` 
 
 Deletes the execution with the provided executionId from workflowId, calls the DELETE /workflows/{workflowId}/executions/{executionId} endpoint.
 
@@ -1400,26 +1400,26 @@ class ai::lucidtech::las::sdk::CreateBatchOptions
 
  Members                        | Descriptions                                
 --------------------------------|---------------------------------------------
-`public inline  `[`CreateDocumentOptions`]`()` | 
-`public inline `[`CreateDocumentOptions`] [`setConsentId`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_create_document_options_1aea843844d1cabdb367b6ef2fbad74763)`(String consentId)` | 
-`public inline `[`CreateDocumentOptions`] [`setBatchId`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_create_document_options_1a6a4643ab2ab9ae0d195e95b6e5858abb)`(String batchId)` | 
-`public inline `[`CreateDocumentOptions`] [`setGroundTruth`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_create_document_options_1a11e5ef2f36fa14e6e048d74d406881f5)`(JSONArray groundTruth)` | 
-`public inline JSONObject `[`addOptions`]`(JSONObject body)` | 
-`public inline JSONObject `[`toJson`]`()` | 
+`public  `[`CreateDocumentOptions`]`()` | 
+`public `[`CreateDocumentOptions`] [`setConsentId`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_create_document_options_1aea843844d1cabdb367b6ef2fbad74763)`(String consentId)` | 
+`public `[`CreateDocumentOptions`] [`setBatchId`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_create_document_options_1a6a4643ab2ab9ae0d195e95b6e5858abb)`(String batchId)` | 
+`public `[`CreateDocumentOptions`] [`setGroundTruth`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_create_document_options_1a11e5ef2f36fa14e6e048d74d406881f5)`(JSONArray groundTruth)` | 
+`public JSONObject `[`addOptions`]`(JSONObject body)` | 
+`public JSONObject `[`toJson`]`()` | 
 
 ## Members
 
-#### `public inline  `[`CreateDocumentOptions`]`()` 
+#### `public  `[`CreateDocumentOptions`]`()` 
 
-#### `public inline `[`CreateDocumentOptions`] [`setConsentId`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_create_document_options_1aea843844d1cabdb367b6ef2fbad74763)`(String consentId)` 
+#### `public `[`CreateDocumentOptions`] [`setConsentId`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_create_document_options_1aea843844d1cabdb367b6ef2fbad74763)`(String consentId)` 
 
-#### `public inline `[`CreateDocumentOptions`] [`setBatchId`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_create_document_options_1a6a4643ab2ab9ae0d195e95b6e5858abb)`(String batchId)` 
+#### `public `[`CreateDocumentOptions`] [`setBatchId`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_create_document_options_1a6a4643ab2ab9ae0d195e95b6e5858abb)`(String batchId)` 
 
-#### `public inline `[`CreateDocumentOptions`] [`setGroundTruth`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_create_document_options_1a11e5ef2f36fa14e6e048d74d406881f5)`(JSONArray groundTruth)` 
+#### `public `[`CreateDocumentOptions`] [`setGroundTruth`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_create_document_options_1a11e5ef2f36fa14e6e048d74d406881f5)`(JSONArray groundTruth)` 
 
-#### `public inline JSONObject `[`addOptions`]`(JSONObject body)` 
+#### `public JSONObject `[`addOptions`]`(JSONObject body)` 
 
-#### `public inline JSONObject `[`toJson`]`()` 
+#### `public JSONObject `[`toJson`]`()` 
 
 # class `ai::lucidtech::las::sdk::CreatePredictionOptions` 
 
@@ -1427,29 +1427,29 @@ class ai::lucidtech::las::sdk::CreateBatchOptions
 
  Members                        | Descriptions                                
 --------------------------------|---------------------------------------------
-`public inline  `[`CreatePredictionOptions`]`()` | 
-`public inline  `[`CreatePredictionOptions`]`(int maxPages,boolean autoRotate)` | 
-`public inline `[`CreatePredictionOptions`] [`setMaxPages`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_create_prediction_options_1af6a80e5477e27525a936bfa24404cdf0)`(int maxPages)` | 
-`public inline `[`CreatePredictionOptions`] [`setAutoRotate`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_create_prediction_options_1a82d5ef3dd802caa5785475eeabbbf9dd)`(boolean autoRotate)` | 
-`public inline `[`CreatePredictionOptions`] [`setImageQuality`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_create_prediction_options_1ad6b7016289238d2e664e6e968a6d59b2)`(`[`ImageQuality`](#enumai_1_1lucidtech_1_1las_1_1sdk_1_1_image_quality)` imageQuality)` | 
-`public inline JSONObject `[`addOptions`]`(JSONObject body)` | 
-`public inline JSONObject `[`toJson`]`()` | 
+`public  `[`CreatePredictionOptions`]`()` | 
+`public  `[`CreatePredictionOptions`]`(int maxPages,boolean autoRotate)` | 
+`public `[`CreatePredictionOptions`] [`setMaxPages`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_create_prediction_options_1af6a80e5477e27525a936bfa24404cdf0)`(int maxPages)` | 
+`public `[`CreatePredictionOptions`] [`setAutoRotate`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_create_prediction_options_1a82d5ef3dd802caa5785475eeabbbf9dd)`(boolean autoRotate)` | 
+`public `[`CreatePredictionOptions`] [`setImageQuality`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_create_prediction_options_1ad6b7016289238d2e664e6e968a6d59b2)`(`[`ImageQuality`](#enumai_1_1lucidtech_1_1las_1_1sdk_1_1_image_quality)` imageQuality)` | 
+`public JSONObject `[`addOptions`]`(JSONObject body)` | 
+`public JSONObject `[`toJson`]`()` | 
 
 ## Members
 
-#### `public inline  `[`CreatePredictionOptions`]`()` 
+#### `public  `[`CreatePredictionOptions`]`()` 
 
-#### `public inline  `[`CreatePredictionOptions`]`(int maxPages,boolean autoRotate)` 
+#### `public  `[`CreatePredictionOptions`]`(int maxPages,boolean autoRotate)` 
 
-#### `public inline `[`CreatePredictionOptions`] [`setMaxPages`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_create_prediction_options_1af6a80e5477e27525a936bfa24404cdf0)`(int maxPages)` 
+#### `public `[`CreatePredictionOptions`] [`setMaxPages`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_create_prediction_options_1af6a80e5477e27525a936bfa24404cdf0)`(int maxPages)` 
 
-#### `public inline `[`CreatePredictionOptions`] [`setAutoRotate`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_create_prediction_options_1a82d5ef3dd802caa5785475eeabbbf9dd)`(boolean autoRotate)` 
+#### `public `[`CreatePredictionOptions`] [`setAutoRotate`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_create_prediction_options_1a82d5ef3dd802caa5785475eeabbbf9dd)`(boolean autoRotate)` 
 
-#### `public inline `[`CreatePredictionOptions`] [`setImageQuality`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_create_prediction_options_1ad6b7016289238d2e664e6e968a6d59b2)`(`[`ImageQuality`](#enumai_1_1lucidtech_1_1las_1_1sdk_1_1_image_quality)` imageQuality)` 
+#### `public `[`CreatePredictionOptions`] [`setImageQuality`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_create_prediction_options_1ad6b7016289238d2e664e6e968a6d59b2)`(`[`ImageQuality`](#enumai_1_1lucidtech_1_1las_1_1sdk_1_1_image_quality)` imageQuality)` 
 
-#### `public inline JSONObject `[`addOptions`]`(JSONObject body)` 
+#### `public JSONObject `[`addOptions`]`(JSONObject body)` 
 
-#### `public inline JSONObject `[`toJson`]`()` 
+#### `public JSONObject `[`toJson`]`()` 
 
 # class `ai::lucidtech::las::sdk::CreateSecretOptions` 
 
@@ -1476,29 +1476,29 @@ class ai::lucidtech::las::sdk::CreateTransitionOptions
 
  Members                        | Descriptions                                
 --------------------------------|---------------------------------------------
-`public inline  `[`CreateTransitionOptions`]`()` | 
-`public inline  `[`CreateTransitionOptions`]`(JSONObject parameters)` | 
-`public inline `[`CreateTransitionOptions`] [`setParameters`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_create_transition_options_1a4464c8b419c7359a3ebc0507c2926b6f)`(JSONObject schema)` | 
-`public inline `[`CreateTransitionOptions`] [`setInputJsonSchema`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_create_transition_options_1a8903a4e3773b695c2e8602af25dd7d23)`(JSONObject schema)` | 
-`public inline `[`CreateTransitionOptions`] [`setOutputJsonSchema`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_create_transition_options_1a666736cded215c9974df0841fdb89ac7)`(JSONObject schema)` | 
-`public inline JSONObject `[`addOptions`]`(JSONObject body)` | 
-`public inline JSONObject `[`toJson`]`()` | 
+`public  `[`CreateTransitionOptions`]`()` | 
+`public  `[`CreateTransitionOptions`]`(JSONObject parameters)` | 
+`public `[`CreateTransitionOptions`] [`setParameters`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_create_transition_options_1a4464c8b419c7359a3ebc0507c2926b6f)`(JSONObject schema)` | 
+`public `[`CreateTransitionOptions`] [`setInputJsonSchema`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_create_transition_options_1a8903a4e3773b695c2e8602af25dd7d23)`(JSONObject schema)` | 
+`public `[`CreateTransitionOptions`] [`setOutputJsonSchema`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_create_transition_options_1a666736cded215c9974df0841fdb89ac7)`(JSONObject schema)` | 
+`public JSONObject `[`addOptions`]`(JSONObject body)` | 
+`public JSONObject `[`toJson`]`()` | 
 
 ## Members
 
-#### `public inline  `[`CreateTransitionOptions`]`()` 
+#### `public  `[`CreateTransitionOptions`]`()` 
 
-#### `public inline  `[`CreateTransitionOptions`]`(JSONObject parameters)` 
+#### `public  `[`CreateTransitionOptions`]`(JSONObject parameters)` 
 
-#### `public inline `[`CreateTransitionOptions`] [`setParameters`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_create_transition_options_1a4464c8b419c7359a3ebc0507c2926b6f)`(JSONObject schema)` 
+#### `public `[`CreateTransitionOptions`] [`setParameters`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_create_transition_options_1a4464c8b419c7359a3ebc0507c2926b6f)`(JSONObject schema)` 
 
-#### `public inline `[`CreateTransitionOptions`] [`setInputJsonSchema`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_create_transition_options_1a8903a4e3773b695c2e8602af25dd7d23)`(JSONObject schema)` 
+#### `public `[`CreateTransitionOptions`] [`setInputJsonSchema`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_create_transition_options_1a8903a4e3773b695c2e8602af25dd7d23)`(JSONObject schema)` 
 
-#### `public inline `[`CreateTransitionOptions`] [`setOutputJsonSchema`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_create_transition_options_1a666736cded215c9974df0841fdb89ac7)`(JSONObject schema)` 
+#### `public `[`CreateTransitionOptions`] [`setOutputJsonSchema`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_create_transition_options_1a666736cded215c9974df0841fdb89ac7)`(JSONObject schema)` 
 
-#### `public inline JSONObject `[`addOptions`]`(JSONObject body)` 
+#### `public JSONObject `[`addOptions`]`(JSONObject body)` 
 
-#### `public inline JSONObject `[`toJson`]`()` 
+#### `public JSONObject `[`toJson`]`()` 
 
 # class `ai::lucidtech::las::sdk::CreateUserOptions` 
 
@@ -1525,23 +1525,23 @@ class ai::lucidtech::las::sdk::CreateWorkflowOptions
 
  Members                        | Descriptions                                
 --------------------------------|---------------------------------------------
-`public inline  `[`CreateWorkflowOptions`]`()` | 
-`public inline  `[`CreateWorkflowOptions`]`(JSONObject errorConfig)` | 
-`public inline `[`CreateWorkflowOptions`] [`setErrorConfig`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_create_workflow_options_1ac8e4383646a9adcf679b5d243159aedb)`(JSONObject errorConfig)` | 
-`public inline JSONObject `[`addOptions`]`(JSONObject body)` | 
-`public inline JSONObject `[`toJson`]`()` | 
+`public  `[`CreateWorkflowOptions`]`()` | 
+`public  `[`CreateWorkflowOptions`]`(JSONObject errorConfig)` | 
+`public `[`CreateWorkflowOptions`] [`setErrorConfig`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_create_workflow_options_1ac8e4383646a9adcf679b5d243159aedb)`(JSONObject errorConfig)` | 
+`public JSONObject `[`addOptions`]`(JSONObject body)` | 
+`public JSONObject `[`toJson`]`()` | 
 
 ## Members
 
-#### `public inline  `[`CreateWorkflowOptions`]`()` 
+#### `public  `[`CreateWorkflowOptions`]`()` 
 
-#### `public inline  `[`CreateWorkflowOptions`]`(JSONObject errorConfig)` 
+#### `public  `[`CreateWorkflowOptions`]`(JSONObject errorConfig)` 
 
-#### `public inline `[`CreateWorkflowOptions`] [`setErrorConfig`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_create_workflow_options_1ac8e4383646a9adcf679b5d243159aedb)`(JSONObject errorConfig)` 
+#### `public `[`CreateWorkflowOptions`] [`setErrorConfig`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_create_workflow_options_1ac8e4383646a9adcf679b5d243159aedb)`(JSONObject errorConfig)` 
 
-#### `public inline JSONObject `[`addOptions`]`(JSONObject body)` 
+#### `public JSONObject `[`addOptions`]`(JSONObject body)` 
 
-#### `public inline JSONObject `[`toJson`]`()` 
+#### `public JSONObject `[`toJson`]`()` 
 
 # class `ai::lucidtech::las::sdk::Credentials` 
 
@@ -1549,14 +1549,14 @@ class ai::lucidtech::las::sdk::CreateWorkflowOptions
 
  Members                        | Descriptions                                
 --------------------------------|---------------------------------------------
-`public inline  `[`Credentials`]`(String clientId,String clientSecret,String apiKey,String authEndpoint,String apiEndpoint)` | Used to fetch and store credentials.
-`public inline String `[`getAccessToken`]`(HttpClient httpClient)` | #### Parameters
-`public inline String `[`getApiKey`]`()` | 
-`public inline String `[`getApiEndpoint`]`()` | 
+`public  `[`Credentials`]`(String clientId,String clientSecret,String apiKey,String authEndpoint,String apiEndpoint)` | Used to fetch and store credentials.
+`public String `[`getAccessToken`]`(HttpClient httpClient)` | #### Parameters
+`public String `[`getApiKey`]`()` | 
+`public String `[`getApiEndpoint`]`()` | 
 
 ## Members
 
-#### `public inline  `[`Credentials`]`(String clientId,String clientSecret,String apiKey,String authEndpoint,String apiEndpoint)` 
+#### `public  `[`Credentials`]`(String clientId,String clientSecret,String apiKey,String authEndpoint,String apiEndpoint)` 
 
 Used to fetch and store credentials.
 
@@ -1574,7 +1574,7 @@ Used to fetch and store credentials.
 #### Exceptions
 * `[MissingCredentialsException]` Raised if some of credentials are missing
 
-#### `public inline String `[`getAccessToken`]`(HttpClient httpClient)` 
+#### `public String `[`getAccessToken`]`(HttpClient httpClient)` 
 
 #### Parameters
 * `httpClient` Instance of HttpClient used to access the authentication endpoint 
@@ -1585,9 +1585,9 @@ Access token, downloading it if necessary
 #### Exceptions
 * `[MissingAccessTokenException]` Raised if access token cannot be obtained
 
-#### `public inline String `[`getApiKey`]`()` 
+#### `public String `[`getApiKey`]`()` 
 
-#### `public inline String `[`getApiEndpoint`]`()` 
+#### `public String `[`getApiEndpoint`]`()` 
 
 # class `ai::lucidtech::las::sdk::ListAssetsOptions` 
 
@@ -1614,20 +1614,20 @@ class ai::lucidtech::las::sdk::ListDocumentsOptions
 
  Members                        | Descriptions                                
 --------------------------------|---------------------------------------------
-`public inline  `[`ListDocumentsOptions`]`()` | 
-`public inline `[`ListDocumentsOptions`] [`setConsentId`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_list_documents_options_1a60cbafbb5cb2443c0add044cf7b88abc)`(String consentId)` | 
-`public inline `[`ListDocumentsOptions`] [`setBatchId`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_list_documents_options_1ac52ae5b69f46e04451a645abce1e7ac7)`(String batchId)` | 
-`public inline List< NameValuePair > `[`toList`]`()` | 
+`public  `[`ListDocumentsOptions`]`()` | 
+`public `[`ListDocumentsOptions`] [`setConsentId`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_list_documents_options_1a60cbafbb5cb2443c0add044cf7b88abc)`(String consentId)` | 
+`public `[`ListDocumentsOptions`] [`setBatchId`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_list_documents_options_1ac52ae5b69f46e04451a645abce1e7ac7)`(String batchId)` | 
+`public List< NameValuePair > `[`toList`]`()` | 
 
 ## Members
 
-#### `public inline  `[`ListDocumentsOptions`]`()` 
+#### `public  `[`ListDocumentsOptions`]`()` 
 
-#### `public inline `[`ListDocumentsOptions`] [`setConsentId`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_list_documents_options_1a60cbafbb5cb2443c0add044cf7b88abc)`(String consentId)` 
+#### `public `[`ListDocumentsOptions`] [`setConsentId`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_list_documents_options_1a60cbafbb5cb2443c0add044cf7b88abc)`(String consentId)` 
 
-#### `public inline `[`ListDocumentsOptions`] [`setBatchId`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_list_documents_options_1ac52ae5b69f46e04451a645abce1e7ac7)`(String batchId)` 
+#### `public `[`ListDocumentsOptions`] [`setBatchId`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_list_documents_options_1ac52ae5b69f46e04451a645abce1e7ac7)`(String batchId)` 
 
-#### `public inline List< NameValuePair > `[`toList`]`()` 
+#### `public List< NameValuePair > `[`toList`]`()` 
 
 # class `ai::lucidtech::las::sdk::ListModelsOptions` 
 
@@ -1663,34 +1663,34 @@ class ai::lucidtech::las::sdk::ListPredictionsOptions
 
  Members                        | Descriptions                                
 --------------------------------|---------------------------------------------
-`public inline  `[`ListResourcesOptions`]`()` | 
-`public inline  `[`ListResourcesOptions`]`(int maxResults)` | 
-`public inline  `[`ListResourcesOptions`]`(String nextToken)` | 
-`public inline  `[`ListResourcesOptions`]`(int maxResults,String nextToken)` | 
-`public inline T `[`setMaxResults`]`(int maxResults)` | 
-`public inline T `[`setNextToken`]`(String nextToken)` | 
-`public inline List< NameValuePair > `[`toList`]`()` | 
-`public inline List< NameValuePair > `[`addOptions`]`(List< NameValuePair > parameters)` | 
+`public  `[`ListResourcesOptions`]`()` | 
+`public  `[`ListResourcesOptions`]`(int maxResults)` | 
+`public  `[`ListResourcesOptions`]`(String nextToken)` | 
+`public  `[`ListResourcesOptions`]`(int maxResults,String nextToken)` | 
+`public T `[`setMaxResults`]`(int maxResults)` | 
+`public T `[`setNextToken`]`(String nextToken)` | 
+`public List< NameValuePair > `[`toList`]`()` | 
+`public List< NameValuePair > `[`addOptions`]`(List< NameValuePair > parameters)` | 
 `protected Integer `[`maxResults`] | 
 `protected String `[`nextToken`] | 
 
 ## Members
 
-#### `public inline  `[`ListResourcesOptions`]`()` 
+#### `public  `[`ListResourcesOptions`]`()` 
 
-#### `public inline  `[`ListResourcesOptions`]`(int maxResults)` 
+#### `public  `[`ListResourcesOptions`]`(int maxResults)` 
 
-#### `public inline  `[`ListResourcesOptions`]`(String nextToken)` 
+#### `public  `[`ListResourcesOptions`]`(String nextToken)` 
 
-#### `public inline  `[`ListResourcesOptions`]`(int maxResults,String nextToken)` 
+#### `public  `[`ListResourcesOptions`]`(int maxResults,String nextToken)` 
 
-#### `public inline T `[`setMaxResults`]`(int maxResults)` 
+#### `public T `[`setMaxResults`]`(int maxResults)` 
 
-#### `public inline T `[`setNextToken`]`(String nextToken)` 
+#### `public T `[`setNextToken`]`(String nextToken)` 
 
-#### `public inline List< NameValuePair > `[`toList`]`()` 
+#### `public List< NameValuePair > `[`toList`]`()` 
 
-#### `public inline List< NameValuePair > `[`addOptions`]`(List< NameValuePair > parameters)` 
+#### `public List< NameValuePair > `[`addOptions`]`(List< NameValuePair > parameters)` 
 
 #### `protected Integer `[`maxResults`] 
 
@@ -1721,25 +1721,25 @@ class ai::lucidtech::las::sdk::ListSortablesOptions
 
  Members                        | Descriptions                                
 --------------------------------|---------------------------------------------
-`public inline  `[`ListSortablesOptions`]`()` | 
-`public inline T `[`setSortBy`]`(String sortBy)` | 
-`public inline T `[`setOrder`]`(`[`Order`](#enumai_1_1lucidtech_1_1las_1_1sdk_1_1_order)` order)` | 
-`public inline List< NameValuePair > `[`toList`]`()` | 
-`public inline List< NameValuePair > `[`addOptions`]`(List< NameValuePair > parameters)` | 
+`public  `[`ListSortablesOptions`]`()` | 
+`public T `[`setSortBy`]`(String sortBy)` | 
+`public T `[`setOrder`]`(`[`Order`](#enumai_1_1lucidtech_1_1las_1_1sdk_1_1_order)` order)` | 
+`public List< NameValuePair > `[`toList`]`()` | 
+`public List< NameValuePair > `[`addOptions`]`(List< NameValuePair > parameters)` | 
 `protected String `[`sortBy`] | 
 `protected `[`Order`](#enumai_1_1lucidtech_1_1las_1_1sdk_1_1_order) [`order`] | 
 
 ## Members
 
-#### `public inline  `[`ListSortablesOptions`]`()` 
+#### `public  `[`ListSortablesOptions`]`()` 
 
-#### `public inline T `[`setSortBy`]`(String sortBy)` 
+#### `public T `[`setSortBy`]`(String sortBy)` 
 
-#### `public inline T `[`setOrder`]`(`[`Order`](#enumai_1_1lucidtech_1_1las_1_1sdk_1_1_order)` order)` 
+#### `public T `[`setOrder`]`(`[`Order`](#enumai_1_1lucidtech_1_1las_1_1sdk_1_1_order)` order)` 
 
-#### `public inline List< NameValuePair > `[`toList`]`()` 
+#### `public List< NameValuePair > `[`toList`]`()` 
 
-#### `public inline List< NameValuePair > `[`addOptions`]`(List< NameValuePair > parameters)` 
+#### `public List< NameValuePair > `[`addOptions`]`(List< NameValuePair > parameters)` 
 
 #### `protected String `[`sortBy`] 
 
@@ -1756,29 +1756,29 @@ class ai::lucidtech::las::sdk::ListTransitionExecutionsOptions
 
  Members                        | Descriptions                                
 --------------------------------|---------------------------------------------
-`public inline  `[`ListTransitionExecutionsOptions`]`()` | 
-`public inline `[`ListTransitionExecutionsOptions`] [`setExecutionId`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_list_transition_executions_options_1a17be680d06dd9eaaaf9c3d0df3519d9d)`(List< String > executionId)` | 
-`public inline `[`ListTransitionExecutionsOptions`] [`setExecutionId`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_list_transition_executions_options_1a6fed26e978e0eec35e8a3dc4297010b7)`(String executionId)` | 
-`public inline `[`ListTransitionExecutionsOptions`] [`setStatus`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_list_transition_executions_options_1aaffb59561c7c6f2ba7249948783b83f0)`(List< `[`TransitionExecutionStatus`](#enumai_1_1lucidtech_1_1las_1_1sdk_1_1_transition_execution_status)` > status)` | 
-`public inline `[`ListTransitionExecutionsOptions`] [`setStatus`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_list_transition_executions_options_1af793df3ada1088f6dc7f83117ec02be1)`(`[`TransitionExecutionStatus`](#enumai_1_1lucidtech_1_1las_1_1sdk_1_1_transition_execution_status)` status)` | 
-`public inline List< NameValuePair > `[`toList`]`()` | 
-`public inline List< NameValuePair > `[`addOptions`]`(List< NameValuePair > parameters)` | 
+`public  `[`ListTransitionExecutionsOptions`]`()` | 
+`public `[`ListTransitionExecutionsOptions`] [`setExecutionId`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_list_transition_executions_options_1a17be680d06dd9eaaaf9c3d0df3519d9d)`(List< String > executionId)` | 
+`public `[`ListTransitionExecutionsOptions`] [`setExecutionId`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_list_transition_executions_options_1a6fed26e978e0eec35e8a3dc4297010b7)`(String executionId)` | 
+`public `[`ListTransitionExecutionsOptions`] [`setStatus`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_list_transition_executions_options_1aaffb59561c7c6f2ba7249948783b83f0)`(List< `[`TransitionExecutionStatus`](#enumai_1_1lucidtech_1_1las_1_1sdk_1_1_transition_execution_status)` > status)` | 
+`public `[`ListTransitionExecutionsOptions`] [`setStatus`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_list_transition_executions_options_1af793df3ada1088f6dc7f83117ec02be1)`(`[`TransitionExecutionStatus`](#enumai_1_1lucidtech_1_1las_1_1sdk_1_1_transition_execution_status)` status)` | 
+`public List< NameValuePair > `[`toList`]`()` | 
+`public List< NameValuePair > `[`addOptions`]`(List< NameValuePair > parameters)` | 
 
 ## Members
 
-#### `public inline  `[`ListTransitionExecutionsOptions`]`()` 
+#### `public  `[`ListTransitionExecutionsOptions`]`()` 
 
-#### `public inline `[`ListTransitionExecutionsOptions`] [`setExecutionId`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_list_transition_executions_options_1a17be680d06dd9eaaaf9c3d0df3519d9d)`(List< String > executionId)` 
+#### `public `[`ListTransitionExecutionsOptions`] [`setExecutionId`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_list_transition_executions_options_1a17be680d06dd9eaaaf9c3d0df3519d9d)`(List< String > executionId)` 
 
-#### `public inline `[`ListTransitionExecutionsOptions`] [`setExecutionId`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_list_transition_executions_options_1a6fed26e978e0eec35e8a3dc4297010b7)`(String executionId)` 
+#### `public `[`ListTransitionExecutionsOptions`] [`setExecutionId`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_list_transition_executions_options_1a6fed26e978e0eec35e8a3dc4297010b7)`(String executionId)` 
 
-#### `public inline `[`ListTransitionExecutionsOptions`] [`setStatus`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_list_transition_executions_options_1aaffb59561c7c6f2ba7249948783b83f0)`(List< `[`TransitionExecutionStatus`](#enumai_1_1lucidtech_1_1las_1_1sdk_1_1_transition_execution_status)` > status)` 
+#### `public `[`ListTransitionExecutionsOptions`] [`setStatus`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_list_transition_executions_options_1aaffb59561c7c6f2ba7249948783b83f0)`(List< `[`TransitionExecutionStatus`](#enumai_1_1lucidtech_1_1las_1_1sdk_1_1_transition_execution_status)` > status)` 
 
-#### `public inline `[`ListTransitionExecutionsOptions`] [`setStatus`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_list_transition_executions_options_1af793df3ada1088f6dc7f83117ec02be1)`(`[`TransitionExecutionStatus`](#enumai_1_1lucidtech_1_1las_1_1sdk_1_1_transition_execution_status)` status)` 
+#### `public `[`ListTransitionExecutionsOptions`] [`setStatus`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_list_transition_executions_options_1af793df3ada1088f6dc7f83117ec02be1)`(`[`TransitionExecutionStatus`](#enumai_1_1lucidtech_1_1las_1_1sdk_1_1_transition_execution_status)` status)` 
 
-#### `public inline List< NameValuePair > `[`toList`]`()` 
+#### `public List< NameValuePair > `[`toList`]`()` 
 
-#### `public inline List< NameValuePair > `[`addOptions`]`(List< NameValuePair > parameters)` 
+#### `public List< NameValuePair > `[`addOptions`]`(List< NameValuePair > parameters)` 
 
 # class `ai::lucidtech::las::sdk::ListTransitionsOptions` 
 
@@ -1791,17 +1791,17 @@ class ai::lucidtech::las::sdk::ListTransitionsOptions
 
  Members                        | Descriptions                                
 --------------------------------|---------------------------------------------
-`public inline  `[`ListTransitionsOptions`]`()` | 
-`public inline `[`ListTransitionsOptions`] [`setTransitionType`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_list_transitions_options_1a63e360ea5c442b76317e5c0f01ed29d8)`(`[`TransitionType`](#enumai_1_1lucidtech_1_1las_1_1sdk_1_1_transition_type)` transitionType)` | 
-`public inline List< NameValuePair > `[`toList`]`()` | 
+`public  `[`ListTransitionsOptions`]`()` | 
+`public `[`ListTransitionsOptions`] [`setTransitionType`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_list_transitions_options_1a63e360ea5c442b76317e5c0f01ed29d8)`(`[`TransitionType`](#enumai_1_1lucidtech_1_1las_1_1sdk_1_1_transition_type)` transitionType)` | 
+`public List< NameValuePair > `[`toList`]`()` | 
 
 ## Members
 
-#### `public inline  `[`ListTransitionsOptions`]`()` 
+#### `public  `[`ListTransitionsOptions`]`()` 
 
-#### `public inline `[`ListTransitionsOptions`] [`setTransitionType`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_list_transitions_options_1a63e360ea5c442b76317e5c0f01ed29d8)`(`[`TransitionType`](#enumai_1_1lucidtech_1_1las_1_1sdk_1_1_transition_type)` transitionType)` 
+#### `public `[`ListTransitionsOptions`] [`setTransitionType`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_list_transitions_options_1a63e360ea5c442b76317e5c0f01ed29d8)`(`[`TransitionType`](#enumai_1_1lucidtech_1_1las_1_1sdk_1_1_transition_type)` transitionType)` 
 
-#### `public inline List< NameValuePair > `[`toList`]`()` 
+#### `public List< NameValuePair > `[`toList`]`()` 
 
 # class `ai::lucidtech::las::sdk::ListUsersOptions` 
 
@@ -1828,23 +1828,23 @@ class ai::lucidtech::las::sdk::ListWorkflowExecutionsOptions
 
  Members                        | Descriptions                                
 --------------------------------|---------------------------------------------
-`public inline  `[`ListWorkflowExecutionsOptions`]`()` | 
-`public inline `[`ListWorkflowExecutionsOptions`] [`setStatus`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_list_workflow_executions_options_1aaf7e9a62ee579d8949fd62d36d0e65db)`(List< `[`WorkflowExecutionStatus`](#enumai_1_1lucidtech_1_1las_1_1sdk_1_1_workflow_execution_status)` > status)` | 
-`public inline `[`ListWorkflowExecutionsOptions`] [`setStatus`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_list_workflow_executions_options_1a0b2f966d52b2aeef2b37ac7c5e5eb520)`(`[`WorkflowExecutionStatus`](#enumai_1_1lucidtech_1_1las_1_1sdk_1_1_workflow_execution_status)` status)` | 
-`public inline List< NameValuePair > `[`toList`]`()` | 
-`public inline List< NameValuePair > `[`addOptions`]`(List< NameValuePair > parameters)` | 
+`public  `[`ListWorkflowExecutionsOptions`]`()` | 
+`public `[`ListWorkflowExecutionsOptions`] [`setStatus`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_list_workflow_executions_options_1aaf7e9a62ee579d8949fd62d36d0e65db)`(List< `[`WorkflowExecutionStatus`](#enumai_1_1lucidtech_1_1las_1_1sdk_1_1_workflow_execution_status)` > status)` | 
+`public `[`ListWorkflowExecutionsOptions`] [`setStatus`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_list_workflow_executions_options_1a0b2f966d52b2aeef2b37ac7c5e5eb520)`(`[`WorkflowExecutionStatus`](#enumai_1_1lucidtech_1_1las_1_1sdk_1_1_workflow_execution_status)` status)` | 
+`public List< NameValuePair > `[`toList`]`()` | 
+`public List< NameValuePair > `[`addOptions`]`(List< NameValuePair > parameters)` | 
 
 ## Members
 
-#### `public inline  `[`ListWorkflowExecutionsOptions`]`()` 
+#### `public  `[`ListWorkflowExecutionsOptions`]`()` 
 
-#### `public inline `[`ListWorkflowExecutionsOptions`] [`setStatus`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_list_workflow_executions_options_1aaf7e9a62ee579d8949fd62d36d0e65db)`(List< `[`WorkflowExecutionStatus`](#enumai_1_1lucidtech_1_1las_1_1sdk_1_1_workflow_execution_status)` > status)` 
+#### `public `[`ListWorkflowExecutionsOptions`] [`setStatus`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_list_workflow_executions_options_1aaf7e9a62ee579d8949fd62d36d0e65db)`(List< `[`WorkflowExecutionStatus`](#enumai_1_1lucidtech_1_1las_1_1sdk_1_1_workflow_execution_status)` > status)` 
 
-#### `public inline `[`ListWorkflowExecutionsOptions`] [`setStatus`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_list_workflow_executions_options_1a0b2f966d52b2aeef2b37ac7c5e5eb520)`(`[`WorkflowExecutionStatus`](#enumai_1_1lucidtech_1_1las_1_1sdk_1_1_workflow_execution_status)` status)` 
+#### `public `[`ListWorkflowExecutionsOptions`] [`setStatus`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_list_workflow_executions_options_1a0b2f966d52b2aeef2b37ac7c5e5eb520)`(`[`WorkflowExecutionStatus`](#enumai_1_1lucidtech_1_1las_1_1sdk_1_1_workflow_execution_status)` status)` 
 
-#### `public inline List< NameValuePair > `[`toList`]`()` 
+#### `public List< NameValuePair > `[`toList`]`()` 
 
-#### `public inline List< NameValuePair > `[`addOptions`]`(List< NameValuePair > parameters)` 
+#### `public List< NameValuePair > `[`addOptions`]`(List< NameValuePair > parameters)` 
 
 # class `ai::lucidtech::las::sdk::ListWorkflowsOptions` 
 
@@ -1894,23 +1894,23 @@ class ai::lucidtech::las::sdk::MissingCredentialsException
 
  Members                        | Descriptions                                
 --------------------------------|---------------------------------------------
-`public inline  `[`NameAndDescriptionOptions`]`()` | 
-`public inline T `[`setName`]`(String name)` | 
-`public inline T `[`setDescription`]`(String description)` | 
-`public inline JSONObject `[`addOptions`]`(JSONObject body)` | 
-`public inline JSONObject `[`toJson`]`()` | 
+`public  `[`NameAndDescriptionOptions`]`()` | 
+`public T `[`setName`]`(String name)` | 
+`public T `[`setDescription`]`(String description)` | 
+`public JSONObject `[`addOptions`]`(JSONObject body)` | 
+`public JSONObject `[`toJson`]`()` | 
 
 ## Members
 
-#### `public inline  `[`NameAndDescriptionOptions`]`()` 
+#### `public  `[`NameAndDescriptionOptions`]`()` 
 
-#### `public inline T `[`setName`]`(String name)` 
+#### `public T `[`setName`]`(String name)` 
 
-#### `public inline T `[`setDescription`]`(String description)` 
+#### `public T `[`setDescription`]`(String description)` 
 
-#### `public inline JSONObject `[`addOptions`]`(JSONObject body)` 
+#### `public JSONObject `[`addOptions`]`(JSONObject body)` 
 
-#### `public inline JSONObject `[`toJson`]`()` 
+#### `public JSONObject `[`toJson`]`()` 
 
 # class `ai::lucidtech::las::sdk::UpdateAssetOptions` 
 
@@ -1923,23 +1923,23 @@ class ai::lucidtech::las::sdk::UpdateAssetOptions
 
  Members                        | Descriptions                                
 --------------------------------|---------------------------------------------
-`public inline  `[`UpdateAssetOptions`]`()` | 
-`public inline `[`UpdateAssetOptions`] [`setContent`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_update_asset_options_1a2c82436e7cf26983ee2c2d892d159773)`(byte [] content)` | 
-`public inline `[`UpdateAssetOptions`] [`setContent`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_update_asset_options_1ad86efbed928b01bc637eedda9f19c733)`(InputStream content)` | 
-`public inline JSONObject `[`addOptions`]`(JSONObject body)` | 
-`public inline JSONObject `[`toJson`]`()` | 
+`public  `[`UpdateAssetOptions`]`()` | 
+`public `[`UpdateAssetOptions`] [`setContent`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_update_asset_options_1a2c82436e7cf26983ee2c2d892d159773)`(byte[] content)` | 
+`public `[`UpdateAssetOptions`] [`setContent`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_update_asset_options_1ad86efbed928b01bc637eedda9f19c733)`(InputStream content)` | 
+`public JSONObject `[`addOptions`]`(JSONObject body)` | 
+`public JSONObject `[`toJson`]`()` | 
 
 ## Members
 
-#### `public inline  `[`UpdateAssetOptions`]`()` 
+#### `public  `[`UpdateAssetOptions`]`()` 
 
-#### `public inline `[`UpdateAssetOptions`] [`setContent`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_update_asset_options_1a2c82436e7cf26983ee2c2d892d159773)`(byte [] content)` 
+#### `public `[`UpdateAssetOptions`] [`setContent`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_update_asset_options_1a2c82436e7cf26983ee2c2d892d159773)`(byte[] content)` 
 
-#### `public inline `[`UpdateAssetOptions`] [`setContent`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_update_asset_options_1ad86efbed928b01bc637eedda9f19c733)`(InputStream content)` 
+#### `public `[`UpdateAssetOptions`] [`setContent`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_update_asset_options_1ad86efbed928b01bc637eedda9f19c733)`(InputStream content)` 
 
-#### `public inline JSONObject `[`addOptions`]`(JSONObject body)` 
+#### `public JSONObject `[`addOptions`]`(JSONObject body)` 
 
-#### `public inline JSONObject `[`toJson`]`()` 
+#### `public JSONObject `[`toJson`]`()` 
 
 # class `ai::lucidtech::las::sdk::UpdateSecretOptions` 
 
@@ -1952,23 +1952,23 @@ class ai::lucidtech::las::sdk::UpdateSecretOptions
 
  Members                        | Descriptions                                
 --------------------------------|---------------------------------------------
-`public inline  `[`UpdateSecretOptions`]`()` | 
-`public inline `[`UpdateSecretOptions`] [`setData`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_update_secret_options_1a85cd3d884163f771962f080a7cfe9e08)`(JSONObject data)` | 
-`public inline `[`UpdateSecretOptions`] [`setData`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_update_secret_options_1ac88357dcd64d7a950b560e7bf60f9fe4)`(Map< String, String > data)` | 
-`public inline JSONObject `[`addOptions`]`(JSONObject body)` | 
-`public inline JSONObject `[`toJson`]`()` | 
+`public  `[`UpdateSecretOptions`]`()` | 
+`public `[`UpdateSecretOptions`] [`setData`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_update_secret_options_1a85cd3d884163f771962f080a7cfe9e08)`(JSONObject data)` | 
+`public `[`UpdateSecretOptions`] [`setData`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_update_secret_options_1ac88357dcd64d7a950b560e7bf60f9fe4)`(Map< String, String > data)` | 
+`public JSONObject `[`addOptions`]`(JSONObject body)` | 
+`public JSONObject `[`toJson`]`()` | 
 
 ## Members
 
-#### `public inline  `[`UpdateSecretOptions`]`()` 
+#### `public  `[`UpdateSecretOptions`]`()` 
 
-#### `public inline `[`UpdateSecretOptions`] [`setData`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_update_secret_options_1a85cd3d884163f771962f080a7cfe9e08)`(JSONObject data)` 
+#### `public `[`UpdateSecretOptions`] [`setData`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_update_secret_options_1a85cd3d884163f771962f080a7cfe9e08)`(JSONObject data)` 
 
-#### `public inline `[`UpdateSecretOptions`] [`setData`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_update_secret_options_1ac88357dcd64d7a950b560e7bf60f9fe4)`(Map< String, String > data)` 
+#### `public `[`UpdateSecretOptions`] [`setData`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_update_secret_options_1ac88357dcd64d7a950b560e7bf60f9fe4)`(Map< String, String > data)` 
 
-#### `public inline JSONObject `[`addOptions`]`(JSONObject body)` 
+#### `public JSONObject `[`addOptions`]`(JSONObject body)` 
 
-#### `public inline JSONObject `[`toJson`]`()` 
+#### `public JSONObject `[`toJson`]`()` 
 
 # class `ai::lucidtech::las::sdk::UpdateTransitionExecutionOptions` 
 
@@ -1976,26 +1976,26 @@ class ai::lucidtech::las::sdk::UpdateSecretOptions
 
  Members                        | Descriptions                                
 --------------------------------|---------------------------------------------
-`public inline  `[`UpdateTransitionExecutionOptions`]`()` | 
-`public inline `[`UpdateTransitionExecutionOptions`] [`setOutput`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_update_transition_execution_options_1afc7f677cd0d46baaea8376d2f02a621d)`(JSONObject error)` | 
-`public inline `[`UpdateTransitionExecutionOptions`] [`setError`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_update_transition_execution_options_1a7df40cd9c5c3735c8abfb6f9d91a8f8e)`(JSONObject output)` | 
-`public inline `[`UpdateTransitionExecutionOptions`] [`setStartTime`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_update_transition_execution_options_1a91eaf567d5e65b0fb5eb3afd8f68c253)`(String startTime)` | 
-`public inline JSONObject `[`addOptions`]`(JSONObject body)` | 
-`public inline JSONObject `[`toJson`]`()` | 
+`public  `[`UpdateTransitionExecutionOptions`]`()` | 
+`public `[`UpdateTransitionExecutionOptions`] [`setOutput`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_update_transition_execution_options_1afc7f677cd0d46baaea8376d2f02a621d)`(JSONObject error)` | 
+`public `[`UpdateTransitionExecutionOptions`] [`setError`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_update_transition_execution_options_1a7df40cd9c5c3735c8abfb6f9d91a8f8e)`(JSONObject output)` | 
+`public `[`UpdateTransitionExecutionOptions`] [`setStartTime`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_update_transition_execution_options_1a91eaf567d5e65b0fb5eb3afd8f68c253)`(String startTime)` | 
+`public JSONObject `[`addOptions`]`(JSONObject body)` | 
+`public JSONObject `[`toJson`]`()` | 
 
 ## Members
 
-#### `public inline  `[`UpdateTransitionExecutionOptions`]`()` 
+#### `public  `[`UpdateTransitionExecutionOptions`]`()` 
 
-#### `public inline `[`UpdateTransitionExecutionOptions`] [`setOutput`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_update_transition_execution_options_1afc7f677cd0d46baaea8376d2f02a621d)`(JSONObject error)` 
+#### `public `[`UpdateTransitionExecutionOptions`] [`setOutput`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_update_transition_execution_options_1afc7f677cd0d46baaea8376d2f02a621d)`(JSONObject error)` 
 
-#### `public inline `[`UpdateTransitionExecutionOptions`] [`setError`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_update_transition_execution_options_1a7df40cd9c5c3735c8abfb6f9d91a8f8e)`(JSONObject output)` 
+#### `public `[`UpdateTransitionExecutionOptions`] [`setError`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_update_transition_execution_options_1a7df40cd9c5c3735c8abfb6f9d91a8f8e)`(JSONObject output)` 
 
-#### `public inline `[`UpdateTransitionExecutionOptions`] [`setStartTime`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_update_transition_execution_options_1a91eaf567d5e65b0fb5eb3afd8f68c253)`(String startTime)` 
+#### `public `[`UpdateTransitionExecutionOptions`] [`setStartTime`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_update_transition_execution_options_1a91eaf567d5e65b0fb5eb3afd8f68c253)`(String startTime)` 
 
-#### `public inline JSONObject `[`addOptions`]`(JSONObject body)` 
+#### `public JSONObject `[`addOptions`]`(JSONObject body)` 
 
-#### `public inline JSONObject `[`toJson`]`()` 
+#### `public JSONObject `[`toJson`]`()` 
 
 # class `ai::lucidtech::las::sdk::UpdateTransitionOptions` 
 
@@ -2008,23 +2008,23 @@ class ai::lucidtech::las::sdk::UpdateTransitionOptions
 
  Members                        | Descriptions                                
 --------------------------------|---------------------------------------------
-`public inline  `[`UpdateTransitionOptions`]`()` | 
-`public inline `[`UpdateTransitionOptions`] [`setInputJsonSchema`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_update_transition_options_1a2e6d97d967f6270b2f9de77eabebc86d)`(JSONObject schema)` | 
-`public inline `[`UpdateTransitionOptions`] [`setOutputJsonSchema`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_update_transition_options_1adcaad2be6ae5fe6c41052101eee65926)`(JSONObject schema)` | 
-`public inline JSONObject `[`addOptions`]`(JSONObject body)` | 
-`public inline JSONObject `[`toJson`]`()` | 
+`public  `[`UpdateTransitionOptions`]`()` | 
+`public `[`UpdateTransitionOptions`] [`setInputJsonSchema`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_update_transition_options_1a2e6d97d967f6270b2f9de77eabebc86d)`(JSONObject schema)` | 
+`public `[`UpdateTransitionOptions`] [`setOutputJsonSchema`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_update_transition_options_1adcaad2be6ae5fe6c41052101eee65926)`(JSONObject schema)` | 
+`public JSONObject `[`addOptions`]`(JSONObject body)` | 
+`public JSONObject `[`toJson`]`()` | 
 
 ## Members
 
-#### `public inline  `[`UpdateTransitionOptions`]`()` 
+#### `public  `[`UpdateTransitionOptions`]`()` 
 
-#### `public inline `[`UpdateTransitionOptions`] [`setInputJsonSchema`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_update_transition_options_1a2e6d97d967f6270b2f9de77eabebc86d)`(JSONObject schema)` 
+#### `public `[`UpdateTransitionOptions`] [`setInputJsonSchema`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_update_transition_options_1a2e6d97d967f6270b2f9de77eabebc86d)`(JSONObject schema)` 
 
-#### `public inline `[`UpdateTransitionOptions`] [`setOutputJsonSchema`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_update_transition_options_1adcaad2be6ae5fe6c41052101eee65926)`(JSONObject schema)` 
+#### `public `[`UpdateTransitionOptions`] [`setOutputJsonSchema`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_update_transition_options_1adcaad2be6ae5fe6c41052101eee65926)`(JSONObject schema)` 
 
-#### `public inline JSONObject `[`addOptions`]`(JSONObject body)` 
+#### `public JSONObject `[`addOptions`]`(JSONObject body)` 
 
-#### `public inline JSONObject `[`toJson`]`()` 
+#### `public JSONObject `[`toJson`]`()` 
 
 # class `ai::lucidtech::las::sdk::UpdateUserOptions` 
 
@@ -2060,25 +2060,25 @@ class ai::lucidtech::las::sdk::UpdateWorkflowOptions
 
  Members                        | Descriptions                                
 --------------------------------|---------------------------------------------
-`public inline  `[`UserOptions`]`()` | 
-`public inline T `[`setName`]`(String name)` | 
-`public inline T `[`setAvatar`]`(String avatar)` | 
-`public inline T `[`setAvatar`]`(byte [] avatar)` | 
-`public inline JSONObject `[`addOptions`]`(JSONObject body)` | 
-`public inline JSONObject `[`toJson`]`()` | 
+`public  `[`UserOptions`]`()` | 
+`public T `[`setName`]`(String name)` | 
+`public T `[`setAvatar`]`(String avatar)` | 
+`public T `[`setAvatar`]`(byte[] avatar)` | 
+`public JSONObject `[`addOptions`]`(JSONObject body)` | 
+`public JSONObject `[`toJson`]`()` | 
 
 ## Members
 
-#### `public inline  `[`UserOptions`]`()` 
+#### `public  `[`UserOptions`]`()` 
 
-#### `public inline T `[`setName`]`(String name)` 
+#### `public T `[`setName`]`(String name)` 
 
-#### `public inline T `[`setAvatar`]`(String avatar)` 
+#### `public T `[`setAvatar`]`(String avatar)` 
 
-#### `public inline T `[`setAvatar`]`(byte [] avatar)` 
+#### `public T `[`setAvatar`]`(byte[] avatar)` 
 
-#### `public inline JSONObject `[`addOptions`]`(JSONObject body)` 
+#### `public JSONObject `[`addOptions`]`(JSONObject body)` 
 
-#### `public inline JSONObject `[`toJson`]`()` 
+#### `public JSONObject `[`toJson`]`()` 
 
 Generated by [Moxygen](https://sourcey.com/moxygen)
