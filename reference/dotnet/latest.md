@@ -23,7 +23,7 @@
  Members                        | Descriptions                                
 --------------------------------|---------------------------------------------
 `{property} RestClient `[`RestSharpClient`](#a00043_1a5e59cc310cc0dd101e74a16824f2fa3a) | 
-`{property} `[`Credentials`](#a00067)` `[`LasCredentials`](#a00043_1aed1258913a65f014aa0ce4ef63bd6dfe) | 
+`{property} `[`Credentials`](#a00067) [`LasCredentials`](#a00043_1aed1258913a65f014aa0ce4ef63bd6dfe) | 
 `public inline  `[`Client`](#a00043_1a2a95a90e6dfa52e94d3e12a18d583fca)`(`[`Credentials`](#a00067)` credentials)` | [Client](#a00043) constructor.
 `public inline  `[`Client`](#a00043_1a0ba3cc00461a4ee4d4a346d9600efa4a)`()` | [Client](#a00043) constructor with credentials read from local file.
 `public inline object `[`CreateAsset`](#a00043_1afde4b9ed933fd6fc775770af3cd412e1)`(byte[] content,Dictionary< string, string?>? attributes)` | Creates an asset, calls the POST /assets endpoint.
@@ -72,7 +72,7 @@
 
 #### `{property} RestClient `[`RestSharpClient`](#a00043_1a5e59cc310cc0dd101e74a16824f2fa3a) 
 
-#### `{property} `[`Credentials`](#a00067)` `[`LasCredentials`](#a00043_1aed1258913a65f014aa0ce4ef63bd6dfe) 
+#### `{property} `[`Credentials`](#a00067)   [`LasCredentials`](#a00043_1aed1258913a65f014aa0ce4ef63bd6dfe) 
 
 #### `public inline  `[`Client`](#a00043_1a2a95a90e6dfa52e94d3e12a18d583fca)`(`[`Credentials`](#a00067)` credentials)` 
 
