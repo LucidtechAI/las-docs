@@ -53,7 +53,7 @@ jobs:
           sed -i 's/inline="yes"/inline="no"/g' xml/* #Remove inline
           npx moxygen xml
           sed -i 's/` `/ /g' api.md
-          sed -i 's/(\#class.*?)//g' api.md # Remove identifier
+          perl -pi -e 's|(\(\#class.*?\))||' api.md # Remove identifier, use pearl to get a non-greedy match
           mv api.md ../reference/java/latest.md
 
       - name: Check out .NET sdk
@@ -69,7 +69,7 @@ jobs:
           sed -i 's/inline="yes"/inline="no"/g' xml/* #Remove inline
           npx moxygen xml
           sed -i 's/` `/ /g' api.md
-          sed -i 's/(\#class.*?)//g' api.md # Remove identifier
+          perl -pi -e 's|(\(\#class.*?\))||' api.md # Remove identifier, use pearl to get a non-greedy match
           mv api.md ../reference/dotnet/latest.md
 
       - name: Check out java-script sdk
