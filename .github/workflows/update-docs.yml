@@ -52,6 +52,7 @@ jobs:
           doxygen
           sed -i 's/inline="yes"/inline="no"/g' xml/* #Remove inline
           npx moxygen xml
+          sed -i 's/` `/ /g' api.md
           mv api.md ../reference/java/latest.md
 
       - name: Check out .NET sdk
@@ -66,6 +67,7 @@ jobs:
           doxygen documentation.conf
           sed -i 's/inline="yes"/inline="no"/g' xml/* #Remove inline
           npx moxygen xml
+          sed -i 's/` `/ /g' api.md
           mv api.md ../reference/dotnet/latest.md
 
       - name: Check out java-script sdk
