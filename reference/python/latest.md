@@ -175,6 +175,50 @@ representing the ground truth values for the document
 
 
 
+#### create_model(width: int, height: int, field_config: dict, \*, preprocess_config: Optional[dict] = None, name: Optional[str] = None, description: Optional[str] = None, \*\*optional_args)
+Creates a model, calls the POST /models endpoint.
+
+
+* **Parameters**
+
+    
+    * **width** (*int*) – The number of pixels to be used for the input image width of your model
+
+
+    * **height** (*int*) – The number of pixels to be used for the input image height of your model
+
+
+    * **field_config** (*dict*) – Specification of the fields that the model is going to predict
+
+
+    * **preprocess_config** (*dict*) – Specification of the processing steps prior to the prediction of an image
+
+
+    * **name** (*Optional**[**str**]*) – Name of the model
+
+
+    * **description** (*Optional**[**str**]*) – Description of the model
+
+
+
+* **Returns**
+
+    Model response from REST API
+
+
+
+* **Return type**
+
+    dict
+
+
+
+* **Raises**
+
+    `InvalidCredentialsException`, `TooManyRequestsException`, `LimitExceededException`, `requests.exception.RequestException`
+
+
+
 #### create_prediction(document_id: str, model_id: str, \*, max_pages: Optional[int] = None, auto_rotate: Optional[bool] = None, image_quality: Optional[str] = None)
 Create a prediction on a document using specified model, calls the POST /predictions endpoint.
 
@@ -327,7 +371,7 @@ Creates a transition, calls the POST /transitions endpoint.
 
 
 
-#### create_user(email: str, \*\*optional_args)
+#### create_user(email: str, \*, app_client_id, \*\*optional_args)
 Creates a new user, calls the POST /users endpoint.
 
 ```python
@@ -908,6 +952,34 @@ get log, calls the GET /logs/{logId} endpoint.
 * **Returns**
 
     Log response from REST API
+
+
+
+* **Return type**
+
+    dict
+
+
+
+* **Raises**
+
+    `InvalidCredentialsException`, `TooManyRequestsException`, `LimitExceededException`, `requests.exception.RequestException`
+
+
+
+#### get_model(model_id: str)
+Get a model, calls the GET /models/{modelId} endpoint.
+
+
+* **Parameters**
+
+    **model_id** (*str*) – The Id of the model
+
+
+
+* **Returns**
+
+    Model response from REST API
 
 
 
@@ -1683,6 +1755,41 @@ calls the POST /transitions/{transitionId}/executions/{executionId}/heartbeats e
 
 
 
+#### update_app_client(app_client_id, \*\*optional_args)
+Updates an appClient, calls the PATCH /appClients/{appClientId} endpoint.
+
+
+* **Parameters**
+
+    
+    * **app_client_id** (*str*) – Id of the appClient
+
+
+    * **name** (*Optional**[**str**]*) – Name of the appClient
+
+
+    * **description** (*Optional**[**str**]*) – Description of the appClient
+
+
+
+* **Returns**
+
+    AppClient response from REST API
+
+
+
+* **Return type**
+
+    dict
+
+
+
+* **Raises**
+
+    `InvalidCredentialsException`, `TooManyRequestsException`, `LimitExceededException`, `requests.exception.RequestException`
+
+
+
 #### update_asset(asset_id: str, \*\*optional_args)
 Updates an asset, calls the PATCH /assets/{assetId} endpoint.
 
@@ -1727,6 +1834,41 @@ Updates an asset, calls the PATCH /assets/{assetId} endpoint.
 
 
 
+#### update_batch(batch_id, \*\*optional_args)
+Updates a batch, calls the PATCH /batches/{batchId} endpoint.
+
+
+* **Parameters**
+
+    
+    * **batch_id** (*str*) – Id of the batch
+
+
+    * **name** (*Optional**[**str**]*) – Name of the batch
+
+
+    * **description** (*Optional**[**str**]*) – Description of the batch
+
+
+
+* **Returns**
+
+    Batch response from REST API
+
+
+
+* **Return type**
+
+    dict
+
+
+
+* **Raises**
+
+    `InvalidCredentialsException`, `TooManyRequestsException`, `LimitExceededException`, `requests.exception.RequestException`
+
+
+
 #### update_document(document_id: str, ground_truth: Sequence[Dict[str, Union[str, None, bool]]])
 Update ground truth for a document, calls the PATCH /documents/{documentId} endpoint.
 Updating ground truth means adding the ground truth data for the particular document.
@@ -1753,6 +1895,56 @@ This enables the API to learn from past mistakes.
 * **Returns**
 
     Document response from REST API
+
+
+
+* **Return type**
+
+    dict
+
+
+
+* **Raises**
+
+    `InvalidCredentialsException`, `TooManyRequestsException`, `LimitExceededException`, `requests.exception.RequestException`
+
+
+
+#### update_model(model_id: str, \*, width: Optional[int] = None, height: Optional[int] = None, field_config: Optional[dict] = None, preprocess_config: Optional[dict] = None, status: Optional[str] = None, \*\*optional_args)
+Updates a model, calls the PATCH /models/{modelId} endpoint.
+
+
+* **Parameters**
+
+    
+    * **model_id** (*Optional**[**str**]*) – The Id of the model
+
+
+    * **width** (*Optional**[**int**]*) – The number of pixels to be used for the input image width of your model
+
+
+    * **height** (*Optional**[**int**]*) – The number of pixels to be used for the input image height of your model
+
+
+    * **field_config** (*dict*) – Specification of the fields that the model is going to predict
+
+
+    * **preprocess_config** (*dict*) – Specification of the processing steps prior to the prediction of an image
+
+
+    * **status** (*Optional**[**str**]*) – New status for the model
+
+
+    * **name** (*Optional**[**str**]*) – Name of the model
+
+
+    * **description** (*Optional**[**str**]*) – Description of the model
+
+
+
+* **Returns**
+
+    Model response from REST API
 
 
 
@@ -2068,4 +2260,4 @@ Used to fetch and store credentials and to generate/cache an access token.
 
 
 
-#### property access_token()
+#### property access_token(: str)

@@ -12,6 +12,7 @@
 --------------------------------|---------------------------------------------
 `class `[`ai::lucidtech::las::sdk::APIException`] | 
 `class `[`ai::lucidtech::las::sdk::Client`] | 
+`class `[`ai::lucidtech::las::sdk::CreateAppClientOptions`] | 
 `class `[`ai::lucidtech::las::sdk::CreateAssetOptions`] | 
 `class `[`ai::lucidtech::las::sdk::CreateBatchOptions`] | 
 `class `[`ai::lucidtech::las::sdk::CreateDocumentOptions`] | 
@@ -21,8 +22,14 @@
 `class `[`ai::lucidtech::las::sdk::CreateUserOptions`] | 
 `class `[`ai::lucidtech::las::sdk::CreateWorkflowOptions`] | 
 `class `[`ai::lucidtech::las::sdk::Credentials`] | 
+`class `[`ai::lucidtech::las::sdk::DeleteDocumentsOptions`] | 
+`class `[`ai::lucidtech::las::sdk::DeleteResourcesOptions`] | 
+`class `[`ai::lucidtech::las::sdk::DockerTransitionParameters`] | 
+`class `[`ai::lucidtech::las::sdk::ListAppClientsOptions`] | 
 `class `[`ai::lucidtech::las::sdk::ListAssetsOptions`] | 
+`class `[`ai::lucidtech::las::sdk::ListBatchesOptions`] | 
 `class `[`ai::lucidtech::las::sdk::ListDocumentsOptions`] | 
+`class `[`ai::lucidtech::las::sdk::ListLogsOptions`] | 
 `class `[`ai::lucidtech::las::sdk::ListModelsOptions`] | 
 `class `[`ai::lucidtech::las::sdk::ListPredictionsOptions`] | 
 `class `[`ai::lucidtech::las::sdk::ListResourcesOptions`] | 
@@ -33,9 +40,12 @@
 `class `[`ai::lucidtech::las::sdk::ListUsersOptions`] | 
 `class `[`ai::lucidtech::las::sdk::ListWorkflowExecutionsOptions`] | 
 `class `[`ai::lucidtech::las::sdk::ListWorkflowsOptions`] | 
+`class `[`ai::lucidtech::las::sdk::ManualTransitionParameters`] | 
 `class `[`ai::lucidtech::las::sdk::MissingAccessTokenException`] | 
 `class `[`ai::lucidtech::las::sdk::MissingCredentialsException`] | 
 `class `[`ai::lucidtech::las::sdk::NameAndDescriptionOptions`] | 
+`class `[`ai::lucidtech::las::sdk::Options`] | 
+`class `[`ai::lucidtech::las::sdk::TransitionParameters`] | 
 `class `[`ai::lucidtech::las::sdk::UpdateAssetOptions`] | 
 `class `[`ai::lucidtech::las::sdk::UpdateSecretOptions`] | 
 `class `[`ai::lucidtech::las::sdk::UpdateTransitionExecutionOptions`] | 
@@ -43,6 +53,8 @@
 `class `[`ai::lucidtech::las::sdk::UpdateUserOptions`] | 
 `class `[`ai::lucidtech::las::sdk::UpdateWorkflowOptions`] | 
 `class `[`ai::lucidtech::las::sdk::UserOptions`] | 
+`class `[`ai::lucidtech::las::sdk::WorkflowCompletedConfig`] | 
+`class `[`ai::lucidtech::las::sdk::WorkflowErrorConfig`] | 
 
 # class `ai::lucidtech::las::sdk::APIException` 
 
@@ -74,58 +86,71 @@ class ai::lucidtech::las::sdk::APIException
  Members                        | Descriptions                                
 --------------------------------|---------------------------------------------
 `public  `[`Client`]`(`[`Credentials`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_credentials)` credentials)` | A client to invoke api methods from Lucidtech AI Services.
-`public JSONObject `[`createAsset`]`(byte[] content,`[`CreateAssetOptions`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_create_asset_options)` options)` | Creates an asset, calls the POST /assets endpoint.
-`public JSONObject `[`createAsset`]`(InputStream content,`[`CreateAssetOptions`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_create_asset_options)` options)` | Creates an asset, calls the POST /assets endpoint.
-`public JSONObject `[`createAsset`]`(byte[] content)` | Creates an asset, calls the POST /assets endpoint.
-`public JSONObject `[`createAsset`]`(InputStream content)` | Creates an asset, calls the POST /assets endpoint.
+`public JSONObject `[`createAppClient`]`(`[`CreateAppClientOptions`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_create_app_client_options)` options)` | Create an app client, calls the POST /appClients endpoint.
+`public JSONObject `[`createAppClient`]`()` | Create an app client, calls the POST /appClients endpoint.
+`public JSONObject `[`listAppClients`]`(`[`ListAppClientsOptions`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_list_app_clients_options)` options)` | List appClients available, calls the GET /appClients endpoint.
+`public JSONObject `[`listAppClients`]`()` | List appClients available, calls the GET /appClients endpoint.
+`public JSONObject `[`deleteAppClient`]`(String appClientId)` | Delete an appClient, calls the DELETE /appClients/{appClientId} endpoint.
+`public JSONObject `[`createAsset`]`(byte[] content,`[`CreateAssetOptions`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_create_asset_options)` options)` | Create an asset, calls the POST /assets endpoint.
+`public JSONObject `[`createAsset`]`(InputStream content,`[`CreateAssetOptions`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_create_asset_options)` options)` | Create an asset, calls the POST /assets endpoint.
+`public JSONObject `[`createAsset`]`(byte[] content)` | Create an asset, calls the POST /assets endpoint.
+`public JSONObject `[`createAsset`]`(InputStream content)` | Create an asset, calls the POST /assets endpoint.
 `public JSONObject `[`listAssets`]`(`[`ListAssetsOptions`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_list_assets_options)` options)` | List assets available, calls the GET /assets endpoint.
 `public JSONObject `[`listAssets`]`()` | List assets available, calls the GET /assets endpoint.
 `public JSONObject `[`getAsset`]`(String assetId)` | Get asset, calls the GET /assets/{assetId} endpoint.
-`public JSONObject `[`updateAsset`]`(String assetId,`[`UpdateAssetOptions`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_update_asset_options)` options)` | Updates an asset, calls the PATCH /assets/{assetId} endpoint.
-`public JSONObject `[`createBatch`]`(`[`CreateBatchOptions`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_create_batch_options)` options)` | Creates a batch, calls the POST /batches endpoint.
-`public JSONObject `[`createBatch`]`()` | Creates a batch, calls the POST /batches endpoint.
-`public JSONObject `[`createDocument`]`(byte[] content,`[`ContentType`](#enumai_1_1lucidtech_1_1las_1_1sdk_1_1_content_type)` contentType,`[`CreateDocumentOptions`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_create_document_options)` options)` | Creates a document, calls the POST /documents endpoint.
-`public JSONObject `[`createDocument`]`(InputStream content,`[`ContentType`](#enumai_1_1lucidtech_1_1las_1_1sdk_1_1_content_type)` contentType,`[`CreateDocumentOptions`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_create_document_options)` options)` | Creates a document, calls the POST /documents endpoint.
-`public JSONObject `[`createDocument`]`(InputStream content,`[`ContentType`](#enumai_1_1lucidtech_1_1las_1_1sdk_1_1_content_type)` contentType)` | Creates a document, calls the POST /documents endpoint.
-`public JSONObject `[`createDocument`]`(byte[] content,`[`ContentType`](#enumai_1_1lucidtech_1_1las_1_1sdk_1_1_content_type)` contentType)` | Creates a document, calls the POST /documents endpoint.
+`public JSONObject `[`updateAsset`]`(String assetId,`[`UpdateAssetOptions`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_update_asset_options)` options)` | Update an asset, calls the PATCH /assets/{assetId} endpoint.
+`public JSONObject `[`deleteAsset`]`(String assetId)` | Delete an asset, calls the DELETE /assets/{assetId} endpoint.
+`public JSONObject `[`createBatch`]`(`[`CreateBatchOptions`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_create_batch_options)` options)` | Create a batch, calls the POST /batches endpoint.
+`public JSONObject `[`createBatch`]`()` | Create a batch, calls the POST /batches endpoint.
+`public JSONObject `[`listBatches`]`(`[`ListBatchesOptions`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_list_batches_options)` options)` | List batches available, calls the GET /batches endpoint.
+`public JSONObject `[`listBatches`]`()` | List batches available, calls the GET /batches endpoint.
+`public JSONObject `[`deleteBatch`]`(String batchId,boolean deleteDocuments)` | Delete a batch, calls the DELETE /batches/{batchId} endpoint.
+`public JSONObject `[`deleteBatch`]`(String batchId)` | Delete a batch, calls the DELETE /batches/{batchId} endpoint.
+`public JSONObject `[`createDocument`]`(byte[] content,`[`ContentType`](#enumai_1_1lucidtech_1_1las_1_1sdk_1_1_content_type)` contentType,`[`CreateDocumentOptions`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_create_document_options)` options)` | Create a document, calls the POST /documents endpoint.
+`public JSONObject `[`createDocument`]`(InputStream content,`[`ContentType`](#enumai_1_1lucidtech_1_1las_1_1sdk_1_1_content_type)` contentType,`[`CreateDocumentOptions`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_create_document_options)` options)` | Create a document, calls the POST /documents endpoint.
+`public JSONObject `[`createDocument`]`(InputStream content,`[`ContentType`](#enumai_1_1lucidtech_1_1las_1_1sdk_1_1_content_type)` contentType)` | Create a document, calls the POST /documents endpoint.
+`public JSONObject `[`createDocument`]`(byte[] content,`[`ContentType`](#enumai_1_1lucidtech_1_1las_1_1sdk_1_1_content_type)` contentType)` | Create a document, calls the POST /documents endpoint.
 `public JSONObject `[`listDocuments`]`(`[`ListDocumentsOptions`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_list_documents_options)` options)` | List documents, calls the GET /documents endpoint.
 `public JSONObject `[`listDocuments`]`()` | List documents, calls the GET /documents endpoint.
+`public JSONObject `[`deleteDocuments`]`(`[`DeleteDocumentsOptions`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_delete_documents_options)` options)` | Delete documents, calls the DELETE /documents endpoint.
 `public JSONObject `[`deleteDocuments`]`()` | Delete documents, calls the DELETE /documents endpoint.
-`public JSONObject `[`deleteDocuments`]`(String consentId)` | Delete documents with the provided consentId, calls the DELETE /documents endpoint.
 `public JSONObject `[`getDocument`]`(String documentId)` | Get document, calls the GET /documents/{documentId} endpoint.
-`public JSONObject `[`updateDocument`]`(String documentId,JSONArray groundTruth)` | Update ground truth for a document, calls the PATCH /documents/{documentId} endpoint.
+`public JSONObject `[`updateDocument`]`(String documentId,JSONArray groundTruth)` | Update document, calls the PATCH /documents/{documentId} endpoint.
 `public JSONObject `[`getLog`]`(String logId)` | Get log, calls the GET /logs/{logId} endpoint.
-`public JSONObject `[`listModels`]`(`[`ListModelsOptions`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_list_models_options)` options)` | List models available, calls the GET /models endpoint.
+`public JSONObject `[`listLogs`]`(`[`ListLogsOptions`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_list_logs_options)` options)` | List logs, calls the GET /logs endpoint.
+`public JSONObject `[`listLogs`]`()` | List logs, calls the GET /logs endpoint.
+`public JSONObject `[`listModels`]`(`[`ListModelsOptions`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_list_models_options)` options)` | List models, calls the GET /models endpoint.
 `public JSONObject `[`listModels`]`()` | List models available, calls the GET /models endpoint.
 `public JSONObject `[`createPrediction`]`(String documentId,String modelId,`[`CreatePredictionOptions`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_create_prediction_options)` options)` | Create a prediction on a document using specified model, calls the POST /predictions endpoint.
 `public JSONObject `[`createPrediction`]`(String documentId,String modelId)` | Create a prediction on a document using specified model, calls the POST /predictions endpoint.
 `public JSONObject `[`listPredictions`]`(`[`ListPredictionsOptions`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_list_predictions_options)` options)` | List predictions available, calls the GET /predictions endpoint.
 `public JSONObject `[`listPredictions`]`()` | List predictions available, calls the GET /predictions endpoint.
-`public JSONObject `[`createSecret`]`(JSONObject data,`[`CreateSecretOptions`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_create_secret_options)` options)` | Creates a secret, calls the POST /secrets endpoint.
-`public JSONObject `[`createSecret`]`(Map< String, String > data,`[`CreateSecretOptions`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_create_secret_options)` options)` | Creates a secret, calls the POST /secrets endpoint.
-`public JSONObject `[`createSecret`]`(Map< String, String > data)` | Creates a secret, calls the POST /secrets endpoint.
-`public JSONObject `[`createSecret`]`(JSONObject data)` | Creates a secret, calls the POST /secrets endpoint.
-`public JSONObject `[`listSecrets`]`(`[`ListSecretsOptions`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_list_secrets_options)` options)` | List secrets available, calls the GET /secrets endpoint.
-`public JSONObject `[`listSecrets`]`()` | List secrets available, calls the GET /secrets endpoint.
-`public JSONObject `[`updateSecret`]`(String secretId,`[`UpdateSecretOptions`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_update_secret_options)` options)` | Updates a secret, calls the PATCH /secrets/{secretId} endpoint.
-`public JSONObject `[`createTransition`]`(`[`TransitionType`](#enumai_1_1lucidtech_1_1las_1_1sdk_1_1_transition_type)` transitionType,`[`CreateTransitionOptions`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_create_transition_options)` options)` | Creates a transition, calls the POST /transitions endpoint.
-`public JSONObject `[`createTransition`]`(`[`TransitionType`](#enumai_1_1lucidtech_1_1las_1_1sdk_1_1_transition_type)` transitionType)` | Creates a transition, calls the POST /transitions endpoint.
+`public JSONObject `[`createSecret`]`(JSONObject data,`[`CreateSecretOptions`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_create_secret_options)` options)` | Create secret, calls the POST /secrets endpoint.
+`public JSONObject `[`createSecret`]`(Map< String, String > data,`[`CreateSecretOptions`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_create_secret_options)` options)` | Create a secret, calls the POST /secrets endpoint.
+`public JSONObject `[`createSecret`]`(Map< String, String > data)` | Create a secret, calls the POST /secrets endpoint.
+`public JSONObject `[`createSecret`]`(JSONObject data)` | Create a secret, calls the POST /secrets endpoint.
+`public JSONObject `[`listSecrets`]`(`[`ListSecretsOptions`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_list_secrets_options)` options)` | List secrets, calls the GET /secrets endpoint.
+`public JSONObject `[`listSecrets`]`()` | List secrets, calls the GET /secrets endpoint.
+`public JSONObject `[`updateSecret`]`(String secretId,`[`UpdateSecretOptions`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_update_secret_options)` options)` | Update a secret, calls the PATCH /secrets/{secretId} endpoint.
+`public JSONObject `[`deleteSecret`]`(String secretId)` | Delete a secret, calls the DELETE /secrets/{secretId} endpoint.
+`public JSONObject `[`createTransition`]`(`[`TransitionType`](#enumai_1_1lucidtech_1_1las_1_1sdk_1_1_transition_type)` transitionType,`[`CreateTransitionOptions`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_create_transition_options)` options)` | Create a transition, calls the POST /transitions endpoint.
+`public JSONObject `[`createTransition`]`(`[`TransitionType`](#enumai_1_1lucidtech_1_1las_1_1sdk_1_1_transition_type)` transitionType)` | Create a transition, calls the POST /transitions endpoint.
 `public JSONObject `[`listTransitions`]`(`[`ListTransitionsOptions`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_list_transitions_options)` options)` | List transitions, calls the GET /transitions endpoint.
 `public JSONObject `[`listTransitions`]`()` | List transitions, calls the GET /transitions endpoint.
 `public JSONObject `[`getTransition`]`(String transitionId)` | Get transition, calls the GET /transitions/{transitionId} endpoint.
 `public JSONObject `[`updateTransition`]`(String transitionId,`[`UpdateTransitionOptions`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_update_transition_options)` options)` | Updates a transition, calls the PATCH /transitions/{transitionId} endpoint.
 `public JSONObject `[`executeTransition`]`(String transitionId)` | Start executing a manual transition, calls the POST /transitions/{transitionId}/executions endpoint.
-`public JSONObject `[`deleteTransition`]`(String transitionId)` | Delete a transition, calls the PATCH /transitions/{transitionId} endpoint. Will fail if transition is in use by one or more workflows.
+`public JSONObject `[`deleteTransition`]`(String transitionId)` | Delete a transition, calls the DELETE /transitions/{transitionId} endpoint. Will fail if transition is in use by one or more workflows.
 `public JSONObject `[`listTransitionExecutions`]`(String transitionId,`[`ListTransitionExecutionsOptions`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_list_transition_executions_options)` options)` | List executions in a transition, calls the GET /transitions/{transitionId}/executions endpoint.
 `public JSONObject `[`listTransitionExecutions`]`(String transitionId)` | List executions in a transition, calls the GET /transitions/{transitionId}/executions endpoint.
 `public JSONObject `[`getTransitionExecution`]`(String transitionId,String executionId)` | Get an execution of a transition, calls the GET /transitions/{transitionId}/executions/{executionId} endpoint
-`public JSONObject `[`updateTransitionExecution`]`(String transitionId,String executionId,`[`TransitionExecutionStatus`](#enumai_1_1lucidtech_1_1las_1_1sdk_1_1_transition_execution_status)` status,`[`UpdateTransitionExecutionOptions`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_update_transition_execution_options)` options)` | Ends the processing of the transition execution, calls the PATCH /transitions/{transition_id}/executions/{execution_id} endpoint.
+`public JSONObject `[`updateTransitionExecution`]`(String transitionId,String executionId,`[`TransitionExecutionStatus`](#enumai_1_1lucidtech_1_1las_1_1sdk_1_1_transition_execution_status)` status,`[`UpdateTransitionExecutionOptions`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_update_transition_execution_options)` options)` | Ends the processing of the transition execution, calls the PATCH /transitions/{transitionId}/executions/{executionId} endpoint.
 `public JSONObject `[`sendHeartbeat`]`(String transitionId,String executionId)` | Send heartbeat for a manual execution to signal that we are still working on it. Must be done at minimum once every 60 seconds or the transition execution will time out, calls the POST /transitions/{transitionId}/executions/{executionId}/heartbeats endpoint.
-`public JSONObject `[`createUser`]`(String email,`[`CreateUserOptions`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_create_user_options)` options)` | Creates a new user, calls the POST /users endpoint.
-`public JSONObject `[`createUser`]`(String email)` | Creates a new user, calls the POST /users endpoint.
+`public JSONObject `[`createUser`]`(String email,`[`CreateUserOptions`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_create_user_options)` options)` | Create a user, calls the POST /users endpoint.
+`public JSONObject `[`createUser`]`(String email)` | Create a user, calls the POST /users endpoint.
 `public JSONObject `[`listUsers`]`(`[`ListUsersOptions`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_list_users_options)` options)` | List users, calls the GET /users endpoint.
 `public JSONObject `[`listUsers`]`()` | List users, calls the GET /users endpoint.
-`public JSONObject `[`getUser`]`(String userId)` | Get information about a specific user, calls the GET /users/{user_id} endpoint.
+`public JSONObject `[`getUser`]`(String userId)` | Get user, calls the GET /users/{userId} endpoint.
 `public JSONObject `[`updateUser`]`(String userId,`[`UpdateUserOptions`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_update_user_options)` options)` | Updates a user, calls the PATCH /users/{userId} endpoint.
 `public JSONObject `[`deleteUser`]`(String userId)` | Delete a user, calls the PATCH /users/{userId} endpoint.
 `public JSONObject `[`createWorkflow`]`(JSONObject specification,`[`CreateWorkflowOptions`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_create_workflow_options)` options)` | Creates a new workflow, calls the POST /workflows endpoint. Check out Lucidtech's tutorials for more info on how to create a workflow. see [https://docs.lucidtech.ai/getting-started/tutorials/setup_predict_and_approve](https://docs.lucidtech.ai/getting-started/tutorials/setup_predict_and_approve)
@@ -133,12 +158,12 @@ class ai::lucidtech::las::sdk::APIException
 `public JSONObject `[`listWorkflows`]`(`[`ListWorkflowsOptions`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_list_workflows_options)` options)` | List workflows, calls the GET /workflows endpoint.
 `public JSONObject `[`listWorkflows`]`()` | List workflows, calls the GET /workflows endpoint.
 `public JSONObject `[`getWorkflow`]`(String workflowId)` | Get workflow, calls the GET /workflows/{workflowId} endpoint.
-`public JSONObject `[`updateWorkflow`]`(String workflowId,`[`UpdateWorkflowOptions`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_update_workflow_options)` options)` | Updates a workflow, calls the PATCH /workflows/{workflowId} endpoint.
+`public JSONObject `[`updateWorkflow`]`(String workflowId,`[`UpdateWorkflowOptions`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_update_workflow_options)` options)` | Update a workflow, calls the PATCH /workflows/{workflowId} endpoint.
 `public JSONObject `[`deleteWorkflow`]`(String workflowId)` | Delete a workflow, calls the DELETE /workflows/{workflowId} endpoint.
 `public JSONObject `[`executeWorkflow`]`(String workflowId,JSONObject content)` | Start a workflow execution, calls the POST /workflows/{workflowId}/executions endpoint.
 `public JSONObject `[`listWorkflowExecutions`]`(String workflowId,`[`ListWorkflowExecutionsOptions`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_list_workflow_executions_options)` options)` | List executions in a workflow, calls the GET /workflows/{workflowId}/executions endpoint.
 `public JSONObject `[`listWorkflowExecutions`]`(String workflowId)` | List executions in a workflow, calls the GET /workflows/{workflowId}/executions endpoint.
-`public JSONObject `[`deleteWorkflowExecution`]`(String workflowId,String executionId)` | Deletes the execution with the provided executionId from workflowId, calls the DELETE /workflows/{workflowId}/executions/{executionId} endpoint.
+`public JSONObject `[`deleteWorkflowExecution`]`(String workflowId,String executionId)` | Delete execution from workflow, calls the DELETE /workflows/{workflowId}/executions/{executionId} endpoint.
 
 ## Members
 
@@ -151,9 +176,92 @@ A client to invoke api methods from Lucidtech AI Services.
 
 **See also**: [Credentials]
 
+#### `public JSONObject `[`createAppClient`]`(`[`CreateAppClientOptions`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_create_app_client_options)` options)` 
+
+Create an app client, calls the POST /appClients endpoint.
+
+**See also**: [CreateAppClientOptions]
+
+#### Parameters
+* `options` Additional options to include in request body 
+
+#### Returns
+Asset response from API 
+
+#### Exceptions
+* `IOException` General IOException 
+
+* `[APIException]` Raised when API returns an erroneous status code 
+
+* `[MissingAccessTokenException]` Raised if access token cannot be obtained
+
+#### `public JSONObject `[`createAppClient`]`()` 
+
+Create an app client, calls the POST /appClients endpoint.
+
+#### Returns
+Asset response from API 
+
+#### Exceptions
+* `IOException` General IOException 
+
+* `[APIException]` Raised when API returns an erroneous status code 
+
+* `[MissingAccessTokenException]` Raised if access token cannot be obtained
+
+#### `public JSONObject `[`listAppClients`]`(`[`ListAppClientsOptions`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_list_app_clients_options)` options)` 
+
+List appClients available, calls the GET /appClients endpoint.
+
+**See also**: [ListAppClientsOptions]
+
+#### Parameters
+* `options` Additional options to pass along as query parameters 
+
+#### Returns
+AppClients response from REST API 
+
+#### Exceptions
+* `IOException` General IOException 
+
+* `[APIException]` Raised when API returns an erroneous status code 
+
+* `[MissingAccessTokenException]` Raised if access token cannot be obtained
+
+#### `public JSONObject `[`listAppClients`]`()` 
+
+List appClients available, calls the GET /appClients endpoint.
+
+#### Returns
+AppClients response from REST API 
+
+#### Exceptions
+* `IOException` General IOException 
+
+* `[APIException]` Raised when API returns an erroneous status code 
+
+* `[MissingAccessTokenException]` Raised if access token cannot be obtained
+
+#### `public JSONObject `[`deleteAppClient`]`(String appClientId)` 
+
+Delete an appClient, calls the DELETE /appClients/{appClientId} endpoint.
+
+#### Parameters
+* `appClientId` Id of the appClient 
+
+#### Returns
+AppClient response from REST API 
+
+#### Exceptions
+* `IOException` General IOException 
+
+* `[APIException]` Raised when API returns an erroneous status code 
+
+* `[MissingAccessTokenException]` Raised if access token cannot be obtained
+
 #### `public JSONObject `[`createAsset`]`(byte[] content,`[`CreateAssetOptions`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_create_asset_options)` options)` 
 
-Creates an asset, calls the POST /assets endpoint.
+Create an asset, calls the POST /assets endpoint.
 
 **See also**: [CreateAssetOptions]
 
@@ -174,7 +282,7 @@ Asset response from API
 
 #### `public JSONObject `[`createAsset`]`(InputStream content,`[`CreateAssetOptions`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_create_asset_options)` options)` 
 
-Creates an asset, calls the POST /assets endpoint.
+Create an asset, calls the POST /assets endpoint.
 
 **See also**: [CreateAssetOptions]
 
@@ -195,7 +303,7 @@ Asset response from API
 
 #### `public JSONObject `[`createAsset`]`(byte[] content)` 
 
-Creates an asset, calls the POST /assets endpoint.
+Create an asset, calls the POST /assets endpoint.
 
 #### Parameters
 * `content` Binary data 
@@ -212,7 +320,7 @@ Asset response from API
 
 #### `public JSONObject `[`createAsset`]`(InputStream content)` 
 
-Creates an asset, calls the POST /assets endpoint.
+Create an asset, calls the POST /assets endpoint.
 
 #### Parameters
 * `content` Data from input stream 
@@ -279,7 +387,7 @@ Asset response from REST API
 
 #### `public JSONObject `[`updateAsset`]`(String assetId,`[`UpdateAssetOptions`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_update_asset_options)` options)` 
 
-Updates an asset, calls the PATCH /assets/{assetId} endpoint.
+Update an asset, calls the PATCH /assets/{assetId} endpoint.
 
 **See also**: [UpdateAssetOptions]
 
@@ -298,9 +406,26 @@ Asset response from REST API
 
 * `[MissingAccessTokenException]` Raised if access token cannot be obtained
 
+#### `public JSONObject `[`deleteAsset`]`(String assetId)` 
+
+Delete an asset, calls the DELETE /assets/{assetId} endpoint.
+
+#### Parameters
+* `assetId` Id of the asset 
+
+#### Returns
+Asset response from REST API 
+
+#### Exceptions
+* `IOException` General IOException 
+
+* `[APIException]` Raised when API returns an erroneous status code 
+
+* `[MissingAccessTokenException]` Raised if access token cannot be obtained
+
 #### `public JSONObject `[`createBatch`]`(`[`CreateBatchOptions`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_create_batch_options)` options)` 
 
-Creates a batch, calls the POST /batches endpoint.
+Create a batch, calls the POST /batches endpoint.
 
 **See also**: [CreateBatchOptions]
 
@@ -319,7 +444,76 @@ Batch response from REST API
 
 #### `public JSONObject `[`createBatch`]`()` 
 
-Creates a batch, calls the POST /batches endpoint.
+Create a batch, calls the POST /batches endpoint.
+
+#### Returns
+Batch response from REST API 
+
+#### Exceptions
+* `IOException` General IOException 
+
+* `[APIException]` Raised when API returns an erroneous status code 
+
+* `[MissingAccessTokenException]` Raised if access token cannot be obtained
+
+#### `public JSONObject `[`listBatches`]`(`[`ListBatchesOptions`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_list_batches_options)` options)` 
+
+List batches available, calls the GET /batches endpoint.
+
+**See also**: [ListBatchesOptions]
+
+#### Parameters
+* `options` Additional options to pass along as query parameters 
+
+#### Returns
+Batches response from REST API 
+
+#### Exceptions
+* `IOException` General IOException 
+
+* `[APIException]` Raised when API returns an erroneous status code 
+
+* `[MissingAccessTokenException]` Raised if access token cannot be obtained
+
+#### `public JSONObject `[`listBatches`]`()` 
+
+List batches available, calls the GET /batches endpoint.
+
+#### Returns
+Batches response from REST API 
+
+#### Exceptions
+* `IOException` General IOException 
+
+* `[APIException]` Raised when API returns an erroneous status code 
+
+* `[MissingAccessTokenException]` Raised if access token cannot be obtained
+
+#### `public JSONObject `[`deleteBatch`]`(String batchId,boolean deleteDocuments)` 
+
+Delete a batch, calls the DELETE /batches/{batchId} endpoint.
+
+#### Parameters
+* `batchId` Id of the batch 
+
+* `deleteDocuments` Set to true to delete documents in batch before deleting batch 
+
+#### Returns
+Batch response from REST API 
+
+#### Exceptions
+* `IOException` General IOException 
+
+* `[APIException]` Raised when API returns an erroneous status code 
+
+* `[MissingAccessTokenException]` Raised if access token cannot be obtained
+
+#### `public JSONObject `[`deleteBatch`]`(String batchId)` 
+
+Delete a batch, calls the DELETE /batches/{batchId} endpoint.
+
+#### Parameters
+* `batchId` Id of the batch 
 
 #### Returns
 Batch response from REST API 
@@ -333,7 +527,7 @@ Batch response from REST API
 
 #### `public JSONObject `[`createDocument`]`(byte[] content,`[`ContentType`](#enumai_1_1lucidtech_1_1las_1_1sdk_1_1_content_type)` contentType,`[`CreateDocumentOptions`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_create_document_options)` options)` 
 
-Creates a document, calls the POST /documents endpoint.
+Create a document, calls the POST /documents endpoint.
 
 **See also**: [CreateDocumentOptions]
 
@@ -356,7 +550,7 @@ Document response from REST API
 
 #### `public JSONObject `[`createDocument`]`(InputStream content,`[`ContentType`](#enumai_1_1lucidtech_1_1las_1_1sdk_1_1_content_type)` contentType,`[`CreateDocumentOptions`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_create_document_options)` options)` 
 
-Creates a document, calls the POST /documents endpoint.
+Create a document, calls the POST /documents endpoint.
 
 **See also**: [CreateDocumentOptions]
 
@@ -379,7 +573,7 @@ Document response from REST API
 
 #### `public JSONObject `[`createDocument`]`(InputStream content,`[`ContentType`](#enumai_1_1lucidtech_1_1las_1_1sdk_1_1_content_type)` contentType)` 
 
-Creates a document, calls the POST /documents endpoint.
+Create a document, calls the POST /documents endpoint.
 
 **See also**: [CreateDocumentOptions]
 
@@ -400,7 +594,7 @@ Document response from REST API
 
 #### `public JSONObject `[`createDocument`]`(byte[] content,`[`ContentType`](#enumai_1_1lucidtech_1_1las_1_1sdk_1_1_content_type)` contentType)` 
 
-Creates a document, calls the POST /documents endpoint.
+Create a document, calls the POST /documents endpoint.
 
 **See also**: [CreateDocumentOptions]
 
@@ -452,11 +646,14 @@ Documents response from REST API
 
 * `[MissingAccessTokenException]` Raised if access token cannot be obtained
 
-#### `public JSONObject `[`deleteDocuments`]`()` 
+#### `public JSONObject `[`deleteDocuments`]`(`[`DeleteDocumentsOptions`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_delete_documents_options)` options)` 
 
 Delete documents, calls the DELETE /documents endpoint.
 
-**See also**: [Client::createDocument]
+**See also**: [DeleteDocumentsOptions]
+
+#### Parameters
+* `options` Additional options to pass along as query parameters 
 
 #### Returns
 Documents response from REST API 
@@ -468,14 +665,11 @@ Documents response from REST API
 
 * `[MissingAccessTokenException]` Raised if access token cannot be obtained
 
-#### `public JSONObject `[`deleteDocuments`]`(String consentId)` 
+#### `public JSONObject `[`deleteDocuments`]`()` 
 
-Delete documents with the provided consentId, calls the DELETE /documents endpoint.
+Delete documents, calls the DELETE /documents endpoint.
 
 **See also**: [Client::createDocument]
-
-#### Parameters
-* `consentId` Delete documents with this consentId 
 
 #### Returns
 Documents response from REST API 
@@ -506,7 +700,7 @@ Document response from REST API
 
 #### `public JSONObject `[`updateDocument`]`(String documentId,JSONArray groundTruth)` 
 
-Update ground truth for a document, calls the PATCH /documents/{documentId} endpoint.
+Update document, calls the PATCH /documents/{documentId} endpoint.
 
 **See also**: [Client::createDocument]
 
@@ -542,9 +736,42 @@ Log response from REST API
 
 * `[MissingAccessTokenException]` Raised if access token cannot be obtained
 
+#### `public JSONObject `[`listLogs`]`(`[`ListLogsOptions`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_list_logs_options)` options)` 
+
+List logs, calls the GET /logs endpoint.
+
+**See also**: [ListLogsOptions]
+
+#### Parameters
+* `options` Additional options to pass along as query parameters 
+
+#### Returns
+Logs response from REST API 
+
+#### Exceptions
+* `IOException` General IOException 
+
+* `[APIException]` Raised when API returns an erroneous status code 
+
+* `[MissingAccessTokenException]` Raised if access token cannot be obtained
+
+#### `public JSONObject `[`listLogs`]`()` 
+
+List logs, calls the GET /logs endpoint.
+
+#### Returns
+Logs response from REST API 
+
+#### Exceptions
+* `IOException` General IOException 
+
+* `[APIException]` Raised when API returns an erroneous status code 
+
+* `[MissingAccessTokenException]` Raised if access token cannot be obtained
+
 #### `public JSONObject `[`listModels`]`(`[`ListModelsOptions`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_list_models_options)` options)` 
 
-List models available, calls the GET /models endpoint.
+List models, calls the GET /models endpoint.
 
 **See also**: [ListModelsOptions]
 
@@ -656,7 +883,7 @@ Predictions response from REST API
 
 #### `public JSONObject `[`createSecret`]`(JSONObject data,`[`CreateSecretOptions`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_create_secret_options)` options)` 
 
-Creates a secret, calls the POST /secrets endpoint.
+Create secret, calls the POST /secrets endpoint.
 
 **See also**: [CreateSecretOptions]
 
@@ -677,7 +904,7 @@ Secret response from API
 
 #### `public JSONObject `[`createSecret`]`(Map< String, String > data,`[`CreateSecretOptions`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_create_secret_options)` options)` 
 
-Creates a secret, calls the POST /secrets endpoint.
+Create a secret, calls the POST /secrets endpoint.
 
 **See also**: [CreateSecretOptions]
 
@@ -698,7 +925,7 @@ Secret response from API
 
 #### `public JSONObject `[`createSecret`]`(Map< String, String > data)` 
 
-Creates a secret, calls the POST /secrets endpoint.
+Create a secret, calls the POST /secrets endpoint.
 
 #### Parameters
 * `data` Key-Value pairs to store secretly 
@@ -715,7 +942,7 @@ Secret response from API
 
 #### `public JSONObject `[`createSecret`]`(JSONObject data)` 
 
-Creates a secret, calls the POST /secrets endpoint.
+Create a secret, calls the POST /secrets endpoint.
 
 #### Parameters
 * `data` Key-Value pairs to store secretly 
@@ -732,7 +959,7 @@ Secret response from API
 
 #### `public JSONObject `[`listSecrets`]`(`[`ListSecretsOptions`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_list_secrets_options)` options)` 
 
-List secrets available, calls the GET /secrets endpoint.
+List secrets, calls the GET /secrets endpoint.
 
 **See also**: [ListSecretsOptions]
 
@@ -751,7 +978,7 @@ Secrets response from REST API
 
 #### `public JSONObject `[`listSecrets`]`()` 
 
-List secrets available, calls the GET /secrets endpoint.
+List secrets, calls the GET /secrets endpoint.
 
 #### Returns
 Secrets response from REST API 
@@ -765,7 +992,7 @@ Secrets response from REST API
 
 #### `public JSONObject `[`updateSecret`]`(String secretId,`[`UpdateSecretOptions`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_update_secret_options)` options)` 
 
-Updates a secret, calls the PATCH /secrets/{secretId} endpoint.
+Update a secret, calls the PATCH /secrets/{secretId} endpoint.
 
 **See also**: [UpdateSecretOptions]
 
@@ -784,9 +1011,26 @@ Secret response from REST API
 
 * `[MissingAccessTokenException]` Raised if access token cannot be obtained
 
+#### `public JSONObject `[`deleteSecret`]`(String secretId)` 
+
+Delete a secret, calls the DELETE /secrets/{secretId} endpoint.
+
+#### Parameters
+* `secretId` Id of the secret 
+
+#### Returns
+Secret response from REST API 
+
+#### Exceptions
+* `IOException` General IOException 
+
+* `[APIException]` Raised when API returns an erroneous status code 
+
+* `[MissingAccessTokenException]` Raised if access token cannot be obtained
+
 #### `public JSONObject `[`createTransition`]`(`[`TransitionType`](#enumai_1_1lucidtech_1_1las_1_1sdk_1_1_transition_type)` transitionType,`[`CreateTransitionOptions`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_create_transition_options)` options)` 
 
-Creates a transition, calls the POST /transitions endpoint.
+Create a transition, calls the POST /transitions endpoint.
 
 **See also**: [CreateTransitionOptions]
 
@@ -809,7 +1053,7 @@ Transition response from API
 
 #### `public JSONObject `[`createTransition`]`(`[`TransitionType`](#enumai_1_1lucidtech_1_1las_1_1sdk_1_1_transition_type)` transitionType)` 
 
-Creates a transition, calls the POST /transitions endpoint.
+Create a transition, calls the POST /transitions endpoint.
 
 **See also**: [TransitionType](#enumai_1_1lucidtech_1_1las_1_1sdk_1_1_transition_type)
 
@@ -916,7 +1160,7 @@ TransitionExecution response from REST API
 
 #### `public JSONObject `[`deleteTransition`]`(String transitionId)` 
 
-Delete a transition, calls the PATCH /transitions/{transitionId} endpoint. Will fail if transition is in use by one or more workflows.
+Delete a transition, calls the DELETE /transitions/{transitionId} endpoint. Will fail if transition is in use by one or more workflows.
 
 #### Parameters
 * `transitionId` Id of the transition 
@@ -990,7 +1234,7 @@ TransitionExecution response from REST API
 
 #### `public JSONObject `[`updateTransitionExecution`]`(String transitionId,String executionId,`[`TransitionExecutionStatus`](#enumai_1_1lucidtech_1_1las_1_1sdk_1_1_transition_execution_status)` status,`[`UpdateTransitionExecutionOptions`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_update_transition_execution_options)` options)` 
 
-Ends the processing of the transition execution, calls the PATCH /transitions/{transition_id}/executions/{execution_id} endpoint.
+Ends the processing of the transition execution, calls the PATCH /transitions/{transitionId}/executions/{executionId} endpoint.
 
 **See also**: [UpdateTransitionExecutionOptions]
 
@@ -1036,7 +1280,7 @@ Empty response
 
 #### `public JSONObject `[`createUser`]`(String email,`[`CreateUserOptions`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_create_user_options)` options)` 
 
-Creates a new user, calls the POST /users endpoint.
+Create a user, calls the POST /users endpoint.
 
 **See also**: [CreateUserOptions]
 
@@ -1057,7 +1301,7 @@ User response from API
 
 #### `public JSONObject `[`createUser`]`(String email)` 
 
-Creates a new user, calls the POST /users endpoint.
+Create a user, calls the POST /users endpoint.
 
 #### Parameters
 * `email` Email to the new user 
@@ -1107,10 +1351,10 @@ Users response from REST API
 
 #### `public JSONObject `[`getUser`]`(String userId)` 
 
-Get information about a specific user, calls the GET /users/{user_id} endpoint.
+Get user, calls the GET /users/{userId} endpoint.
 
 #### Parameters
-* `userId` The Id of the user 
+* `userId` Id of user 
 
 #### Returns
 User response 
@@ -1129,7 +1373,7 @@ Updates a user, calls the PATCH /users/{userId} endpoint.
 **See also**: [UpdateUserOptions]
 
 #### Parameters
-* `userId` Id of the user 
+* `userId` Id of user 
 
 * `options` Additional options to include in request body 
 
@@ -1148,7 +1392,7 @@ User response from REST API
 Delete a user, calls the PATCH /users/{userId} endpoint.
 
 #### Parameters
-* `userId` Id of the user 
+* `userId` Id of user 
 
 #### Returns
 User response from REST API 
@@ -1250,7 +1494,7 @@ Workflow response from REST API
 
 #### `public JSONObject `[`updateWorkflow`]`(String workflowId,`[`UpdateWorkflowOptions`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_update_workflow_options)` options)` 
 
-Updates a workflow, calls the PATCH /workflows/{workflowId} endpoint.
+Update a workflow, calls the PATCH /workflows/{workflowId} endpoint.
 
 **See also**: [UpdateWorkflowOptions]
 
@@ -1347,7 +1591,7 @@ Workflow executions response from REST API
 
 #### `public JSONObject `[`deleteWorkflowExecution`]`(String workflowId,String executionId)` 
 
-Deletes the execution with the provided executionId from workflowId, calls the DELETE /workflows/{workflowId}/executions/{executionId} endpoint.
+Delete execution from workflow, calls the DELETE /workflows/{workflowId}/executions/{executionId} endpoint.
 
 **See also**: [Client::executeWorkflow]
 
@@ -1357,7 +1601,7 @@ Deletes the execution with the provided executionId from workflowId, calls the D
 * `executionId` Id of the execution 
 
 #### Returns
-WorklowExecution response from REST API 
+WorkflowExecution response from REST API 
 
 #### Exceptions
 * `IOException` General IOException 
@@ -1365,6 +1609,32 @@ WorklowExecution response from REST API
 * `[APIException]` Raised when API returns an erroneous status code 
 
 * `[MissingAccessTokenException]` Raised if access token cannot be obtained
+
+# class `ai::lucidtech::las::sdk::CreateAppClientOptions` 
+
+```
+class ai::lucidtech::las::sdk::CreateAppClientOptions
+  : public ai.lucidtech.las.sdk.NameAndDescriptionOptions< CreateAppClientOptions >
+```  
+
+## Summary
+
+ Members                        | Descriptions                                
+--------------------------------|---------------------------------------------
+`public `[`CreateAppClientOptions`] [`setCallbackUrls`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_create_app_client_options_1a8bbf6466c0013be0d9a0e281abb5a431)`(String[] callbackUrls)` | 
+`public `[`CreateAppClientOptions`] [`setLogoutUrls`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_create_app_client_options_1a688e2c5f76413c0a94bd58ded8031ad0)`(String[] logoutUrls)` | 
+`public `[`CreateAppClientOptions`] [`setGenerateSecret`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_create_app_client_options_1ac2a6827e706591140ddbecf7b271b769)`(Boolean generateSecret)` | 
+`public JSONObject `[`addOptions`]`(JSONObject body)` | 
+
+## Members
+
+#### `public `[`CreateAppClientOptions`] [`setCallbackUrls`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_create_app_client_options_1a8bbf6466c0013be0d9a0e281abb5a431)`(String[] callbackUrls)` 
+
+#### `public `[`CreateAppClientOptions`] [`setLogoutUrls`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_create_app_client_options_1a688e2c5f76413c0a94bd58ded8031ad0)`(String[] logoutUrls)` 
+
+#### `public `[`CreateAppClientOptions`] [`setGenerateSecret`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_create_app_client_options_1ac2a6827e706591140ddbecf7b271b769)`(Boolean generateSecret)` 
+
+#### `public JSONObject `[`addOptions`]`(JSONObject body)` 
 
 # class `ai::lucidtech::las::sdk::CreateAssetOptions` 
 
@@ -1391,25 +1661,32 @@ class ai::lucidtech::las::sdk::CreateBatchOptions
 
  Members                        | Descriptions                                
 --------------------------------|---------------------------------------------
+`public `[`CreateBatchOptions`] [`setContainsPersonallyIdentifiableInformation`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_create_batch_options_1a0db395dc2d449ea24505793eb14b7945)`(Boolean containsPersonallyIdentifiableInformation)` | 
+`public JSONObject `[`addOptions`]`(JSONObject body)` | 
 
 ## Members
 
+#### `public `[`CreateBatchOptions`] [`setContainsPersonallyIdentifiableInformation`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_create_batch_options_1a0db395dc2d449ea24505793eb14b7945)`(Boolean containsPersonallyIdentifiableInformation)` 
+
+#### `public JSONObject `[`addOptions`]`(JSONObject body)` 
+
 # class `ai::lucidtech::las::sdk::CreateDocumentOptions` 
+
+```
+class ai::lucidtech::las::sdk::CreateDocumentOptions
+  : public ai.lucidtech.las.sdk.Options
+```  
 
 ## Summary
 
  Members                        | Descriptions                                
 --------------------------------|---------------------------------------------
-`public  `[`CreateDocumentOptions`]`()` | 
 `public `[`CreateDocumentOptions`] [`setConsentId`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_create_document_options_1aea843844d1cabdb367b6ef2fbad74763)`(String consentId)` | 
 `public `[`CreateDocumentOptions`] [`setBatchId`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_create_document_options_1a6a4643ab2ab9ae0d195e95b6e5858abb)`(String batchId)` | 
 `public `[`CreateDocumentOptions`] [`setGroundTruth`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_create_document_options_1a11e5ef2f36fa14e6e048d74d406881f5)`(JSONArray groundTruth)` | 
 `public JSONObject `[`addOptions`]`(JSONObject body)` | 
-`public JSONObject `[`toJson`]`()` | 
 
 ## Members
-
-#### `public  `[`CreateDocumentOptions`]`()` 
 
 #### `public `[`CreateDocumentOptions`] [`setConsentId`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_create_document_options_1aea843844d1cabdb367b6ef2fbad74763)`(String consentId)` 
 
@@ -1419,27 +1696,23 @@ class ai::lucidtech::las::sdk::CreateBatchOptions
 
 #### `public JSONObject `[`addOptions`]`(JSONObject body)` 
 
-#### `public JSONObject `[`toJson`]`()` 
-
 # class `ai::lucidtech::las::sdk::CreatePredictionOptions` 
+
+```
+class ai::lucidtech::las::sdk::CreatePredictionOptions
+  : public ai.lucidtech.las.sdk.Options
+```  
 
 ## Summary
 
  Members                        | Descriptions                                
 --------------------------------|---------------------------------------------
-`public  `[`CreatePredictionOptions`]`()` | 
-`public  `[`CreatePredictionOptions`]`(int maxPages,boolean autoRotate)` | 
 `public `[`CreatePredictionOptions`] [`setMaxPages`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_create_prediction_options_1af6a80e5477e27525a936bfa24404cdf0)`(int maxPages)` | 
 `public `[`CreatePredictionOptions`] [`setAutoRotate`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_create_prediction_options_1a82d5ef3dd802caa5785475eeabbbf9dd)`(boolean autoRotate)` | 
 `public `[`CreatePredictionOptions`] [`setImageQuality`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_create_prediction_options_1ad6b7016289238d2e664e6e968a6d59b2)`(`[`ImageQuality`](#enumai_1_1lucidtech_1_1las_1_1sdk_1_1_image_quality)` imageQuality)` | 
 `public JSONObject `[`addOptions`]`(JSONObject body)` | 
-`public JSONObject `[`toJson`]`()` | 
 
 ## Members
-
-#### `public  `[`CreatePredictionOptions`]`()` 
-
-#### `public  `[`CreatePredictionOptions`]`(int maxPages,boolean autoRotate)` 
 
 #### `public `[`CreatePredictionOptions`] [`setMaxPages`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_create_prediction_options_1af6a80e5477e27525a936bfa24404cdf0)`(int maxPages)` 
 
@@ -1448,8 +1721,6 @@ class ai::lucidtech::las::sdk::CreateBatchOptions
 #### `public `[`CreatePredictionOptions`] [`setImageQuality`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_create_prediction_options_1ad6b7016289238d2e664e6e968a6d59b2)`(`[`ImageQuality`](#enumai_1_1lucidtech_1_1las_1_1sdk_1_1_image_quality)` imageQuality)` 
 
 #### `public JSONObject `[`addOptions`]`(JSONObject body)` 
-
-#### `public JSONObject `[`toJson`]`()` 
 
 # class `ai::lucidtech::las::sdk::CreateSecretOptions` 
 
@@ -1476,29 +1747,20 @@ class ai::lucidtech::las::sdk::CreateTransitionOptions
 
  Members                        | Descriptions                                
 --------------------------------|---------------------------------------------
-`public  `[`CreateTransitionOptions`]`()` | 
-`public  `[`CreateTransitionOptions`]`(JSONObject parameters)` | 
-`public `[`CreateTransitionOptions`] [`setParameters`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_create_transition_options_1a4464c8b419c7359a3ebc0507c2926b6f)`(JSONObject schema)` | 
-`public `[`CreateTransitionOptions`] [`setInputJsonSchema`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_create_transition_options_1a8903a4e3773b695c2e8602af25dd7d23)`(JSONObject schema)` | 
-`public `[`CreateTransitionOptions`] [`setOutputJsonSchema`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_create_transition_options_1a666736cded215c9974df0841fdb89ac7)`(JSONObject schema)` | 
+`public `[`CreateTransitionOptions`] [`setParameters`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_create_transition_options_1aa546f75e3898f4b779e860955822e77e)`(`[`TransitionParameters`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_transition_parameters)` parameters)` | 
+`public `[`CreateTransitionOptions`] [`setInputJsonSchema`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_create_transition_options_1ab76486532b052a9dfdd434a6edf210c2)`(JSONObject inputJsonSchema)` | 
+`public `[`CreateTransitionOptions`] [`setOutputJsonSchema`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_create_transition_options_1a1d77cbecb47c7f092befd51253ef8ed5)`(JSONObject outputJsonSchema)` | 
 `public JSONObject `[`addOptions`]`(JSONObject body)` | 
-`public JSONObject `[`toJson`]`()` | 
 
 ## Members
 
-#### `public  `[`CreateTransitionOptions`]`()` 
+#### `public `[`CreateTransitionOptions`] [`setParameters`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_create_transition_options_1aa546f75e3898f4b779e860955822e77e)`(`[`TransitionParameters`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_transition_parameters)` parameters)` 
 
-#### `public  `[`CreateTransitionOptions`]`(JSONObject parameters)` 
+#### `public `[`CreateTransitionOptions`] [`setInputJsonSchema`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_create_transition_options_1ab76486532b052a9dfdd434a6edf210c2)`(JSONObject inputJsonSchema)` 
 
-#### `public `[`CreateTransitionOptions`] [`setParameters`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_create_transition_options_1a4464c8b419c7359a3ebc0507c2926b6f)`(JSONObject schema)` 
-
-#### `public `[`CreateTransitionOptions`] [`setInputJsonSchema`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_create_transition_options_1a8903a4e3773b695c2e8602af25dd7d23)`(JSONObject schema)` 
-
-#### `public `[`CreateTransitionOptions`] [`setOutputJsonSchema`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_create_transition_options_1a666736cded215c9974df0841fdb89ac7)`(JSONObject schema)` 
+#### `public `[`CreateTransitionOptions`] [`setOutputJsonSchema`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_create_transition_options_1a1d77cbecb47c7f092befd51253ef8ed5)`(JSONObject outputJsonSchema)` 
 
 #### `public JSONObject `[`addOptions`]`(JSONObject body)` 
-
-#### `public JSONObject `[`toJson`]`()` 
 
 # class `ai::lucidtech::las::sdk::CreateUserOptions` 
 
@@ -1525,23 +1787,17 @@ class ai::lucidtech::las::sdk::CreateWorkflowOptions
 
  Members                        | Descriptions                                
 --------------------------------|---------------------------------------------
-`public  `[`CreateWorkflowOptions`]`()` | 
-`public  `[`CreateWorkflowOptions`]`(JSONObject errorConfig)` | 
-`public `[`CreateWorkflowOptions`] [`setErrorConfig`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_create_workflow_options_1ac8e4383646a9adcf679b5d243159aedb)`(JSONObject errorConfig)` | 
+`public `[`CreateWorkflowOptions`] [`setCompletedConfig`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_create_workflow_options_1adcf2b376dab782ce4b8f84e73132eb1f)`(`[`WorkflowCompletedConfig`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_workflow_completed_config)` completedConfig)` | 
+`public `[`CreateWorkflowOptions`] [`setErrorConfig`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_create_workflow_options_1aa5f11590f30a23063349152742baedff)`(`[`WorkflowErrorConfig`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_workflow_error_config)` errorConfig)` | 
 `public JSONObject `[`addOptions`]`(JSONObject body)` | 
-`public JSONObject `[`toJson`]`()` | 
 
 ## Members
 
-#### `public  `[`CreateWorkflowOptions`]`()` 
+#### `public `[`CreateWorkflowOptions`] [`setCompletedConfig`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_create_workflow_options_1adcf2b376dab782ce4b8f84e73132eb1f)`(`[`WorkflowCompletedConfig`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_workflow_completed_config)` completedConfig)` 
 
-#### `public  `[`CreateWorkflowOptions`]`(JSONObject errorConfig)` 
-
-#### `public `[`CreateWorkflowOptions`] [`setErrorConfig`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_create_workflow_options_1ac8e4383646a9adcf679b5d243159aedb)`(JSONObject errorConfig)` 
+#### `public `[`CreateWorkflowOptions`] [`setErrorConfig`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_create_workflow_options_1aa5f11590f30a23063349152742baedff)`(`[`WorkflowErrorConfig`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_workflow_error_config)` errorConfig)` 
 
 #### `public JSONObject `[`addOptions`]`(JSONObject body)` 
-
-#### `public JSONObject `[`toJson`]`()` 
 
 # class `ai::lucidtech::las::sdk::Credentials` 
 
@@ -1589,11 +1845,133 @@ Access token, downloading it if necessary
 
 #### `public String `[`getApiEndpoint`]`()` 
 
+# class `ai::lucidtech::las::sdk::DeleteDocumentsOptions` 
+
+```
+class ai::lucidtech::las::sdk::DeleteDocumentsOptions
+  : public ai.lucidtech.las.sdk.DeleteResourcesOptions< DeleteDocumentsOptions >
+```  
+
+## Summary
+
+ Members                        | Descriptions                                
+--------------------------------|---------------------------------------------
+`public `[`DeleteDocumentsOptions`] [`setConsentId`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_delete_documents_options_1aaf5142e3fd86dbecf7a7993aa9321405)`(String[] consentId)` | 
+`public `[`DeleteDocumentsOptions`] [`setBatchId`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_delete_documents_options_1af8605c4bfd5d14e69d363f6805ca4459)`(String[] batchId)` | 
+`public List< NameValuePair > `[`toList`]`()` | 
+
+## Members
+
+#### `public `[`DeleteDocumentsOptions`] [`setConsentId`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_delete_documents_options_1aaf5142e3fd86dbecf7a7993aa9321405)`(String[] consentId)` 
+
+#### `public `[`DeleteDocumentsOptions`] [`setBatchId`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_delete_documents_options_1af8605c4bfd5d14e69d363f6805ca4459)`(String[] batchId)` 
+
+#### `public List< NameValuePair > `[`toList`]`()` 
+
+# class `ai::lucidtech::las::sdk::DeleteResourcesOptions` 
+
+## Summary
+
+ Members                        | Descriptions                                
+--------------------------------|---------------------------------------------
+`public T `[`setMaxResults`]`(int maxResults)` | 
+`public T `[`setNextToken`]`(String nextToken)` | 
+`public List< NameValuePair > `[`toList`]`()` | 
+`public List< NameValuePair > `[`addOptions`]`(List< NameValuePair > parameters)` | 
+`protected Integer `[`maxResults`] | 
+`protected String `[`nextToken`] | 
+`protected void `[`addOption`]`(List< NameValuePair > parameters,String key,String value)` | 
+`protected void `[`addOption`]`(List< NameValuePair > parameters,String key,String[] value)` | 
+`protected void `[`addOption`]`(List< NameValuePair > parameters,String key,Integer value)` | 
+
+## Members
+
+#### `public T `[`setMaxResults`]`(int maxResults)` 
+
+#### `public T `[`setNextToken`]`(String nextToken)` 
+
+#### `public List< NameValuePair > `[`toList`]`()` 
+
+#### `public List< NameValuePair > `[`addOptions`]`(List< NameValuePair > parameters)` 
+
+#### `protected Integer `[`maxResults`] 
+
+#### `protected String `[`nextToken`] 
+
+#### `protected void `[`addOption`]`(List< NameValuePair > parameters,String key,String value)` 
+
+#### `protected void `[`addOption`]`(List< NameValuePair > parameters,String key,String[] value)` 
+
+#### `protected void `[`addOption`]`(List< NameValuePair > parameters,String key,Integer value)` 
+
+# class `ai::lucidtech::las::sdk::DockerTransitionParameters` 
+
+```
+class ai::lucidtech::las::sdk::DockerTransitionParameters
+  : public ai.lucidtech.las.sdk.TransitionParameters
+```  
+
+## Summary
+
+ Members                        | Descriptions                                
+--------------------------------|---------------------------------------------
+`public `[`DockerTransitionParameters`] [`setImageUrl`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_docker_transition_parameters_1ac1a2e6105139a97ad1ee257644841af4)`(String imageUrl)` | 
+`public `[`DockerTransitionParameters`] [`setSecretId`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_docker_transition_parameters_1a5177a815e7989b6e86001076464b14eb)`(String secretId)` | 
+`public `[`DockerTransitionParameters`] [`setMemory`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_docker_transition_parameters_1ae6c2d6e74e8c5c4b383399c7e066dedc)`(Integer memory)` | 
+`public `[`DockerTransitionParameters`] [`setCpu`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_docker_transition_parameters_1a4ba534d7a6abe5ae3e0509c5e0a2ca7d)`(Integer cpu)` | 
+`public `[`DockerTransitionParameters`] [`setEnvironmentSecrets`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_docker_transition_parameters_1af8c88a8d63800aad3e7180b82b0f5c0a)`(String[] environmentSecrets)` | 
+`public `[`DockerTransitionParameters`] [`setEnvironment`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_docker_transition_parameters_1a4d2b42a01536ab100771164bf094d72f)`(Map< String, String > environment)` | 
+`public JSONObject `[`addOptions`]`(JSONObject body)` | 
+
+## Members
+
+#### `public `[`DockerTransitionParameters`] [`setImageUrl`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_docker_transition_parameters_1ac1a2e6105139a97ad1ee257644841af4)`(String imageUrl)` 
+
+#### `public `[`DockerTransitionParameters`] [`setSecretId`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_docker_transition_parameters_1a5177a815e7989b6e86001076464b14eb)`(String secretId)` 
+
+#### `public `[`DockerTransitionParameters`] [`setMemory`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_docker_transition_parameters_1ae6c2d6e74e8c5c4b383399c7e066dedc)`(Integer memory)` 
+
+#### `public `[`DockerTransitionParameters`] [`setCpu`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_docker_transition_parameters_1a4ba534d7a6abe5ae3e0509c5e0a2ca7d)`(Integer cpu)` 
+
+#### `public `[`DockerTransitionParameters`] [`setEnvironmentSecrets`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_docker_transition_parameters_1af8c88a8d63800aad3e7180b82b0f5c0a)`(String[] environmentSecrets)` 
+
+#### `public `[`DockerTransitionParameters`] [`setEnvironment`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_docker_transition_parameters_1a4d2b42a01536ab100771164bf094d72f)`(Map< String, String > environment)` 
+
+#### `public JSONObject `[`addOptions`]`(JSONObject body)` 
+
+# class `ai::lucidtech::las::sdk::ListAppClientsOptions` 
+
+```
+class ai::lucidtech::las::sdk::ListAppClientsOptions
+  : public ai.lucidtech.las.sdk.ListResourcesOptions< ListAppClientsOptions >
+```  
+
+## Summary
+
+ Members                        | Descriptions                                
+--------------------------------|---------------------------------------------
+
+## Members
+
 # class `ai::lucidtech::las::sdk::ListAssetsOptions` 
 
 ```
 class ai::lucidtech::las::sdk::ListAssetsOptions
   : public ai.lucidtech.las.sdk.ListResourcesOptions< ListAssetsOptions >
+```  
+
+## Summary
+
+ Members                        | Descriptions                                
+--------------------------------|---------------------------------------------
+
+## Members
+
+# class `ai::lucidtech::las::sdk::ListBatchesOptions` 
+
+```
+class ai::lucidtech::las::sdk::ListBatchesOptions
+  : public ai.lucidtech.las.sdk.ListResourcesOptions< ListBatchesOptions >
 ```  
 
 ## Summary
@@ -1614,18 +1992,44 @@ class ai::lucidtech::las::sdk::ListDocumentsOptions
 
  Members                        | Descriptions                                
 --------------------------------|---------------------------------------------
-`public  `[`ListDocumentsOptions`]`()` | 
 `public `[`ListDocumentsOptions`] [`setConsentId`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_list_documents_options_1a60cbafbb5cb2443c0add044cf7b88abc)`(String consentId)` | 
 `public `[`ListDocumentsOptions`] [`setBatchId`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_list_documents_options_1ac52ae5b69f46e04451a645abce1e7ac7)`(String batchId)` | 
 `public List< NameValuePair > `[`toList`]`()` | 
 
 ## Members
 
-#### `public  `[`ListDocumentsOptions`]`()` 
-
 #### `public `[`ListDocumentsOptions`] [`setConsentId`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_list_documents_options_1a60cbafbb5cb2443c0add044cf7b88abc)`(String consentId)` 
 
 #### `public `[`ListDocumentsOptions`] [`setBatchId`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_list_documents_options_1ac52ae5b69f46e04451a645abce1e7ac7)`(String batchId)` 
+
+#### `public List< NameValuePair > `[`toList`]`()` 
+
+# class `ai::lucidtech::las::sdk::ListLogsOptions` 
+
+```
+class ai::lucidtech::las::sdk::ListLogsOptions
+  : public ai.lucidtech.las.sdk.ListResourcesOptions< ListLogsOptions >
+```  
+
+## Summary
+
+ Members                        | Descriptions                                
+--------------------------------|---------------------------------------------
+`public `[`ListLogsOptions`] [`setTransitionId`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_list_logs_options_1a0ba087cbe466b362eb0f88c7a01c54fd)`(String transitionId)` | 
+`public `[`ListLogsOptions`] [`setTransitionExecutionId`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_list_logs_options_1a28aad7497a2818097a8026ee36146f6d)`(String transitionExecutionId)` | 
+`public `[`ListLogsOptions`] [`setWorkflowId`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_list_logs_options_1a8640336f1d080459996287e1fdd3be23)`(String workflowId)` | 
+`public `[`ListLogsOptions`] [`setWorkflowExecutionId`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_list_logs_options_1a57c6a3b3e889a2fd5511aeaf2f90497f)`(String workflowExecutionId)` | 
+`public List< NameValuePair > `[`toList`]`()` | 
+
+## Members
+
+#### `public `[`ListLogsOptions`] [`setTransitionId`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_list_logs_options_1a0ba087cbe466b362eb0f88c7a01c54fd)`(String transitionId)` 
+
+#### `public `[`ListLogsOptions`] [`setTransitionExecutionId`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_list_logs_options_1a28aad7497a2818097a8026ee36146f6d)`(String transitionExecutionId)` 
+
+#### `public `[`ListLogsOptions`] [`setWorkflowId`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_list_logs_options_1a8640336f1d080459996287e1fdd3be23)`(String workflowId)` 
+
+#### `public `[`ListLogsOptions`] [`setWorkflowExecutionId`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_list_logs_options_1a57c6a3b3e889a2fd5511aeaf2f90497f)`(String workflowExecutionId)` 
 
 #### `public List< NameValuePair > `[`toList`]`()` 
 
@@ -1663,26 +2067,16 @@ class ai::lucidtech::las::sdk::ListPredictionsOptions
 
  Members                        | Descriptions                                
 --------------------------------|---------------------------------------------
-`public  `[`ListResourcesOptions`]`()` | 
-`public  `[`ListResourcesOptions`]`(int maxResults)` | 
-`public  `[`ListResourcesOptions`]`(String nextToken)` | 
-`public  `[`ListResourcesOptions`]`(int maxResults,String nextToken)` | 
 `public T `[`setMaxResults`]`(int maxResults)` | 
 `public T `[`setNextToken`]`(String nextToken)` | 
 `public List< NameValuePair > `[`toList`]`()` | 
 `public List< NameValuePair > `[`addOptions`]`(List< NameValuePair > parameters)` | 
-`protected Integer `[`maxResults`] | 
-`protected String `[`nextToken`] | 
+`protected void `[`addOption`]`(List< NameValuePair > parameters,String key,String value)` | 
+`protected void `[`addOption`]`(List< NameValuePair > parameters,String key,String[] value)` | 
+`protected void `[`addOption`]`(List< NameValuePair > parameters,String key,List< String > value)` | 
+`protected void `[`addOption`]`(List< NameValuePair > parameters,String key,Integer value)` | 
 
 ## Members
-
-#### `public  `[`ListResourcesOptions`]`()` 
-
-#### `public  `[`ListResourcesOptions`]`(int maxResults)` 
-
-#### `public  `[`ListResourcesOptions`]`(String nextToken)` 
-
-#### `public  `[`ListResourcesOptions`]`(int maxResults,String nextToken)` 
 
 #### `public T `[`setMaxResults`]`(int maxResults)` 
 
@@ -1692,9 +2086,13 @@ class ai::lucidtech::las::sdk::ListPredictionsOptions
 
 #### `public List< NameValuePair > `[`addOptions`]`(List< NameValuePair > parameters)` 
 
-#### `protected Integer `[`maxResults`] 
+#### `protected void `[`addOption`]`(List< NameValuePair > parameters,String key,String value)` 
 
-#### `protected String `[`nextToken`] 
+#### `protected void `[`addOption`]`(List< NameValuePair > parameters,String key,String[] value)` 
+
+#### `protected void `[`addOption`]`(List< NameValuePair > parameters,String key,List< String > value)` 
+
+#### `protected void `[`addOption`]`(List< NameValuePair > parameters,String key,Integer value)` 
 
 # class `ai::lucidtech::las::sdk::ListSecretsOptions` 
 
@@ -1721,7 +2119,6 @@ class ai::lucidtech::las::sdk::ListSortablesOptions
 
  Members                        | Descriptions                                
 --------------------------------|---------------------------------------------
-`public  `[`ListSortablesOptions`]`()` | 
 `public T `[`setSortBy`]`(String sortBy)` | 
 `public T `[`setOrder`]`(`[`Order`](#enumai_1_1lucidtech_1_1las_1_1sdk_1_1_order)` order)` | 
 `public List< NameValuePair > `[`toList`]`()` | 
@@ -1730,8 +2127,6 @@ class ai::lucidtech::las::sdk::ListSortablesOptions
 `protected `[`Order`](#enumai_1_1lucidtech_1_1las_1_1sdk_1_1_order) [`order`] | 
 
 ## Members
-
-#### `public  `[`ListSortablesOptions`]`()` 
 
 #### `public T `[`setSortBy`]`(String sortBy)` 
 
@@ -1756,7 +2151,6 @@ class ai::lucidtech::las::sdk::ListTransitionExecutionsOptions
 
  Members                        | Descriptions                                
 --------------------------------|---------------------------------------------
-`public  `[`ListTransitionExecutionsOptions`]`()` | 
 `public `[`ListTransitionExecutionsOptions`] [`setExecutionId`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_list_transition_executions_options_1a17be680d06dd9eaaaf9c3d0df3519d9d)`(List< String > executionId)` | 
 `public `[`ListTransitionExecutionsOptions`] [`setExecutionId`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_list_transition_executions_options_1a6fed26e978e0eec35e8a3dc4297010b7)`(String executionId)` | 
 `public `[`ListTransitionExecutionsOptions`] [`setStatus`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_list_transition_executions_options_1aaffb59561c7c6f2ba7249948783b83f0)`(List< `[`TransitionExecutionStatus`](#enumai_1_1lucidtech_1_1las_1_1sdk_1_1_transition_execution_status)` > status)` | 
@@ -1765,8 +2159,6 @@ class ai::lucidtech::las::sdk::ListTransitionExecutionsOptions
 `public List< NameValuePair > `[`addOptions`]`(List< NameValuePair > parameters)` | 
 
 ## Members
-
-#### `public  `[`ListTransitionExecutionsOptions`]`()` 
 
 #### `public `[`ListTransitionExecutionsOptions`] [`setExecutionId`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_list_transition_executions_options_1a17be680d06dd9eaaaf9c3d0df3519d9d)`(List< String > executionId)` 
 
@@ -1791,13 +2183,10 @@ class ai::lucidtech::las::sdk::ListTransitionsOptions
 
  Members                        | Descriptions                                
 --------------------------------|---------------------------------------------
-`public  `[`ListTransitionsOptions`]`()` | 
 `public `[`ListTransitionsOptions`] [`setTransitionType`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_list_transitions_options_1a63e360ea5c442b76317e5c0f01ed29d8)`(`[`TransitionType`](#enumai_1_1lucidtech_1_1las_1_1sdk_1_1_transition_type)` transitionType)` | 
 `public List< NameValuePair > `[`toList`]`()` | 
 
 ## Members
-
-#### `public  `[`ListTransitionsOptions`]`()` 
 
 #### `public `[`ListTransitionsOptions`] [`setTransitionType`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_list_transitions_options_1a63e360ea5c442b76317e5c0f01ed29d8)`(`[`TransitionType`](#enumai_1_1lucidtech_1_1las_1_1sdk_1_1_transition_type)` transitionType)` 
 
@@ -1828,15 +2217,12 @@ class ai::lucidtech::las::sdk::ListWorkflowExecutionsOptions
 
  Members                        | Descriptions                                
 --------------------------------|---------------------------------------------
-`public  `[`ListWorkflowExecutionsOptions`]`()` | 
 `public `[`ListWorkflowExecutionsOptions`] [`setStatus`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_list_workflow_executions_options_1aaf7e9a62ee579d8949fd62d36d0e65db)`(List< `[`WorkflowExecutionStatus`](#enumai_1_1lucidtech_1_1las_1_1sdk_1_1_workflow_execution_status)` > status)` | 
 `public `[`ListWorkflowExecutionsOptions`] [`setStatus`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_list_workflow_executions_options_1a0b2f966d52b2aeef2b37ac7c5e5eb520)`(`[`WorkflowExecutionStatus`](#enumai_1_1lucidtech_1_1las_1_1sdk_1_1_workflow_execution_status)` status)` | 
 `public List< NameValuePair > `[`toList`]`()` | 
 `public List< NameValuePair > `[`addOptions`]`(List< NameValuePair > parameters)` | 
 
 ## Members
-
-#### `public  `[`ListWorkflowExecutionsOptions`]`()` 
 
 #### `public `[`ListWorkflowExecutionsOptions`] [`setStatus`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_list_workflow_executions_options_1aaf7e9a62ee579d8949fd62d36d0e65db)`(List< `[`WorkflowExecutionStatus`](#enumai_1_1lucidtech_1_1las_1_1sdk_1_1_workflow_execution_status)` > status)` 
 
@@ -1859,6 +2245,26 @@ class ai::lucidtech::las::sdk::ListWorkflowsOptions
 --------------------------------|---------------------------------------------
 
 ## Members
+
+# class `ai::lucidtech::las::sdk::ManualTransitionParameters` 
+
+```
+class ai::lucidtech::las::sdk::ManualTransitionParameters
+  : public ai.lucidtech.las.sdk.TransitionParameters
+```  
+
+## Summary
+
+ Members                        | Descriptions                                
+--------------------------------|---------------------------------------------
+`public `[`ManualTransitionParameters`] [`setAssets`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_manual_transition_parameters_1ac6f32809496241e3a656aab6193cba2a)`(Map< String, String > assets)` | 
+`public JSONObject `[`addOptions`]`(JSONObject body)` | 
+
+## Members
+
+#### `public `[`ManualTransitionParameters`] [`setAssets`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_manual_transition_parameters_1ac6f32809496241e3a656aab6193cba2a)`(Map< String, String > assets)` 
+
+#### `public JSONObject `[`addOptions`]`(JSONObject body)` 
 
 # class `ai::lucidtech::las::sdk::MissingAccessTokenException` 
 
@@ -1890,19 +2296,21 @@ class ai::lucidtech::las::sdk::MissingCredentialsException
 
 # class `ai::lucidtech::las::sdk::NameAndDescriptionOptions` 
 
+```
+class ai::lucidtech::las::sdk::NameAndDescriptionOptions
+  : public ai.lucidtech.las.sdk.Options
+```  
+
 ## Summary
 
  Members                        | Descriptions                                
 --------------------------------|---------------------------------------------
-`public  `[`NameAndDescriptionOptions`]`()` | 
 `public T `[`setName`]`(String name)` | 
 `public T `[`setDescription`]`(String description)` | 
 `public JSONObject `[`addOptions`]`(JSONObject body)` | 
 `public JSONObject `[`toJson`]`()` | 
 
 ## Members
-
-#### `public  `[`NameAndDescriptionOptions`]`()` 
 
 #### `public T `[`setName`]`(String name)` 
 
@@ -1911,6 +2319,59 @@ class ai::lucidtech::las::sdk::MissingCredentialsException
 #### `public JSONObject `[`addOptions`]`(JSONObject body)` 
 
 #### `public JSONObject `[`toJson`]`()` 
+
+# class `ai::lucidtech::las::sdk::Options` 
+
+## Summary
+
+ Members                        | Descriptions                                
+--------------------------------|---------------------------------------------
+`public abstract JSONObject `[`addOptions`]`(JSONObject body)` | 
+`protected void `[`addOption`]`(JSONObject body,String key,String value)` | 
+`protected void `[`addOption`]`(JSONObject body,String key,String[] value)` | 
+`protected void `[`addOption`]`(JSONObject body,String key,Map< String, String > value)` | 
+`protected void `[`addOption`]`(JSONObject body,String key,Boolean value)` | 
+`protected void `[`addOption`]`(JSONObject body,String key,Integer value)` | 
+`protected void `[`addOption`]`(JSONObject body,String key,JSONArray value)` | 
+`protected void `[`addOption`]`(JSONObject body,String key,JSONObject value)` | 
+`protected void `[`addOption`]`(JSONObject body,String key,`[`Options`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_options)` value)` | 
+
+## Members
+
+#### `public abstract JSONObject `[`addOptions`]`(JSONObject body)` 
+
+#### `protected void `[`addOption`]`(JSONObject body,String key,String value)` 
+
+#### `protected void `[`addOption`]`(JSONObject body,String key,String[] value)` 
+
+#### `protected void `[`addOption`]`(JSONObject body,String key,Map< String, String > value)` 
+
+#### `protected void `[`addOption`]`(JSONObject body,String key,Boolean value)` 
+
+#### `protected void `[`addOption`]`(JSONObject body,String key,Integer value)` 
+
+#### `protected void `[`addOption`]`(JSONObject body,String key,JSONArray value)` 
+
+#### `protected void `[`addOption`]`(JSONObject body,String key,JSONObject value)` 
+
+#### `protected void `[`addOption`]`(JSONObject body,String key,`[`Options`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_options)` value)` 
+
+# class `ai::lucidtech::las::sdk::TransitionParameters` 
+
+```
+class ai::lucidtech::las::sdk::TransitionParameters
+  : public ai.lucidtech.las.sdk.Options
+```  
+
+## Summary
+
+ Members                        | Descriptions                                
+--------------------------------|---------------------------------------------
+`public abstract JSONObject `[`addOptions`]`(JSONObject body)` | 
+
+## Members
+
+#### `public abstract JSONObject `[`addOptions`]`(JSONObject body)` 
 
 # class `ai::lucidtech::las::sdk::UpdateAssetOptions` 
 
@@ -1923,15 +2384,12 @@ class ai::lucidtech::las::sdk::UpdateAssetOptions
 
  Members                        | Descriptions                                
 --------------------------------|---------------------------------------------
-`public  `[`UpdateAssetOptions`]`()` | 
 `public `[`UpdateAssetOptions`] [`setContent`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_update_asset_options_1a2c82436e7cf26983ee2c2d892d159773)`(byte[] content)` | 
 `public `[`UpdateAssetOptions`] [`setContent`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_update_asset_options_1ad86efbed928b01bc637eedda9f19c733)`(InputStream content)` | 
 `public JSONObject `[`addOptions`]`(JSONObject body)` | 
 `public JSONObject `[`toJson`]`()` | 
 
 ## Members
-
-#### `public  `[`UpdateAssetOptions`]`()` 
 
 #### `public `[`UpdateAssetOptions`] [`setContent`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_update_asset_options_1a2c82436e7cf26983ee2c2d892d159773)`(byte[] content)` 
 
@@ -1952,15 +2410,12 @@ class ai::lucidtech::las::sdk::UpdateSecretOptions
 
  Members                        | Descriptions                                
 --------------------------------|---------------------------------------------
-`public  `[`UpdateSecretOptions`]`()` | 
 `public `[`UpdateSecretOptions`] [`setData`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_update_secret_options_1a85cd3d884163f771962f080a7cfe9e08)`(JSONObject data)` | 
 `public `[`UpdateSecretOptions`] [`setData`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_update_secret_options_1ac88357dcd64d7a950b560e7bf60f9fe4)`(Map< String, String > data)` | 
 `public JSONObject `[`addOptions`]`(JSONObject body)` | 
 `public JSONObject `[`toJson`]`()` | 
 
 ## Members
-
-#### `public  `[`UpdateSecretOptions`]`()` 
 
 #### `public `[`UpdateSecretOptions`] [`setData`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_update_secret_options_1a85cd3d884163f771962f080a7cfe9e08)`(JSONObject data)` 
 
@@ -1972,26 +2427,31 @@ class ai::lucidtech::las::sdk::UpdateSecretOptions
 
 # class `ai::lucidtech::las::sdk::UpdateTransitionExecutionOptions` 
 
+```
+class ai::lucidtech::las::sdk::UpdateTransitionExecutionOptions
+  : public ai.lucidtech.las.sdk.Options
+```  
+
 ## Summary
 
  Members                        | Descriptions                                
 --------------------------------|---------------------------------------------
-`public  `[`UpdateTransitionExecutionOptions`]`()` | 
 `public `[`UpdateTransitionExecutionOptions`] [`setOutput`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_update_transition_execution_options_1afc7f677cd0d46baaea8376d2f02a621d)`(JSONObject error)` | 
 `public `[`UpdateTransitionExecutionOptions`] [`setError`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_update_transition_execution_options_1a7df40cd9c5c3735c8abfb6f9d91a8f8e)`(JSONObject output)` | 
 `public `[`UpdateTransitionExecutionOptions`] [`setStartTime`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_update_transition_execution_options_1a91eaf567d5e65b0fb5eb3afd8f68c253)`(String startTime)` | 
+`public `[`UpdateTransitionExecutionOptions`] [`setStartTime`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_update_transition_execution_options_1af03251ca5b54aa8c4ac5623496490286)`(ZonedDateTime startTime)` | 
 `public JSONObject `[`addOptions`]`(JSONObject body)` | 
 `public JSONObject `[`toJson`]`()` | 
 
 ## Members
-
-#### `public  `[`UpdateTransitionExecutionOptions`]`()` 
 
 #### `public `[`UpdateTransitionExecutionOptions`] [`setOutput`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_update_transition_execution_options_1afc7f677cd0d46baaea8376d2f02a621d)`(JSONObject error)` 
 
 #### `public `[`UpdateTransitionExecutionOptions`] [`setError`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_update_transition_execution_options_1a7df40cd9c5c3735c8abfb6f9d91a8f8e)`(JSONObject output)` 
 
 #### `public `[`UpdateTransitionExecutionOptions`] [`setStartTime`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_update_transition_execution_options_1a91eaf567d5e65b0fb5eb3afd8f68c253)`(String startTime)` 
+
+#### `public `[`UpdateTransitionExecutionOptions`] [`setStartTime`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_update_transition_execution_options_1af03251ca5b54aa8c4ac5623496490286)`(ZonedDateTime startTime)` 
 
 #### `public JSONObject `[`addOptions`]`(JSONObject body)` 
 
@@ -2008,15 +2468,12 @@ class ai::lucidtech::las::sdk::UpdateTransitionOptions
 
  Members                        | Descriptions                                
 --------------------------------|---------------------------------------------
-`public  `[`UpdateTransitionOptions`]`()` | 
 `public `[`UpdateTransitionOptions`] [`setInputJsonSchema`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_update_transition_options_1a2e6d97d967f6270b2f9de77eabebc86d)`(JSONObject schema)` | 
 `public `[`UpdateTransitionOptions`] [`setOutputJsonSchema`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_update_transition_options_1adcaad2be6ae5fe6c41052101eee65926)`(JSONObject schema)` | 
 `public JSONObject `[`addOptions`]`(JSONObject body)` | 
 `public JSONObject `[`toJson`]`()` | 
 
 ## Members
-
-#### `public  `[`UpdateTransitionOptions`]`()` 
 
 #### `public `[`UpdateTransitionOptions`] [`setInputJsonSchema`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_update_transition_options_1a2e6d97d967f6270b2f9de77eabebc86d)`(JSONObject schema)` 
 
@@ -2056,11 +2513,15 @@ class ai::lucidtech::las::sdk::UpdateWorkflowOptions
 
 # class `ai::lucidtech::las::sdk::UserOptions` 
 
+```
+class ai::lucidtech::las::sdk::UserOptions
+  : public ai.lucidtech.las.sdk.Options
+```  
+
 ## Summary
 
  Members                        | Descriptions                                
 --------------------------------|---------------------------------------------
-`public  `[`UserOptions`]`()` | 
 `public T `[`setName`]`(String name)` | 
 `public T `[`setAvatar`]`(String avatar)` | 
 `public T `[`setAvatar`]`(byte[] avatar)` | 
@@ -2068,8 +2529,6 @@ class ai::lucidtech::las::sdk::UpdateWorkflowOptions
 `public JSONObject `[`toJson`]`()` | 
 
 ## Members
-
-#### `public  `[`UserOptions`]`()` 
 
 #### `public T `[`setName`]`(String name)` 
 
@@ -2080,5 +2539,57 @@ class ai::lucidtech::las::sdk::UpdateWorkflowOptions
 #### `public JSONObject `[`addOptions`]`(JSONObject body)` 
 
 #### `public JSONObject `[`toJson`]`()` 
+
+# class `ai::lucidtech::las::sdk::WorkflowCompletedConfig` 
+
+```
+class ai::lucidtech::las::sdk::WorkflowCompletedConfig
+  : public ai.lucidtech.las.sdk.Options
+```  
+
+## Summary
+
+ Members                        | Descriptions                                
+--------------------------------|---------------------------------------------
+`public `[`WorkflowCompletedConfig`] [`setImageUrl`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_workflow_completed_config_1a098d36b9e6bbd2fbe61552e897882c19)`(String imageUrl)` | 
+`public `[`WorkflowCompletedConfig`] [`setSecretId`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_workflow_completed_config_1ac2dcc7edfbc11762c43d26343eef1c2d)`(String secretId)` | 
+`public `[`WorkflowCompletedConfig`] [`setEnvironmentSecrets`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_workflow_completed_config_1a8e29416dbfccb4320b35d2f8e0b7b09e)`(String[] environmentSecrets)` | 
+`public `[`WorkflowCompletedConfig`] [`setEnvironment`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_workflow_completed_config_1a4c20fb980273b190060ce5c75acb315f)`(Map< String, String > environment)` | 
+`public JSONObject `[`addOptions`]`(JSONObject body)` | 
+
+## Members
+
+#### `public `[`WorkflowCompletedConfig`] [`setImageUrl`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_workflow_completed_config_1a098d36b9e6bbd2fbe61552e897882c19)`(String imageUrl)` 
+
+#### `public `[`WorkflowCompletedConfig`] [`setSecretId`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_workflow_completed_config_1ac2dcc7edfbc11762c43d26343eef1c2d)`(String secretId)` 
+
+#### `public `[`WorkflowCompletedConfig`] [`setEnvironmentSecrets`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_workflow_completed_config_1a8e29416dbfccb4320b35d2f8e0b7b09e)`(String[] environmentSecrets)` 
+
+#### `public `[`WorkflowCompletedConfig`] [`setEnvironment`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_workflow_completed_config_1a4c20fb980273b190060ce5c75acb315f)`(Map< String, String > environment)` 
+
+#### `public JSONObject `[`addOptions`]`(JSONObject body)` 
+
+# class `ai::lucidtech::las::sdk::WorkflowErrorConfig` 
+
+```
+class ai::lucidtech::las::sdk::WorkflowErrorConfig
+  : public ai.lucidtech.las.sdk.Options
+```  
+
+## Summary
+
+ Members                        | Descriptions                                
+--------------------------------|---------------------------------------------
+`public `[`WorkflowErrorConfig`] [`setEmail`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_workflow_error_config_1ac0fa13c1d6704a9805eeee56d7de34b6)`(String email)` | 
+`public `[`WorkflowErrorConfig`] [`setManualRetry`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_workflow_error_config_1a058574fcc2a8856e766c6c29c8786359)`(Boolean manualRetry)` | 
+`public JSONObject `[`addOptions`]`(JSONObject body)` | 
+
+## Members
+
+#### `public `[`WorkflowErrorConfig`] [`setEmail`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_workflow_error_config_1ac0fa13c1d6704a9805eeee56d7de34b6)`(String email)` 
+
+#### `public `[`WorkflowErrorConfig`] [`setManualRetry`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_workflow_error_config_1a058574fcc2a8856e766c6c29c8786359)`(Boolean manualRetry)` 
+
+#### `public JSONObject `[`addOptions`]`(JSONObject body)` 
 
 Generated by [Moxygen](https://sourcey.com/moxygen)
