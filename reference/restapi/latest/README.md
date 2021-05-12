@@ -309,6 +309,113 @@
 ```
 
 
+#### PATCH /appClients/{appClientId}
+
+
+| Path name | Path value |
+| --- | --- |
+| appClientId | Id of appClient on the form las:appClient:&lt;hex&gt; |
+
+
+| Header name | Header value |
+| --- | --- |
+| Content-Type | application/json |
+| Authorization | Bearer &lt;your access token here&gt; |
+| x-api-key | &lt;your api key here&gt; |
+
+
+
+
+
+##### Request body JSON Schema
+```json
+{
+  "title": "PATCH /appClients/{appClientId}",
+  "minProperties": 1,
+  "type": "object",
+  "properties": {
+    "name": {
+      "maxLength": 4096,
+      "type": "string",
+      "nullable": true
+    },
+    "description": {
+      "maxLength": 4096,
+      "type": "string",
+      "nullable": true
+    }
+  },
+  "additionalProperties": false
+}
+```
+
+
+##### Response body JSON Schema
+```json
+{
+  "title": "appClient",
+  "required": [
+    "apiKey",
+    "appClientId",
+    "callbackUrls",
+    "clientId",
+    "createdTime",
+    "description",
+    "hasSecret",
+    "logoutUrls",
+    "name"
+  ],
+  "type": "object",
+  "properties": {
+    "hasSecret": {
+      "type": "boolean"
+    },
+    "clientId": {
+      "type": "string"
+    },
+    "apiKey": {
+      "type": "string"
+    },
+    "name": {
+      "maxLength": 4096,
+      "type": "string",
+      "nullable": true
+    },
+    "logoutUrls": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "description": {
+      "maxLength": 4096,
+      "type": "string",
+      "nullable": true
+    },
+    "createdTime": {
+      "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2}( |T)?[0-9]{2}:?[0-9]{2}:?[0-9]{2}(.[0-9]{1,6})?(Z|[+][0-9]{2}(:|)[0-9]{2})$",
+      "type": "string",
+      "nullable": true
+    },
+    "callbackUrls": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "clientSecret": {
+      "type": "string"
+    },
+    "appClientId": {
+      "pattern": "^las:app-client:[a-f0-9]{32}$",
+      "type": "string"
+    }
+  },
+  "additionalProperties": false
+}
+```
+
+
 #### GET /assets
 
 
@@ -867,6 +974,105 @@
 
 
 
+
+
+##### Response body JSON Schema
+```json
+{
+  "title": "batch",
+  "required": [
+    "batchId",
+    "containsPersonallyIdentifiableInformation",
+    "createdTime",
+    "description",
+    "numDocuments",
+    "retentionInDays",
+    "storageLocation"
+  ],
+  "type": "object",
+  "properties": {
+    "retentionInDays": {
+      "maximum": 1825,
+      "minimum": 0,
+      "type": "integer"
+    },
+    "name": {
+      "maxLength": 4096,
+      "type": "string",
+      "nullable": true
+    },
+    "description": {
+      "maxLength": 4096,
+      "type": "string",
+      "nullable": true
+    },
+    "createdTime": {
+      "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2}( |T)?[0-9]{2}:?[0-9]{2}:?[0-9]{2}(.[0-9]{1,6})?(Z|[+][0-9]{2}(:|)[0-9]{2})$",
+      "type": "string",
+      "nullable": true
+    },
+    "storageLocation": {
+      "type": "string",
+      "enum": [
+        "EU"
+      ]
+    },
+    "containsPersonallyIdentifiableInformation": {
+      "type": "boolean"
+    },
+    "batchId": {
+      "pattern": "^las:batch:[a-f0-9]{32}$",
+      "type": "string"
+    },
+    "numDocuments": {
+      "minimum": 0,
+      "type": "integer"
+    }
+  },
+  "additionalProperties": false
+}
+```
+
+
+#### PATCH /batches/{batchId}
+
+
+| Path name | Path value |
+| --- | --- |
+| batchId | Id of batch on the form las:batch:&lt;hex&gt; |
+
+
+| Header name | Header value |
+| --- | --- |
+| Content-Type | application/json |
+| Authorization | Bearer &lt;your access token here&gt; |
+| x-api-key | &lt;your api key here&gt; |
+
+
+
+
+
+##### Request body JSON Schema
+```json
+{
+  "title": "PATCH /batches/{batchId}",
+  "minProperties": 1,
+  "type": "object",
+  "properties": {
+    "name": {
+      "maxLength": 4096,
+      "type": "string",
+      "nullable": true
+    },
+    "description": {
+      "maxLength": 4096,
+      "type": "string",
+      "nullable": true
+    }
+  },
+  "additionalProperties": false
+}
+```
 
 
 ##### Response body JSON Schema
@@ -1878,6 +2084,8 @@
             "nullable": true
           },
           "width": {
+            "maximum": 1921,
+            "minimum": 97,
             "type": "integer"
           },
           "description": {
@@ -1923,19 +2131,24 @@
                   ]
                 },
                 "maxLength": {
+                  "maximum": 100,
+                  "minimum": 1,
                   "type": "integer"
                 }
               }
             }
           },
           "height": {
+            "maximum": 1921,
+            "minimum": 97,
             "type": "integer"
           },
           "status": {
             "type": "string",
             "enum": [
               "active",
-              "training"
+              "training",
+              "inactive"
             ]
           }
         },
@@ -1946,6 +2159,666 @@
       "maxLength": 4096,
       "type": "string",
       "nullable": true
+    }
+  },
+  "additionalProperties": false
+}
+```
+
+
+#### POST /models
+
+
+
+
+
+| Header name | Header value |
+| --- | --- |
+| Content-Type | application/json |
+| Authorization | Bearer &lt;your access token here&gt; |
+| x-api-key | &lt;your api key here&gt; |
+
+
+
+
+
+##### Request body JSON Schema
+```json
+{
+  "title": "POST /models",
+  "required": [
+    "fieldConfig",
+    "height",
+    "width"
+  ],
+  "type": "object",
+  "properties": {
+    "preprocessConfig": {
+      "required": [
+        "autoRotate",
+        "imageQuality",
+        "maxPages"
+      ],
+      "type": "object",
+      "properties": {
+        "maxPages": {
+          "type": "integer"
+        },
+        "autoRotate": {
+          "type": "boolean"
+        },
+        "imageQuality": {
+          "type": "string",
+          "enum": [
+            "LOW",
+            "HIGH"
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "name": {
+      "maxLength": 4096,
+      "type": "string",
+      "nullable": true
+    },
+    "width": {
+      "maximum": 1921,
+      "minimum": 97,
+      "type": "integer"
+    },
+    "description": {
+      "maxLength": 4096,
+      "type": "string",
+      "nullable": true
+    },
+    "fieldConfig": {
+      "type": "object",
+      "additionalProperties": {
+        "required": [
+          "description",
+          "maxLength",
+          "type"
+        ],
+        "type": "object",
+        "properties": {
+          "description": {
+            "maxLength": 4096,
+            "type": "string",
+            "nullable": true
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "date",
+              "amount",
+              "number",
+              "letter",
+              "phone",
+              "alphanum",
+              "alphanumext",
+              "all"
+            ]
+          },
+          "maxLength": {
+            "maximum": 100,
+            "minimum": 1,
+            "type": "integer"
+          }
+        }
+      }
+    },
+    "height": {
+      "maximum": 1921,
+      "minimum": 97,
+      "type": "integer"
+    }
+  },
+  "additionalProperties": false
+}
+```
+
+
+##### Response body JSON Schema
+```json
+{
+  "title": "models",
+  "required": [
+    "models",
+    "nextToken"
+  ],
+  "type": "object",
+  "properties": {
+    "models": {
+      "type": "array",
+      "items": {
+        "required": [
+          "createdTime",
+          "description",
+          "fieldConfig",
+          "height",
+          "modelId",
+          "name",
+          "preprocessConfig",
+          "status",
+          "updatedTime",
+          "width"
+        ],
+        "type": "object",
+        "properties": {
+          "updatedTime": {
+            "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2}( |T)?[0-9]{2}:?[0-9]{2}:?[0-9]{2}(.[0-9]{1,6})?(Z|[+][0-9]{2}(:|)[0-9]{2})$",
+            "type": "string",
+            "nullable": true
+          },
+          "preprocessConfig": {
+            "required": [
+              "autoRotate",
+              "imageQuality",
+              "maxPages"
+            ],
+            "type": "object",
+            "properties": {
+              "maxPages": {
+                "type": "integer"
+              },
+              "autoRotate": {
+                "type": "boolean"
+              },
+              "imageQuality": {
+                "type": "string",
+                "enum": [
+                  "LOW",
+                  "HIGH"
+                ]
+              }
+            },
+            "additionalProperties": false
+          },
+          "modelId": {
+            "pattern": "^las:model:[0-9A-Za-z_]+$",
+            "type": "string"
+          },
+          "name": {
+            "maxLength": 4096,
+            "type": "string",
+            "nullable": true
+          },
+          "width": {
+            "maximum": 1921,
+            "minimum": 97,
+            "type": "integer"
+          },
+          "description": {
+            "maxLength": 4096,
+            "type": "string",
+            "nullable": true
+          },
+          "createdTime": {
+            "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2}( |T)?[0-9]{2}:?[0-9]{2}:?[0-9]{2}(.[0-9]{1,6})?(Z|[+][0-9]{2}(:|)[0-9]{2})$",
+            "type": "string",
+            "nullable": true
+          },
+          "fieldConfig": {
+            "type": "object",
+            "additionalProperties": {
+              "required": [
+                "description",
+                "maxLength",
+                "type"
+              ],
+              "type": "object",
+              "properties": {
+                "description": {
+                  "anyOf": [
+                    {
+                      "maxLength": 4096,
+                      "type": "string"
+                    },
+                    null
+                  ]
+                },
+                "type": {
+                  "type": "string",
+                  "enum": [
+                    "date",
+                    "amount",
+                    "number",
+                    "letter",
+                    "phone",
+                    "alphanum",
+                    "alphanumext",
+                    "all"
+                  ]
+                },
+                "maxLength": {
+                  "maximum": 100,
+                  "minimum": 1,
+                  "type": "integer"
+                }
+              }
+            }
+          },
+          "height": {
+            "maximum": 1921,
+            "minimum": 97,
+            "type": "integer"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "active",
+              "training",
+              "inactive"
+            ]
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "nextToken": {
+      "maxLength": 4096,
+      "type": "string",
+      "nullable": true
+    }
+  },
+  "additionalProperties": false
+}
+```
+
+
+#### GET /models/{modelId}
+
+
+| Path name | Path value |
+| --- | --- |
+| modelId | Id of model on the form las:model:&lt;hex&gt; |
+
+
+| Header name | Header value |
+| --- | --- |
+| Authorization | Bearer &lt;your access token here&gt; |
+| x-api-key | &lt;your api key here&gt; |
+
+
+
+
+
+
+
+
+##### Response body JSON Schema
+```json
+{
+  "title": "model",
+  "required": [
+    "createdTime",
+    "description",
+    "fieldConfig",
+    "height",
+    "modelId",
+    "name",
+    "preprocessConfig",
+    "status",
+    "updatedTime",
+    "width"
+  ],
+  "type": "object",
+  "properties": {
+    "updatedTime": {
+      "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2}( |T)?[0-9]{2}:?[0-9]{2}:?[0-9]{2}(.[0-9]{1,6})?(Z|[+][0-9]{2}(:|)[0-9]{2})$",
+      "type": "string",
+      "nullable": true
+    },
+    "preprocessConfig": {
+      "required": [
+        "autoRotate",
+        "imageQuality",
+        "maxPages"
+      ],
+      "type": "object",
+      "properties": {
+        "maxPages": {
+          "type": "integer"
+        },
+        "autoRotate": {
+          "type": "boolean"
+        },
+        "imageQuality": {
+          "type": "string",
+          "enum": [
+            "LOW",
+            "HIGH"
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "modelId": {
+      "pattern": "^las:model:[0-9A-Za-z_]+$",
+      "type": "string"
+    },
+    "name": {
+      "maxLength": 4096,
+      "type": "string",
+      "nullable": true
+    },
+    "width": {
+      "maximum": 1921,
+      "minimum": 97,
+      "type": "integer"
+    },
+    "description": {
+      "maxLength": 4096,
+      "type": "string",
+      "nullable": true
+    },
+    "createdTime": {
+      "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2}( |T)?[0-9]{2}:?[0-9]{2}:?[0-9]{2}(.[0-9]{1,6})?(Z|[+][0-9]{2}(:|)[0-9]{2})$",
+      "type": "string",
+      "nullable": true
+    },
+    "fieldConfig": {
+      "type": "object",
+      "additionalProperties": {
+        "required": [
+          "description",
+          "maxLength",
+          "type"
+        ],
+        "type": "object",
+        "properties": {
+          "description": {
+            "anyOf": [
+              {
+                "maxLength": 4096,
+                "type": "string"
+              },
+              null
+            ]
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "date",
+              "amount",
+              "number",
+              "letter",
+              "phone",
+              "alphanum",
+              "alphanumext",
+              "all"
+            ]
+          },
+          "maxLength": {
+            "maximum": 100,
+            "minimum": 1,
+            "type": "integer"
+          }
+        }
+      }
+    },
+    "height": {
+      "maximum": 1921,
+      "minimum": 97,
+      "type": "integer"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "active",
+        "training",
+        "inactive"
+      ]
+    }
+  },
+  "additionalProperties": false
+}
+```
+
+
+#### PATCH /models/{modelId}
+
+
+| Path name | Path value |
+| --- | --- |
+| modelId | Id of model on the form las:model:&lt;hex&gt; |
+
+
+| Header name | Header value |
+| --- | --- |
+| Content-Type | application/json |
+| Authorization | Bearer &lt;your access token here&gt; |
+| x-api-key | &lt;your api key here&gt; |
+
+
+
+
+
+##### Request body JSON Schema
+```json
+{
+  "title": "PATCH /models/modelId",
+  "minProperties": 1,
+  "type": "object",
+  "properties": {
+    "preprocessConfig": {
+      "required": [
+        "autoRotate",
+        "imageQuality",
+        "maxPages"
+      ],
+      "type": "object",
+      "properties": {
+        "maxPages": {
+          "type": "integer"
+        },
+        "autoRotate": {
+          "type": "boolean"
+        },
+        "imageQuality": {
+          "type": "string",
+          "enum": [
+            "LOW",
+            "HIGH"
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "width": {
+      "maximum": 1921,
+      "minimum": 97,
+      "type": "integer"
+    },
+    "name": {
+      "maxLength": 4096,
+      "type": "string",
+      "nullable": true
+    },
+    "description": {
+      "maxLength": 4096,
+      "type": "string",
+      "nullable": true
+    },
+    "fieldConfig": {
+      "type": "object",
+      "additionalProperties": {
+        "required": [
+          "description",
+          "maxLength",
+          "type"
+        ],
+        "type": "object",
+        "properties": {
+          "description": {
+            "maxLength": 4096,
+            "type": "string",
+            "nullable": true
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "date",
+              "amount",
+              "number",
+              "letter",
+              "phone",
+              "alphanum",
+              "alphanumext",
+              "all"
+            ]
+          },
+          "maxLength": {
+            "maximum": 100,
+            "minimum": 1,
+            "type": "integer"
+          }
+        }
+      }
+    },
+    "height": {
+      "maximum": 1921,
+      "minimum": 97,
+      "type": "integer"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "active",
+        "training",
+        "inactive"
+      ]
+    }
+  },
+  "additionalProperties": false
+}
+```
+
+
+##### Response body JSON Schema
+```json
+{
+  "title": "model",
+  "required": [
+    "createdTime",
+    "description",
+    "fieldConfig",
+    "height",
+    "modelId",
+    "name",
+    "preprocessConfig",
+    "status",
+    "updatedTime",
+    "width"
+  ],
+  "type": "object",
+  "properties": {
+    "updatedTime": {
+      "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2}( |T)?[0-9]{2}:?[0-9]{2}:?[0-9]{2}(.[0-9]{1,6})?(Z|[+][0-9]{2}(:|)[0-9]{2})$",
+      "type": "string",
+      "nullable": true
+    },
+    "preprocessConfig": {
+      "required": [
+        "autoRotate",
+        "imageQuality",
+        "maxPages"
+      ],
+      "type": "object",
+      "properties": {
+        "maxPages": {
+          "type": "integer"
+        },
+        "autoRotate": {
+          "type": "boolean"
+        },
+        "imageQuality": {
+          "type": "string",
+          "enum": [
+            "LOW",
+            "HIGH"
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "modelId": {
+      "pattern": "^las:model:[0-9A-Za-z_]+$",
+      "type": "string"
+    },
+    "name": {
+      "maxLength": 4096,
+      "type": "string",
+      "nullable": true
+    },
+    "width": {
+      "maximum": 1921,
+      "minimum": 97,
+      "type": "integer"
+    },
+    "description": {
+      "maxLength": 4096,
+      "type": "string",
+      "nullable": true
+    },
+    "createdTime": {
+      "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2}( |T)?[0-9]{2}:?[0-9]{2}:?[0-9]{2}(.[0-9]{1,6})?(Z|[+][0-9]{2}(:|)[0-9]{2})$",
+      "type": "string",
+      "nullable": true
+    },
+    "fieldConfig": {
+      "type": "object",
+      "additionalProperties": {
+        "required": [
+          "description",
+          "maxLength",
+          "type"
+        ],
+        "type": "object",
+        "properties": {
+          "description": {
+            "anyOf": [
+              {
+                "maxLength": 4096,
+                "type": "string"
+              },
+              null
+            ]
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "date",
+              "amount",
+              "number",
+              "letter",
+              "phone",
+              "alphanum",
+              "alphanumext",
+              "all"
+            ]
+          },
+          "maxLength": {
+            "maximum": 100,
+            "minimum": 1,
+            "type": "integer"
+          }
+        }
+      }
+    },
+    "height": {
+      "maximum": 1921,
+      "minimum": 97,
+      "type": "integer"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "active",
+        "training",
+        "inactive"
+      ]
     }
   },
   "additionalProperties": false
@@ -2967,13 +3840,26 @@
       }
     },
     "environment": {
-      "type": "object"
+      "type": "object",
+      "additionalProperties": {
+        "type": "string"
+      }
     },
     "outputJsonSchema": {
       "type": "object"
     },
     "assets": {
-      "type": "object"
+      "type": "object",
+      "properties": {
+        "jsRemoteComponent": {
+          "pattern": "^las:asset:[a-f0-9]{32}$",
+          "type": "string"
+        }
+      },
+      "additionalProperties": {
+        "pattern": "^las:asset:[a-f0-9]{32}$",
+        "type": "string"
+      }
     },
     "name": {
       "maxLength": 4096,
@@ -3677,6 +4563,10 @@
     },
     "email": {
       "pattern": "^[A-Za-z0-9][-+._A-Za-z0-9]*@([-_.A-Za-z0-9]+\\.)+[A-Za-z]{2,}$",
+      "type": "string"
+    },
+    "appClientId": {
+      "pattern": "^las:app-client:[a-f0-9]{32}$",
       "type": "string"
     }
   },
@@ -4645,6 +5535,12 @@
               ]
             }
           },
+          "events": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          },
           "status": {
             "type": "string",
             "enum": [
@@ -4802,6 +5698,12 @@
         ]
       }
     },
+    "events": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
     "status": {
       "type": "string",
       "enum": [
@@ -4903,6 +5805,12 @@
         ]
       }
     },
+    "events": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
     "status": {
       "type": "string",
       "enum": [
@@ -5002,6 +5910,12 @@
             "type": "string"
           }
         ]
+      }
+    },
+    "events": {
+      "type": "array",
+      "items": {
+        "type": "object"
       }
     },
     "status": {
@@ -5128,6 +6042,12 @@
             "type": "string"
           }
         ]
+      }
+    },
+    "events": {
+      "type": "array",
+      "items": {
+        "type": "object"
       }
     },
     "status": {
