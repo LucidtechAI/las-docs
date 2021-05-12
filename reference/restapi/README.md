@@ -4,6 +4,16 @@ You can find the Open API specification file [here](https://raw.githubuserconten
 
 ## Changelog
 
+### 2021-05-12
+
+- Added PATCH /batches/:id
+- Added PATCH /appClients/:id
+- Added GET /models/:id
+- Added PATCH /models/:id
+- Added POST /models
+- Updated OAuth2 scopes
+- Added new possible value 'inactive' for status in /models
+
 ### 2021-04-27
 
 - Added storageLocation, retentionInDays, containsPersonallyIdentifiableInformation to /batches
