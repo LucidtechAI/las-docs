@@ -327,7 +327,7 @@ Creates a transition, calls the POST /transitions endpoint.
 
 
 
-#### create_user(email: str, \*\*optional_args)
+#### create_user(email: str, \*, app_client_id, \*\*optional_args)
 Creates a new user, calls the POST /users endpoint.
 
 ```python
@@ -2068,4 +2068,4 @@ Used to fetch and store credentials and to generate/cache an access token.
 
 
 
-#### property access_token()
+#### property access_token(: str)
