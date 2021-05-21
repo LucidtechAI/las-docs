@@ -7,9 +7,7 @@ You can find the Open API specification file [here](https://raw.githubuserconten
 ### 2021-05-19
 
 - Added loginUrls, defaultLoginUrl to /appClients
-- Added loginUrl to POST /users request body
 - Link to login button in invitation email now sends you to the app corresponding to the defaultLoginUrl in /appClients
-or loginUrl parameter in the POST /users request body
 
 ### 2021-05-12
 
