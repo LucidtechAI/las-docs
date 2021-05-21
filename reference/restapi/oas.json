@@ -2,7 +2,7 @@
   "openapi": "3.0.1",
   "info": {
     "title": "Lucidtech API",
-    "version": "2021-05-12T21:01:48Z"
+    "version": "2021-05-19T09:10:50Z"
   },
   "servers": [
     {
@@ -8697,6 +8697,15 @@
             "maxLength": 4096,
             "type": "string",
             "nullable": true
+          },
+          "loginUrls": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "defaultLoginUrl": {
+            "type": "string"
           }
         },
         "additionalProperties": false
@@ -8923,8 +8932,10 @@
           "callbackUrls",
           "clientId",
           "createdTime",
+          "defaultLoginUrl",
           "description",
           "hasSecret",
+          "loginUrls",
           "logoutUrls",
           "name"
         ],
@@ -8969,9 +8980,19 @@
           "clientSecret": {
             "type": "string"
           },
+          "loginUrls": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
           "appClientId": {
             "pattern": "^las:app-client:[a-f0-9]{32}$",
             "type": "string"
+          },
+          "defaultLoginUrl": {
+            "type": "string",
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -9703,8 +9724,10 @@
                 "callbackUrls",
                 "clientId",
                 "createdTime",
+                "defaultLoginUrl",
                 "description",
                 "hasSecret",
+                "loginUrls",
                 "logoutUrls",
                 "name"
               ],
@@ -9749,9 +9772,19 @@
                 "clientSecret": {
                   "type": "string"
                 },
+                "loginUrls": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
                 "appClientId": {
                   "pattern": "^las:app-client:[a-f0-9]{32}$",
                   "type": "string"
+                },
+                "defaultLoginUrl": {
+                  "type": "string",
+                  "nullable": true
                 }
               },
               "additionalProperties": false

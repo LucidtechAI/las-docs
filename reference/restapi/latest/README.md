@@ -43,8 +43,10 @@
           "callbackUrls",
           "clientId",
           "createdTime",
+          "defaultLoginUrl",
           "description",
           "hasSecret",
+          "loginUrls",
           "logoutUrls",
           "name"
         ],
@@ -89,9 +91,19 @@
           "clientSecret": {
             "type": "string"
           },
+          "loginUrls": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
           "appClientId": {
             "pattern": "^las:app-client:[a-f0-9]{32}$",
             "type": "string"
+          },
+          "defaultLoginUrl": {
+            "type": "string",
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -150,6 +162,15 @@
       "maxLength": 4096,
       "type": "string",
       "nullable": true
+    },
+    "loginUrls": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "defaultLoginUrl": {
+      "type": "string"
     }
   },
   "additionalProperties": false
@@ -167,8 +188,10 @@
     "callbackUrls",
     "clientId",
     "createdTime",
+    "defaultLoginUrl",
     "description",
     "hasSecret",
+    "loginUrls",
     "logoutUrls",
     "name"
   ],
@@ -213,9 +236,19 @@
     "clientSecret": {
       "type": "string"
     },
+    "loginUrls": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
     "appClientId": {
       "pattern": "^las:app-client:[a-f0-9]{32}$",
       "type": "string"
+    },
+    "defaultLoginUrl": {
+      "type": "string",
+      "nullable": true
     }
   },
   "additionalProperties": false
@@ -253,8 +286,10 @@
     "callbackUrls",
     "clientId",
     "createdTime",
+    "defaultLoginUrl",
     "description",
     "hasSecret",
+    "loginUrls",
     "logoutUrls",
     "name"
   ],
@@ -299,9 +334,19 @@
     "clientSecret": {
       "type": "string"
     },
+    "loginUrls": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
     "appClientId": {
       "pattern": "^las:app-client:[a-f0-9]{32}$",
       "type": "string"
+    },
+    "defaultLoginUrl": {
+      "type": "string",
+      "nullable": true
     }
   },
   "additionalProperties": false
@@ -360,8 +405,10 @@
     "callbackUrls",
     "clientId",
     "createdTime",
+    "defaultLoginUrl",
     "description",
     "hasSecret",
+    "loginUrls",
     "logoutUrls",
     "name"
   ],
@@ -406,9 +453,19 @@
     "clientSecret": {
       "type": "string"
     },
+    "loginUrls": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
     "appClientId": {
       "pattern": "^las:app-client:[a-f0-9]{32}$",
       "type": "string"
+    },
+    "defaultLoginUrl": {
+      "type": "string",
+      "nullable": true
     }
   },
   "additionalProperties": false

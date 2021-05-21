@@ -4,6 +4,11 @@ You can find the Open API specification file [here](https://raw.githubuserconten
 
 ## Changelog
 
+### 2021-05-19
+
+- Added loginUrls, defaultLoginUrl to /appClients
+- Link to login button in invitation email now sends you to the app corresponding to the defaultLoginUrl in /appClients
+
 ### 2021-05-12
 
 - Added PATCH /batches/:id
