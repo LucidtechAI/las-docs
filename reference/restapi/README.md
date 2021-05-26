@@ -7,6 +7,7 @@ You can find the Open API specification file [here](https://raw.githubuserconten
 ### 2021-05-26
 
 - Added DELETE /models/:id
+- description in /models fieldConfig is no longer required
 
 ### 2021-05-19
 
