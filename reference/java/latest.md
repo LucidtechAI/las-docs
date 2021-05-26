@@ -16,6 +16,7 @@
 `class `[`ai::lucidtech::las::sdk::CreateAssetOptions`] | 
 `class `[`ai::lucidtech::las::sdk::CreateBatchOptions`] | 
 `class `[`ai::lucidtech::las::sdk::CreateDocumentOptions`] | 
+`class `[`ai::lucidtech::las::sdk::CreateModelOptions`] | 
 `class `[`ai::lucidtech::las::sdk::CreatePredictionOptions`] | 
 `class `[`ai::lucidtech::las::sdk::CreateSecretOptions`] | 
 `class `[`ai::lucidtech::las::sdk::CreateTransitionOptions`] | 
@@ -25,6 +26,8 @@
 `class `[`ai::lucidtech::las::sdk::DeleteDocumentsOptions`] | 
 `class `[`ai::lucidtech::las::sdk::DeleteResourcesOptions`] | 
 `class `[`ai::lucidtech::las::sdk::DockerTransitionParameters`] | 
+`class `[`ai::lucidtech::las::sdk::Field`] | 
+`class `[`ai::lucidtech::las::sdk::FieldConfig`] | 
 `class `[`ai::lucidtech::las::sdk::ListAppClientsOptions`] | 
 `class `[`ai::lucidtech::las::sdk::ListAssetsOptions`] | 
 `class `[`ai::lucidtech::las::sdk::ListBatchesOptions`] | 
@@ -44,9 +47,14 @@
 `class `[`ai::lucidtech::las::sdk::MissingAccessTokenException`] | 
 `class `[`ai::lucidtech::las::sdk::MissingCredentialsException`] | 
 `class `[`ai::lucidtech::las::sdk::NameAndDescriptionOptions`] | 
+`class `[`ai::lucidtech::las::sdk::NullableString`] | 
 `class `[`ai::lucidtech::las::sdk::Options`] | 
+`class `[`ai::lucidtech::las::sdk::PreprocessConfig`] | 
 `class `[`ai::lucidtech::las::sdk::TransitionParameters`] | 
+`class `[`ai::lucidtech::las::sdk::UpdateAppClientOptions`] | 
 `class `[`ai::lucidtech::las::sdk::UpdateAssetOptions`] | 
+`class `[`ai::lucidtech::las::sdk::UpdateBatchOptions`] | 
+`class `[`ai::lucidtech::las::sdk::UpdateModelOptions`] | 
 `class `[`ai::lucidtech::las::sdk::UpdateSecretOptions`] | 
 `class `[`ai::lucidtech::las::sdk::UpdateTransitionExecutionOptions`] | 
 `class `[`ai::lucidtech::las::sdk::UpdateTransitionOptions`] | 
@@ -88,6 +96,7 @@ class ai::lucidtech::las::sdk::APIException
 `public  `[`Client`]`(`[`Credentials`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_credentials)` credentials)` | A client to invoke api methods from Lucidtech AI Services.
 `public JSONObject `[`createAppClient`]`(`[`CreateAppClientOptions`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_create_app_client_options)` options)` | Create an app client, calls the POST /appClients endpoint.
 `public JSONObject `[`createAppClient`]`()` | Create an app client, calls the POST /appClients endpoint.
+`public JSONObject `[`updateAppClient`]`(String appClientId,`[`UpdateAppClientOptions`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_update_app_client_options)` options)` | Update an appClient, calls the PATCH /appClients/{appClientId} endpoint.
 `public JSONObject `[`listAppClients`]`(`[`ListAppClientsOptions`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_list_app_clients_options)` options)` | List appClients available, calls the GET /appClients endpoint.
 `public JSONObject `[`listAppClients`]`()` | List appClients available, calls the GET /appClients endpoint.
 `public JSONObject `[`deleteAppClient`]`(String appClientId)` | Delete an appClient, calls the DELETE /appClients/{appClientId} endpoint.
@@ -102,6 +111,7 @@ class ai::lucidtech::las::sdk::APIException
 `public JSONObject `[`deleteAsset`]`(String assetId)` | Delete an asset, calls the DELETE /assets/{assetId} endpoint.
 `public JSONObject `[`createBatch`]`(`[`CreateBatchOptions`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_create_batch_options)` options)` | Create a batch, calls the POST /batches endpoint.
 `public JSONObject `[`createBatch`]`()` | Create a batch, calls the POST /batches endpoint.
+`public JSONObject `[`updateBatch`]`(String batchId,`[`UpdateBatchOptions`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_update_batch_options)` options)` | Update a batch, calls the PATCH /batches/{batchId} endpoint.
 `public JSONObject `[`listBatches`]`(`[`ListBatchesOptions`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_list_batches_options)` options)` | List batches available, calls the GET /batches endpoint.
 `public JSONObject `[`listBatches`]`()` | List batches available, calls the GET /batches endpoint.
 `public JSONObject `[`deleteBatch`]`(String batchId,boolean deleteDocuments)` | Delete a batch, calls the DELETE /batches/{batchId} endpoint.
@@ -119,6 +129,10 @@ class ai::lucidtech::las::sdk::APIException
 `public JSONObject `[`getLog`]`(String logId)` | Get log, calls the GET /logs/{logId} endpoint.
 `public JSONObject `[`listLogs`]`(`[`ListLogsOptions`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_list_logs_options)` options)` | List logs, calls the GET /logs endpoint.
 `public JSONObject `[`listLogs`]`()` | List logs, calls the GET /logs endpoint.
+`public JSONObject `[`createModel`]`(int width,int height,`[`FieldConfig`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_field_config)` fieldConfig,`[`CreateModelOptions`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_create_model_options)` options)` | Create a model, calls the POST /models endpoint.
+`public JSONObject `[`createModel`]`(int width,int height,`[`FieldConfig`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_field_config)` fieldConfig)` | Create a model, calls the POST /models endpoint.
+`public JSONObject `[`updateModel`]`(String modelId,`[`UpdateModelOptions`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_update_model_options)` options)` | Updates a model, calls the PATCH /models/{modelId} endpoint.
+`public JSONObject `[`getModel`]`(String modelId)` | Get model, calls the GET /models/{modelId} endpoint.
 `public JSONObject `[`listModels`]`(`[`ListModelsOptions`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_list_models_options)` options)` | List models, calls the GET /models endpoint.
 `public JSONObject `[`listModels`]`()` | List models available, calls the GET /models endpoint.
 `public JSONObject `[`createPrediction`]`(String documentId,String modelId,`[`CreatePredictionOptions`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_create_prediction_options)` options)` | Create a prediction on a document using specified model, calls the POST /predictions endpoint.
@@ -201,6 +215,27 @@ Create an app client, calls the POST /appClients endpoint.
 
 #### Returns
 Asset response from API 
+
+#### Exceptions
+* `IOException` General IOException 
+
+* `[APIException]` Raised when API returns an erroneous status code 
+
+* `[MissingAccessTokenException]` Raised if access token cannot be obtained
+
+#### `public JSONObject `[`updateAppClient`]`(String appClientId,`[`UpdateAppClientOptions`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_update_app_client_options)` options)` 
+
+Update an appClient, calls the PATCH /appClients/{appClientId} endpoint.
+
+**See also**: [UpdateAppClientOptions]
+
+#### Parameters
+* `appClientId` Id of the appClient 
+
+* `options` Additional options to include in request body 
+
+#### Returns
+AppClient response from REST API 
 
 #### Exceptions
 * `IOException` General IOException 
@@ -445,6 +480,27 @@ Batch response from REST API
 #### `public JSONObject `[`createBatch`]`()` 
 
 Create a batch, calls the POST /batches endpoint.
+
+#### Returns
+Batch response from REST API 
+
+#### Exceptions
+* `IOException` General IOException 
+
+* `[APIException]` Raised when API returns an erroneous status code 
+
+* `[MissingAccessTokenException]` Raised if access token cannot be obtained
+
+#### `public JSONObject `[`updateBatch`]`(String batchId,`[`UpdateBatchOptions`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_update_batch_options)` options)` 
+
+Update a batch, calls the PATCH /batches/{batchId} endpoint.
+
+**See also**: [UpdateBatchOptions]
+
+#### Parameters
+* `batchId` Id of the batch 
+
+* `options` Additional options to include in request body 
 
 #### Returns
 Batch response from REST API 
@@ -761,6 +817,94 @@ List logs, calls the GET /logs endpoint.
 
 #### Returns
 Logs response from REST API 
+
+#### Exceptions
+* `IOException` General IOException 
+
+* `[APIException]` Raised when API returns an erroneous status code 
+
+* `[MissingAccessTokenException]` Raised if access token cannot be obtained
+
+#### `public JSONObject `[`createModel`]`(int width,int height,`[`FieldConfig`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_field_config)` fieldConfig,`[`CreateModelOptions`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_create_model_options)` options)` 
+
+Create a model, calls the POST /models endpoint.
+
+**See also**: [CreateModelOptions]
+
+**See also**: [FieldConfig]
+
+#### Parameters
+* `width` The number of pixels to be used for the input image width of your model 
+
+* `height` The number of pixels to be used for the input image height of your model 
+
+* `fieldConfig` Specification of the fields that the model is going to predict 
+
+* `options` Additional options to include in request body 
+
+#### Returns
+Model response from API 
+
+#### Exceptions
+* `IOException` General IOException 
+
+* `[APIException]` Raised when API returns an erroneous status code 
+
+* `[MissingAccessTokenException]` Raised if access token cannot be obtained
+
+#### `public JSONObject `[`createModel`]`(int width,int height,`[`FieldConfig`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_field_config)` fieldConfig)` 
+
+Create a model, calls the POST /models endpoint.
+
+**See also**: [FieldConfig]
+
+#### Parameters
+* `width` The number of pixels to be used for the input image width of your model 
+
+* `height` The number of pixels to be used for the input image height of your model 
+
+* `fieldConfig` Specification of the fields that the model is going to predict 
+
+#### Returns
+Model response from API 
+
+#### Exceptions
+* `IOException` General IOException 
+
+* `[APIException]` Raised when API returns an erroneous status code 
+
+* `[MissingAccessTokenException]` Raised if access token cannot be obtained
+
+#### `public JSONObject `[`updateModel`]`(String modelId,`[`UpdateModelOptions`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_update_model_options)` options)` 
+
+Updates a model, calls the PATCH /models/{modelId} endpoint.
+
+**See also**: [UpdateModelOptions]
+
+#### Parameters
+* `modelId` Id of the model 
+
+* `options` Additional options to include in request body 
+
+#### Returns
+Model response from REST API 
+
+#### Exceptions
+* `IOException` General IOException 
+
+* `[APIException]` Raised when API returns an erroneous status code 
+
+* `[MissingAccessTokenException]` Raised if access token cannot be obtained
+
+#### `public JSONObject `[`getModel`]`(String modelId)` 
+
+Get model, calls the GET /models/{modelId} endpoint.
+
+#### Parameters
+* `modelId` Id of the model 
+
+#### Returns
+Model response from REST API 
 
 #### Exceptions
 * `IOException` General IOException 
@@ -1623,6 +1767,8 @@ class ai::lucidtech::las::sdk::CreateAppClientOptions
 --------------------------------|---------------------------------------------
 `public `[`CreateAppClientOptions`] [`setCallbackUrls`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_create_app_client_options_1a8bbf6466c0013be0d9a0e281abb5a431)`(String[] callbackUrls)` | 
 `public `[`CreateAppClientOptions`] [`setLogoutUrls`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_create_app_client_options_1a688e2c5f76413c0a94bd58ded8031ad0)`(String[] logoutUrls)` | 
+`public `[`CreateAppClientOptions`] [`setLoginUrls`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_create_app_client_options_1a9f60b0cec00958967603418b02b315e4)`(String[] loginUrls)` | 
+`public `[`CreateAppClientOptions`] [`setDefaultLoginUrl`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_create_app_client_options_1a1257aa6a3bf68cd43fa42b86f4cbda79)`(String defaultLoginUrl)` | 
 `public `[`CreateAppClientOptions`] [`setGenerateSecret`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_create_app_client_options_1ac2a6827e706591140ddbecf7b271b769)`(Boolean generateSecret)` | 
 `public JSONObject `[`addOptions`]`(JSONObject body)` | 
 
@@ -1631,6 +1777,10 @@ class ai::lucidtech::las::sdk::CreateAppClientOptions
 #### `public `[`CreateAppClientOptions`] [`setCallbackUrls`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_create_app_client_options_1a8bbf6466c0013be0d9a0e281abb5a431)`(String[] callbackUrls)` 
 
 #### `public `[`CreateAppClientOptions`] [`setLogoutUrls`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_create_app_client_options_1a688e2c5f76413c0a94bd58ded8031ad0)`(String[] logoutUrls)` 
+
+#### `public `[`CreateAppClientOptions`] [`setLoginUrls`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_create_app_client_options_1a9f60b0cec00958967603418b02b315e4)`(String[] loginUrls)` 
+
+#### `public `[`CreateAppClientOptions`] [`setDefaultLoginUrl`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_create_app_client_options_1a1257aa6a3bf68cd43fa42b86f4cbda79)`(String defaultLoginUrl)` 
 
 #### `public `[`CreateAppClientOptions`] [`setGenerateSecret`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_create_app_client_options_1ac2a6827e706591140ddbecf7b271b769)`(Boolean generateSecret)` 
 
@@ -1693,6 +1843,26 @@ class ai::lucidtech::las::sdk::CreateDocumentOptions
 #### `public `[`CreateDocumentOptions`] [`setBatchId`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_create_document_options_1a6a4643ab2ab9ae0d195e95b6e5858abb)`(String batchId)` 
 
 #### `public `[`CreateDocumentOptions`] [`setGroundTruth`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_create_document_options_1a11e5ef2f36fa14e6e048d74d406881f5)`(JSONArray groundTruth)` 
+
+#### `public JSONObject `[`addOptions`]`(JSONObject body)` 
+
+# class `ai::lucidtech::las::sdk::CreateModelOptions` 
+
+```
+class ai::lucidtech::las::sdk::CreateModelOptions
+  : public ai.lucidtech.las.sdk.NameAndDescriptionOptions< CreateModelOptions >
+```  
+
+## Summary
+
+ Members                        | Descriptions                                
+--------------------------------|---------------------------------------------
+`public `[`CreateModelOptions`] [`setPreprocessConfig`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_create_model_options_1a66eece8a0b6ae4e500ae1d02798d6aa0)`(`[`PreprocessConfig`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_preprocess_config)` preprocessConfig)` | 
+`public JSONObject `[`addOptions`]`(JSONObject body)` | 
+
+## Members
+
+#### `public `[`CreateModelOptions`] [`setPreprocessConfig`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_create_model_options_1a66eece8a0b6ae4e500ae1d02798d6aa0)`(`[`PreprocessConfig`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_preprocess_config)` preprocessConfig)` 
 
 #### `public JSONObject `[`addOptions`]`(JSONObject body)` 
 
@@ -1938,6 +2108,64 @@ class ai::lucidtech::las::sdk::DockerTransitionParameters
 #### `public `[`DockerTransitionParameters`] [`setEnvironment`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_docker_transition_parameters_1a4d2b42a01536ab100771164bf094d72f)`(Map< String, String > environment)` 
 
 #### `public JSONObject `[`addOptions`]`(JSONObject body)` 
+
+# class `ai::lucidtech::las::sdk::Field` 
+
+```
+class ai::lucidtech::las::sdk::Field
+  : public ai.lucidtech.las.sdk.Options
+```  
+
+## Summary
+
+ Members                        | Descriptions                                
+--------------------------------|---------------------------------------------
+`public String `[`name`] | 
+`public  `[`Field`]`(String name,`[`FieldType`](#enumai_1_1lucidtech_1_1las_1_1sdk_1_1_field_type)` fieldType,Integer maxLength)` | 
+`public `[`Field`] [`setName`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_field_1a069d9673c20a97e833ca48e04e1620ed)`(String name)` | 
+`public `[`Field`] [`setFieldType`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_field_1a0d8ffa4f63806111d97295a224dcc849)`(`[`FieldType`](#enumai_1_1lucidtech_1_1las_1_1sdk_1_1_field_type)` fieldType)` | 
+`public `[`Field`] [`setMaxLength`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_field_1a562d537097a73eaec5ebda075cd7af7e)`(Integer maxLength)` | 
+`public `[`Field`] [`setDescription`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_field_1a3069a2218f7dd0642782bacb97779446)`(String description)` | 
+`public JSONObject `[`addOptions`]`(JSONObject body)` | 
+
+## Members
+
+#### `public String `[`name`] 
+
+#### `public  `[`Field`]`(String name,`[`FieldType`](#enumai_1_1lucidtech_1_1las_1_1sdk_1_1_field_type)` fieldType,Integer maxLength)` 
+
+#### `public `[`Field`] [`setName`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_field_1a069d9673c20a97e833ca48e04e1620ed)`(String name)` 
+
+#### `public `[`Field`] [`setFieldType`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_field_1a0d8ffa4f63806111d97295a224dcc849)`(`[`FieldType`](#enumai_1_1lucidtech_1_1las_1_1sdk_1_1_field_type)` fieldType)` 
+
+#### `public `[`Field`] [`setMaxLength`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_field_1a562d537097a73eaec5ebda075cd7af7e)`(Integer maxLength)` 
+
+#### `public `[`Field`] [`setDescription`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_field_1a3069a2218f7dd0642782bacb97779446)`(String description)` 
+
+#### `public JSONObject `[`addOptions`]`(JSONObject body)` 
+
+# class `ai::lucidtech::las::sdk::FieldConfig` 
+
+```
+class ai::lucidtech::las::sdk::FieldConfig
+  : public ai.lucidtech.las.sdk.Options
+```  
+
+## Summary
+
+ Members                        | Descriptions                                
+--------------------------------|---------------------------------------------
+`public `[`FieldConfig`] [`addField`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_field_config_1ad25b5131121d9554ad4e4811adb8ff62)`(`[`Field`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_field)` field)` | 
+`public JSONObject `[`addOptions`]`(JSONObject body)` | 
+`public JSONObject `[`toJson`]`()` | 
+
+## Members
+
+#### `public `[`FieldConfig`] [`addField`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_field_config_1ad25b5131121d9554ad4e4811adb8ff62)`(`[`Field`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_field)` field)` 
+
+#### `public JSONObject `[`addOptions`]`(JSONObject body)` 
+
+#### `public JSONObject `[`toJson`]`()` 
 
 # class `ai::lucidtech::las::sdk::ListAppClientsOptions` 
 
@@ -2320,6 +2548,24 @@ class ai::lucidtech::las::sdk::NameAndDescriptionOptions
 
 #### `public JSONObject `[`toJson`]`()` 
 
+# class `ai::lucidtech::las::sdk::NullableString` 
+
+## Summary
+
+ Members                        | Descriptions                                
+--------------------------------|---------------------------------------------
+`public Boolean `[`hasEditedValue`] | 
+`public  `[`NullableString`]`()` | 
+`public void `[`setValue`]`(String value)` | 
+
+## Members
+
+#### `public Boolean `[`hasEditedValue`] 
+
+#### `public  `[`NullableString`]`()` 
+
+#### `public void `[`setValue`]`(String value)` 
+
 # class `ai::lucidtech::las::sdk::Options` 
 
 ## Summary
@@ -2327,6 +2573,7 @@ class ai::lucidtech::las::sdk::NameAndDescriptionOptions
  Members                        | Descriptions                                
 --------------------------------|---------------------------------------------
 `public abstract JSONObject `[`addOptions`]`(JSONObject body)` | 
+`protected void `[`addOption`]`(JSONObject body,String key,NullableString value)` | 
 `protected void `[`addOption`]`(JSONObject body,String key,String value)` | 
 `protected void `[`addOption`]`(JSONObject body,String key,String[] value)` | 
 `protected void `[`addOption`]`(JSONObject body,String key,Map< String, String > value)` | 
@@ -2339,6 +2586,8 @@ class ai::lucidtech::las::sdk::NameAndDescriptionOptions
 ## Members
 
 #### `public abstract JSONObject `[`addOptions`]`(JSONObject body)` 
+
+#### `protected void `[`addOption`]`(JSONObject body,String key,NullableString value)` 
 
 #### `protected void `[`addOption`]`(JSONObject body,String key,String value)` 
 
@@ -2356,6 +2605,32 @@ class ai::lucidtech::las::sdk::NameAndDescriptionOptions
 
 #### `protected void `[`addOption`]`(JSONObject body,String key,`[`Options`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_options)` value)` 
 
+# class `ai::lucidtech::las::sdk::PreprocessConfig` 
+
+```
+class ai::lucidtech::las::sdk::PreprocessConfig
+  : public ai.lucidtech.las.sdk.Options
+```  
+
+## Summary
+
+ Members                        | Descriptions                                
+--------------------------------|---------------------------------------------
+`public `[`PreprocessConfig`] [`setImageQuality`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_preprocess_config_1a921565e7cd48714db772156cfa9d332a)`(`[`ImageQuality`](#enumai_1_1lucidtech_1_1las_1_1sdk_1_1_image_quality)` imageQuality)` | 
+`public `[`PreprocessConfig`] [`setAutoRotate`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_preprocess_config_1a5a140a77bf7dec6c7ebde44973593be5)`(Boolean autoRotate)` | 
+`public `[`PreprocessConfig`] [`setMaxPages`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_preprocess_config_1add6c7c76cb74a413dc3b79de09aa5af1)`(Integer maxPages)` | 
+`public JSONObject `[`addOptions`]`(JSONObject body)` | 
+
+## Members
+
+#### `public `[`PreprocessConfig`] [`setImageQuality`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_preprocess_config_1a921565e7cd48714db772156cfa9d332a)`(`[`ImageQuality`](#enumai_1_1lucidtech_1_1las_1_1sdk_1_1_image_quality)` imageQuality)` 
+
+#### `public `[`PreprocessConfig`] [`setAutoRotate`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_preprocess_config_1a5a140a77bf7dec6c7ebde44973593be5)`(Boolean autoRotate)` 
+
+#### `public `[`PreprocessConfig`] [`setMaxPages`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_preprocess_config_1add6c7c76cb74a413dc3b79de09aa5af1)`(Integer maxPages)` 
+
+#### `public JSONObject `[`addOptions`]`(JSONObject body)` 
+
 # class `ai::lucidtech::las::sdk::TransitionParameters` 
 
 ```
@@ -2372,6 +2647,20 @@ class ai::lucidtech::las::sdk::TransitionParameters
 ## Members
 
 #### `public abstract JSONObject `[`addOptions`]`(JSONObject body)` 
+
+# class `ai::lucidtech::las::sdk::UpdateAppClientOptions` 
+
+```
+class ai::lucidtech::las::sdk::UpdateAppClientOptions
+  : public ai.lucidtech.las.sdk.NameAndDescriptionOptions< UpdateAppClientOptions >
+```  
+
+## Summary
+
+ Members                        | Descriptions                                
+--------------------------------|---------------------------------------------
+
+## Members
 
 # class `ai::lucidtech::las::sdk::UpdateAssetOptions` 
 
@@ -2394,6 +2683,55 @@ class ai::lucidtech::las::sdk::UpdateAssetOptions
 #### `public `[`UpdateAssetOptions`] [`setContent`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_update_asset_options_1a2c82436e7cf26983ee2c2d892d159773)`(byte[] content)` 
 
 #### `public `[`UpdateAssetOptions`] [`setContent`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_update_asset_options_1ad86efbed928b01bc637eedda9f19c733)`(InputStream content)` 
+
+#### `public JSONObject `[`addOptions`]`(JSONObject body)` 
+
+#### `public JSONObject `[`toJson`]`()` 
+
+# class `ai::lucidtech::las::sdk::UpdateBatchOptions` 
+
+```
+class ai::lucidtech::las::sdk::UpdateBatchOptions
+  : public ai.lucidtech.las.sdk.NameAndDescriptionOptions< UpdateBatchOptions >
+```  
+
+## Summary
+
+ Members                        | Descriptions                                
+--------------------------------|---------------------------------------------
+
+## Members
+
+# class `ai::lucidtech::las::sdk::UpdateModelOptions` 
+
+```
+class ai::lucidtech::las::sdk::UpdateModelOptions
+  : public ai.lucidtech.las.sdk.NameAndDescriptionOptions< UpdateModelOptions >
+```  
+
+## Summary
+
+ Members                        | Descriptions                                
+--------------------------------|---------------------------------------------
+`public `[`UpdateModelOptions`] [`setWidth`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_update_model_options_1a01fc78feb68e7ee3aeaf43a271761a66)`(Integer width)` | 
+`public `[`UpdateModelOptions`] [`setHeight`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_update_model_options_1a2da6e50d998b640fa77a9236d0673065)`(Integer height)` | 
+`public `[`UpdateModelOptions`] [`setFieldConfig`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_update_model_options_1aea4fd4d0f263cf1a5f3516bbd7910efc)`(`[`FieldConfig`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_field_config)` fieldConfig)` | 
+`public `[`UpdateModelOptions`] [`setModelStatus`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_update_model_options_1ad1d2a5b7900a8e46bcf11dc24ad288a2)`(`[`ModelStatus`](#enumai_1_1lucidtech_1_1las_1_1sdk_1_1_model_status)` modelStatus)` | 
+`public `[`UpdateModelOptions`] [`setPreprocessConfig`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_update_model_options_1ac462fc8fa030b5c7853ccae24782fb3c)`(`[`PreprocessConfig`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_preprocess_config)` preprocessConfig)` | 
+`public JSONObject `[`addOptions`]`(JSONObject body)` | 
+`public JSONObject `[`toJson`]`()` | 
+
+## Members
+
+#### `public `[`UpdateModelOptions`] [`setWidth`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_update_model_options_1a01fc78feb68e7ee3aeaf43a271761a66)`(Integer width)` 
+
+#### `public `[`UpdateModelOptions`] [`setHeight`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_update_model_options_1a2da6e50d998b640fa77a9236d0673065)`(Integer height)` 
+
+#### `public `[`UpdateModelOptions`] [`setFieldConfig`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_update_model_options_1aea4fd4d0f263cf1a5f3516bbd7910efc)`(`[`FieldConfig`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_field_config)` fieldConfig)` 
+
+#### `public `[`UpdateModelOptions`] [`setModelStatus`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_update_model_options_1ad1d2a5b7900a8e46bcf11dc24ad288a2)`(`[`ModelStatus`](#enumai_1_1lucidtech_1_1las_1_1sdk_1_1_model_status)` modelStatus)` 
+
+#### `public `[`UpdateModelOptions`] [`setPreprocessConfig`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_update_model_options_1ac462fc8fa030b5c7853ccae24782fb3c)`(`[`PreprocessConfig`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_preprocess_config)` preprocessConfig)` 
 
 #### `public JSONObject `[`addOptions`]`(JSONObject body)` 
 
