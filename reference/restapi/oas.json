@@ -2,7 +2,7 @@
   "openapi": "3.0.1",
   "info": {
     "title": "Lucidtech API",
-    "version": "2021-05-19T09:10:50Z"
+    "version": "2021-05-26T08:07:25Z"
   },
   "servers": [
     {
@@ -3164,6 +3164,115 @@
       }
     },
     "/models/{modelId}": {
+      "delete": {
+        "parameters": [
+          {
+            "in": "path",
+            "name": "modelId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Model"
+                }
+              }
+            },
+            "description": "200 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "400 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "404 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "415": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "415 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "500 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "OAuth2": [
+              "api.lucidtech.ai/models:write"
+            ]
+          },
+          {
+            "api_key": []
+          }
+        ]
+      },
       "get": {
         "parameters": [
           {
@@ -7996,7 +8105,6 @@
             "type": "object",
             "additionalProperties": {
               "required": [
-                "description",
                 "maxLength",
                 "type"
               ],
@@ -9231,7 +9339,6 @@
                   "type": "object",
                   "additionalProperties": {
                     "required": [
-                      "description",
                       "maxLength",
                       "type"
                     ],
@@ -9885,7 +9992,6 @@
             "type": "object",
             "additionalProperties": {
               "required": [
-                "description",
                 "maxLength",
                 "type"
               ],
@@ -10609,7 +10715,6 @@
             "type": "object",
             "additionalProperties": {
               "required": [
-                "description",
                 "maxLength",
                 "type"
               ],
@@ -10879,7 +10984,7 @@
               "api.lucidtech.ai/models:read": "Scope for GET /models/{modelId}",
               "api.lucidtech.ai/predictions:write": "Scope for POST /predictions",
               "api.lucidtech.ai/appclients:read": "Scope for GET /appClients",
-              "api.lucidtech.ai/models:write": "Scope for PATCH /models/{modelId}",
+              "api.lucidtech.ai/models:write": "Scope for DELETE /models/{modelId}",
               "api.lucidtech.ai/secrets:write": "Scope for DELETE /secrets/{secretId}",
               "api.lucidtech.ai/documents:read": "Scope for GET /documents/{documentId}",
               "api.lucidtech.ai/documents:write": "Scope for PATCH /documents/{documentId}",
