@@ -4,6 +4,10 @@ You can find the Open API specification file [here](https://raw.githubuserconten
 
 ## Changelog
 
+### 2021-05-26
+
+- Added DELETE /models/:id
+
 ### 2021-05-19
 
 - Added loginUrls, defaultLoginUrl to /appClients

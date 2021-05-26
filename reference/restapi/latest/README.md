@@ -2159,7 +2159,6 @@
             "type": "object",
             "additionalProperties": {
               "required": [
-                "description",
                 "maxLength",
                 "type"
               ],
@@ -2293,7 +2292,6 @@
       "type": "object",
       "additionalProperties": {
         "required": [
-          "description",
           "maxLength",
           "type"
         ],
@@ -2411,7 +2409,155 @@
       "type": "object",
       "additionalProperties": {
         "required": [
-          "description",
+          "maxLength",
+          "type"
+        ],
+        "type": "object",
+        "properties": {
+          "description": {
+            "anyOf": [
+              {
+                "maxLength": 4096,
+                "type": "string"
+              },
+              null
+            ]
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "date",
+              "amount",
+              "number",
+              "letter",
+              "phone",
+              "alphanum",
+              "alphanumext",
+              "all"
+            ]
+          },
+          "maxLength": {
+            "maximum": 100,
+            "minimum": 1,
+            "type": "integer"
+          }
+        }
+      }
+    },
+    "height": {
+      "maximum": 1921,
+      "minimum": 97,
+      "type": "integer"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "active",
+        "training",
+        "inactive"
+      ]
+    }
+  },
+  "additionalProperties": false
+}
+```
+
+
+#### DELETE /models/{modelId}
+
+
+| Path name | Path value |
+| --- | --- |
+| modelId | Id of model on the form las:model:&lt;hex&gt; |
+
+
+| Header name | Header value |
+| --- | --- |
+| Authorization | Bearer &lt;your access token here&gt; |
+| x-api-key | &lt;your api key here&gt; |
+
+
+
+
+
+
+
+
+##### Response body JSON Schema
+```json
+{
+  "title": "model",
+  "required": [
+    "createdTime",
+    "description",
+    "fieldConfig",
+    "height",
+    "modelId",
+    "name",
+    "preprocessConfig",
+    "status",
+    "updatedTime",
+    "width"
+  ],
+  "type": "object",
+  "properties": {
+    "updatedTime": {
+      "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2}( |T)?[0-9]{2}:?[0-9]{2}:?[0-9]{2}(.[0-9]{1,6})?(Z|[+][0-9]{2}(:|)[0-9]{2})$",
+      "type": "string",
+      "nullable": true
+    },
+    "preprocessConfig": {
+      "required": [
+        "autoRotate",
+        "imageQuality",
+        "maxPages"
+      ],
+      "type": "object",
+      "properties": {
+        "maxPages": {
+          "type": "integer"
+        },
+        "autoRotate": {
+          "type": "boolean"
+        },
+        "imageQuality": {
+          "type": "string",
+          "enum": [
+            "LOW",
+            "HIGH"
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "modelId": {
+      "pattern": "^las:model:[0-9A-Za-z_]+$",
+      "type": "string"
+    },
+    "name": {
+      "maxLength": 4096,
+      "type": "string",
+      "nullable": true
+    },
+    "width": {
+      "maximum": 1921,
+      "minimum": 97,
+      "type": "integer"
+    },
+    "description": {
+      "maxLength": 4096,
+      "type": "string",
+      "nullable": true
+    },
+    "createdTime": {
+      "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2}( |T)?[0-9]{2}:?[0-9]{2}:?[0-9]{2}(.[0-9]{1,6})?(Z|[+][0-9]{2}(:|)[0-9]{2})$",
+      "type": "string",
+      "nullable": true
+    },
+    "fieldConfig": {
+      "type": "object",
+      "additionalProperties": {
+        "required": [
           "maxLength",
           "type"
         ],
@@ -2561,7 +2707,6 @@
       "type": "object",
       "additionalProperties": {
         "required": [
-          "description",
           "maxLength",
           "type"
         ],
@@ -2684,7 +2829,6 @@
       "type": "object",
       "additionalProperties": {
         "required": [
-          "description",
           "maxLength",
           "type"
         ],
@@ -2810,7 +2954,6 @@
       "type": "object",
       "additionalProperties": {
         "required": [
-          "description",
           "maxLength",
           "type"
         ],
