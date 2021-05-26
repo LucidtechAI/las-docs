@@ -9,7 +9,7 @@ Bases: `object`
 A low level client to invoke api methods from Lucidtech AI Services.
 
 
-#### create_app_client(generate_secret=True, logout_urls=None, callback_urls=None, \*\*optional_args)
+#### create_app_client(generate_secret=True, logout_urls=None, callback_urls=None, login_urls=None, default_login_url=None, \*\*optional_args)
 Creates an appClient, calls the POST /appClients endpoint.
 
 ```python
@@ -35,6 +35,12 @@ Creates an appClient, calls the POST /appClients endpoint.
 
 
     * **callback_urls** (*List**[**str**]*) – List of callback urls
+
+
+    * **login_urls** (*List**[**str**]*) – List of login urls
+
+
+    * **default_login_url** (*str*) – Default login url
 
 
 
