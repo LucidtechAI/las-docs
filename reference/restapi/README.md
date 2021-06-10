@@ -4,6 +4,14 @@ You can find the Open API specification file [here](https://raw.githubuserconten
 
 ## Changelog
 
+### 2021-06-10
+
+- Added GET /organizations/:id
+- Added PATCH /organizations/:id
+- Fixed a bug preventing the first log message to be written for workflow executions
+- Updated the email invite and verification code layout
+- Added numberOfRunningExecutions to /workflows
+
 ### 2021-05-26
 
 - Added DELETE /models/:id
