@@ -3033,29 +3033,149 @@
 {
   "title": "organization",
   "required": [
-    "assetId",
     "description",
-    "name"
+    "monthlyNumberOfDocumentsAllowed",
+    "monthlyNumberOfDocumentsCreated",
+    "monthlyNumberOfPredictionsAllowed",
+    "monthlyNumberOfPredictionsCreated",
+    "monthlyNumberOfTransitionExecutionsAllowed",
+    "monthlyNumberOfTransitionExecutionsCreated",
+    "monthlyNumberOfWorkflowExecutionsAllowed",
+    "monthlyNumberOfWorkflowExecutionsCreated",
+    "monthlyUsageSummary",
+    "name",
+    "numberOfAppClientsAllowed",
+    "numberOfAppClientsCreated",
+    "numberOfAssetsAllowed",
+    "numberOfAssetsCreated",
+    "numberOfBatchesAllowed",
+    "numberOfBatchesCreated",
+    "numberOfModelsAllowed",
+    "numberOfModelsCreated",
+    "numberOfSecretsAllowed",
+    "numberOfSecretsCreated",
+    "numberOfTransitionsAllowed",
+    "numberOfTransitionsCreated",
+    "numberOfUsersAllowed",
+    "numberOfUsersCreated",
+    "numberOfWorkflowsAllowed",
+    "numberOfWorkflowsCreated",
+    "organizationId"
   ],
   "type": "object",
   "properties": {
-    "assetId": {
-      "pattern": "^las:asset:[a-f0-9]{32}$",
-      "type": "string"
+    "numberOfWorkflowsCreated": {
+      "minimum": 0,
+      "type": "integer"
     },
-    "name": {
-      "maxLength": 4096,
-      "type": "string",
-      "nullable": true
+    "monthlyNumberOfWorkflowExecutionsCreated": {
+      "minimum": 0,
+      "type": "integer"
     },
     "description": {
       "maxLength": 4096,
       "type": "string",
       "nullable": true
     },
-    "content": {
-      "minLength": 1,
+    "numberOfBatchesAllowed": {
+      "minimum": 0,
+      "type": "integer"
+    },
+    "numberOfUsersAllowed": {
+      "minimum": 0,
+      "type": "integer"
+    },
+    "monthlyNumberOfPredictionsAllowed": {
+      "minimum": 0,
+      "type": "integer"
+    },
+    "organizationId": {
+      "pattern": "^las:organization:[a-f0-9]{32}$",
       "type": "string"
+    },
+    "numberOfModelsCreated": {
+      "minimum": 0,
+      "type": "integer"
+    },
+    "numberOfTransitionsCreated": {
+      "minimum": 0,
+      "type": "integer"
+    },
+    "monthlyNumberOfTransitionExecutionsAllowed": {
+      "minimum": 0,
+      "type": "integer"
+    },
+    "monthlyNumberOfDocumentsAllowed": {
+      "minimum": 0,
+      "type": "integer"
+    },
+    "numberOfSecretsAllowed": {
+      "minimum": 0,
+      "type": "integer"
+    },
+    "monthlyUsageSummary": {
+      "type": "object"
+    },
+    "numberOfAppClientsCreated": {
+      "minimum": 0,
+      "type": "integer"
+    },
+    "numberOfAssetsCreated": {
+      "minimum": 0,
+      "type": "integer"
+    },
+    "numberOfWorkflowsAllowed": {
+      "minimum": 0,
+      "type": "integer"
+    },
+    "monthlyNumberOfWorkflowExecutionsAllowed": {
+      "minimum": 0,
+      "type": "integer"
+    },
+    "numberOfBatchesCreated": {
+      "minimum": 0,
+      "type": "integer"
+    },
+    "numberOfUsersCreated": {
+      "minimum": 0,
+      "type": "integer"
+    },
+    "monthlyNumberOfPredictionsCreated": {
+      "minimum": 0,
+      "type": "integer"
+    },
+    "numberOfTransitionsAllowed": {
+      "minimum": 0,
+      "type": "integer"
+    },
+    "monthlyNumberOfTransitionExecutionsCreated": {
+      "minimum": 0,
+      "type": "integer"
+    },
+    "numberOfModelsAllowed": {
+      "minimum": 0,
+      "type": "integer"
+    },
+    "monthlyNumberOfDocumentsCreated": {
+      "minimum": 0,
+      "type": "integer"
+    },
+    "numberOfSecretsCreated": {
+      "minimum": 0,
+      "type": "integer"
+    },
+    "name": {
+      "maxLength": 4096,
+      "type": "string",
+      "nullable": true
+    },
+    "numberOfAppClientsAllowed": {
+      "minimum": 0,
+      "type": "integer"
+    },
+    "numberOfAssetsAllowed": {
+      "minimum": 0,
+      "type": "integer"
     }
   },
   "additionalProperties": false
@@ -3109,29 +3229,149 @@
 {
   "title": "organization",
   "required": [
-    "assetId",
     "description",
-    "name"
+    "monthlyNumberOfDocumentsAllowed",
+    "monthlyNumberOfDocumentsCreated",
+    "monthlyNumberOfPredictionsAllowed",
+    "monthlyNumberOfPredictionsCreated",
+    "monthlyNumberOfTransitionExecutionsAllowed",
+    "monthlyNumberOfTransitionExecutionsCreated",
+    "monthlyNumberOfWorkflowExecutionsAllowed",
+    "monthlyNumberOfWorkflowExecutionsCreated",
+    "monthlyUsageSummary",
+    "name",
+    "numberOfAppClientsAllowed",
+    "numberOfAppClientsCreated",
+    "numberOfAssetsAllowed",
+    "numberOfAssetsCreated",
+    "numberOfBatchesAllowed",
+    "numberOfBatchesCreated",
+    "numberOfModelsAllowed",
+    "numberOfModelsCreated",
+    "numberOfSecretsAllowed",
+    "numberOfSecretsCreated",
+    "numberOfTransitionsAllowed",
+    "numberOfTransitionsCreated",
+    "numberOfUsersAllowed",
+    "numberOfUsersCreated",
+    "numberOfWorkflowsAllowed",
+    "numberOfWorkflowsCreated",
+    "organizationId"
   ],
   "type": "object",
   "properties": {
-    "assetId": {
-      "pattern": "^las:asset:[a-f0-9]{32}$",
-      "type": "string"
+    "numberOfWorkflowsCreated": {
+      "minimum": 0,
+      "type": "integer"
     },
-    "name": {
-      "maxLength": 4096,
-      "type": "string",
-      "nullable": true
+    "monthlyNumberOfWorkflowExecutionsCreated": {
+      "minimum": 0,
+      "type": "integer"
     },
     "description": {
       "maxLength": 4096,
       "type": "string",
       "nullable": true
     },
-    "content": {
-      "minLength": 1,
+    "numberOfBatchesAllowed": {
+      "minimum": 0,
+      "type": "integer"
+    },
+    "numberOfUsersAllowed": {
+      "minimum": 0,
+      "type": "integer"
+    },
+    "monthlyNumberOfPredictionsAllowed": {
+      "minimum": 0,
+      "type": "integer"
+    },
+    "organizationId": {
+      "pattern": "^las:organization:[a-f0-9]{32}$",
       "type": "string"
+    },
+    "numberOfModelsCreated": {
+      "minimum": 0,
+      "type": "integer"
+    },
+    "numberOfTransitionsCreated": {
+      "minimum": 0,
+      "type": "integer"
+    },
+    "monthlyNumberOfTransitionExecutionsAllowed": {
+      "minimum": 0,
+      "type": "integer"
+    },
+    "monthlyNumberOfDocumentsAllowed": {
+      "minimum": 0,
+      "type": "integer"
+    },
+    "numberOfSecretsAllowed": {
+      "minimum": 0,
+      "type": "integer"
+    },
+    "monthlyUsageSummary": {
+      "type": "object"
+    },
+    "numberOfAppClientsCreated": {
+      "minimum": 0,
+      "type": "integer"
+    },
+    "numberOfAssetsCreated": {
+      "minimum": 0,
+      "type": "integer"
+    },
+    "numberOfWorkflowsAllowed": {
+      "minimum": 0,
+      "type": "integer"
+    },
+    "monthlyNumberOfWorkflowExecutionsAllowed": {
+      "minimum": 0,
+      "type": "integer"
+    },
+    "numberOfBatchesCreated": {
+      "minimum": 0,
+      "type": "integer"
+    },
+    "numberOfUsersCreated": {
+      "minimum": 0,
+      "type": "integer"
+    },
+    "monthlyNumberOfPredictionsCreated": {
+      "minimum": 0,
+      "type": "integer"
+    },
+    "numberOfTransitionsAllowed": {
+      "minimum": 0,
+      "type": "integer"
+    },
+    "monthlyNumberOfTransitionExecutionsCreated": {
+      "minimum": 0,
+      "type": "integer"
+    },
+    "numberOfModelsAllowed": {
+      "minimum": 0,
+      "type": "integer"
+    },
+    "monthlyNumberOfDocumentsCreated": {
+      "minimum": 0,
+      "type": "integer"
+    },
+    "numberOfSecretsCreated": {
+      "minimum": 0,
+      "type": "integer"
+    },
+    "name": {
+      "maxLength": 4096,
+      "type": "string",
+      "nullable": true
+    },
+    "numberOfAppClientsAllowed": {
+      "minimum": 0,
+      "type": "integer"
+    },
+    "numberOfAssetsAllowed": {
+      "minimum": 0,
+      "type": "integer"
     }
   },
   "additionalProperties": false
