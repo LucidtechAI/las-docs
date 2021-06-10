@@ -2,7 +2,7 @@
   "openapi": "3.0.1",
   "info": {
     "title": "Lucidtech API",
-    "version": "2021-05-26T08:07:25Z"
+    "version": "2021-06-10T07:22:36Z"
   },
   "servers": [
     {
@@ -3553,6 +3553,338 @@
           {
             "OAuth2": [
               "api.lucidtech.ai/models:write"
+            ]
+          },
+          {
+            "api_key": []
+          }
+        ]
+      }
+    },
+    "/organizations": {
+      "options": {
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Empty"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Empty"
+                }
+              }
+            },
+            "description": "200 response",
+            "headers": {
+              "Access-Control-Allow-Headers": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "Access-Control-Allow-Methods": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/organizations/{organizationId}": {
+      "get": {
+        "parameters": [
+          {
+            "in": "path",
+            "name": "organizationId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Organization"
+                }
+              }
+            },
+            "description": "200 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "400 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "404 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "415": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "415 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "500 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "OAuth2": [
+              "api.lucidtech.ai/organizations:read"
+            ]
+          },
+          {
+            "api_key": []
+          }
+        ]
+      },
+      "options": {
+        "parameters": [
+          {
+            "in": "path",
+            "name": "organizationId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Empty"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Empty"
+                }
+              }
+            },
+            "description": "200 response",
+            "headers": {
+              "Access-Control-Allow-Headers": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "Access-Control-Allow-Methods": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "parameters": [
+          {
+            "in": "header",
+            "name": "Content-Type",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "organizationId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PatchOrganizationId"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Organization"
+                }
+              }
+            },
+            "description": "200 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "400 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "404 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "415": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "415 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "500 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "OAuth2": [
+              "api.lucidtech.ai/organizations:write"
             ]
           },
           {
@@ -8573,10 +8905,14 @@
                 "description",
                 "errorConfig",
                 "name",
+                "numberOfRunningExecutions",
                 "workflowId"
               ],
               "type": "object",
               "properties": {
+                "numberOfRunningExecutions": {
+                  "type": "integer"
+                },
                 "completedConfig": {
                   "required": [
                     "imageUrl"
@@ -8653,7 +8989,7 @@
         "type": "object",
         "properties": {
           "modelId": {
-            "pattern": "^las:model:[0-9A-Za-z_]+$",
+            "pattern": "^las:model:[a-f0-9]{32}$",
             "type": "string"
           },
           "inferenceTime": {
@@ -8713,10 +9049,14 @@
           "description",
           "errorConfig",
           "name",
+          "numberOfRunningExecutions",
           "workflowId"
         ],
         "type": "object",
         "properties": {
+          "numberOfRunningExecutions": {
+            "type": "integer"
+          },
           "completedConfig": {
             "required": [
               "imageUrl"
@@ -8975,7 +9315,7 @@
               "type": "object",
               "properties": {
                 "modelId": {
-                  "pattern": "^las:model:[0-9A-Za-z_]+$",
+                  "pattern": "^las:model:[a-f0-9]{32}$",
                   "type": "string"
                 },
                 "inferenceTime": {
@@ -9312,7 +9652,7 @@
                   "additionalProperties": false
                 },
                 "modelId": {
-                  "pattern": "^las:model:[0-9A-Za-z_]+$",
+                  "pattern": "^las:model:[a-f0-9]{32}$",
                   "type": "string"
                 },
                 "name": {
@@ -9637,6 +9977,36 @@
         },
         "additionalProperties": false
       },
+      "Organization": {
+        "title": "organization",
+        "required": [
+          "assetId",
+          "description",
+          "name"
+        ],
+        "type": "object",
+        "properties": {
+          "assetId": {
+            "pattern": "^las:asset:[a-f0-9]{32}$",
+            "type": "string"
+          },
+          "name": {
+            "maxLength": 4096,
+            "type": "string",
+            "nullable": true
+          },
+          "description": {
+            "maxLength": 4096,
+            "type": "string",
+            "nullable": true
+          },
+          "content": {
+            "minLength": 1,
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
       "User": {
         "title": "user",
         "required": [
@@ -9679,7 +10049,7 @@
         "type": "object",
         "properties": {
           "modelId": {
-            "pattern": "^las:model:[0-9A-Za-z_]+$",
+            "pattern": "^las:model:[a-f0-9]{32}$",
             "type": "string"
           },
           "maxPages": {
@@ -10688,7 +11058,7 @@
             "additionalProperties": false
           },
           "modelId": {
-            "pattern": "^las:model:[0-9A-Za-z_]+$",
+            "pattern": "^las:model:[a-f0-9]{32}$",
             "type": "string"
           },
           "name": {
@@ -10849,6 +11219,24 @@
         },
         "additionalProperties": false
       },
+      "PatchOrganizationId": {
+        "title": "PATCH /organizations/organizationId",
+        "minProperties": 1,
+        "type": "object",
+        "properties": {
+          "name": {
+            "maxLength": 4096,
+            "type": "string",
+            "nullable": true
+          },
+          "description": {
+            "maxLength": 4096,
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
       "PostWorkflows": {
         "title": "POST /workflows",
         "required": [
@@ -10970,6 +11358,8 @@
               "api.lucidtech.ai/logs:read": "Scope for GET /logs/{logId}",
               "api.lucidtech.ai/users:read": "Scope for GET /users/{userId}",
               "api.lucidtech.ai/transitions:write": "Scope for DELETE /transitions/{transitionId}",
+              "api.lucidtech.ai/organizations:write": "Scope for PATCH /organizations/{organizationId}",
+              "api.lucidtech.ai/organizations:read": "Scope for GET /organizations/{organizationId}",
               "api.lucidtech.ai/assets:write": "Scope for DELETE /assets/{assetId}",
               "api.lucidtech.ai/transitions.executions.heartbeats:write": "Scope for POST /transitions/{transitionId}/executions/{executionId}/heartbeats",
               "api.lucidtech.ai/secrets:read": "Scope for GET /secrets",

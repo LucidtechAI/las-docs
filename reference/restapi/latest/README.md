@@ -2132,7 +2132,7 @@
             "additionalProperties": false
           },
           "modelId": {
-            "pattern": "^las:model:[0-9A-Za-z_]+$",
+            "pattern": "^las:model:[a-f0-9]{32}$",
             "type": "string"
           },
           "name": {
@@ -2382,7 +2382,7 @@
       "additionalProperties": false
     },
     "modelId": {
-      "pattern": "^las:model:[0-9A-Za-z_]+$",
+      "pattern": "^las:model:[a-f0-9]{32}$",
       "type": "string"
     },
     "name": {
@@ -2531,7 +2531,7 @@
       "additionalProperties": false
     },
     "modelId": {
-      "pattern": "^las:model:[0-9A-Za-z_]+$",
+      "pattern": "^las:model:[a-f0-9]{32}$",
       "type": "string"
     },
     "name": {
@@ -2680,7 +2680,7 @@
       "additionalProperties": false
     },
     "modelId": {
-      "pattern": "^las:model:[0-9A-Za-z_]+$",
+      "pattern": "^las:model:[a-f0-9]{32}$",
       "type": "string"
     },
     "name": {
@@ -2927,7 +2927,7 @@
       "additionalProperties": false
     },
     "modelId": {
-      "pattern": "^las:model:[0-9A-Za-z_]+$",
+      "pattern": "^las:model:[a-f0-9]{32}$",
       "type": "string"
     },
     "name": {
@@ -3008,6 +3008,137 @@
 ```
 
 
+#### GET /organizations/{organizationId}
+
+
+| Path name | Path value |
+| --- | --- |
+| organizationId | Id of organization on the form las:organization:&lt;hex&gt; |
+
+
+| Header name | Header value |
+| --- | --- |
+| Authorization | Bearer &lt;your access token here&gt; |
+| x-api-key | &lt;your api key here&gt; |
+
+
+
+
+
+
+
+
+##### Response body JSON Schema
+```json
+{
+  "title": "organization",
+  "required": [
+    "assetId",
+    "description",
+    "name"
+  ],
+  "type": "object",
+  "properties": {
+    "assetId": {
+      "pattern": "^las:asset:[a-f0-9]{32}$",
+      "type": "string"
+    },
+    "name": {
+      "maxLength": 4096,
+      "type": "string",
+      "nullable": true
+    },
+    "description": {
+      "maxLength": 4096,
+      "type": "string",
+      "nullable": true
+    },
+    "content": {
+      "minLength": 1,
+      "type": "string"
+    }
+  },
+  "additionalProperties": false
+}
+```
+
+
+#### PATCH /organizations/{organizationId}
+
+
+| Path name | Path value |
+| --- | --- |
+| organizationId | Id of organization on the form las:organization:&lt;hex&gt; |
+
+
+| Header name | Header value |
+| --- | --- |
+| Content-Type | application/json |
+| Authorization | Bearer &lt;your access token here&gt; |
+| x-api-key | &lt;your api key here&gt; |
+
+
+
+
+
+##### Request body JSON Schema
+```json
+{
+  "title": "PATCH /organizations/organizationId",
+  "minProperties": 1,
+  "type": "object",
+  "properties": {
+    "name": {
+      "maxLength": 4096,
+      "type": "string",
+      "nullable": true
+    },
+    "description": {
+      "maxLength": 4096,
+      "type": "string",
+      "nullable": true
+    }
+  },
+  "additionalProperties": false
+}
+```
+
+
+##### Response body JSON Schema
+```json
+{
+  "title": "organization",
+  "required": [
+    "assetId",
+    "description",
+    "name"
+  ],
+  "type": "object",
+  "properties": {
+    "assetId": {
+      "pattern": "^las:asset:[a-f0-9]{32}$",
+      "type": "string"
+    },
+    "name": {
+      "maxLength": 4096,
+      "type": "string",
+      "nullable": true
+    },
+    "description": {
+      "maxLength": 4096,
+      "type": "string",
+      "nullable": true
+    },
+    "content": {
+      "minLength": 1,
+      "type": "string"
+    }
+  },
+  "additionalProperties": false
+}
+```
+
+
 #### GET /predictions
 
 
@@ -3058,7 +3189,7 @@
         "type": "object",
         "properties": {
           "modelId": {
-            "pattern": "^las:model:[0-9A-Za-z_]+$",
+            "pattern": "^las:model:[a-f0-9]{32}$",
             "type": "string"
           },
           "inferenceTime": {
@@ -3145,7 +3276,7 @@
   "type": "object",
   "properties": {
     "modelId": {
-      "pattern": "^las:model:[0-9A-Za-z_]+$",
+      "pattern": "^las:model:[a-f0-9]{32}$",
       "type": "string"
     },
     "maxPages": {
@@ -3188,7 +3319,7 @@
   "type": "object",
   "properties": {
     "modelId": {
-      "pattern": "^las:model:[0-9A-Za-z_]+$",
+      "pattern": "^las:model:[a-f0-9]{32}$",
       "type": "string"
     },
     "inferenceTime": {
@@ -5018,10 +5149,14 @@
           "description",
           "errorConfig",
           "name",
+          "numberOfRunningExecutions",
           "workflowId"
         ],
         "type": "object",
         "properties": {
+          "numberOfRunningExecutions": {
+            "type": "integer"
+          },
           "completedConfig": {
             "required": [
               "imageUrl"
@@ -5204,10 +5339,14 @@
     "description",
     "errorConfig",
     "name",
+    "numberOfRunningExecutions",
     "workflowId"
   ],
   "type": "object",
   "properties": {
+    "numberOfRunningExecutions": {
+      "type": "integer"
+    },
     "completedConfig": {
       "required": [
         "imageUrl"
@@ -5299,10 +5438,14 @@
     "description",
     "errorConfig",
     "name",
+    "numberOfRunningExecutions",
     "workflowId"
   ],
   "type": "object",
   "properties": {
+    "numberOfRunningExecutions": {
+      "type": "integer"
+    },
     "completedConfig": {
       "required": [
         "imageUrl"
@@ -5394,10 +5537,14 @@
     "description",
     "errorConfig",
     "name",
+    "numberOfRunningExecutions",
     "workflowId"
   ],
   "type": "object",
   "properties": {
+    "numberOfRunningExecutions": {
+      "type": "integer"
+    },
     "completedConfig": {
       "required": [
         "imageUrl"
@@ -5552,10 +5699,14 @@
     "description",
     "errorConfig",
     "name",
+    "numberOfRunningExecutions",
     "workflowId"
   ],
   "type": "object",
   "properties": {
+    "numberOfRunningExecutions": {
+      "type": "integer"
+    },
     "completedConfig": {
       "required": [
         "imageUrl"
