@@ -2,7 +2,7 @@
   "openapi": "3.0.1",
   "info": {
     "title": "Lucidtech API",
-    "version": "2021-06-10T12:02:51Z"
+    "version": "2021-06-16T11:53:31Z"
   },
   "servers": [
     {
@@ -8793,6 +8793,15 @@
             "maxLength": 4096,
             "type": "string",
             "nullable": true
+          },
+          "loginUrls": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "defaultLoginUrl": {
+            "type": "string"
           }
         },
         "additionalProperties": false

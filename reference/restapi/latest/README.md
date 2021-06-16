@@ -388,6 +388,15 @@
       "maxLength": 4096,
       "type": "string",
       "nullable": true
+    },
+    "loginUrls": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "defaultLoginUrl": {
+      "type": "string"
     }
   },
   "additionalProperties": false

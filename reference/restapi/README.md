@@ -4,6 +4,10 @@ You can find the Open API specification file [here](https://raw.githubuserconten
 
 ## Changelog
 
+### 2021-06-16
+
+- Added loginUrls, defaultLoginUrl to PATCH /appClients/:id
+
 ### 2021-06-10
 
 - Added GET /organizations/:id
