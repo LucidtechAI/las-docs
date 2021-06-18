@@ -1,8 +1,11 @@
 # *Predictions*
 
- - A *Prediction* is a prediction made by a *Model* on a *Document*
+ - The *Prediction* component of the API is a prediction made by a *Model* on a *Document*
     
-After a *Model* have been trained and a *Document* have been created a *Prediction* can be made. 
+After a *Model* has been trained and a *Document* has been created, a *Prediction* can be made as shown in the example below:
+
+(TTNote: Again, since 'model' is referenced in this section, consider resequencing the 'models' section (https://docs.lucidtech.ai/getting-started/introduction/models) to be listed above this one. Consider adding links to each section as well.)
+
 ```commandline
 >> las predictions create las:document:fe1cfdb5de254bb68d7c2763d3861baf las:model:03bce190cf4343efb3eb5065bd999844  
 {
@@ -36,7 +39,7 @@ After a *Model* have been trained and a *Document* have been created a *Predicti
 }
 ```
 
-Common for all *Predictions* is that they have a list of dictionaries on the form 
+Note: Common in all *Predictions* is that they have a list of dictionaries in the format shown below: 
 ```
     {
       "label": "<field-name>",
@@ -45,12 +48,16 @@ Common for all *Predictions* is that they have a list of dictionaries on the for
     }
 ```
 
-By delivering `confidence` with every prediction the user can make decisions on whether to use or discard the result 
+
+By specifying a `confidence` with every prediction, you can make decisions on whether to use or discard the results 
 depending on the accuracy required for a specific case. 
-In the example above the confidence reveals that the `due_date` is likely to be wrong, 
+
+In the example above, the confidence reveals that the `due_date` is likely to be wrong, 
 while the `bank_account` is very likely to be correct.
 
-*Predictions* can also be listed, which can be useful for making statistics or inspecting the performance of the model.
+
+
+*Predictions* can also be listed, which can be useful for making statistics or inspecting the performance of the model:
 ```commandline
 >>las predictions list
 {
