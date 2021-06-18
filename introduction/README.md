@@ -2,5 +2,5 @@
 
 ## Introduction
 
-Learn about the key concepts in Lucidtech's APIs here.
+Learn about the key concepts of Lucidtech's APIs here.
 
