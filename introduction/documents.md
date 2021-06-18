@@ -9,9 +9,11 @@ of your documents, therefore the *Document* is an important concept. In this
 introduction, you will see how a *Document* can be created, controlled and used together with 
 *Batches*, *Consents*, *Predictions*, and *Models*.
 
-# Creating a *Document*
+## Creating a *Document*
 The simplest way to create a *Document* is to use the command line interface (CLI) 
 and specify the path of the PDF or JPEG file that you would like to upload. See the example below:
+
+(TTNote: Consider a link for the CLI text to reference how to install/use the CLI, perhaps with https://docs.lucidtech.ai/getting-started/dev/cli )
 
 (TTNote: Suggest some clarity between 'creating' vs. 'uploading' a 'document'. It seems the pdf/jpg file (which is referenced in the first bullet as 'a document') is already 'created' in the file system, and here it's being 'uploaded' to use into the API, also as a 'document'. Perhaps the pdf/jpg is the source file to create a 'document record' or 'document type' in the API?)
 
@@ -22,11 +24,11 @@ and specify the path of the PDF or JPEG file that you would like to upload. See 
   "contentType": "application/pdf"
 }
 ```
-Use this `documentlId` along with a `modelId` to make a prediction on the document. 
+Note: You will use this `documentlId` along with a `modelId` to make a prediction on the document. 
 See [Predictions](./predictions.md) for more details.
 
 
-### *Batches* and *Consents*
+## Grouping Documents with *Batches* or *Consents*
 
 ### *Batches*
 
@@ -66,9 +68,9 @@ For more information on *batches* and *consents* see the page on [batches and co
 
 ## Attaching *Ground Truth* to a document
 
-(Note: Since 'model' is referenced in this section, consider resequencing the 'model' section to somewhere earlier than this section.)
+(TTNote: Since 'model' is referenced in this section, consider resequencing the 'model' section to somewhere earlier than this section.)
 
-(Note: Consider whether this 'ground truth' section should be a separate section under 'Documents' since it's an important component.)
+(TTNote: Consider whether this 'ground truth' section should be a separate section under 'Documents' since it's an important component.)
 
 In order to train or evaluate a model, we first need to define a ground truth for each document. 
 See our tutorial on [data training](https://docs.lucidtech.ai/data-training/data-training) for more details.
