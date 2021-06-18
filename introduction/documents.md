@@ -1,11 +1,11 @@
 # *Documents*
 
- - A *Document* can be a .pdf or a .jpeg file along with some meta information.
+ - A *Document* can be a .pdf or a .jpeg file along with some meta information. (TTNote: Reference note below about clarity on terminology.)
 
-(TTNote: Consider moving this bullet above to after the first paragraph below.)
+(TTNote: Consider moving this bullet to be displayed after the first paragraph below.)
 
 Lucidtech delivers services that help you control and automate the flow
-of your documents, therefore the *Document* is an important concept. In this 
+of your documents. Therefore, the *Document* is an important component of the API. In this 
 introduction, you will see how a *Document* can be created, controlled and used together with 
 *Batches*, *Consents*, *Predictions*, and *Models*.
 
@@ -13,9 +13,9 @@ introduction, you will see how a *Document* can be created, controlled and used 
 The simplest way to create a *Document* is to use the command line interface (CLI) 
 and specify the path of the PDF or JPEG file that you would like to upload. See the example below:
 
-(TTNote: Consider a link for the CLI text to reference how to install/use the CLI, perhaps with https://docs.lucidtech.ai/getting-started/dev/cli )
+(TTNote: Consider a link for the CLI text to reference how to install/use the CLI, perhaps to https://docs.lucidtech.ai/getting-started/dev/cli )
 
-(TTNote: Suggest some clarity between 'creating' vs. 'uploading' a 'document'. It seems the pdf/jpg file (which is referenced in the first bullet as 'a document') is already 'created' in the file system, and here it's being 'uploaded' to use into the API, also as a 'document'. Perhaps the pdf/jpg is the source file to create a 'document record' or 'document type' in the API?)
+(TTNote: Suggest some clarity between 'creating' vs. 'uploading' a document and/or clarity between use of lowercase 'document' and uppercase '*Document*'. It seems the pdf/jpg file (which is referenced in the first bullet as 'a *Document*') is already 'created' in the file system, and here it's being 'uploaded' to use into the API. Both are referenced as '*Document*'. Perhaps the pdf/jpg is the source file (and should be referenced as lowercase 'document' or simply 'file'), and it is used to create the '*Document*' item/component in the API?)
 
 ```commandline
 >> las documents create path/to/my/document.pdf
@@ -57,11 +57,9 @@ for the purpose of constructing a dataset for training a model. See the example 
 The same grouping can be done for *Consents*, 
 but the purpose of *Consents* is to separate customer data rather that to group them together for training purposes.
 
-(TTNote: Suggest an example be added here for Consents)
+(TTNote: Suggest an example be added here for Consents.)
 
 For more information on *batches* and *consents* see the page on [batches and consents](./batches_and_consents.md).
-
-(TTNote: The previous link references a github link, should it refefence the respective page on gitbook?)
 
 (TTNote: Consider combining these items above with the 'Batches and Consents' section (https://docs.lucidtech.ai/getting-started/introduction/batches_and_consents) so that the grouping information is all together.)
 
@@ -70,7 +68,7 @@ For more information on *batches* and *consents* see the page on [batches and co
 
 (TTNote: Since 'model' is referenced in this section, consider resequencing the 'model' section to somewhere earlier than this section.)
 
-(TTNote: Consider whether this 'ground truth' section should be a separate section under 'Documents' since it's an important component.)
+(TTNote: Consider whether this 'ground truth' section should be a separate section in the menu bar under 'Documents' since it's an important component.)
 
 In order to train or evaluate a model, we first need to define a ground truth for each document. 
 See our tutorial on [data training](https://docs.lucidtech.ai/data-training/data-training) for more details.
