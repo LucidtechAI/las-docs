@@ -2,7 +2,7 @@
 
 ## Installation
 
-Install the CLI via the Python package manager [pip](https://pip.pypa.io/en/stable/)
+Install the CLI via the Python package manager [pip](https://pip.pypa.io/en/stable/):
 
 ```bash
 >> $ pip install lucidtech-las-cli
@@ -10,7 +10,7 @@ Install the CLI via the Python package manager [pip](https://pip.pypa.io/en/stab
 
 ## Make a prediction on a document
 
-List models that are available for predictions
+First, list models that are available for predictions:
 ```bash
 >> $ las models list
 {
@@ -24,7 +24,7 @@ List models that are available for predictions
 }
 ```
 
-Upload a document
+Next, upload a document:
 ```bash
 >> $ las documents create invoice.pdf
 {
@@ -33,7 +33,7 @@ Upload a document
 }
 ```
 
-Run inference on the document using a model
+Finally, run inference on the document using a model:
 ```bash
 >> $ las predictions create las:document:<hex> las:model:<hex>
 {
@@ -46,8 +46,11 @@ Run inference on the document using a model
 
 ## Set ground truth of document
 
-When uploading data that will be used for training and evaluation, we need to provide a ground truth.
+When uploading data that will be used for training and evaluation, we need to provide a ground truth. 
+(TTNote: Consider removing this note on why ground truth is needed as this was mentioned earlier, and/or perhaps add a link here 
+to the relevant section under 'documents.')
 We can then use the optional parameters `--ground-truth-path` or `--ground-truth-fields`.
+(TTNote: Consider whether these parameters should be mentioned in the earlier 'documents' section.)
 
 ```bash
 >> $ las documents create invoice.pdf --ground-truth-path ground_truth.json
@@ -59,16 +62,17 @@ We can then use the optional parameters `--ground-truth-path` or `--ground-truth
   ]
 }
 ```
-In this case the `ground_truth.json` should be on the following format
+In this case, the `ground_truth.json` file should use the following format:
 ```json 
 {
     "total_amount": "299.00",
     "due_date": "2020-03-20"
 }
 ```
+
 ### Update an existing document
-If for instance a prediction reveals incorrect values in the ground truth of a document, 
-we can update the existing document with new ground truth values.
+If a prediction reveals incorrect values in the ground truth of a document, 
+we can update the existing document with new ground truth values:
 ```bash
 >> $ las documents update las:document:<hex> --ground-truth-fields total_amount=300.00 due_date=2020-02-28
 {
@@ -79,11 +83,13 @@ we can update the existing document with new ground truth values.
 }
 ```
 
-## Create a document with consent id
+## Create a document with a consentId
 
 {% hint style="info" %}
-Consent ID is an identifier you can assign to documents to keep track of document ownership for your customers.
+ConsentID is an identifier that you can assign to documents to keep track of document ownership for your customers.
 {% endhint %}
+
+(TTNote: Consider a link here to the 'consents' section for more information.)
 
 ```bash
 >> $ las documents create invoice.pdf --consent-id las:consent:<hex>
@@ -95,6 +101,9 @@ Consent ID is an identifier you can assign to documents to keep track of documen
 ```
 
 ## Get document and download document content
+(TTNote: Consider some verbiage here to explain the steps we are seeing in the example below, or to point out items that might need clarification.)
+
+(TTNote: Should invoice2.pdf below match invoice.pdf mentioned above?)
 
 ```bash
 >> $ las documents create invoice.pdf --consent-id las:consent:<hex>
@@ -112,9 +121,10 @@ Consent ID is an identifier you can assign to documents to keep track of documen
 }
 ```
 
-## Revoking consent and deleting documents
+## Revoke consent and delete documents
 
-Suppose we wish to delete all documents associated with a customer in our ERP database or other systems. We need to provide a consent\_id to the prediction method that uniquely identifies the customer and use that consent\_id to delete documents.
+To delete all documents associated with a customer in your ERP or other systems, first provide the `consentId` (which uniquely identifies the customer) to the prediction method, then use that `consentId` to delete the documents:
+(TTNote: Consider a link here to the batches and consents details.)
 
 ```bash
 >> $ las consents delete las:consent:<hex>
@@ -126,9 +136,10 @@ Suppose we wish to delete all documents associated with a customer in our ERP da
 }
 ```
 
-## Create a batch and associate a few documents with it
+## Create a batch and associate documents with it
 
 Creating a batch is a way to group documents. This is useful for specifying batches of documents to use in improving the model later.
+(TTNote: Consider a link here to the batches and consents details.)
 
 ```bash
 >> $ las batches create
