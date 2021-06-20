@@ -42,6 +42,9 @@ console.log(predictions);
 ## Set ground truth of document
 
 When uploading data that will be used for training and evaluation, we need to provide a ground truth:
+
+(TTNote: Consider referencing more detailed section on ground truth from 'documents')
+
 ```javascript
 const groundTruth = [
   { 'label': 'total_amount', 'value': '240.01' },
