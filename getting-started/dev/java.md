@@ -1,4 +1,4 @@
-# Java
+# Using Java
 
 [API reference](../../reference/java/latest.md)
 
@@ -16,7 +16,8 @@ Credentials credentials = new Credentials(
 client = new Client(credentials);
 ```
 
-## Upload a document to get a document id
+## Upload a document to get a documentId
+(TTNote: For consistency, consider including 'upload' as a subsection under the heading of 'make predictions' with verbiage as in the CLI (i.e. 'first list, next upload, finally run inference...') Or alternately, consider whether all other pages should match the syntax here instead.
 
 ```java
 public void createDocument() throws IOException, APIException, MissingAccessTokenException {
@@ -33,6 +34,7 @@ public void createDocument() throws IOException, APIException, MissingAccessToke
 ## Make a prediction on a document
 
 Suppose we wish to run inference on a document using one of the available models.
+(TTNote: Also for consistency with CLI, consider if a `list` (or in this case `listModel`) is needed first and whether the description should be updated to match.)
 
 ```java
 public void createPrediction() throws IOException, APIException, MissingAccessTokenException {
@@ -46,11 +48,15 @@ public void createPrediction() throws IOException, APIException, MissingAccessTo
 {% hint style="info" %}
 See what models you have available and their model id by using the method `listModels()`
 {% endhint %}
+(TTNote: For consistency, consider if this info window should be part of the steps as in the CLI instead, i.e. 'first list models, next upload, finally run inference')
 
 
 ## Set ground truth of document
 
-When uploading data that will be used for training and evaluation, we need to provide a ground truth.
+When uploading data that will be used for training and evaluation, we need to provide a ground truth:
+
+(TTNote: Consider referencing more detailed section on ground truth from 'documents')
+
 ```java
 File file = new File("myReceipt.pdf");
 InputStream content = new FileInputStream(file);
@@ -62,24 +68,23 @@ JSONObject document = this.client.createDocument(content, ContentType.PDF, optio
 ```
 
 ### Update an existing document
-If for instance a prediction reveals incorrect values in the ground truth of a document, 
-we can update the existing document with new ground truth values.
+If a prediction reveals incorrect values in the ground truth of a document, 
+we can update the existing document with new ground truth values:
 ```java
 JSONArray groundTruth = new JSONArray();
 groundTruth.put(new JSONObject(){{ put("label", "totalAmount"); put("value", "199.00"); }});
 groundTruth.put(new JSONObject(){{ put("label", "dueDate"); put("value", "2020-03-20"); }});
 JSONObject document = this.client.createDocument("las:document:<hex-uuid>", groundTruth);
 ```
-## Set ground truth of document
 
-Suppose we make a prediction that returns incorrect values and we wish to improve the model for future use. 
-We can do so by sending groundTruth to the model, telling it what the expected values should have been.
+(TTNote: Consider if 'Create a document with a consentId', 'Get document and download document content', 'Revoke consent and delete documents' sections
+are needed for consistency.)
 
-
-## Create a batch and associate a few documents with it
+## Create a batch and associate documents with it
 
 Creating a batch is a way to group documents. 
-This is useful for specifying batches of documents to use in improving the model later.
+This is useful for specifying batches of documents to use in improving the model later:
+(TTNote: Consider a link here to the batches and consents details.)
 
 ```java
 public void createBatch() throws IOException, APIException, MissingAccessTokenException {
