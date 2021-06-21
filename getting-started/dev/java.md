@@ -46,7 +46,7 @@ public void createPrediction() throws IOException, APIException, MissingAccessTo
 ```
 
 {% hint style="info" %}
-See what models you have available and their model id by using the method `listModels()`
+See what models are available along with their `modelId` by using the method `listModels()`
 {% endhint %}
 (TTNote: For consistency, consider if this info window should be part of the steps as in the CLI instead, i.e. 'first list models, next upload, finally run inference')
 
