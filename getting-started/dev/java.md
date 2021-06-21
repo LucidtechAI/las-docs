@@ -2,6 +2,8 @@
 
 [API reference](../../reference/java/latest.md)
 
+(TTNote: Consider if an 'Installation' section is needed here for consistency, or if the below section is in lieu of that.)
+
 ## Create a client to talk to the API
 
 ```java
