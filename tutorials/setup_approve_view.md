@@ -1,21 +1,22 @@
-# Tutorial for creating a custom approve view in Flyt
+# Tutorial: Create a custom approval view in Flyt
 
-With access to Flyt, you have the option to create your own React component to be loaded for each queue in its approval view.
+With access to *Flyt*, you have the option to create your own React component to be loaded for each queue in its approval view.
 The entire view is yours to do with as you see fit.
 
-For now we'll create a simple view with half the page having a PDF/image preview, and the other half being a form
-for the information we care about from our documents, along with some action buttons to either approve, skip, or reject a task.
+For now, we'll create a simple view with a PDF/image preview on half of the page, and a form
+for the relevant document information on the other half. In addition, we'll include action buttons to either approve, skip, or reject a task.
 
 ## Build setup
 
-Before we start creating the component, lets take care of the build setup and everything that is necessary to actually get a working remote component built.
+Before we start creating the component, let's complete the build setup and everything that is necessary to get a working remote component built.
 
-To have a functioning remote component, you need to create a CommonJS bundle because of the usage through [remote-component](https://github.com/Paciolan/remote-component).
-You are free to use whatever bundler or build tool you feel like, but in this example we'll make use of Webpack just like in the examples in the above link.
+To have a functioning remote component, you need to create a `CommonJS` bundle because of the usage through [remote component](https://github.com/Paciolan/remote-component).
+(TTNote: Link above is to github, consider if a link to gitbook is needed instead.)
+You are free to use the bundler or build tool of your choice, but in this example, we'll make use of *Webpack*, as in in the examples in the above link.
 
 ### `src/index.js`
 
-Create `src/index.js` and expose your component as the `default` export.
+Create `src/index.js` and expose your component as the `default` export:
 
 ```javascript
 import React from "react";
@@ -31,8 +32,8 @@ export default RemoteComponent;
 
 The `libraryTarget` of the `RemoteComponent` must be set to `commonjs`.
 
-Flyt provides you with a React global already, so it is very much recommended that you add it as an external library in your bundle.
-If you are using React with hooks, you could see some buggy behavior if you do not do this step, as there will be two different React runtimes.
+Flyt already provides you with a React global (TTNote: Unclear if 'global' is the noun here or if a word is missing afterwards - such as 'React global variable' or 'React global library', etc), so it is highly recommended that you add it as an external library in your bundle.
+If you are using React with hooks, you may see some unexpected behavior if you do not include this step, as there will be two different React runtimes.
 
 
 ```javascript
@@ -47,12 +48,12 @@ module.exports = {
 };
 ```
 
-Running a Webpack build will now create a CommonJS bundle file that can be loaded successfully! With the build setup done, we can start creating the actual component itself.
+Running a Webpack build will now create a `CommonJS` bundle file that can be loaded successfully. With the build setup done, we can start creating the components.
 
-## Creating our component
+## Creating the component
 
 ### Props
-The remote component will receive a few props we can make use of. Here are a few Typescript types from the API as well to make things a bit clearer:
+The remote component will receive a few props we can utilize. For clarity, here are a few Typescript types from the API:
 
 ```ts
 /** All props received from the Flyt app */
@@ -143,4 +144,4 @@ Here's what we're making:
 
 ![Screenshot](../.gitbook/assets/remote.png)
 
-See [the source](https://github.com/LucidtechAI/las-docs/tree/master/tutorials/simple-demo/frontend/src/) for the code itself.
+View [the source code here](https://github.com/LucidtechAI/las-docs/tree/master/tutorials/simple-demo/frontend/src/).
