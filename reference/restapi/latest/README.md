@@ -1,6 +1,12 @@
+(TTNote: Suggest an index on top for each module listed below for easier access to the content. Also consider descriptions for when to use each module.)
+
+(TTNote: Unclear why some sections had a second 'request body JSON Schema' listed. Consider adding descriptions if needed. The first few are noted inline.)
+
+(TTNote: Also consider additional separation between each module for clarity when reading, such as the separator lines that I've added.)
+
+
+
 #### GET /appClients
-
-
 
 
 
@@ -114,6 +120,7 @@
 }
 ```
 
+- - -
 
 #### POST /appClients
 
@@ -179,6 +186,9 @@
 
 
 ##### Response body JSON Schema
+
+(TTNote: Suggest verbiage here to describe why this is different from above 'response body json schema'.)
+
 ```json
 {
   "title": "appClient",
@@ -254,6 +264,8 @@
   "additionalProperties": false
 }
 ```
+
+- - -
 
 
 #### DELETE /appClients/{appClientId}
@@ -353,6 +365,8 @@
 }
 ```
 
+- - -
+
 
 #### PATCH /appClients/{appClientId}
 
@@ -396,6 +410,10 @@
 
 
 ##### Response body JSON Schema
+
+(TTNote: Suggest verbiage here to describe why this is different from above 'response body json schema'.)
+
+
 ```json
 {
   "title": "appClient",
@@ -473,6 +491,8 @@
 ```
 
 
+- - -
+
 #### GET /assets
 
 
@@ -547,6 +567,9 @@
 ```
 
 
+- - -
+
+
 #### POST /assets
 
 
@@ -593,6 +616,9 @@
 
 
 ##### Response body JSON Schema
+
+(TTNote: Suggest verbiage here to describe why this is different from above 'response body json schema'.)
+
 ```json
 {
   "title": "asset",
@@ -626,6 +652,7 @@
 }
 ```
 
+- - -
 
 #### DELETE /assets/{assetId}
 
@@ -682,6 +709,8 @@
 ```
 
 
+- - -
+
 #### GET /assets/{assetId}
 
 
@@ -737,6 +766,9 @@
 ```
 
 
+- - -
+
+
 #### PATCH /assets/{assetId}
 
 
@@ -783,6 +815,9 @@
 
 
 ##### Response body JSON Schema
+
+(TTNote: Suggest verbiage here to describe why this is different from above 'response body json schema'.)
+
 ```json
 {
   "title": "asset",
@@ -815,6 +850,8 @@
   "additionalProperties": false
 }
 ```
+
+- - -
 
 
 #### GET /batches
@@ -914,6 +951,8 @@
 ```
 
 
+- - -
+
 #### POST /batches
 
 
@@ -956,6 +995,9 @@
 
 
 ##### Response body JSON Schema
+
+(TTNote: Suggest verbiage here to describe why this is different from above 'response body json schema'.)
+
 ```json
 {
   "title": "batch",
@@ -1012,6 +1054,7 @@
 }
 ```
 
+- - -
 
 #### DELETE /batches/{batchId}
 
@@ -1091,6 +1134,8 @@
 ```
 
 
+- - -
+
 #### PATCH /batches/{batchId}
 
 
@@ -1133,6 +1178,9 @@
 
 
 ##### Response body JSON Schema
+
+(TTNote: Suggest verbiage here to describe why this is different from above 'response body json schema'.)
+
 ```json
 {
   "title": "batch",
@@ -1189,6 +1237,7 @@
 }
 ```
 
+- - -
 
 #### DELETE /documents
 
@@ -1317,6 +1366,8 @@
 }
 ```
 
+- - -
+
 
 #### GET /documents
 
@@ -1444,6 +1495,8 @@
   "additionalProperties": false
 }
 ```
+
+- - -
 
 
 #### POST /documents
@@ -1603,6 +1656,8 @@
 }
 ```
 
+- - -
+
 
 #### GET /documents/{documentId}
 
@@ -1695,6 +1750,8 @@
   "additionalProperties": false
 }
 ```
+
+- - -
 
 
 #### PATCH /documents/{documentId}
@@ -1834,6 +1891,8 @@
 }
 ```
 
+- - -
+
 
 #### GET /logs
 
@@ -1971,6 +2030,8 @@
 }
 ```
 
+- - -
+
 
 #### GET /logs/{logId}
 
@@ -2052,6 +2113,8 @@
   "additionalProperties": false
 }
 ```
+
+- - -
 
 
 #### GET /models
@@ -2220,6 +2283,8 @@
   "additionalProperties": false
 }
 ```
+
+- - -
 
 
 #### POST /models
@@ -2463,6 +2528,8 @@
 ```
 
 
+- - -
+
 #### DELETE /models/{modelId}
 
 
@@ -2612,6 +2679,8 @@
 ```
 
 
+- - -
+
 #### GET /models/{modelId}
 
 
@@ -2760,6 +2829,8 @@
 }
 ```
 
+
+- - -
 
 #### PATCH /models/{modelId}
 
@@ -3008,6 +3079,8 @@
 ```
 
 
+- - -
+
 #### GET /organizations/{organizationId}
 
 
@@ -3182,6 +3255,8 @@
 }
 ```
 
+
+- - -
 
 #### PATCH /organizations/{organizationId}
 
@@ -3379,6 +3454,8 @@
 ```
 
 
+- - -
+
 #### GET /predictions
 
 
@@ -3488,6 +3565,8 @@
 }
 ```
 
+
+- - -
 
 #### POST /predictions
 
@@ -3615,6 +3694,8 @@
 ```
 
 
+- - -
+
 #### GET /secrets
 
 
@@ -3684,6 +3765,8 @@
 }
 ```
 
+
+- - -
 
 #### POST /secrets
 
@@ -3760,6 +3843,8 @@
 ```
 
 
+- - -
+
 #### DELETE /secrets/{secretId}
 
 
@@ -3810,6 +3895,8 @@
 }
 ```
 
+
+- - -
 
 #### PATCH /secrets/{secretId}
 
@@ -3885,6 +3972,8 @@
 }
 ```
 
+
+- - -
 
 #### GET /transitions
 
@@ -4001,6 +4090,8 @@
 }
 ```
 
+
+- - -
 
 #### POST /transitions
 
@@ -4188,6 +4279,8 @@
 ```
 
 
+- - -
+
 #### DELETE /transitions/{transitionId}
 
 
@@ -4274,6 +4367,8 @@
 ```
 
 
+- - -
+
 #### GET /transitions/{transitionId}
 
 
@@ -4359,6 +4454,8 @@
 }
 ```
 
+
+- - -
 
 #### PATCH /transitions/{transitionId}
 
@@ -4498,6 +4595,8 @@
 }
 ```
 
+
+- - -
 
 #### GET /transitions/{transitionId}/executions
 
@@ -4640,6 +4739,8 @@
 ```
 
 
+- - -
+
 #### POST /transitions/{transitionId}/executions
 
 
@@ -4736,6 +4837,8 @@
 ```
 
 
+- - -
+
 #### GET /transitions/{transitionId}/executions/{executionId}
 
 
@@ -4825,6 +4928,8 @@
 }
 ```
 
+
+- - -
 
 #### PATCH /transitions/{transitionId}/executions/{executionId}
 
@@ -4975,6 +5080,8 @@
 ```
 
 
+- - -
+
 #### POST /transitions/{transitionId}/executions/{executionId}/heartbeats
 
 
@@ -5005,6 +5112,8 @@
 
 
 
+
+- - -
 
 #### GET /users
 
@@ -5078,6 +5187,8 @@
 }
 ```
 
+
+- - -
 
 #### POST /users
 
@@ -5162,6 +5273,8 @@
 ```
 
 
+- - -
+
 #### DELETE /users/{userId}
 
 
@@ -5216,6 +5329,8 @@
 ```
 
 
+- - -
+
 #### GET /users/{userId}
 
 
@@ -5269,6 +5384,8 @@
 }
 ```
 
+
+- - -
 
 #### PATCH /users/{userId}
 
@@ -5344,6 +5461,8 @@
 }
 ```
 
+
+- - -
 
 #### GET /workflows
 
@@ -5462,6 +5581,8 @@
 }
 ```
 
+
+- - -
 
 #### POST /workflows
 
@@ -5649,6 +5770,8 @@
 ```
 
 
+- - -
+
 #### DELETE /workflows/{workflowId}
 
 
@@ -5748,6 +5871,8 @@
 ```
 
 
+- - -
+
 #### GET /workflows/{workflowId}
 
 
@@ -5846,6 +5971,8 @@
 }
 ```
 
+
+- - -
 
 #### PATCH /workflows/{workflowId}
 
@@ -6008,6 +6135,8 @@
 }
 ```
 
+
+- - -
 
 #### GET /workflows/{workflowId}/executions
 
@@ -6172,6 +6301,8 @@
 ```
 
 
+- - -
+
 #### POST /workflows/{workflowId}/executions
 
 
@@ -6294,6 +6425,8 @@
 ```
 
 
+- - -
+
 #### DELETE /workflows/{workflowId}/executions/{executionId}
 
 
@@ -6401,6 +6534,8 @@
 ```
 
 
+- - -
+
 #### GET /workflows/{workflowId}/executions/{executionId}
 
 
@@ -6507,6 +6642,8 @@
 }
 ```
 
+
+- - -
 
 #### PATCH /workflows/{workflowId}/executions/{executionId}
 
