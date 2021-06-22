@@ -1,8 +1,8 @@
-# Python
+# Using Python
 
 ## Installation
 
-Install the package via the Python package manager [pip](https://pip.pypa.io/en/stable/)
+Install the package via the Python package manager [pip](https://pip.pypa.io/en/stable/):
 
 ```bash
 >> $ pip install lucidtech-las
@@ -10,7 +10,8 @@ Install the package via the Python package manager [pip](https://pip.pypa.io/en/
 
 ## Make a prediction on a document
 
-Suppose we wish to run inference on a document using Lucidtech’s invoice model.
+Suppose we wish to run inference on a document using Lucidtech’s invoice model:
+(TTNote: For consistency with CLI, consider if a `list` is needed first. Then consider a description to replace the above line such as: 'Upload a document then run inference using the invoice model:')
 
 ```python
 from las import Client
@@ -24,7 +25,10 @@ print(prediction)
 
 ## Set ground truth of document
 
-When uploading data that will be used for training and evaluation, we need to provide a ground truth.
+When uploading data that will be used for training and evaluation, we need to provide a ground truth:
+
+(TTNote: Consider referencing more detailed section on ground truth from 'documents')
+
 ```python
 from las import Client
 
@@ -37,22 +41,25 @@ document = client.create_document('invoice.pdf', 'application/pdf', ground_truth
 ```
 
 ### Update an existing document
-If for instance a prediction reveals incorrect values in the ground truth of a document, 
-we can update the existing document with new ground truth values.
+If a prediction reveals incorrect values in the ground truth of a document, 
+we can update the existing document with new ground truth values:
 ```python
 document = client.update_document('las:document:<hex-uuid>', ground_truth=ground_truth)
 ```
 
 {% hint style="info" %}
-Providing ground truth is a necessary to re-train a model whether the model got it right or wrong. So always provide 
+Providing ground truth is necessary to retrain a model, whether the model was right or wrong. So always provide 
 the ground truth if it is available.
 {% endhint %}
+(TTNote: Consider replicating this note in all other sections for consistency.)
 
-## Create a document with consent id
+## Create a document with a consentId
 
 {% hint style="info" %}
-Consent ID is an identifier you can assign to documents to keep track of document ownership for your customers.
+ConsentID is an identifier that you can assign to documents to keep track of document ownership for your customers.
 {% endhint %}
+
+(TTNote: Consider a link here to the 'consents' section for more information.)
 
 ```python
 from las import Client
@@ -61,9 +68,12 @@ client = Client()
 document = client.create_document('invoice.pdf', 'application/pdf', consent_id='las:consent:<hex>')
 ```
 
-## Revoking consent and deleting documents
+(TTNote: Consider if a section 'get document and download document content' is needed here for consistency.)
 
-Suppose we wish to delete all documents associated with a customer in our ERP database or other systems. We need to provide a consent\_id to the prediction method that uniquely identifies the customer and use that consent\_id to delete documents.
+## Revoke consent and delete documents
+
+To delete all documents associated with a customer in your ERP or other systems, first provide the `consentId` (which uniquely identifies the customer) to the prediction method, then use that `consentId` to delete the documents.
+(TTNote: Consider a link here to the batches and consents details.)
 
 ```python
 from las import Client
@@ -74,10 +84,11 @@ document = client.create_document('invoice.pdf', 'application/pdf', consent_id=c
 client.delete_documents(consent_id=consent_id)
 ```
 
-## Create a batch and associate a few documents with it
+## Create a batch and associate documents with it
 
 Creating a batch is a way to group documents. This is useful for specifying batches of documents to use in improving the
 model later.
+(TTNote: Consider a link here to the batches and consents details.)
 
 ```python
 from las import Client

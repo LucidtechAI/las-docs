@@ -3,6 +3,11 @@
 
 @lucidtech/las-sdk-core / [Exports](#modulesmd)
 
+(TTNote: Links to modulesmd above not working.)
+
+(TTNote: Suggest an index on top for each module listed below for easier access to the content.)
+
+
 # JavaScript SDK for Lucidtech AI Services API
 
 ## Installation
@@ -53,10 +58,16 @@ Run tests
 $ npm run test test
 ```
 
+(TTNote: Consider whether above section - from header to here - is needed here as this is a duplicate of the readme.)
+
 
 <a name="classesclientclient-1md"></a>
 
 [@lucidtech/las-sdk-core](#readmemd) / [Exports](#modulesmd) / [client](#modulesclientmd) / Client
+
+(TTNote: Links in the above lin aren't working.)
+
+
 
 # Class: Client
 
@@ -222,7 +233,7 @@ ___
 
 ▸ **createSecret**(`data`: *Record*<any, any\>, `options?`: [*CreateSecretOptions*](#interfacestypescreatesecretoptionsmd)): *Promise*<[*Secret*](#secret)\>
 
-Creates an secret handle, calls the POST /secrets endpoint.
+Creates a secret handle, calls the POST /secrets endpoint.
 
 #### Parameters:
 
@@ -975,6 +986,7 @@ Method used to get and cache an access token. Algorithm used:
 **Returns:** *Promise*<string\>
 
 
+(TTNote: Consider additional descriptions for sections below.)
 
 <a name="classescredentialstokenmd"></a>
 

@@ -1,6 +1,6 @@
-# JavaScript
+# Using JavaScript
 
-## Use browser version
+## Install browser version
 
 ```text
 npm install --save las-sdk-browser
@@ -14,7 +14,7 @@ const credentials = new AuthorizationCodeCredentials('<apiEndpoint>', '<apiKey>'
 const client = new Client(credentials);
 ```
 
-## Use node version
+## Install node version
 
 ```text
 npm install --save las-sdk-node
@@ -31,6 +31,7 @@ const client = new Client(credentials);
 ## Make a prediction on a document
 
 Suppose we wish to run inference on a document using Lucidtech’s invoice model.
+(TTNote: For consistency with CLI, consider if a `list` is needed first. Then consider a description to replace the above line such as: 'Upload a document then run inference using the invoice model:')
 
 ```javascript
 const { documentId } = await client.createDocument('<document content>', '<document mime type>', { consentId: '<consent id>' });
@@ -40,7 +41,10 @@ console.log(predictions);
 
 ## Set ground truth of document
 
-When uploading data that will be used for training and evaluation, we need to provide a ground truth.
+When uploading data that will be used for training and evaluation, we need to provide a ground truth:
+
+(TTNote: Consider referencing more detailed section on ground truth from 'documents')
+
 ```javascript
 const groundTruth = [
   { 'label': 'total_amount', 'value': '240.01' },
@@ -51,8 +55,8 @@ const { documentId } = await client.createDocument('<document content>', '<docum
 
 ### Update an existing document
 
-If for instance a prediction reveals incorrect values in the ground truth of a document, 
-we can update the existing document with new ground truth values.
+If a prediction reveals incorrect values in the ground truth of a document, 
+we can update the existing document with new ground truth values:
 
 ```javascript
 const groundTruth = [
@@ -63,24 +67,30 @@ client.updateDocument('las:document:<hex-uuid>', groundTruth);
 ```
 
 {% hint style="info" %}
-Providing ground truth is a necessary to re-train a model whether the model got it right or wrong. So always provide 
+Providing ground truth is necessary to retrain a model, whether the model was right or wrong. So always provide 
 the ground truth if it is available.
 {% endhint %}
 
 
-## Create a document with consent id
+## Create a document with a consentId
 
 {% hint style="info" %}
-Consent ID is an identifier you can assign to documents to keep track of document ownership for your customers.
+ConsentID is an identifier that you can assign to documents to keep track of document ownership for your customers.
 {% endhint %}
+
+(TTNote: Consider a link here to the 'consents' section for more information.)
 
 ```javascript
 const { documentId } = await client.createDocument('<document content>', '<document mime type>', { consentId: '<consent id>' });
 ```
 
-## Create a batch and associate a few documents with it
+(TTNote: Consider if sections 'get document and download document content' and 'revoke consent and delete documents' are needed here for consistency.)
+
+
+## Create a batch and associate documents with it
 
 Creating a batch is a way to group documents. This is useful for specifying batches of documents to use in improving the model later.
+(TTNote: Consider a link here to the batches and consents details.)
 
 ```javascript
 const { batchId } = await client.createBatch(batchDescription);
