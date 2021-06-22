@@ -120,7 +120,7 @@ $ docker build . -t <image-url> && docker push <image-url>
 
 {% hint style="info" %}
 It is recommended to place the docker image in a private repository, 
-and in that case. you need to store your credentials as a *Secret*.
+and in that case, you need to store your credentials as a *Secret*.
 ```commandline
 $ las secrets create  username=<username> password=<password> --description 'docker credentials'
 ```
