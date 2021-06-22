@@ -6,6 +6,14 @@
 `namespace `[`Lucidtech::Las::Core`](#a00022) | 
 `namespace `[`Lucidtech::Las::Utils`](#a00023) | 
 
+(TTNote: Consider if summary index should contain classes as well for easy references.)
+
+(TTNote: The a00021/22/23 links above, along with these style links throughout this document, do not appear to work to jump to the appropriate namespace or section.)
+
+(TTNote: Consider additional separators between each module for clarity when reading, it's not apparent the appropriate places for those separators.)
+
+
+
 # namespace `Lucidtech::Las` 
 
 ## Summary
@@ -45,7 +53,7 @@
 `public object `[`ListPredictions`](#a00043_1aa07c60058c89b9d2464ec8ccd2037a18)`(int? maxResults,string? nextToken)` | List predictions available, calls the GET /predictions endpoint.
 `public object `[`ListLogs`](#a00043_1a48c31f9df10d39e5f6303032572c946d)`(string? transitionId,string? transitionExecutionId,string? workflowId,string? workflowExecutionId,int? maxResults,string? nextToken)` | List logs, calls the GET /logs endpoint.
 `public object `[`ListModels`](#a00043_1a2a5979f62ac58a13cdd2fce28c174508)`(int? maxResults,string? nextToken)` | List models available, calls the GET /models endpoint.
-`public object `[`CreateSecret`](#a00043_1ac9ee5b8c1cedfd849aa258bccdcd1de9)`(Dictionary< string, string > data,Dictionary< string, string?>? attributes)` | Creates an secret, calls the POST /secrets endpoint.
+`public object `[`CreateSecret`](#a00043_1ac9ee5b8c1cedfd849aa258bccdcd1de9)`(Dictionary< string, string > data,Dictionary< string, string?>? attributes)` | Creates a secret, calls the POST /secrets endpoint.
 `public object `[`ListSecrets`](#a00043_1a4bf28ad750cf50ad0f6e0d8a3558f69f)`(int? maxResults,string? nextToken)` | List secrets available, calls the GET /secrets endpoint.
 `public object `[`UpdateSecret`](#a00043_1a881282cf8a8cc3618b25a25c64c7feeb)`(string secretId,Dictionary< string, string >? data,Dictionary< string, string?>? attributes)` | Updates a secret, calls the PATCH /secrets/secretId endpoint.
 `public object `[`DeleteSecret`](#a00043_1af74cb1bf2068af164bdc42acc033f012)`(string secretId)` | Delete a secret, calls the DELETE /secrets/{secretId} endpoint.
@@ -346,7 +354,7 @@ A deserialized object that can be interpreted as a Dictionary with the fields co
 
 Create a batch handle, calls the POST /batches endpoint.
 
-Create a new batch with the provided description. on the document specified by '<batchId>' 
+Create a new batch with the provided description on the document specified by '<batchId>' 
 ```cpp
 Client client = new Client();
 var response = client.CreateBatch("Data gathered from the Mars Rover Invoice Scan Mission");
@@ -358,7 +366,7 @@ var response = client.CreateBatch("Data gathered from the Mars Rover Invoice Sca
 * `description` A brief description of the purpose of the batch 
 
 #### Returns
-A deserialized object that can be interpreted as a Dictionary with the fields batchId and description. batchId can be used as an input when posting documents to make them a part of this batch.
+A deserialized object that can be interpreted as a Dictionary with the fields batchId and description. BatchId can be used as an input when posting documents to make them part of this batch.
 
 #### `public object `[`DeleteBatch`](#a00043_1afca5b7b95d5c60661417e824b7b8d898)`(string batchId,bool deleteDocuments)` 
 
@@ -467,7 +475,7 @@ JSON object with two keys:
 
 #### `public object `[`CreateSecret`](#a00043_1ac9ee5b8c1cedfd849aa258bccdcd1de9)`(Dictionary< string, string > data,Dictionary< string, string?>? attributes)` 
 
-Creates an secret, calls the POST /secrets endpoint.
+Creates a secret, calls the POST /secrets endpoint.
 
 ```cpp
 Client client = new Client();
@@ -862,6 +870,9 @@ User response from REST API
 
 Creates a new workflow, calls the POST /workflows endpoint. Check out [Lucidtech](#a00020)'s tutorials for more info on how to create a workflow.
 
+(TTNote: Link to a00020 above for tutorials is not working.)
+ 
+
 ```cpp
 Client client = new Client();
 var specification = new Dictionary<string, object>{
@@ -1069,7 +1080,7 @@ var response = client.UpdateWorkflowExecution("<workflow_id>", "<execution_id>",
 
 * `executionId` Id of the execution
 
-* `nextTransitionId` The next transition to transition into, to end the workflow-execution, use: las:transition:commons-failed
+* `nextTransitionId` The next transition, to end the workflow execution (TTNote: Unclear why end workflow is mentioned here or if it's related to the 'nextTransitionID' or to the 'las:transition:commons-failed'), use: las:transition:commons-failed
 
 #### Returns
 WorkflowExecution response from REST API
@@ -1270,7 +1281,7 @@ class Lucidtech::Las::Core::InvalidCredentialsException
   : public Lucidtech.Las.Core.ClientException
 ```  
 
-An [InvalidCredentialsException](#a00051) is raised if api key, access key id or secret access key is invalid.
+An [InvalidCredentialsException](#a00051) is raised if the api key, access key id or secret access key is invalid.
 
 ## Summary
 
@@ -1336,7 +1347,7 @@ A list of the responses from a prediction
 
 #### `public  `[`Prediction`](#a00071_1ad2683829a91fd8809e00aeb35c412901)`(string documentId,string consentId,string modelName,List< Dictionary< string, object >> predictionResponse)` 
 
-Constructor of s [Prediction](#a00071) object
+Constructor of a [Prediction](#a00071) object
 
 #### Parameters
 * `documentId` The id of the document used in the prediction 
@@ -1442,12 +1453,12 @@ A [TooManyRequestsException](#a00055) is raised if you have reached the number o
 
  Members                        | Descriptions                                
 --------------------------------|---------------------------------------------
-`class `[`Lucidtech::Las::Utils::FileType`](#a00083) | Help determine the type of a file, inspired by pythons `imghdr.what()`.
-`class `[`Lucidtech::Las::Utils::JsonSerialPublisher`](#a00087) | A Json publishes that allows the user to serialize and deserialize back and forth between serialized json objects and deserialized general objects and specific Dictionaries.
+`class `[`Lucidtech::Las::Utils::FileType`](#a00083) | Help determine the type of a file, inspired by python's `imghdr.what()`.
+`class `[`Lucidtech::Las::Utils::JsonSerialPublisher`](#a00087) | A Json publisher that allows the user to serialize and deserialize back and forth between serialized json objects and deserialized general objects and specific Dictionaries.
 
 # class `Lucidtech::Las::Utils::FileType` 
 
-Help determine the type of a file, inspired by pythons `imghdr.what()`.
+Help determine the type of a file, inspired by python's `imghdr.what()`.
 
 ## Summary
 
@@ -1464,7 +1475,7 @@ class Lucidtech::Las::Utils::JsonSerialPublisher
   : public IDeserializer
 ```  
 
-A Json publishes that allows the user to serialize and deserialize back and forth between serialized json objects and deserialized general objects and specific Dictionaries.
+A Json publisher that allows the user to serialize and deserialize back and forth between serialized json objects and deserialized general objects and specific Dictionaries.
 
 ## Summary
 
