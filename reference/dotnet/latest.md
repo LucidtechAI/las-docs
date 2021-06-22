@@ -767,7 +767,7 @@ Transition execution response from REST API
 
 #### `public object `[`SendHeartbeat`](#a00043_1a4d93ff7210887e14489f679963e38d25)`(string transitionId,string executionId)` 
 
-Send heartbeat for a manual execution, calls the POST /transitions/{transitionId}/executions/{executionId}/heartbeats endpoint.
+Send heartbeat for a manual execution, calls the POST /transitions/{transitionId}/executions/{executionId}/heartbeats endpoint. (TTNote: does note need to be added here about heartbeat needed once every 60 seconds: 'Note: This must be done, at minimum, once every 60 seconds or the transition execution will time out.' ?)
 
 ```cpp
 Client client = new Client();
