@@ -6,7 +6,7 @@
 But if it is duplicated here, the syntax should match (in quickstart, it's referencing bash syntax, here it is simply commandline.)
 
 
-The python SDK for Lucidtech AI Services (LAS) can be downloaded from `pip`:
+The Python SDK for Lucidtech AI Services (LAS) can be installed using `pip`:
 ```commandline
 $ pip install lucidtech-las
 ```
