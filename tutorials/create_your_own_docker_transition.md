@@ -14,7 +14,7 @@ to explain some of the key concepts. For a simple Python-based docker image, you
  - `requirements.txt`: Here are the required packages that need to be installed.
 
 ## Dockerfile
-For a simple process like this, the Dockerfile can look something like this:
+For a simple process, the Dockerfile can look something like this:
 ```dockerfile 
 FROM python:3.8  # Use the base image of your own choice
 
