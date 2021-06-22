@@ -2,7 +2,10 @@
 
 You can find the Open API specification file [here](https://raw.githubusercontent.com/LucidtechAI/las-docs/master/reference/restapi/oas.json)
 
-## Changelog
+(TTNote: Consider if Installation and/or Getting Started section is needed here for consistency with Python SDK and others in this section.)
+(TTNote: Consider if Rest API section is also needed under "Quickstart" section also for consistency.)
+
+## Change Log
 
 ### 2021-06-10
 
@@ -15,7 +18,7 @@ You can find the Open API specification file [here](https://raw.githubuserconten
 ### 2021-05-26
 
 - Added DELETE /models/:id
-- description in /models fieldConfig is no longer required
+- Description in /models fieldConfig is no longer required
 
 ### 2021-05-19
 
