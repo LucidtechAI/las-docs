@@ -1,7 +1,8 @@
 ## Quotas
 
-When using Lucidtech APIs you might encounter limits in how many total resources you may create and how many you may 
-create every month. If you want to increase this limit please contact us at [support@lucidtech.ai](mailto:support@lucidtech.ai).
+When using Lucidtech APIs, you might encounter limits in how many total resources you can create and how many (TTNote: Unclear if there is a 
+word missing here. First is 'how many total resources', second is 'how many __'?) you can 
+create every month. If you want to increase these limits, please contact us at [support@lucidtech.ai](mailto:support@lucidtech.ai).
 
 #### Current default quotas
 
