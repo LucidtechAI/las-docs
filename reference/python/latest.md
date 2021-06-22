@@ -1,13 +1,21 @@
 # las package
 
+(TTNote: Suggest an index on top for each module listed below for easier access to the content.)
+
+(TTNote: Also consider additional separation between each module for clarity when reading, such as the separator lines that I've added.)
+
+
 ## Module contents
 
 
 ### class las.Client(credentials: Optional[las.credentials.Credentials] = None)
 Bases: `object`
+(TTNote: Suggest additional notations about why 'basis' is mentioned here.)
 
-A low level client to invoke api methods from Lucidtech AI Services.
+A low-level client to invoke API methods from Lucidtech AI Services.
 
+
+- - -
 
 #### create_app_client(generate_secret=True, logout_urls=None, callback_urls=None, login_urls=None, default_login_url=None, \*\*optional_args)
 Creates an appClient, calls the POST /appClients endpoint.
@@ -28,7 +36,7 @@ Creates an appClient, calls the POST /appClients endpoint.
     * **description** (*Optional**[**str**]*) – Description of the appClient
 
 
-    * **generate_secret** (*Boolean*) – Set to False to ceate a Public app client, default: True
+    * **generate_secret** (*Boolean*) – Set to False to create a Public app client, default: True
 
 
     * **logout_urls** (*List**[**str**]*) – List of logout urls
@@ -61,6 +69,7 @@ Creates an appClient, calls the POST /appClients endpoint.
     `InvalidCredentialsException`, `TooManyRequestsException`, `LimitExceededException`, `requests.exception.RequestException`
 
 
+- - -
 
 #### create_asset(content: Union[bytes, bytearray, str, pathlib.Path, io.IOBase], \*\*optional_args)
 Creates an asset, calls the POST /assets endpoint.
@@ -103,6 +112,8 @@ Creates an asset, calls the POST /assets endpoint.
 
 
 
+- - -
+
 #### create_batch(\*\*optional_args)
 Creates a batch, calls the POST /batches endpoint.
 
@@ -141,6 +152,8 @@ Creates a batch, calls the POST /batches endpoint.
 
 
 
+- - -
+
 #### create_document(content: Union[bytes, bytearray, str, pathlib.Path, io.IOBase], content_type: str, \*, consent_id: Optional[str] = None, batch_id: Optional[str] = None, ground_truth: Optional[Sequence[Dict[str, str]]] = None)
 Creates a document, calls the POST /documents endpoint.
 
@@ -160,10 +173,10 @@ Creates a document, calls the POST /documents endpoint.
     * **content_type** (*str*) – MIME type for the document
 
 
-    * **consent_id** (*Optional**[**str**]*) – Id of the consent that marks the owner of the document
+    * **consent_id** (*Optional**[**str**]*) – ID of the consent that marks the owner of the document
 
 
-    * **batch_id** (*Optional**[**str**]*) – Id of the associated batch
+    * **batch_id** (*Optional**[**str**]*) – ID of the associated batch
 
 
     * **ground_truth** – List of items {‘label’: label, ‘value’: value}
@@ -180,6 +193,8 @@ representing the ground truth values for the document
     `InvalidCredentialsException`, `TooManyRequestsException`, `LimitExceededException`, `requests.exception.RequestException`
 
 
+
+- - -
 
 #### create_model(width: int, height: int, field_config: dict, \*, preprocess_config: Optional[dict] = None, name: Optional[str] = None, description: Optional[str] = None, \*\*optional_args)
 Creates a model, calls the POST /models endpoint.
@@ -225,6 +240,8 @@ Creates a model, calls the POST /models endpoint.
 
 
 
+- - -
+
 #### create_prediction(document_id: str, model_id: str, \*, max_pages: Optional[int] = None, auto_rotate: Optional[bool] = None, image_quality: Optional[str] = None)
 Create a prediction on a document using specified model, calls the POST /predictions endpoint.
 
@@ -241,16 +258,16 @@ Create a prediction on a document using specified model, calls the POST /predict
     * **document_id** (*str*) – Id of the document to run inference and create a prediction on
 
 
-    * **model_id** (*str*) – Id of the model to use for inference
+    * **model_id** (*str*) – ID of the model to use for inference
 
 
     * **max_pages** (*Optional**[**int**]*) – Maximum number of pages to run predictions on
 
 
-    * **auto_rotate** (*Optional**[**bool**]*) – Whether or not to let the API try different rotations on            the document when running predictions
+    * **auto_rotate** (*Optional**[**bool**]*) – Whether or not to let the API try different rotations on the document when running predictions
 
 
-    * **image_quality** (*Optional**[**int**]*) – image quality for prediction “LOW|HIGH”.             high quality could give better result but will also take longer time.
+    * **image_quality** (*Optional**[**int**]*) – Image quality for prediction “LOW|HIGH”. Note: High quality could give better results, but will also take longer.
 
 
 
@@ -272,8 +289,10 @@ Create a prediction on a document using specified model, calls the POST /predict
 
 
 
+- - -
+
 #### create_secret(data: dict, \*\*optional_args)
-Creates an secret, calls the POST /secrets endpoint.
+Creates a secret, calls the POST /secrets endpoint.
 
 ```python
 >>> from las.client import Client
@@ -314,6 +333,8 @@ Creates an secret, calls the POST /secrets endpoint.
 
 
 
+- - -
+
 #### create_transition(transition_type: str, \*, in_schema: Optional[dict] = None, out_schema: Optional[dict] = None, parameters: Optional[dict] = None, \*\*optional_args)
 Creates a transition, calls the POST /transitions endpoint.
 
@@ -343,10 +364,10 @@ Creates a transition, calls the POST /transitions endpoint.
     * **transition_type** (*str*) – Type of transition “docker”|”manual”
 
 
-    * **in_schema** (*Optional**[**dict**]*) – Json-schema that defines the input to the transition
+    * **in_schema** (*Optional**[**dict**]*) – Json schema that defines the input to the transition
 
 
-    * **out_schema** (*Optional**[**dict**]*) – Json-schema that defines the output of the transition
+    * **out_schema** (*Optional**[**dict**]*) – Json schema that defines the output of the transition
 
 
     * **name** (*Optional**[**str**]*) – Name of the transition
@@ -377,6 +398,8 @@ Creates a transition, calls the POST /transitions endpoint.
 
 
 
+- - -
+
 #### create_user(email: str, \*, app_client_id, \*\*optional_args)
 Creates a new user, calls the POST /users endpoint.
 
@@ -390,7 +413,7 @@ Creates a new user, calls the POST /users endpoint.
 * **Parameters**
 
     
-    * **email** (*str*) – Email to the new user
+    * **email** (*str*) – Email to the new user (TTNote: Unclear if this is a flag to 'send an email to the user' or a field to include the 'email address of the user'.)
 
 
     * **name** (*Optional**[**str**]*) – Name of the user
@@ -418,9 +441,11 @@ Creates a new user, calls the POST /users endpoint.
 
 
 
+- - -
+
 #### create_workflow(specification: dict, \*, error_config: Optional[dict] = None, completed_config: Optional[dict] = None, \*\*optional_args)
 Creates a new workflow, calls the POST /workflows endpoint.
-Check out Lucidtech’s tutorials for more info on how to create a workflow.
+Note: Check out Lucidtech’s tutorials (TTNote: Suggest a link here.) for more info on how to create a workflow.
 
 ```python
 >>> from las.client import Client
@@ -470,6 +495,8 @@ Check out Lucidtech’s tutorials for more info on how to create a workflow.
 
 
 
+- - -
+
 #### delete_app_client(app_client_id: str)
 Delete the appClient with the provided appClientId, calls the DELETE /appClients/{appClientId} endpoint.
 
@@ -482,7 +509,7 @@ Delete the appClient with the provided appClientId, calls the DELETE /appClients
 
 * **Parameters**
 
-    **app_client_id** (*str*) – Id of the appClient
+    **app_client_id** (*str*) – ID of the appClient
 
 
 
@@ -504,6 +531,8 @@ Delete the appClient with the provided appClientId, calls the DELETE /appClients
 
 
 
+- - -
+
 #### delete_asset(asset_id: str)
 Delete the asset with the provided asset_id, calls the DELETE /assets/{assetId} endpoint.
 
@@ -516,7 +545,7 @@ Delete the asset with the provided asset_id, calls the DELETE /assets/{assetId} 
 
 * **Parameters**
 
-    **asset_id** (*str*) – Id of the asset
+    **asset_id** (*str*) – ID of the asset
 
 
 
@@ -538,6 +567,8 @@ Delete the asset with the provided asset_id, calls the DELETE /assets/{assetId} 
 
 
 
+- - -
+
 #### delete_batch(batch_id: str, delete_documents=False)
 Delete the batch with the provided batch_id, calls the DELETE /batches/{batchId} endpoint.
 
@@ -551,10 +582,10 @@ Delete the batch with the provided batch_id, calls the DELETE /batches/{batchId}
 * **Parameters**
 
     
-    * **batch_id** (*str*) – Id of the batch
+    * **batch_id** (*str*) – ID of the batch
 
 
-    * **delete_documents** (*bool*) – Set to true to delete documents in batch before deleting batch
+    * **delete_documents** (*bool*) – Set to 'true' to delete documents in batch before deleting the batch
 
 
 
@@ -576,6 +607,8 @@ Delete the batch with the provided batch_id, calls the DELETE /batches/{batchId}
 
 
 
+- - -
+
 #### delete_documents(\*, consent_id: Optional[Union[str, List[str]]] = None, batch_id: Optional[Union[str, List[str]]] = None, max_results: Optional[int] = None, next_token: Optional[str] = None)
 Delete documents with the provided consent_id, calls the DELETE /documents endpoint.
 
@@ -589,10 +622,10 @@ Delete documents with the provided consent_id, calls the DELETE /documents endpo
 * **Parameters**
 
     
-    * **batch_id** (*Optional**[**Queryparam**]*) – Ids of the batches to be deleted
+    * **batch_id** (*Optional**[**Queryparam**]*) – IDs of the batches to be deleted
 
 
-    * **consent_id** (*Optional**[**Queryparam**]*) – Ids of the consents that marks the owner of the document
+    * **consent_id** (*Optional**[**Queryparam**]*) – IDs of the consents that marks the owner of the document
 
 
     * **max_results** (*Optional**[**int**]*) – Maximum number of documents that will be deleted
@@ -620,6 +653,8 @@ Delete documents with the provided consent_id, calls the DELETE /documents endpo
 
 
 
+- - -
+
 #### delete_secret(secret_id: str)
 Delete the secret with the provided secret_id, calls the DELETE /secrets/{secretId} endpoint.
 
@@ -632,7 +667,7 @@ Delete the secret with the provided secret_id, calls the DELETE /secrets/{secret
 
 * **Parameters**
 
-    **secret_id** (*str*) – Id of the secret
+    **secret_id** (*str*) – ID of the secret
 
 
 
@@ -654,6 +689,8 @@ Delete the secret with the provided secret_id, calls the DELETE /secrets/{secret
 
 
 
+- - -
+
 #### delete_transition(transition_id: str)
 Delete the transition with the provided transition_id, calls the DELETE /transitions/{transitionId} endpoint.
 
@@ -668,7 +705,7 @@ Delete the transition with the provided transition_id, calls the DELETE /transit
 
 * **Parameters**
 
-    **transition_id** (*str*) – Id of the transition
+    **transition_id** (*str*) – ID of the transition
 
 
 
@@ -690,6 +727,8 @@ Delete the transition with the provided transition_id, calls the DELETE /transit
 
 
 
+- - -
+
 #### delete_user(user_id: str)
 Delete the user with the provided user_id, calls the DELETE /users/{userId} endpoint.
 
@@ -702,7 +741,7 @@ Delete the user with the provided user_id, calls the DELETE /users/{userId} endp
 
 * **Parameters**
 
-    **user_id** (*str*) – Id of the user
+    **user_id** (*str*) – ID of the user
 
 
 
@@ -723,6 +762,8 @@ Delete the user with the provided user_id, calls the DELETE /users/{userId} endp
     `InvalidCredentialsException`, `TooManyRequestsException`, `LimitExceededException`, `requests.exception.RequestException`
 
 
+
+- - -
 
 #### delete_workflow(workflow_id: str)
 Delete the workflow with the provided workflow_id, calls the DELETE /workflows/{workflowId} endpoint.
@@ -756,6 +797,8 @@ Delete the workflow with the provided workflow_id, calls the DELETE /workflows/{
 
     `InvalidCredentialsException`, `TooManyRequestsException`, `LimitExceededException`, `requests.exception.RequestException`
 
+
+- - -
 
 
 #### delete_workflow_execution(workflow_id: str, execution_id: str)
@@ -797,6 +840,8 @@ calls the DELETE /workflows/{workflowId}/executions/{executionId} endpoint.
 
 
 
+- - -
+
 #### execute_transition(transition_id: str)
 Start executing a manual transition, calls the POST /transitions/{transitionId}/executions endpoint.
 
@@ -830,6 +875,8 @@ Start executing a manual transition, calls the POST /transitions/{transitionId}/
     `InvalidCredentialsException`, `TooManyRequestsException`, `LimitExceededException`, `requests.exception.RequestException`
 
 
+
+- - -
 
 #### execute_workflow(workflow_id: str, content: dict)
 Start a workflow execution, calls the POST /workflows/{workflowId}/executions endpoint.
@@ -871,6 +918,8 @@ Start a workflow execution, calls the POST /workflows/{workflowId}/executions en
 
 
 
+- - -
+
 #### get_asset(asset_id: str)
 Get asset, calls the GET /assets/{assetId} endpoint.
 
@@ -883,7 +932,7 @@ Get asset, calls the GET /assets/{assetId} endpoint.
 
 * **Parameters**
 
-    **asset_id** (*str*) – Id of the asset
+    **asset_id** (*str*) – ID of the asset
 
 
 
@@ -905,6 +954,8 @@ Get asset, calls the GET /assets/{assetId} endpoint.
 
 
 
+- - -
+
 #### get_document(document_id: str)
 Get document, calls the GET /documents/{documentId} endpoint.
 
@@ -917,7 +968,7 @@ Get document, calls the GET /documents/{documentId} endpoint.
 
 * **Parameters**
 
-    **document_id** (*str*) – Id of the document
+    **document_id** (*str*) – ID of the document
 
 
 
@@ -938,6 +989,8 @@ Get document, calls the GET /documents/{documentId} endpoint.
     `InvalidCredentialsException`, `TooManyRequestsException`, `LimitExceededException`, `requests.exception.RequestException`
 
 
+
+- - -
 
 #### get_log(log_id)
 get log, calls the GET /logs/{logId} endpoint.
@@ -973,6 +1026,8 @@ get log, calls the GET /logs/{logId} endpoint.
 
 
 
+- - -
+
 #### get_model(model_id: str)
 Get a model, calls the GET /models/{modelId} endpoint.
 
@@ -1000,6 +1055,8 @@ Get a model, calls the GET /models/{modelId} endpoint.
     `InvalidCredentialsException`, `TooManyRequestsException`, `LimitExceededException`, `requests.exception.RequestException`
 
 
+
+- - -
 
 #### get_transition(transition_id: str)
 Get the transition with the provided transition_id, calls the GET /transitions/{transitionId} endpoint.
@@ -1033,6 +1090,8 @@ Get the transition with the provided transition_id, calls the GET /transitions/{
 
     `InvalidCredentialsException`, `TooManyRequestsException`, `LimitExceededException`, `requests.exception.RequestException`
 
+
+- - -
 
 
 #### get_transition_execution(transition_id: str, execution_id: str)
@@ -1073,6 +1132,8 @@ Get an execution of a transition, calls the GET /transitions/{transitionId}/exec
 
 
 
+- - -
+
 #### get_user(user_id: str)
 Get information about a specific user, calls the GET /users/{user_id} endpoint.
 
@@ -1106,6 +1167,8 @@ Get information about a specific user, calls the GET /users/{user_id} endpoint.
     `InvalidCredentialsException`, `TooManyRequestsException`, `LimitExceededException`, `requests.exception.RequestException`
 
 
+- - -
+
 
 #### get_workflow(workflow_id: str)
 Get the workflow with the provided workflow_id, calls the GET /workflows/{workflowId} endpoint.
@@ -1119,7 +1182,7 @@ Get the workflow with the provided workflow_id, calls the GET /workflows/{workfl
 
 * **Parameters**
 
-    **workflow_id** (*str*) – Id of the workflow
+    **workflow_id** (*str*) – ID of the workflow
 
 
 
@@ -1140,6 +1203,8 @@ Get the workflow with the provided workflow_id, calls the GET /workflows/{workfl
     `InvalidCredentialsException`, `TooManyRequestsException`, `LimitExceededException`, `requests.exception.RequestException`
 
 
+
+- - -
 
 #### get_workflow_execution(workflow_id: str, execution_id: str)
 Get a workflow execution, calls the GET /workflows/{workflow_id}/executions/{execution_id} endpoint.
@@ -1179,6 +1244,8 @@ Get a workflow execution, calls the GET /workflows/{workflow_id}/executions/{exe
 
 
 
+- - -
+
 #### list_app_clients(\*, max_results: Optional[int] = None, next_token: Optional[str] = None)
 List appClients available, calls the GET /appClients endpoint.
 
@@ -1215,6 +1282,8 @@ List appClients available, calls the GET /appClients endpoint.
 
     `InvalidCredentialsException`, `TooManyRequestsException`, `LimitExceededException`, `requests.exception.RequestException`
 
+
+- - -
 
 
 #### list_assets(\*, max_results: Optional[int] = None, next_token: Optional[str] = None)
@@ -1255,6 +1324,8 @@ List assets available, calls the GET /assets endpoint.
 
 
 
+- - -
+
 #### list_batches(\*, max_results: Optional[int] = None, next_token: Optional[str] = None)
 List batches available, calls the GET /batches endpoint.
 
@@ -1292,6 +1363,8 @@ List batches available, calls the GET /batches endpoint.
     `InvalidCredentialsException`, `TooManyRequestsException`, `LimitExceededException`, `requests.exception.RequestException`
 
 
+- - -
+
 
 #### list_documents(\*, batch_id: Optional[Union[str, List[str]]] = None, consent_id: Optional[Union[str, List[str]]] = None, max_results: Optional[int] = None, next_token: Optional[str] = None)
 List documents available for inference, calls the GET /documents endpoint.
@@ -1306,10 +1379,10 @@ List documents available for inference, calls the GET /documents endpoint.
 * **Parameters**
 
     
-    * **batch_id** (*Optional**[**Queryparam**]*) – Ids of batches that contains the documents of interest
+    * **batch_id** (*Optional**[**Queryparam**]*) – IDs of batches that contains the documents of interest
 
 
-    * **consent_id** (*Optional**[**Queryparam**]*) – Ids of the consents that marks the owner of the document
+    * **consent_id** (*Optional**[**Queryparam**]*) – IDs of the consents that marks the owner of the document
 
 
     * **max_results** (*Optional**[**int**]*) – Maximum number of results to be returned
@@ -1337,6 +1410,8 @@ List documents available for inference, calls the GET /documents endpoint.
 
 
 
+- - -
+
 #### list_logs(\*, workflow_id: Optional[Union[str, List[str]]] = None, workflow_execution_id: Optional[Union[str, List[str]]] = None, transition_id: Optional[Union[str, List[str]]] = None, transition_execution_id: Optional[Union[str, List[str]]] = None, max_results: Optional[int] = None, next_token: Optional[str] = None)
 List logs, calls the GET /logs endpoint.
 
@@ -1361,6 +1436,7 @@ List logs, calls the GET /logs endpoint.
 
     * **transition_execution_id** (*Optional**[**Queryparam**]*) – 
 
+(TTNote: Suggest descriptions for the bullets above.)
 
     * **max_results** (*Optional**[**int**]*) – Maximum number of results to be returned
 
@@ -1386,6 +1462,8 @@ List logs, calls the GET /logs endpoint.
     `InvalidCredentialsException`, `TooManyRequestsException`, `LimitExceededException`, `requests.exception.RequestException`
 
 
+
+- - -
 
 #### list_models(\*, max_results: Optional[int] = None, next_token: Optional[str] = None)
 List models available, calls the GET /models endpoint.
@@ -1425,6 +1503,8 @@ List models available, calls the GET /models endpoint.
 
 
 
+- - -
+
 #### list_predictions(\*, max_results: Optional[int] = None, next_token: Optional[str] = None)
 List predictions available, calls the GET /predictions endpoint.
 
@@ -1462,6 +1542,8 @@ List predictions available, calls the GET /predictions endpoint.
     `InvalidCredentialsException`, `TooManyRequestsException`, `LimitExceededException`, `requests.exception.RequestException`
 
 
+
+- - -
 
 #### list_secrets(\*, max_results: Optional[int] = None, next_token: Optional[str] = None)
 List secrets available, calls the GET /secrets endpoint.
@@ -1501,6 +1583,8 @@ List secrets available, calls the GET /secrets endpoint.
 
 
 
+- - -
+
 #### list_transition_executions(transition_id: str, \*, status: Optional[Union[str, List[str]]] = None, execution_id: Optional[Union[str, List[str]]] = None, max_results: Optional[int] = None, next_token: Optional[str] = None, sort_by: Optional[str] = None, order: Optional[str] = None)
 List executions in a transition, calls the GET /transitions/{transitionId}/executions endpoint.
 
@@ -1514,7 +1598,7 @@ List executions in a transition, calls the GET /transitions/{transitionId}/execu
 * **Parameters**
 
     
-    * **transition_id** (*str*) – Id of the transition
+    * **transition_id** (*str*) – ID of the transition
 
 
     * **status** (*Optional**[**Queryparam**]*) – Statuses of the executions
@@ -1523,10 +1607,10 @@ List executions in a transition, calls the GET /transitions/{transitionId}/execu
     * **order** (*Optional**[**str**]*) – Order of the executions, either ‘ascending’ or ‘descending’
 
 
-    * **sort_by** (*Optional**[**str**]*) – the sorting variable of the executions, either ‘endTime’, or ‘startTime’
+    * **sort_by** (*Optional**[**str**]*) – The sorting variable of the executions, either ‘endTime’, or ‘startTime’
 
 
-    * **execution_id** (*Optional**[**Queryparam**]*) – Ids of the executions
+    * **execution_id** (*Optional**[**Queryparam**]*) – IDs of the executions
 
 
     * **max_results** (*Optional**[**int**]*) – Maximum number of results to be returned
@@ -1553,6 +1637,8 @@ List executions in a transition, calls the GET /transitions/{transitionId}/execu
     `InvalidCredentialsException`, `TooManyRequestsException`, `LimitExceededException`, `requests.exception.RequestException`
 
 
+
+- - -
 
 #### list_transitions(\*, transition_type: Optional[Union[str, List[str]]] = None, max_results: Optional[int] = None, next_token: Optional[str] = None)
 List transitions, calls the GET /transitions endpoint.
@@ -1595,6 +1681,8 @@ List transitions, calls the GET /transitions endpoint.
 
 
 
+- - -
+
 #### list_users(\*, max_results: Optional[int] = None, next_token: Optional[str] = None)
 List users, calls the GET /users endpoint.
 
@@ -1633,6 +1721,8 @@ List users, calls the GET /users endpoint.
 
 
 
+- - -
+
 #### list_workflow_executions(workflow_id: str, \*, status: Optional[Union[str, List[str]]] = None, sort_by: Optional[str] = None, order: Optional[str] = None, max_results: Optional[int] = None, next_token: Optional[str] = None)
 List executions in a workflow, calls the GET /workflows/{workflowId}/executions endpoint.
 
@@ -1646,13 +1736,13 @@ List executions in a workflow, calls the GET /workflows/{workflowId}/executions 
 * **Parameters**
 
     
-    * **workflow_id** (*str*) – Id of the workflow
+    * **workflow_id** (*str*) – ID of the workflow
 
 
     * **order** (*Optional**[**str**]*) – Order of the executions, either ‘ascending’ or ‘descending’
 
 
-    * **sort_by** (*Optional**[**str**]*) – the sorting variable of the executions, either ‘endTime’, or ‘startTime’
+    * **sort_by** (*Optional**[**str**]*) – The sorting variable of the executions, either ‘endTime’, or ‘startTime’
 
 
     * **status** (*Optional**[**Queryparam**]*) – Statuses of the executions
@@ -1682,6 +1772,8 @@ List executions in a workflow, calls the GET /workflows/{workflowId}/executions 
     `InvalidCredentialsException`, `TooManyRequestsException`, `LimitExceededException`, `requests.exception.RequestException`
 
 
+
+- - -
 
 #### list_workflows(\*, max_results: Optional[int] = None, next_token: Optional[str] = None)
 List workflows, calls the GET /workflows endpoint.
@@ -1721,10 +1813,12 @@ List workflows, calls the GET /workflows endpoint.
 
 
 
+- - -
+
 #### send_heartbeat(transition_id: str, execution_id: str)
-Send heartbeat for a manual execution to signal that we are still working on it.
-Must be done at minimum once every 60 seconds or the transition execution will time out,
-calls the POST /transitions/{transitionId}/executions/{executionId}/heartbeats endpoint.
+Sends a heartbeat for a manual execution to signal that we are still working on it.
+Note: This must be done, at minimum, once every 60 seconds or the transition execution will time out.
+Calls the POST /transitions/{transitionId}/executions/{executionId}/heartbeats endpoint.
 
 ```python
 >>> from las.client import Client
@@ -1736,10 +1830,10 @@ calls the POST /transitions/{transitionId}/executions/{executionId}/heartbeats e
 * **Parameters**
 
     
-    * **transition_id** (*str*) – Id of the transition
+    * **transition_id** (*str*) – ID of the transition
 
 
-    * **execution_id** (*str*) – Id of the transition execution
+    * **execution_id** (*str*) – IDof the transition execution
 
 
 
@@ -1761,6 +1855,8 @@ calls the POST /transitions/{transitionId}/executions/{executionId}/heartbeats e
 
 
 
+- - -
+
 #### update_app_client(app_client_id, \*\*optional_args)
 Updates an appClient, calls the PATCH /appClients/{appClientId} endpoint.
 
@@ -1768,7 +1864,7 @@ Updates an appClient, calls the PATCH /appClients/{appClientId} endpoint.
 * **Parameters**
 
     
-    * **app_client_id** (*str*) – Id of the appClient
+    * **app_client_id** (*str*) – ID of the appClient
 
 
     * **name** (*Optional**[**str**]*) – Name of the appClient
@@ -1796,6 +1892,8 @@ Updates an appClient, calls the PATCH /appClients/{appClientId} endpoint.
 
 
 
+- - -
+
 #### update_asset(asset_id: str, \*\*optional_args)
 Updates an asset, calls the PATCH /assets/{assetId} endpoint.
 
@@ -1809,10 +1907,10 @@ Updates an asset, calls the PATCH /assets/{assetId} endpoint.
 * **Parameters**
 
     
-    * **asset_id** (*str*) – Id of the asset
+    * **asset_id** (*str*) – ID of the asset
 
 
-    * **content** (*Optional**[**Content**]*) – Content to PATCH
+    * **content** (*Optional**[**Content**]*) – Content to patch
 
 
     * **name** (*Optional**[**str**]*) – Name of the asset
@@ -1840,6 +1938,8 @@ Updates an asset, calls the PATCH /assets/{assetId} endpoint.
 
 
 
+- - -
+
 #### update_batch(batch_id, \*\*optional_args)
 Updates a batch, calls the PATCH /batches/{batchId} endpoint.
 
@@ -1847,7 +1947,7 @@ Updates a batch, calls the PATCH /batches/{batchId} endpoint.
 * **Parameters**
 
     
-    * **batch_id** (*str*) – Id of the batch
+    * **batch_id** (*str*) – ID of the batch
 
 
     * **name** (*Optional**[**str**]*) – Name of the batch
@@ -1875,9 +1975,11 @@ Updates a batch, calls the PATCH /batches/{batchId} endpoint.
 
 
 
+- - -
+
 #### update_document(document_id: str, ground_truth: Sequence[Dict[str, Union[str, None, bool]]])
 Update ground truth for a document, calls the PATCH /documents/{documentId} endpoint.
-Updating ground truth means adding the ground truth data for the particular document.
+Updating ground truth means updating the ground truth data for the particular document.
 This enables the API to learn from past mistakes.
 
 ```python
@@ -1891,7 +1993,7 @@ This enables the API to learn from past mistakes.
 * **Parameters**
 
     
-    * **document_id** (*str*) – Id of the document
+    * **document_id** (*str*) – ID of the document
 
 
     * **ground_truth** (*Sequence**[**Dict**[**str**, **Union**[**Optional**[**str**]**, **bool**]**]**]*) – List of items {label: value} representing the ground truth values for the document
@@ -1916,6 +2018,8 @@ This enables the API to learn from past mistakes.
 
 
 
+- - -
+
 #### update_model(model_id: str, \*, width: Optional[int] = None, height: Optional[int] = None, field_config: Optional[dict] = None, preprocess_config: Optional[dict] = None, status: Optional[str] = None, \*\*optional_args)
 Updates a model, calls the PATCH /models/{modelId} endpoint.
 
@@ -1923,7 +2027,7 @@ Updates a model, calls the PATCH /models/{modelId} endpoint.
 * **Parameters**
 
     
-    * **model_id** (*Optional**[**str**]*) – The Id of the model
+    * **model_id** (*Optional**[**str**]*) – The ID of the model
 
 
     * **width** (*Optional**[**int**]*) – The number of pixels to be used for the input image width of your model
@@ -1966,8 +2070,10 @@ Updates a model, calls the PATCH /models/{modelId} endpoint.
 
 
 
+- - -
+
 #### update_secret(secret_id: str, \*, data: Optional[dict] = None, \*\*optional_args)
-Updates an secret, calls the PATCH /secrets/secretId endpoint.
+Updates a secret, calls the PATCH /secrets/secretId endpoint.
 
 ```python
 >>> from las.client import Client
@@ -1980,7 +2086,7 @@ Updates an secret, calls the PATCH /secrets/secretId endpoint.
 * **Parameters**
 
     
-    * **secret_id** (*str*) – Id of the secret
+    * **secret_id** (*str*) – ID of the secret
 
 
     * **data** (*Optional**[**dict**]*) – Dict containing the data you want to keep secret
@@ -2011,6 +2117,8 @@ Updates an secret, calls the PATCH /secrets/secretId endpoint.
 
 
 
+- - -
+
 #### update_transition(transition_id: str, \*, in_schema: Optional[dict] = None, out_schema: Optional[dict] = None, assets: Optional[dict] = None, environment: Optional[dict] = None, environment_secrets: Optional[list] = None, \*\*optional_args)
 Updates a transition, calls the PATCH /transitions/{transitionId} endpoint.
 
@@ -2026,7 +2134,7 @@ Updates a transition, calls the PATCH /transitions/{transitionId} endpoint.
 * **Parameters**
 
     
-    * **transition_id** (*str*) – Id of the transition
+    * **transition_id** (*str*) – ID of the transition
 
 
     * **name** (*Optional**[**str**]*) – Name of the transition
@@ -2035,10 +2143,10 @@ Updates a transition, calls the PATCH /transitions/{transitionId} endpoint.
     * **description** (*Optional**[**str**]*) – Description of the transition
 
 
-    * **in_schema** (*Optional**[**dict**]*) – Json-schema that defines the input to the transition
+    * **in_schema** (*Optional**[**dict**]*) – Json schema that defines the input to the transition
 
 
-    * **out_schema** (*Optional**[**dict**]*) – Json-schema that defines the output of the transition
+    * **out_schema** (*Optional**[**dict**]*) – Json schema that defines the output of the transition
 
 
     * **assets** (*Optional**[**dict**]*) – A dictionary where the values are assetIds that can be used in a manual transition
@@ -2062,6 +2170,8 @@ A list of secretIds that contains environment variables to use for a docker tran
 
 
 
+- - -
+
 #### update_transition_execution(transition_id: str, execution_id: str, status: str, \*, output: Optional[dict] = None, error: Optional[dict] = None, start_time: Optional[Union[str, datetime.datetime]] = None)
 Ends the processing of the transition execution,
 calls the PATCH /transitions/{transition_id}/executions/{execution_id} endpoint.
@@ -2079,22 +2189,22 @@ calls the PATCH /transitions/{transition_id}/executions/{execution_id} endpoint.
 * **Parameters**
 
     
-    * **transition_id** (*str*) – Id of the transition that performs the execution
+    * **transition_id** (*str*) – ID of the transition that performs the execution
 
 
-    * **execution_id** (*str*) – Id of the execution to update
+    * **execution_id** (*str*) – ID of the execution to update
 
 
     * **status** (*str*) – Status of the execution ‘succeeded|failed’
 
 
-    * **output** (*Optional**[**dict**]*) – Output from the execution, required when status is ‘succeded’
+    * **output** (*Optional**[**dict**]*) – Output from the execution, required when status is ‘succeeded’
 
 
     * **error** (*Optional**[**dict**]*) – Error from the execution, required when status is ‘failed’, needs to contain ‘message’
 
 
-    * **start_time** (*Optional**[**str**]*) – start time that will replace the original start time of the execution
+    * **start_time** (*Optional**[**str**]*) – Start time that will replace the original start time of the execution
 
 
 
@@ -2116,6 +2226,8 @@ calls the PATCH /transitions/{transition_id}/executions/{execution_id} endpoint.
 
 
 
+- - -
+
 #### update_user(user_id: str, \*\*optional_args)
 Updates a user, calls the PATCH /users/{userId} endpoint.
 
@@ -2129,7 +2241,7 @@ Updates a user, calls the PATCH /users/{userId} endpoint.
 * **Parameters**
 
     
-    * **user_id** (*str*) – Id of the user
+    * **user_id** (*str*) – ID of the user
 
 
     * **name** (*Optional**[**str**]*) – Name of the user
@@ -2157,6 +2269,8 @@ Updates a user, calls the PATCH /users/{userId} endpoint.
 
 
 
+- - -
+
 #### update_workflow(workflow_id: str, \*, error_config: Optional[dict] = None, completed_config: Optional[dict] = None, \*\*optional_args)
 Updates a workflow, calls the PATCH /workflows/{workflowId} endpoint.
 
@@ -2172,7 +2286,7 @@ Updates a workflow, calls the PATCH /workflows/{workflowId} endpoint.
 * **Parameters**
 
     
-    * **workflow_id** – Id of the workflow
+    * **workflow_id** – ID of the workflow
 
 
     * **name** (*Optional**[**str**]*) – Name of the workflow
@@ -2206,6 +2320,8 @@ Updates a workflow, calls the PATCH /workflows/{workflowId} endpoint.
 
 
 
+- - -
+
 #### update_workflow_execution(workflow_id: str, execution_id: str, next_transition_id: str)
 Retry or end the processing of a workflow execution,
 calls the PATCH /workflows/{workflow_id}/executions/{execution_id} endpoint.
@@ -2220,13 +2336,13 @@ calls the PATCH /workflows/{workflow_id}/executions/{execution_id} endpoint.
 * **Parameters**
 
     
-    * **workflow_id** (*str*) – Id of the workflow that performs the execution
+    * **workflow_id** (*str*) – ID of the workflow that performs the execution
 
 
-    * **execution_id** (*str*) – Id of the execution to update
+    * **execution_id** (*str*) – ID of the execution to update
 
 
-    * **next_transition_id** – the next transition to transition into, to end the workflow-execution,
+    * **next_transition_id** – the next transition or to end the workflow execution (TTNote: Unclear why end workflow is mentioned here, unless it will end if the id is left blank?)
 
 
 use: las:transition:commons-failed
@@ -2240,6 +2356,8 @@ use: las:transition:commons-failed
     `InvalidCredentialsException`, `TooManyRequestsException`, `LimitExceededException`, `requests.exception.RequestException`
 
 
+
+- - -
 
 ### class las.Credentials(client_id: str, client_secret: str, api_key: str, auth_endpoint: str, api_endpoint: str)
 Bases: `object`
