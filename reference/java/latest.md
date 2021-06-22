@@ -4,6 +4,13 @@
 --------------------------------|---------------------------------------------
 `namespace `[`ai::lucidtech::las::sdk`](#namespaceai_1_1lucidtech_1_1las_1_1sdk) | 
 
+(TTNote: Consider if summary index should contain classes as well for easy references.)
+
+(TTNote: The namespace link above, along with these style links throughout this document, do not appear to work to jump to the appropriate namespace or section.)
+
+(TTNote: Consider additional separators between each module for clarity when reading.)
+
+
 # namespace `ai::lucidtech::las::sdk` 
 
 ## Summary
@@ -167,8 +174,8 @@ class ai::lucidtech::las::sdk::APIException
 `public JSONObject `[`getUser`]`(String userId)` | Get user, calls the GET /users/{userId} endpoint.
 `public JSONObject `[`updateUser`]`(String userId,`[`UpdateUserOptions`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_update_user_options)` options)` | Updates a user, calls the PATCH /users/{userId} endpoint.
 `public JSONObject `[`deleteUser`]`(String userId)` | Delete a user, calls the PATCH /users/{userId} endpoint.
-`public JSONObject `[`createWorkflow`]`(JSONObject specification,`[`CreateWorkflowOptions`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_create_workflow_options)` options)` | Creates a new workflow, calls the POST /workflows endpoint. Check out Lucidtech's tutorials for more info on how to create a workflow. see [https://docs.lucidtech.ai/getting-started/tutorials/setup_predict_and_approve](https://docs.lucidtech.ai/getting-started/tutorials/setup_predict_and_approve)
-`public JSONObject `[`createWorkflow`]`(JSONObject specification)` | Creates a new workflow, calls the POST /workflows endpoint. Check out Lucidtech's tutorials for more info on how to create a workflow. see [https://docs.lucidtech.ai/getting-started/tutorials/setup_predict_and_approve](https://docs.lucidtech.ai/getting-started/tutorials/setup_predict_and_approve)
+`public JSONObject `[`createWorkflow`]`(JSONObject specification,`[`CreateWorkflowOptions`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_create_workflow_options)` options)` | Creates a new workflow, calls the POST /workflows endpoint. Check out Lucidtech's tutorials for more information on how to create a workflow. see [https://docs.lucidtech.ai/getting-started/tutorials/setup_predict_and_approve](https://docs.lucidtech.ai/getting-started/tutorials/setup_predict_and_approve)
+`public JSONObject `[`createWorkflow`]`(JSONObject specification)` | Creates a new workflow, calls the POST /workflows endpoint. Check out Lucidtech's tutorials for more information on how to create a workflow. see [https://docs.lucidtech.ai/getting-started/tutorials/setup_predict_and_approve](https://docs.lucidtech.ai/getting-started/tutorials/setup_predict_and_approve)
 `public JSONObject `[`listWorkflows`]`(`[`ListWorkflowsOptions`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_list_workflows_options)` options)` | List workflows, calls the GET /workflows endpoint.
 `public JSONObject `[`listWorkflows`]`()` | List workflows, calls the GET /workflows endpoint.
 `public JSONObject `[`getWorkflow`]`(String workflowId)` | Get workflow, calls the GET /workflows/{workflowId} endpoint.
@@ -190,11 +197,15 @@ A client to invoke api methods from Lucidtech AI Services.
 
 **See also**: [Credentials]
 
+(TTNote: Consider if above should be a link.)
+
 #### `public JSONObject `[`createAppClient`]`(`[`CreateAppClientOptions`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_create_app_client_options)` options)` 
 
 Create an app client, calls the POST /appClients endpoint.
 
 **See also**: [CreateAppClientOptions]
+
+(TTNote: Consider if above should be a link.)
 
 #### Parameters
 * `options` Additional options to include in request body 
@@ -229,6 +240,8 @@ Update an appClient, calls the PATCH /appClients/{appClientId} endpoint.
 
 **See also**: [UpdateAppClientOptions]
 
+(TTNote: Consider if above should be a link.)
+
 #### Parameters
 * `appClientId` Id of the appClient 
 
@@ -249,6 +262,8 @@ AppClient response from REST API
 List appClients available, calls the GET /appClients endpoint.
 
 **See also**: [ListAppClientsOptions]
+
+(TTNote: Consider if above should be a link.)
 
 #### Parameters
 * `options` Additional options to pass along as query parameters 
@@ -300,6 +315,8 @@ Create an asset, calls the POST /assets endpoint.
 
 **See also**: [CreateAssetOptions]
 
+(TTNote: Consider if above should be a link.)
+
 #### Parameters
 * `content` Binary data 
 
@@ -320,6 +337,8 @@ Asset response from API
 Create an asset, calls the POST /assets endpoint.
 
 **See also**: [CreateAssetOptions]
+
+(TTNote: Consider if above should be a link.)
 
 #### Parameters
 * `content` Data from input stream 
@@ -376,6 +395,8 @@ List assets available, calls the GET /assets endpoint.
 
 **See also**: [ListAssetsOptions]
 
+(TTNote: Consider if above should be a link.)
+
 #### Parameters
 * `options` Additional options to pass along as query parameters 
 
@@ -426,6 +447,8 @@ Update an asset, calls the PATCH /assets/{assetId} endpoint.
 
 **See also**: [UpdateAssetOptions]
 
+(TTNote: Consider if above should be a link.)
+
 #### Parameters
 * `assetId` Id of the asset 
 
@@ -464,6 +487,8 @@ Create a batch, calls the POST /batches endpoint.
 
 **See also**: [CreateBatchOptions]
 
+(TTNote: Consider if above should be a link.)
+
 #### Parameters
 * `options` Additional options to include in request body 
 
@@ -497,6 +522,8 @@ Update a batch, calls the PATCH /batches/{batchId} endpoint.
 
 **See also**: [UpdateBatchOptions]
 
+(TTNote: Consider if above should be a link.)
+
 #### Parameters
 * `batchId` Id of the batch 
 
@@ -517,6 +544,8 @@ Batch response from REST API
 List batches available, calls the GET /batches endpoint.
 
 **See also**: [ListBatchesOptions]
+
+(TTNote: Consider if above should be a link.)
 
 #### Parameters
 * `options` Additional options to pass along as query parameters 
@@ -587,6 +616,8 @@ Create a document, calls the POST /documents endpoint.
 
 **See also**: [CreateDocumentOptions]
 
+(TTNote: Consider if above should be a link.)
+
 #### Parameters
 * `content` Binary data 
 
@@ -609,6 +640,8 @@ Document response from REST API
 Create a document, calls the POST /documents endpoint.
 
 **See also**: [CreateDocumentOptions]
+
+(TTNote: Consider if above should be a link.)
 
 #### Parameters
 * `content` Data from input stream 
@@ -633,6 +666,8 @@ Create a document, calls the POST /documents endpoint.
 
 **See also**: [CreateDocumentOptions]
 
+(TTNote: Consider if above should be a link.)
+
 #### Parameters
 * `content` Data from input stream 
 
@@ -654,6 +689,8 @@ Create a document, calls the POST /documents endpoint.
 
 **See also**: [CreateDocumentOptions]
 
+(TTNote: Consider if above should be a link.)
+
 #### Parameters
 * `content` Binary data 
 
@@ -674,6 +711,8 @@ Document response from REST API
 List documents, calls the GET /documents endpoint.
 
 **See also**: [ListDocumentsOptions]
+
+(TTNote: Consider if above should be a link.)
 
 #### Parameters
 * `options` Additional options to pass along as query parameters 
@@ -708,6 +747,8 @@ Delete documents, calls the DELETE /documents endpoint.
 
 **See also**: [DeleteDocumentsOptions]
 
+(TTNote: Consider if above should be a link.)
+
 #### Parameters
 * `options` Additional options to pass along as query parameters 
 
@@ -726,6 +767,8 @@ Documents response from REST API
 Delete documents, calls the DELETE /documents endpoint.
 
 **See also**: [Client::createDocument]
+
+(TTNote: Consider if above should be a link.)
 
 #### Returns
 Documents response from REST API 
@@ -759,6 +802,8 @@ Document response from REST API
 Update document, calls the PATCH /documents/{documentId} endpoint.
 
 **See also**: [Client::createDocument]
+
+(TTNote: Consider if above should be a link.)
 
 #### Parameters
 * `documentId` The document id to post groundTruth to. 
@@ -798,6 +843,8 @@ List logs, calls the GET /logs endpoint.
 
 **See also**: [ListLogsOptions]
 
+(TTNote: Consider if above should be a link.)
+
 #### Parameters
 * `options` Additional options to pass along as query parameters 
 
@@ -833,6 +880,8 @@ Create a model, calls the POST /models endpoint.
 
 **See also**: [FieldConfig]
 
+(TTNote: Consider if above 2 should be link.)
+
 #### Parameters
 * `width` The number of pixels to be used for the input image width of your model 
 
@@ -858,6 +907,8 @@ Create a model, calls the POST /models endpoint.
 
 **See also**: [FieldConfig]
 
+(TTNote: Consider if above should be a link.)
+
 #### Parameters
 * `width` The number of pixels to be used for the input image width of your model 
 
@@ -880,6 +931,8 @@ Model response from API
 Updates a model, calls the PATCH /models/{modelId} endpoint.
 
 **See also**: [UpdateModelOptions]
+
+(TTNote: Consider if above should be a link.)
 
 #### Parameters
 * `modelId` Id of the model 
@@ -919,6 +972,8 @@ List models, calls the GET /models endpoint.
 
 **See also**: [ListModelsOptions]
 
+(TTNote: Consider if above should be a link.)
+
 #### Parameters
 * `options` Additional options to pass along as query parameters 
 
@@ -954,6 +1009,8 @@ Create a prediction on a document using specified model, calls the POST /predict
 
 **See also**: [CreatePredictionOptions]
 
+(TTNote: Consider if above 2 links should be links.)
+
 #### Parameters
 * `documentId` The document id to run inference and create a prediction on. 
 
@@ -977,6 +1034,8 @@ Create a prediction on a document using specified model, calls the POST /predict
 
 **See also**: [Client::createDocument]
 
+(TTNote: Consider if above should be a link.)
+
 #### Parameters
 * `documentId` The document id to run inference and create a prediction on. 
 
@@ -997,6 +1056,8 @@ Prediction response from REST API
 List predictions available, calls the GET /predictions endpoint.
 
 **See also**: [ListPredictionsOptions]
+
+(TTNote: Consider if above should be a link.)
 
 #### Parameters
 * `options` Additional options to pass along as query parameters 
@@ -1031,6 +1092,8 @@ Create secret, calls the POST /secrets endpoint.
 
 **See also**: [CreateSecretOptions]
 
+(TTNote: Consider if above should be a link.)
+
 #### Parameters
 * `data` Key-Value pairs to store secretly 
 
@@ -1051,6 +1114,8 @@ Secret response from API
 Create a secret, calls the POST /secrets endpoint.
 
 **See also**: [CreateSecretOptions]
+
+(TTNote: Consider if above should be a link.)
 
 #### Parameters
 * `data` Key-Value pairs to store secretly 
@@ -1107,6 +1172,8 @@ List secrets, calls the GET /secrets endpoint.
 
 **See also**: [ListSecretsOptions]
 
+(TTNote: Consider if above should be a link.)
+
 #### Parameters
 * `options` Additional options to pass along as query parameters 
 
@@ -1139,6 +1206,8 @@ Secrets response from REST API
 Update a secret, calls the PATCH /secrets/{secretId} endpoint.
 
 **See also**: [UpdateSecretOptions]
+
+(TTNote: Consider if above should be a link.)
 
 #### Parameters
 * `secretId` Id of the secret 
@@ -1178,7 +1247,11 @@ Create a transition, calls the POST /transitions endpoint.
 
 **See also**: [CreateTransitionOptions]
 
+(TTNote: Consider if above should be a link.)
+
 **See also**: [TransitionType](#enumai_1_1lucidtech_1_1las_1_1sdk_1_1_transition_type)
+
+(TTNote: Link above does not work.)
 
 #### Parameters
 * `transitionType` Type of transition 
@@ -1201,6 +1274,8 @@ Create a transition, calls the POST /transitions endpoint.
 
 **See also**: [TransitionType](#enumai_1_1lucidtech_1_1las_1_1sdk_1_1_transition_type)
 
+(TTNote: Link above does not work.)
+
 #### Parameters
 * `transitionType` Type of transition 
 
@@ -1219,6 +1294,8 @@ Transition response from API
 List transitions, calls the GET /transitions endpoint.
 
 **See also**: [ListTransitionsOptions]
+
+(TTNote: Consider if above should be a link.)
 
 #### Parameters
 * `options` Additional options to pass along as query parameters 
@@ -1269,6 +1346,8 @@ Transition response from REST API
 Updates a transition, calls the PATCH /transitions/{transitionId} endpoint.
 
 **See also**: [UpdateTransitionOptions]
+
+(TTNote: Consider if above should be a link.)
 
 #### Parameters
 * `transitionId` Id of the transition 
@@ -1324,6 +1403,8 @@ Transition response from REST API
 List executions in a transition, calls the GET /transitions/{transitionId}/executions endpoint.
 
 **See also**: [ListTransitionExecutionsOptions]
+
+(TTNote: Consider if above should be a link.)
 
 #### Parameters
 * `transitionId` Id of the transition 
@@ -1382,7 +1463,12 @@ Ends the processing of the transition execution, calls the PATCH /transitions/{t
 
 **See also**: [UpdateTransitionExecutionOptions]
 
+(TTNote: Consider if above should be a link.)
+
 **See also**: [TransitionExecutionStatus](#enumai_1_1lucidtech_1_1las_1_1sdk_1_1_transition_execution_status)
+
+(TTNote: Link above does not work.)
+
 
 #### Parameters
 * `transitionId` Id of the transition 
@@ -1405,7 +1491,7 @@ Transition response from REST API
 
 #### `public JSONObject `[`sendHeartbeat`]`(String transitionId,String executionId)` 
 
-Send heartbeat for a manual execution to signal that we are still working on it. Must be done at minimum once every 60 seconds or the transition execution will time out, calls the POST /transitions/{transitionId}/executions/{executionId}/heartbeats endpoint.
+Send heartbeat for a manual execution to signal that we are still working on it. Note: Must be done at minimum once every 60 seconds or the transition execution will time out. Calls the POST /transitions/{transitionId}/executions/{executionId}/heartbeats endpoint.
 
 #### Parameters
 * `transitionId` Id of the transition 
@@ -1427,6 +1513,8 @@ Empty response
 Create a user, calls the POST /users endpoint.
 
 **See also**: [CreateUserOptions]
+
+(TTNote: Consider if above should be a link.)
 
 #### Parameters
 * `email` Email of the new user 
@@ -1465,6 +1553,8 @@ User response from API
 List users, calls the GET /users endpoint.
 
 **See also**: [ListUsersOptions]
+
+(TTNote: Consider if above should be a link.)
 
 #### Parameters
 * `options` Additional options to pass along as query parameters 
@@ -1516,6 +1606,8 @@ Updates a user, calls the PATCH /users/{userId} endpoint.
 
 **See also**: [UpdateUserOptions]
 
+(TTNote: Consider if above should be a link.)
+
 #### Parameters
 * `userId` Id of user 
 
@@ -1550,9 +1642,11 @@ User response from REST API
 
 #### `public JSONObject `[`createWorkflow`]`(JSONObject specification,`[`CreateWorkflowOptions`](#classai_1_1lucidtech_1_1las_1_1sdk_1_1_create_workflow_options)` options)` 
 
-Creates a new workflow, calls the POST /workflows endpoint. Check out Lucidtech's tutorials for more info on how to create a workflow. see [https://docs.lucidtech.ai/getting-started/tutorials/setup_predict_and_approve](https://docs.lucidtech.ai/getting-started/tutorials/setup_predict_and_approve)
+Creates a new workflow, calls the POST /workflows endpoint. Check out Lucidtech's tutorials for more information on how to create a workflow. see [https://docs.lucidtech.ai/getting-started/tutorials/setup_predict_and_approve](https://docs.lucidtech.ai/getting-started/tutorials/setup_predict_and_approve)
 
 **See also**: [CreateWorkflowOptions]
+
+(TTNote: Consider if above should be a link.)
 
 #### Parameters
 * `specification` Specification of the workflow, currently supporting ASL: [https://states-language.net/spec.html](https://states-language.net/spec.html). Check out the tutorials for more information: see [https://docs.lucidtech.ai/getting-started/tutorials/setup_predict_and_approve#creating-the-workflow](https://docs.lucidtech.ai/getting-started/tutorials/setup_predict_and_approve#creating-the-workflow)
@@ -1571,7 +1665,7 @@ Workflow response from API
 
 #### `public JSONObject `[`createWorkflow`]`(JSONObject specification)` 
 
-Creates a new workflow, calls the POST /workflows endpoint. Check out Lucidtech's tutorials for more info on how to create a workflow. see [https://docs.lucidtech.ai/getting-started/tutorials/setup_predict_and_approve](https://docs.lucidtech.ai/getting-started/tutorials/setup_predict_and_approve)
+Creates a new workflow, calls the POST /workflows endpoint. Check out Lucidtech's tutorials for more information on how to create a workflow. see [https://docs.lucidtech.ai/getting-started/tutorials/setup_predict_and_approve](https://docs.lucidtech.ai/getting-started/tutorials/setup_predict_and_approve)
 
 #### Parameters
 * `specification` Specification of the workflow, currently supporting ASL: [https://states-language.net/spec.html](https://states-language.net/spec.html). Check out the tutorials for more information: see [https://docs.lucidtech.ai/getting-started/tutorials/setup_predict_and_approve#creating-the-workflow](https://docs.lucidtech.ai/getting-started/tutorials/setup_predict_and_approve#creating-the-workflow)
@@ -1591,6 +1685,8 @@ Workflow response from API
 List workflows, calls the GET /workflows endpoint.
 
 **See also**: [ListWorkflowsOptions]
+
+(TTNote: Consider if above should be a link.)
 
 #### Parameters
 * `options` Additional options to pass along as query parameters 
@@ -1642,6 +1738,8 @@ Update a workflow, calls the PATCH /workflows/{workflowId} endpoint.
 
 **See also**: [UpdateWorkflowOptions]
 
+(TTNote: Consider if above should be a link.)
+
 #### Parameters
 * `workflowId` Id of the workflow 
 
@@ -1662,6 +1760,8 @@ Workflow response from REST API
 Delete a workflow, calls the DELETE /workflows/{workflowId} endpoint.
 
 **See also**: [Client::createWorkflow]
+
+(TTNote: Consider if above should be a link.)
 
 #### Parameters
 * `workflowId` Id of the workflow 
@@ -1701,6 +1801,8 @@ List executions in a workflow, calls the GET /workflows/{workflowId}/executions 
 
 **See also**: [ListWorkflowExecutionsOptions]
 
+(TTNote: Consider if above should be a link.)
+
 #### Parameters
 * `workflowId` Id of the workflow 
 
@@ -1739,6 +1841,8 @@ Delete execution from workflow, calls the DELETE /workflows/{workflowId}/executi
 
 **See also**: [Client::executeWorkflow]
 
+(TTNote: Consider if above should be a link.)
+
 #### Parameters
 * `workflowId` Id of the workflow 
 
@@ -1753,6 +1857,10 @@ WorkflowExecution response from REST API
 * `[APIException]` Raised when API returns an erroneous status code 
 
 * `[MissingAccessTokenException]` Raised if access token cannot be obtained
+
+
+(TTNote: Suggestion to add more verbiage to sections below such as summary descriptions and members, etc)
+
 
 # class `ai::lucidtech::las::sdk::CreateAppClientOptions` 
 
@@ -1996,6 +2104,9 @@ Used to fetch and store credentials.
 * `authEndpoint` Auth endpoint 
 
 * `apiEndpoint` Domain endpoint of the api, e.g. [https://{prefix}.api.lucidtech.ai/{version}](https://{prefix}.api.lucidtech.ai/{version})
+
+(TTNote: Consider whether this should be a link since it has variables, assumption is that this is to show the format of the url not an actual url.)
+
 
 #### Exceptions
 * `[MissingCredentialsException]` Raised if some of credentials are missing
