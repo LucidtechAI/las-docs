@@ -2,6 +2,8 @@
 
 - Why did the execution of my *docker transition* fail? 
 
+(TTNote: Do log exists for manual transitions or only docker transitions?)
+
 All executed docker *transitions* will be provided with a `logId` which references the log that was generated from 
 the execution of that *transition*. The logs provide all relevant details about the execution, including any error messages received. 
 This can be very useful when debugging if something went wrong.
