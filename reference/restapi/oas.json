@@ -2,7 +2,7 @@
   "openapi": "3.0.1",
   "info": {
     "title": "Lucidtech API",
-    "version": "2021-06-16T11:53:31Z"
+    "version": "2021-06-25T07:54:41Z"
   },
   "servers": [
     {
@@ -1822,6 +1822,572 @@
         ]
       }
     },
+    "/datasets": {
+      "get": {
+        "parameters": [
+          {
+            "in": "query",
+            "name": "nextToken",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "maxResults",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Datasets"
+                }
+              }
+            },
+            "description": "200 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "400 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "404 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "415": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "415 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "500 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "OAuth2": [
+              "api.lucidtech.ai/datasets:read"
+            ]
+          },
+          {
+            "api_key": []
+          }
+        ]
+      },
+      "options": {
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Empty"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Empty"
+                }
+              }
+            },
+            "description": "200 response",
+            "headers": {
+              "Access-Control-Allow-Headers": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "Access-Control-Allow-Methods": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "parameters": [
+          {
+            "in": "header",
+            "name": "Content-Type",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PostDatasets"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Dataset"
+                }
+              }
+            },
+            "description": "200 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "400 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "404 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "415": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "415 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "500 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "OAuth2": [
+              "api.lucidtech.ai/datasets:write"
+            ]
+          },
+          {
+            "api_key": []
+          }
+        ]
+      }
+    },
+    "/datasets/{datasetId}": {
+      "delete": {
+        "parameters": [
+          {
+            "in": "path",
+            "name": "datasetId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Dataset"
+                }
+              }
+            },
+            "description": "200 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "400 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "404 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "415": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "415 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "500 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "OAuth2": [
+              "api.lucidtech.ai/datasets:write"
+            ]
+          },
+          {
+            "api_key": []
+          }
+        ]
+      },
+      "options": {
+        "parameters": [
+          {
+            "in": "path",
+            "name": "datasetId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Empty"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Empty"
+                }
+              }
+            },
+            "description": "200 response",
+            "headers": {
+              "Access-Control-Allow-Headers": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "Access-Control-Allow-Methods": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "parameters": [
+          {
+            "in": "header",
+            "name": "Content-Type",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "datasetId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PatchDatasetId"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Dataset"
+                }
+              }
+            },
+            "description": "200 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "400 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "404 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "415": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "415 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "500 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "OAuth2": [
+              "api.lucidtech.ai/datasets:write"
+            ]
+          },
+          {
+            "api_key": []
+          }
+        ]
+      }
+    },
     "/documents": {
       "delete": {
         "parameters": [
@@ -2243,6 +2809,115 @@
       }
     },
     "/documents/{documentId}": {
+      "delete": {
+        "parameters": [
+          {
+            "in": "path",
+            "name": "documentId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Document"
+                }
+              }
+            },
+            "description": "200 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "400 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "404 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "415": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "415 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "500 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "OAuth2": [
+              "api.lucidtech.ai/documents:write"
+            ]
+          },
+          {
+            "api_key": []
+          }
+        ]
+      },
       "get": {
         "parameters": [
           {
@@ -3553,6 +4228,629 @@
           {
             "OAuth2": [
               "api.lucidtech.ai/models:write"
+            ]
+          },
+          {
+            "api_key": []
+          }
+        ]
+      }
+    },
+    "/models/{modelId}/dataBundles": {
+      "get": {
+        "parameters": [
+          {
+            "in": "path",
+            "name": "modelId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "status",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "nextToken",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "maxResults",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DataBundles"
+                }
+              }
+            },
+            "description": "200 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "400 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "404 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "415": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "415 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "500 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "OAuth2": [
+              "api.lucidtech.ai/databundles:read"
+            ]
+          },
+          {
+            "api_key": []
+          }
+        ]
+      },
+      "options": {
+        "parameters": [
+          {
+            "in": "path",
+            "name": "modelId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Empty"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Empty"
+                }
+              }
+            },
+            "description": "200 response",
+            "headers": {
+              "Access-Control-Allow-Headers": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "Access-Control-Allow-Methods": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "parameters": [
+          {
+            "in": "header",
+            "name": "Content-Type",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "modelId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PostDataBundles"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DataBundle"
+                }
+              }
+            },
+            "description": "200 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "400 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "404 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "415": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "415 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "500 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "OAuth2": [
+              "api.lucidtech.ai/databundles:write"
+            ]
+          },
+          {
+            "api_key": []
+          }
+        ]
+      }
+    },
+    "/models/{modelId}/dataBundles/{dataBundleId}": {
+      "delete": {
+        "parameters": [
+          {
+            "in": "path",
+            "name": "dataBundleId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "modelId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DataBundle"
+                }
+              }
+            },
+            "description": "200 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "400 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "404 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "415": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "415 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "500 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "OAuth2": [
+              "api.lucidtech.ai/databundles:write"
+            ]
+          },
+          {
+            "api_key": []
+          }
+        ]
+      },
+      "options": {
+        "parameters": [
+          {
+            "in": "path",
+            "name": "dataBundleId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "modelId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Empty"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Empty"
+                }
+              }
+            },
+            "description": "200 response",
+            "headers": {
+              "Access-Control-Allow-Headers": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "Access-Control-Allow-Methods": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "parameters": [
+          {
+            "in": "path",
+            "name": "dataBundleId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "Content-Type",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "modelId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PatchDataBundleId"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DataBundle"
+                }
+              }
+            },
+            "description": "200 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "400 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "404 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "415": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "415 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "500 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "OAuth2": [
+              "api.lucidtech.ai/databundles:write"
             ]
           },
           {
@@ -8713,6 +10011,10 @@
             "pattern": "^las:consent:[a-f0-9]{32}$",
             "type": "string"
           },
+          "datasetId": {
+            "pattern": "^las:dataset:[a-f0-9]{32}$",
+            "type": "string"
+          },
           "documentId": {
             "pattern": "^las:document:[a-f0-9]{32}$",
             "type": "string"
@@ -8806,6 +10108,209 @@
         },
         "additionalProperties": false
       },
+      "Datasets": {
+        "title": "datasets",
+        "required": [
+          "datasets",
+          "nextToken"
+        ],
+        "type": "object",
+        "properties": {
+          "nextToken": {
+            "maxLength": 4096,
+            "type": "string",
+            "nullable": true
+          },
+          "datasets": {
+            "type": "array",
+            "items": {
+              "required": [
+                "containsPersonallyIdentifiableInformation",
+                "createdTime",
+                "datasetId",
+                "description",
+                "numDocuments",
+                "retentionInDays",
+                "storageLocation",
+                "version"
+              ],
+              "type": "object",
+              "properties": {
+                "updatedTime": {
+                  "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2}( |T)?[0-9]{2}:?[0-9]{2}:?[0-9]{2}(.[0-9]{1,6})?(Z|[+][0-9]{2}(:|)[0-9]{2})$",
+                  "type": "string",
+                  "nullable": true
+                },
+                "retentionInDays": {
+                  "maximum": 1825,
+                  "minimum": 0,
+                  "type": "integer"
+                },
+                "name": {
+                  "maxLength": 4096,
+                  "type": "string",
+                  "nullable": true
+                },
+                "datasetId": {
+                  "pattern": "^las:dataset:[a-f0-9]{32}$",
+                  "type": "string"
+                },
+                "description": {
+                  "maxLength": 4096,
+                  "type": "string",
+                  "nullable": true
+                },
+                "createdTime": {
+                  "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2}( |T)?[0-9]{2}:?[0-9]{2}:?[0-9]{2}(.[0-9]{1,6})?(Z|[+][0-9]{2}(:|)[0-9]{2})$",
+                  "type": "string",
+                  "nullable": true
+                },
+                "storageLocation": {
+                  "type": "string",
+                  "enum": [
+                    "EU"
+                  ]
+                },
+                "containsPersonallyIdentifiableInformation": {
+                  "type": "boolean"
+                },
+                "numDocuments": {
+                  "minimum": 0,
+                  "type": "integer"
+                },
+                "version": {
+                  "minimum": 0,
+                  "type": "integer"
+                }
+              },
+              "additionalProperties": false
+            }
+          }
+        },
+        "additionalProperties": false
+      },
+      "DataBundle": {
+        "title": "dataBundle",
+        "required": [
+          "createdTime",
+          "dataBundleId",
+          "datasets",
+          "description",
+          "modelId",
+          "name",
+          "status",
+          "summary",
+          "updatedTime"
+        ],
+        "type": "object",
+        "properties": {
+          "summary": {
+            "type": "object"
+          },
+          "updatedTime": {
+            "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2}( |T)?[0-9]{2}:?[0-9]{2}:?[0-9]{2}(.[0-9]{1,6})?(Z|[+][0-9]{2}(:|)[0-9]{2})$",
+            "type": "string",
+            "nullable": true
+          },
+          "modelId": {
+            "pattern": "^las:model:[a-f0-9]{32}$",
+            "type": "string"
+          },
+          "dataBundleId": {
+            "pattern": "^las:model-data-bundle:[a-f0-9]{32}$",
+            "type": "string"
+          },
+          "name": {
+            "maxLength": 4096,
+            "type": "string",
+            "nullable": true
+          },
+          "description": {
+            "maxLength": 4096,
+            "type": "string",
+            "nullable": true
+          },
+          "createdTime": {
+            "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2}( |T)?[0-9]{2}:?[0-9]{2}:?[0-9]{2}(.[0-9]{1,6})?(Z|[+][0-9]{2}(:|)[0-9]{2})$",
+            "type": "string",
+            "nullable": true
+          },
+          "datasets": {
+            "type": "array",
+            "items": {
+              "required": [
+                "containsPersonallyIdentifiableInformation",
+                "createdTime",
+                "datasetId",
+                "description",
+                "numDocuments",
+                "retentionInDays",
+                "storageLocation",
+                "version"
+              ],
+              "type": "object",
+              "properties": {
+                "updatedTime": {
+                  "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2}( |T)?[0-9]{2}:?[0-9]{2}:?[0-9]{2}(.[0-9]{1,6})?(Z|[+][0-9]{2}(:|)[0-9]{2})$",
+                  "type": "string",
+                  "nullable": true
+                },
+                "retentionInDays": {
+                  "maximum": 1825,
+                  "minimum": 0,
+                  "type": "integer"
+                },
+                "name": {
+                  "maxLength": 4096,
+                  "type": "string",
+                  "nullable": true
+                },
+                "datasetId": {
+                  "pattern": "^las:dataset:[a-f0-9]{32}$",
+                  "type": "string"
+                },
+                "description": {
+                  "maxLength": 4096,
+                  "type": "string",
+                  "nullable": true
+                },
+                "createdTime": {
+                  "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2}( |T)?[0-9]{2}:?[0-9]{2}:?[0-9]{2}(.[0-9]{1,6})?(Z|[+][0-9]{2}(:|)[0-9]{2})$",
+                  "type": "string",
+                  "nullable": true
+                },
+                "storageLocation": {
+                  "type": "string",
+                  "enum": [
+                    "EU"
+                  ]
+                },
+                "containsPersonallyIdentifiableInformation": {
+                  "type": "boolean"
+                },
+                "numDocuments": {
+                  "minimum": 0,
+                  "type": "integer"
+                },
+                "version": {
+                  "minimum": 0,
+                  "type": "integer"
+                }
+              },
+              "additionalProperties": false
+            }
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "processing",
+              "ready",
+              "failed"
+            ]
+          }
+        },
+        "additionalProperties": false
+      },
       "Asset": {
         "title": "asset",
         "required": [
@@ -8832,6 +10337,157 @@
           "content": {
             "minLength": 1,
             "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "DataBundles": {
+        "title": "dataBundles",
+        "required": [
+          "dataBundles",
+          "nextToken"
+        ],
+        "type": "object",
+        "properties": {
+          "nextToken": {
+            "maxLength": 4096,
+            "type": "string",
+            "nullable": true
+          },
+          "dataBundles": {
+            "type": "array",
+            "items": {
+              "required": [
+                "createdTime",
+                "dataBundleId",
+                "datasets",
+                "description",
+                "modelId",
+                "name",
+                "status",
+                "summary",
+                "updatedTime"
+              ],
+              "type": "object",
+              "properties": {
+                "summary": {
+                  "type": "object"
+                },
+                "updatedTime": {
+                  "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2}( |T)?[0-9]{2}:?[0-9]{2}:?[0-9]{2}(.[0-9]{1,6})?(Z|[+][0-9]{2}(:|)[0-9]{2})$",
+                  "type": "string",
+                  "nullable": true
+                },
+                "modelId": {
+                  "pattern": "^las:model:[a-f0-9]{32}$",
+                  "type": "string"
+                },
+                "dataBundleId": {
+                  "pattern": "^las:model-data-bundle:[a-f0-9]{32}$",
+                  "type": "string"
+                },
+                "name": {
+                  "maxLength": 4096,
+                  "type": "string",
+                  "nullable": true
+                },
+                "description": {
+                  "maxLength": 4096,
+                  "type": "string",
+                  "nullable": true
+                },
+                "createdTime": {
+                  "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2}( |T)?[0-9]{2}:?[0-9]{2}:?[0-9]{2}(.[0-9]{1,6})?(Z|[+][0-9]{2}(:|)[0-9]{2})$",
+                  "type": "string",
+                  "nullable": true
+                },
+                "datasets": {
+                  "type": "array",
+                  "items": {
+                    "required": [
+                      "containsPersonallyIdentifiableInformation",
+                      "createdTime",
+                      "datasetId",
+                      "description",
+                      "numDocuments",
+                      "retentionInDays",
+                      "storageLocation",
+                      "version"
+                    ],
+                    "type": "object",
+                    "properties": {
+                      "updatedTime": {
+                        "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2}( |T)?[0-9]{2}:?[0-9]{2}:?[0-9]{2}(.[0-9]{1,6})?(Z|[+][0-9]{2}(:|)[0-9]{2})$",
+                        "type": "string",
+                        "nullable": true
+                      },
+                      "retentionInDays": {
+                        "maximum": 1825,
+                        "minimum": 0,
+                        "type": "integer"
+                      },
+                      "name": {
+                        "maxLength": 4096,
+                        "type": "string",
+                        "nullable": true
+                      },
+                      "datasetId": {
+                        "pattern": "^las:dataset:[a-f0-9]{32}$",
+                        "type": "string"
+                      },
+                      "description": {
+                        "maxLength": 4096,
+                        "type": "string",
+                        "nullable": true
+                      },
+                      "createdTime": {
+                        "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2}( |T)?[0-9]{2}:?[0-9]{2}:?[0-9]{2}(.[0-9]{1,6})?(Z|[+][0-9]{2}(:|)[0-9]{2})$",
+                        "type": "string",
+                        "nullable": true
+                      },
+                      "storageLocation": {
+                        "type": "string",
+                        "enum": [
+                          "EU"
+                        ]
+                      },
+                      "containsPersonallyIdentifiableInformation": {
+                        "type": "boolean"
+                      },
+                      "numDocuments": {
+                        "minimum": 0,
+                        "type": "integer"
+                      },
+                      "version": {
+                        "minimum": 0,
+                        "type": "integer"
+                      }
+                    },
+                    "additionalProperties": false
+                  }
+                },
+                "status": {
+                  "type": "string",
+                  "enum": [
+                    "processing",
+                    "ready",
+                    "failed"
+                  ]
+                }
+              },
+              "additionalProperties": false
+            }
+          },
+          "status": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "processing",
+                "ready",
+                "failed"
+              ]
+            }
           }
         },
         "additionalProperties": false
@@ -9257,6 +10913,10 @@
                   "pattern": "^las:consent:[a-f0-9]{32}$",
                   "type": "string"
                 },
+                "datasetId": {
+                  "pattern": "^las:dataset:[a-f0-9]{32}$",
+                  "type": "string"
+                },
                 "documentId": {
                   "pattern": "^las:document:[a-f0-9]{32}$",
                   "type": "string"
@@ -9286,6 +10946,13 @@
             "maxLength": 4096,
             "type": "string",
             "nullable": true
+          },
+          "datasetId": {
+            "type": "array",
+            "items": {
+              "pattern": "^las:dataset:[a-f0-9]{32}$",
+              "type": "string"
+            }
           },
           "batchId": {
             "type": "array",
@@ -9990,6 +11657,8 @@
         "title": "organization",
         "required": [
           "description",
+          "monthlyNumberOfDataBundlesAllowed",
+          "monthlyNumberOfDataBundlesCreated",
           "monthlyNumberOfDocumentsAllowed",
           "monthlyNumberOfDocumentsCreated",
           "monthlyNumberOfPredictionsAllowed",
@@ -10045,6 +11714,14 @@
             "minimum": 0,
             "type": "integer"
           },
+          "numberOfDatasetsAllowed": {
+            "minimum": 0,
+            "type": "integer"
+          },
+          "monthlyNumberOfDataBundlesAllowed": {
+            "minimum": 0,
+            "type": "integer"
+          },
           "organizationId": {
             "pattern": "^las:organization:[a-f0-9]{32}$",
             "type": "string"
@@ -10092,11 +11769,19 @@
             "minimum": 0,
             "type": "integer"
           },
+          "monthlyNumberOfDataBundlesCreated": {
+            "minimum": 0,
+            "type": "integer"
+          },
           "numberOfUsersCreated": {
             "minimum": 0,
             "type": "integer"
           },
           "monthlyNumberOfPredictionsCreated": {
+            "minimum": 0,
+            "type": "integer"
+          },
+          "numberOfDatasetsCreated": {
             "minimum": 0,
             "type": "integer"
           },
@@ -10168,6 +11853,23 @@
       "PostHeartbeats": {
         "title": "POST /transitions/{transitionId}/executions/{executionId}/heartbeats",
         "type": "object"
+      },
+      "PatchDataBundleId": {
+        "title": "PATCH /models/{modelId}/dataBundles/{dataBundleId}",
+        "type": "object",
+        "properties": {
+          "name": {
+            "maxLength": 4096,
+            "type": "string",
+            "nullable": true
+          },
+          "description": {
+            "maxLength": 4096,
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
       },
       "PostPredictions": {
         "title": "POST /predictions",
@@ -10534,6 +12236,89 @@
               "training",
               "inactive"
             ]
+          }
+        },
+        "additionalProperties": false
+      },
+      "PostDatasets": {
+        "title": "POST /datasets",
+        "type": "object",
+        "properties": {
+          "name": {
+            "maxLength": 4096,
+            "type": "string",
+            "nullable": true
+          },
+          "description": {
+            "maxLength": 4096,
+            "type": "string",
+            "nullable": true
+          },
+          "containsPersonallyIdentifiableInformation": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "Dataset": {
+        "title": "dataset",
+        "required": [
+          "containsPersonallyIdentifiableInformation",
+          "createdTime",
+          "datasetId",
+          "description",
+          "numDocuments",
+          "retentionInDays",
+          "storageLocation",
+          "version"
+        ],
+        "type": "object",
+        "properties": {
+          "updatedTime": {
+            "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2}( |T)?[0-9]{2}:?[0-9]{2}:?[0-9]{2}(.[0-9]{1,6})?(Z|[+][0-9]{2}(:|)[0-9]{2})$",
+            "type": "string",
+            "nullable": true
+          },
+          "retentionInDays": {
+            "maximum": 1825,
+            "minimum": 0,
+            "type": "integer"
+          },
+          "name": {
+            "maxLength": 4096,
+            "type": "string",
+            "nullable": true
+          },
+          "datasetId": {
+            "pattern": "^las:dataset:[a-f0-9]{32}$",
+            "type": "string"
+          },
+          "description": {
+            "maxLength": 4096,
+            "type": "string",
+            "nullable": true
+          },
+          "createdTime": {
+            "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2}( |T)?[0-9]{2}:?[0-9]{2}:?[0-9]{2}(.[0-9]{1,6})?(Z|[+][0-9]{2}(:|)[0-9]{2})$",
+            "type": "string",
+            "nullable": true
+          },
+          "storageLocation": {
+            "type": "string",
+            "enum": [
+              "EU"
+            ]
+          },
+          "containsPersonallyIdentifiableInformation": {
+            "type": "boolean"
+          },
+          "numDocuments": {
+            "minimum": 0,
+            "type": "integer"
+          },
+          "version": {
+            "minimum": 0,
+            "type": "integer"
           }
         },
         "additionalProperties": false
@@ -10906,6 +12691,10 @@
           },
           "consentId": {
             "pattern": "^las:consent:[a-f0-9]{32}$",
+            "type": "string"
+          },
+          "datasetId": {
+            "pattern": "^las:dataset:[a-f0-9]{32}$",
             "type": "string"
           },
           "batchId": {
@@ -11452,8 +13241,51 @@
         },
         "additionalProperties": false
       },
+      "PostDataBundles": {
+        "title": "POST /models/{modelId}/dataBundles",
+        "type": "object",
+        "properties": {
+          "datasetIds": {
+            "minItems": 1,
+            "type": "array",
+            "items": {
+              "pattern": "^las:dataset:[a-f0-9]{32}$",
+              "type": "string"
+            }
+          },
+          "name": {
+            "maxLength": 4096,
+            "type": "string",
+            "nullable": true
+          },
+          "description": {
+            "maxLength": 4096,
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
       "PatchBatchId": {
         "title": "PATCH /batches/{batchId}",
+        "minProperties": 1,
+        "type": "object",
+        "properties": {
+          "name": {
+            "maxLength": 4096,
+            "type": "string",
+            "nullable": true
+          },
+          "description": {
+            "maxLength": 4096,
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "PatchDatasetId": {
+        "title": "PATCH /datasets/{datasetId}",
         "minProperties": 1,
         "type": "object",
         "properties": {
@@ -11487,6 +13319,7 @@
               "api.lucidtech.ai/logs:read": "Scope for GET /logs/{logId}",
               "api.lucidtech.ai/users:read": "Scope for GET /users/{userId}",
               "api.lucidtech.ai/transitions:write": "Scope for DELETE /transitions/{transitionId}",
+              "api.lucidtech.ai/datasets:read": "Scope for GET /datasets",
               "api.lucidtech.ai/organizations:write": "Scope for PATCH /organizations/{organizationId}",
               "api.lucidtech.ai/organizations:read": "Scope for GET /organizations/{organizationId}",
               "api.lucidtech.ai/assets:write": "Scope for DELETE /assets/{assetId}",
@@ -11499,17 +13332,20 @@
               "api.lucidtech.ai/workflows.executions:write": "Scope for PATCH /workflows/{workflowId}/executions/{executionId}",
               "api.lucidtech.ai/transitions.executions:write": "Scope for PATCH /transitions/{transitionId}/executions/{executionId}",
               "api.lucidtech.ai/appclients:write": "Scope for DELETE /appClients/{appClientId}",
+              "api.lucidtech.ai/databundles:read": "Scope for GET /models/{modelId}/dataBundles",
               "api.lucidtech.ai/workflows:write": "Scope for PATCH /workflows/{workflowId}",
               "api.lucidtech.ai/models:read": "Scope for GET /models/{modelId}",
               "api.lucidtech.ai/predictions:write": "Scope for POST /predictions",
               "api.lucidtech.ai/appclients:read": "Scope for GET /appClients",
               "api.lucidtech.ai/models:write": "Scope for DELETE /models/{modelId}",
+              "api.lucidtech.ai/databundles:write": "Scope for DELETE /models/{modelId}/dataBundles/{dataBundleId}",
               "api.lucidtech.ai/secrets:write": "Scope for DELETE /secrets/{secretId}",
               "api.lucidtech.ai/documents:read": "Scope for GET /documents/{documentId}",
-              "api.lucidtech.ai/documents:write": "Scope for PATCH /documents/{documentId}",
+              "api.lucidtech.ai/documents:write": "Scope for DELETE /documents/{documentId}",
               "api.lucidtech.ai/batches:read": "Scope for GET /batches",
               "api.lucidtech.ai/workflows:read": "Scope for GET /workflows/{workflowId}",
               "api.lucidtech.ai/transitions.executions:read": "Scope for GET /transitions/{transitionId}/executions/{executionId}",
+              "api.lucidtech.ai/datasets:write": "Scope for DELETE /datasets/{datasetId}",
               "api.lucidtech.ai/workflows.executions:read": "Scope for GET /workflows/{workflowId}/executions/{executionId}"
             }
           }

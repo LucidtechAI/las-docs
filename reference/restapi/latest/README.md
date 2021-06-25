@@ -1199,6 +1199,419 @@
 ```
 
 
+#### GET /datasets
+
+
+
+
+
+| Header name | Header value |
+| --- | --- |
+| Authorization | Bearer &lt;your access token here&gt; |
+| x-api-key | &lt;your api key here&gt; |
+
+
+| Query name | Query value |
+| --- | --- |
+| nextToken | String value as returned by a previous list operation |
+| maxResults | Integer representing maximum number of resources to list |
+
+
+
+
+
+##### Response body JSON Schema
+```json
+{
+  "title": "datasets",
+  "required": [
+    "datasets",
+    "nextToken"
+  ],
+  "type": "object",
+  "properties": {
+    "nextToken": {
+      "maxLength": 4096,
+      "type": "string",
+      "nullable": true
+    },
+    "datasets": {
+      "type": "array",
+      "items": {
+        "required": [
+          "containsPersonallyIdentifiableInformation",
+          "createdTime",
+          "datasetId",
+          "description",
+          "numDocuments",
+          "retentionInDays",
+          "storageLocation",
+          "version"
+        ],
+        "type": "object",
+        "properties": {
+          "updatedTime": {
+            "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2}( |T)?[0-9]{2}:?[0-9]{2}:?[0-9]{2}(.[0-9]{1,6})?(Z|[+][0-9]{2}(:|)[0-9]{2})$",
+            "type": "string",
+            "nullable": true
+          },
+          "retentionInDays": {
+            "maximum": 1825,
+            "minimum": 0,
+            "type": "integer"
+          },
+          "name": {
+            "maxLength": 4096,
+            "type": "string",
+            "nullable": true
+          },
+          "datasetId": {
+            "pattern": "^las:dataset:[a-f0-9]{32}$",
+            "type": "string"
+          },
+          "description": {
+            "maxLength": 4096,
+            "type": "string",
+            "nullable": true
+          },
+          "createdTime": {
+            "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2}( |T)?[0-9]{2}:?[0-9]{2}:?[0-9]{2}(.[0-9]{1,6})?(Z|[+][0-9]{2}(:|)[0-9]{2})$",
+            "type": "string",
+            "nullable": true
+          },
+          "storageLocation": {
+            "type": "string",
+            "enum": [
+              "EU"
+            ]
+          },
+          "containsPersonallyIdentifiableInformation": {
+            "type": "boolean"
+          },
+          "numDocuments": {
+            "minimum": 0,
+            "type": "integer"
+          },
+          "version": {
+            "minimum": 0,
+            "type": "integer"
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}
+```
+
+
+#### POST /datasets
+
+
+
+
+
+| Header name | Header value |
+| --- | --- |
+| Content-Type | application/json |
+| Authorization | Bearer &lt;your access token here&gt; |
+| x-api-key | &lt;your api key here&gt; |
+
+
+
+
+
+##### Request body JSON Schema
+```json
+{
+  "title": "POST /datasets",
+  "type": "object",
+  "properties": {
+    "name": {
+      "maxLength": 4096,
+      "type": "string",
+      "nullable": true
+    },
+    "description": {
+      "maxLength": 4096,
+      "type": "string",
+      "nullable": true
+    },
+    "containsPersonallyIdentifiableInformation": {
+      "type": "boolean"
+    }
+  },
+  "additionalProperties": false
+}
+```
+
+
+##### Response body JSON Schema
+```json
+{
+  "title": "dataset",
+  "required": [
+    "containsPersonallyIdentifiableInformation",
+    "createdTime",
+    "datasetId",
+    "description",
+    "numDocuments",
+    "retentionInDays",
+    "storageLocation",
+    "version"
+  ],
+  "type": "object",
+  "properties": {
+    "updatedTime": {
+      "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2}( |T)?[0-9]{2}:?[0-9]{2}:?[0-9]{2}(.[0-9]{1,6})?(Z|[+][0-9]{2}(:|)[0-9]{2})$",
+      "type": "string",
+      "nullable": true
+    },
+    "retentionInDays": {
+      "maximum": 1825,
+      "minimum": 0,
+      "type": "integer"
+    },
+    "name": {
+      "maxLength": 4096,
+      "type": "string",
+      "nullable": true
+    },
+    "datasetId": {
+      "pattern": "^las:dataset:[a-f0-9]{32}$",
+      "type": "string"
+    },
+    "description": {
+      "maxLength": 4096,
+      "type": "string",
+      "nullable": true
+    },
+    "createdTime": {
+      "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2}( |T)?[0-9]{2}:?[0-9]{2}:?[0-9]{2}(.[0-9]{1,6})?(Z|[+][0-9]{2}(:|)[0-9]{2})$",
+      "type": "string",
+      "nullable": true
+    },
+    "storageLocation": {
+      "type": "string",
+      "enum": [
+        "EU"
+      ]
+    },
+    "containsPersonallyIdentifiableInformation": {
+      "type": "boolean"
+    },
+    "numDocuments": {
+      "minimum": 0,
+      "type": "integer"
+    },
+    "version": {
+      "minimum": 0,
+      "type": "integer"
+    }
+  },
+  "additionalProperties": false
+}
+```
+
+
+#### DELETE /datasets/{datasetId}
+
+
+| Path name | Path value |
+| --- | --- |
+| datasetId | Id of dataset on the form las:dataset:&lt;hex&gt; |
+
+
+| Header name | Header value |
+| --- | --- |
+| Authorization | Bearer &lt;your access token here&gt; |
+| x-api-key | &lt;your api key here&gt; |
+
+
+
+
+
+
+
+
+##### Response body JSON Schema
+```json
+{
+  "title": "dataset",
+  "required": [
+    "containsPersonallyIdentifiableInformation",
+    "createdTime",
+    "datasetId",
+    "description",
+    "numDocuments",
+    "retentionInDays",
+    "storageLocation",
+    "version"
+  ],
+  "type": "object",
+  "properties": {
+    "updatedTime": {
+      "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2}( |T)?[0-9]{2}:?[0-9]{2}:?[0-9]{2}(.[0-9]{1,6})?(Z|[+][0-9]{2}(:|)[0-9]{2})$",
+      "type": "string",
+      "nullable": true
+    },
+    "retentionInDays": {
+      "maximum": 1825,
+      "minimum": 0,
+      "type": "integer"
+    },
+    "name": {
+      "maxLength": 4096,
+      "type": "string",
+      "nullable": true
+    },
+    "datasetId": {
+      "pattern": "^las:dataset:[a-f0-9]{32}$",
+      "type": "string"
+    },
+    "description": {
+      "maxLength": 4096,
+      "type": "string",
+      "nullable": true
+    },
+    "createdTime": {
+      "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2}( |T)?[0-9]{2}:?[0-9]{2}:?[0-9]{2}(.[0-9]{1,6})?(Z|[+][0-9]{2}(:|)[0-9]{2})$",
+      "type": "string",
+      "nullable": true
+    },
+    "storageLocation": {
+      "type": "string",
+      "enum": [
+        "EU"
+      ]
+    },
+    "containsPersonallyIdentifiableInformation": {
+      "type": "boolean"
+    },
+    "numDocuments": {
+      "minimum": 0,
+      "type": "integer"
+    },
+    "version": {
+      "minimum": 0,
+      "type": "integer"
+    }
+  },
+  "additionalProperties": false
+}
+```
+
+
+#### PATCH /datasets/{datasetId}
+
+
+| Path name | Path value |
+| --- | --- |
+| datasetId | Id of dataset on the form las:dataset:&lt;hex&gt; |
+
+
+| Header name | Header value |
+| --- | --- |
+| Content-Type | application/json |
+| Authorization | Bearer &lt;your access token here&gt; |
+| x-api-key | &lt;your api key here&gt; |
+
+
+
+
+
+##### Request body JSON Schema
+```json
+{
+  "title": "PATCH /datasets/{datasetId}",
+  "minProperties": 1,
+  "type": "object",
+  "properties": {
+    "name": {
+      "maxLength": 4096,
+      "type": "string",
+      "nullable": true
+    },
+    "description": {
+      "maxLength": 4096,
+      "type": "string",
+      "nullable": true
+    }
+  },
+  "additionalProperties": false
+}
+```
+
+
+##### Response body JSON Schema
+```json
+{
+  "title": "dataset",
+  "required": [
+    "containsPersonallyIdentifiableInformation",
+    "createdTime",
+    "datasetId",
+    "description",
+    "numDocuments",
+    "retentionInDays",
+    "storageLocation",
+    "version"
+  ],
+  "type": "object",
+  "properties": {
+    "updatedTime": {
+      "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2}( |T)?[0-9]{2}:?[0-9]{2}:?[0-9]{2}(.[0-9]{1,6})?(Z|[+][0-9]{2}(:|)[0-9]{2})$",
+      "type": "string",
+      "nullable": true
+    },
+    "retentionInDays": {
+      "maximum": 1825,
+      "minimum": 0,
+      "type": "integer"
+    },
+    "name": {
+      "maxLength": 4096,
+      "type": "string",
+      "nullable": true
+    },
+    "datasetId": {
+      "pattern": "^las:dataset:[a-f0-9]{32}$",
+      "type": "string"
+    },
+    "description": {
+      "maxLength": 4096,
+      "type": "string",
+      "nullable": true
+    },
+    "createdTime": {
+      "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2}( |T)?[0-9]{2}:?[0-9]{2}:?[0-9]{2}(.[0-9]{1,6})?(Z|[+][0-9]{2}(:|)[0-9]{2})$",
+      "type": "string",
+      "nullable": true
+    },
+    "storageLocation": {
+      "type": "string",
+      "enum": [
+        "EU"
+      ]
+    },
+    "containsPersonallyIdentifiableInformation": {
+      "type": "boolean"
+    },
+    "numDocuments": {
+      "minimum": 0,
+      "type": "integer"
+    },
+    "version": {
+      "minimum": 0,
+      "type": "integer"
+    }
+  },
+  "additionalProperties": false
+}
+```
+
+
 #### DELETE /documents
 
 
@@ -1284,6 +1697,10 @@
             "pattern": "^las:consent:[a-f0-9]{32}$",
             "type": "string"
           },
+          "datasetId": {
+            "pattern": "^las:dataset:[a-f0-9]{32}$",
+            "type": "string"
+          },
           "documentId": {
             "pattern": "^las:document:[a-f0-9]{32}$",
             "type": "string"
@@ -1313,6 +1730,13 @@
       "maxLength": 4096,
       "type": "string",
       "nullable": true
+    },
+    "datasetId": {
+      "type": "array",
+      "items": {
+        "pattern": "^las:dataset:[a-f0-9]{32}$",
+        "type": "string"
+      }
     },
     "batchId": {
       "type": "array",
@@ -1412,6 +1836,10 @@
             "pattern": "^las:consent:[a-f0-9]{32}$",
             "type": "string"
           },
+          "datasetId": {
+            "pattern": "^las:dataset:[a-f0-9]{32}$",
+            "type": "string"
+          },
           "documentId": {
             "pattern": "^las:document:[a-f0-9]{32}$",
             "type": "string"
@@ -1441,6 +1869,13 @@
       "maxLength": 4096,
       "type": "string",
       "nullable": true
+    },
+    "datasetId": {
+      "type": "array",
+      "items": {
+        "pattern": "^las:dataset:[a-f0-9]{32}$",
+        "type": "string"
+      }
     },
     "batchId": {
       "type": "array",
@@ -1517,6 +1952,10 @@
       "pattern": "^las:consent:[a-f0-9]{32}$",
       "type": "string"
     },
+    "datasetId": {
+      "pattern": "^las:dataset:[a-f0-9]{32}$",
+      "type": "string"
+    },
     "batchId": {
       "pattern": "^las:batch:[a-f0-9]{32}$",
       "type": "string"
@@ -1584,6 +2023,107 @@
     },
     "consentId": {
       "pattern": "^las:consent:[a-f0-9]{32}$",
+      "type": "string"
+    },
+    "datasetId": {
+      "pattern": "^las:dataset:[a-f0-9]{32}$",
+      "type": "string"
+    },
+    "documentId": {
+      "pattern": "^las:document:[a-f0-9]{32}$",
+      "type": "string"
+    },
+    "batchId": {
+      "pattern": "^las:batch:[a-f0-9]{32}$",
+      "type": "string"
+    },
+    "contentType": {
+      "type": "string",
+      "enum": [
+        "application/pdf",
+        "image/jpeg",
+        "image/png",
+        "image/tiff"
+      ]
+    },
+    "content": {
+      "minLength": 1,
+      "type": "string"
+    }
+  },
+  "additionalProperties": false
+}
+```
+
+
+#### DELETE /documents/{documentId}
+
+
+| Path name | Path value |
+| --- | --- |
+| documentId | Id of document on the form las:document:&lt;hex&gt; |
+
+
+| Header name | Header value |
+| --- | --- |
+| Authorization | Bearer &lt;your access token here&gt; |
+| x-api-key | &lt;your api key here&gt; |
+
+
+
+
+
+
+
+
+##### Response body JSON Schema
+```json
+{
+  "title": "document",
+  "required": [
+    "contentType",
+    "documentId"
+  ],
+  "type": "object",
+  "properties": {
+    "groundTruth": {
+      "type": "array",
+      "items": {
+        "required": [
+          "label",
+          "value"
+        ],
+        "type": "object",
+        "properties": {
+          "label": {
+            "maxLength": 36,
+            "minLength": 1,
+            "pattern": "^[0-9A-Za-z_]+$",
+            "type": "string"
+          },
+          "value": {
+            "anyOf": [
+              {
+                "maxLength": 64,
+                "minLength": 1,
+                "type": "string",
+                "nullable": true
+              },
+              {
+                "type": "boolean"
+              }
+            ]
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "consentId": {
+      "pattern": "^las:consent:[a-f0-9]{32}$",
+      "type": "string"
+    },
+    "datasetId": {
+      "pattern": "^las:dataset:[a-f0-9]{32}$",
       "type": "string"
     },
     "documentId": {
@@ -1677,6 +2217,10 @@
     },
     "consentId": {
       "pattern": "^las:consent:[a-f0-9]{32}$",
+      "type": "string"
+    },
+    "datasetId": {
+      "pattern": "^las:dataset:[a-f0-9]{32}$",
       "type": "string"
     },
     "documentId": {
@@ -1815,6 +2359,10 @@
     },
     "consentId": {
       "pattern": "^las:consent:[a-f0-9]{32}$",
+      "type": "string"
+    },
+    "datasetId": {
+      "pattern": "^las:dataset:[a-f0-9]{32}$",
       "type": "string"
     },
     "documentId": {
@@ -3017,6 +3565,677 @@
 ```
 
 
+#### GET /models/{modelId}/dataBundles
+
+
+| Path name | Path value |
+| --- | --- |
+| modelId | Id of model on the form las:model:&lt;hex&gt; |
+
+
+| Header name | Header value |
+| --- | --- |
+| Authorization | Bearer &lt;your access token here&gt; |
+| x-api-key | &lt;your api key here&gt; |
+
+
+| Query name | Query value |
+| --- | --- |
+| status | running \| succeeded \| failed \| rejected \| retry |
+| nextToken | String value as returned by a previous list operation |
+| maxResults | Integer representing maximum number of resources to list |
+
+
+
+
+
+##### Response body JSON Schema
+```json
+{
+  "title": "dataBundles",
+  "required": [
+    "dataBundles",
+    "nextToken"
+  ],
+  "type": "object",
+  "properties": {
+    "nextToken": {
+      "maxLength": 4096,
+      "type": "string",
+      "nullable": true
+    },
+    "dataBundles": {
+      "type": "array",
+      "items": {
+        "required": [
+          "createdTime",
+          "dataBundleId",
+          "datasets",
+          "description",
+          "modelId",
+          "name",
+          "status",
+          "summary",
+          "updatedTime"
+        ],
+        "type": "object",
+        "properties": {
+          "summary": {
+            "type": "object"
+          },
+          "updatedTime": {
+            "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2}( |T)?[0-9]{2}:?[0-9]{2}:?[0-9]{2}(.[0-9]{1,6})?(Z|[+][0-9]{2}(:|)[0-9]{2})$",
+            "type": "string",
+            "nullable": true
+          },
+          "modelId": {
+            "pattern": "^las:model:[a-f0-9]{32}$",
+            "type": "string"
+          },
+          "dataBundleId": {
+            "pattern": "^las:model-data-bundle:[a-f0-9]{32}$",
+            "type": "string"
+          },
+          "name": {
+            "maxLength": 4096,
+            "type": "string",
+            "nullable": true
+          },
+          "description": {
+            "maxLength": 4096,
+            "type": "string",
+            "nullable": true
+          },
+          "createdTime": {
+            "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2}( |T)?[0-9]{2}:?[0-9]{2}:?[0-9]{2}(.[0-9]{1,6})?(Z|[+][0-9]{2}(:|)[0-9]{2})$",
+            "type": "string",
+            "nullable": true
+          },
+          "datasets": {
+            "type": "array",
+            "items": {
+              "required": [
+                "containsPersonallyIdentifiableInformation",
+                "createdTime",
+                "datasetId",
+                "description",
+                "numDocuments",
+                "retentionInDays",
+                "storageLocation",
+                "version"
+              ],
+              "type": "object",
+              "properties": {
+                "updatedTime": {
+                  "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2}( |T)?[0-9]{2}:?[0-9]{2}:?[0-9]{2}(.[0-9]{1,6})?(Z|[+][0-9]{2}(:|)[0-9]{2})$",
+                  "type": "string",
+                  "nullable": true
+                },
+                "retentionInDays": {
+                  "maximum": 1825,
+                  "minimum": 0,
+                  "type": "integer"
+                },
+                "name": {
+                  "maxLength": 4096,
+                  "type": "string",
+                  "nullable": true
+                },
+                "datasetId": {
+                  "pattern": "^las:dataset:[a-f0-9]{32}$",
+                  "type": "string"
+                },
+                "description": {
+                  "maxLength": 4096,
+                  "type": "string",
+                  "nullable": true
+                },
+                "createdTime": {
+                  "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2}( |T)?[0-9]{2}:?[0-9]{2}:?[0-9]{2}(.[0-9]{1,6})?(Z|[+][0-9]{2}(:|)[0-9]{2})$",
+                  "type": "string",
+                  "nullable": true
+                },
+                "storageLocation": {
+                  "type": "string",
+                  "enum": [
+                    "EU"
+                  ]
+                },
+                "containsPersonallyIdentifiableInformation": {
+                  "type": "boolean"
+                },
+                "numDocuments": {
+                  "minimum": 0,
+                  "type": "integer"
+                },
+                "version": {
+                  "minimum": 0,
+                  "type": "integer"
+                }
+              },
+              "additionalProperties": false
+            }
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "processing",
+              "ready",
+              "failed"
+            ]
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "status": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "processing",
+          "ready",
+          "failed"
+        ]
+      }
+    }
+  },
+  "additionalProperties": false
+}
+```
+
+
+#### POST /models/{modelId}/dataBundles
+
+
+| Path name | Path value |
+| --- | --- |
+| modelId | Id of model on the form las:model:&lt;hex&gt; |
+
+
+| Header name | Header value |
+| --- | --- |
+| Content-Type | application/json |
+| Authorization | Bearer &lt;your access token here&gt; |
+| x-api-key | &lt;your api key here&gt; |
+
+
+
+
+
+##### Request body JSON Schema
+```json
+{
+  "title": "POST /models/{modelId}/dataBundles",
+  "type": "object",
+  "properties": {
+    "datasetIds": {
+      "minItems": 1,
+      "type": "array",
+      "items": {
+        "pattern": "^las:dataset:[a-f0-9]{32}$",
+        "type": "string"
+      }
+    },
+    "name": {
+      "maxLength": 4096,
+      "type": "string",
+      "nullable": true
+    },
+    "description": {
+      "maxLength": 4096,
+      "type": "string",
+      "nullable": true
+    }
+  },
+  "additionalProperties": false
+}
+```
+
+
+##### Response body JSON Schema
+```json
+{
+  "title": "dataBundle",
+  "required": [
+    "createdTime",
+    "dataBundleId",
+    "datasets",
+    "description",
+    "modelId",
+    "name",
+    "status",
+    "summary",
+    "updatedTime"
+  ],
+  "type": "object",
+  "properties": {
+    "summary": {
+      "type": "object"
+    },
+    "updatedTime": {
+      "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2}( |T)?[0-9]{2}:?[0-9]{2}:?[0-9]{2}(.[0-9]{1,6})?(Z|[+][0-9]{2}(:|)[0-9]{2})$",
+      "type": "string",
+      "nullable": true
+    },
+    "modelId": {
+      "pattern": "^las:model:[a-f0-9]{32}$",
+      "type": "string"
+    },
+    "dataBundleId": {
+      "pattern": "^las:model-data-bundle:[a-f0-9]{32}$",
+      "type": "string"
+    },
+    "name": {
+      "maxLength": 4096,
+      "type": "string",
+      "nullable": true
+    },
+    "description": {
+      "maxLength": 4096,
+      "type": "string",
+      "nullable": true
+    },
+    "createdTime": {
+      "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2}( |T)?[0-9]{2}:?[0-9]{2}:?[0-9]{2}(.[0-9]{1,6})?(Z|[+][0-9]{2}(:|)[0-9]{2})$",
+      "type": "string",
+      "nullable": true
+    },
+    "datasets": {
+      "type": "array",
+      "items": {
+        "required": [
+          "containsPersonallyIdentifiableInformation",
+          "createdTime",
+          "datasetId",
+          "description",
+          "numDocuments",
+          "retentionInDays",
+          "storageLocation",
+          "version"
+        ],
+        "type": "object",
+        "properties": {
+          "updatedTime": {
+            "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2}( |T)?[0-9]{2}:?[0-9]{2}:?[0-9]{2}(.[0-9]{1,6})?(Z|[+][0-9]{2}(:|)[0-9]{2})$",
+            "type": "string",
+            "nullable": true
+          },
+          "retentionInDays": {
+            "maximum": 1825,
+            "minimum": 0,
+            "type": "integer"
+          },
+          "name": {
+            "maxLength": 4096,
+            "type": "string",
+            "nullable": true
+          },
+          "datasetId": {
+            "pattern": "^las:dataset:[a-f0-9]{32}$",
+            "type": "string"
+          },
+          "description": {
+            "maxLength": 4096,
+            "type": "string",
+            "nullable": true
+          },
+          "createdTime": {
+            "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2}( |T)?[0-9]{2}:?[0-9]{2}:?[0-9]{2}(.[0-9]{1,6})?(Z|[+][0-9]{2}(:|)[0-9]{2})$",
+            "type": "string",
+            "nullable": true
+          },
+          "storageLocation": {
+            "type": "string",
+            "enum": [
+              "EU"
+            ]
+          },
+          "containsPersonallyIdentifiableInformation": {
+            "type": "boolean"
+          },
+          "numDocuments": {
+            "minimum": 0,
+            "type": "integer"
+          },
+          "version": {
+            "minimum": 0,
+            "type": "integer"
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "processing",
+        "ready",
+        "failed"
+      ]
+    }
+  },
+  "additionalProperties": false
+}
+```
+
+
+#### DELETE /models/{modelId}/dataBundles/{dataBundleId}
+
+
+| Path name | Path value |
+| --- | --- |
+| dataBundleId | Id of dataBundle on the form las:dataBundle:&lt;hex&gt; |
+| modelId | Id of model on the form las:model:&lt;hex&gt; |
+
+
+| Header name | Header value |
+| --- | --- |
+| Authorization | Bearer &lt;your access token here&gt; |
+| x-api-key | &lt;your api key here&gt; |
+
+
+
+
+
+
+
+
+##### Response body JSON Schema
+```json
+{
+  "title": "dataBundle",
+  "required": [
+    "createdTime",
+    "dataBundleId",
+    "datasets",
+    "description",
+    "modelId",
+    "name",
+    "status",
+    "summary",
+    "updatedTime"
+  ],
+  "type": "object",
+  "properties": {
+    "summary": {
+      "type": "object"
+    },
+    "updatedTime": {
+      "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2}( |T)?[0-9]{2}:?[0-9]{2}:?[0-9]{2}(.[0-9]{1,6})?(Z|[+][0-9]{2}(:|)[0-9]{2})$",
+      "type": "string",
+      "nullable": true
+    },
+    "modelId": {
+      "pattern": "^las:model:[a-f0-9]{32}$",
+      "type": "string"
+    },
+    "dataBundleId": {
+      "pattern": "^las:model-data-bundle:[a-f0-9]{32}$",
+      "type": "string"
+    },
+    "name": {
+      "maxLength": 4096,
+      "type": "string",
+      "nullable": true
+    },
+    "description": {
+      "maxLength": 4096,
+      "type": "string",
+      "nullable": true
+    },
+    "createdTime": {
+      "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2}( |T)?[0-9]{2}:?[0-9]{2}:?[0-9]{2}(.[0-9]{1,6})?(Z|[+][0-9]{2}(:|)[0-9]{2})$",
+      "type": "string",
+      "nullable": true
+    },
+    "datasets": {
+      "type": "array",
+      "items": {
+        "required": [
+          "containsPersonallyIdentifiableInformation",
+          "createdTime",
+          "datasetId",
+          "description",
+          "numDocuments",
+          "retentionInDays",
+          "storageLocation",
+          "version"
+        ],
+        "type": "object",
+        "properties": {
+          "updatedTime": {
+            "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2}( |T)?[0-9]{2}:?[0-9]{2}:?[0-9]{2}(.[0-9]{1,6})?(Z|[+][0-9]{2}(:|)[0-9]{2})$",
+            "type": "string",
+            "nullable": true
+          },
+          "retentionInDays": {
+            "maximum": 1825,
+            "minimum": 0,
+            "type": "integer"
+          },
+          "name": {
+            "maxLength": 4096,
+            "type": "string",
+            "nullable": true
+          },
+          "datasetId": {
+            "pattern": "^las:dataset:[a-f0-9]{32}$",
+            "type": "string"
+          },
+          "description": {
+            "maxLength": 4096,
+            "type": "string",
+            "nullable": true
+          },
+          "createdTime": {
+            "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2}( |T)?[0-9]{2}:?[0-9]{2}:?[0-9]{2}(.[0-9]{1,6})?(Z|[+][0-9]{2}(:|)[0-9]{2})$",
+            "type": "string",
+            "nullable": true
+          },
+          "storageLocation": {
+            "type": "string",
+            "enum": [
+              "EU"
+            ]
+          },
+          "containsPersonallyIdentifiableInformation": {
+            "type": "boolean"
+          },
+          "numDocuments": {
+            "minimum": 0,
+            "type": "integer"
+          },
+          "version": {
+            "minimum": 0,
+            "type": "integer"
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "processing",
+        "ready",
+        "failed"
+      ]
+    }
+  },
+  "additionalProperties": false
+}
+```
+
+
+#### PATCH /models/{modelId}/dataBundles/{dataBundleId}
+
+
+| Path name | Path value |
+| --- | --- |
+| dataBundleId | Id of dataBundle on the form las:dataBundle:&lt;hex&gt; |
+| modelId | Id of model on the form las:model:&lt;hex&gt; |
+
+
+| Header name | Header value |
+| --- | --- |
+| Content-Type | application/json |
+| Authorization | Bearer &lt;your access token here&gt; |
+| x-api-key | &lt;your api key here&gt; |
+
+
+
+
+
+##### Request body JSON Schema
+```json
+{
+  "title": "PATCH /models/{modelId}/dataBundles/{dataBundleId}",
+  "type": "object",
+  "properties": {
+    "name": {
+      "maxLength": 4096,
+      "type": "string",
+      "nullable": true
+    },
+    "description": {
+      "maxLength": 4096,
+      "type": "string",
+      "nullable": true
+    }
+  },
+  "additionalProperties": false
+}
+```
+
+
+##### Response body JSON Schema
+```json
+{
+  "title": "dataBundle",
+  "required": [
+    "createdTime",
+    "dataBundleId",
+    "datasets",
+    "description",
+    "modelId",
+    "name",
+    "status",
+    "summary",
+    "updatedTime"
+  ],
+  "type": "object",
+  "properties": {
+    "summary": {
+      "type": "object"
+    },
+    "updatedTime": {
+      "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2}( |T)?[0-9]{2}:?[0-9]{2}:?[0-9]{2}(.[0-9]{1,6})?(Z|[+][0-9]{2}(:|)[0-9]{2})$",
+      "type": "string",
+      "nullable": true
+    },
+    "modelId": {
+      "pattern": "^las:model:[a-f0-9]{32}$",
+      "type": "string"
+    },
+    "dataBundleId": {
+      "pattern": "^las:model-data-bundle:[a-f0-9]{32}$",
+      "type": "string"
+    },
+    "name": {
+      "maxLength": 4096,
+      "type": "string",
+      "nullable": true
+    },
+    "description": {
+      "maxLength": 4096,
+      "type": "string",
+      "nullable": true
+    },
+    "createdTime": {
+      "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2}( |T)?[0-9]{2}:?[0-9]{2}:?[0-9]{2}(.[0-9]{1,6})?(Z|[+][0-9]{2}(:|)[0-9]{2})$",
+      "type": "string",
+      "nullable": true
+    },
+    "datasets": {
+      "type": "array",
+      "items": {
+        "required": [
+          "containsPersonallyIdentifiableInformation",
+          "createdTime",
+          "datasetId",
+          "description",
+          "numDocuments",
+          "retentionInDays",
+          "storageLocation",
+          "version"
+        ],
+        "type": "object",
+        "properties": {
+          "updatedTime": {
+            "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2}( |T)?[0-9]{2}:?[0-9]{2}:?[0-9]{2}(.[0-9]{1,6})?(Z|[+][0-9]{2}(:|)[0-9]{2})$",
+            "type": "string",
+            "nullable": true
+          },
+          "retentionInDays": {
+            "maximum": 1825,
+            "minimum": 0,
+            "type": "integer"
+          },
+          "name": {
+            "maxLength": 4096,
+            "type": "string",
+            "nullable": true
+          },
+          "datasetId": {
+            "pattern": "^las:dataset:[a-f0-9]{32}$",
+            "type": "string"
+          },
+          "description": {
+            "maxLength": 4096,
+            "type": "string",
+            "nullable": true
+          },
+          "createdTime": {
+            "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2}( |T)?[0-9]{2}:?[0-9]{2}:?[0-9]{2}(.[0-9]{1,6})?(Z|[+][0-9]{2}(:|)[0-9]{2})$",
+            "type": "string",
+            "nullable": true
+          },
+          "storageLocation": {
+            "type": "string",
+            "enum": [
+              "EU"
+            ]
+          },
+          "containsPersonallyIdentifiableInformation": {
+            "type": "boolean"
+          },
+          "numDocuments": {
+            "minimum": 0,
+            "type": "integer"
+          },
+          "version": {
+            "minimum": 0,
+            "type": "integer"
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "processing",
+        "ready",
+        "failed"
+      ]
+    }
+  },
+  "additionalProperties": false
+}
+```
+
+
 #### GET /organizations/{organizationId}
 
 
@@ -3043,6 +4262,8 @@
   "title": "organization",
   "required": [
     "description",
+    "monthlyNumberOfDataBundlesAllowed",
+    "monthlyNumberOfDataBundlesCreated",
     "monthlyNumberOfDocumentsAllowed",
     "monthlyNumberOfDocumentsCreated",
     "monthlyNumberOfPredictionsAllowed",
@@ -3098,6 +4319,14 @@
       "minimum": 0,
       "type": "integer"
     },
+    "numberOfDatasetsAllowed": {
+      "minimum": 0,
+      "type": "integer"
+    },
+    "monthlyNumberOfDataBundlesAllowed": {
+      "minimum": 0,
+      "type": "integer"
+    },
     "organizationId": {
       "pattern": "^las:organization:[a-f0-9]{32}$",
       "type": "string"
@@ -3145,11 +4374,19 @@
       "minimum": 0,
       "type": "integer"
     },
+    "monthlyNumberOfDataBundlesCreated": {
+      "minimum": 0,
+      "type": "integer"
+    },
     "numberOfUsersCreated": {
       "minimum": 0,
       "type": "integer"
     },
     "monthlyNumberOfPredictionsCreated": {
+      "minimum": 0,
+      "type": "integer"
+    },
+    "numberOfDatasetsCreated": {
       "minimum": 0,
       "type": "integer"
     },
@@ -3239,6 +4476,8 @@
   "title": "organization",
   "required": [
     "description",
+    "monthlyNumberOfDataBundlesAllowed",
+    "monthlyNumberOfDataBundlesCreated",
     "monthlyNumberOfDocumentsAllowed",
     "monthlyNumberOfDocumentsCreated",
     "monthlyNumberOfPredictionsAllowed",
@@ -3294,6 +4533,14 @@
       "minimum": 0,
       "type": "integer"
     },
+    "numberOfDatasetsAllowed": {
+      "minimum": 0,
+      "type": "integer"
+    },
+    "monthlyNumberOfDataBundlesAllowed": {
+      "minimum": 0,
+      "type": "integer"
+    },
     "organizationId": {
       "pattern": "^las:organization:[a-f0-9]{32}$",
       "type": "string"
@@ -3341,11 +4588,19 @@
       "minimum": 0,
       "type": "integer"
     },
+    "monthlyNumberOfDataBundlesCreated": {
+      "minimum": 0,
+      "type": "integer"
+    },
     "numberOfUsersCreated": {
       "minimum": 0,
       "type": "integer"
     },
     "monthlyNumberOfPredictionsCreated": {
+      "minimum": 0,
+      "type": "integer"
+    },
+    "numberOfDatasetsCreated": {
       "minimum": 0,
       "type": "integer"
     },
