@@ -4,6 +4,25 @@ You can find the Open API specification file [here](https://raw.githubuserconten
 
 ## Changelog
 
+### 2021-06-25
+
+- Deprecated /batches endpoint. It's replaced by /datasets. Your current batches will be unaffected until 2021-09-06, 
+after which we will remove the entire endpoint and all of its data. Documents in batches will not be affected, only the 
+batches themselves. Until 2021-09-06 you will not be able to create new batches. Please consider replacing your batches 
+with datasets.
+- Added POST /datasets
+- Added GET /datasets
+- Added PATCH /datasets/:id
+- Added DELETE /datasets/:id
+- Added POST /models/:id/dataBundles
+- Added GET /models/:id/dataBundles
+- Added PATCH /models/:id/dataBundles/:id
+- Added DELETE /models/:id/dataBundles/:id
+- Fixed a bug causing incorrect error messages to be returned from the API
+- POST /transitions will now attempt to return appropriate status 400 error message when imageUrl is incomplete
+- PATCH /transitions/:id/executions/:id will now return status 400 error message when attempting to PATCH a timed out
+transition execution
+
 ### 2021-06-16
 
 - Added loginUrls, defaultLoginUrl to PATCH /appClients/:id
