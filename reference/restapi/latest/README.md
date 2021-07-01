@@ -1243,7 +1243,7 @@
           "createdTime",
           "datasetId",
           "description",
-          "numDocuments",
+          "numberOfDocuments",
           "retentionInDays",
           "storageLocation",
           "version"
@@ -1257,6 +1257,10 @@
           },
           "retentionInDays": {
             "maximum": 1825,
+            "minimum": 0,
+            "type": "integer"
+          },
+          "numberOfDocuments": {
             "minimum": 0,
             "type": "integer"
           },
@@ -1287,10 +1291,6 @@
           },
           "containsPersonallyIdentifiableInformation": {
             "type": "boolean"
-          },
-          "numDocuments": {
-            "minimum": 0,
-            "type": "integer"
           },
           "version": {
             "minimum": 0,
@@ -1356,7 +1356,7 @@
     "createdTime",
     "datasetId",
     "description",
-    "numDocuments",
+    "numberOfDocuments",
     "retentionInDays",
     "storageLocation",
     "version"
@@ -1370,6 +1370,10 @@
     },
     "retentionInDays": {
       "maximum": 1825,
+      "minimum": 0,
+      "type": "integer"
+    },
+    "numberOfDocuments": {
       "minimum": 0,
       "type": "integer"
     },
@@ -1400,10 +1404,6 @@
     },
     "containsPersonallyIdentifiableInformation": {
       "type": "boolean"
-    },
-    "numDocuments": {
-      "minimum": 0,
-      "type": "integer"
     },
     "version": {
       "minimum": 0,
@@ -1444,7 +1444,7 @@
     "createdTime",
     "datasetId",
     "description",
-    "numDocuments",
+    "numberOfDocuments",
     "retentionInDays",
     "storageLocation",
     "version"
@@ -1458,6 +1458,10 @@
     },
     "retentionInDays": {
       "maximum": 1825,
+      "minimum": 0,
+      "type": "integer"
+    },
+    "numberOfDocuments": {
       "minimum": 0,
       "type": "integer"
     },
@@ -1488,10 +1492,6 @@
     },
     "containsPersonallyIdentifiableInformation": {
       "type": "boolean"
-    },
-    "numDocuments": {
-      "minimum": 0,
-      "type": "integer"
     },
     "version": {
       "minimum": 0,
@@ -1553,7 +1553,7 @@
     "createdTime",
     "datasetId",
     "description",
-    "numDocuments",
+    "numberOfDocuments",
     "retentionInDays",
     "storageLocation",
     "version"
@@ -1567,6 +1567,10 @@
     },
     "retentionInDays": {
       "maximum": 1825,
+      "minimum": 0,
+      "type": "integer"
+    },
+    "numberOfDocuments": {
       "minimum": 0,
       "type": "integer"
     },
@@ -1598,10 +1602,6 @@
     "containsPersonallyIdentifiableInformation": {
       "type": "boolean"
     },
-    "numDocuments": {
-      "minimum": 0,
-      "type": "integer"
-    },
     "version": {
       "minimum": 0,
       "type": "integer"
@@ -1628,6 +1628,7 @@
 | --- | --- |
 | batchId | Id of batch on the form las:batch:&lt;hex&gt; |
 | consentId | Id of consent on the form las:consent:&lt;hex&gt; |
+| datasetId | String |
 | nextToken | String value as returned by a previous list operation |
 | maxResults | Integer representing maximum number of resources to list |
 
@@ -1767,6 +1768,7 @@
 | --- | --- |
 | batchId | Id of batch on the form las:batch:&lt;hex&gt; |
 | consentId | Id of consent on the form las:consent:&lt;hex&gt; |
+| datasetId | String |
 | nextToken | String value as returned by a previous list operation |
 | maxResults | Integer representing maximum number of resources to list |
 
@@ -2272,9 +2274,7 @@
 ```json
 {
   "title": "PATCH /documents/{documentId}",
-  "required": [
-    "groundTruth"
-  ],
+  "minProperties": 1,
   "type": "object",
   "properties": {
     "groundTruth": {
@@ -2308,6 +2308,10 @@
         },
         "additionalProperties": false
       }
+    },
+    "datasetId": {
+      "pattern": "^las:dataset:[a-f0-9]{32}$",
+      "type": "string"
     }
   },
   "additionalProperties": false
@@ -3659,7 +3663,7 @@
                 "createdTime",
                 "datasetId",
                 "description",
-                "numDocuments",
+                "numberOfDocuments",
                 "retentionInDays",
                 "storageLocation",
                 "version"
@@ -3673,6 +3677,10 @@
                 },
                 "retentionInDays": {
                   "maximum": 1825,
+                  "minimum": 0,
+                  "type": "integer"
+                },
+                "numberOfDocuments": {
                   "minimum": 0,
                   "type": "integer"
                 },
@@ -3703,10 +3711,6 @@
                 },
                 "containsPersonallyIdentifiableInformation": {
                   "type": "boolean"
-                },
-                "numDocuments": {
-                  "minimum": 0,
-                  "type": "integer"
                 },
                 "version": {
                   "minimum": 0,
@@ -3849,7 +3853,7 @@
           "createdTime",
           "datasetId",
           "description",
-          "numDocuments",
+          "numberOfDocuments",
           "retentionInDays",
           "storageLocation",
           "version"
@@ -3863,6 +3867,10 @@
           },
           "retentionInDays": {
             "maximum": 1825,
+            "minimum": 0,
+            "type": "integer"
+          },
+          "numberOfDocuments": {
             "minimum": 0,
             "type": "integer"
           },
@@ -3893,10 +3901,6 @@
           },
           "containsPersonallyIdentifiableInformation": {
             "type": "boolean"
-          },
-          "numDocuments": {
-            "minimum": 0,
-            "type": "integer"
           },
           "version": {
             "minimum": 0,
@@ -3997,7 +4001,7 @@
           "createdTime",
           "datasetId",
           "description",
-          "numDocuments",
+          "numberOfDocuments",
           "retentionInDays",
           "storageLocation",
           "version"
@@ -4011,6 +4015,10 @@
           },
           "retentionInDays": {
             "maximum": 1825,
+            "minimum": 0,
+            "type": "integer"
+          },
+          "numberOfDocuments": {
             "minimum": 0,
             "type": "integer"
           },
@@ -4041,10 +4049,6 @@
           },
           "containsPersonallyIdentifiableInformation": {
             "type": "boolean"
-          },
-          "numDocuments": {
-            "minimum": 0,
-            "type": "integer"
           },
           "version": {
             "minimum": 0,
@@ -4165,7 +4169,7 @@
           "createdTime",
           "datasetId",
           "description",
-          "numDocuments",
+          "numberOfDocuments",
           "retentionInDays",
           "storageLocation",
           "version"
@@ -4179,6 +4183,10 @@
           },
           "retentionInDays": {
             "maximum": 1825,
+            "minimum": 0,
+            "type": "integer"
+          },
+          "numberOfDocuments": {
             "minimum": 0,
             "type": "integer"
           },
@@ -4209,10 +4217,6 @@
           },
           "containsPersonallyIdentifiableInformation": {
             "type": "boolean"
-          },
-          "numDocuments": {
-            "minimum": 0,
-            "type": "integer"
           },
           "version": {
             "minimum": 0,
