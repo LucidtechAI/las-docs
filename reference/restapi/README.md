@@ -10,6 +10,7 @@ You can find the Open API specification file [here](https://raw.githubuserconten
 - Added datasetId query parameter to GET /documents
 - Fixed bug preventing completion config in /workflows to be executed in some situations
 - Added datasetId to PATCH /documents/:id
+- Fixed error in JSON schema for /datasets, numDocuments -> numberOfDocuments
 
 ### 2021-06-25
 
