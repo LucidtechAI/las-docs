@@ -26,25 +26,39 @@
 `{property} `[`Credentials`](#a00067) [`LasCredentials`](#a00043_1aed1258913a65f014aa0ce4ef63bd6dfe) | 
 `public  `[`Client`](#a00043_1a2a95a90e6dfa52e94d3e12a18d583fca)`(`[`Credentials`](#a00067)` credentials)` | [Client](#a00043) constructor.
 `public  `[`Client`](#a00043_1a0ba3cc00461a4ee4d4a346d9600efa4a)`()` | [Client](#a00043) constructor with credentials read from local file.
-`public object `[`CreateAppClient`](#a00043_1ab01ecee2c2198e5d1f484ab6f4b091e9)`(bool generateSecret,List< string >? logoutUrls,List< string >? callbackUrls,Dictionary< string, string?>? attributes)` | Creates an appClient, calls the POST /appClients endpoint.
+`public object `[`CreateAppClient`](#a00043_1adbe8e2a3fefe5b6df86771a858de4864)`(bool generateSecret,List< string >? logoutUrls,List< string >? loginUrls,List< string >? callbackUrls,string? defaultLoginUrl,Dictionary< string, string?>? attributes)` | Creates an appClient, calls the POST /appClients endpoint.
 `public object `[`ListAppClients`](#a00043_1afdd7a170f2d21b6643b5dcff0effc3d1)`(int? maxResults,string? nextToken)` | List available appClients, calls the GET /appClients endpoint.
+`public object `[`UpdateAppClient`](#a00043_1a94257b036dd947a40bb10a243ad0fd53)`(string appClientId,Dictionary< string, string?>? attributes)` | Updates an existing appClient, calls the PATCH /appClients/{appClientId} endpoint.
 `public object `[`DeleteAppClient`](#a00043_1acdfd1de4050f19d8cb167b865455ed88)`(string appClientId)` | Delete an appClient, calls the DELETE /appClients/{appClientId} endpoint.
 `public object `[`CreateAsset`](#a00043_1afde4b9ed933fd6fc775770af3cd412e1)`(byte[] content,Dictionary< string, string?>? attributes)` | Creates an asset, calls the POST /assets endpoint.
 `public object `[`ListAssets`](#a00043_1a3fe859d9bfd3d23d919c708f99141e4f)`(int? maxResults,string? nextToken)` | List available assets, calls the GET /assets endpoint.
 `public object `[`GetAsset`](#a00043_1a8e338146001a43c4b0ca59d3f4afb901)`(string assetId)` | Get asset from the REST API, calls the GET /assets/{assetId} endpoint.
 `public object `[`UpdateAsset`](#a00043_1a63e88e264995507702cfde3285150eae)`(string assetId,byte?[] content,Dictionary< string, string?>? attributes)` | Updates an asset, calls the PATCH /assets/{assetId} endpoint.
 `public object `[`DeleteAsset`](#a00043_1a98d632656a3ecdf936a31d7a5f67ad54)`(string assetId)` | Delete an asset, calls the DELETE /assets/{assetId} endpoint.
-`public object `[`CreateDocument`](#a00043_1aef5c33f1a06ea8010bb6a6ba0c97b236)`(byte[] content,string contentType,string? consentId,string? batchId,List< Dictionary< string, string >>? groundTruth)` | Creates a document handle, calls the POST /documents endpoint
-`public object `[`ListDocuments`](#a00043_1a6c1c9a3f3a20bad2ccf858ac490f57d5)`(string? batchId,string? consentId,int? maxResults,string? nextToken)` | Get documents from the REST API, calls the GET /documents endpoint.
+`public object `[`CreateDocument`](#a00043_1a79a3c991aa414ee4cc419f255b68b68e)`(byte[] content,string contentType,string? consentId,string? batchId,List< Dictionary< string, string >>? groundTruth,string? datasetId)` | Creates a document handle, calls the POST /documents endpoint
+`public object `[`ListDocuments`](#a00043_1ae27c667e46f477518eb9318c6df7e168)`(string? batchId,string? consentId,int? maxResults,string? nextToken,string? datasetId)` | Get documents from the REST API, calls the GET /documents endpoint.
 `public object `[`GetDocument`](#a00043_1a1638a8fd9c03e35934af0c16d05cf90b)`(string documentId)` | Get document from the REST API, calls the GET /documents/{documentId} endpoint.
-`public object `[`UpdateDocument`](#a00043_1a8aa65dc695c9b9918f63d12b92f329b3)`(string documentId,List< Dictionary< string, string >> groundTruth)` | Update ground truth of the document, calls the POST /documents/{documentId} endpoint. This enables the API to learn from past mistakes.
-`public object `[`DeleteDocuments`](#a00043_1ac84e743752ac35802ebc335985220e4c)`(string? batchId,string? consentId,int? maxResults,string? nextToken)` | Delete documents with specified consentId, calls DELETE /documents endpoint.
+`public object `[`UpdateDocument`](#a00043_1a1dc913a4653a26fb14622b3537f51141)`(string documentId,List< Dictionary< string, string >>? groundTruth,string? datasetId)` | Update ground truth of the document, calls the POST /documents/{documentId} endpoint. This enables the API to learn from past mistakes.
+`public object `[`DeleteDocuments`](#a00043_1acd6023809e716b0af2aee364843ae088)`(string? batchId,string? consentId,int? maxResults,string? nextToken,string? datasetId,bool deleteAll)` | Delete documents with specified consentId, calls DELETE /documents endpoint.
+`public object `[`DeleteDocument`](#a00043_1aafd4deeebea97d6b937dbfe6227cd09d)`(string documentId)` | Delete a document, calls the DELETE /documents/{documentId} endpoint. <br/>#### Parameters<br/>* `documentId` Id of the document<br/><br/><br/><br/><br/><br/>#### Returns<br/>Document response from REST API
 `public object `[`CreateBatch`](#a00043_1a67cccdf0e1af3c8ce8b660bf1074f38f)`(string? name,string? description)` | Create a batch handle, calls the POST /batches endpoint.
+`public object `[`UpdateBatch`](#a00043_1aad6c5cc8c157268c36c04e922bf01672)`(string batchId,Dictionary< string, string?>? attributes)` | Updates an existing batch, calls the PATCH /batches/{batchId} endpoint.
 `public object `[`DeleteBatch`](#a00043_1afca5b7b95d5c60661417e824b7b8d898)`(string batchId,bool deleteDocuments)` | Delete a batch, calls the DELETE /batches/{batchId} endpoint.
+`public object `[`CreateDataset`](#a00043_1a5bc08562dca015280bb40201458c0e53)`(string? name,string? description)` | Create a dataset handle, calls the POST /datasets endpoint.
+`public object `[`ListDatasets`](#a00043_1a0d2fe04da4566e86f5988c10aba8fee7)`(int? maxResults,string? nextToken)` | List datasets available, calls the GET /datasets endpoint.
+`public object `[`UpdateDataset`](#a00043_1abb805616b3c28f137f57a6458dcec18b)`(string datasetId,Dictionary< string, string?>? attributes)` | Updates an existing dataset, calls the PATCH /datasets/{datasetId} endpoint.
+`public object `[`DeleteDataset`](#a00043_1a9d124051fdb2024a4623e19e624fa5d7)`(string datasetId,bool deleteDocuments)` | Delete a dataset, calls the DELETE /datasets/{datasetId} endpoint.
 `public object `[`CreatePrediction`](#a00043_1a4cb78d4caa5b0a3f6c077eec720bd4d2)`(string documentId,string modelId,int? maxPages,bool? autoRotate,string? imageQuality)` | Run inference and create a prediction, calls the POST /predictions endpoint.
 `public object `[`ListPredictions`](#a00043_1aa07c60058c89b9d2464ec8ccd2037a18)`(int? maxResults,string? nextToken)` | List predictions available, calls the GET /predictions endpoint.
 `public object `[`ListLogs`](#a00043_1a48c31f9df10d39e5f6303032572c946d)`(string? transitionId,string? transitionExecutionId,string? workflowId,string? workflowExecutionId,int? maxResults,string? nextToken)` | List logs, calls the GET /logs endpoint.
+`public object `[`CreateModel`](#a00043_1a46244b6d90855b929dd5c6b8a07cbfef)`(int width,int height,Dictionary< string, object > fieldConfig,Dictionary< string, object >? preprocessConfig,string? name,string? description,Dictionary< string, string?>? attributes)` | Creates a model, calls the POST /models endpoint.
 `public object `[`ListModels`](#a00043_1a2a5979f62ac58a13cdd2fce28c174508)`(int? maxResults,string? nextToken)` | List models available, calls the GET /models endpoint.
+`public object `[`GetModel`](#a00043_1af9964054bea7041345e16f51063409c7)`(string modelId)` | Get information about a specific model, calls the GET /models/{modelId} endpoint.
+`public object `[`UpdateModel`](#a00043_1a5ad7270e6d1de683d5f7eb69b633e58c)`(string modelId,int? width,int? height,Dictionary< string, object >? fieldConfig,Dictionary< string, object >? preprocessConfig,string? name,string? description,string? status,Dictionary< string, string?>? attributes)` | Updates a model, calls the PATCH /models/{modelId} endpoint.
+`public object `[`CreateDataBundle`](#a00043_1a854cc016def250aef026cf7cd9e485c0)`(string modelId,List< string > datasetIds,string? name,string? description)` | Create a data bundle handle, calls the POST /models/{modelId}/dataBundles endpoint.
+`public object `[`ListDataBundles`](#a00043_1af376709c384dee0bd1dceb8e0a6ce93e)`(string modelId,int? maxResults,string? nextToken)` | List data bundles available, calls the GET /models/{modelId}/dataBundles endpoint.
+`public object `[`UpdateDataBundle`](#a00043_1a2d4413c5567aeb21e42f07aa1a09d6d2)`(string modelId,string dataBundleId,Dictionary< string, string?>? attributes)` | Updates an existing data bundle, calls the PATCH /models/{modelId}/dataBundles/{dataBundleId} endpoint.
+`public object `[`DeleteDataBundle`](#a00043_1a06fa74f82b181b50a8587fbc5ad08e36)`(string modelId,string dataBundleId)` | Delete a data bundle, calls the DELETE /models/{modelId}/dataBundles/{dataBundleId} endpoint. <br/>#### Parameters<br/>* `modelId` Id of the model<br/><br/><br/>* `dataBundleId` Id of the data bundle<br/><br/><br/><br/><br/><br/>#### Returns<br/>Data Bundle response from REST API
 `public object `[`CreateSecret`](#a00043_1ac9ee5b8c1cedfd849aa258bccdcd1de9)`(Dictionary< string, string > data,Dictionary< string, string?>? attributes)` | Creates an secret, calls the POST /secrets endpoint.
 `public object `[`ListSecrets`](#a00043_1a4bf28ad750cf50ad0f6e0d8a3558f69f)`(int? maxResults,string? nextToken)` | List secrets available, calls the GET /secrets endpoint.
 `public object `[`UpdateSecret`](#a00043_1a881282cf8a8cc3618b25a25c64c7feeb)`(string secretId,Dictionary< string, string >? data,Dictionary< string, string?>? attributes)` | Updates a secret, calls the PATCH /secrets/secretId endpoint.
@@ -94,24 +108,21 @@
 
 [Client](#a00043) constructor with credentials read from local file.
 
-#### `public object `[`CreateAppClient`](#a00043_1ab01ecee2c2198e5d1f484ab6f4b091e9)`(bool generateSecret,List< string >? logoutUrls,List< string >? callbackUrls,Dictionary< string, string?>? attributes)` 
+#### `public object `[`CreateAppClient`](#a00043_1adbe8e2a3fefe5b6df86771a858de4864)`(bool generateSecret,List< string >? logoutUrls,List< string >? loginUrls,List< string >? callbackUrls,string? defaultLoginUrl,Dictionary< string, string?>? attributes)` 
 
 Creates an appClient, calls the POST /appClients endpoint.
 
-```cpp
-var parameters = new Dictionary<string, string?>{
-    {"name", name},
-    {"description", description},
-};
-var response = Toby.CreateAppClient(
-    attributes: parameters, 
-    generateSecret: false,
-    logoutUrls: new List<string>{"https://localhost:3030/logout"},
-    callbackUrls: new List<string>{"https://localhost:3030/callback"}
-);
-```
-
 #### Parameters
+* `generateSecret` Set to false to ceate a Public app client, default: true
+
+* `logoutUrls` List of logout urls
+
+* `callbackUrls` List of callback urls
+
+* `loginUrls` List of login urls
+
+* `defaultLoginUrl` default login url
+
 * `attributes` Additional attributes
 
 #### Returns
@@ -137,6 +148,18 @@ JSON object with two keys:
 * "appClients" AppClients response from REST API without the content of each appClient
 
 * "nextToken" allowing for retrieving the next portion of data
+
+#### `public object `[`UpdateAppClient`](#a00043_1a94257b036dd947a40bb10a243ad0fd53)`(string appClientId,Dictionary< string, string?>? attributes)` 
+
+Updates an existing appClient, calls the PATCH /appClients/{appClientId} endpoint.
+
+#### Parameters
+* `appClientId` Id of the appClient
+
+* `attributes` Additional attributes
+
+#### Returns
+AppClient response from REST API
 
 #### `public object `[`DeleteAppClient`](#a00043_1acdfd1de4050f19d8cb167b865455ed88)`(string appClientId)` 
 
@@ -236,32 +259,27 @@ Delete an asset, calls the DELETE /assets/{assetId} endpoint.
 #### Returns
 Asset response from REST API
 
-#### `public object `[`CreateDocument`](#a00043_1aef5c33f1a06ea8010bb6a6ba0c97b236)`(byte[] content,string contentType,string? consentId,string? batchId,List< Dictionary< string, string >>? groundTruth)` 
+#### `public object `[`CreateDocument`](#a00043_1a79a3c991aa414ee4cc419f255b68b68e)`(byte[] content,string contentType,string? consentId,string? batchId,List< Dictionary< string, string >>? groundTruth,string? datasetId)` 
 
 Creates a document handle, calls the POST /documents endpoint
-
-Create a document handle for a jpeg image 
-```cpp
-Client client = new Client();
-byte[] content = File.ReadAllBytes("MyReceipt.jpeg");
-var response = client.CreateDocument(content, "image/jpeg", "bar");
-```
 
 #### Parameters
 * `content` Content to POST 
 
 * `contentType` A mime type for the document handle 
 
+* `batchId` Specifies the batch to which the document will be associated with 
+
 * `consentId` An identifier to mark the owner of the document handle 
 
-* `batchId` Specifies the batch to which the document will be associated with 
+* `datasetId` Specifies the dataset to which the document will be associated with 
 
 * `groundTruth` A list of items {label: value}, representing the ground truth values for the document 
 
 #### Returns
 A deserialized object that can be interpreted as a Dictionary with the fields with batchId, documentId, contentType and consentId
 
-#### `public object `[`ListDocuments`](#a00043_1a6c1c9a3f3a20bad2ccf858ac490f57d5)`(string? batchId,string? consentId,int? maxResults,string? nextToken)` 
+#### `public object `[`ListDocuments`](#a00043_1ae27c667e46f477518eb9318c6df7e168)`(string? batchId,string? consentId,int? maxResults,string? nextToken,string? datasetId)` 
 
 Get documents from the REST API, calls the GET /documents endpoint.
 
@@ -275,6 +293,8 @@ var response = client.ListDocuments('<batchId>');
 * `batchId` The batch id that contains the documents of interest 
 
 * `consentId` An identifier to mark the owner of the document handle 
+
+* `datasetId` The dataset id that contains the documents of interest 
 
 * `maxResults` Number of items to show on a single page
 
@@ -299,29 +319,21 @@ var response = client.GetDocument('<documentId>');
 #### Returns
 Document information from REST API
 
-#### `public object `[`UpdateDocument`](#a00043_1a8aa65dc695c9b9918f63d12b92f329b3)`(string documentId,List< Dictionary< string, string >> groundTruth)` 
+#### `public object `[`UpdateDocument`](#a00043_1a1dc913a4653a26fb14622b3537f51141)`(string documentId,List< Dictionary< string, string >>? groundTruth,string? datasetId)` 
 
 Update ground truth of the document, calls the POST /documents/{documentId} endpoint. This enables the API to learn from past mistakes.
 
-```cpp
-Client client = new Client();
-var groundTruth = new List<Dictionary<string, string>>()
-{
-    new Dictionary<string, string>(){{"label", "total_amount"},{"value", "54.50"}},
-    new Dictionary<string, string>(){{"label", "purchase_date"},{"value", "2007-07-30"}}
-};
-var response = client.UpdateDocument('<documentId>', groundTruth);
-```
-
 #### Parameters
-* `documentId` Path to document to upload, Same as provided to [CreateDocument](#a00043_1aef5c33f1a06ea8010bb6a6ba0c97b236)
+* `documentId` Path to document to upload, Same as provided to [CreateDocument](#a00043_1a79a3c991aa414ee4cc419f255b68b68e)
 
 * `groundTruth` A list of ground truth items 
+
+* `datasetId` change or add the documents datasetId 
 
 #### Returns
 A deserialized object that can be interpreted as a Dictionary with the fields documentId, consentId, uploadUrl, contentType and ground truth.
 
-#### `public object `[`DeleteDocuments`](#a00043_1ac84e743752ac35802ebc335985220e4c)`(string? batchId,string? consentId,int? maxResults,string? nextToken)` 
+#### `public object `[`DeleteDocuments`](#a00043_1acd6023809e716b0af2aee364843ae088)`(string? batchId,string? consentId,int? maxResults,string? nextToken,string? datasetId,bool deleteAll)` 
 
 Delete documents with specified consentId, calls DELETE /documents endpoint.
 
@@ -335,12 +347,23 @@ var response = client.DeleteConsent('<consentId>');
 
 * `consentId` Delete documents with provided consentId 
 
+* `datasetId` Delete documents with provided datasetId 
+
 * `maxResults` Maximum number of items to delete
 
 * `nextToken` Token to retrieve the next page
 
 #### Returns
 A deserialized object that can be interpreted as a Dictionary with the fields consentId, nextToken and documents
+
+#### `public object `[`DeleteDocument`](#a00043_1aafd4deeebea97d6b937dbfe6227cd09d)`(string documentId)` 
+
+Delete a document, calls the DELETE /documents/{documentId} endpoint. 
+#### Parameters
+* `documentId` Id of the document
+
+#### Returns
+Document response from REST API
 
 #### `public object `[`CreateBatch`](#a00043_1a67cccdf0e1af3c8ce8b660bf1074f38f)`(string? name,string? description)` 
 
@@ -360,6 +383,18 @@ var response = client.CreateBatch("Data gathered from the Mars Rover Invoice Sca
 #### Returns
 A deserialized object that can be interpreted as a Dictionary with the fields batchId and description. batchId can be used as an input when posting documents to make them a part of this batch.
 
+#### `public object `[`UpdateBatch`](#a00043_1aad6c5cc8c157268c36c04e922bf01672)`(string batchId,Dictionary< string, string?>? attributes)` 
+
+Updates an existing batch, calls the PATCH /batches/{batchId} endpoint.
+
+#### Parameters
+* `batchId` Id of the batch
+
+* `attributes` Additional attributes
+
+#### Returns
+Batch response from REST API
+
 #### `public object `[`DeleteBatch`](#a00043_1afca5b7b95d5c60661417e824b7b8d898)`(string batchId,bool deleteDocuments)` 
 
 Delete a batch, calls the DELETE /batches/{batchId} endpoint.
@@ -374,6 +409,71 @@ Delete a batch, calls the DELETE /batches/{batchId} endpoint.
 #### Returns
 Batch response from REST API
 
+#### `public object `[`CreateDataset`](#a00043_1a5bc08562dca015280bb40201458c0e53)`(string? name,string? description)` 
+
+Create a dataset handle, calls the POST /datasets endpoint.
+
+Create a new dataset with the provided description. on the document specified by '<datasetId>' 
+```cpp
+Client client = new Client();
+var response = client.CreateDataset("Data gathered from the Mars Rover Invoice Scan Mission");
+```
+
+#### Parameters
+* `name` Name of the dataset
+
+* `description` A brief description of the dataset 
+
+#### Returns
+A deserialized object that can be interpreted as a Dictionary with the fields datasetId and description. datasetId can be used as an input when posting documents to make them a part of this dataset.
+
+#### `public object `[`ListDatasets`](#a00043_1a0d2fe04da4566e86f5988c10aba8fee7)`(int? maxResults,string? nextToken)` 
+
+List datasets available, calls the GET /datasets endpoint.
+
+```cpp
+Client client = new Client();
+var response = client.ListDatasets();
+```
+
+#### Parameters
+* `maxResults` Number of items to show on a single page
+
+* `nextToken` Token to retrieve the next page
+
+#### Returns
+JSON object with two keys:
+
+* "datasets" which contains a list of Dataset objects
+
+* "nextToken" allowing for retrieving the next portion of data
+
+#### `public object `[`UpdateDataset`](#a00043_1abb805616b3c28f137f57a6458dcec18b)`(string datasetId,Dictionary< string, string?>? attributes)` 
+
+Updates an existing dataset, calls the PATCH /datasets/{datasetId} endpoint.
+
+#### Parameters
+* `datasetId` Id of the dataset
+
+* `attributes` Additional attributes
+
+#### Returns
+Dataset response from REST API
+
+#### `public object `[`DeleteDataset`](#a00043_1a9d124051fdb2024a4623e19e624fa5d7)`(string datasetId,bool deleteDocuments)` 
+
+Delete a dataset, calls the DELETE /datasets/{datasetId} endpoint.
+
+`[Client](#a00043) client = new [Client()](#a00043_1a0ba3cc00461a4ee4d4a346d9600efa4a); var response = client.DeleteDataset("&lt;datasetId&gt;"); `
+
+#### Parameters
+* `datasetId` Id of the dataset
+
+* `deleteDocuments` Set to true to delete documents in dataset before deleting dataset
+
+#### Returns
+Dataset response from REST API
+
 #### `public object `[`CreatePrediction`](#a00043_1a4cb78d4caa5b0a3f6c077eec720bd4d2)`(string documentId,string modelId,int? maxPages,bool? autoRotate,string? imageQuality)` 
 
 Run inference and create a prediction, calls the POST /predictions endpoint.
@@ -385,7 +485,7 @@ var response = client.CreatePrediction('<documentId>',"las:model:99cac468f7cf47d
 ```
 
 #### Parameters
-* `documentId` Path to document to upload Same as provided to [CreateDocument](#a00043_1aef5c33f1a06ea8010bb6a6ba0c97b236)
+* `documentId` Path to document to upload Same as provided to [CreateDocument](#a00043_1a79a3c991aa414ee4cc419f255b68b68e)
 
 * `modelId` Id of the model to use for inference 
 
@@ -444,6 +544,28 @@ var response = client.ListLogs();
 #### Returns
 Logs response from REST API
 
+#### `public object `[`CreateModel`](#a00043_1a46244b6d90855b929dd5c6b8a07cbfef)`(int width,int height,Dictionary< string, object > fieldConfig,Dictionary< string, object >? preprocessConfig,string? name,string? description,Dictionary< string, string?>? attributes)` 
+
+Creates a model, calls the POST /models endpoint.
+
+#### Parameters
+* `width` The number of pixels to be used for the input image width of your model
+
+* `height` The number of pixels to be used for the input image height of your model
+
+* `fieldConfig` Specification of the fields that the model is going to predict
+
+* `preprocessConfig` Specification of the processing steps prior to the prediction of an image
+
+* `name` Name of the model
+
+* `description` Description of the model
+
+* `attributes` Additional attributes
+
+#### Returns
+Model response from REST API
+
 #### `public object `[`ListModels`](#a00043_1a2a5979f62ac58a13cdd2fce28c174508)`(int? maxResults,string? nextToken)` 
 
 List models available, calls the GET /models endpoint.
@@ -464,6 +586,101 @@ JSON object with two keys:
 * "models" which contains a list of Prediction objects
 
 * "nextToken" allowing for retrieving the next portion of data
+
+#### `public object `[`GetModel`](#a00043_1af9964054bea7041345e16f51063409c7)`(string modelId)` 
+
+Get information about a specific model, calls the GET /models/{modelId} endpoint.
+
+#### Parameters
+* `modelId` Id of the model
+
+#### Returns
+Model response from REST API
+
+#### `public object `[`UpdateModel`](#a00043_1a5ad7270e6d1de683d5f7eb69b633e58c)`(string modelId,int? width,int? height,Dictionary< string, object >? fieldConfig,Dictionary< string, object >? preprocessConfig,string? name,string? description,string? status,Dictionary< string, string?>? attributes)` 
+
+Updates a model, calls the PATCH /models/{modelId} endpoint.
+
+#### Parameters
+* `modelId` Id of the model
+
+* `width` The number of pixels to be used for the input image width of your model
+
+* `height` The number of pixels to be used for the input image height of your model
+
+* `fieldConfig` Specification of the fields that the model is going to predict
+
+* `preprocessConfig` Specification of the processing steps prior to the prediction of an image
+
+* `name` Name of the model
+
+* `description` Description of the model
+
+* `status` New status for the model
+
+* `attributes` Additional attributes
+
+#### Returns
+Model response from REST API
+
+#### `public object `[`CreateDataBundle`](#a00043_1a854cc016def250aef026cf7cd9e485c0)`(string modelId,List< string > datasetIds,string? name,string? description)` 
+
+Create a data bundle handle, calls the POST /models/{modelId}/dataBundles endpoint.
+
+#### Parameters
+* `modelId` Id of the model 
+
+* `datasetIds` List of Dataset Ids that will be included in the data bundle 
+#### Parameters
+* `name` Name of the data bundle
+
+* `description` A brief description of the data bundle 
+
+#### Returns
+Data Bundle response from REST API
+
+#### `public object `[`ListDataBundles`](#a00043_1af376709c384dee0bd1dceb8e0a6ce93e)`(string modelId,int? maxResults,string? nextToken)` 
+
+List data bundles available, calls the GET /models/{modelId}/dataBundles endpoint.
+
+#### Parameters
+* `modelId` Id of the model
+
+* `maxResults` Number of items to show on a single page
+
+* `nextToken` Token to retrieve the next page
+
+#### Returns
+JSON object with two keys:
+
+* "dataBundles" which contains a list of data bundle objects
+
+* "nextToken" allowing for retrieving the next portion of data
+
+#### `public object `[`UpdateDataBundle`](#a00043_1a2d4413c5567aeb21e42f07aa1a09d6d2)`(string modelId,string dataBundleId,Dictionary< string, string?>? attributes)` 
+
+Updates an existing data bundle, calls the PATCH /models/{modelId}/dataBundles/{dataBundleId} endpoint.
+
+#### Parameters
+* `modelId` Id of the model
+
+* `dataBundleId` Id of the data bundle
+
+* `attributes` Additional attributes
+
+#### Returns
+Data Bundle response from REST API
+
+#### `public object `[`DeleteDataBundle`](#a00043_1a06fa74f82b181b50a8587fbc5ad08e36)`(string modelId,string dataBundleId)` 
+
+Delete a data bundle, calls the DELETE /models/{modelId}/dataBundles/{dataBundleId} endpoint. 
+#### Parameters
+* `modelId` Id of the model
+
+* `dataBundleId` Id of the data bundle
+
+#### Returns
+Data Bundle response from REST API
 
 #### `public object `[`CreateSecret`](#a00043_1ac9ee5b8c1cedfd849aa258bccdcd1de9)`(Dictionary< string, string > data,Dictionary< string, string?>? attributes)` 
 

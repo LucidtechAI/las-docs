@@ -141,7 +141,77 @@ Creates a batch, calls the POST /batches endpoint.
 
 
 
-#### create_document(content: Union[bytes, bytearray, str, pathlib.Path, io.IOBase], content_type: str, \*, consent_id: Optional[str] = None, batch_id: Optional[str] = None, ground_truth: Optional[Sequence[Dict[str, str]]] = None)
+#### create_data_bundle(model_id, dataset_ids, \*\*optional_args)
+Creates a data bundle, calls the POST /models/{modelId}/dataBundles endpoint.
+
+
+* **Parameters**
+
+    
+    * **model_id** (*str*) – Id of the model
+
+
+    * **dataset_ids** (*List**[**str**]*) – Dataset Ids that will be included in the data bundle
+
+
+    * **name** (*Optional**[**str**]*) – Name of the data bundle
+
+
+    * **description** (*Optional**[**str**]*) – Description of the data bundle
+
+
+
+* **Returns**
+
+    Data Bundle response from REST API
+
+
+
+* **Return type**
+
+    dict
+
+
+
+* **Raises**
+
+    `InvalidCredentialsException`, `TooManyRequestsException`, `LimitExceededException`, `requests.exception.RequestException`
+
+
+
+#### create_dataset(\*\*optional_args)
+Creates a dataset, calls the POST /datasets endpoint.
+
+
+* **Parameters**
+
+    
+    * **name** (*Optional**[**str**]*) – Name of the dataset
+
+
+    * **description** (*Optional**[**str**]*) – Description of the dataset
+
+
+
+* **Returns**
+
+    Dataset response from REST API
+
+
+
+* **Return type**
+
+    dict
+
+
+
+* **Raises**
+
+    `InvalidCredentialsException`, `TooManyRequestsException`, `LimitExceededException`, `requests.exception.RequestException`
+
+
+
+#### create_document(content: Union[bytes, bytearray, str, pathlib.Path, io.IOBase], content_type: str, \*, consent_id: Optional[str] = None, batch_id: Optional[str] = None, dataset_id: Optional[str] = None, ground_truth: Optional[Sequence[Dict[str, str]]] = None)
 Creates a document, calls the POST /documents endpoint.
 
 ```python
@@ -164,6 +234,9 @@ Creates a document, calls the POST /documents endpoint.
 
 
     * **batch_id** (*Optional**[**str**]*) – Id of the associated batch
+
+
+    * **dataset_id** (*Optional**[**str**]*) – Id of the associated dataset
 
 
     * **ground_truth** – List of items {‘label’: label, ‘value’: value}
@@ -576,7 +649,106 @@ Delete the batch with the provided batch_id, calls the DELETE /batches/{batchId}
 
 
 
-#### delete_documents(\*, consent_id: Optional[Union[str, List[str]]] = None, batch_id: Optional[Union[str, List[str]]] = None, max_results: Optional[int] = None, next_token: Optional[str] = None)
+#### delete_data_bundle(model_id: str, data_bundle_id: str)
+Delete the data bundle with the provided data_bundle_id,
+calls the DELETE /models/{modelId}/dataBundles/{dataBundleId} endpoint.
+
+
+* **Parameters**
+
+    
+    * **model_id** (*str*) – Id of the model
+
+
+    * **data_bundle_id** (*str*) – Id of the data bundle
+
+
+
+* **Returns**
+
+    Data Bundle response from REST API
+
+
+
+* **Return type**
+
+    dict
+
+
+
+* **Raises**
+
+    `InvalidCredentialsException`, `TooManyRequestsException`, `LimitExceededException`, `requests.exception.RequestException`
+
+
+
+#### delete_dataset(dataset_id: str, delete_documents: bool = False)
+Delete the dataset with the provided dataset_id, calls the DELETE /datasets/{datasetId} endpoint.
+
+
+* **Parameters**
+
+    
+    * **dataset_id** (*str*) – Id of the dataset
+
+
+    * **delete_documents** (*bool*) – Set to true to delete documents in dataset before deleting dataset
+
+
+
+* **Returns**
+
+    Dataset response from REST API
+
+
+
+* **Return type**
+
+    dict
+
+
+
+* **Raises**
+
+    `InvalidCredentialsException`, `TooManyRequestsException`, `LimitExceededException`, `requests.exception.RequestException`
+
+
+
+#### delete_document(document_id: str)
+Delete the document with the provided document_id, calls the DELETE /documents/{documentId} endpoint.
+
+```python
+>>> from las.client import Client
+>>> client = Client()
+>>> client.delete_document('<document_id>')
+```
+
+
+* **Parameters**
+
+    **document_id** (*str*) – Id of the document
+
+
+
+* **Returns**
+
+    Model response from REST API
+
+
+
+* **Return type**
+
+    dict
+
+
+
+* **Raises**
+
+    `InvalidCredentialsException`, `TooManyRequestsException`, `LimitExceededException`, `requests.exception.RequestException`
+
+
+
+#### delete_documents(\*, batch_id: Optional[Union[str, List[str]]] = None, consent_id: Optional[Union[str, List[str]]] = None, dataset_id: Optional[Union[str, List[str]]] = None, max_results: Optional[int] = None, next_token: Optional[str] = None, delete_all: Optional[bool] = False)
 Delete documents with the provided consent_id, calls the DELETE /documents endpoint.
 
 ```python
@@ -595,16 +767,49 @@ Delete documents with the provided consent_id, calls the DELETE /documents endpo
     * **consent_id** (*Optional**[**Queryparam**]*) – Ids of the consents that marks the owner of the document
 
 
+    * **dataset_id** (*Optional**[**Queryparam**]*) – Ids of the datasets to be deleted
+
+
     * **max_results** (*Optional**[**int**]*) – Maximum number of documents that will be deleted
 
 
     * **next_token** (*Optional**[**str**]*) – A unique token for each page, use the returned token to retrieve the next page.
 
 
+    * **delete_all** – Delete all documents that match the given parameters doing multiple API calls if necessary.
+
+
+Will throw an error if parameter max_results is also specified.
+:type delete_all: Optional[bool]
+:return: Documents response from REST API
+:rtype: dict
+
+
+* **Raises**
+
+    `InvalidCredentialsException`, `TooManyRequestsException`, `LimitExceededException`, `requests.exception.RequestException`
+
+
+
+#### delete_model(model_id: str)
+Delete the model with the provided model_id, calls the DELETE /models/{modelId} endpoint.
+
+```python
+>>> from las.client import Client
+>>> client = Client()
+>>> client.delete_model('<model_id>')
+```
+
+
+* **Parameters**
+
+    **model_id** (*str*) – Id of the model
+
+
 
 * **Returns**
 
-    Documents response from REST API
+    Model response from REST API
 
 
 
@@ -1001,6 +1206,34 @@ Get a model, calls the GET /models/{modelId} endpoint.
 
 
 
+#### get_organization(organization_id: str)
+Get an organization, calls the GET /organizations/{organizationId} endpoint.
+
+
+* **Parameters**
+
+    **organization_id** (*str*) – The Id of the organization
+
+
+
+* **Returns**
+
+    Organization response from REST API
+
+
+
+* **Return type**
+
+    dict
+
+
+
+* **Raises**
+
+    `InvalidCredentialsException`, `TooManyRequestsException`, `LimitExceededException`, `requests.exception.RequestException`
+
+
+
 #### get_transition(transition_id: str)
 Get the transition with the provided transition_id, calls the GET /transitions/{transitionId} endpoint.
 
@@ -1293,7 +1526,74 @@ List batches available, calls the GET /batches endpoint.
 
 
 
-#### list_documents(\*, batch_id: Optional[Union[str, List[str]]] = None, consent_id: Optional[Union[str, List[str]]] = None, max_results: Optional[int] = None, next_token: Optional[str] = None)
+#### list_data_bundles(model_id, \*, max_results: Optional[int] = None, next_token: Optional[str] = None)
+List data bundles available, calls the GET /models/{modelId}/dataBundles endpoint.
+
+
+* **Parameters**
+
+    
+    * **model_id** (*str*) – Id of the model
+
+
+    * **max_results** (*Optional**[**int**]*) – Maximum number of results to be returned
+
+
+    * **next_token** (*Optional**[**str**]*) – A unique token for each page, use the returned token to retrieve the next page.
+
+
+
+* **Returns**
+
+    Data Bundles response from REST API
+
+
+
+* **Return type**
+
+    dict
+
+
+
+* **Raises**
+
+    `InvalidCredentialsException`, `TooManyRequestsException`, `LimitExceededException`, `requests.exception.RequestException`
+
+
+
+#### list_datasets(\*, max_results: Optional[int] = None, next_token: Optional[str] = None)
+List datasets available, calls the GET /datasets endpoint.
+
+
+* **Parameters**
+
+    
+    * **max_results** (*Optional**[**int**]*) – Maximum number of results to be returned
+
+
+    * **next_token** (*Optional**[**str**]*) – A unique token for each page, use the returned token to retrieve the next page.
+
+
+
+* **Returns**
+
+    Datasets response from REST API without the content of each dataset
+
+
+
+* **Return type**
+
+    dict
+
+
+
+* **Raises**
+
+    `InvalidCredentialsException`, `TooManyRequestsException`, `LimitExceededException`, `requests.exception.RequestException`
+
+
+
+#### list_documents(\*, batch_id: Optional[Union[str, List[str]]] = None, consent_id: Optional[Union[str, List[str]]] = None, dataset_id: Optional[Union[str, List[str]]] = None, max_results: Optional[int] = None, next_token: Optional[str] = None)
 List documents available for inference, calls the GET /documents endpoint.
 
 ```python
@@ -1310,6 +1610,9 @@ List documents available for inference, calls the GET /documents endpoint.
 
 
     * **consent_id** (*Optional**[**Queryparam**]*) – Ids of the consents that marks the owner of the document
+
+
+    * **dataset_id** (*Optional**[**Queryparam**]*) – Ids of datasets that contains the documents of interest
 
 
     * **max_results** (*Optional**[**int**]*) – Maximum number of results to be returned
@@ -1337,7 +1640,7 @@ List documents available for inference, calls the GET /documents endpoint.
 
 
 
-#### list_logs(\*, workflow_id: Optional[Union[str, List[str]]] = None, workflow_execution_id: Optional[Union[str, List[str]]] = None, transition_id: Optional[Union[str, List[str]]] = None, transition_execution_id: Optional[Union[str, List[str]]] = None, max_results: Optional[int] = None, next_token: Optional[str] = None)
+#### list_logs(\*, workflow_id: Optional[str] = None, workflow_execution_id: Optional[str] = None, transition_id: Optional[str] = None, transition_execution_id: Optional[str] = None, max_results: Optional[int] = None, next_token: Optional[str] = None)
 List logs, calls the GET /logs endpoint.
 
 ```python
@@ -1350,16 +1653,16 @@ List logs, calls the GET /logs endpoint.
 * **Parameters**
 
     
-    * **workflow_id** (*Optional**[**Queryparam**]*) – 
+    * **workflow_id** (*Optional**[**str**]*) – Only show logs from this workflow
 
 
-    * **workflow_execution_id** (*Optional**[**Queryparam**]*) – 
+    * **workflow_execution_id** (*Optional**[**str**]*) – Only show logs from this workflow execution
 
 
-    * **transition_id** (*Optional**[**Queryparam**]*) – 
+    * **transition_id** (*Optional**[**str**]*) – Only show logs from this transition
 
 
-    * **transition_execution_id** (*Optional**[**Queryparam**]*) – 
+    * **transition_execution_id** (*Optional**[**str**]*) – Only show logs from this transition execution
 
 
     * **max_results** (*Optional**[**int**]*) – Maximum number of results to be returned
@@ -1875,17 +2178,83 @@ Updates a batch, calls the PATCH /batches/{batchId} endpoint.
 
 
 
-#### update_document(document_id: str, ground_truth: Sequence[Dict[str, Union[str, None, bool]]])
+#### update_data_bundle(model_id: str, data_bundle_id: str, \*\*optional_args)
+Updates a data bundle, calls the PATCH /models/{modelId}/dataBundles/{dataBundleId} endpoint.
+
+
+* **Parameters**
+
+    
+    * **model_id** (*str*) – Id of the model
+
+
+    * **data_bundle_id** (*str*) – Id of the data bundle
+
+
+    * **name** (*Optional**[**str**]*) – Name of the data bundle
+
+
+    * **description** (*Optional**[**str**]*) – Description of the data bundle
+
+
+
+* **Returns**
+
+    Data Bundle response from REST API
+
+
+
+* **Return type**
+
+    dict
+
+
+
+* **Raises**
+
+    `InvalidCredentialsException`, `TooManyRequestsException`, `LimitExceededException`, `requests.exception.RequestException`
+
+
+
+#### update_dataset(dataset_id, \*\*optional_args)
+Updates a dataset, calls the PATCH /datasets/{datasetId} endpoint.
+
+
+* **Parameters**
+
+    
+    * **dataset_id** (*str*) – Id of the dataset
+
+
+    * **name** (*Optional**[**str**]*) – Name of the dataset
+
+
+    * **description** (*Optional**[**str**]*) – Description of the dataset
+
+
+
+* **Returns**
+
+    Dataset response from REST API
+
+
+
+* **Return type**
+
+    dict
+
+
+
+* **Raises**
+
+    `InvalidCredentialsException`, `TooManyRequestsException`, `LimitExceededException`, `requests.exception.RequestException`
+
+
+
+#### update_document(document_id: str, ground_truth: Optional[Sequence[Dict[str, Union[str, None, bool]]]] = None, \*, dataset_id: Optional[str] = None)
 Update ground truth for a document, calls the PATCH /documents/{documentId} endpoint.
 Updating ground truth means adding the ground truth data for the particular document.
 This enables the API to learn from past mistakes.
-
-```python
->>> from las.client import Client
->>> client = Client()
->>> ground_truth = [{'label': 'total_amount', 'value': '156.00'}, {'label': 'date', 'value': '2018-10-23'}]
->>> client.update_document(document_id='<document id>', ground_truth=ground_truth)
-```
 
 
 * **Parameters**
@@ -1894,7 +2263,10 @@ This enables the API to learn from past mistakes.
     * **document_id** (*str*) – Id of the document
 
 
-    * **ground_truth** (*Sequence**[**Dict**[**str**, **Union**[**Optional**[**str**]**, **bool**]**]**]*) – List of items {label: value} representing the ground truth values for the document
+    * **dataset_id** (*Optional**[**str**]*) – Id of the dataset you want to associate your document with
+
+
+    * **ground_truth** (*Optional**[**Sequence**[**Dict**[**str**, **Union**[**Optional**[**str**]**, **bool**]**]**]**]*) – List of items {label: value} representing the ground truth values for the document
 
 
 
@@ -1951,6 +2323,41 @@ Updates a model, calls the PATCH /models/{modelId} endpoint.
 * **Returns**
 
     Model response from REST API
+
+
+
+* **Return type**
+
+    dict
+
+
+
+* **Raises**
+
+    `InvalidCredentialsException`, `TooManyRequestsException`, `LimitExceededException`, `requests.exception.RequestException`
+
+
+
+#### update_organization(organization_id: str, \*\*optional_args)
+Updates an organization, calls the PATCH /organizations/{organizationId} endpoint.
+
+
+* **Parameters**
+
+    
+    * **organization_id** (*Optional**[**str**]*) – The Id of the organization
+
+
+    * **name** (*Optional**[**str**]*) – Name of the organization
+
+
+    * **description** (*Optional**[**str**]*) – Description of the organization
+
+
+
+* **Returns**
+
+    Organization response from REST API
 
 
 
