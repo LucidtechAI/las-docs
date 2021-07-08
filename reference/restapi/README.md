@@ -6,8 +6,8 @@ You can find the Open API specification file [here](https://raw.githubuserconten
 
 ### 2021-07-08
 
-- Extended the period in which temporary credentials are valid upon first time invitation to Typenode or Flyt from 7
-days to 30 days
+- Extended the period in which temporary credentials are valid upon first time invitation to Typenode or Flyt from 7 
+  days to 30 days
 - Added timeoutInSeconds to /transitions
 - Fixed a bug preventing login to complete successfully in Typenode and Flyt
 - Fixed a bug preventing expired users from getting new temporary credentials when invited again
@@ -23,9 +23,9 @@ days to 30 days
 ### 2021-06-25
 
 - Deprecated /batches endpoint. It's replaced by /datasets. Your current batches will be unaffected until 2021-09-06,
-after which we will remove the entire endpoint and all of its data. Documents in batches will not be affected, only the
-batches themselves. Until 2021-09-06 you will not be able to create new batches. Please consider replacing your batches
-with datasets.
+  after which we will remove the entire endpoint and all of its data. Documents in batches will not be affected, only the
+  batches themselves. Until 2021-09-06 you will not be able to create new batches. Please consider replacing your batches
+  with datasets.
 - Added POST /datasets
 - Added GET /datasets
 - Added PATCH /datasets/:id
