@@ -6,7 +6,7 @@ You can find the Open API specification file [here](https://raw.githubuserconten
 
 ### 2021-07-08
 
-- Extended the period in which temporary credentials are valid upon first time invitation to Typenode or Flyt from 7 
+- Extended the period in which temporary credentials are valid upon first time invitation to Typenode or Flyt from 7\
   days to 30 days
 - Added timeoutInSeconds to /transitions
 - Fixed a bug preventing login to complete successfully in Typenode and Flyt
