@@ -2,7 +2,7 @@
   "openapi": "3.0.1",
   "info": {
     "title": "Lucidtech API",
-    "version": "2021-07-01T08:00:44Z"
+    "version": "2021-07-08T07:35:32Z"
   },
   "servers": [
     {
@@ -9865,6 +9865,7 @@
                 "description",
                 "name",
                 "parameters",
+                "timeoutInSeconds",
                 "transitionId",
                 "transitionType"
               ],
@@ -9916,6 +9917,11 @@
                 },
                 "parameters": {
                   "type": "object"
+                },
+                "timeoutInSeconds": {
+                  "maximum": 1800,
+                  "minimum": 60,
+                  "type": "integer"
                 }
               },
               "additionalProperties": false
@@ -12609,6 +12615,11 @@
                 "additionalProperties": false
               }
             ]
+          },
+          "timeoutInSeconds": {
+            "maximum": 1800,
+            "minimum": 60,
+            "type": "integer"
           }
         },
         "additionalProperties": false
@@ -13076,6 +13087,7 @@
           "description",
           "name",
           "parameters",
+          "timeoutInSeconds",
           "transitionId",
           "transitionType"
         ],
@@ -13127,6 +13139,11 @@
           },
           "parameters": {
             "type": "object"
+          },
+          "timeoutInSeconds": {
+            "maximum": 1800,
+            "minimum": 60,
+            "type": "integer"
           }
         },
         "additionalProperties": false

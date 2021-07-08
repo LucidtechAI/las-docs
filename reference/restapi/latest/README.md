@@ -5198,6 +5198,7 @@
           "description",
           "name",
           "parameters",
+          "timeoutInSeconds",
           "transitionId",
           "transitionType"
         ],
@@ -5249,6 +5250,11 @@
           },
           "parameters": {
             "type": "object"
+          },
+          "timeoutInSeconds": {
+            "maximum": 1800,
+            "minimum": 60,
+            "type": "integer"
           }
         },
         "additionalProperties": false
@@ -5383,6 +5389,11 @@
           "additionalProperties": false
         }
       ]
+    },
+    "timeoutInSeconds": {
+      "maximum": 1800,
+      "minimum": 60,
+      "type": "integer"
     }
   },
   "additionalProperties": false
@@ -5398,6 +5409,7 @@
     "description",
     "name",
     "parameters",
+    "timeoutInSeconds",
     "transitionId",
     "transitionType"
   ],
@@ -5449,6 +5461,11 @@
     },
     "parameters": {
       "type": "object"
+    },
+    "timeoutInSeconds": {
+      "maximum": 1800,
+      "minimum": 60,
+      "type": "integer"
     }
   },
   "additionalProperties": false
@@ -5484,6 +5501,7 @@
     "description",
     "name",
     "parameters",
+    "timeoutInSeconds",
     "transitionId",
     "transitionType"
   ],
@@ -5535,6 +5553,11 @@
     },
     "parameters": {
       "type": "object"
+    },
+    "timeoutInSeconds": {
+      "maximum": 1800,
+      "minimum": 60,
+      "type": "integer"
     }
   },
   "additionalProperties": false
@@ -5570,6 +5593,7 @@
     "description",
     "name",
     "parameters",
+    "timeoutInSeconds",
     "transitionId",
     "transitionType"
   ],
@@ -5621,6 +5645,11 @@
     },
     "parameters": {
       "type": "object"
+    },
+    "timeoutInSeconds": {
+      "maximum": 1800,
+      "minimum": 60,
+      "type": "integer"
     }
   },
   "additionalProperties": false
@@ -5709,6 +5738,7 @@
     "description",
     "name",
     "parameters",
+    "timeoutInSeconds",
     "transitionId",
     "transitionType"
   ],
@@ -5760,6 +5790,11 @@
     },
     "parameters": {
       "type": "object"
+    },
+    "timeoutInSeconds": {
+      "maximum": 1800,
+      "minimum": 60,
+      "type": "integer"
     }
   },
   "additionalProperties": false
