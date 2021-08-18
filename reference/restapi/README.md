@@ -4,6 +4,25 @@ You can find the Open API specification file [here](https://raw.githubuserconten
 
 ## Changelog
 
+### 2021-08-18
+- Fixed a bug preventing a transition execution from starting for transitions with the docker type
+- Added GET /datasets/:id
+- Extended the period in which temporary credentials are valid upon first time invitation to Typenode or Flyt from 30 days to 90 days
+- Listing endpoints like DELETE /documents and GET /documents should now respond faster
+- Added more descriptive error message for 404 responses
+- Added createdBy, updatedTime, updatedBy to /appClients
+- Added createdTime, createdBy, updatedTime, updatedBy to /users
+- Added createdTime, createdBy, updatedTime, updatedBy to /assets
+- Added createdTime, createdBy, updatedTime, updatedBy to /documents
+- Added createdBy, updatedBy to /models
+- Added createdBy, updatedBy to /models/:id/dataBundles
+- Added createdTime, createdBy, updatedTime, updatedBy to /secrets
+- Added createdTime, createdBy, updatedTime, updatedBy to /transitions
+- Added createdTime, createdBy, updatedTime, updatedBy to /workflows
+- Added createdBy, updatedBy to /datasets
+- Added updatedTime, updatedBy to /organizations
+- Added retentionInDays to /documents. For documents with a datasetId, the minimum retentionInDays of the dataset and the document is chosen
+
 ### 2021-07-08
 
 - Extended the period in which temporary credentials are valid upon first time invitation to Typenode or Flyt from 7 days to 30 days

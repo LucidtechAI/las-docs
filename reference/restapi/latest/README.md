@@ -42,29 +42,37 @@
           "appClientId",
           "callbackUrls",
           "clientId",
+          "createdBy",
           "createdTime",
           "defaultLoginUrl",
           "description",
           "hasSecret",
           "loginUrls",
           "logoutUrls",
-          "name"
+          "name",
+          "updatedBy",
+          "updatedTime"
         ],
         "type": "object",
         "properties": {
           "hasSecret": {
             "type": "boolean"
           },
+          "updatedTime": {
+            "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2}( |T)?[0-9]{2}:?[0-9]{2}:?[0-9]{2}(.[0-9]{1,6})?(Z|[+][0-9]{2}(:|)[0-9]{2})$",
+            "type": "string",
+            "nullable": true
+          },
           "clientId": {
             "type": "string"
           },
-          "apiKey": {
-            "type": "string"
-          },
-          "name": {
+          "updatedBy": {
             "maxLength": 4096,
             "type": "string",
             "nullable": true
+          },
+          "apiKey": {
+            "type": "string"
           },
           "logoutUrls": {
             "type": "array",
@@ -77,19 +85,11 @@
             "type": "string",
             "nullable": true
           },
-          "createdTime": {
-            "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2}( |T)?[0-9]{2}:?[0-9]{2}:?[0-9]{2}(.[0-9]{1,6})?(Z|[+][0-9]{2}(:|)[0-9]{2})$",
-            "type": "string",
-            "nullable": true
-          },
           "callbackUrls": {
             "type": "array",
             "items": {
               "type": "string"
             }
-          },
-          "clientSecret": {
-            "type": "string"
           },
           "loginUrls": {
             "type": "array",
@@ -97,13 +97,31 @@
               "type": "string"
             }
           },
-          "appClientId": {
-            "pattern": "^las:app-client:[a-f0-9]{32}$",
-            "type": "string"
-          },
           "defaultLoginUrl": {
             "type": "string",
             "nullable": true
+          },
+          "createdBy": {
+            "maxLength": 4096,
+            "type": "string",
+            "nullable": true
+          },
+          "name": {
+            "maxLength": 4096,
+            "type": "string",
+            "nullable": true
+          },
+          "createdTime": {
+            "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2}( |T)?[0-9]{2}:?[0-9]{2}:?[0-9]{2}(.[0-9]{1,6})?(Z|[+][0-9]{2}(:|)[0-9]{2})$",
+            "type": "string",
+            "nullable": true
+          },
+          "clientSecret": {
+            "type": "string"
+          },
+          "appClientId": {
+            "pattern": "^las:app-client:[a-f0-9]{32}$",
+            "type": "string"
           }
         },
         "additionalProperties": false
@@ -187,29 +205,37 @@
     "appClientId",
     "callbackUrls",
     "clientId",
+    "createdBy",
     "createdTime",
     "defaultLoginUrl",
     "description",
     "hasSecret",
     "loginUrls",
     "logoutUrls",
-    "name"
+    "name",
+    "updatedBy",
+    "updatedTime"
   ],
   "type": "object",
   "properties": {
     "hasSecret": {
       "type": "boolean"
     },
+    "updatedTime": {
+      "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2}( |T)?[0-9]{2}:?[0-9]{2}:?[0-9]{2}(.[0-9]{1,6})?(Z|[+][0-9]{2}(:|)[0-9]{2})$",
+      "type": "string",
+      "nullable": true
+    },
     "clientId": {
       "type": "string"
     },
-    "apiKey": {
-      "type": "string"
-    },
-    "name": {
+    "updatedBy": {
       "maxLength": 4096,
       "type": "string",
       "nullable": true
+    },
+    "apiKey": {
+      "type": "string"
     },
     "logoutUrls": {
       "type": "array",
@@ -222,19 +248,11 @@
       "type": "string",
       "nullable": true
     },
-    "createdTime": {
-      "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2}( |T)?[0-9]{2}:?[0-9]{2}:?[0-9]{2}(.[0-9]{1,6})?(Z|[+][0-9]{2}(:|)[0-9]{2})$",
-      "type": "string",
-      "nullable": true
-    },
     "callbackUrls": {
       "type": "array",
       "items": {
         "type": "string"
       }
-    },
-    "clientSecret": {
-      "type": "string"
     },
     "loginUrls": {
       "type": "array",
@@ -242,13 +260,31 @@
         "type": "string"
       }
     },
-    "appClientId": {
-      "pattern": "^las:app-client:[a-f0-9]{32}$",
-      "type": "string"
-    },
     "defaultLoginUrl": {
       "type": "string",
       "nullable": true
+    },
+    "createdBy": {
+      "maxLength": 4096,
+      "type": "string",
+      "nullable": true
+    },
+    "name": {
+      "maxLength": 4096,
+      "type": "string",
+      "nullable": true
+    },
+    "createdTime": {
+      "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2}( |T)?[0-9]{2}:?[0-9]{2}:?[0-9]{2}(.[0-9]{1,6})?(Z|[+][0-9]{2}(:|)[0-9]{2})$",
+      "type": "string",
+      "nullable": true
+    },
+    "clientSecret": {
+      "type": "string"
+    },
+    "appClientId": {
+      "pattern": "^las:app-client:[a-f0-9]{32}$",
+      "type": "string"
     }
   },
   "additionalProperties": false
@@ -285,29 +321,37 @@
     "appClientId",
     "callbackUrls",
     "clientId",
+    "createdBy",
     "createdTime",
     "defaultLoginUrl",
     "description",
     "hasSecret",
     "loginUrls",
     "logoutUrls",
-    "name"
+    "name",
+    "updatedBy",
+    "updatedTime"
   ],
   "type": "object",
   "properties": {
     "hasSecret": {
       "type": "boolean"
     },
+    "updatedTime": {
+      "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2}( |T)?[0-9]{2}:?[0-9]{2}:?[0-9]{2}(.[0-9]{1,6})?(Z|[+][0-9]{2}(:|)[0-9]{2})$",
+      "type": "string",
+      "nullable": true
+    },
     "clientId": {
       "type": "string"
     },
-    "apiKey": {
-      "type": "string"
-    },
-    "name": {
+    "updatedBy": {
       "maxLength": 4096,
       "type": "string",
       "nullable": true
+    },
+    "apiKey": {
+      "type": "string"
     },
     "logoutUrls": {
       "type": "array",
@@ -320,19 +364,11 @@
       "type": "string",
       "nullable": true
     },
-    "createdTime": {
-      "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2}( |T)?[0-9]{2}:?[0-9]{2}:?[0-9]{2}(.[0-9]{1,6})?(Z|[+][0-9]{2}(:|)[0-9]{2})$",
-      "type": "string",
-      "nullable": true
-    },
     "callbackUrls": {
       "type": "array",
       "items": {
         "type": "string"
       }
-    },
-    "clientSecret": {
-      "type": "string"
     },
     "loginUrls": {
       "type": "array",
@@ -340,13 +376,31 @@
         "type": "string"
       }
     },
-    "appClientId": {
-      "pattern": "^las:app-client:[a-f0-9]{32}$",
-      "type": "string"
-    },
     "defaultLoginUrl": {
       "type": "string",
       "nullable": true
+    },
+    "createdBy": {
+      "maxLength": 4096,
+      "type": "string",
+      "nullable": true
+    },
+    "name": {
+      "maxLength": 4096,
+      "type": "string",
+      "nullable": true
+    },
+    "createdTime": {
+      "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2}( |T)?[0-9]{2}:?[0-9]{2}:?[0-9]{2}(.[0-9]{1,6})?(Z|[+][0-9]{2}(:|)[0-9]{2})$",
+      "type": "string",
+      "nullable": true
+    },
+    "clientSecret": {
+      "type": "string"
+    },
+    "appClientId": {
+      "pattern": "^las:app-client:[a-f0-9]{32}$",
+      "type": "string"
     }
   },
   "additionalProperties": false
@@ -413,29 +467,37 @@
     "appClientId",
     "callbackUrls",
     "clientId",
+    "createdBy",
     "createdTime",
     "defaultLoginUrl",
     "description",
     "hasSecret",
     "loginUrls",
     "logoutUrls",
-    "name"
+    "name",
+    "updatedBy",
+    "updatedTime"
   ],
   "type": "object",
   "properties": {
     "hasSecret": {
       "type": "boolean"
     },
+    "updatedTime": {
+      "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2}( |T)?[0-9]{2}:?[0-9]{2}:?[0-9]{2}(.[0-9]{1,6})?(Z|[+][0-9]{2}(:|)[0-9]{2})$",
+      "type": "string",
+      "nullable": true
+    },
     "clientId": {
       "type": "string"
     },
-    "apiKey": {
-      "type": "string"
-    },
-    "name": {
+    "updatedBy": {
       "maxLength": 4096,
       "type": "string",
       "nullable": true
+    },
+    "apiKey": {
+      "type": "string"
     },
     "logoutUrls": {
       "type": "array",
@@ -448,19 +510,11 @@
       "type": "string",
       "nullable": true
     },
-    "createdTime": {
-      "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2}( |T)?[0-9]{2}:?[0-9]{2}:?[0-9]{2}(.[0-9]{1,6})?(Z|[+][0-9]{2}(:|)[0-9]{2})$",
-      "type": "string",
-      "nullable": true
-    },
     "callbackUrls": {
       "type": "array",
       "items": {
         "type": "string"
       }
-    },
-    "clientSecret": {
-      "type": "string"
     },
     "loginUrls": {
       "type": "array",
@@ -468,13 +522,31 @@
         "type": "string"
       }
     },
-    "appClientId": {
-      "pattern": "^las:app-client:[a-f0-9]{32}$",
-      "type": "string"
-    },
     "defaultLoginUrl": {
       "type": "string",
       "nullable": true
+    },
+    "createdBy": {
+      "maxLength": 4096,
+      "type": "string",
+      "nullable": true
+    },
+    "name": {
+      "maxLength": 4096,
+      "type": "string",
+      "nullable": true
+    },
+    "createdTime": {
+      "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2}( |T)?[0-9]{2}:?[0-9]{2}:?[0-9]{2}(.[0-9]{1,6})?(Z|[+][0-9]{2}(:|)[0-9]{2})$",
+      "type": "string",
+      "nullable": true
+    },
+    "clientSecret": {
+      "type": "string"
+    },
+    "appClientId": {
+      "pattern": "^las:app-client:[a-f0-9]{32}$",
+      "type": "string"
     }
   },
   "additionalProperties": false
@@ -518,11 +590,30 @@
       "items": {
         "required": [
           "assetId",
+          "createdBy",
+          "createdTime",
           "description",
-          "name"
+          "name",
+          "updatedBy",
+          "updatedTime"
         ],
         "type": "object",
         "properties": {
+          "updatedTime": {
+            "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2}( |T)?[0-9]{2}:?[0-9]{2}:?[0-9]{2}(.[0-9]{1,6})?(Z|[+][0-9]{2}(:|)[0-9]{2})$",
+            "type": "string",
+            "nullable": true
+          },
+          "updatedBy": {
+            "maxLength": 4096,
+            "type": "string",
+            "nullable": true
+          },
+          "createdBy": {
+            "maxLength": 4096,
+            "type": "string",
+            "nullable": true
+          },
           "assetId": {
             "pattern": "^las:asset:[a-f0-9]{32}$",
             "type": "string"
@@ -534,6 +625,11 @@
           },
           "description": {
             "maxLength": 4096,
+            "type": "string",
+            "nullable": true
+          },
+          "createdTime": {
+            "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2}( |T)?[0-9]{2}:?[0-9]{2}:?[0-9]{2}(.[0-9]{1,6})?(Z|[+][0-9]{2}(:|)[0-9]{2})$",
             "type": "string",
             "nullable": true
           },
@@ -607,11 +703,30 @@
   "title": "asset",
   "required": [
     "assetId",
+    "createdBy",
+    "createdTime",
     "description",
-    "name"
+    "name",
+    "updatedBy",
+    "updatedTime"
   ],
   "type": "object",
   "properties": {
+    "updatedTime": {
+      "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2}( |T)?[0-9]{2}:?[0-9]{2}:?[0-9]{2}(.[0-9]{1,6})?(Z|[+][0-9]{2}(:|)[0-9]{2})$",
+      "type": "string",
+      "nullable": true
+    },
+    "updatedBy": {
+      "maxLength": 4096,
+      "type": "string",
+      "nullable": true
+    },
+    "createdBy": {
+      "maxLength": 4096,
+      "type": "string",
+      "nullable": true
+    },
     "assetId": {
       "pattern": "^las:asset:[a-f0-9]{32}$",
       "type": "string"
@@ -623,6 +738,11 @@
     },
     "description": {
       "maxLength": 4096,
+      "type": "string",
+      "nullable": true
+    },
+    "createdTime": {
+      "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2}( |T)?[0-9]{2}:?[0-9]{2}:?[0-9]{2}(.[0-9]{1,6})?(Z|[+][0-9]{2}(:|)[0-9]{2})$",
       "type": "string",
       "nullable": true
     },
@@ -662,11 +782,30 @@
   "title": "asset",
   "required": [
     "assetId",
+    "createdBy",
+    "createdTime",
     "description",
-    "name"
+    "name",
+    "updatedBy",
+    "updatedTime"
   ],
   "type": "object",
   "properties": {
+    "updatedTime": {
+      "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2}( |T)?[0-9]{2}:?[0-9]{2}:?[0-9]{2}(.[0-9]{1,6})?(Z|[+][0-9]{2}(:|)[0-9]{2})$",
+      "type": "string",
+      "nullable": true
+    },
+    "updatedBy": {
+      "maxLength": 4096,
+      "type": "string",
+      "nullable": true
+    },
+    "createdBy": {
+      "maxLength": 4096,
+      "type": "string",
+      "nullable": true
+    },
     "assetId": {
       "pattern": "^las:asset:[a-f0-9]{32}$",
       "type": "string"
@@ -678,6 +817,11 @@
     },
     "description": {
       "maxLength": 4096,
+      "type": "string",
+      "nullable": true
+    },
+    "createdTime": {
+      "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2}( |T)?[0-9]{2}:?[0-9]{2}:?[0-9]{2}(.[0-9]{1,6})?(Z|[+][0-9]{2}(:|)[0-9]{2})$",
       "type": "string",
       "nullable": true
     },
@@ -717,11 +861,30 @@
   "title": "asset",
   "required": [
     "assetId",
+    "createdBy",
+    "createdTime",
     "description",
-    "name"
+    "name",
+    "updatedBy",
+    "updatedTime"
   ],
   "type": "object",
   "properties": {
+    "updatedTime": {
+      "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2}( |T)?[0-9]{2}:?[0-9]{2}:?[0-9]{2}(.[0-9]{1,6})?(Z|[+][0-9]{2}(:|)[0-9]{2})$",
+      "type": "string",
+      "nullable": true
+    },
+    "updatedBy": {
+      "maxLength": 4096,
+      "type": "string",
+      "nullable": true
+    },
+    "createdBy": {
+      "maxLength": 4096,
+      "type": "string",
+      "nullable": true
+    },
     "assetId": {
       "pattern": "^las:asset:[a-f0-9]{32}$",
       "type": "string"
@@ -733,6 +896,11 @@
     },
     "description": {
       "maxLength": 4096,
+      "type": "string",
+      "nullable": true
+    },
+    "createdTime": {
+      "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2}( |T)?[0-9]{2}:?[0-9]{2}:?[0-9]{2}(.[0-9]{1,6})?(Z|[+][0-9]{2}(:|)[0-9]{2})$",
       "type": "string",
       "nullable": true
     },
@@ -797,11 +965,30 @@
   "title": "asset",
   "required": [
     "assetId",
+    "createdBy",
+    "createdTime",
     "description",
-    "name"
+    "name",
+    "updatedBy",
+    "updatedTime"
   ],
   "type": "object",
   "properties": {
+    "updatedTime": {
+      "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2}( |T)?[0-9]{2}:?[0-9]{2}:?[0-9]{2}(.[0-9]{1,6})?(Z|[+][0-9]{2}(:|)[0-9]{2})$",
+      "type": "string",
+      "nullable": true
+    },
+    "updatedBy": {
+      "maxLength": 4096,
+      "type": "string",
+      "nullable": true
+    },
+    "createdBy": {
+      "maxLength": 4096,
+      "type": "string",
+      "nullable": true
+    },
     "assetId": {
       "pattern": "^las:asset:[a-f0-9]{32}$",
       "type": "string"
@@ -813,6 +1000,11 @@
     },
     "description": {
       "maxLength": 4096,
+      "type": "string",
+      "nullable": true
+    },
+    "createdTime": {
+      "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2}( |T)?[0-9]{2}:?[0-9]{2}:?[0-9]{2}(.[0-9]{1,6})?(Z|[+][0-9]{2}(:|)[0-9]{2})$",
       "type": "string",
       "nullable": true
     },
@@ -1240,12 +1432,15 @@
       "items": {
         "required": [
           "containsPersonallyIdentifiableInformation",
+          "createdBy",
           "createdTime",
           "datasetId",
           "description",
           "numberOfDocuments",
           "retentionInDays",
           "storageLocation",
+          "updatedBy",
+          "updatedTime",
           "version"
         ],
         "type": "object",
@@ -1259,6 +1454,16 @@
             "maximum": 1825,
             "minimum": 0,
             "type": "integer"
+          },
+          "updatedBy": {
+            "maxLength": 4096,
+            "type": "string",
+            "nullable": true
+          },
+          "createdBy": {
+            "maxLength": 4096,
+            "type": "string",
+            "nullable": true
           },
           "numberOfDocuments": {
             "minimum": 0,
@@ -1278,16 +1483,16 @@
             "type": "string",
             "nullable": true
           },
-          "createdTime": {
-            "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2}( |T)?[0-9]{2}:?[0-9]{2}:?[0-9]{2}(.[0-9]{1,6})?(Z|[+][0-9]{2}(:|)[0-9]{2})$",
-            "type": "string",
-            "nullable": true
-          },
           "storageLocation": {
             "type": "string",
             "enum": [
               "EU"
             ]
+          },
+          "createdTime": {
+            "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2}( |T)?[0-9]{2}:?[0-9]{2}:?[0-9]{2}(.[0-9]{1,6})?(Z|[+][0-9]{2}(:|)[0-9]{2})$",
+            "type": "string",
+            "nullable": true
           },
           "containsPersonallyIdentifiableInformation": {
             "type": "boolean"
@@ -1353,12 +1558,15 @@
   "title": "dataset",
   "required": [
     "containsPersonallyIdentifiableInformation",
+    "createdBy",
     "createdTime",
     "datasetId",
     "description",
     "numberOfDocuments",
     "retentionInDays",
     "storageLocation",
+    "updatedBy",
+    "updatedTime",
     "version"
   ],
   "type": "object",
@@ -1372,6 +1580,16 @@
       "maximum": 1825,
       "minimum": 0,
       "type": "integer"
+    },
+    "updatedBy": {
+      "maxLength": 4096,
+      "type": "string",
+      "nullable": true
+    },
+    "createdBy": {
+      "maxLength": 4096,
+      "type": "string",
+      "nullable": true
     },
     "numberOfDocuments": {
       "minimum": 0,
@@ -1391,16 +1609,16 @@
       "type": "string",
       "nullable": true
     },
-    "createdTime": {
-      "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2}( |T)?[0-9]{2}:?[0-9]{2}:?[0-9]{2}(.[0-9]{1,6})?(Z|[+][0-9]{2}(:|)[0-9]{2})$",
-      "type": "string",
-      "nullable": true
-    },
     "storageLocation": {
       "type": "string",
       "enum": [
         "EU"
       ]
+    },
+    "createdTime": {
+      "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2}( |T)?[0-9]{2}:?[0-9]{2}:?[0-9]{2}(.[0-9]{1,6})?(Z|[+][0-9]{2}(:|)[0-9]{2})$",
+      "type": "string",
+      "nullable": true
     },
     "containsPersonallyIdentifiableInformation": {
       "type": "boolean"
@@ -1441,12 +1659,15 @@
   "title": "dataset",
   "required": [
     "containsPersonallyIdentifiableInformation",
+    "createdBy",
     "createdTime",
     "datasetId",
     "description",
     "numberOfDocuments",
     "retentionInDays",
     "storageLocation",
+    "updatedBy",
+    "updatedTime",
     "version"
   ],
   "type": "object",
@@ -1460,6 +1681,16 @@
       "maximum": 1825,
       "minimum": 0,
       "type": "integer"
+    },
+    "updatedBy": {
+      "maxLength": 4096,
+      "type": "string",
+      "nullable": true
+    },
+    "createdBy": {
+      "maxLength": 4096,
+      "type": "string",
+      "nullable": true
     },
     "numberOfDocuments": {
       "minimum": 0,
@@ -1479,8 +1710,104 @@
       "type": "string",
       "nullable": true
     },
+    "storageLocation": {
+      "type": "string",
+      "enum": [
+        "EU"
+      ]
+    },
     "createdTime": {
       "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2}( |T)?[0-9]{2}:?[0-9]{2}:?[0-9]{2}(.[0-9]{1,6})?(Z|[+][0-9]{2}(:|)[0-9]{2})$",
+      "type": "string",
+      "nullable": true
+    },
+    "containsPersonallyIdentifiableInformation": {
+      "type": "boolean"
+    },
+    "version": {
+      "minimum": 0,
+      "type": "integer"
+    }
+  },
+  "additionalProperties": false
+}
+```
+
+
+#### GET /datasets/{datasetId}
+
+
+| Path name | Path value |
+| --- | --- |
+| datasetId | Id of dataset on the form las:dataset:&lt;hex&gt; |
+
+
+| Header name | Header value |
+| --- | --- |
+| Authorization | Bearer &lt;your access token here&gt; |
+| x-api-key | &lt;your api key here&gt; |
+
+
+
+
+
+
+
+
+##### Response body JSON Schema
+```json
+{
+  "title": "dataset",
+  "required": [
+    "containsPersonallyIdentifiableInformation",
+    "createdBy",
+    "createdTime",
+    "datasetId",
+    "description",
+    "numberOfDocuments",
+    "retentionInDays",
+    "storageLocation",
+    "updatedBy",
+    "updatedTime",
+    "version"
+  ],
+  "type": "object",
+  "properties": {
+    "updatedTime": {
+      "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2}( |T)?[0-9]{2}:?[0-9]{2}:?[0-9]{2}(.[0-9]{1,6})?(Z|[+][0-9]{2}(:|)[0-9]{2})$",
+      "type": "string",
+      "nullable": true
+    },
+    "retentionInDays": {
+      "maximum": 1825,
+      "minimum": 0,
+      "type": "integer"
+    },
+    "updatedBy": {
+      "maxLength": 4096,
+      "type": "string",
+      "nullable": true
+    },
+    "createdBy": {
+      "maxLength": 4096,
+      "type": "string",
+      "nullable": true
+    },
+    "numberOfDocuments": {
+      "minimum": 0,
+      "type": "integer"
+    },
+    "name": {
+      "maxLength": 4096,
+      "type": "string",
+      "nullable": true
+    },
+    "datasetId": {
+      "pattern": "^las:dataset:[a-f0-9]{32}$",
+      "type": "string"
+    },
+    "description": {
+      "maxLength": 4096,
       "type": "string",
       "nullable": true
     },
@@ -1489,6 +1816,11 @@
       "enum": [
         "EU"
       ]
+    },
+    "createdTime": {
+      "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2}( |T)?[0-9]{2}:?[0-9]{2}:?[0-9]{2}(.[0-9]{1,6})?(Z|[+][0-9]{2}(:|)[0-9]{2})$",
+      "type": "string",
+      "nullable": true
     },
     "containsPersonallyIdentifiableInformation": {
       "type": "boolean"
@@ -1550,12 +1882,15 @@
   "title": "dataset",
   "required": [
     "containsPersonallyIdentifiableInformation",
+    "createdBy",
     "createdTime",
     "datasetId",
     "description",
     "numberOfDocuments",
     "retentionInDays",
     "storageLocation",
+    "updatedBy",
+    "updatedTime",
     "version"
   ],
   "type": "object",
@@ -1569,6 +1904,16 @@
       "maximum": 1825,
       "minimum": 0,
       "type": "integer"
+    },
+    "updatedBy": {
+      "maxLength": 4096,
+      "type": "string",
+      "nullable": true
+    },
+    "createdBy": {
+      "maxLength": 4096,
+      "type": "string",
+      "nullable": true
     },
     "numberOfDocuments": {
       "minimum": 0,
@@ -1588,16 +1933,16 @@
       "type": "string",
       "nullable": true
     },
-    "createdTime": {
-      "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2}( |T)?[0-9]{2}:?[0-9]{2}:?[0-9]{2}(.[0-9]{1,6})?(Z|[+][0-9]{2}(:|)[0-9]{2})$",
-      "type": "string",
-      "nullable": true
-    },
     "storageLocation": {
       "type": "string",
       "enum": [
         "EU"
       ]
+    },
+    "createdTime": {
+      "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2}( |T)?[0-9]{2}:?[0-9]{2}:?[0-9]{2}(.[0-9]{1,6})?(Z|[+][0-9]{2}(:|)[0-9]{2})$",
+      "type": "string",
+      "nullable": true
     },
     "containsPersonallyIdentifiableInformation": {
       "type": "boolean"
@@ -1658,7 +2003,12 @@
       "items": {
         "required": [
           "contentType",
-          "documentId"
+          "createdBy",
+          "createdTime",
+          "documentId",
+          "retentionInDays",
+          "updatedBy",
+          "updatedTime"
         ],
         "type": "object",
         "properties": {
@@ -1694,9 +2044,33 @@
               "additionalProperties": false
             }
           },
+          "updatedTime": {
+            "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2}( |T)?[0-9]{2}:?[0-9]{2}:?[0-9]{2}(.[0-9]{1,6})?(Z|[+][0-9]{2}(:|)[0-9]{2})$",
+            "type": "string",
+            "nullable": true
+          },
           "consentId": {
             "pattern": "^las:consent:[a-f0-9]{32}$",
             "type": "string"
+          },
+          "retentionInDays": {
+            "minimum": 1,
+            "type": "integer"
+          },
+          "updatedBy": {
+            "maxLength": 4096,
+            "type": "string",
+            "nullable": true
+          },
+          "createdBy": {
+            "maxLength": 4096,
+            "type": "string",
+            "nullable": true
+          },
+          "createdTime": {
+            "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2}( |T)?[0-9]{2}:?[0-9]{2}:?[0-9]{2}(.[0-9]{1,6})?(Z|[+][0-9]{2}(:|)[0-9]{2})$",
+            "type": "string",
+            "nullable": true
           },
           "datasetId": {
             "pattern": "^las:dataset:[a-f0-9]{32}$",
@@ -1798,7 +2172,12 @@
       "items": {
         "required": [
           "contentType",
-          "documentId"
+          "createdBy",
+          "createdTime",
+          "documentId",
+          "retentionInDays",
+          "updatedBy",
+          "updatedTime"
         ],
         "type": "object",
         "properties": {
@@ -1834,9 +2213,33 @@
               "additionalProperties": false
             }
           },
+          "updatedTime": {
+            "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2}( |T)?[0-9]{2}:?[0-9]{2}:?[0-9]{2}(.[0-9]{1,6})?(Z|[+][0-9]{2}(:|)[0-9]{2})$",
+            "type": "string",
+            "nullable": true
+          },
           "consentId": {
             "pattern": "^las:consent:[a-f0-9]{32}$",
             "type": "string"
+          },
+          "retentionInDays": {
+            "minimum": 1,
+            "type": "integer"
+          },
+          "updatedBy": {
+            "maxLength": 4096,
+            "type": "string",
+            "nullable": true
+          },
+          "createdBy": {
+            "maxLength": 4096,
+            "type": "string",
+            "nullable": true
+          },
+          "createdTime": {
+            "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2}( |T)?[0-9]{2}:?[0-9]{2}:?[0-9]{2}(.[0-9]{1,6})?(Z|[+][0-9]{2}(:|)[0-9]{2})$",
+            "type": "string",
+            "nullable": true
           },
           "datasetId": {
             "pattern": "^las:dataset:[a-f0-9]{32}$",
@@ -1954,6 +2357,10 @@
       "pattern": "^las:consent:[a-f0-9]{32}$",
       "type": "string"
     },
+    "retentionInDays": {
+      "minimum": 1,
+      "type": "integer"
+    },
     "datasetId": {
       "pattern": "^las:dataset:[a-f0-9]{32}$",
       "type": "string"
@@ -1987,7 +2394,12 @@
   "title": "document",
   "required": [
     "contentType",
-    "documentId"
+    "createdBy",
+    "createdTime",
+    "documentId",
+    "retentionInDays",
+    "updatedBy",
+    "updatedTime"
   ],
   "type": "object",
   "properties": {
@@ -2023,9 +2435,33 @@
         "additionalProperties": false
       }
     },
+    "updatedTime": {
+      "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2}( |T)?[0-9]{2}:?[0-9]{2}:?[0-9]{2}(.[0-9]{1,6})?(Z|[+][0-9]{2}(:|)[0-9]{2})$",
+      "type": "string",
+      "nullable": true
+    },
     "consentId": {
       "pattern": "^las:consent:[a-f0-9]{32}$",
       "type": "string"
+    },
+    "retentionInDays": {
+      "minimum": 1,
+      "type": "integer"
+    },
+    "updatedBy": {
+      "maxLength": 4096,
+      "type": "string",
+      "nullable": true
+    },
+    "createdBy": {
+      "maxLength": 4096,
+      "type": "string",
+      "nullable": true
+    },
+    "createdTime": {
+      "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2}( |T)?[0-9]{2}:?[0-9]{2}:?[0-9]{2}(.[0-9]{1,6})?(Z|[+][0-9]{2}(:|)[0-9]{2})$",
+      "type": "string",
+      "nullable": true
     },
     "datasetId": {
       "pattern": "^las:dataset:[a-f0-9]{32}$",
@@ -2084,7 +2520,12 @@
   "title": "document",
   "required": [
     "contentType",
-    "documentId"
+    "createdBy",
+    "createdTime",
+    "documentId",
+    "retentionInDays",
+    "updatedBy",
+    "updatedTime"
   ],
   "type": "object",
   "properties": {
@@ -2120,9 +2561,33 @@
         "additionalProperties": false
       }
     },
+    "updatedTime": {
+      "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2}( |T)?[0-9]{2}:?[0-9]{2}:?[0-9]{2}(.[0-9]{1,6})?(Z|[+][0-9]{2}(:|)[0-9]{2})$",
+      "type": "string",
+      "nullable": true
+    },
     "consentId": {
       "pattern": "^las:consent:[a-f0-9]{32}$",
       "type": "string"
+    },
+    "retentionInDays": {
+      "minimum": 1,
+      "type": "integer"
+    },
+    "updatedBy": {
+      "maxLength": 4096,
+      "type": "string",
+      "nullable": true
+    },
+    "createdBy": {
+      "maxLength": 4096,
+      "type": "string",
+      "nullable": true
+    },
+    "createdTime": {
+      "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2}( |T)?[0-9]{2}:?[0-9]{2}:?[0-9]{2}(.[0-9]{1,6})?(Z|[+][0-9]{2}(:|)[0-9]{2})$",
+      "type": "string",
+      "nullable": true
     },
     "datasetId": {
       "pattern": "^las:dataset:[a-f0-9]{32}$",
@@ -2181,7 +2646,12 @@
   "title": "document",
   "required": [
     "contentType",
-    "documentId"
+    "createdBy",
+    "createdTime",
+    "documentId",
+    "retentionInDays",
+    "updatedBy",
+    "updatedTime"
   ],
   "type": "object",
   "properties": {
@@ -2217,9 +2687,33 @@
         "additionalProperties": false
       }
     },
+    "updatedTime": {
+      "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2}( |T)?[0-9]{2}:?[0-9]{2}:?[0-9]{2}(.[0-9]{1,6})?(Z|[+][0-9]{2}(:|)[0-9]{2})$",
+      "type": "string",
+      "nullable": true
+    },
     "consentId": {
       "pattern": "^las:consent:[a-f0-9]{32}$",
       "type": "string"
+    },
+    "retentionInDays": {
+      "minimum": 1,
+      "type": "integer"
+    },
+    "updatedBy": {
+      "maxLength": 4096,
+      "type": "string",
+      "nullable": true
+    },
+    "createdBy": {
+      "maxLength": 4096,
+      "type": "string",
+      "nullable": true
+    },
+    "createdTime": {
+      "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2}( |T)?[0-9]{2}:?[0-9]{2}:?[0-9]{2}(.[0-9]{1,6})?(Z|[+][0-9]{2}(:|)[0-9]{2})$",
+      "type": "string",
+      "nullable": true
     },
     "datasetId": {
       "pattern": "^las:dataset:[a-f0-9]{32}$",
@@ -2325,7 +2819,12 @@
   "title": "document",
   "required": [
     "contentType",
-    "documentId"
+    "createdBy",
+    "createdTime",
+    "documentId",
+    "retentionInDays",
+    "updatedBy",
+    "updatedTime"
   ],
   "type": "object",
   "properties": {
@@ -2361,9 +2860,33 @@
         "additionalProperties": false
       }
     },
+    "updatedTime": {
+      "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2}( |T)?[0-9]{2}:?[0-9]{2}:?[0-9]{2}(.[0-9]{1,6})?(Z|[+][0-9]{2}(:|)[0-9]{2})$",
+      "type": "string",
+      "nullable": true
+    },
     "consentId": {
       "pattern": "^las:consent:[a-f0-9]{32}$",
       "type": "string"
+    },
+    "retentionInDays": {
+      "minimum": 1,
+      "type": "integer"
+    },
+    "updatedBy": {
+      "maxLength": 4096,
+      "type": "string",
+      "nullable": true
+    },
+    "createdBy": {
+      "maxLength": 4096,
+      "type": "string",
+      "nullable": true
+    },
+    "createdTime": {
+      "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2}( |T)?[0-9]{2}:?[0-9]{2}:?[0-9]{2}(.[0-9]{1,6})?(Z|[+][0-9]{2}(:|)[0-9]{2})$",
+      "type": "string",
+      "nullable": true
     },
     "datasetId": {
       "pattern": "^las:dataset:[a-f0-9]{32}$",
@@ -2650,6 +3173,7 @@
       "type": "array",
       "items": {
         "required": [
+          "createdBy",
           "createdTime",
           "description",
           "fieldConfig",
@@ -2658,6 +3182,7 @@
           "name",
           "preprocessConfig",
           "status",
+          "updatedBy",
           "updatedTime",
           "width"
         ],
@@ -2692,9 +3217,19 @@
             },
             "additionalProperties": false
           },
+          "updatedBy": {
+            "maxLength": 4096,
+            "type": "string",
+            "nullable": true
+          },
           "modelId": {
             "pattern": "^las:model:[a-f0-9]{32}$",
             "type": "string"
+          },
+          "createdBy": {
+            "maxLength": 4096,
+            "type": "string",
+            "nullable": true
           },
           "name": {
             "maxLength": 4096,
@@ -2900,6 +3435,7 @@
 {
   "title": "model",
   "required": [
+    "createdBy",
     "createdTime",
     "description",
     "fieldConfig",
@@ -2908,6 +3444,7 @@
     "name",
     "preprocessConfig",
     "status",
+    "updatedBy",
     "updatedTime",
     "width"
   ],
@@ -2942,9 +3479,19 @@
       },
       "additionalProperties": false
     },
+    "updatedBy": {
+      "maxLength": 4096,
+      "type": "string",
+      "nullable": true
+    },
     "modelId": {
       "pattern": "^las:model:[a-f0-9]{32}$",
       "type": "string"
+    },
+    "createdBy": {
+      "maxLength": 4096,
+      "type": "string",
+      "nullable": true
     },
     "name": {
       "maxLength": 4096,
@@ -3049,6 +3596,7 @@
 {
   "title": "model",
   "required": [
+    "createdBy",
     "createdTime",
     "description",
     "fieldConfig",
@@ -3057,6 +3605,7 @@
     "name",
     "preprocessConfig",
     "status",
+    "updatedBy",
     "updatedTime",
     "width"
   ],
@@ -3091,9 +3640,19 @@
       },
       "additionalProperties": false
     },
+    "updatedBy": {
+      "maxLength": 4096,
+      "type": "string",
+      "nullable": true
+    },
     "modelId": {
       "pattern": "^las:model:[a-f0-9]{32}$",
       "type": "string"
+    },
+    "createdBy": {
+      "maxLength": 4096,
+      "type": "string",
+      "nullable": true
     },
     "name": {
       "maxLength": 4096,
@@ -3198,6 +3757,7 @@
 {
   "title": "model",
   "required": [
+    "createdBy",
     "createdTime",
     "description",
     "fieldConfig",
@@ -3206,6 +3766,7 @@
     "name",
     "preprocessConfig",
     "status",
+    "updatedBy",
     "updatedTime",
     "width"
   ],
@@ -3240,9 +3801,19 @@
       },
       "additionalProperties": false
     },
+    "updatedBy": {
+      "maxLength": 4096,
+      "type": "string",
+      "nullable": true
+    },
     "modelId": {
       "pattern": "^las:model:[a-f0-9]{32}$",
       "type": "string"
+    },
+    "createdBy": {
+      "maxLength": 4096,
+      "type": "string",
+      "nullable": true
     },
     "name": {
       "maxLength": 4096,
@@ -3445,6 +4016,7 @@
 {
   "title": "model",
   "required": [
+    "createdBy",
     "createdTime",
     "description",
     "fieldConfig",
@@ -3453,6 +4025,7 @@
     "name",
     "preprocessConfig",
     "status",
+    "updatedBy",
     "updatedTime",
     "width"
   ],
@@ -3487,9 +4060,19 @@
       },
       "additionalProperties": false
     },
+    "updatedBy": {
+      "maxLength": 4096,
+      "type": "string",
+      "nullable": true
+    },
     "modelId": {
       "pattern": "^las:model:[a-f0-9]{32}$",
       "type": "string"
+    },
+    "createdBy": {
+      "maxLength": 4096,
+      "type": "string",
+      "nullable": true
     },
     "name": {
       "maxLength": 4096,
@@ -3612,6 +4195,7 @@
       "type": "array",
       "items": {
         "required": [
+          "createdBy",
           "createdTime",
           "dataBundleId",
           "datasets",
@@ -3620,6 +4204,7 @@
           "name",
           "status",
           "summary",
+          "updatedBy",
           "updatedTime"
         ],
         "type": "object",
@@ -3632,9 +4217,19 @@
             "type": "string",
             "nullable": true
           },
+          "updatedBy": {
+            "maxLength": 4096,
+            "type": "string",
+            "nullable": true
+          },
           "modelId": {
             "pattern": "^las:model:[a-f0-9]{32}$",
             "type": "string"
+          },
+          "createdBy": {
+            "maxLength": 4096,
+            "type": "string",
+            "nullable": true
           },
           "dataBundleId": {
             "pattern": "^las:model-data-bundle:[a-f0-9]{32}$",
@@ -3660,7 +4255,6 @@
             "items": {
               "required": [
                 "containsPersonallyIdentifiableInformation",
-                "createdTime",
                 "datasetId",
                 "description",
                 "numberOfDocuments",
@@ -3680,6 +4274,16 @@
                   "minimum": 0,
                   "type": "integer"
                 },
+                "updatedBy": {
+                  "maxLength": 4096,
+                  "type": "string",
+                  "nullable": true
+                },
+                "createdBy": {
+                  "maxLength": 4096,
+                  "type": "string",
+                  "nullable": true
+                },
                 "numberOfDocuments": {
                   "minimum": 0,
                   "type": "integer"
@@ -3698,16 +4302,16 @@
                   "type": "string",
                   "nullable": true
                 },
-                "createdTime": {
-                  "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2}( |T)?[0-9]{2}:?[0-9]{2}:?[0-9]{2}(.[0-9]{1,6})?(Z|[+][0-9]{2}(:|)[0-9]{2})$",
-                  "type": "string",
-                  "nullable": true
-                },
                 "storageLocation": {
                   "type": "string",
                   "enum": [
                     "EU"
                   ]
+                },
+                "createdTime": {
+                  "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2}( |T)?[0-9]{2}:?[0-9]{2}:?[0-9]{2}(.[0-9]{1,6})?(Z|[+][0-9]{2}(:|)[0-9]{2})$",
+                  "type": "string",
+                  "nullable": true
                 },
                 "containsPersonallyIdentifiableInformation": {
                   "type": "boolean"
@@ -3802,6 +4406,7 @@
 {
   "title": "dataBundle",
   "required": [
+    "createdBy",
     "createdTime",
     "dataBundleId",
     "datasets",
@@ -3810,6 +4415,7 @@
     "name",
     "status",
     "summary",
+    "updatedBy",
     "updatedTime"
   ],
   "type": "object",
@@ -3822,9 +4428,19 @@
       "type": "string",
       "nullable": true
     },
+    "updatedBy": {
+      "maxLength": 4096,
+      "type": "string",
+      "nullable": true
+    },
     "modelId": {
       "pattern": "^las:model:[a-f0-9]{32}$",
       "type": "string"
+    },
+    "createdBy": {
+      "maxLength": 4096,
+      "type": "string",
+      "nullable": true
     },
     "dataBundleId": {
       "pattern": "^las:model-data-bundle:[a-f0-9]{32}$",
@@ -3850,7 +4466,6 @@
       "items": {
         "required": [
           "containsPersonallyIdentifiableInformation",
-          "createdTime",
           "datasetId",
           "description",
           "numberOfDocuments",
@@ -3870,6 +4485,16 @@
             "minimum": 0,
             "type": "integer"
           },
+          "updatedBy": {
+            "maxLength": 4096,
+            "type": "string",
+            "nullable": true
+          },
+          "createdBy": {
+            "maxLength": 4096,
+            "type": "string",
+            "nullable": true
+          },
           "numberOfDocuments": {
             "minimum": 0,
             "type": "integer"
@@ -3888,16 +4513,16 @@
             "type": "string",
             "nullable": true
           },
-          "createdTime": {
-            "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2}( |T)?[0-9]{2}:?[0-9]{2}:?[0-9]{2}(.[0-9]{1,6})?(Z|[+][0-9]{2}(:|)[0-9]{2})$",
-            "type": "string",
-            "nullable": true
-          },
           "storageLocation": {
             "type": "string",
             "enum": [
               "EU"
             ]
+          },
+          "createdTime": {
+            "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2}( |T)?[0-9]{2}:?[0-9]{2}:?[0-9]{2}(.[0-9]{1,6})?(Z|[+][0-9]{2}(:|)[0-9]{2})$",
+            "type": "string",
+            "nullable": true
           },
           "containsPersonallyIdentifiableInformation": {
             "type": "boolean"
@@ -3950,6 +4575,7 @@
 {
   "title": "dataBundle",
   "required": [
+    "createdBy",
     "createdTime",
     "dataBundleId",
     "datasets",
@@ -3958,6 +4584,7 @@
     "name",
     "status",
     "summary",
+    "updatedBy",
     "updatedTime"
   ],
   "type": "object",
@@ -3970,9 +4597,19 @@
       "type": "string",
       "nullable": true
     },
+    "updatedBy": {
+      "maxLength": 4096,
+      "type": "string",
+      "nullable": true
+    },
     "modelId": {
       "pattern": "^las:model:[a-f0-9]{32}$",
       "type": "string"
+    },
+    "createdBy": {
+      "maxLength": 4096,
+      "type": "string",
+      "nullable": true
     },
     "dataBundleId": {
       "pattern": "^las:model-data-bundle:[a-f0-9]{32}$",
@@ -3998,7 +4635,6 @@
       "items": {
         "required": [
           "containsPersonallyIdentifiableInformation",
-          "createdTime",
           "datasetId",
           "description",
           "numberOfDocuments",
@@ -4018,6 +4654,16 @@
             "minimum": 0,
             "type": "integer"
           },
+          "updatedBy": {
+            "maxLength": 4096,
+            "type": "string",
+            "nullable": true
+          },
+          "createdBy": {
+            "maxLength": 4096,
+            "type": "string",
+            "nullable": true
+          },
           "numberOfDocuments": {
             "minimum": 0,
             "type": "integer"
@@ -4036,16 +4682,16 @@
             "type": "string",
             "nullable": true
           },
-          "createdTime": {
-            "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2}( |T)?[0-9]{2}:?[0-9]{2}:?[0-9]{2}(.[0-9]{1,6})?(Z|[+][0-9]{2}(:|)[0-9]{2})$",
-            "type": "string",
-            "nullable": true
-          },
           "storageLocation": {
             "type": "string",
             "enum": [
               "EU"
             ]
+          },
+          "createdTime": {
+            "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2}( |T)?[0-9]{2}:?[0-9]{2}:?[0-9]{2}(.[0-9]{1,6})?(Z|[+][0-9]{2}(:|)[0-9]{2})$",
+            "type": "string",
+            "nullable": true
           },
           "containsPersonallyIdentifiableInformation": {
             "type": "boolean"
@@ -4118,6 +4764,7 @@
 {
   "title": "dataBundle",
   "required": [
+    "createdBy",
     "createdTime",
     "dataBundleId",
     "datasets",
@@ -4126,6 +4773,7 @@
     "name",
     "status",
     "summary",
+    "updatedBy",
     "updatedTime"
   ],
   "type": "object",
@@ -4138,9 +4786,19 @@
       "type": "string",
       "nullable": true
     },
+    "updatedBy": {
+      "maxLength": 4096,
+      "type": "string",
+      "nullable": true
+    },
     "modelId": {
       "pattern": "^las:model:[a-f0-9]{32}$",
       "type": "string"
+    },
+    "createdBy": {
+      "maxLength": 4096,
+      "type": "string",
+      "nullable": true
     },
     "dataBundleId": {
       "pattern": "^las:model-data-bundle:[a-f0-9]{32}$",
@@ -4166,7 +4824,6 @@
       "items": {
         "required": [
           "containsPersonallyIdentifiableInformation",
-          "createdTime",
           "datasetId",
           "description",
           "numberOfDocuments",
@@ -4186,6 +4843,16 @@
             "minimum": 0,
             "type": "integer"
           },
+          "updatedBy": {
+            "maxLength": 4096,
+            "type": "string",
+            "nullable": true
+          },
+          "createdBy": {
+            "maxLength": 4096,
+            "type": "string",
+            "nullable": true
+          },
           "numberOfDocuments": {
             "minimum": 0,
             "type": "integer"
@@ -4204,16 +4871,16 @@
             "type": "string",
             "nullable": true
           },
-          "createdTime": {
-            "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2}( |T)?[0-9]{2}:?[0-9]{2}:?[0-9]{2}(.[0-9]{1,6})?(Z|[+][0-9]{2}(:|)[0-9]{2})$",
-            "type": "string",
-            "nullable": true
-          },
           "storageLocation": {
             "type": "string",
             "enum": [
               "EU"
             ]
+          },
+          "createdTime": {
+            "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2}( |T)?[0-9]{2}:?[0-9]{2}:?[0-9]{2}(.[0-9]{1,6})?(Z|[+][0-9]{2}(:|)[0-9]{2})$",
+            "type": "string",
+            "nullable": true
           },
           "containsPersonallyIdentifiableInformation": {
             "type": "boolean"
@@ -4294,7 +4961,9 @@
     "numberOfUsersCreated",
     "numberOfWorkflowsAllowed",
     "numberOfWorkflowsCreated",
-    "organizationId"
+    "organizationId",
+    "updatedBy",
+    "updatedTime"
   ],
   "type": "object",
   "properties": {
@@ -4366,9 +5035,19 @@
       "minimum": 0,
       "type": "integer"
     },
+    "updatedTime": {
+      "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2}( |T)?[0-9]{2}:?[0-9]{2}:?[0-9]{2}(.[0-9]{1,6})?(Z|[+][0-9]{2}(:|)[0-9]{2})$",
+      "type": "string",
+      "nullable": true
+    },
     "numberOfWorkflowsAllowed": {
       "minimum": 0,
       "type": "integer"
+    },
+    "updatedBy": {
+      "maxLength": 4096,
+      "type": "string",
+      "nullable": true
     },
     "monthlyNumberOfWorkflowExecutionsAllowed": {
       "minimum": 0,
@@ -4508,7 +5187,9 @@
     "numberOfUsersCreated",
     "numberOfWorkflowsAllowed",
     "numberOfWorkflowsCreated",
-    "organizationId"
+    "organizationId",
+    "updatedBy",
+    "updatedTime"
   ],
   "type": "object",
   "properties": {
@@ -4580,9 +5261,19 @@
       "minimum": 0,
       "type": "integer"
     },
+    "updatedTime": {
+      "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2}( |T)?[0-9]{2}:?[0-9]{2}:?[0-9]{2}(.[0-9]{1,6})?(Z|[+][0-9]{2}(:|)[0-9]{2})$",
+      "type": "string",
+      "nullable": true
+    },
     "numberOfWorkflowsAllowed": {
       "minimum": 0,
       "type": "integer"
+    },
+    "updatedBy": {
+      "maxLength": 4096,
+      "type": "string",
+      "nullable": true
     },
     "monthlyNumberOfWorkflowExecutionsAllowed": {
       "minimum": 0,
@@ -4923,12 +5614,31 @@
       "type": "array",
       "items": {
         "required": [
+          "createdBy",
+          "createdTime",
           "description",
           "name",
-          "secretId"
+          "secretId",
+          "updatedBy",
+          "updatedTime"
         ],
         "type": "object",
         "properties": {
+          "updatedTime": {
+            "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2}( |T)?[0-9]{2}:?[0-9]{2}:?[0-9]{2}(.[0-9]{1,6})?(Z|[+][0-9]{2}(:|)[0-9]{2})$",
+            "type": "string",
+            "nullable": true
+          },
+          "updatedBy": {
+            "maxLength": 4096,
+            "type": "string",
+            "nullable": true
+          },
+          "createdBy": {
+            "maxLength": 4096,
+            "type": "string",
+            "nullable": true
+          },
           "name": {
             "maxLength": 4096,
             "type": "string",
@@ -4937,6 +5647,11 @@
           "secretId": {
             "pattern": "^las:secret:[a-f0-9]{32}$",
             "type": "string"
+          },
+          "createdTime": {
+            "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2}( |T)?[0-9]{2}:?[0-9]{2}:?[0-9]{2}(.[0-9]{1,6})?(Z|[+][0-9]{2}(:|)[0-9]{2})$",
+            "type": "string",
+            "nullable": true
           },
           "description": {
             "maxLength": 4096,
@@ -5002,12 +5717,31 @@
 {
   "title": "secret",
   "required": [
+    "createdBy",
+    "createdTime",
     "description",
     "name",
-    "secretId"
+    "secretId",
+    "updatedBy",
+    "updatedTime"
   ],
   "type": "object",
   "properties": {
+    "updatedTime": {
+      "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2}( |T)?[0-9]{2}:?[0-9]{2}:?[0-9]{2}(.[0-9]{1,6})?(Z|[+][0-9]{2}(:|)[0-9]{2})$",
+      "type": "string",
+      "nullable": true
+    },
+    "updatedBy": {
+      "maxLength": 4096,
+      "type": "string",
+      "nullable": true
+    },
+    "createdBy": {
+      "maxLength": 4096,
+      "type": "string",
+      "nullable": true
+    },
     "name": {
       "maxLength": 4096,
       "type": "string",
@@ -5016,6 +5750,11 @@
     "secretId": {
       "pattern": "^las:secret:[a-f0-9]{32}$",
       "type": "string"
+    },
+    "createdTime": {
+      "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2}( |T)?[0-9]{2}:?[0-9]{2}:?[0-9]{2}(.[0-9]{1,6})?(Z|[+][0-9]{2}(:|)[0-9]{2})$",
+      "type": "string",
+      "nullable": true
     },
     "description": {
       "maxLength": 4096,
@@ -5053,12 +5792,31 @@
 {
   "title": "secret",
   "required": [
+    "createdBy",
+    "createdTime",
     "description",
     "name",
-    "secretId"
+    "secretId",
+    "updatedBy",
+    "updatedTime"
   ],
   "type": "object",
   "properties": {
+    "updatedTime": {
+      "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2}( |T)?[0-9]{2}:?[0-9]{2}:?[0-9]{2}(.[0-9]{1,6})?(Z|[+][0-9]{2}(:|)[0-9]{2})$",
+      "type": "string",
+      "nullable": true
+    },
+    "updatedBy": {
+      "maxLength": 4096,
+      "type": "string",
+      "nullable": true
+    },
+    "createdBy": {
+      "maxLength": 4096,
+      "type": "string",
+      "nullable": true
+    },
     "name": {
       "maxLength": 4096,
       "type": "string",
@@ -5067,6 +5825,11 @@
     "secretId": {
       "pattern": "^las:secret:[a-f0-9]{32}$",
       "type": "string"
+    },
+    "createdTime": {
+      "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2}( |T)?[0-9]{2}:?[0-9]{2}:?[0-9]{2}(.[0-9]{1,6})?(Z|[+][0-9]{2}(:|)[0-9]{2})$",
+      "type": "string",
+      "nullable": true
     },
     "description": {
       "maxLength": 4096,
@@ -5128,12 +5891,31 @@
 {
   "title": "secret",
   "required": [
+    "createdBy",
+    "createdTime",
     "description",
     "name",
-    "secretId"
+    "secretId",
+    "updatedBy",
+    "updatedTime"
   ],
   "type": "object",
   "properties": {
+    "updatedTime": {
+      "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2}( |T)?[0-9]{2}:?[0-9]{2}:?[0-9]{2}(.[0-9]{1,6})?(Z|[+][0-9]{2}(:|)[0-9]{2})$",
+      "type": "string",
+      "nullable": true
+    },
+    "updatedBy": {
+      "maxLength": 4096,
+      "type": "string",
+      "nullable": true
+    },
+    "createdBy": {
+      "maxLength": 4096,
+      "type": "string",
+      "nullable": true
+    },
     "name": {
       "maxLength": 4096,
       "type": "string",
@@ -5142,6 +5924,11 @@
     "secretId": {
       "pattern": "^las:secret:[a-f0-9]{32}$",
       "type": "string"
+    },
+    "createdTime": {
+      "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2}( |T)?[0-9]{2}:?[0-9]{2}:?[0-9]{2}(.[0-9]{1,6})?(Z|[+][0-9]{2}(:|)[0-9]{2})$",
+      "type": "string",
+      "nullable": true
     },
     "description": {
       "maxLength": 4096,
@@ -5195,15 +5982,54 @@
       "type": "array",
       "items": {
         "required": [
+          "createdBy",
+          "createdTime",
           "description",
           "name",
           "parameters",
           "timeoutInSeconds",
           "transitionId",
-          "transitionType"
+          "transitionType",
+          "updatedBy",
+          "updatedTime"
         ],
         "type": "object",
         "properties": {
+          "updatedTime": {
+            "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2}( |T)?[0-9]{2}:?[0-9]{2}:?[0-9]{2}(.[0-9]{1,6})?(Z|[+][0-9]{2}(:|)[0-9]{2})$",
+            "type": "string",
+            "nullable": true
+          },
+          "updatedBy": {
+            "maxLength": 4096,
+            "type": "string",
+            "nullable": true
+          },
+          "transitionId": {
+            "anyOf": [
+              {
+                "pattern": "^las:transition:[a-f0-9]{32}$",
+                "type": "string"
+              },
+              {
+                "pattern": "^las:transition:commons-[0-9A-Za-z-]+$",
+                "type": "string"
+              }
+            ]
+          },
+          "description": {
+            "maxLength": 4096,
+            "type": "string",
+            "nullable": true
+          },
+          "inputJsonSchema": {
+            "type": "object"
+          },
+          "timeoutInSeconds": {
+            "maximum": 1800,
+            "minimum": 60,
+            "type": "integer"
+          },
           "outputJsonSchema": {
             "type": "object"
           },
@@ -5220,41 +6046,30 @@
               "type": "string"
             }
           },
-          "transitionId": {
-            "anyOf": [
-              {
-                "pattern": "^las:transition:[a-f0-9]{32}$",
-                "type": "string"
-              },
-              {
-                "pattern": "^las:transition:commons-[0-9A-Za-z-]+$",
-                "type": "string"
-              }
-            ]
+          "createdBy": {
+            "maxLength": 4096,
+            "type": "string",
+            "nullable": true
           },
           "name": {
             "maxLength": 4096,
             "type": "string",
             "nullable": true
           },
-          "description": {
-            "maxLength": 4096,
+          "createdTime": {
+            "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2}( |T)?[0-9]{2}:?[0-9]{2}:?[0-9]{2}(.[0-9]{1,6})?(Z|[+][0-9]{2}(:|)[0-9]{2})$",
             "type": "string",
             "nullable": true
           },
           "transitionType": {
-            "type": "string"
-          },
-          "inputJsonSchema": {
-            "type": "object"
+            "type": "string",
+            "enum": [
+              "docker",
+              "manual"
+            ]
           },
           "parameters": {
             "type": "object"
-          },
-          "timeoutInSeconds": {
-            "maximum": 1800,
-            "minimum": 60,
-            "type": "integer"
           }
         },
         "additionalProperties": false
@@ -5406,15 +6221,54 @@
 {
   "title": "transition",
   "required": [
+    "createdBy",
+    "createdTime",
     "description",
     "name",
     "parameters",
     "timeoutInSeconds",
     "transitionId",
-    "transitionType"
+    "transitionType",
+    "updatedBy",
+    "updatedTime"
   ],
   "type": "object",
   "properties": {
+    "updatedTime": {
+      "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2}( |T)?[0-9]{2}:?[0-9]{2}:?[0-9]{2}(.[0-9]{1,6})?(Z|[+][0-9]{2}(:|)[0-9]{2})$",
+      "type": "string",
+      "nullable": true
+    },
+    "updatedBy": {
+      "maxLength": 4096,
+      "type": "string",
+      "nullable": true
+    },
+    "transitionId": {
+      "anyOf": [
+        {
+          "pattern": "^las:transition:[a-f0-9]{32}$",
+          "type": "string"
+        },
+        {
+          "pattern": "^las:transition:commons-[0-9A-Za-z-]+$",
+          "type": "string"
+        }
+      ]
+    },
+    "description": {
+      "maxLength": 4096,
+      "type": "string",
+      "nullable": true
+    },
+    "inputJsonSchema": {
+      "type": "object"
+    },
+    "timeoutInSeconds": {
+      "maximum": 1800,
+      "minimum": 60,
+      "type": "integer"
+    },
     "outputJsonSchema": {
       "type": "object"
     },
@@ -5431,41 +6285,30 @@
         "type": "string"
       }
     },
-    "transitionId": {
-      "anyOf": [
-        {
-          "pattern": "^las:transition:[a-f0-9]{32}$",
-          "type": "string"
-        },
-        {
-          "pattern": "^las:transition:commons-[0-9A-Za-z-]+$",
-          "type": "string"
-        }
-      ]
+    "createdBy": {
+      "maxLength": 4096,
+      "type": "string",
+      "nullable": true
     },
     "name": {
       "maxLength": 4096,
       "type": "string",
       "nullable": true
     },
-    "description": {
-      "maxLength": 4096,
+    "createdTime": {
+      "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2}( |T)?[0-9]{2}:?[0-9]{2}:?[0-9]{2}(.[0-9]{1,6})?(Z|[+][0-9]{2}(:|)[0-9]{2})$",
       "type": "string",
       "nullable": true
     },
     "transitionType": {
-      "type": "string"
-    },
-    "inputJsonSchema": {
-      "type": "object"
+      "type": "string",
+      "enum": [
+        "docker",
+        "manual"
+      ]
     },
     "parameters": {
       "type": "object"
-    },
-    "timeoutInSeconds": {
-      "maximum": 1800,
-      "minimum": 60,
-      "type": "integer"
     }
   },
   "additionalProperties": false
@@ -5498,15 +6341,54 @@
 {
   "title": "transition",
   "required": [
+    "createdBy",
+    "createdTime",
     "description",
     "name",
     "parameters",
     "timeoutInSeconds",
     "transitionId",
-    "transitionType"
+    "transitionType",
+    "updatedBy",
+    "updatedTime"
   ],
   "type": "object",
   "properties": {
+    "updatedTime": {
+      "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2}( |T)?[0-9]{2}:?[0-9]{2}:?[0-9]{2}(.[0-9]{1,6})?(Z|[+][0-9]{2}(:|)[0-9]{2})$",
+      "type": "string",
+      "nullable": true
+    },
+    "updatedBy": {
+      "maxLength": 4096,
+      "type": "string",
+      "nullable": true
+    },
+    "transitionId": {
+      "anyOf": [
+        {
+          "pattern": "^las:transition:[a-f0-9]{32}$",
+          "type": "string"
+        },
+        {
+          "pattern": "^las:transition:commons-[0-9A-Za-z-]+$",
+          "type": "string"
+        }
+      ]
+    },
+    "description": {
+      "maxLength": 4096,
+      "type": "string",
+      "nullable": true
+    },
+    "inputJsonSchema": {
+      "type": "object"
+    },
+    "timeoutInSeconds": {
+      "maximum": 1800,
+      "minimum": 60,
+      "type": "integer"
+    },
     "outputJsonSchema": {
       "type": "object"
     },
@@ -5523,41 +6405,30 @@
         "type": "string"
       }
     },
-    "transitionId": {
-      "anyOf": [
-        {
-          "pattern": "^las:transition:[a-f0-9]{32}$",
-          "type": "string"
-        },
-        {
-          "pattern": "^las:transition:commons-[0-9A-Za-z-]+$",
-          "type": "string"
-        }
-      ]
+    "createdBy": {
+      "maxLength": 4096,
+      "type": "string",
+      "nullable": true
     },
     "name": {
       "maxLength": 4096,
       "type": "string",
       "nullable": true
     },
-    "description": {
-      "maxLength": 4096,
+    "createdTime": {
+      "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2}( |T)?[0-9]{2}:?[0-9]{2}:?[0-9]{2}(.[0-9]{1,6})?(Z|[+][0-9]{2}(:|)[0-9]{2})$",
       "type": "string",
       "nullable": true
     },
     "transitionType": {
-      "type": "string"
-    },
-    "inputJsonSchema": {
-      "type": "object"
+      "type": "string",
+      "enum": [
+        "docker",
+        "manual"
+      ]
     },
     "parameters": {
       "type": "object"
-    },
-    "timeoutInSeconds": {
-      "maximum": 1800,
-      "minimum": 60,
-      "type": "integer"
     }
   },
   "additionalProperties": false
@@ -5590,15 +6461,54 @@
 {
   "title": "transition",
   "required": [
+    "createdBy",
+    "createdTime",
     "description",
     "name",
     "parameters",
     "timeoutInSeconds",
     "transitionId",
-    "transitionType"
+    "transitionType",
+    "updatedBy",
+    "updatedTime"
   ],
   "type": "object",
   "properties": {
+    "updatedTime": {
+      "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2}( |T)?[0-9]{2}:?[0-9]{2}:?[0-9]{2}(.[0-9]{1,6})?(Z|[+][0-9]{2}(:|)[0-9]{2})$",
+      "type": "string",
+      "nullable": true
+    },
+    "updatedBy": {
+      "maxLength": 4096,
+      "type": "string",
+      "nullable": true
+    },
+    "transitionId": {
+      "anyOf": [
+        {
+          "pattern": "^las:transition:[a-f0-9]{32}$",
+          "type": "string"
+        },
+        {
+          "pattern": "^las:transition:commons-[0-9A-Za-z-]+$",
+          "type": "string"
+        }
+      ]
+    },
+    "description": {
+      "maxLength": 4096,
+      "type": "string",
+      "nullable": true
+    },
+    "inputJsonSchema": {
+      "type": "object"
+    },
+    "timeoutInSeconds": {
+      "maximum": 1800,
+      "minimum": 60,
+      "type": "integer"
+    },
     "outputJsonSchema": {
       "type": "object"
     },
@@ -5615,41 +6525,30 @@
         "type": "string"
       }
     },
-    "transitionId": {
-      "anyOf": [
-        {
-          "pattern": "^las:transition:[a-f0-9]{32}$",
-          "type": "string"
-        },
-        {
-          "pattern": "^las:transition:commons-[0-9A-Za-z-]+$",
-          "type": "string"
-        }
-      ]
+    "createdBy": {
+      "maxLength": 4096,
+      "type": "string",
+      "nullable": true
     },
     "name": {
       "maxLength": 4096,
       "type": "string",
       "nullable": true
     },
-    "description": {
-      "maxLength": 4096,
+    "createdTime": {
+      "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2}( |T)?[0-9]{2}:?[0-9]{2}:?[0-9]{2}(.[0-9]{1,6})?(Z|[+][0-9]{2}(:|)[0-9]{2})$",
       "type": "string",
       "nullable": true
     },
     "transitionType": {
-      "type": "string"
-    },
-    "inputJsonSchema": {
-      "type": "object"
+      "type": "string",
+      "enum": [
+        "docker",
+        "manual"
+      ]
     },
     "parameters": {
       "type": "object"
-    },
-    "timeoutInSeconds": {
-      "maximum": 1800,
-      "minimum": 60,
-      "type": "integer"
     }
   },
   "additionalProperties": false
@@ -5735,15 +6634,54 @@
 {
   "title": "transition",
   "required": [
+    "createdBy",
+    "createdTime",
     "description",
     "name",
     "parameters",
     "timeoutInSeconds",
     "transitionId",
-    "transitionType"
+    "transitionType",
+    "updatedBy",
+    "updatedTime"
   ],
   "type": "object",
   "properties": {
+    "updatedTime": {
+      "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2}( |T)?[0-9]{2}:?[0-9]{2}:?[0-9]{2}(.[0-9]{1,6})?(Z|[+][0-9]{2}(:|)[0-9]{2})$",
+      "type": "string",
+      "nullable": true
+    },
+    "updatedBy": {
+      "maxLength": 4096,
+      "type": "string",
+      "nullable": true
+    },
+    "transitionId": {
+      "anyOf": [
+        {
+          "pattern": "^las:transition:[a-f0-9]{32}$",
+          "type": "string"
+        },
+        {
+          "pattern": "^las:transition:commons-[0-9A-Za-z-]+$",
+          "type": "string"
+        }
+      ]
+    },
+    "description": {
+      "maxLength": 4096,
+      "type": "string",
+      "nullable": true
+    },
+    "inputJsonSchema": {
+      "type": "object"
+    },
+    "timeoutInSeconds": {
+      "maximum": 1800,
+      "minimum": 60,
+      "type": "integer"
+    },
     "outputJsonSchema": {
       "type": "object"
     },
@@ -5760,41 +6698,30 @@
         "type": "string"
       }
     },
-    "transitionId": {
-      "anyOf": [
-        {
-          "pattern": "^las:transition:[a-f0-9]{32}$",
-          "type": "string"
-        },
-        {
-          "pattern": "^las:transition:commons-[0-9A-Za-z-]+$",
-          "type": "string"
-        }
-      ]
+    "createdBy": {
+      "maxLength": 4096,
+      "type": "string",
+      "nullable": true
     },
     "name": {
       "maxLength": 4096,
       "type": "string",
       "nullable": true
     },
-    "description": {
-      "maxLength": 4096,
+    "createdTime": {
+      "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2}( |T)?[0-9]{2}:?[0-9]{2}:?[0-9]{2}(.[0-9]{1,6})?(Z|[+][0-9]{2}(:|)[0-9]{2})$",
       "type": "string",
       "nullable": true
     },
     "transitionType": {
-      "type": "string"
-    },
-    "inputJsonSchema": {
-      "type": "object"
+      "type": "string",
+      "enum": [
+        "docker",
+        "manual"
+      ]
     },
     "parameters": {
       "type": "object"
-    },
-    "timeoutInSeconds": {
-      "maximum": 1800,
-      "minimum": 60,
-      "type": "integer"
     }
   },
   "additionalProperties": false
@@ -6349,13 +7276,37 @@
       "type": "array",
       "items": {
         "required": [
+          "createdBy",
+          "createdTime",
           "email",
+          "updatedBy",
+          "updatedTime",
           "userId"
         ],
         "type": "object",
         "properties": {
+          "updatedTime": {
+            "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2}( |T)?[0-9]{2}:?[0-9]{2}:?[0-9]{2}(.[0-9]{1,6})?(Z|[+][0-9]{2}(:|)[0-9]{2})$",
+            "type": "string",
+            "nullable": true
+          },
+          "updatedBy": {
+            "maxLength": 4096,
+            "type": "string",
+            "nullable": true
+          },
+          "createdBy": {
+            "maxLength": 4096,
+            "type": "string",
+            "nullable": true
+          },
           "name": {
             "maxLength": 4096,
+            "type": "string",
+            "nullable": true
+          },
+          "createdTime": {
+            "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2}( |T)?[0-9]{2}:?[0-9]{2}:?[0-9]{2}(.[0-9]{1,6})?(Z|[+][0-9]{2}(:|)[0-9]{2})$",
             "type": "string",
             "nullable": true
           },
@@ -6436,13 +7387,37 @@
 {
   "title": "user",
   "required": [
+    "createdBy",
+    "createdTime",
     "email",
+    "updatedBy",
+    "updatedTime",
     "userId"
   ],
   "type": "object",
   "properties": {
+    "updatedTime": {
+      "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2}( |T)?[0-9]{2}:?[0-9]{2}:?[0-9]{2}(.[0-9]{1,6})?(Z|[+][0-9]{2}(:|)[0-9]{2})$",
+      "type": "string",
+      "nullable": true
+    },
+    "updatedBy": {
+      "maxLength": 4096,
+      "type": "string",
+      "nullable": true
+    },
+    "createdBy": {
+      "maxLength": 4096,
+      "type": "string",
+      "nullable": true
+    },
     "name": {
       "maxLength": 4096,
+      "type": "string",
+      "nullable": true
+    },
+    "createdTime": {
+      "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2}( |T)?[0-9]{2}:?[0-9]{2}:?[0-9]{2}(.[0-9]{1,6})?(Z|[+][0-9]{2}(:|)[0-9]{2})$",
       "type": "string",
       "nullable": true
     },
@@ -6490,13 +7465,37 @@
 {
   "title": "user",
   "required": [
+    "createdBy",
+    "createdTime",
     "email",
+    "updatedBy",
+    "updatedTime",
     "userId"
   ],
   "type": "object",
   "properties": {
+    "updatedTime": {
+      "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2}( |T)?[0-9]{2}:?[0-9]{2}:?[0-9]{2}(.[0-9]{1,6})?(Z|[+][0-9]{2}(:|)[0-9]{2})$",
+      "type": "string",
+      "nullable": true
+    },
+    "updatedBy": {
+      "maxLength": 4096,
+      "type": "string",
+      "nullable": true
+    },
+    "createdBy": {
+      "maxLength": 4096,
+      "type": "string",
+      "nullable": true
+    },
     "name": {
       "maxLength": 4096,
+      "type": "string",
+      "nullable": true
+    },
+    "createdTime": {
+      "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2}( |T)?[0-9]{2}:?[0-9]{2}:?[0-9]{2}(.[0-9]{1,6})?(Z|[+][0-9]{2}(:|)[0-9]{2})$",
       "type": "string",
       "nullable": true
     },
@@ -6544,13 +7543,37 @@
 {
   "title": "user",
   "required": [
+    "createdBy",
+    "createdTime",
     "email",
+    "updatedBy",
+    "updatedTime",
     "userId"
   ],
   "type": "object",
   "properties": {
+    "updatedTime": {
+      "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2}( |T)?[0-9]{2}:?[0-9]{2}:?[0-9]{2}(.[0-9]{1,6})?(Z|[+][0-9]{2}(:|)[0-9]{2})$",
+      "type": "string",
+      "nullable": true
+    },
+    "updatedBy": {
+      "maxLength": 4096,
+      "type": "string",
+      "nullable": true
+    },
+    "createdBy": {
+      "maxLength": 4096,
+      "type": "string",
+      "nullable": true
+    },
     "name": {
       "maxLength": 4096,
+      "type": "string",
+      "nullable": true
+    },
+    "createdTime": {
+      "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2}( |T)?[0-9]{2}:?[0-9]{2}:?[0-9]{2}(.[0-9]{1,6})?(Z|[+][0-9]{2}(:|)[0-9]{2})$",
       "type": "string",
       "nullable": true
     },
@@ -6619,13 +7642,37 @@
 {
   "title": "user",
   "required": [
+    "createdBy",
+    "createdTime",
     "email",
+    "updatedBy",
+    "updatedTime",
     "userId"
   ],
   "type": "object",
   "properties": {
+    "updatedTime": {
+      "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2}( |T)?[0-9]{2}:?[0-9]{2}:?[0-9]{2}(.[0-9]{1,6})?(Z|[+][0-9]{2}(:|)[0-9]{2})$",
+      "type": "string",
+      "nullable": true
+    },
+    "updatedBy": {
+      "maxLength": 4096,
+      "type": "string",
+      "nullable": true
+    },
+    "createdBy": {
+      "maxLength": 4096,
+      "type": "string",
+      "nullable": true
+    },
     "name": {
       "maxLength": 4096,
+      "type": "string",
+      "nullable": true
+    },
+    "createdTime": {
+      "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2}( |T)?[0-9]{2}:?[0-9]{2}:?[0-9]{2}(.[0-9]{1,6})?(Z|[+][0-9]{2}(:|)[0-9]{2})$",
       "type": "string",
       "nullable": true
     },
@@ -6689,16 +7736,35 @@
       "items": {
         "required": [
           "completedConfig",
+          "createdBy",
+          "createdTime",
           "description",
           "errorConfig",
           "name",
           "numberOfRunningExecutions",
+          "updatedBy",
+          "updatedTime",
           "workflowId"
         ],
         "type": "object",
         "properties": {
+          "updatedTime": {
+            "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2}( |T)?[0-9]{2}:?[0-9]{2}:?[0-9]{2}(.[0-9]{1,6})?(Z|[+][0-9]{2}(:|)[0-9]{2})$",
+            "type": "string",
+            "nullable": true
+          },
+          "updatedBy": {
+            "maxLength": 4096,
+            "type": "string",
+            "nullable": true
+          },
           "numberOfRunningExecutions": {
             "type": "integer"
+          },
+          "createdBy": {
+            "maxLength": 4096,
+            "type": "string",
+            "nullable": true
           },
           "completedConfig": {
             "required": [
@@ -6736,6 +7802,11 @@
           },
           "description": {
             "maxLength": 4096,
+            "type": "string",
+            "nullable": true
+          },
+          "createdTime": {
+            "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2}( |T)?[0-9]{2}:?[0-9]{2}:?[0-9]{2}(.[0-9]{1,6})?(Z|[+][0-9]{2}(:|)[0-9]{2})$",
             "type": "string",
             "nullable": true
           },
@@ -6879,16 +7950,35 @@
   "title": "workflow",
   "required": [
     "completedConfig",
+    "createdBy",
+    "createdTime",
     "description",
     "errorConfig",
     "name",
     "numberOfRunningExecutions",
+    "updatedBy",
+    "updatedTime",
     "workflowId"
   ],
   "type": "object",
   "properties": {
+    "updatedTime": {
+      "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2}( |T)?[0-9]{2}:?[0-9]{2}:?[0-9]{2}(.[0-9]{1,6})?(Z|[+][0-9]{2}(:|)[0-9]{2})$",
+      "type": "string",
+      "nullable": true
+    },
+    "updatedBy": {
+      "maxLength": 4096,
+      "type": "string",
+      "nullable": true
+    },
     "numberOfRunningExecutions": {
       "type": "integer"
+    },
+    "createdBy": {
+      "maxLength": 4096,
+      "type": "string",
+      "nullable": true
     },
     "completedConfig": {
       "required": [
@@ -6926,6 +8016,11 @@
     },
     "description": {
       "maxLength": 4096,
+      "type": "string",
+      "nullable": true
+    },
+    "createdTime": {
+      "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2}( |T)?[0-9]{2}:?[0-9]{2}:?[0-9]{2}(.[0-9]{1,6})?(Z|[+][0-9]{2}(:|)[0-9]{2})$",
       "type": "string",
       "nullable": true
     },
@@ -6978,16 +8073,35 @@
   "title": "workflow",
   "required": [
     "completedConfig",
+    "createdBy",
+    "createdTime",
     "description",
     "errorConfig",
     "name",
     "numberOfRunningExecutions",
+    "updatedBy",
+    "updatedTime",
     "workflowId"
   ],
   "type": "object",
   "properties": {
+    "updatedTime": {
+      "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2}( |T)?[0-9]{2}:?[0-9]{2}:?[0-9]{2}(.[0-9]{1,6})?(Z|[+][0-9]{2}(:|)[0-9]{2})$",
+      "type": "string",
+      "nullable": true
+    },
+    "updatedBy": {
+      "maxLength": 4096,
+      "type": "string",
+      "nullable": true
+    },
     "numberOfRunningExecutions": {
       "type": "integer"
+    },
+    "createdBy": {
+      "maxLength": 4096,
+      "type": "string",
+      "nullable": true
     },
     "completedConfig": {
       "required": [
@@ -7025,6 +8139,11 @@
     },
     "description": {
       "maxLength": 4096,
+      "type": "string",
+      "nullable": true
+    },
+    "createdTime": {
+      "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2}( |T)?[0-9]{2}:?[0-9]{2}:?[0-9]{2}(.[0-9]{1,6})?(Z|[+][0-9]{2}(:|)[0-9]{2})$",
       "type": "string",
       "nullable": true
     },
@@ -7077,16 +8196,35 @@
   "title": "workflow",
   "required": [
     "completedConfig",
+    "createdBy",
+    "createdTime",
     "description",
     "errorConfig",
     "name",
     "numberOfRunningExecutions",
+    "updatedBy",
+    "updatedTime",
     "workflowId"
   ],
   "type": "object",
   "properties": {
+    "updatedTime": {
+      "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2}( |T)?[0-9]{2}:?[0-9]{2}:?[0-9]{2}(.[0-9]{1,6})?(Z|[+][0-9]{2}(:|)[0-9]{2})$",
+      "type": "string",
+      "nullable": true
+    },
+    "updatedBy": {
+      "maxLength": 4096,
+      "type": "string",
+      "nullable": true
+    },
     "numberOfRunningExecutions": {
       "type": "integer"
+    },
+    "createdBy": {
+      "maxLength": 4096,
+      "type": "string",
+      "nullable": true
     },
     "completedConfig": {
       "required": [
@@ -7124,6 +8262,11 @@
     },
     "description": {
       "maxLength": 4096,
+      "type": "string",
+      "nullable": true
+    },
+    "createdTime": {
+      "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2}( |T)?[0-9]{2}:?[0-9]{2}:?[0-9]{2}(.[0-9]{1,6})?(Z|[+][0-9]{2}(:|)[0-9]{2})$",
       "type": "string",
       "nullable": true
     },
@@ -7239,16 +8382,35 @@
   "title": "workflow",
   "required": [
     "completedConfig",
+    "createdBy",
+    "createdTime",
     "description",
     "errorConfig",
     "name",
     "numberOfRunningExecutions",
+    "updatedBy",
+    "updatedTime",
     "workflowId"
   ],
   "type": "object",
   "properties": {
+    "updatedTime": {
+      "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2}( |T)?[0-9]{2}:?[0-9]{2}:?[0-9]{2}(.[0-9]{1,6})?(Z|[+][0-9]{2}(:|)[0-9]{2})$",
+      "type": "string",
+      "nullable": true
+    },
+    "updatedBy": {
+      "maxLength": 4096,
+      "type": "string",
+      "nullable": true
+    },
     "numberOfRunningExecutions": {
       "type": "integer"
+    },
+    "createdBy": {
+      "maxLength": 4096,
+      "type": "string",
+      "nullable": true
     },
     "completedConfig": {
       "required": [
@@ -7286,6 +8448,11 @@
     },
     "description": {
       "maxLength": 4096,
+      "type": "string",
+      "nullable": true
+    },
+    "createdTime": {
+      "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2}( |T)?[0-9]{2}:?[0-9]{2}:?[0-9]{2}(.[0-9]{1,6})?(Z|[+][0-9]{2}(:|)[0-9]{2})$",
       "type": "string",
       "nullable": true
     },
