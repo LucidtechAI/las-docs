@@ -72,7 +72,9 @@
             "nullable": true
           },
           "apiKey": {
-            "type": "string"
+            "maxLength": 4096,
+            "type": "string",
+            "nullable": true
           },
           "logoutUrls": {
             "type": "array",
@@ -235,7 +237,9 @@
       "nullable": true
     },
     "apiKey": {
-      "type": "string"
+      "maxLength": 4096,
+      "type": "string",
+      "nullable": true
     },
     "logoutUrls": {
       "type": "array",
@@ -351,7 +355,9 @@
       "nullable": true
     },
     "apiKey": {
-      "type": "string"
+      "maxLength": 4096,
+      "type": "string",
+      "nullable": true
     },
     "logoutUrls": {
       "type": "array",
@@ -497,7 +503,9 @@
       "nullable": true
     },
     "apiKey": {
-      "type": "string"
+      "maxLength": 4096,
+      "type": "string",
+      "nullable": true
     },
     "logoutUrls": {
       "type": "array",
@@ -1533,6 +1541,10 @@
   "title": "POST /datasets",
   "type": "object",
   "properties": {
+    "retentionInDays": {
+      "minimum": 1,
+      "type": "integer"
+    },
     "name": {
       "maxLength": 4096,
       "type": "string",
@@ -3180,6 +3192,7 @@
           "height",
           "modelId",
           "name",
+          "numberOfDataBundles",
           "preprocessConfig",
           "status",
           "updatedBy",
@@ -3193,30 +3206,6 @@
             "type": "string",
             "nullable": true
           },
-          "preprocessConfig": {
-            "required": [
-              "autoRotate",
-              "imageQuality",
-              "maxPages"
-            ],
-            "type": "object",
-            "properties": {
-              "maxPages": {
-                "type": "integer"
-              },
-              "autoRotate": {
-                "type": "boolean"
-              },
-              "imageQuality": {
-                "type": "string",
-                "enum": [
-                  "LOW",
-                  "HIGH"
-                ]
-              }
-            },
-            "additionalProperties": false
-          },
           "updatedBy": {
             "maxLength": 4096,
             "type": "string",
@@ -3226,28 +3215,8 @@
             "pattern": "^las:model:[a-f0-9]{32}$",
             "type": "string"
           },
-          "createdBy": {
-            "maxLength": 4096,
-            "type": "string",
-            "nullable": true
-          },
-          "name": {
-            "maxLength": 4096,
-            "type": "string",
-            "nullable": true
-          },
-          "width": {
-            "maximum": 1921,
-            "minimum": 97,
-            "type": "integer"
-          },
           "description": {
             "maxLength": 4096,
-            "type": "string",
-            "nullable": true
-          },
-          "createdTime": {
-            "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2}( |T)?[0-9]{2}:?[0-9]{2}:?[0-9]{2}(.[0-9]{1,6})?(Z|[+][0-9]{2}(:|)[0-9]{2})$",
             "type": "string",
             "nullable": true
           },
@@ -3289,6 +3258,54 @@
                 }
               }
             }
+          },
+          "preprocessConfig": {
+            "required": [
+              "autoRotate",
+              "imageQuality",
+              "maxPages"
+            ],
+            "type": "object",
+            "properties": {
+              "maxPages": {
+                "type": "integer"
+              },
+              "autoRotate": {
+                "type": "boolean"
+              },
+              "imageQuality": {
+                "type": "string",
+                "enum": [
+                  "LOW",
+                  "HIGH"
+                ]
+              }
+            },
+            "additionalProperties": false
+          },
+          "createdBy": {
+            "maxLength": 4096,
+            "type": "string",
+            "nullable": true
+          },
+          "name": {
+            "maxLength": 4096,
+            "type": "string",
+            "nullable": true
+          },
+          "width": {
+            "maximum": 1921,
+            "minimum": 97,
+            "type": "integer"
+          },
+          "numberOfDataBundles": {
+            "minimum": 0,
+            "type": "integer"
+          },
+          "createdTime": {
+            "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2}( |T)?[0-9]{2}:?[0-9]{2}:?[0-9]{2}(.[0-9]{1,6})?(Z|[+][0-9]{2}(:|)[0-9]{2})$",
+            "type": "string",
+            "nullable": true
           },
           "height": {
             "maximum": 1921,
@@ -3442,6 +3459,7 @@
     "height",
     "modelId",
     "name",
+    "numberOfDataBundles",
     "preprocessConfig",
     "status",
     "updatedBy",
@@ -3455,30 +3473,6 @@
       "type": "string",
       "nullable": true
     },
-    "preprocessConfig": {
-      "required": [
-        "autoRotate",
-        "imageQuality",
-        "maxPages"
-      ],
-      "type": "object",
-      "properties": {
-        "maxPages": {
-          "type": "integer"
-        },
-        "autoRotate": {
-          "type": "boolean"
-        },
-        "imageQuality": {
-          "type": "string",
-          "enum": [
-            "LOW",
-            "HIGH"
-          ]
-        }
-      },
-      "additionalProperties": false
-    },
     "updatedBy": {
       "maxLength": 4096,
       "type": "string",
@@ -3488,28 +3482,8 @@
       "pattern": "^las:model:[a-f0-9]{32}$",
       "type": "string"
     },
-    "createdBy": {
-      "maxLength": 4096,
-      "type": "string",
-      "nullable": true
-    },
-    "name": {
-      "maxLength": 4096,
-      "type": "string",
-      "nullable": true
-    },
-    "width": {
-      "maximum": 1921,
-      "minimum": 97,
-      "type": "integer"
-    },
     "description": {
       "maxLength": 4096,
-      "type": "string",
-      "nullable": true
-    },
-    "createdTime": {
-      "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2}( |T)?[0-9]{2}:?[0-9]{2}:?[0-9]{2}(.[0-9]{1,6})?(Z|[+][0-9]{2}(:|)[0-9]{2})$",
       "type": "string",
       "nullable": true
     },
@@ -3551,6 +3525,54 @@
           }
         }
       }
+    },
+    "preprocessConfig": {
+      "required": [
+        "autoRotate",
+        "imageQuality",
+        "maxPages"
+      ],
+      "type": "object",
+      "properties": {
+        "maxPages": {
+          "type": "integer"
+        },
+        "autoRotate": {
+          "type": "boolean"
+        },
+        "imageQuality": {
+          "type": "string",
+          "enum": [
+            "LOW",
+            "HIGH"
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "createdBy": {
+      "maxLength": 4096,
+      "type": "string",
+      "nullable": true
+    },
+    "name": {
+      "maxLength": 4096,
+      "type": "string",
+      "nullable": true
+    },
+    "width": {
+      "maximum": 1921,
+      "minimum": 97,
+      "type": "integer"
+    },
+    "numberOfDataBundles": {
+      "minimum": 0,
+      "type": "integer"
+    },
+    "createdTime": {
+      "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2}( |T)?[0-9]{2}:?[0-9]{2}:?[0-9]{2}(.[0-9]{1,6})?(Z|[+][0-9]{2}(:|)[0-9]{2})$",
+      "type": "string",
+      "nullable": true
     },
     "height": {
       "maximum": 1921,
@@ -3603,6 +3625,7 @@
     "height",
     "modelId",
     "name",
+    "numberOfDataBundles",
     "preprocessConfig",
     "status",
     "updatedBy",
@@ -3616,30 +3639,6 @@
       "type": "string",
       "nullable": true
     },
-    "preprocessConfig": {
-      "required": [
-        "autoRotate",
-        "imageQuality",
-        "maxPages"
-      ],
-      "type": "object",
-      "properties": {
-        "maxPages": {
-          "type": "integer"
-        },
-        "autoRotate": {
-          "type": "boolean"
-        },
-        "imageQuality": {
-          "type": "string",
-          "enum": [
-            "LOW",
-            "HIGH"
-          ]
-        }
-      },
-      "additionalProperties": false
-    },
     "updatedBy": {
       "maxLength": 4096,
       "type": "string",
@@ -3649,28 +3648,8 @@
       "pattern": "^las:model:[a-f0-9]{32}$",
       "type": "string"
     },
-    "createdBy": {
-      "maxLength": 4096,
-      "type": "string",
-      "nullable": true
-    },
-    "name": {
-      "maxLength": 4096,
-      "type": "string",
-      "nullable": true
-    },
-    "width": {
-      "maximum": 1921,
-      "minimum": 97,
-      "type": "integer"
-    },
     "description": {
       "maxLength": 4096,
-      "type": "string",
-      "nullable": true
-    },
-    "createdTime": {
-      "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2}( |T)?[0-9]{2}:?[0-9]{2}:?[0-9]{2}(.[0-9]{1,6})?(Z|[+][0-9]{2}(:|)[0-9]{2})$",
       "type": "string",
       "nullable": true
     },
@@ -3712,6 +3691,54 @@
           }
         }
       }
+    },
+    "preprocessConfig": {
+      "required": [
+        "autoRotate",
+        "imageQuality",
+        "maxPages"
+      ],
+      "type": "object",
+      "properties": {
+        "maxPages": {
+          "type": "integer"
+        },
+        "autoRotate": {
+          "type": "boolean"
+        },
+        "imageQuality": {
+          "type": "string",
+          "enum": [
+            "LOW",
+            "HIGH"
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "createdBy": {
+      "maxLength": 4096,
+      "type": "string",
+      "nullable": true
+    },
+    "name": {
+      "maxLength": 4096,
+      "type": "string",
+      "nullable": true
+    },
+    "width": {
+      "maximum": 1921,
+      "minimum": 97,
+      "type": "integer"
+    },
+    "numberOfDataBundles": {
+      "minimum": 0,
+      "type": "integer"
+    },
+    "createdTime": {
+      "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2}( |T)?[0-9]{2}:?[0-9]{2}:?[0-9]{2}(.[0-9]{1,6})?(Z|[+][0-9]{2}(:|)[0-9]{2})$",
+      "type": "string",
+      "nullable": true
     },
     "height": {
       "maximum": 1921,
@@ -3764,6 +3791,7 @@
     "height",
     "modelId",
     "name",
+    "numberOfDataBundles",
     "preprocessConfig",
     "status",
     "updatedBy",
@@ -3777,30 +3805,6 @@
       "type": "string",
       "nullable": true
     },
-    "preprocessConfig": {
-      "required": [
-        "autoRotate",
-        "imageQuality",
-        "maxPages"
-      ],
-      "type": "object",
-      "properties": {
-        "maxPages": {
-          "type": "integer"
-        },
-        "autoRotate": {
-          "type": "boolean"
-        },
-        "imageQuality": {
-          "type": "string",
-          "enum": [
-            "LOW",
-            "HIGH"
-          ]
-        }
-      },
-      "additionalProperties": false
-    },
     "updatedBy": {
       "maxLength": 4096,
       "type": "string",
@@ -3810,28 +3814,8 @@
       "pattern": "^las:model:[a-f0-9]{32}$",
       "type": "string"
     },
-    "createdBy": {
-      "maxLength": 4096,
-      "type": "string",
-      "nullable": true
-    },
-    "name": {
-      "maxLength": 4096,
-      "type": "string",
-      "nullable": true
-    },
-    "width": {
-      "maximum": 1921,
-      "minimum": 97,
-      "type": "integer"
-    },
     "description": {
       "maxLength": 4096,
-      "type": "string",
-      "nullable": true
-    },
-    "createdTime": {
-      "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2}( |T)?[0-9]{2}:?[0-9]{2}:?[0-9]{2}(.[0-9]{1,6})?(Z|[+][0-9]{2}(:|)[0-9]{2})$",
       "type": "string",
       "nullable": true
     },
@@ -3873,6 +3857,54 @@
           }
         }
       }
+    },
+    "preprocessConfig": {
+      "required": [
+        "autoRotate",
+        "imageQuality",
+        "maxPages"
+      ],
+      "type": "object",
+      "properties": {
+        "maxPages": {
+          "type": "integer"
+        },
+        "autoRotate": {
+          "type": "boolean"
+        },
+        "imageQuality": {
+          "type": "string",
+          "enum": [
+            "LOW",
+            "HIGH"
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "createdBy": {
+      "maxLength": 4096,
+      "type": "string",
+      "nullable": true
+    },
+    "name": {
+      "maxLength": 4096,
+      "type": "string",
+      "nullable": true
+    },
+    "width": {
+      "maximum": 1921,
+      "minimum": 97,
+      "type": "integer"
+    },
+    "numberOfDataBundles": {
+      "minimum": 0,
+      "type": "integer"
+    },
+    "createdTime": {
+      "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2}( |T)?[0-9]{2}:?[0-9]{2}:?[0-9]{2}(.[0-9]{1,6})?(Z|[+][0-9]{2}(:|)[0-9]{2})$",
+      "type": "string",
+      "nullable": true
     },
     "height": {
       "maximum": 1921,
@@ -4023,6 +4055,7 @@
     "height",
     "modelId",
     "name",
+    "numberOfDataBundles",
     "preprocessConfig",
     "status",
     "updatedBy",
@@ -4036,30 +4069,6 @@
       "type": "string",
       "nullable": true
     },
-    "preprocessConfig": {
-      "required": [
-        "autoRotate",
-        "imageQuality",
-        "maxPages"
-      ],
-      "type": "object",
-      "properties": {
-        "maxPages": {
-          "type": "integer"
-        },
-        "autoRotate": {
-          "type": "boolean"
-        },
-        "imageQuality": {
-          "type": "string",
-          "enum": [
-            "LOW",
-            "HIGH"
-          ]
-        }
-      },
-      "additionalProperties": false
-    },
     "updatedBy": {
       "maxLength": 4096,
       "type": "string",
@@ -4069,28 +4078,8 @@
       "pattern": "^las:model:[a-f0-9]{32}$",
       "type": "string"
     },
-    "createdBy": {
-      "maxLength": 4096,
-      "type": "string",
-      "nullable": true
-    },
-    "name": {
-      "maxLength": 4096,
-      "type": "string",
-      "nullable": true
-    },
-    "width": {
-      "maximum": 1921,
-      "minimum": 97,
-      "type": "integer"
-    },
     "description": {
       "maxLength": 4096,
-      "type": "string",
-      "nullable": true
-    },
-    "createdTime": {
-      "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2}( |T)?[0-9]{2}:?[0-9]{2}:?[0-9]{2}(.[0-9]{1,6})?(Z|[+][0-9]{2}(:|)[0-9]{2})$",
       "type": "string",
       "nullable": true
     },
@@ -4132,6 +4121,54 @@
           }
         }
       }
+    },
+    "preprocessConfig": {
+      "required": [
+        "autoRotate",
+        "imageQuality",
+        "maxPages"
+      ],
+      "type": "object",
+      "properties": {
+        "maxPages": {
+          "type": "integer"
+        },
+        "autoRotate": {
+          "type": "boolean"
+        },
+        "imageQuality": {
+          "type": "string",
+          "enum": [
+            "LOW",
+            "HIGH"
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "createdBy": {
+      "maxLength": 4096,
+      "type": "string",
+      "nullable": true
+    },
+    "name": {
+      "maxLength": 4096,
+      "type": "string",
+      "nullable": true
+    },
+    "width": {
+      "maximum": 1921,
+      "minimum": 97,
+      "type": "integer"
+    },
+    "numberOfDataBundles": {
+      "minimum": 0,
+      "type": "integer"
+    },
+    "createdTime": {
+      "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2}( |T)?[0-9]{2}:?[0-9]{2}:?[0-9]{2}(.[0-9]{1,6})?(Z|[+][0-9]{2}(:|)[0-9]{2})$",
+      "type": "string",
+      "nullable": true
     },
     "height": {
       "maximum": 1921,
@@ -6825,8 +6862,7 @@
               "succeeded",
               "failed",
               "rejected",
-              "retry",
-              "error"
+              "retry"
             ]
           }
         },
@@ -6859,8 +6895,7 @@
           "succeeded",
           "failed",
           "rejected",
-          "retry",
-          "error"
+          "retry"
         ]
       }
     }
@@ -6956,8 +6991,7 @@
         "succeeded",
         "failed",
         "rejected",
-        "retry",
-        "error"
+        "retry"
       ]
     }
   },
@@ -7046,8 +7080,7 @@
         "succeeded",
         "failed",
         "rejected",
-        "retry",
-        "error"
+        "retry"
       ]
     }
   },
@@ -7195,8 +7228,7 @@
         "succeeded",
         "failed",
         "rejected",
-        "retry",
-        "error"
+        "retry"
       ]
     }
   },
