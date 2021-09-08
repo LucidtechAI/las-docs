@@ -4,7 +4,13 @@ You can find the Open API specification file [here](https://raw.githubuserconten
 
 ## Changelog
 
+### 2021-09-08
+
+- Updated Login UI
+- API key is no longer needed
+
 ### 2021-08-18
+
 - Fixed a bug preventing a transition execution from starting for transitions with the docker type
 - Added GET /datasets/:id
 - Extended the period in which temporary credentials are valid upon first time invitation to Typenode or Flyt from 30 days to 90 days
