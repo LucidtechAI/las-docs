@@ -4,6 +4,11 @@ You can find the Open API specification file [here](https://raw.githubuserconten
 
 ## Changelog
 
+### 2021-09-17
+
+- Fixed a bug preventing resources to be deleted sometimes when calling DELETE /documents/:id or DELETE /assets/:id
+- Fixed a bug causing negative values to be returned for several fields (e.g. numberOfDocuments, numberOfDataBundles)
+
 ### 2021-09-08
 
 - Updated Login UI

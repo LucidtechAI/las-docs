@@ -79,6 +79,7 @@
           "logoutUrls": {
             "type": "array",
             "items": {
+              "pattern": "^http://localhost.*|^https://.*",
               "type": "string"
             }
           },
@@ -90,16 +91,19 @@
           "callbackUrls": {
             "type": "array",
             "items": {
+              "pattern": "^http://localhost.*|^https://.*",
               "type": "string"
             }
           },
           "loginUrls": {
             "type": "array",
             "items": {
+              "pattern": "^http://localhost.*|^https://.*",
               "type": "string"
             }
           },
           "defaultLoginUrl": {
+            "pattern": "^http://localhost.*|^https://.*",
             "type": "string",
             "nullable": true
           },
@@ -164,6 +168,7 @@
     "logoutUrls": {
       "type": "array",
       "items": {
+        "pattern": "^http://localhost.*|^https://.*",
         "type": "string"
       }
     },
@@ -175,6 +180,7 @@
     "callbackUrls": {
       "type": "array",
       "items": {
+        "pattern": "^http://localhost.*|^https://.*",
         "type": "string"
       }
     },
@@ -186,10 +192,12 @@
     "loginUrls": {
       "type": "array",
       "items": {
+        "pattern": "^http://localhost.*|^https://.*",
         "type": "string"
       }
     },
     "defaultLoginUrl": {
+      "pattern": "^http://localhost.*|^https://.*",
       "type": "string"
     }
   },
@@ -244,6 +252,7 @@
     "logoutUrls": {
       "type": "array",
       "items": {
+        "pattern": "^http://localhost.*|^https://.*",
         "type": "string"
       }
     },
@@ -255,16 +264,19 @@
     "callbackUrls": {
       "type": "array",
       "items": {
+        "pattern": "^http://localhost.*|^https://.*",
         "type": "string"
       }
     },
     "loginUrls": {
       "type": "array",
       "items": {
+        "pattern": "^http://localhost.*|^https://.*",
         "type": "string"
       }
     },
     "defaultLoginUrl": {
+      "pattern": "^http://localhost.*|^https://.*",
       "type": "string",
       "nullable": true
     },
@@ -362,6 +374,7 @@
     "logoutUrls": {
       "type": "array",
       "items": {
+        "pattern": "^http://localhost.*|^https://.*",
         "type": "string"
       }
     },
@@ -373,16 +386,19 @@
     "callbackUrls": {
       "type": "array",
       "items": {
+        "pattern": "^http://localhost.*|^https://.*",
         "type": "string"
       }
     },
     "loginUrls": {
       "type": "array",
       "items": {
+        "pattern": "^http://localhost.*|^https://.*",
         "type": "string"
       }
     },
     "defaultLoginUrl": {
+      "pattern": "^http://localhost.*|^https://.*",
       "type": "string",
       "nullable": true
     },
@@ -452,10 +468,12 @@
     "loginUrls": {
       "type": "array",
       "items": {
+        "pattern": "^http://localhost.*|^https://.*",
         "type": "string"
       }
     },
     "defaultLoginUrl": {
+      "pattern": "^http://localhost.*|^https://.*",
       "type": "string"
     }
   },
@@ -510,6 +528,7 @@
     "logoutUrls": {
       "type": "array",
       "items": {
+        "pattern": "^http://localhost.*|^https://.*",
         "type": "string"
       }
     },
@@ -521,16 +540,19 @@
     "callbackUrls": {
       "type": "array",
       "items": {
+        "pattern": "^http://localhost.*|^https://.*",
         "type": "string"
       }
     },
     "loginUrls": {
       "type": "array",
       "items": {
+        "pattern": "^http://localhost.*|^https://.*",
         "type": "string"
       }
     },
     "defaultLoginUrl": {
+      "pattern": "^http://localhost.*|^https://.*",
       "type": "string",
       "nullable": true
     },
@@ -696,6 +718,7 @@
       "nullable": true
     },
     "content": {
+      "maxLength": 6250000,
       "minLength": 1,
       "type": "string"
     }
@@ -2391,6 +2414,7 @@
       ]
     },
     "content": {
+      "maxLength": 6250000,
       "minLength": 1,
       "type": "string"
     }
@@ -8586,6 +8610,11 @@
             "type": "string",
             "nullable": true
           },
+          "completedTaskLogId": {
+            "pattern": "^las:log:[a-f0-9]{32}$",
+            "type": "string",
+            "nullable": true
+          },
           "endTime": {
             "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2}( |T)?[0-9]{2}:?[0-9]{2}:?[0-9]{2}(.[0-9]{1,6})?(Z|[+][0-9]{2}(:|)[0-9]{2})$",
             "type": "string",
@@ -8749,6 +8778,11 @@
       "type": "string",
       "nullable": true
     },
+    "completedTaskLogId": {
+      "pattern": "^las:log:[a-f0-9]{32}$",
+      "type": "string",
+      "nullable": true
+    },
     "endTime": {
       "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2}( |T)?[0-9]{2}:?[0-9]{2}:?[0-9]{2}(.[0-9]{1,6})?(Z|[+][0-9]{2}(:|)[0-9]{2})$",
       "type": "string",
@@ -8856,6 +8890,11 @@
       "type": "string",
       "nullable": true
     },
+    "completedTaskLogId": {
+      "pattern": "^las:log:[a-f0-9]{32}$",
+      "type": "string",
+      "nullable": true
+    },
     "endTime": {
       "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2}( |T)?[0-9]{2}:?[0-9]{2}:?[0-9]{2}(.[0-9]{1,6})?(Z|[+][0-9]{2}(:|)[0-9]{2})$",
       "type": "string",
@@ -8960,6 +8999,11 @@
     },
     "startTime": {
       "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2}( |T)?[0-9]{2}:?[0-9]{2}:?[0-9]{2}(.[0-9]{1,6})?(Z|[+][0-9]{2}(:|)[0-9]{2})$",
+      "type": "string",
+      "nullable": true
+    },
+    "completedTaskLogId": {
+      "pattern": "^las:log:[a-f0-9]{32}$",
       "type": "string",
       "nullable": true
     },
@@ -9092,6 +9136,11 @@
     },
     "startTime": {
       "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2}( |T)?[0-9]{2}:?[0-9]{2}:?[0-9]{2}(.[0-9]{1,6})?(Z|[+][0-9]{2}(:|)[0-9]{2})$",
+      "type": "string",
+      "nullable": true
+    },
+    "completedTaskLogId": {
+      "pattern": "^las:log:[a-f0-9]{32}$",
       "type": "string",
       "nullable": true
     },
