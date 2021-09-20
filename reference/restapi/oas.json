@@ -2,7 +2,7 @@
   "openapi": "3.0.1",
   "info": {
     "title": "Lucidtech API",
-    "version": "2021-09-08T14:46:19Z"
+    "version": "2021-09-17T16:33:17Z"
   },
   "servers": [
     {
@@ -68,6 +68,23 @@
               }
             }
           },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "403 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
           "404": {
             "content": {
               "application/json": {
@@ -123,6 +140,9 @@
         "security": [
           {
             "lucidtech-api-ProductionAPI-ApiStack-6Q75M6VOG2KB-CustomAuthorizer": []
+          },
+          {
+            "api_key": []
           }
         ]
       },
@@ -223,6 +243,23 @@
               }
             }
           },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "403 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
           "404": {
             "content": {
               "application/json": {
@@ -278,6 +315,9 @@
         "security": [
           {
             "lucidtech-api-ProductionAPI-ApiStack-6Q75M6VOG2KB-CustomAuthorizer": []
+          },
+          {
+            "api_key": []
           }
         ]
       }
@@ -329,6 +369,23 @@
               }
             }
           },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "403 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
           "404": {
             "content": {
               "application/json": {
@@ -384,6 +441,9 @@
         "security": [
           {
             "lucidtech-api-ProductionAPI-ApiStack-6Q75M6VOG2KB-CustomAuthorizer": []
+          },
+          {
+            "api_key": []
           }
         ]
       },
@@ -502,6 +562,23 @@
               }
             }
           },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "403 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
           "404": {
             "content": {
               "application/json": {
@@ -557,6 +634,9 @@
         "security": [
           {
             "lucidtech-api-ProductionAPI-ApiStack-6Q75M6VOG2KB-CustomAuthorizer": []
+          },
+          {
+            "api_key": []
           }
         ]
       }
@@ -614,6 +694,23 @@
               }
             }
           },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "403 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
           "404": {
             "content": {
               "application/json": {
@@ -669,6 +766,9 @@
         "security": [
           {
             "lucidtech-api-ProductionAPI-ApiStack-6Q75M6VOG2KB-CustomAuthorizer": []
+          },
+          {
+            "api_key": []
           }
         ]
       },
@@ -769,6 +869,23 @@
               }
             }
           },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "403 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
           "404": {
             "content": {
               "application/json": {
@@ -824,6 +941,9 @@
         "security": [
           {
             "lucidtech-api-ProductionAPI-ApiStack-6Q75M6VOG2KB-CustomAuthorizer": []
+          },
+          {
+            "api_key": []
           }
         ]
       }
@@ -875,6 +995,23 @@
               }
             }
           },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "403 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
           "404": {
             "content": {
               "application/json": {
@@ -930,6 +1067,9 @@
         "security": [
           {
             "lucidtech-api-ProductionAPI-ApiStack-6Q75M6VOG2KB-CustomAuthorizer": []
+          },
+          {
+            "api_key": []
           }
         ]
       },
@@ -979,6 +1119,23 @@
               }
             }
           },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "403 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
           "404": {
             "content": {
               "application/json": {
@@ -1034,6 +1191,9 @@
         "security": [
           {
             "lucidtech-api-ProductionAPI-ApiStack-6Q75M6VOG2KB-CustomAuthorizer": []
+          },
+          {
+            "api_key": []
           }
         ]
       },
@@ -1152,6 +1312,23 @@
               }
             }
           },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "403 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
           "404": {
             "content": {
               "application/json": {
@@ -1207,6 +1384,9 @@
         "security": [
           {
             "lucidtech-api-ProductionAPI-ApiStack-6Q75M6VOG2KB-CustomAuthorizer": []
+          },
+          {
+            "api_key": []
           }
         ]
       }
@@ -1264,6 +1444,23 @@
               }
             }
           },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "403 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
           "404": {
             "content": {
               "application/json": {
@@ -1319,6 +1516,9 @@
         "security": [
           {
             "lucidtech-api-ProductionAPI-ApiStack-6Q75M6VOG2KB-CustomAuthorizer": []
+          },
+          {
+            "api_key": []
           }
         ]
       },
@@ -1419,6 +1619,23 @@
               }
             }
           },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "403 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
           "404": {
             "content": {
               "application/json": {
@@ -1474,6 +1691,9 @@
         "security": [
           {
             "lucidtech-api-ProductionAPI-ApiStack-6Q75M6VOG2KB-CustomAuthorizer": []
+          },
+          {
+            "api_key": []
           }
         ]
       }
@@ -1525,6 +1745,23 @@
               }
             }
           },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "403 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
           "404": {
             "content": {
               "application/json": {
@@ -1580,6 +1817,9 @@
         "security": [
           {
             "lucidtech-api-ProductionAPI-ApiStack-6Q75M6VOG2KB-CustomAuthorizer": []
+          },
+          {
+            "api_key": []
           }
         ]
       },
@@ -1698,6 +1938,23 @@
               }
             }
           },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "403 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
           "404": {
             "content": {
               "application/json": {
@@ -1753,6 +2010,9 @@
         "security": [
           {
             "lucidtech-api-ProductionAPI-ApiStack-6Q75M6VOG2KB-CustomAuthorizer": []
+          },
+          {
+            "api_key": []
           }
         ]
       }
@@ -1810,6 +2070,23 @@
               }
             }
           },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "403 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
           "404": {
             "content": {
               "application/json": {
@@ -1865,6 +2142,9 @@
         "security": [
           {
             "lucidtech-api-ProductionAPI-ApiStack-6Q75M6VOG2KB-CustomAuthorizer": []
+          },
+          {
+            "api_key": []
           }
         ]
       },
@@ -1965,6 +2245,23 @@
               }
             }
           },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "403 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
           "404": {
             "content": {
               "application/json": {
@@ -2020,6 +2317,9 @@
         "security": [
           {
             "lucidtech-api-ProductionAPI-ApiStack-6Q75M6VOG2KB-CustomAuthorizer": []
+          },
+          {
+            "api_key": []
           }
         ]
       }
@@ -2071,6 +2371,23 @@
               }
             }
           },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "403 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
           "404": {
             "content": {
               "application/json": {
@@ -2126,6 +2443,9 @@
         "security": [
           {
             "lucidtech-api-ProductionAPI-ApiStack-6Q75M6VOG2KB-CustomAuthorizer": []
+          },
+          {
+            "api_key": []
           }
         ]
       },
@@ -2175,6 +2495,23 @@
               }
             }
           },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "403 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
           "404": {
             "content": {
               "application/json": {
@@ -2230,6 +2567,9 @@
         "security": [
           {
             "lucidtech-api-ProductionAPI-ApiStack-6Q75M6VOG2KB-CustomAuthorizer": []
+          },
+          {
+            "api_key": []
           }
         ]
       },
@@ -2348,6 +2688,23 @@
               }
             }
           },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "403 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
           "404": {
             "content": {
               "application/json": {
@@ -2403,6 +2760,9 @@
         "security": [
           {
             "lucidtech-api-ProductionAPI-ApiStack-6Q75M6VOG2KB-CustomAuthorizer": []
+          },
+          {
+            "api_key": []
           }
         ]
       }
@@ -2481,6 +2841,23 @@
               }
             }
           },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "403 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
           "404": {
             "content": {
               "application/json": {
@@ -2536,6 +2913,9 @@
         "security": [
           {
             "lucidtech-api-ProductionAPI-ApiStack-6Q75M6VOG2KB-CustomAuthorizer": []
+          },
+          {
+            "api_key": []
           }
         ]
       },
@@ -2612,6 +2992,23 @@
               }
             }
           },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "403 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
           "404": {
             "content": {
               "application/json": {
@@ -2667,6 +3064,9 @@
         "security": [
           {
             "lucidtech-api-ProductionAPI-ApiStack-6Q75M6VOG2KB-CustomAuthorizer": []
+          },
+          {
+            "api_key": []
           }
         ]
       },
@@ -2767,6 +3167,23 @@
               }
             }
           },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "403 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
           "404": {
             "content": {
               "application/json": {
@@ -2822,6 +3239,9 @@
         "security": [
           {
             "lucidtech-api-ProductionAPI-ApiStack-6Q75M6VOG2KB-CustomAuthorizer": []
+          },
+          {
+            "api_key": []
           }
         ]
       }
@@ -2873,6 +3293,23 @@
               }
             }
           },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "403 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
           "404": {
             "content": {
               "application/json": {
@@ -2928,6 +3365,9 @@
         "security": [
           {
             "lucidtech-api-ProductionAPI-ApiStack-6Q75M6VOG2KB-CustomAuthorizer": []
+          },
+          {
+            "api_key": []
           }
         ]
       },
@@ -2977,6 +3417,23 @@
               }
             }
           },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "403 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
           "404": {
             "content": {
               "application/json": {
@@ -3032,6 +3489,9 @@
         "security": [
           {
             "lucidtech-api-ProductionAPI-ApiStack-6Q75M6VOG2KB-CustomAuthorizer": []
+          },
+          {
+            "api_key": []
           }
         ]
       },
@@ -3150,6 +3610,23 @@
               }
             }
           },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "403 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
           "404": {
             "content": {
               "application/json": {
@@ -3205,6 +3682,9 @@
         "security": [
           {
             "lucidtech-api-ProductionAPI-ApiStack-6Q75M6VOG2KB-CustomAuthorizer": []
+          },
+          {
+            "api_key": []
           }
         ]
       }
@@ -3297,6 +3777,23 @@
               }
             }
           },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "403 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
           "404": {
             "content": {
               "application/json": {
@@ -3352,6 +3849,9 @@
         "security": [
           {
             "lucidtech-api-ProductionAPI-ApiStack-6Q75M6VOG2KB-CustomAuthorizer": []
+          },
+          {
+            "api_key": []
           }
         ]
       },
@@ -3444,6 +3944,23 @@
               }
             }
           },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "403 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
           "404": {
             "content": {
               "application/json": {
@@ -3499,6 +4016,9 @@
         "security": [
           {
             "lucidtech-api-ProductionAPI-ApiStack-6Q75M6VOG2KB-CustomAuthorizer": []
+          },
+          {
+            "api_key": []
           }
         ]
       },
@@ -3607,6 +4127,23 @@
               }
             }
           },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "403 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
           "404": {
             "content": {
               "application/json": {
@@ -3662,6 +4199,9 @@
         "security": [
           {
             "lucidtech-api-ProductionAPI-ApiStack-6Q75M6VOG2KB-CustomAuthorizer": []
+          },
+          {
+            "api_key": []
           }
         ]
       },
@@ -3762,6 +4302,23 @@
               }
             }
           },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "403 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
           "404": {
             "content": {
               "application/json": {
@@ -3817,6 +4374,9 @@
         "security": [
           {
             "lucidtech-api-ProductionAPI-ApiStack-6Q75M6VOG2KB-CustomAuthorizer": []
+          },
+          {
+            "api_key": []
           }
         ]
       }
@@ -3868,6 +4428,23 @@
               }
             }
           },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "403 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
           "404": {
             "content": {
               "application/json": {
@@ -3923,6 +4500,9 @@
         "security": [
           {
             "lucidtech-api-ProductionAPI-ApiStack-6Q75M6VOG2KB-CustomAuthorizer": []
+          },
+          {
+            "api_key": []
           }
         ]
       },
@@ -3972,6 +4552,23 @@
               }
             }
           },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "403 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
           "404": {
             "content": {
               "application/json": {
@@ -4027,6 +4624,9 @@
         "security": [
           {
             "lucidtech-api-ProductionAPI-ApiStack-6Q75M6VOG2KB-CustomAuthorizer": []
+          },
+          {
+            "api_key": []
           }
         ]
       },
@@ -4145,6 +4745,23 @@
               }
             }
           },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "403 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
           "404": {
             "content": {
               "application/json": {
@@ -4200,6 +4817,9 @@
         "security": [
           {
             "lucidtech-api-ProductionAPI-ApiStack-6Q75M6VOG2KB-CustomAuthorizer": []
+          },
+          {
+            "api_key": []
           }
         ]
       }
@@ -4272,6 +4892,23 @@
               }
             }
           },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "403 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
           "404": {
             "content": {
               "application/json": {
@@ -4327,6 +4964,9 @@
         "security": [
           {
             "lucidtech-api-ProductionAPI-ApiStack-6Q75M6VOG2KB-CustomAuthorizer": []
+          },
+          {
+            "api_key": []
           }
         ]
       },
@@ -4445,6 +5085,23 @@
               }
             }
           },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "403 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
           "404": {
             "content": {
               "application/json": {
@@ -4500,6 +5157,9 @@
         "security": [
           {
             "lucidtech-api-ProductionAPI-ApiStack-6Q75M6VOG2KB-CustomAuthorizer": []
+          },
+          {
+            "api_key": []
           }
         ]
       }
@@ -4559,6 +5219,23 @@
               }
             }
           },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "403 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
           "404": {
             "content": {
               "application/json": {
@@ -4614,6 +5291,9 @@
         "security": [
           {
             "lucidtech-api-ProductionAPI-ApiStack-6Q75M6VOG2KB-CustomAuthorizer": []
+          },
+          {
+            "api_key": []
           }
         ]
       },
@@ -4748,6 +5428,23 @@
               }
             }
           },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "403 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
           "404": {
             "content": {
               "application/json": {
@@ -4803,6 +5500,9 @@
         "security": [
           {
             "lucidtech-api-ProductionAPI-ApiStack-6Q75M6VOG2KB-CustomAuthorizer": []
+          },
+          {
+            "api_key": []
           }
         ]
       }
@@ -4897,6 +5597,23 @@
               }
             }
           },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "403 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
           "404": {
             "content": {
               "application/json": {
@@ -4952,6 +5669,9 @@
         "security": [
           {
             "lucidtech-api-ProductionAPI-ApiStack-6Q75M6VOG2KB-CustomAuthorizer": []
+          },
+          {
+            "api_key": []
           }
         ]
       },
@@ -5070,6 +5790,23 @@
               }
             }
           },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "403 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
           "404": {
             "content": {
               "application/json": {
@@ -5125,6 +5862,9 @@
         "security": [
           {
             "lucidtech-api-ProductionAPI-ApiStack-6Q75M6VOG2KB-CustomAuthorizer": []
+          },
+          {
+            "api_key": []
           }
         ]
       }
@@ -5182,6 +5922,23 @@
               }
             }
           },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "403 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
           "404": {
             "content": {
               "application/json": {
@@ -5237,6 +5994,9 @@
         "security": [
           {
             "lucidtech-api-ProductionAPI-ApiStack-6Q75M6VOG2KB-CustomAuthorizer": []
+          },
+          {
+            "api_key": []
           }
         ]
       },
@@ -5337,6 +6097,23 @@
               }
             }
           },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "403 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
           "404": {
             "content": {
               "application/json": {
@@ -5392,6 +6169,9 @@
         "security": [
           {
             "lucidtech-api-ProductionAPI-ApiStack-6Q75M6VOG2KB-CustomAuthorizer": []
+          },
+          {
+            "api_key": []
           }
         ]
       }
@@ -5449,6 +6229,23 @@
               }
             }
           },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "403 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
           "404": {
             "content": {
               "application/json": {
@@ -5504,6 +6301,9 @@
         "security": [
           {
             "lucidtech-api-ProductionAPI-ApiStack-6Q75M6VOG2KB-CustomAuthorizer": []
+          },
+          {
+            "api_key": []
           }
         ]
       },
@@ -5604,6 +6404,23 @@
               }
             }
           },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "403 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
           "404": {
             "content": {
               "application/json": {
@@ -5659,6 +6476,9 @@
         "security": [
           {
             "lucidtech-api-ProductionAPI-ApiStack-6Q75M6VOG2KB-CustomAuthorizer": []
+          },
+          {
+            "api_key": []
           }
         ]
       }
@@ -5710,6 +6530,23 @@
               }
             }
           },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "403 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
           "404": {
             "content": {
               "application/json": {
@@ -5765,6 +6602,9 @@
         "security": [
           {
             "lucidtech-api-ProductionAPI-ApiStack-6Q75M6VOG2KB-CustomAuthorizer": []
+          },
+          {
+            "api_key": []
           }
         ]
       },
@@ -5883,6 +6723,23 @@
               }
             }
           },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "403 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
           "404": {
             "content": {
               "application/json": {
@@ -5938,6 +6795,9 @@
         "security": [
           {
             "lucidtech-api-ProductionAPI-ApiStack-6Q75M6VOG2KB-CustomAuthorizer": []
+          },
+          {
+            "api_key": []
           }
         ]
       }
@@ -6002,6 +6862,23 @@
               }
             }
           },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "403 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
           "404": {
             "content": {
               "application/json": {
@@ -6057,6 +6934,9 @@
         "security": [
           {
             "lucidtech-api-ProductionAPI-ApiStack-6Q75M6VOG2KB-CustomAuthorizer": []
+          },
+          {
+            "api_key": []
           }
         ]
       },
@@ -6157,6 +7037,23 @@
               }
             }
           },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "403 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
           "404": {
             "content": {
               "application/json": {
@@ -6212,6 +7109,9 @@
         "security": [
           {
             "lucidtech-api-ProductionAPI-ApiStack-6Q75M6VOG2KB-CustomAuthorizer": []
+          },
+          {
+            "api_key": []
           }
         ]
       }
@@ -6263,6 +7163,23 @@
               }
             }
           },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "403 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
           "404": {
             "content": {
               "application/json": {
@@ -6318,6 +7235,9 @@
         "security": [
           {
             "lucidtech-api-ProductionAPI-ApiStack-6Q75M6VOG2KB-CustomAuthorizer": []
+          },
+          {
+            "api_key": []
           }
         ]
       },
@@ -6367,6 +7287,23 @@
               }
             }
           },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "403 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
           "404": {
             "content": {
               "application/json": {
@@ -6422,6 +7359,9 @@
         "security": [
           {
             "lucidtech-api-ProductionAPI-ApiStack-6Q75M6VOG2KB-CustomAuthorizer": []
+          },
+          {
+            "api_key": []
           }
         ]
       },
@@ -6540,6 +7480,23 @@
               }
             }
           },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "403 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
           "404": {
             "content": {
               "application/json": {
@@ -6595,6 +7552,9 @@
         "security": [
           {
             "lucidtech-api-ProductionAPI-ApiStack-6Q75M6VOG2KB-CustomAuthorizer": []
+          },
+          {
+            "api_key": []
           }
         ]
       }
@@ -6688,6 +7648,23 @@
               }
             }
           },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "403 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
           "404": {
             "content": {
               "application/json": {
@@ -6743,6 +7720,9 @@
         "security": [
           {
             "lucidtech-api-ProductionAPI-ApiStack-6Q75M6VOG2KB-CustomAuthorizer": []
+          },
+          {
+            "api_key": []
           }
         ]
       },
@@ -6861,6 +7841,23 @@
               }
             }
           },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "403 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
           "404": {
             "content": {
               "application/json": {
@@ -6916,6 +7913,9 @@
         "security": [
           {
             "lucidtech-api-ProductionAPI-ApiStack-6Q75M6VOG2KB-CustomAuthorizer": []
+          },
+          {
+            "api_key": []
           }
         ]
       }
@@ -6975,6 +7975,23 @@
               }
             }
           },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "403 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
           "404": {
             "content": {
               "application/json": {
@@ -7030,6 +8047,9 @@
         "security": [
           {
             "lucidtech-api-ProductionAPI-ApiStack-6Q75M6VOG2KB-CustomAuthorizer": []
+          },
+          {
+            "api_key": []
           }
         ]
       },
@@ -7164,6 +8184,23 @@
               }
             }
           },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "403 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
           "404": {
             "content": {
               "application/json": {
@@ -7219,6 +8256,9 @@
         "security": [
           {
             "lucidtech-api-ProductionAPI-ApiStack-6Q75M6VOG2KB-CustomAuthorizer": []
+          },
+          {
+            "api_key": []
           }
         ]
       }
@@ -7355,6 +8395,23 @@
               }
             }
           },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "403 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
           "404": {
             "content": {
               "application/json": {
@@ -7410,6 +8467,9 @@
         "security": [
           {
             "lucidtech-api-ProductionAPI-ApiStack-6Q75M6VOG2KB-CustomAuthorizer": []
+          },
+          {
+            "api_key": []
           }
         ]
       }
@@ -7467,6 +8527,23 @@
               }
             }
           },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "403 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
           "404": {
             "content": {
               "application/json": {
@@ -7522,6 +8599,9 @@
         "security": [
           {
             "lucidtech-api-ProductionAPI-ApiStack-6Q75M6VOG2KB-CustomAuthorizer": []
+          },
+          {
+            "api_key": []
           }
         ]
       },
@@ -7622,6 +8702,23 @@
               }
             }
           },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "403 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
           "404": {
             "content": {
               "application/json": {
@@ -7677,6 +8774,9 @@
         "security": [
           {
             "lucidtech-api-ProductionAPI-ApiStack-6Q75M6VOG2KB-CustomAuthorizer": []
+          },
+          {
+            "api_key": []
           }
         ]
       }
@@ -7728,6 +8828,23 @@
               }
             }
           },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "403 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
           "404": {
             "content": {
               "application/json": {
@@ -7783,6 +8900,9 @@
         "security": [
           {
             "lucidtech-api-ProductionAPI-ApiStack-6Q75M6VOG2KB-CustomAuthorizer": []
+          },
+          {
+            "api_key": []
           }
         ]
       },
@@ -7832,6 +8952,23 @@
               }
             }
           },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "403 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
           "404": {
             "content": {
               "application/json": {
@@ -7887,6 +9024,9 @@
         "security": [
           {
             "lucidtech-api-ProductionAPI-ApiStack-6Q75M6VOG2KB-CustomAuthorizer": []
+          },
+          {
+            "api_key": []
           }
         ]
       },
@@ -8005,6 +9145,23 @@
               }
             }
           },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "403 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
           "404": {
             "content": {
               "application/json": {
@@ -8060,6 +9217,9 @@
         "security": [
           {
             "lucidtech-api-ProductionAPI-ApiStack-6Q75M6VOG2KB-CustomAuthorizer": []
+          },
+          {
+            "api_key": []
           }
         ]
       }
@@ -8117,6 +9277,23 @@
               }
             }
           },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "403 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
           "404": {
             "content": {
               "application/json": {
@@ -8172,6 +9349,9 @@
         "security": [
           {
             "lucidtech-api-ProductionAPI-ApiStack-6Q75M6VOG2KB-CustomAuthorizer": []
+          },
+          {
+            "api_key": []
           }
         ]
       },
@@ -8272,6 +9452,23 @@
               }
             }
           },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "403 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
           "404": {
             "content": {
               "application/json": {
@@ -8327,6 +9524,9 @@
         "security": [
           {
             "lucidtech-api-ProductionAPI-ApiStack-6Q75M6VOG2KB-CustomAuthorizer": []
+          },
+          {
+            "api_key": []
           }
         ]
       }
@@ -8378,6 +9578,23 @@
               }
             }
           },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "403 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
           "404": {
             "content": {
               "application/json": {
@@ -8433,6 +9650,9 @@
         "security": [
           {
             "lucidtech-api-ProductionAPI-ApiStack-6Q75M6VOG2KB-CustomAuthorizer": []
+          },
+          {
+            "api_key": []
           }
         ]
       },
@@ -8482,6 +9702,23 @@
               }
             }
           },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "403 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
           "404": {
             "content": {
               "application/json": {
@@ -8537,6 +9774,9 @@
         "security": [
           {
             "lucidtech-api-ProductionAPI-ApiStack-6Q75M6VOG2KB-CustomAuthorizer": []
+          },
+          {
+            "api_key": []
           }
         ]
       },
@@ -8655,6 +9895,23 @@
               }
             }
           },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "403 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
           "404": {
             "content": {
               "application/json": {
@@ -8710,6 +9967,9 @@
         "security": [
           {
             "lucidtech-api-ProductionAPI-ApiStack-6Q75M6VOG2KB-CustomAuthorizer": []
+          },
+          {
+            "api_key": []
           }
         ]
       }
@@ -8796,6 +10056,23 @@
               }
             }
           },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "403 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
           "404": {
             "content": {
               "application/json": {
@@ -8851,6 +10128,9 @@
         "security": [
           {
             "lucidtech-api-ProductionAPI-ApiStack-6Q75M6VOG2KB-CustomAuthorizer": []
+          },
+          {
+            "api_key": []
           }
         ]
       },
@@ -8969,6 +10249,23 @@
               }
             }
           },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "403 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
           "404": {
             "content": {
               "application/json": {
@@ -9024,6 +10321,9 @@
         "security": [
           {
             "lucidtech-api-ProductionAPI-ApiStack-6Q75M6VOG2KB-CustomAuthorizer": []
+          },
+          {
+            "api_key": []
           }
         ]
       }
@@ -9083,6 +10383,23 @@
               }
             }
           },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "403 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
           "404": {
             "content": {
               "application/json": {
@@ -9138,6 +10455,9 @@
         "security": [
           {
             "lucidtech-api-ProductionAPI-ApiStack-6Q75M6VOG2KB-CustomAuthorizer": []
+          },
+          {
+            "api_key": []
           }
         ]
       },
@@ -9195,6 +10515,23 @@
               }
             }
           },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "403 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
           "404": {
             "content": {
               "application/json": {
@@ -9250,6 +10587,9 @@
         "security": [
           {
             "lucidtech-api-ProductionAPI-ApiStack-6Q75M6VOG2KB-CustomAuthorizer": []
+          },
+          {
+            "api_key": []
           }
         ]
       },
@@ -9384,6 +10724,23 @@
               }
             }
           },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "403 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
           "404": {
             "content": {
               "application/json": {
@@ -9439,6 +10796,9 @@
         "security": [
           {
             "lucidtech-api-ProductionAPI-ApiStack-6Q75M6VOG2KB-CustomAuthorizer": []
+          },
+          {
+            "api_key": []
           }
         ]
       }
@@ -9995,10 +11355,12 @@
           "loginUrls": {
             "type": "array",
             "items": {
+              "pattern": "^http://localhost.*|^https://.*",
               "type": "string"
             }
           },
           "defaultLoginUrl": {
+            "pattern": "^http://localhost.*|^https://.*",
             "type": "string"
           }
         },
@@ -10815,6 +12177,7 @@
           "logoutUrls": {
             "type": "array",
             "items": {
+              "pattern": "^http://localhost.*|^https://.*",
               "type": "string"
             }
           },
@@ -10826,6 +12189,7 @@
           "callbackUrls": {
             "type": "array",
             "items": {
+              "pattern": "^http://localhost.*|^https://.*",
               "type": "string"
             }
           },
@@ -10837,10 +12201,12 @@
           "loginUrls": {
             "type": "array",
             "items": {
+              "pattern": "^http://localhost.*|^https://.*",
               "type": "string"
             }
           },
           "defaultLoginUrl": {
+            "pattern": "^http://localhost.*|^https://.*",
             "type": "string"
           }
         },
@@ -11168,6 +12534,7 @@
           "logoutUrls": {
             "type": "array",
             "items": {
+              "pattern": "^http://localhost.*|^https://.*",
               "type": "string"
             }
           },
@@ -11179,16 +12546,19 @@
           "callbackUrls": {
             "type": "array",
             "items": {
+              "pattern": "^http://localhost.*|^https://.*",
               "type": "string"
             }
           },
           "loginUrls": {
             "type": "array",
             "items": {
+              "pattern": "^http://localhost.*|^https://.*",
               "type": "string"
             }
           },
           "defaultLoginUrl": {
+            "pattern": "^http://localhost.*|^https://.*",
             "type": "string",
             "nullable": true
           },
@@ -11251,6 +12621,11 @@
           },
           "startTime": {
             "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2}( |T)?[0-9]{2}:?[0-9]{2}:?[0-9]{2}(.[0-9]{1,6})?(Z|[+][0-9]{2}(:|)[0-9]{2})$",
+            "type": "string",
+            "nullable": true
+          },
+          "completedTaskLogId": {
+            "pattern": "^las:log:[a-f0-9]{32}$",
             "type": "string",
             "nullable": true
           },
@@ -11678,6 +13053,11 @@
                 },
                 "startTime": {
                   "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2}( |T)?[0-9]{2}:?[0-9]{2}:?[0-9]{2}(.[0-9]{1,6})?(Z|[+][0-9]{2}(:|)[0-9]{2})$",
+                  "type": "string",
+                  "nullable": true
+                },
+                "completedTaskLogId": {
+                  "pattern": "^las:log:[a-f0-9]{32}$",
                   "type": "string",
                   "nullable": true
                 },
@@ -12241,6 +13621,7 @@
                 "logoutUrls": {
                   "type": "array",
                   "items": {
+                    "pattern": "^http://localhost.*|^https://.*",
                     "type": "string"
                   }
                 },
@@ -12252,16 +13633,19 @@
                 "callbackUrls": {
                   "type": "array",
                   "items": {
+                    "pattern": "^http://localhost.*|^https://.*",
                     "type": "string"
                   }
                 },
                 "loginUrls": {
                   "type": "array",
                   "items": {
+                    "pattern": "^http://localhost.*|^https://.*",
                     "type": "string"
                   }
                 },
                 "defaultLoginUrl": {
+                  "pattern": "^http://localhost.*|^https://.*",
                   "type": "string",
                   "nullable": true
                 },
@@ -12830,6 +14214,7 @@
             "nullable": true
           },
           "content": {
+            "maxLength": 6250000,
             "minLength": 1,
             "type": "string"
           }
@@ -12930,6 +14315,7 @@
             ]
           },
           "content": {
+            "maxLength": 6250000,
             "minLength": 1,
             "type": "string"
           }
@@ -13571,6 +14957,11 @@
       }
     },
     "securitySchemes": {
+      "api_key": {
+        "type": "apiKey",
+        "name": "x-api-key",
+        "in": "header"
+      },
       "OAuth2": {
         "type": "oauth2",
         "flows": {
