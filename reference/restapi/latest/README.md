@@ -1467,6 +1467,7 @@
           "createdTime",
           "datasetId",
           "description",
+          "groundTruthSummary",
           "numberOfDocuments",
           "retentionInDays",
           "storageLocation",
@@ -1491,6 +1492,24 @@
             "type": "string",
             "nullable": true
           },
+          "groundTruthSummary": {
+            "type": "object"
+          },
+          "description": {
+            "maxLength": 4096,
+            "type": "string",
+            "nullable": true
+          },
+          "storageLocation": {
+            "type": "string",
+            "enum": [
+              "EU"
+            ]
+          },
+          "version": {
+            "minimum": 0,
+            "type": "integer"
+          },
           "createdBy": {
             "maxLength": 4096,
             "type": "string",
@@ -1509,17 +1528,6 @@
             "pattern": "^las:dataset:[a-f0-9]{32}$",
             "type": "string"
           },
-          "description": {
-            "maxLength": 4096,
-            "type": "string",
-            "nullable": true
-          },
-          "storageLocation": {
-            "type": "string",
-            "enum": [
-              "EU"
-            ]
-          },
           "createdTime": {
             "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2}( |T)?[0-9]{2}:?[0-9]{2}:?[0-9]{2}(.[0-9]{1,6})?(Z|[+][0-9]{2}(:|)[0-9]{2})$",
             "type": "string",
@@ -1527,10 +1535,6 @@
           },
           "containsPersonallyIdentifiableInformation": {
             "type": "boolean"
-          },
-          "version": {
-            "minimum": 0,
-            "type": "integer"
           }
         },
         "additionalProperties": false
@@ -1597,6 +1601,7 @@
     "createdTime",
     "datasetId",
     "description",
+    "groundTruthSummary",
     "numberOfDocuments",
     "retentionInDays",
     "storageLocation",
@@ -1621,6 +1626,24 @@
       "type": "string",
       "nullable": true
     },
+    "groundTruthSummary": {
+      "type": "object"
+    },
+    "description": {
+      "maxLength": 4096,
+      "type": "string",
+      "nullable": true
+    },
+    "storageLocation": {
+      "type": "string",
+      "enum": [
+        "EU"
+      ]
+    },
+    "version": {
+      "minimum": 0,
+      "type": "integer"
+    },
     "createdBy": {
       "maxLength": 4096,
       "type": "string",
@@ -1639,17 +1662,6 @@
       "pattern": "^las:dataset:[a-f0-9]{32}$",
       "type": "string"
     },
-    "description": {
-      "maxLength": 4096,
-      "type": "string",
-      "nullable": true
-    },
-    "storageLocation": {
-      "type": "string",
-      "enum": [
-        "EU"
-      ]
-    },
     "createdTime": {
       "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2}( |T)?[0-9]{2}:?[0-9]{2}:?[0-9]{2}(.[0-9]{1,6})?(Z|[+][0-9]{2}(:|)[0-9]{2})$",
       "type": "string",
@@ -1657,10 +1669,6 @@
     },
     "containsPersonallyIdentifiableInformation": {
       "type": "boolean"
-    },
-    "version": {
-      "minimum": 0,
-      "type": "integer"
     }
   },
   "additionalProperties": false
@@ -1698,6 +1706,7 @@
     "createdTime",
     "datasetId",
     "description",
+    "groundTruthSummary",
     "numberOfDocuments",
     "retentionInDays",
     "storageLocation",
@@ -1722,6 +1731,24 @@
       "type": "string",
       "nullable": true
     },
+    "groundTruthSummary": {
+      "type": "object"
+    },
+    "description": {
+      "maxLength": 4096,
+      "type": "string",
+      "nullable": true
+    },
+    "storageLocation": {
+      "type": "string",
+      "enum": [
+        "EU"
+      ]
+    },
+    "version": {
+      "minimum": 0,
+      "type": "integer"
+    },
     "createdBy": {
       "maxLength": 4096,
       "type": "string",
@@ -1740,17 +1767,6 @@
       "pattern": "^las:dataset:[a-f0-9]{32}$",
       "type": "string"
     },
-    "description": {
-      "maxLength": 4096,
-      "type": "string",
-      "nullable": true
-    },
-    "storageLocation": {
-      "type": "string",
-      "enum": [
-        "EU"
-      ]
-    },
     "createdTime": {
       "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2}( |T)?[0-9]{2}:?[0-9]{2}:?[0-9]{2}(.[0-9]{1,6})?(Z|[+][0-9]{2}(:|)[0-9]{2})$",
       "type": "string",
@@ -1758,10 +1774,6 @@
     },
     "containsPersonallyIdentifiableInformation": {
       "type": "boolean"
-    },
-    "version": {
-      "minimum": 0,
-      "type": "integer"
     }
   },
   "additionalProperties": false
@@ -1799,6 +1811,7 @@
     "createdTime",
     "datasetId",
     "description",
+    "groundTruthSummary",
     "numberOfDocuments",
     "retentionInDays",
     "storageLocation",
@@ -1823,6 +1836,24 @@
       "type": "string",
       "nullable": true
     },
+    "groundTruthSummary": {
+      "type": "object"
+    },
+    "description": {
+      "maxLength": 4096,
+      "type": "string",
+      "nullable": true
+    },
+    "storageLocation": {
+      "type": "string",
+      "enum": [
+        "EU"
+      ]
+    },
+    "version": {
+      "minimum": 0,
+      "type": "integer"
+    },
     "createdBy": {
       "maxLength": 4096,
       "type": "string",
@@ -1841,17 +1872,6 @@
       "pattern": "^las:dataset:[a-f0-9]{32}$",
       "type": "string"
     },
-    "description": {
-      "maxLength": 4096,
-      "type": "string",
-      "nullable": true
-    },
-    "storageLocation": {
-      "type": "string",
-      "enum": [
-        "EU"
-      ]
-    },
     "createdTime": {
       "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2}( |T)?[0-9]{2}:?[0-9]{2}:?[0-9]{2}(.[0-9]{1,6})?(Z|[+][0-9]{2}(:|)[0-9]{2})$",
       "type": "string",
@@ -1859,10 +1879,6 @@
     },
     "containsPersonallyIdentifiableInformation": {
       "type": "boolean"
-    },
-    "version": {
-      "minimum": 0,
-      "type": "integer"
     }
   },
   "additionalProperties": false
@@ -1921,6 +1937,7 @@
     "createdTime",
     "datasetId",
     "description",
+    "groundTruthSummary",
     "numberOfDocuments",
     "retentionInDays",
     "storageLocation",
@@ -1945,6 +1962,24 @@
       "type": "string",
       "nullable": true
     },
+    "groundTruthSummary": {
+      "type": "object"
+    },
+    "description": {
+      "maxLength": 4096,
+      "type": "string",
+      "nullable": true
+    },
+    "storageLocation": {
+      "type": "string",
+      "enum": [
+        "EU"
+      ]
+    },
+    "version": {
+      "minimum": 0,
+      "type": "integer"
+    },
     "createdBy": {
       "maxLength": 4096,
       "type": "string",
@@ -1963,17 +1998,6 @@
       "pattern": "^las:dataset:[a-f0-9]{32}$",
       "type": "string"
     },
-    "description": {
-      "maxLength": 4096,
-      "type": "string",
-      "nullable": true
-    },
-    "storageLocation": {
-      "type": "string",
-      "enum": [
-        "EU"
-      ]
-    },
     "createdTime": {
       "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2}( |T)?[0-9]{2}:?[0-9]{2}:?[0-9]{2}(.[0-9]{1,6})?(Z|[+][0-9]{2}(:|)[0-9]{2})$",
       "type": "string",
@@ -1981,10 +2005,6 @@
     },
     "containsPersonallyIdentifiableInformation": {
       "type": "boolean"
-    },
-    "version": {
-      "minimum": 0,
-      "type": "integer"
     }
   },
   "additionalProperties": false
@@ -4340,6 +4360,24 @@
                   "type": "string",
                   "nullable": true
                 },
+                "groundTruthSummary": {
+                  "type": "object"
+                },
+                "description": {
+                  "maxLength": 4096,
+                  "type": "string",
+                  "nullable": true
+                },
+                "storageLocation": {
+                  "type": "string",
+                  "enum": [
+                    "EU"
+                  ]
+                },
+                "version": {
+                  "minimum": 0,
+                  "type": "integer"
+                },
                 "createdBy": {
                   "maxLength": 4096,
                   "type": "string",
@@ -4358,17 +4396,6 @@
                   "pattern": "^las:dataset:[a-f0-9]{32}$",
                   "type": "string"
                 },
-                "description": {
-                  "maxLength": 4096,
-                  "type": "string",
-                  "nullable": true
-                },
-                "storageLocation": {
-                  "type": "string",
-                  "enum": [
-                    "EU"
-                  ]
-                },
                 "createdTime": {
                   "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2}( |T)?[0-9]{2}:?[0-9]{2}:?[0-9]{2}(.[0-9]{1,6})?(Z|[+][0-9]{2}(:|)[0-9]{2})$",
                   "type": "string",
@@ -4376,10 +4403,6 @@
                 },
                 "containsPersonallyIdentifiableInformation": {
                   "type": "boolean"
-                },
-                "version": {
-                  "minimum": 0,
-                  "type": "integer"
                 }
               },
               "additionalProperties": false
@@ -4551,6 +4574,24 @@
             "type": "string",
             "nullable": true
           },
+          "groundTruthSummary": {
+            "type": "object"
+          },
+          "description": {
+            "maxLength": 4096,
+            "type": "string",
+            "nullable": true
+          },
+          "storageLocation": {
+            "type": "string",
+            "enum": [
+              "EU"
+            ]
+          },
+          "version": {
+            "minimum": 0,
+            "type": "integer"
+          },
           "createdBy": {
             "maxLength": 4096,
             "type": "string",
@@ -4569,17 +4610,6 @@
             "pattern": "^las:dataset:[a-f0-9]{32}$",
             "type": "string"
           },
-          "description": {
-            "maxLength": 4096,
-            "type": "string",
-            "nullable": true
-          },
-          "storageLocation": {
-            "type": "string",
-            "enum": [
-              "EU"
-            ]
-          },
           "createdTime": {
             "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2}( |T)?[0-9]{2}:?[0-9]{2}:?[0-9]{2}(.[0-9]{1,6})?(Z|[+][0-9]{2}(:|)[0-9]{2})$",
             "type": "string",
@@ -4587,10 +4617,6 @@
           },
           "containsPersonallyIdentifiableInformation": {
             "type": "boolean"
-          },
-          "version": {
-            "minimum": 0,
-            "type": "integer"
           }
         },
         "additionalProperties": false
@@ -4720,6 +4746,24 @@
             "type": "string",
             "nullable": true
           },
+          "groundTruthSummary": {
+            "type": "object"
+          },
+          "description": {
+            "maxLength": 4096,
+            "type": "string",
+            "nullable": true
+          },
+          "storageLocation": {
+            "type": "string",
+            "enum": [
+              "EU"
+            ]
+          },
+          "version": {
+            "minimum": 0,
+            "type": "integer"
+          },
           "createdBy": {
             "maxLength": 4096,
             "type": "string",
@@ -4738,17 +4782,6 @@
             "pattern": "^las:dataset:[a-f0-9]{32}$",
             "type": "string"
           },
-          "description": {
-            "maxLength": 4096,
-            "type": "string",
-            "nullable": true
-          },
-          "storageLocation": {
-            "type": "string",
-            "enum": [
-              "EU"
-            ]
-          },
           "createdTime": {
             "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2}( |T)?[0-9]{2}:?[0-9]{2}:?[0-9]{2}(.[0-9]{1,6})?(Z|[+][0-9]{2}(:|)[0-9]{2})$",
             "type": "string",
@@ -4756,10 +4789,6 @@
           },
           "containsPersonallyIdentifiableInformation": {
             "type": "boolean"
-          },
-          "version": {
-            "minimum": 0,
-            "type": "integer"
           }
         },
         "additionalProperties": false
@@ -4909,6 +4938,24 @@
             "type": "string",
             "nullable": true
           },
+          "groundTruthSummary": {
+            "type": "object"
+          },
+          "description": {
+            "maxLength": 4096,
+            "type": "string",
+            "nullable": true
+          },
+          "storageLocation": {
+            "type": "string",
+            "enum": [
+              "EU"
+            ]
+          },
+          "version": {
+            "minimum": 0,
+            "type": "integer"
+          },
           "createdBy": {
             "maxLength": 4096,
             "type": "string",
@@ -4927,17 +4974,6 @@
             "pattern": "^las:dataset:[a-f0-9]{32}$",
             "type": "string"
           },
-          "description": {
-            "maxLength": 4096,
-            "type": "string",
-            "nullable": true
-          },
-          "storageLocation": {
-            "type": "string",
-            "enum": [
-              "EU"
-            ]
-          },
           "createdTime": {
             "pattern": "^[0-9]{4}-?[0-9]{2}-?[0-9]{2}( |T)?[0-9]{2}:?[0-9]{2}:?[0-9]{2}(.[0-9]{1,6})?(Z|[+][0-9]{2}(:|)[0-9]{2})$",
             "type": "string",
@@ -4945,10 +4981,6 @@
           },
           "containsPersonallyIdentifiableInformation": {
             "type": "boolean"
-          },
-          "version": {
-            "minimum": 0,
-            "type": "integer"
           }
         },
         "additionalProperties": false
