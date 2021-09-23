@@ -2859,6 +2859,10 @@
         "additionalProperties": false
       }
     },
+    "retentionInDays": {
+      "minimum": 1,
+      "type": "integer"
+    },
     "datasetId": {
       "pattern": "^las:dataset:[a-f0-9]{32}$",
       "type": "string"

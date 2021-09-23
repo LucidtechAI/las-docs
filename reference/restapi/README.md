@@ -4,6 +4,10 @@ You can find the Open API specification file [here](https://raw.githubuserconten
 
 ## Changelog
 
+### 2021-09-23
+
+- Added retentionInDays to PATCH /documents/:id
+
 ### 2021-09-22
 
 - Added groundTruthSummary to /datasets

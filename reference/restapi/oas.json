@@ -2,7 +2,7 @@
   "openapi": "3.0.1",
   "info": {
     "title": "Lucidtech API",
-    "version": "2021-09-22T08:43:10Z"
+    "version": "2021-09-23T08:42:38Z"
   },
   "servers": [
     {
@@ -11329,6 +11329,10 @@
               },
               "additionalProperties": false
             }
+          },
+          "retentionInDays": {
+            "minimum": 1,
+            "type": "integer"
           },
           "datasetId": {
             "pattern": "^las:dataset:[a-f0-9]{32}$",
