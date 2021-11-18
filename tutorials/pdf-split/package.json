@@ -41,6 +41,7 @@
   "dependencies": {
     "@lucidtech/flyt-form": "^1.4.0",
     "react-hotkeys": "^2.0.0",
-    "react-pdf": "^5.0.0-beta.2"
+    "react-pdf": "^5.0.0-beta.2",
+    "react-rnd": "^10.3.5"
   }
 }

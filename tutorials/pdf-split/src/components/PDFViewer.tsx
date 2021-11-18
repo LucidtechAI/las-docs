@@ -1,14 +1,18 @@
-import React, { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
+import React, { Dispatch, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import { pdfjs, Document, Page } from 'react-pdf';
 import { GlobalHotKeys } from 'react-hotkeys';
+import { Rnd } from 'react-rnd';
+import { Button, Select } from '@lucidtech/flyt-form';
 
 import styles from './PDFViewer.module.css';
 import ScissorButton from './ScissorButton';
 import MergeButton from './MergeButton';
 import Spinner from './Spinner';
 import { GroupPrediction, Groups } from '..';
-import { Select } from '@lucidtech/flyt-form';
-import { EnumOption } from '../types';
+import { Dimensions, EnumOption, PageBoundingBoxes, Position } from '../types';
+import CustomHandle from './CustomHandle';
+import { normalizeDimensionsToScale, normalizePositionToScale, normalizeToPixels } from '../utils';
+import { Action } from '../boxReducer';
 
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.min.js`;
 const options = {
@@ -21,6 +25,8 @@ type PDFViewerProps = {
   loading?: boolean;
   groups: Groups;
   setGroups: (groups: Groups) => void;
+  boxDispatch: Dispatch<Action>;
+  boundingBoxes: PageBoundingBoxes;
   extraKeymap?: Record<string, any>;
   extraHandlers?: Record<string, any>;
   predictions?: Array<GroupPrediction>;
@@ -36,6 +42,8 @@ const PDFViewer = ({
   extraKeymap = {},
   predictions,
   categories = [],
+  boundingBoxes,
+  boxDispatch,
 }: PDFViewerProps): JSX.Element => {
   const [numPages, setNumPages] = useState<number | null>(null);
   const [previewPage, setPreviewPage] = useState(1);
@@ -45,6 +53,7 @@ const PDFViewer = ({
 
   function onDocumentLoadSuccess({ numPages }) {
     setNumPages(numPages);
+    boxDispatch({ type: 'ensurePageCount', pages: numPages });
   }
 
   const docBinary = useMemo(() => {
@@ -250,80 +259,163 @@ const PDFViewer = ({
       {loading ? (
         <Spinner />
       ) : (
-        <Document
-          file={docBinary}
-          onLoadSuccess={onDocumentLoadSuccess}
-          onSourceSuccess={() => setNumPages(null)}
-          loading={<Spinner />}
-          options={options}
-          className={styles['outer-container']}
-        >
-          <div className={styles['page-preview']}>
-            <Page pageNumber={previewPage} width={600} className={styles['page-preview-canvas']} />
-          </div>
-          <div className={styles['group-container']} ref={groupContainerRef}>
-            {!loading &&
-              groups.map((group, groupIndex) => {
-                const hasNextGroup = groupIndex !== groups.length - 1;
-                const groupKey = `group_${groupIndex}-${group.pages.join('-')}`;
+        <>
+          <Document
+            file={docBinary}
+            onLoadSuccess={onDocumentLoadSuccess}
+            onSourceSuccess={() => setNumPages(null)}
+            loading={<Spinner />}
+            options={options}
+            className={styles['outer-container']}
+          >
+            <div className={styles['page-preview']}>
+              <Page pageNumber={previewPage} width={600} className={styles['page-preview-canvas']} />
+              {boundingBoxes[previewPage - 1]?.map((box, index) => {
+                const { x, y, w, h } = normalizeToPixels(box, { w: 600, h: 500 });
+                console.log({ x, y, w, h });
+                // base key on window dimensions to force a re-render of boxes if window gets resized
+                // slightly hacky but necessary it seems
+                const key = `${box.id}-${500}-${600}-${600}-${500}`;
                 return (
-                  <div key={groupKey} className={styles['page-container']}>
-                    <div className={styles['group-tab']}>{(groupIndex + 1).toString().padStart(2, '0')}</div>
-                    <Select
-                      options={categories}
-                      className={styles.select}
-                      selectedItem={group.category}
-                      innerTabIndex={-1}
-                      handleSelectedItemChange={(item) =>
-                        item.selectedItem && changeCategory(groupIndex, item.selectedItem)
-                      }
-                    />
-                    <ul className={styles['group-list']}>
-                      {group.pages.map((pageNumber, pageIndex) => {
-                        const hasPrevPage = pageIndex !== 0;
-                        const hasNextPage = pageIndex !== group.pages.length - 1;
-                        return (
-                          <li className={`${styles['list-item']}`} key={`page_${pageNumber}`}>
-                            <div
-                              className={styles['list-item-page']}
-                              tabIndex={0}
-                              data-has-prev={hasPrevPage ? true : undefined}
-                              data-has-next={hasNextPage ? true : undefined}
-                              data-page-number={pageNumber}
-                              onFocus={() => onFocus(groupIndex, pageIndex, pageNumber)}
-                            >
-                              <Page pageNumber={pageNumber} height={150} />
-                            </div>
-                            {hasPrevPage && (
-                              <ScissorButton
-                                className={`${styles['scissor-button']} ${styles['scissor-button-prev']}`}
-                                onClick={() => cutGroup(groupIndex, pageIndex)}
-                                tabIndex={-1}
-                              />
-                            )}
-                            {hasNextPage && (
-                              <ScissorButton
-                                className={`${styles['scissor-button']} ${styles['scissor-button-next']}`}
-                                onClick={() => cutGroup(groupIndex, pageIndex + 1)}
-                                tabIndex={-1}
-                              />
-                            )}
-                          </li>
-                        );
-                      })}
-                    </ul>
-                    {hasNextGroup && (
-                      <MergeButton
-                        className={`${styles['merge-button']} ${styles['merge-button-next']}`}
-                        onClick={() => joinGroups(groupIndex, groupIndex + 1)}
-                        tabIndex={-1}
-                      />
-                    )}
-                  </div>
+                  <Rnd
+                    key={key}
+                    bounds=".react-pdf__Page"
+                    size={{
+                      width: w,
+                      height: h,
+                    }}
+                    position={{
+                      x: x,
+                      y: y,
+                    }}
+                    onDragStop={(_event: any, d: any) => {
+                      console.log({ x: d.x, y: d.y });
+                      boxDispatch({
+                        type: 'updateBox',
+                        x: d.x,
+                        y: d.y,
+                        w,
+                        h,
+                        page: previewPage - 1,
+                        id: box.id || '',
+                      });
+                    }}
+                    onResize={(_event, _direction, ref, _delta, position) => {
+                      boxDispatch({
+                        type: 'updateBox',
+                        x: position.x,
+                        y: position.y,
+                        w: ref.offsetWidth,
+                        h: ref.offsetHeight,
+                        page: previewPage - 1,
+                        id: box.id || '',
+                      });
+                    }}
+                    minHeight={40}
+                    minWidth={40}
+                    style={{
+                      backgroundColor: 'rgba(0,255,0,0.05)',
+                      border: '1px dashed rgba(0,0,0,0.5)',
+                    }}
+                    resizeHandleComponent={{
+                      bottomLeft: <CustomHandle />,
+                      bottomRight: <CustomHandle />,
+                      topLeft: <CustomHandle />,
+                      topRight: <CustomHandle />,
+                    }}
+                  >
+                    <Button
+                      variant="danger"
+                      onClick={() => box.id && boxDispatch({ type: 'deleteBox', page: previewPage - 1, id: box.id })}
+                      className="m-2 p-1"
+                      style={{
+                        borderColor: 'var(--danger)',
+                      }}
+                    >
+                      <span className="fe fe-trash-2" />
+                    </Button>
+                  </Rnd>
                 );
               })}
+            </div>
+            <div className={styles['group-container']} ref={groupContainerRef}>
+              {!loading &&
+                groups.map((group, groupIndex) => {
+                  const hasNextGroup = groupIndex !== groups.length - 1;
+                  const groupKey = `group_${groupIndex}-${group.pages.join('-')}`;
+                  return (
+                    <div key={groupKey} className={styles['page-container']}>
+                      <div className={styles['group-tab']}>{(groupIndex + 1).toString().padStart(2, '0')}</div>
+                      <Select
+                        options={categories}
+                        className={styles.select}
+                        selectedItem={group.category}
+                        innerTabIndex={-1}
+                        handleSelectedItemChange={(item) =>
+                          item.selectedItem && changeCategory(groupIndex, item.selectedItem)
+                        }
+                      />
+                      <ul className={styles['group-list']}>
+                        {group.pages.map((pageNumber, pageIndex) => {
+                          const hasPrevPage = pageIndex !== 0;
+                          const hasNextPage = pageIndex !== group.pages.length - 1;
+                          return (
+                            <li className={`${styles['list-item']}`} key={`page_${pageNumber}`}>
+                              <div
+                                className={styles['list-item-page']}
+                                tabIndex={0}
+                                data-has-prev={hasPrevPage ? true : undefined}
+                                data-has-next={hasNextPage ? true : undefined}
+                                data-page-number={pageNumber}
+                                onFocus={() => onFocus(groupIndex, pageIndex, pageNumber)}
+                              >
+                                <Page pageNumber={pageNumber} height={150} />
+                              </div>
+                              {hasPrevPage && (
+                                <ScissorButton
+                                  className={`${styles['scissor-button']} ${styles['scissor-button-prev']}`}
+                                  onClick={() => cutGroup(groupIndex, pageIndex)}
+                                  tabIndex={-1}
+                                />
+                              )}
+                              {hasNextPage && (
+                                <ScissorButton
+                                  className={`${styles['scissor-button']} ${styles['scissor-button-next']}`}
+                                  onClick={() => cutGroup(groupIndex, pageIndex + 1)}
+                                  tabIndex={-1}
+                                />
+                              )}
+                            </li>
+                          );
+                        })}
+                      </ul>
+                      {hasNextGroup && (
+                        <MergeButton
+                          className={`${styles['merge-button']} ${styles['merge-button-next']}`}
+                          onClick={() => joinGroups(groupIndex, groupIndex + 1)}
+                          tabIndex={-1}
+                        />
+                      )}
+                    </div>
+                  );
+                })}
+            </div>
+          </Document>
+
+          <div
+            style={{
+              display: 'flex',
+              flexDirection: 'row',
+              justifyContent: 'space-between',
+              maxWidth: '600px',
+            }}
+            className="my-3"
+          >
+            <Button variant="success" onClick={() => boxDispatch({ type: 'addBox', page: previewPage - 1 })}>
+              <span className="fe fe-plus-square mr-2" /> Add box
+            </Button>
           </div>
-        </Document>
+        </>
       )}
     </>
   );

@@ -1,13 +1,21 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useReducer, useState } from 'react';
 import { Button } from '@lucidtech/flyt-form';
 
-import { EnumOption, Field, QueueStatus, RemoteComponentExternalProps } from './types';
+import {
+  EnumOption,
+  Field,
+  PageBoundingBoxes,
+  QueueStatus,
+  RemoteComponentExternalProps,
+  RNDBoundingBox,
+} from './types';
 import ErrorAlert from './components/ErrorAlert';
 import PDFViewer from './components/PDFViewer';
 import HotkeyHint from './components/HotkeyHint';
 
 import styles from './index.module.css';
-import { b64DecodeUnicode, normalizeEnum, normalizeString } from './utils';
+import { b64DecodeUnicode, generateSemiRandomId, normalizeEnum, normalizeString } from './utils';
+import { boxReducer } from './boxReducer';
 
 declare const ___PDF_SPLIT_VERSION___: string;
 
@@ -32,6 +40,7 @@ const RemoteComponent = ({
   client,
   queueStatus,
 }: RemoteComponentExternalProps): JSX.Element => {
+  const [boundingBoxes, boxDispatch] = useReducer(boxReducer, []);
   const [doc, setDoc] = useState('');
   const [error, setError] = useState<string | null>(null);
   const [isLoadingDocument, setIsLoadingDocument] = useState(true);
@@ -119,6 +128,13 @@ const RemoteComponent = ({
       });
   }, [transitionExecution]);
 
+  // map initial bounding boxes
+  useEffect(() => {
+    boxDispatch({ type: 'deriveFromPredictions', predictions: transitionExecution.input?.boxes || [] });
+  }, [transitionExecution]);
+
+  console.log(boundingBoxes);
+
   const approve = () => {
     const input = transitionExecution?.input || {};
     const normalizedOutput: Array<GroupPrediction> = groups.map((group) => {
@@ -185,6 +201,8 @@ const RemoteComponent = ({
                 <PDFViewer
                   doc={doc}
                   loading={somethingIsLoading}
+                  boundingBoxes={boundingBoxes}
+                  boxDispatch={boxDispatch}
                   groups={groups}
                   setGroups={setGroups}
                   categories={categories}
