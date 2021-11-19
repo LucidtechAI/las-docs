@@ -133,8 +133,6 @@ const RemoteComponent = ({
     boxDispatch({ type: 'deriveFromPredictions', predictions: transitionExecution.input?.boxes || [] });
   }, [transitionExecution]);
 
-  console.log(boundingBoxes);
-
   const approve = () => {
     const input = transitionExecution?.input || {};
     const normalizedOutput: Array<GroupPrediction> = groups.map((group) => {

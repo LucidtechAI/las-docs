@@ -289,12 +289,11 @@ const PDFViewer = ({
                 className={styles['page-preview-canvas']}
                 inputRef={measuredRef}
               />
-              {boundingBoxes[previewPage - 1]?.map((box, index) => {
-                const { x, y, w, h } = normalizeToPixels(box, { w: 600, h: 500 });
-                console.log({ x, y, w, h });
+              {boundingBoxes[previewPage - 1]?.map((box) => {
+                const { x, y, w, h } = normalizeToPixels(box, dimensions);
                 // base key on window dimensions to force a re-render of boxes if window gets resized
                 // slightly hacky but necessary it seems
-                const key = `${box.id}-${500}-${600}-${600}-${500}`;
+                const key = `${box.id}-${dimensions.w}-${dimensions.h}`;
                 return (
                   <Rnd
                     key={key}
@@ -308,24 +307,29 @@ const PDFViewer = ({
                       y: y,
                     }}
                     onDragStop={(_event: any, d: any) => {
-                      console.log({ x: d.x, y: d.y });
+                      const scalePosition = normalizePositionToScale({ x: d.x, y: d.y }, dimensions);
                       boxDispatch({
                         type: 'updateBox',
-                        x: d.x,
-                        y: d.y,
-                        w,
-                        h,
+                        x: scalePosition.x,
+                        y: scalePosition.y,
+                        w: box.w,
+                        h: box.h,
                         page: previewPage - 1,
                         id: box.id || '',
                       });
                     }}
                     onResize={(_event, _direction, ref, _delta, position) => {
+                      const scalePosition = normalizePositionToScale({ x: position.x, y: position.y }, dimensions);
+                      const scaleDimensions = normalizeDimensionsToScale(
+                        { w: ref.offsetWidth, h: ref.offsetHeight },
+                        dimensions,
+                      );
                       boxDispatch({
                         type: 'updateBox',
-                        x: position.x,
-                        y: position.y,
-                        w: ref.offsetWidth,
-                        h: ref.offsetHeight,
+                        x: scalePosition.x,
+                        y: scalePosition.y,
+                        w: scaleDimensions.w,
+                        h: scaleDimensions.h,
                         page: previewPage - 1,
                         id: box.id || '',
                       });
