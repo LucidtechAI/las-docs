@@ -26,10 +26,22 @@ export function createTransitionExecution(transitionId?: string): TransitionExec
     modelId: 'las:model:abc',
     predictionId: 'las:prediction:abc',
     timestamp: 0,
-    predictions: [
+    pagePredictions: [
       { pages: [1], category: 'INVOICE' },
       { pages: [2], category: 'RECEIPT' },
       { pages: [3, 4], category: 'MULTIPLE_RECEIPTS' },
+    ],
+    cropPredictions: [
+      [
+        { x: 0.5, y: 0.5, w: 0.1, h: 0.1 },
+        { x: 0.8, y: 0.1, w: 0.1, h: 0.1 },
+      ],
+      [{ x: 0.2, y: 0.2, w: 0.5, h: 0.5 }],
+      [
+        { x: 0.1, y: 0.1, w: 0.25, h: 0.25 },
+        { x: 0.5, y: 0.5, w: 0.1, h: 0.1 },
+        { x: 0.7, y: 0.7, w: 0.2, h: 0.2 },
+      ],
     ],
   };
 

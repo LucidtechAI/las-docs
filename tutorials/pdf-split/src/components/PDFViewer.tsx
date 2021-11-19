@@ -435,7 +435,7 @@ const PDFViewer = ({
             className="my-3"
           >
             <Button variant="success" onClick={() => boxDispatch({ type: 'addBox', page: previewPage - 1 })}>
-              <span className="fe fe-plus-square mr-2" /> Add box
+              <span className="fe fe-plus-square mr-2" /> Add crop
             </Button>
           </div>
         </>

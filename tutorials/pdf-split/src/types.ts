@@ -55,3 +55,4 @@ export type BoundingBox = {
 };
 
 export type PageBoundingBoxes = Array<Array<RNDBoundingBox>>;
+export type PageBoundingBoxesPredictions = Array<Array<BoundingBox>>;
