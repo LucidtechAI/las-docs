@@ -37,10 +37,10 @@ export function generateSemiRandomId(): string {
   return newBoxId;
 }
 
-export function normalizeDimensionsToScale(dimensions: Dimensions, imageDimensions: Dimensions): Dimensions {
-  const { w: imageWidth, w: imageHeight } = imageDimensions;
-  const scaleWidth = (1 / imageWidth) * dimensions.w;
-  const scaleHeight = (1 / imageHeight) * dimensions.h;
+export function normalizeDimensionsToScale(boxDimension: Dimensions, imageDimensions: Dimensions): Dimensions {
+  const { w: imageWidth, h: imageHeight } = imageDimensions;
+  const scaleWidth = (1 / imageWidth) * boxDimension.w;
+  const scaleHeight = (1 / imageHeight) * boxDimension.h;
   return {
     w: scaleWidth,
     h: scaleHeight,
