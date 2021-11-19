@@ -1,4 +1,4 @@
-import React, { Dispatch, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
+import React, { Dispatch, useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import { pdfjs, Document, Page } from 'react-pdf';
 import { GlobalHotKeys } from 'react-hotkeys';
 import { Rnd } from 'react-rnd';
@@ -47,6 +47,7 @@ const PDFViewer = ({
 }: PDFViewerProps): JSX.Element => {
   const [numPages, setNumPages] = useState<number | null>(null);
   const [previewPage, setPreviewPage] = useState(1);
+  const [dimensions, setDimensions] = useState<Dimensions>({ w: 600, h: 800 });
 
   // ref for looking for focusable elements
   const groupContainerRef = useRef<HTMLDivElement>(null);
@@ -55,6 +56,19 @@ const PDFViewer = ({
     setNumPages(numPages);
     boxDispatch({ type: 'ensurePageCount', pages: numPages });
   }
+
+  // get new page dimensions on resize or page selection
+  const measuredRef = useCallback((node: null | HTMLDivElement) => {
+    function outputsize() {
+      const w = node?.getBoundingClientRect().width || 600;
+      const h = node?.getBoundingClientRect().height || 800;
+      setDimensions({ w, h });
+    }
+
+    if (node !== null) {
+      new ResizeObserver(outputsize).observe(node);
+    }
+  }, []);
 
   const docBinary = useMemo(() => {
     const docBinary = atob(doc || '');
@@ -269,7 +283,12 @@ const PDFViewer = ({
             className={styles['outer-container']}
           >
             <div className={styles['page-preview']}>
-              <Page pageNumber={previewPage} width={600} className={styles['page-preview-canvas']} />
+              <Page
+                pageNumber={previewPage}
+                width={600}
+                className={styles['page-preview-canvas']}
+                inputRef={measuredRef}
+              />
               {boundingBoxes[previewPage - 1]?.map((box, index) => {
                 const { x, y, w, h } = normalizeToPixels(box, { w: 600, h: 500 });
                 console.log({ x, y, w, h });
