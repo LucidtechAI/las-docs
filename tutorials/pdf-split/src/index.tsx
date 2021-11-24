@@ -1,13 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useReducer, useState } from 'react';
 import { Button } from '@lucidtech/flyt-form';
 
-import { EnumOption, Field, QueueStatus, RemoteComponentExternalProps } from './types';
+import { EnumOption, Field, PageBoundingBoxesPredictions, QueueStatus, RemoteComponentExternalProps } from './types';
 import ErrorAlert from './components/ErrorAlert';
 import PDFViewer from './components/PDFViewer';
 import HotkeyHint from './components/HotkeyHint';
 
 import styles from './index.module.css';
 import { b64DecodeUnicode, normalizeEnum, normalizeString } from './utils';
+import { boxReducer } from './boxReducer';
 
 declare const ___PDF_SPLIT_VERSION___: string;
 
@@ -32,6 +33,7 @@ const RemoteComponent = ({
   client,
   queueStatus,
 }: RemoteComponentExternalProps): JSX.Element => {
+  const [boundingBoxes, boxDispatch] = useReducer(boxReducer, []);
   const [doc, setDoc] = useState('');
   const [error, setError] = useState<string | null>(null);
   const [isLoadingDocument, setIsLoadingDocument] = useState(true);
@@ -119,15 +121,28 @@ const RemoteComponent = ({
       });
   }, [transitionExecution]);
 
+  // map initial bounding boxes
+  useEffect(() => {
+    boxDispatch({ type: 'deriveFromPredictions', predictions: transitionExecution.input?.cropPredictions || [] });
+  }, [transitionExecution]);
+
   const approve = () => {
     const input = transitionExecution?.input || {};
-    const normalizedOutput: Array<GroupPrediction> = groups.map((group) => {
+    const normalizedPageOutput: Array<GroupPrediction> = groups.map((group) => {
       return { ...group, category: normalizeString(group.category) };
+    });
+    const normalizedCropOutput: PageBoundingBoxesPredictions = boundingBoxes.map((page) => {
+      const pageBoxes = page.map((box) => {
+        const { id, ...rest } = box;
+        return rest;
+      });
+      return pageBoxes;
     });
 
     const payload = {
       ...input,
-      verified: normalizedOutput,
+      pages: normalizedPageOutput,
+      crops: normalizedCropOutput,
     };
     onApprove(payload);
     onRequestNew();
@@ -185,12 +200,14 @@ const RemoteComponent = ({
                 <PDFViewer
                   doc={doc}
                   loading={somethingIsLoading}
+                  boundingBoxes={boundingBoxes}
+                  boxDispatch={boxDispatch}
                   groups={groups}
                   setGroups={setGroups}
                   categories={categories}
                   extraKeymap={keyMap}
                   extraHandlers={handlers}
-                  predictions={transitionExecution?.input?.predictions}
+                  predictions={transitionExecution?.input?.pagePredictions}
                 />
               )}
             </div>

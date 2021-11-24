@@ -33,3 +33,26 @@ export type Field = {
   enum?: Array<EnumOption>;
   confidenceLevels: { automated: number; highest: number; high: number; low: number };
 };
+
+export type RNDBoundingBox = BoundingBox & {
+  id?: string;
+};
+export interface Dimensions {
+  w: number;
+  h: number;
+}
+
+export interface Position {
+  x: number;
+  y: number;
+}
+
+export type BoundingBox = {
+  x: number;
+  y: number;
+  w: number;
+  h: number;
+};
+
+export type PageBoundingBoxes = Array<Array<RNDBoundingBox>>;
+export type PageBoundingBoxesPredictions = Array<Array<BoundingBox>>;
