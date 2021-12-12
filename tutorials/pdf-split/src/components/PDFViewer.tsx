@@ -13,6 +13,7 @@ import { Dimensions, EnumOption, PageBoundingBoxes, Position } from '../types';
 import CustomHandle from './CustomHandle';
 import { normalizeDimensionsToScale, normalizePositionToScale, normalizeToPixels } from '../utils';
 import { Action } from '../boxReducer';
+import { ProgressPlugin } from 'webpack';
 
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.min.js`;
 const options = {
@@ -31,6 +32,7 @@ type PDFViewerProps = {
   extraHandlers?: Record<string, any>;
   predictions?: Array<GroupPrediction>;
   categories?: Array<EnumOption>;
+  showGroupNumber?: boolean;
 };
 
 const PDFViewer = ({
@@ -42,6 +44,7 @@ const PDFViewer = ({
   extraKeymap = {},
   predictions,
   categories = [],
+  showGroupNumber = false,
   boundingBoxes,
   boxDispatch,
 }: PDFViewerProps): JSX.Element => {
@@ -373,7 +376,9 @@ const PDFViewer = ({
                   const groupKey = `group_${groupIndex}-${group.pages.join('-')}`;
                   return (
                     <div key={groupKey} className={styles['page-container']}>
-                      <div className={styles['group-tab']}>{(groupIndex + 1).toString().padStart(2, '0')}</div>
+                      { showGroupNumber &&
+                        <div className={styles['group-tab']}>{(groupIndex + 1).toString().padStart(2, '0')}</div>
+                      }
                       { categories.length > 0 && <Select
                         options={categories}
                         className={styles.select}

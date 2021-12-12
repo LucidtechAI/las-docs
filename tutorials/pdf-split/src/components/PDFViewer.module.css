@@ -54,7 +54,7 @@
 .page-container {
   position: relative;
   padding: 15px 15px 15px 30px;
-  background-color: rgb(229, 241, 234);
+  background-color: #edf2f9;
   border-radius: 8px;
   margin-bottom: 15px;
 }
@@ -65,13 +65,13 @@
 
 .group-tab {
   position: absolute;
-  background-color: rgb(125, 187, 158);
-  left: -30px;
+  background-color: #f0f0f0;
+  left: -20px;
   top: 30px;
-  padding: 10px 15px;
-  color: white;
+  padding: 5px 8px;
+  color: #6e84a3;
   font-weight: bold;
-  border-radius: 8px;
+  border-radius: 6px;
 }
 
 .merge-button {
