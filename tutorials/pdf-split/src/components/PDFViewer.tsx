@@ -167,6 +167,11 @@ const PDFViewer = ({
       nodes[0].focus();
     }
   };
+  
+  const getCurrentGroupCount = () => {
+    const currentGroupIndex = groups.findIndex((group) => group.pages.includes(previewPage));
+    return groups[currentGroupIndex]?.pages?.length;
+  };
 
   const handlers = {
     // focus the select in the current group
@@ -369,7 +374,7 @@ const PDFViewer = ({
                   return (
                     <div key={groupKey} className={styles['page-container']}>
                       <div className={styles['group-tab']}>{(groupIndex + 1).toString().padStart(2, '0')}</div>
-                      <Select
+                      { categories.length > 0 && <Select
                         options={categories}
                         className={styles.select}
                         selectedItem={group.category}
@@ -377,7 +382,7 @@ const PDFViewer = ({
                         handleSelectedItemChange={(item) =>
                           item.selectedItem && changeCategory(groupIndex, item.selectedItem)
                         }
-                      />
+                      /> }
                       <ul className={styles['group-list']}>
                         {group.pages.map((pageNumber, pageIndex) => {
                           const hasPrevPage = pageIndex !== 0;
@@ -434,9 +439,11 @@ const PDFViewer = ({
             }}
             className="my-3"
           >
-            <Button variant="success" onClick={() => boxDispatch({ type: 'addBox', page: previewPage - 1 })}>
-              <span className="fe fe-plus-square mr-2" /> Add crop
-            </Button>
+            { getCurrentGroupCount() == 1 &&
+              <Button variant="success" onClick={() => boxDispatch({ type: 'addBox', page: previewPage - 1 })}>
+                <span className="fe fe-plus-square mr-2" /> Add crop
+              </Button>
+            }
           </div>
         </>
       )}
